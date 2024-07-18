@@ -1,0 +1,56 @@
+<?php
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SettingsController;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Middleware\VerifyAjaxRequest;
+
+
+Route::controller(AuthController::class)->group(function () {
+    Route::prefix('/')->group(function () {
+        Route::get('/', function () {
+            return redirect()->route('signin');
+        }); 
+        Route::get('/signin', 'index')->name('signin');
+        Route::get('/signup', 'index')->name('signup');
+        Route::get('/forgot_password', 'index')->name('forgot-password');
+        Route::get('/password-recovery/{token}', 'elm_password_recovery')->name('elm_password_recovery');
+    });
+    Route::prefix('/auth')->group(function () {
+        Route::post('/signin', 'signin_process')->name('signin_process');
+        Route::post('/signup', 'index')->name('signup');
+        Route::post('/forgot_password', 'index')->name('forgot-password');
+        Route::post('/password-recovery/{token}', 'elm_password_recovery')->name('elm_password_recovery');
+    });
+    Route::middleware([VerifyAjaxRequest::class])->group(function () {
+        Route::prefix('/elm')->group(function () {
+            Route::get('/signin', 'elm_signin')->name('elm_signin');
+            Route::get('/signup', 'elm_signup')->name('elm_signup');
+            Route::get('/forgot_password', 'elm_forgot_password')->name('elm_forgot_password');
+        });
+    });
+});
+
+Route::controller(DashboardController::class)->group(function () {
+    Route::prefix('/dashboard')->group(function () {
+        Route::get('/', 'index')->name('dashboard');
+       
+        Route::controller(SettingsController::class)->group(function () {
+            Route::prefix('/settings')->group(function () {
+                Route::get('/', 'index')->name('settings');
+                Route::get('/{any}', 'index');
+                
+                Route::middleware([VerifyAjaxRequest::class])->group(function () {
+                    Route::prefix('/elm')->group(function () {
+                        Route::get('/settings', 'elm_settings');
+                        Route::get('/email_setting', 'elm_email_setting');
+                        Route::get('/security', 'elm_security');
+                        Route::get('/preferences', 'elm_preferences');
+                    
+                    });
+                });
+            });
+        });
+    });
+});
