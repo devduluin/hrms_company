@@ -11,7 +11,7 @@
                 </div>
             </div>
             <div class="ml-3.5 font-medium text-white transition-opacity group-[.side-menu--collapsed.side-menu--on-hover]:xl:opacity-100 group-[.side-menu--collapsed]:xl:opacity-0">
-                HURRICANE
+                {{ $data['title'] }}
             </div>
         </a>
         <a class="toggle-compact-menu ml-auto hidden h-[20px] w-[20px] items-center justify-center rounded-full border border-white/40 text-white transition-[opacity,transform] hover:bg-white/5 group-[.side-menu--collapsed]:xl:rotate-180 group-[.side-menu--collapsed.side-menu--on-hover]:xl:opacity-100 group-[.side-menu--collapsed]:xl:opacity-0 3xl:flex" href="#">
@@ -30,16 +30,12 @@
         <div class="flex h-full w-full items-center px-5">
             <!-- BEGIN: Breadcrumb -->
             <nav aria-label="breadcrumb" class="flex hidden flex-1 xl:block">
-                <ol class="flex items-center text-theme-1 dark:text-slate-300 text-white/90">
+                <ol id="breadcrumb" class="flex items-center text-theme-1 dark:text-slate-300 text-white/90">
                     <li class="">
-                        <a href="#">HRMS</a>
+                        <a href="#"></a>
                     </li>
-                    <li class="relative ml-5 pl-0.5 before:content-[''] before:w-[14px] before:h-[14px] before:bg-chevron-white before:transform before:rotate-[-90deg] before:bg-[length:100%] before:-ml-[1.125rem] before:absolute before:my-auto before:inset-y-0 dark:before:bg-chevron-white">
-                        <a href="{{ url('/') }}">Dashboards</a>
-                    </li>
-                    <li class="relative ml-5 pl-0.5 before:content-[''] before:w-[14px] before:h-[14px] before:bg-chevron-white before:transform before:rotate-[-90deg] before:bg-[length:100%] before:-ml-[1.125rem] before:absolute before:my-auto before:inset-y-0 dark:before:bg-chevron-white text-white/70">
-                        <a href="#">Analytics</a>
-                    </li>
+                    
+                     
                 </ol>
             </nav>
             <!-- END: Breadcrumb -->
@@ -48,214 +44,12 @@
                 <div class="flex w-[350px] cursor-pointer items-center rounded-[0.5rem] bg-white/[0.12] px-3.5 py-2 text-white/60 transition-colors hover:bg-white/20">
                     <i data-tw-merge="" data-lucide="search" class="stroke-[1] h-[18px] w-[18px]"></i>
                     <div class="ml-2.5 mr-auto">Quick search...</div>
-                    <div>⌘K</div>
+                    <div>⌘</div>
                 </div>
             </div>
-            <div id="quick-search" aria-hidden="true" tabindex="-1" class="modal group bg-gradient-to-b from-theme-1/50 via-theme-2/50 to-black/50 transition-[visibility,opacity] w-screen h-screen fixed left-0 top-0 overflow-y-hidden z-[60] [&:not(.show)]:duration-[0s,0.2s] [&:not(.show)]:delay-[0.2s,0s] [&:not(.show)]:invisible [&:not(.show)]:opacity-0 [&.show]:visible [&.show]:opacity-100 [&.show]:duration-[0s,0.1s]">
-                <div class="relative mx-auto my-2 w-[95%] scale-95 transition-transform group-[.show]:scale-100 sm:mt-40 sm:w-[600px] lg:w-[700px]">
-                    <div class="relative">
-                        <div class="absolute inset-y-0 left-0 flex w-12 items-center justify-center">
-                            <i data-tw-merge="" data-lucide="search" class="stroke-[1] w-5 h-5 -mr-1.5 text-slate-500"></i>
-                        </div>
-                        <input data-tw-merge="" type="text" placeholder="Quick search..." class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full border-slate-200 placeholder:text-slate-400/90 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 rounded-lg border-0 py-3.5 pl-12 pr-14 text-base shadow-lg focus:ring-0">
-                        <div class="absolute inset-y-0 right-0 flex w-14 items-center">
-                            <div class="mr-auto rounded-[0.4rem] border bg-slate-100 px-2 py-1 text-xs text-slate-500/80">
-                                ESC
-                            </div>
-                        </div>
-                    </div>
-                    <div class="global-search global-search--show-result group relative z-10 mt-1 max-h-[468px] overflow-y-auto rounded-lg bg-white pb-1 shadow-lg sm:max-h-[615px]">
-                        <div class="flex flex-col items-center justify-center pb-28 pt-20 group-[.global-search--show-result]:hidden">
-                            <i data-tw-merge="" data-lucide="search-x" class="h-20 w-20 fill-theme-1/5 stroke-[0.5] text-theme-1/20"></i>
-                            <div class="mt-5 text-xl font-medium">
-                                No result found
-                            </div>
-                            <div class="mt-3 w-2/3 text-center leading-relaxed text-slate-500">
-                                No results found for
-                                <span class="global-search__keyword font-medium italic"></span>
-                                . Please try a different search term or check your
-                                spelling.
-                            </div>
-                        </div>
-                        <div class="hidden group-[.global-search--show-result]:block">
-                            <div class="px-5 py-4">
-                                <div class="flex items-center">
-                                    <div class="text-xs uppercase text-slate-500">
-                                        Start your search here...
-                                    </div>
-                                </div>
-                                <div class="mt-3.5 flex flex-wrap gap-2">
-                                    <a class="flex items-center gap-x-1.5 rounded-full border border-slate-300/70 px-3 py-0.5 hover:bg-slate-50" href="#">
-                                        <i data-tw-merge="" data-lucide="users2" class="h-4 w-4 stroke-[1.3]"></i>
-                                        Users
-                                    </a>
-                                    <a class="flex items-center gap-x-1.5 rounded-full border border-slate-300/70 px-3 py-0.5 hover:bg-slate-50" href="#">
-                                        <i data-tw-merge="" data-lucide="building2" class="h-4 w-4 stroke-[1.3]"></i>
-                                        Departments
-                                    </a>
-                                    <a class="flex items-center gap-x-1.5 rounded-full border border-slate-300/70 px-3 py-0.5 hover:bg-slate-50" href="#">
-                                        <i data-tw-merge="" data-lucide="kanban-square" class="h-4 w-4 stroke-[1.3]"></i>
-                                        Products
-                                    </a>
-                                    <a class="flex items-center gap-x-1.5 rounded-full border border-slate-300/70 px-3 py-0.5 hover:bg-slate-50" href="#">
-                                        <i data-tw-merge="" data-lucide="mail-check" class="h-4 w-4 stroke-[1.3]"></i>
-                                        Mails
-                                    </a>
-                                    <div data-tw-merge="" data-tw-placement="bottom-end" class="dropdown relative"><a data-tw-toggle="dropdown" aria-expanded="false" href="javascript:;" class="cursor-pointer flex items-center gap-x-1.5 rounded-full border border-slate-300/70 px-3 py-0.5 hover:bg-slate-50">More
-                                            <i data-tw-merge="" data-lucide="chevron-down" class="-ml-0.5 h-4 w-4 stroke-[1.3]"></i>
-                                        </a>
-                                        <div data-transition="" data-selector=".show" data-enter="transition-all ease-linear duration-150" data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1" data-enter-to="!mt-1 visible opacity-100 translate-y-0" data-leave="transition-all ease-linear duration-150" data-leave-from="!mt-1 visible opacity-100 translate-y-0" data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1" class="dropdown-menu absolute z-[9999] hidden">
-                                            <div data-tw-merge="" class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 w-40">
-                                                <a class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge="" data-lucide="map" class="stroke-[1] mr-2 h-4 w-4"></i>
-                                                    Locations</a>
-                                                <a class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge="" data-lucide="file-check" class="stroke-[1] mr-2 h-4 w-4"></i>
-                                                    Projects</a>
-                                                <a class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge="" data-lucide="printer" class="stroke-[1] mr-2 h-4 w-4"></i>
-                                                    Devices</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="border-t border-dashed px-5 py-4">
-                                <div class="flex items-center">
-                                    <div class="text-xs uppercase text-slate-500">
-                                        Users
-                                    </div>
-                                    <a class="ml-auto text-xs text-slate-500" href="#">
-                                        See All
-                                    </a>
-                                </div>
-                                <div class="mt-3.5 flex flex-col gap-1">
-                                    <a class="flex items-center gap-2.5 rounded-md border border-transparent p-1 hover:border-slate-100 hover:bg-slate-50/80" href="#">
-                                        <div class="image-fit zoom-in box h-6 w-6 overflow-hidden rounded-full border-2 border-slate-200/70">
-                                            <img src="dist/images/users/user7-50x50.jpg" alt="Tailwise - Admin Dashboard Template">
-                                        </div>
-                                        <div class="truncate font-medium">
-                                            Johnny Depp
-                                        </div>
-                                        <div class="hidden text-slate-500 sm:block">
-                                            Denver, USA
-                                        </div>
-                                    </a>
-                                    <a class="flex items-center gap-2.5 rounded-md border border-transparent p-1 hover:border-slate-100 hover:bg-slate-50/80" href="#">
-                                        <div class="image-fit zoom-in box h-6 w-6 overflow-hidden rounded-full border-2 border-slate-200/70">
-                                            <img src="dist/images/users/user1-50x50.jpg" alt="Tailwise - Admin Dashboard Template">
-                                        </div>
-                                        <div class="truncate font-medium">
-                                            Tom Hanks
-                                        </div>
-                                        <div class="hidden text-slate-500 sm:block">
-                                            New York, USA
-                                        </div>
-                                    </a>
-                                    <a class="flex items-center gap-2.5 rounded-md border border-transparent p-1 hover:border-slate-100 hover:bg-slate-50/80" href="#">
-                                        <div class="image-fit zoom-in box h-6 w-6 overflow-hidden rounded-full border-2 border-slate-200/70">
-                                            <img src="dist/images/users/user8-50x50.jpg" alt="Tailwise - Admin Dashboard Template">
-                                        </div>
-                                        <div class="truncate font-medium">
-                                            Cate Blanchett
-                                        </div>
-                                        <div class="hidden text-slate-500 sm:block">
-                                            Houston, USA
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="border-t border-dashed px-5 py-4">
-                                <div class="flex items-center">
-                                    <div class="text-xs uppercase text-slate-500">
-                                        Departments
-                                    </div>
-                                    <a class="ml-auto text-xs text-slate-500" href="#">
-                                        See All
-                                    </a>
-                                </div>
-                                <div class="mt-3.5 flex flex-col gap-1">
-                                    <a class="flex items-center gap-2.5 rounded-md border border-transparent p-1 hover:border-slate-100 hover:bg-slate-50/80" href="#">
-                                        <div class="zoom-in box flex h-6 w-6 items-center justify-center overflow-hidden rounded-md border border-theme-1/10 bg-theme-1/10">
-                                            <i data-tw-merge="" data-lucide="store" class="h-3.5 w-3.5 stroke-[1.3] text-theme-1"></i>
-                                        </div>
-                                        <div class="truncate font-medium">
-                                            Product Management
-                                        </div>
-                                        <div class="hidden text-slate-500 sm:block">
-                                            Kyrgyzstan
-                                        </div>
-                                    </a>
-                                    <a class="flex items-center gap-2.5 rounded-md border border-transparent p-1 hover:border-slate-100 hover:bg-slate-50/80" href="#">
-                                        <div class="zoom-in box flex h-6 w-6 items-center justify-center overflow-hidden rounded-md border border-theme-1/10 bg-theme-1/10">
-                                            <i data-tw-merge="" data-lucide="store" class="h-3.5 w-3.5 stroke-[1.3] text-theme-1"></i>
-                                        </div>
-                                        <div class="truncate font-medium">
-                                            Customer Support
-                                        </div>
-                                        <div class="hidden text-slate-500 sm:block">
-                                            Bouvet Island
-                                        </div>
-                                    </a>
-                                    <a class="flex items-center gap-2.5 rounded-md border border-transparent p-1 hover:border-slate-100 hover:bg-slate-50/80" href="#">
-                                        <div class="zoom-in box flex h-6 w-6 items-center justify-center overflow-hidden rounded-md border border-theme-1/10 bg-theme-1/10">
-                                            <i data-tw-merge="" data-lucide="store" class="h-3.5 w-3.5 stroke-[1.3] text-theme-1"></i>
-                                        </div>
-                                        <div class="truncate font-medium">
-                                            Marketing
-                                        </div>
-                                        <div class="hidden text-slate-500 sm:block">
-                                            Haiti
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="border-t border-dashed px-5 py-4">
-                                <div class="flex items-center">
-                                    <div class="text-xs uppercase text-slate-500">
-                                        Products
-                                    </div>
-                                    <a class="ml-auto text-xs text-slate-500" href="#">
-                                        See All
-                                    </a>
-                                </div>
-                                <div class="mt-3.5 flex flex-col gap-1">
-                                    <a class="flex items-center gap-2.5 rounded-md border border-transparent p-1 hover:border-slate-100 hover:bg-slate-50/80" href="#">
-                                        <div class="image-fit zoom-in box h-6 w-6 overflow-hidden rounded-full border-2 border-slate-200/70">
-                                            <img src="dist/images/products/product2-400x400.jpg" alt="Tailwise - Admin Dashboard Template">
-                                        </div>
-                                        <div class="truncate font-medium">
-                                            High-Performance Laptop
-                                        </div>
-                                        <div class="hidden text-slate-500 sm:block">
-                                            Food & Grocery
-                                        </div>
-                                    </a>
-                                    <a class="flex items-center gap-2.5 rounded-md border border-transparent p-1 hover:border-slate-100 hover:bg-slate-50/80" href="#">
-                                        <div class="image-fit zoom-in box h-6 w-6 overflow-hidden rounded-full border-2 border-slate-200/70">
-                                            <img src="dist/images/products/product4-400x400.jpg" alt="Tailwise - Admin Dashboard Template">
-                                        </div>
-                                        <div class="truncate font-medium">
-                                            Smartphone Charging Dock
-                                        </div>
-                                        <div class="hidden text-slate-500 sm:block">
-                                            Home & Garden
-                                        </div>
-                                    </a>
-                                    <a class="flex items-center gap-2.5 rounded-md border border-transparent p-1 hover:border-slate-100 hover:bg-slate-50/80" href="#">
-                                        <div class="image-fit zoom-in box h-6 w-6 overflow-hidden rounded-full border-2 border-slate-200/70">
-                                            <img src="dist/images/products/product4-400x400.jpg" alt="Tailwise - Admin Dashboard Template">
-                                        </div>
-                                        <div class="truncate font-medium">
-                                            Wireless Noise-Cancelling Headphones
-                                        </div>
-                                        <div class="hidden text-slate-500 sm:block">
-                                            Food & Grocery
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+            @include('layouts.dashboard.quick_search')
+            
             <!-- END: Search -->
             <!-- BEGIN: Notification & User Menu -->
             <div class="flex flex-1 items-center">
@@ -281,7 +75,7 @@
                                 Reset Password</a>
                             <div class="h-px my-2 -mx-2 bg-slate-200/60 dark:bg-darkmode-400">
                             </div>
-                            <a href="{{ url('dashboard/settings/settings') }}" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge="" data-lucide="users" class="stroke-[1] mr-2 h-4 w-4"></i>
+                            <a href="{{ url('dashboard/settings') }}" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge="" data-lucide="users" class="stroke-[1] mr-2 h-4 w-4"></i>
                                 Profile Info</a>
                             <a href="{{ url('/') }}" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge="" data-lucide="power" class="stroke-[1] mr-2 h-4 w-4"></i>
                                 Logout</a>
@@ -570,214 +364,6 @@
                                         </div>
                                     </div>
                                     <div class="sm:ml-5">
-                                        <div class="font-medium">Uploaded images</div>
-                                        <div class="mt-0.5 text-slate-500">
-                                            Added project screenshots
-                                        </div>
-                                        <div class="my-3.5 w-40 rounded-[0.6rem] border bg-slate-50/80 p-1 sm:w-56">
-                                            <div class="grid grid-cols-3 overflow-hidden rounded-[0.6rem]">
-                                                <div class="image-fit h-12 cursor-pointer overflow-hidden border border-slate-100 saturate-[.6] hover:saturate-100 sm:h-16">
-                                                    <img src="dist/images/projects/project5-400x400.jpg" alt="Tailwise - Admin Dashboard Template">
-                                                </div>
-                                                <div class="image-fit h-12 cursor-pointer overflow-hidden border border-slate-100 saturate-[.6] hover:saturate-100 sm:h-16">
-                                                    <img src="dist/images/projects/project9-400x400.jpg" alt="Tailwise - Admin Dashboard Template">
-                                                </div>
-                                                <div class="image-fit h-12 cursor-pointer overflow-hidden border border-slate-100 saturate-[.6] hover:saturate-100 sm:h-16">
-                                                    <img src="dist/images/projects/project9-400x400.jpg" alt="Tailwise - Admin Dashboard Template">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mt-1.5 text-xs text-slate-500">
-                                            Thu Apr 2021
-                                        </div>
-                                    </div>
-                                    <div class="ml-auto h-2 w-2 flex-none rounded-full border border-primary/40 bg-primary/40">
-                                    </div>
-                                </a>
-                                <a class="flex items-center rounded-xl px-3 py-2.5 hover:bg-slate-100/80" href="#">
-                                    <div>
-                                        <div class="image-fit h-11 w-11 overflow-hidden rounded-full border-2 border-slate-200/70">
-                                            <img src="dist/images/users/user8-50x50.jpg" alt="Tailwise - Admin Dashboard Template">
-                                        </div>
-                                    </div>
-                                    <div class="sm:ml-5">
-                                        <div class="font-medium">Uploaded presentations</div>
-                                        <div class="mt-0.5 text-slate-500">
-                                            Added slides for the team meeting
-                                        </div>
-                                        <div class="mt-1.5 text-xs text-slate-500">
-                                            Mon Sep 2021
-                                        </div>
-                                    </div>
-                                    <div class="ml-auto h-2 w-2 flex-none rounded-full border border-primary/40 bg-primary/40">
-                                    </div>
-                                </a>
-                                <a class="flex items-center rounded-xl px-3 py-2.5 hover:bg-slate-100/80" href="#">
-                                    <div>
-                                        <div class="image-fit h-11 w-11 overflow-hidden rounded-full border-2 border-slate-200/70">
-                                            <img src="dist/images/users/user8-50x50.jpg" alt="Tailwise - Admin Dashboard Template">
-                                        </div>
-                                    </div>
-                                    <div class="sm:ml-5">
-                                        <div class="font-medium">Updated profile picture</div>
-                                        <div class="mt-0.5 text-slate-500">
-                                            Changed profile photo
-                                        </div>
-                                        <div class="my-3.5 w-40 rounded-[0.6rem] border bg-slate-50/80 p-1 sm:w-56">
-                                            <div class="grid grid-cols-3 overflow-hidden rounded-[0.6rem]">
-                                                <div class="image-fit h-12 cursor-pointer overflow-hidden border border-slate-100 saturate-[.6] hover:saturate-100 sm:h-16">
-                                                    <img src="dist/images/projects/project3-400x400.jpg" alt="Tailwise - Admin Dashboard Template">
-                                                </div>
-                                                <div class="image-fit h-12 cursor-pointer overflow-hidden border border-slate-100 saturate-[.6] hover:saturate-100 sm:h-16">
-                                                    <img src="dist/images/projects/project9-400x400.jpg" alt="Tailwise - Admin Dashboard Template">
-                                                </div>
-                                                <div class="image-fit h-12 cursor-pointer overflow-hidden border border-slate-100 saturate-[.6] hover:saturate-100 sm:h-16">
-                                                    <img src="dist/images/projects/project1-400x400.jpg" alt="Tailwise - Admin Dashboard Template">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mt-1.5 text-xs text-slate-500">
-                                            Sat May 2022
-                                        </div>
-                                    </div>
-                                </a>
-                                <a class="flex items-center rounded-xl px-3 py-2.5 hover:bg-slate-100/80" href="#">
-                                    <div>
-                                        <div class="image-fit h-11 w-11 overflow-hidden rounded-full border-2 border-slate-200/70">
-                                            <img src="dist/images/users/user8-50x50.jpg" alt="Tailwise - Admin Dashboard Template">
-                                        </div>
-                                    </div>
-                                    <div class="sm:ml-5">
-                                        <div class="font-medium">Logged out</div>
-                                        <div class="mt-0.5 text-slate-500">
-                                            Signed out from the dashboard
-                                        </div>
-                                        <div class="my-3.5 w-40 rounded-[0.6rem] border bg-slate-50/80 p-1 sm:w-56">
-                                            <div class="grid grid-cols-3 overflow-hidden rounded-[0.6rem]">
-                                                <div class="image-fit h-12 cursor-pointer overflow-hidden border border-slate-100 saturate-[.6] hover:saturate-100 sm:h-16">
-                                                    <img src="dist/images/projects/project8-400x400.jpg" alt="Tailwise - Admin Dashboard Template">
-                                                </div>
-                                                <div class="image-fit h-12 cursor-pointer overflow-hidden border border-slate-100 saturate-[.6] hover:saturate-100 sm:h-16">
-                                                    <img src="dist/images/projects/project8-400x400.jpg" alt="Tailwise - Admin Dashboard Template">
-                                                </div>
-                                                <div class="image-fit h-12 cursor-pointer overflow-hidden border border-slate-100 saturate-[.6] hover:saturate-100 sm:h-16">
-                                                    <img src="dist/images/projects/project1-400x400.jpg" alt="Tailwise - Admin Dashboard Template">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mt-1.5 text-xs text-slate-500">
-                                            Wed Nov 2022
-                                        </div>
-                                    </div>
-                                    <div class="ml-auto h-2 w-2 flex-none rounded-full border border-primary/40 bg-primary/40">
-                                    </div>
-                                </a>
-                                <a class="flex items-center rounded-xl px-3 py-2.5 hover:bg-slate-100/80" href="#">
-                                    <div>
-                                        <div class="image-fit h-11 w-11 overflow-hidden rounded-full border-2 border-slate-200/70">
-                                            <img src="dist/images/users/user8-50x50.jpg" alt="Tailwise - Admin Dashboard Template">
-                                        </div>
-                                    </div>
-                                    <div class="sm:ml-5">
-                                        <div class="font-medium">Uploaded audio recordings</div>
-                                        <div class="mt-0.5 text-slate-500">
-                                            Recorded podcast episodes
-                                        </div>
-                                        <div class="mt-1.5 text-xs text-slate-500">
-                                            Sun Feb 2021
-                                        </div>
-                                    </div>
-                                    <div class="ml-auto h-2 w-2 flex-none rounded-full border border-primary/40 bg-primary/40">
-                                    </div>
-                                </a>
-                                <a class="flex items-center rounded-xl px-3 py-2.5 hover:bg-slate-100/80" href="#">
-                                    <div>
-                                        <div class="image-fit h-11 w-11 overflow-hidden rounded-full border-2 border-slate-200/70">
-                                            <img src="dist/images/users/user8-50x50.jpg" alt="Tailwise - Admin Dashboard Template">
-                                        </div>
-                                    </div>
-                                    <div class="sm:ml-5">
-                                        <div class="font-medium">Uploaded a spreadsheet</div>
-                                        <div class="mt-0.5 text-slate-500">
-                                            Added financial data for Q3
-                                        </div>
-                                        <div class="mt-1.5 text-xs text-slate-500">
-                                            Thu Jan 2021
-                                        </div>
-                                    </div>
-                                    <div class="ml-auto h-2 w-2 flex-none rounded-full border border-primary/40 bg-primary/40">
-                                    </div>
-                                </a>
-                                <a class="flex items-center rounded-xl px-3 py-2.5 hover:bg-slate-100/80" href="#">
-                                    <div>
-                                        <div class="image-fit h-11 w-11 overflow-hidden rounded-full border-2 border-slate-200/70">
-                                            <img src="dist/images/users/user8-50x50.jpg" alt="Tailwise - Admin Dashboard Template">
-                                        </div>
-                                    </div>
-                                    <div class="sm:ml-5">
-                                        <div class="font-medium">Received 5 new emails</div>
-                                        <div class="mt-0.5 text-slate-500">
-                                            Inbox updates
-                                        </div>
-                                        <div class="mt-1.5 text-xs text-slate-500">
-                                            Sun Apr 2022
-                                        </div>
-                                    </div>
-                                    <div class="ml-auto h-2 w-2 flex-none rounded-full border border-primary/40 bg-primary/40">
-                                    </div>
-                                </a>
-                                <a class="flex items-center rounded-xl px-3 py-2.5 hover:bg-slate-100/80" href="#">
-                                    <div>
-                                        <div class="image-fit h-11 w-11 overflow-hidden rounded-full border-2 border-slate-200/70">
-                                            <img src="dist/images/users/user8-50x50.jpg" alt="Tailwise - Admin Dashboard Template">
-                                        </div>
-                                    </div>
-                                    <div class="sm:ml-5">
-                                        <div class="font-medium">Task completed: Review Project Proposal</div>
-                                        <div class="mt-0.5 text-slate-500">
-                                            Reviewed and provided feedback
-                                        </div>
-                                        <div class="my-3.5 w-40 rounded-[0.6rem] border bg-slate-50/80 p-1 sm:w-56">
-                                            <div class="grid grid-cols-3 overflow-hidden rounded-[0.6rem]">
-                                                <div class="image-fit h-12 cursor-pointer overflow-hidden border border-slate-100 saturate-[.6] hover:saturate-100 sm:h-16">
-                                                    <img src="dist/images/projects/project7-400x400.jpg" alt="Tailwise - Admin Dashboard Template">
-                                                </div>
-                                                <div class="image-fit h-12 cursor-pointer overflow-hidden border border-slate-100 saturate-[.6] hover:saturate-100 sm:h-16">
-                                                    <img src="dist/images/projects/project4-400x400.jpg" alt="Tailwise - Admin Dashboard Template">
-                                                </div>
-                                                <div class="image-fit h-12 cursor-pointer overflow-hidden border border-slate-100 saturate-[.6] hover:saturate-100 sm:h-16">
-                                                    <img src="dist/images/projects/project2-400x400.jpg" alt="Tailwise - Admin Dashboard Template">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mt-1.5 text-xs text-slate-500">
-                                            Fri Sep 2020
-                                        </div>
-                                    </div>
-                                </a>
-                                <a class="flex items-center rounded-xl px-3 py-2.5 hover:bg-slate-100/80" href="#">
-                                    <div>
-                                        <div class="image-fit h-11 w-11 overflow-hidden rounded-full border-2 border-slate-200/70">
-                                            <img src="dist/images/users/user8-50x50.jpg" alt="Tailwise - Admin Dashboard Template">
-                                        </div>
-                                    </div>
-                                    <div class="sm:ml-5">
-                                        <div class="font-medium">Added a new contact</div>
-                                        <div class="mt-0.5 text-slate-500">
-                                            Added a new contact, Sarah
-                                        </div>
-                                        <div class="mt-1.5 text-xs text-slate-500">
-                                            Thu Feb 2022
-                                        </div>
-                                    </div>
-                                </a>
-                                <a class="flex items-center rounded-xl px-3 py-2.5 hover:bg-slate-100/80" href="#">
-                                    <div>
-                                        <div class="image-fit h-11 w-11 overflow-hidden rounded-full border-2 border-slate-200/70">
-                                            <img src="dist/images/users/user8-50x50.jpg" alt="Tailwise - Admin Dashboard Template">
-                                        </div>
-                                    </div>
-                                    <div class="sm:ml-5">
                                         <div class="font-medium">Posted a status update</div>
                                         <div class="mt-0.5 text-slate-500">
                                             Shared thoughts on the project
@@ -787,67 +373,6 @@
                                         </div>
                                     </div>
                                     <div class="ml-auto h-2 w-2 flex-none rounded-full border border-primary/40 bg-primary/40">
-                                    </div>
-                                </a>
-                                <a class="flex items-center rounded-xl px-3 py-2.5 hover:bg-slate-100/80" href="#">
-                                    <div>
-                                        <div class="image-fit h-11 w-11 overflow-hidden rounded-full border-2 border-slate-200/70">
-                                            <img src="dist/images/users/user8-50x50.jpg" alt="Tailwise - Admin Dashboard Template">
-                                        </div>
-                                    </div>
-                                    <div class="sm:ml-5">
-                                        <div class="font-medium">Uploaded code files</div>
-                                        <div class="mt-0.5 text-slate-500">
-                                            Added new code modules
-                                        </div>
-                                        <div class="mt-1.5 text-xs text-slate-500">
-                                            Sun Nov 2022
-                                        </div>
-                                    </div>
-                                </a>
-                                <a class="flex items-center rounded-xl px-3 py-2.5 hover:bg-slate-100/80" href="#">
-                                    <div>
-                                        <div class="image-fit h-11 w-11 overflow-hidden rounded-full border-2 border-slate-200/70">
-                                            <img src="dist/images/users/user8-50x50.jpg" alt="Tailwise - Admin Dashboard Template">
-                                        </div>
-                                    </div>
-                                    <div class="sm:ml-5">
-                                        <div class="font-medium">Uploaded documents</div>
-                                        <div class="mt-0.5 text-slate-500">
-                                            Uploaded important project documents
-                                        </div>
-                                        <div class="mt-1.5 text-xs text-slate-500">
-                                            Thu Nov 2020
-                                        </div>
-                                    </div>
-                                </a>
-                                <a class="flex items-center rounded-xl px-3 py-2.5 hover:bg-slate-100/80" href="#">
-                                    <div>
-                                        <div class="image-fit h-11 w-11 overflow-hidden rounded-full border-2 border-slate-200/70">
-                                            <img src="dist/images/users/user8-50x50.jpg" alt="Tailwise - Admin Dashboard Template">
-                                        </div>
-                                    </div>
-                                    <div class="sm:ml-5">
-                                        <div class="font-medium">Logged in successfully</div>
-                                        <div class="mt-0.5 text-slate-500">
-                                            Accessed the dashboard
-                                        </div>
-                                        <div class="my-3.5 w-40 rounded-[0.6rem] border bg-slate-50/80 p-1 sm:w-56">
-                                            <div class="grid grid-cols-3 overflow-hidden rounded-[0.6rem]">
-                                                <div class="image-fit h-12 cursor-pointer overflow-hidden border border-slate-100 saturate-[.6] hover:saturate-100 sm:h-16">
-                                                    <img src="dist/images/projects/project2-400x400.jpg" alt="Tailwise - Admin Dashboard Template">
-                                                </div>
-                                                <div class="image-fit h-12 cursor-pointer overflow-hidden border border-slate-100 saturate-[.6] hover:saturate-100 sm:h-16">
-                                                    <img src="dist/images/projects/project4-400x400.jpg" alt="Tailwise - Admin Dashboard Template">
-                                                </div>
-                                                <div class="image-fit h-12 cursor-pointer overflow-hidden border border-slate-100 saturate-[.6] hover:saturate-100 sm:h-16">
-                                                    <img src="dist/images/projects/project3-400x400.jpg" alt="Tailwise - Admin Dashboard Template">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mt-1.5 text-xs text-slate-500">
-                                            Tue Mar 2021
-                                        </div>
                                     </div>
                                 </a>
                                 <a class="flex items-center rounded-xl px-3 py-2.5 hover:bg-slate-100/80" href="#">
@@ -878,3 +403,58 @@
         </div>
     </div>
 </div>
+
+<script>
+        function updateBreadcrumb() {
+            // Get the breadcrumb element
+            const breadcrumb = document.getElementById('breadcrumb');
+
+            // Clear existing breadcrumb items (except the first one)
+            while (breadcrumb.children.length > 1) {
+                breadcrumb.removeChild(breadcrumb.lastChild);
+            }
+
+            // Get the current URL path
+            const path = window.location.pathname;
+
+            // Split the path into segments
+            const segments = path.split('/').filter(segment => segment);
+
+            // Initialize the URL for the breadcrumb links
+            let url = '';
+
+            // Loop through the segments and create breadcrumb items
+            segments.forEach((segment, index) => {
+                url += '/' + segment;
+
+                // Create a list item for the breadcrumb
+                const li = document.createElement('li');
+                li.className = 'relative ml-5 pl-0.5 before:content-[""] before:w-[14px] before:h-[14px] before:bg-chevron-white before:transform before:rotate-[-90deg] before:bg-[length:100%] before:-ml-[1.125rem] before:absolute before:my-auto before:inset-y-0 dark:before:bg-chevron-white';
+
+                if (index === segments.length - 1) {
+                    li.classList.add('text-white/70');
+                }
+
+                // Format the segment text
+                const formattedSegment = segment
+                    .replace(/_/g, ' ') // Replace underscores with spaces
+                    .replace(/\b\w/g, char => char.toUpperCase()); // Capitalize each word
+
+                // Create an anchor element for the breadcrumb link
+                const a = document.createElement('a');
+                a.href = url;
+                a.textContent = formattedSegment;
+
+                // Append the anchor to the list item
+                li.appendChild(a);
+
+                // Append the list item to the breadcrumb
+                breadcrumb.appendChild(li);
+            });
+        }
+
+        // Update the breadcrumb on initial load
+        updateBreadcrumb();
+
+        
+    </script>

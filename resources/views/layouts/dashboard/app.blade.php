@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{ asset('dist/css/themes/hurricane.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/app.css') }}"> 
     
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
 </head>
 <!-- END: Head -->
 <body>

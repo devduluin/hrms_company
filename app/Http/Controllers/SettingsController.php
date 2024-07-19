@@ -9,7 +9,7 @@ class SettingsController extends Controller
     public function index()
     {
         $data['title']   = 'Duluin HRMS';
-        $data['page_title']   = 'HRMS Settings';
+        $data['page_title']   = 'Index Settings';
         
         return view('dashboard.settings.index', compact('data'));
     }
@@ -17,7 +17,7 @@ class SettingsController extends Controller
     public function elm_settings()
     {
         $data['title']   = 'Duluin HRMS';
-        $data['page_title']   = 'HRMS Settings';
+        $data['page_title']   = 'Account Settings';
         
         return view('dashboard.settings.elm_settings', compact('data'));
     }
@@ -44,5 +44,21 @@ class SettingsController extends Controller
         $data['page_title']   = 'Preferences Settings';
         
         return view('dashboard.settings.elm_preferences', compact('data'));
+    }
+    
+    public function elm_notification_setting()
+    {
+        $data['title']   = 'Duluin HRMS';
+        $data['page_title']   = 'Notification Settings';
+        
+        return view('dashboard.settings.elm_notification_setting', compact('data'));
+    }
+
+    public function elm_deactivation()
+    {
+        $data['title']   = 'Duluin HRMS';
+        $data['page_title']   = 'Deactivation Account';
+        
+        return view('dashboard.settings.elm_deactivation', compact('data'));
     }
 }

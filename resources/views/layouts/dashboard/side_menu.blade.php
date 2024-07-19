@@ -11,13 +11,37 @@
                 DASHBOARDS
             </li>
             <li>
-                <a href="hurricane-dashboard-overview-1.html" class="side-menu__link side-menu__link--active ">
-                    <i data-tw-merge="" data-lucide="gauge-circle" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
-                    <div class="side-menu__link__title">E-Commerce</div>
+                <a href="javascript:;" class="side-menu__link ">
+                    <i data-tw-merge="" data-lucide="layout-panel-left" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
+                    <div class="side-menu__link__title">HRMS</div>
+                    <i data-tw-merge="" data-lucide="chevron-down" class="stroke-[1] w-5 h-5 side-menu__link__chevron"></i>
                 </a>
                 <!-- BEGIN: Second Child -->
+                <ul class="hidden">
+                    <li>
+                        <a href="{{ url('/dashboard/hrms') }}" class="side-menu__link ">
+                            <i data-tw-merge="" data-lucide="flip-vertical" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
+                            <div class="side-menu__link__title">
+                                Dashoard Overview
+                            </div>
+                        </a>
+                        <!-- BEGIN: Third Child -->
+                        <!-- END: Third Child -->
+                    </li>
+                    <li>
+                        <a href="{{ url('/dashboard/hrms/employees/') }}" class="side-menu__link ">
+                            <i data-tw-merge="" data-lucide="flip-horizontal" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
+                            <div class="side-menu__link__title">
+                                Employees
+                            </div>
+                        </a>
+                        <!-- BEGIN: Third Child -->
+                        <!-- END: Third Child -->
+                    </li>
+                </ul>
                 <!-- END: Second Child -->
             </li>
+            
             <li>
                 <a href="hurricane-dashboard-overview-2.html" class="side-menu__link ">
                     <i data-tw-merge="" data-lucide="activity-square" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>

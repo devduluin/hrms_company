@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HrmsController;
 use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
@@ -47,6 +48,24 @@ Route::controller(DashboardController::class)->group(function () {
                         Route::get('/email_setting', 'elm_email_setting');
                         Route::get('/security', 'elm_security');
                         Route::get('/preferences', 'elm_preferences');
+                        Route::get('/notification_setting', 'elm_notification_setting');
+                        Route::get('/deactivation', 'elm_deactivation');
+                    
+                    });
+                });
+            });
+        });
+
+        Route::controller(HrmsController::class)->group(function () {
+            Route::prefix('/hrms')->group(function () {
+                Route::get('/', 'index')->name('hrms');
+                Route::get('/{any}', 'index');
+                
+                Route::middleware([VerifyAjaxRequest::class])->group(function () {
+                    Route::prefix('/elm')->group(function () {
+                        Route::get('/hrms', 'elm_hrms');
+                        Route::get('/employees', 'elm_employees');
+                       
                     
                     });
                 });

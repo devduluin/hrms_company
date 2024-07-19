@@ -1,32 +1,4 @@
-<div class="box box--stacked flex flex-col p-1.5">
-    <div class="relative h-60 w-full rounded-[0.6rem] bg-gradient-to-b from-theme-1/95 to-theme-2/95">
-        <div class="w-full h-full relative overflow-hidden before:content-[''] before:absolute before:inset-0 before:bg-texture-white before:-mt-[50rem] after:content-[''] after:absolute after:inset-0 after:bg-texture-white after:-mt-[50rem]"></div>
-        <div class="absolute inset-x-0 top-0 mx-auto mt-36 h-32 w-32">
-            <div class="box image-fit h-full w-full overflow-hidden rounded-full border-[6px] border-white">
-                <img src="dist/images/users/user1-50x50.jpg" alt="Tailwise - Admin Dashboard Template">
-            </div>
-            <div class="box absolute bottom-0 right-0 mb-2.5 mr-2.5 h-5 w-5 rounded-full border-2 border-white bg-success">
-            </div>
-        </div>
-    </div>
-    <div class="flex flex-col gap-y-3 rounded-[0.6rem] bg-slate-50 p-5 pt-12 sm:flex-row sm:items-end">
-        <div>
-            <label data-tw-merge="" class="mb-2 group-[.form-inline]:mb-2 group-[.form-inline]:sm:mb-0 group-[.form-inline]:sm:mr-5 group-[.form-inline]:sm:text-right flex items-center text-slate-500">
-                Who can see your profile photo?
-                <span data-placement="top" title="Low" class="tooltip cursor-pointer ml-1.5"><i data-tw-merge="" data-lucide="info" class="h-3.5 w-3.5 stroke-[1.3] text-slate-500"></i></span>
-            </label>
-            <div class="relative mt-2.5">
-                <i data-tw-merge="" data-lucide="globe" class="absolute inset-y-0 left-0 z-10 my-auto ml-3 h-4 w-4 stroke-[1.3]"></i>
-                <select data-tw-merge="" class="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1 mr-3 rounded-[0.5rem] pl-9 sm:w-44">
-                    <option value="custom-date">Anyone</option>
-                    <option value="daily">Only you</option>
-                </select>
-            </div>
-        </div>
-        <button data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed text-primary dark:border-primary [&:hover:not(:disabled)]:bg-primary/10 border-primary/50 sm:ml-auto"><i data-tw-merge="" data-lucide="image" class="mr-2.5 h-4 w-4 stroke-[1.3]"></i>
-            Upload Cover</button>
-    </div>
-</div>
+
 <div class="box box--stacked flex flex-col p-5">
     <div class="mb-6 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
         Profile Info

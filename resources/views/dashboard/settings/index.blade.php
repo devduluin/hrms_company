@@ -37,19 +37,11 @@
                                             <i data-tw-merge="" data-lucide="package-check" class="mr-3 h-4 w-4 stroke-[1.3]"></i>
                                             Preferences
                                         </a>
-                                        <a href="#" class="flex items-center py-3 first:-mt-3 last:-mb-3 [&.active]:text-primary [&.active]:font-medium hover:text-primary">
+                                        <a id="notification_setting" href="#" class="menu-item flex items-center py-3 first:-mt-3 last:-mb-3 [&.active]:text-primary [&.active]:font-medium hover:text-primary">
                                             <i data-tw-merge="" data-lucide="bell-dot" class="mr-3 h-4 w-4 stroke-[1.3]"></i>
                                             Notification Settings
                                         </a>
-                                        <a href="#" class="flex items-center py-3 first:-mt-3 last:-mb-3 [&.active]:text-primary [&.active]:font-medium hover:text-primary">
-                                            <i data-tw-merge="" data-lucide="workflow" class="mr-3 h-4 w-4 stroke-[1.3]"></i>
-                                            Connected Services
-                                        </a>
-                                        <a href="#" class="flex items-center py-3 first:-mt-3 last:-mb-3 [&.active]:text-primary [&.active]:font-medium hover:text-primary">
-                                            <i data-tw-merge="" data-lucide="podcast" class="mr-3 h-4 w-4 stroke-[1.3]"></i>
-                                            Social Media Links
-                                        </a>
-                                        <a href="#" class="flex items-center py-3 first:-mt-3 last:-mb-3 [&.active]:text-primary [&.active]:font-medium hover:text-primary">
+                                        <a id="deactivation" href="#" class="menu-item flex items-center py-3 first:-mt-3 last:-mb-3 [&.active]:text-primary [&.active]:font-medium hover:text-primary">
                                             <i data-tw-merge="" data-lucide="trash2" class="mr-3 h-4 w-4 stroke-[1.3]"></i>
                                             Account Deactivation
                                         </a>
@@ -57,7 +49,7 @@
                                 </div>
                             </div>
                             <div  id="contents-page" class="col-span-12 flex flex-col gap-y-7 xl:col-span-9">
-                                <div id="loading-indicator" style="display: none;">Loading...</div>
+                                <div id="loading-indicator" class="items-center" style="display: none;">Loading Content...</div>
                                 
                             </div>
                         </div>
@@ -90,6 +82,14 @@ document.addEventListener('DOMContentLoaded', async function() {
         preferences: {
             path: '{{ url('/dashboard/settings/preferences') }}',
             element: '{{ url('/dashboard/settings/elm/preferences') }}'
+        },
+        notification_setting: {
+            path: '{{ url('/dashboard/settings/notification_setting') }}',
+            element: '{{ url('/dashboard/settings/elm/notification_setting') }}'
+        },
+        deactivation: {
+            path: '{{ url('/dashboard/settings/deactivation') }}',
+            element: '{{ url('/dashboard/settings/elm/deactivation') }}'
         }
     };
 
@@ -119,6 +119,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             await loadContent(route.element);
             history.replaceState(initialPath, '', route.path);
             setActiveClassByPath();
+            updateBreadcrumb();
         }
     }
 
@@ -131,6 +132,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             window.history.pushState(id, '', route.path);
             await loadContent(route.element);
             setActiveClassByPath();
+            updateBreadcrumb();
         }
     });
 
@@ -139,6 +141,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (route) {
             await loadContent(route.element);
             setActiveClassByPath();
+            updateBreadcrumb();
         }
     });
 

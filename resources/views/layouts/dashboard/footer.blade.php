@@ -22,6 +22,8 @@
     <script src="{{ asset('dist/js/components/base/tippy.js') }}"></script>
     <script src="{{ asset('dist/js/themes/hurricane.js') }}"></script>
     <script src="{{ asset('dist/js/components/quick-search.js') }}"></script>
+    <script src="{{ asset('dist/js/components/quick-search.js') }}"></script>
+    <script>initializeDropdown();</script>
 </body>
 
 </html>
