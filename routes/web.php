@@ -6,25 +6,29 @@ use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Middleware\VerifyAjaxRequest;
+use Illuminate\Http\Request;
 
 
 Route::controller(AuthController::class)->group(function () {
     Route::prefix('/')->group(function () {
-        Route::get('/', function () {
-            return redirect()->route('signin');
-        }); 
-        Route::get('/signin', 'index')->name('signin');
-        Route::get('/signup', 'index')->name('signup');
-        Route::get('/forgot_password', 'index')->name('forgot-password');
-        Route::get('/password-recovery/{token}', 'elm_password_recovery')->name('elm_password_recovery');
+		Route::get('/', function (Request $request) {			
+				return redirect()->route('signin');
+			})->name('index'); 
+		Route::middleware('isActivated')->group(function () {
+			Route::get('/signin', 'index')->name('signin');
+			Route::get('/signup', 'index')->name('signup');
+			Route::get('/forgot_password', 'index')->name('forgot-password');
+			Route::get('/password-recovery/{token}', 'elm_password_recovery')->name('elm_password_recovery');
+		});
+		Route::get('/unactivated', 'unactivated')->name('unactivated');
     });
     Route::prefix('/auth')->group(function () {
-        Route::post('/signin', 'signin_process')->name('signin_process');
-        Route::post('/signup', 'index')->name('signup');
-        Route::post('/forgot_password', 'index')->name('forgot-password');
+        Route::post('/signin', 'signin_process');
+        Route::post('/signup', 'index');
+        Route::post('/forgot_password', 'index');
         Route::post('/password-recovery/{token}', 'elm_password_recovery')->name('elm_password_recovery');
     });
-    Route::middleware([VerifyAjaxRequest::class])->group(function () {
+    Route::middleware(['isAjax', 'isActivated'])->group(function () {
         Route::prefix('/elm')->group(function () {
             Route::get('/signin', 'elm_signin')->name('elm_signin');
             Route::get('/signup', 'elm_signup')->name('elm_signup');
@@ -34,6 +38,7 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::controller(DashboardController::class)->group(function () {
+	
     Route::prefix('/dashboard')->group(function () {
         Route::get('/', 'index')->name('dashboard');
        
@@ -42,7 +47,7 @@ Route::controller(DashboardController::class)->group(function () {
                 Route::get('/', 'index')->name('settings');
                 Route::get('/{any}', 'index');
                 
-                Route::middleware([VerifyAjaxRequest::class])->group(function () {
+                Route::middleware('isAjax')->group(function () {
                     Route::prefix('/elm')->group(function () {
                         Route::get('/settings', 'elm_settings');
                         Route::get('/email_setting', 'elm_email_setting');
@@ -61,7 +66,7 @@ Route::controller(DashboardController::class)->group(function () {
                 Route::get('/', 'index')->name('hrms');
                 Route::get('/{any}', 'index');
                 
-                Route::middleware([VerifyAjaxRequest::class])->group(function () {
+                Route::middleware('isAjax')->group(function () {
                     Route::prefix('/elm')->group(function () {
                         Route::get('/hrms', 'elm_hrms');
                         Route::get('/employees', 'elm_employees');

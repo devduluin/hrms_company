@@ -13,6 +13,13 @@ class AuthController extends Controller
         
         return view('auth.index', compact('data'));
     }
+	
+	public function unactivated()
+    {
+        $data['page_title']   = 'Aktivasi Akun Hris';
+        
+        return view('auth.index', compact('data'));
+    }
 
     public function elm_signin()
     {

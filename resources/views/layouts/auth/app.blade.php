@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{ asset('dist/css/vendors/tippy.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/app.css') }}"> <!-- END: CSS Assets-->
 
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
 </head>
 <!-- END: Head -->
 <body>
