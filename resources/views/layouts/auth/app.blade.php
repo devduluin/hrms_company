@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="">
-    <title>{{  isset($data['title']) }} - {{  isset($data['page_title']) }}</title>
+    <title>{{  $data['title'] }} - {{ $data['page_title'] }}</title>
     <!-- BEGIN: CSS Assets-->
     <link rel="stylesheet" href="{{ asset('dist/css/vendors/tippy.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/app.css') }}"> <!-- END: CSS Assets-->
