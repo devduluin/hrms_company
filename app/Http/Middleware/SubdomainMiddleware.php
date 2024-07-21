@@ -6,6 +6,8 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\URL;
 
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\RequestException;
@@ -60,7 +62,14 @@ class SubdomainMiddleware
         if($apiResponse['is_activated'] == false){
             Cache::forget($cacheKey);
         }
-		
+
+        Config::set('app.url', $host);
+        if ($host === 'http://localhost') {
+            Config::set('app.url', 'http://localhost/hris/public');
+        }
+	   
+       URL::forceRootUrl(Config::get('app.url'));
+
 	   $request->attributes->set('host', $host);
 	   $request->attributes->set('is_activated', $apiResponse['is_activated']);
 
