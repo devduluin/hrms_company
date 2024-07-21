@@ -64,6 +64,8 @@ class SubdomainMiddleware
         }
 
         Config::set('app.url', $host);
+        
+        //Development porpose
         if ($host === 'http://localhost') {
             Config::set('app.url', 'http://localhost/hris/public');
         }
