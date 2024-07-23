@@ -4,7 +4,6 @@ namespace App\Traits;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use Illuminate\Http\Request;
 
 trait GuzzleTrait
 {
@@ -42,29 +41,29 @@ trait GuzzleTrait
         }
     }
 
-    public function getRequest($url, $params = [], $headers = [])
+    public function getRequest($url, $id, $headers = [])
     {
-        return $this->handleRequest('GET', $url, ['query' => $params], $headers);
+        return $this->handleRequest('GET', "{$url}/{$id}", [], $headers);
+    }
+
+    public function deleteRequest($url, $id, $headers = [])
+    {
+        return $this->handleRequest('DELETE', "{$url}/{$id}", [], $headers);
     }
 
     public function postRequest($url, $data = [], $headers = [])
     {
-        return $this->handleRequest('POST', $url, ['json' => $data], $headers);
+        return $this->handleRequest('POST', $url, ['body' => json_encode($data)], $headers);
     }
 
     public function patchRequest($url, $data = [], $headers = [])
     {
-        return $this->handleRequest('PATCH', $url, ['json' => $data], $headers);
+        return $this->handleRequest('PATCH', $url, ['body' => json_encode($data)], $headers);
     }
 
     public function putRequest($url, $data = [], $headers = [])
     {
-        return $this->handleRequest('PUT', $url, ['json' => $data], $headers);
-    }
-
-    public function deleteRequest($url, $params = [], $headers = [])
-    {
-        return $this->handleRequest('DELETE', $url, ['query' => $params], $headers);
+        return $this->handleRequest('PUT', $url, ['body' => json_encode($data)], $headers);
     }
 }
 
