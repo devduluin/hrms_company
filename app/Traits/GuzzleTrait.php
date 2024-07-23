@@ -4,6 +4,7 @@ namespace App\Traits;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use Illuminate\Http\Request;
 
 trait GuzzleTrait
 {
@@ -18,33 +19,25 @@ trait GuzzleTrait
     protected function handleRequest($method, $url, $options = [], $headers = [])
     {
         $client = $this->getClient();
-        $protocol 	= $request->secure() ? 'https://' : 'http://';
-        $host 		= $protocol . $request->getHost();
+        $protocol = request()->secure() ? 'https://' : 'http://';
+        $host = $protocol . request()->getHost();
 
-        // Default headers
         $defaultHeaders = [
             'Content-Type' => 'application/json',
             'Connection' => 'Keep-Alive',
             'Keep-Alive' => 'timeout=5, max=100',
-            'X-Forwarded-Host' =>  $host,
+            'X-Forwarded-Host' => $host,
         ];
 
-        // Merge default headers with custom headers
         $options['headers'] = array_merge($defaultHeaders, $headers);
 
         try {
             $response = $client->request($method, $url, $options);
             return json_decode($response->getBody(), true);
         } catch (RequestException $e) {
-            if ($e->hasResponse()) {
-                return [
-                    'error' => true,
-                    'message' => $e->getResponse()->getBody()->getContents(),
-                ];
-            }
             return [
                 'error' => true,
-                'message' => $e->getMessage(),
+                'message' => $e->hasResponse() ? $e->getResponse()->getBody()->getContents() : $e->getMessage(),
             ];
         }
     }
@@ -75,8 +68,7 @@ trait GuzzleTrait
     }
 }
 
-
-/* EXAMPLE USAGE
+/* Example Usage
 
 public function anotherMethod()
 {
