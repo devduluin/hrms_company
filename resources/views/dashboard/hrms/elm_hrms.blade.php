@@ -1,5 +1,6 @@
+
 <div class="grid grid-cols-12 gap-x-6 gap-y-10">
-    <div class="col-span-12 flex flex-col gap-y-10 2xl:col-span-9">
+    <div class="col-span-12 flex flex-col gap-y-12 2xl:col-span-12">
         <div>
             <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center">
                 <div class="text-base font-medium 2xl:group-[.mode--light]:text-white">
@@ -9,14 +10,14 @@
             <div class="box box--stacked mt-3.5">
                 <div class="grid grid-cols-2 gap-y-5 border-b px-5 py-10 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7">
                     <a id="employees" class="flex flex-col items-center" href="#">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-full border border-pending/10 bg-pending/10">
-                            <i data-tw-merge="" data-lucide="users" class="stroke-[1] h-6 w-6 fill-pending/10 text-pending"></i>
+                        <div class="flex h-12 w-12 items-center justify-center rounded-full border border-info/10 bg-info/10">
+                            <i data-tw-merge="" data-lucide="users" class="stroke-[1] h-6 w-6 fill-info/10 text-info"></i>
                         </div>
-                        <div class="mt-3 text-slate-500">Employees</div>
+                        <div class="mt-3 text-slate-500">Recruitment</div>
                     </a>
                     <a id="duluin_gajian" class="flex flex-col items-center" href="#">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-full border border-primary/10 bg-primary/10">
-                            <i data-tw-merge="" data-lucide="credit-card" class="stroke-[1] h-6 w-6 fill-primary/10 text-primary"></i>
+                        <div class="flex h-12 w-12 items-center justify-center rounded-full border border-info/10 bg-info/10">
+                            <i data-tw-merge="" data-lucide="credit-card" class="stroke-[1] h-6 w-6 fill-info/10 text-info"></i>
                         </div>
                         <div class="mt-3 text-slate-500">Duluin Gajian</div>
                     </a>
@@ -24,33 +25,33 @@
                         <div class="flex h-12 w-12 items-center justify-center rounded-full border border-info/10 bg-info/10">
                             <i data-tw-merge="" data-lucide="airplay" class="stroke-[1] h-6 w-6 fill-info/10 text-info"></i>
                         </div>
-                        <div class="mt-3 text-slate-500">Request Leave</div>
+                        <div class="mt-3 text-slate-500">Employee Lifecycle</div>
                     </a>
                     <a class="flex flex-col items-center" href="#">
                         <div class="flex h-12 w-12 items-center justify-center rounded-full border border-info/10 bg-info/10">
                             <i data-tw-merge="" data-lucide="wallet-cards" class="stroke-[1] h-6 w-6 fill-info/10 text-info"></i>
                         </div>
-                        <div class="mt-3 text-slate-500">Expense</div>
+                        <div class="mt-3 text-slate-500">Performance</div>
                     </a>
                     
                     <a class="flex flex-col items-center" href="#">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-full border border-success/10 bg-success/10">
-                            <i data-tw-merge="" data-lucide="banknote" class="stroke-[1] h-6 w-6 fill-success/10 text-success"></i>
+                        <div class="flex h-12 w-12 items-center justify-center rounded-full border border-info/10 bg-info/10">
+                            <i data-tw-merge="" data-lucide="banknote" class="stroke-[1] h-6 w-6 fill-info/10 text-info"></i>
                         </div>
-                        <div class="mt-3 text-slate-500">Advance</div>
+                        <div class="mt-3 text-slate-500">Shift & Attendance</div>
                     </a>
                     
                     <a class="flex flex-col items-center" href="#">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-full border border-primary/10 bg-primary/10">
-                            <i data-tw-merge="" data-lucide="shopping-bag" class="stroke-[1] h-6 w-6 fill-primary/10 text-primary"></i>
+                        <div class="flex h-12 w-12 items-center justify-center rounded-full border border-info/10 bg-info/10">
+                            <i data-tw-merge="" data-lucide="shopping-bag" class="stroke-[1] h-6 w-6 fill-info/10 text-info"></i>
                         </div>
-                        <div class="mt-3 text-slate-500">Checkout</div>
+                        <div class="mt-3 text-slate-500">Expense Claim</div>
                     </a>
                     <a class="flex flex-col items-center" href="#">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-full border border-warning/10 bg-warning/10">
-                            <i data-tw-merge="" data-lucide="circle-dollar-sign" class="stroke-[1] h-6 w-6 fill-warning/10 text-warning"></i>
+                        <div class="flex h-12 w-12 items-center justify-center rounded-full border border-info/10 bg-info/10">
+                            <i data-tw-merge="" data-lucide="circle-dollar-sign" class="stroke-[1] h-6 w-6 fill-info/10 text-info"></i>
                         </div>
-                        <div class="mt-3 text-slate-500">Accept Payments</div>
+                        <div class="mt-3 text-slate-500">Leave</div>
                     </a>
                 </div>
             </div>

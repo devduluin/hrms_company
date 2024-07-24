@@ -2,6 +2,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HrmsController;
+use App\Http\Controllers\RecruitmentController;
 use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
@@ -37,6 +38,8 @@ Route::controller(AuthController::class)->group(function () {
     });
 });
 
+
+
 Route::controller(DashboardController::class)->group(function () {
 	
     Route::prefix('/dashboard')->group(function () {
@@ -64,17 +67,23 @@ Route::controller(DashboardController::class)->group(function () {
         Route::controller(HrmsController::class)->group(function () {
             Route::prefix('/hrms')->group(function () {
                 Route::get('/', 'index')->name('hrms');
+                Route::get('/new_job_applicant', 'elm_applicant');
+                Route::get('/new_employee/employee_overview', 'elm_employee_overview');
+                Route::get('/new_employee/employee_profile', 'elm_employee_profile');
+                Route::get('/new_employee/employee_details', 'elm_employee_details');
+                Route::get('/new_employee/employee_contact', 'elm_employee_contact');
                 Route::get('/{any}', 'index');
+                
                 
                 Route::middleware('isAjax')->group(function () {
                     Route::prefix('/elm')->group(function () {
                         Route::get('/hrms', 'elm_hrms');
-                        Route::get('/employees', 'elm_employees');
-                       
-                    
+                        Route::get('/employees', 'elm_overview');
                     });
+                    
                 });
             });
         });
+        
     });
 });

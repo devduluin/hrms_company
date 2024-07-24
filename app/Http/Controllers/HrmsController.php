@@ -23,11 +23,52 @@ class HrmsController extends Controller
         return view('dashboard.hrms.elm_hrms', compact('data'));
     }
 
-    public function elm_employees()
+    public function elm_overview()
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Data Employees';
         
-        return view('dashboard.hrms.elm_employees', compact('data'));
+        return view('dashboard.hrms.elm_dashboard', compact('data'));
+    }
+
+    public function elm_applicant()
+    {
+        $data['title']   = 'Duluin HRMS';
+        $data['page_title']   = 'New Job Applicant';
+        
+        return view('dashboard.hrms.elm_applicant', compact('data'));
+    }
+
+    public function elm_employee_overview()
+    {
+        $data['title']   = 'Duluin HRMS';
+        $data['page_title']   = 'New Employee';
+        
+        return view('dashboard.hrms.elm_employee_overview', compact('data'));
+    }
+
+    public function elm_employee_profile()
+    {
+        $data['title']   = 'Duluin HRMS';
+        $data['page_title']   = 'New Employee';
+        
+        return view('dashboard.hrms.elm_employee_profile', compact('data'));
+    }
+
+    public function elm_employee_details()
+    {
+        $data['title']   = 'Duluin HRMS';
+        $data['page_title']   = 'New Employee';
+        
+        return view('dashboard.hrms.elm_employee_details', compact('data'));
+    }
+
+    public function elm_employee_contact()
+    {
+        $data['title']   = 'Duluin HRMS';
+        $data['page_title']   = 'New Employee';
+        
+        return view('dashboard.hrms.elm_employee_contact', compact('data'));
     }
 }
+

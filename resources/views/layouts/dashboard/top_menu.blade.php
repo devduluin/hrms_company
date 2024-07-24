@@ -1,6 +1,8 @@
-<div class="fixed top-0 inset-x-0 mt-2.5 z-10 mx-2.5 h-[65px] bg-gradient-to-r from-theme-1 to-theme-2 rounded-[0.6rem] shadow-lg flex before:content-[''] before:absolute before:inset-x-0 before:-mt-2.5 before:h-2.5 before:backdrop-blur">
-    <div class="side-menu__content flex-none flex items-center z-10 px-5 h-full xl:w-[275px] overflow-hidden xl:-ml-2.5 relative duration-300 group-[.side-menu--collapsed]:xl:w-[100px] group-[.side-menu--collapsed.side-menu--on-hover]:xl:w-[275px] group-[.side-menu--collapsed.side-menu--on-hover]:xl:shadow-[6px_0_12px_-4px_#0000001f] before:content-[''] before:hidden before:xl:block before:absolute before:right-0 before:border-r before:border-dotted before:border-white/[0.15] before:h-4/6 before:group-[.side-menu--collapsed.side-menu--on-hover]:xl:hidden after:content-[''] after:hidden after:xl:block after:absolute after:w-full after:h-full after:bg-[length:100vw_65px] after:z-[-1] after:bg-gradient-to-r after:from-theme-1 after:to-theme-2">
-        <a class="ml-2.5 hidden items-center transition-[margin] xl:flex group-[.side-menu--collapsed.side-menu--on-hover]:xl:ml-2.5 group-[.side-menu--collapsed]:xl:ml-6" href="#">
+
+
+<div class="fixed top-0 inset-x-0 mt-2.5 z-10 mx-2.5 h-[65px] bg-linear-gradient-to-r from-[#2970FF] to-[#0040C1] rounded-[0.6rem] shadow-lg flex before:content-[''] before:absolute before:inset-x-0 before:-mt-2.5 before:h-2.5 before:backdrop-blur" style="background: linear-gradient(90deg, #2970FF 0%, #0040C1 100%);">
+    <div class="side-menu__content flex-none flex items-center z-10 px-5 gap-4 h-full bg-blue-600 rounded-[0.6rem] xl:w-[275px] overflow-hidden relative duration-300  group-[.side-menu--collapsed]:xl:w-[100px] group-[.side-menu--collapsed.side-menu--on-hover]:xl:w-[275px] group-[.side-menu--collapsed.side-menu--on-hover]:xl:shadow-[6px_0_12px_-4px_#0000001f] before:content-[''] before:hidden before:xl:block before:absolute before:right-0 before:border-r before:border-dotted before:border-white/[0.15] before:h-4/6 before:group-[.side-menu--collapsed.side-menu--on-hover]:xl:hidden after:content-[''] after:hidden after:xl:block after:absolute after:w-full after:h-full after:bg-[length:100vw_65px] after:z-[-1] after:bg-blue-600   ">
+        <a class="ml-2.5 hidden items-center transition-[margin]  xl:flex group-[.side-menu--collapsed.side-menu--on-hover]:xl:ml-2.5 group-[.side-menu--collapsed]:xl:ml-6" href="#">
             <div class="transition-transform ease-in-out group-[.side-menu--collapsed.side-menu--on-hover]:xl:-rotate-180">
                 <div class="relative h-[18px] w-[18px] -rotate-45 [&_div]:bg-white">
                     <div class="absolute inset-y-0 left-0 my-auto h-[75%] w-[21%] rounded-full opacity-50">
@@ -30,7 +32,7 @@
         <div class="flex h-full w-full items-center px-5">
             <!-- BEGIN: Breadcrumb -->
             <nav aria-label="breadcrumb" class="flex hidden flex-1 xl:block">
-                <ol id="breadcrumb" class="flex items-center text-theme-1 dark:text-slate-300 text-white/90">
+                <ol id="breadcrumb" class="flex items-center text-white dark:text-slate-300 text-white/90">
                     <li class="">
                         <a href="#"></a>
                     </li>
