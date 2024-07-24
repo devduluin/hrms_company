@@ -1,7 +1,9 @@
 <?php
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Response\AuthResponseController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HrmsController;
+use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\RecruitmentController;
 use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
@@ -23,11 +25,13 @@ Route::controller(AuthController::class)->group(function () {
 		});
 		Route::get('/unactivated', 'unactivated')->name('unactivated');
     });
-    Route::prefix('/auth')->group(function () {
-        Route::post('/signin', 'signin_process');
-        Route::post('/signup', 'index');
-        Route::post('/forgot_password', 'index');
-        Route::post('/password-recovery/{token}', 'elm_password_recovery')->name('elm_password_recovery');
+    Route::controller(AuthResponseController::class)->group(function () {
+        Route::prefix('/auth')->group(function () {
+            Route::post('/signin', 'signin');
+            Route::post('/signup', 'index');
+            Route::post('/forgot_password', 'index');
+            Route::post('/password-recovery/{token}', 'elm_password_recovery')->name('elm_password_recovery');
+        });
     });
     Route::middleware(['isAjax', 'isActivated'])->group(function () {
         Route::prefix('/elm')->group(function () {
@@ -67,14 +71,35 @@ Route::controller(DashboardController::class)->group(function () {
         Route::controller(HrmsController::class)->group(function () {
             Route::prefix('/hrms')->group(function () {
                 Route::get('/', 'index')->name('hrms');
-                Route::get('/new_job_applicant', 'elm_applicant');
-                Route::get('/new_employee/employee_overview', 'elm_employee_overview');
-                Route::get('/new_employee/employee_profile', 'elm_employee_profile');
-                Route::get('/new_employee/employee_details', 'elm_employee_details');
-                Route::get('/new_employee/employee_contact', 'elm_employee_contact');
-                Route::get('/{any}', 'index');
                 
                 
+                //employees modules
+                
+                Route::prefix('/employee')->group(function () {
+                    Route::controller(EmployeesController::class)->group(function () {
+                        Route::get('/', 'index')->name('hrms');
+                        Route::get('/list', 'list')->name('employee');
+                        Route::get('/new_employee', 'create');
+                        Route::get('/update_employee', 'update');
+     
+                    });
+                });
+
+                //recruitment modules
+                Route::prefix('/recruitment')->group(function () {
+                    Route::controller(RecruitmentController::class)->group(function () {
+                        Route::get('/', 'index')->name('employee');
+                       
+                    });
+                });
+
+                //other modules
+
+
+
+
+                //dynamic content
+                //Route::get('/{any}', 'index');
                 Route::middleware('isAjax')->group(function () {
                     Route::prefix('/elm')->group(function () {
                         Route::get('/hrms', 'elm_hrms');
@@ -82,8 +107,12 @@ Route::controller(DashboardController::class)->group(function () {
                     });
                     
                 });
+
+            });
+
+            Route::prefix('/payroll')->group(function () {
+
             });
         });
-        
     });
 });

@@ -14,7 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        // $middleware->append(SubdomainMiddleware::class);
+        $middleware->append(SubdomainMiddleware::class);
 		$middleware->alias([
             'isActivated' => ActivatedMiddleware::class,
             'isAjax' => VerifyAjaxRequest::class,

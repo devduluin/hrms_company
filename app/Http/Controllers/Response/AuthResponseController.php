@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\Response;
+use App\Http\Controllers\Controller;
 use App\Traits\GuzzleTrait;
 
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class AuthResponseController extends Controller
 {
     use GuzzleTrait;
     //

@@ -23,11 +23,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     
     const routes = {
-        
-        employees: {
-            path: '{{ url('/dashboard/hrms/employees') }}',
-            element: '{{ url('/dashboard/hrms/elm/employees') }}'
-        },
+      
         duluin_gajian: {
             path: '{{ url('/dashboard/hrms/duluin_gajian') }}',
             element: '{{ url('/dashboard/hrms/elm/duluin_gajian') }}'
