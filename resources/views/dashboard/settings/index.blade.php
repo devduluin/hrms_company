@@ -1,6 +1,6 @@
 @extends('layouts.dashboard.app')
 @section('content')
-
+<link rel="stylesheet" href="{{ asset('dist/css/vendors/tom-select.css') }}">
 <div class="hurricane before:content-[''] before:z-[-1] before:w-screen before:bg-slate-50 before:top-0 before:h-screen before:fixed before:bg-texture-black before:bg-contain before:bg-fixed before:bg-[center_-20rem] before:bg-no-repeat">
         @include('layouts.dashboard.menu')
 
@@ -13,17 +13,18 @@
                                 HRMS Settings
                             </div>
                             <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
-                                <button data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"><i data-tw-merge="" data-lucide="external-link" class="mr-3 h-4 w-4 stroke-[1.3]"></i>
-                                    Go to My Profile</button>
+                                <button id="submitButton" data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-blue-theme border-blue-theme text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"><i data-tw-merge="" data-lucide="external-link" class="mr-3 h-4 w-4 stroke-[1.3]"></i>
+                                    <span id="loadingText">Save Changes</span></button>
                             </div>
                         </div>
                         <div class="mt-3.5 grid grid-cols-12 gap-x-6 gap-y-10">
                             <div id="menus-page" class="relative col-span-12 xl:col-span-3">
                                 <div class="sticky top-[104px]">
                                     <div class="box box--stacked flex flex-col px-5 pb-6 pt-5">
-                                        <a id="settings" href="#" class="menu-item flex items-center py-3 first:-mt-3 last:-mb-3 [&.active]:text-primary [&.active]:font-medium hover:text-primary">
-                                            <i data-tw-merge="" data-lucide="app-window" class="mr-3 h-4 w-4 stroke-[1.3]"></i>
-                                            Profile Info
+                                         
+                                        <a id="user_account" href="#" class="menu-item flex items-center py-3 first:-mt-3 last:-mb-3 [&.active]:text-primary [&.active]:font-medium hover:text-primary">
+                                            <i data-tw-merge="" data-lucide="user-check" class="mr-3 h-4 w-4 stroke-[1.3]"></i>
+                                            My Account
                                         </a>
                                         <a id="email_setting" href="#" class="menu-item flex items-center py-3 first:-mt-3 last:-mb-3 [&.active]:text-primary [&.active]:font-medium hover:text-primary">
                                             <i data-tw-merge="" data-lucide="mail-check" class="mr-3 h-4 w-4 stroke-[1.3]"></i>
@@ -60,6 +61,57 @@
     
 </div>
 <script>
+    async function initializeForm() {
+    const form = document.getElementById('settingForm');
+    const loadingText = document.getElementById('loadingText');
+    const submitButton = document.getElementById("submitButton");
+
+    async function handleSubmit(event) {
+        event.preventDefault();
+         // Change button state to loading
+        submitButton.disabled = true;
+        loadingText.innerHTML = 'Saving...'; // Optionally add a class for styling
+        
+        // Trigger form validation
+        if (!form.reportValidity()) {
+            // If form is invalid, stop the submission
+            submitButton.disabled = false;
+            loadingText.innerHTML = 'Save Changes';
+            return;
+        }
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                console.log('Form submitted successfully');
+            } else {
+                console.error('Error submitting form');
+            }
+        } catch (error) {
+            console.error('Error submitting form', error);
+        } finally {
+            // Restore button state
+            submitButton.disabled = false;
+            loadingText.innerHTML = 'Save Changes';
+        }
+    }
+
+    // Prevent the form from submitting normally
+    if (form) submitButton.addEventListener('click', handleSubmit);
+}
+</script>
+<script src="{{ asset('dist/js/vendors/tom-select.js') }}"></script>
+<script src="{{ asset('dist/js/components/base/tom-select.js') }}"></script> 
+<script>
 document.addEventListener('DOMContentLoaded', async function() {
     const menu = document.getElementById("menus-page");
     const content = document.getElementById("contents-page");
@@ -69,7 +121,11 @@ document.addEventListener('DOMContentLoaded', async function() {
     const routes = {
         settings: {
             path: '{{ url('/dashboard/settings') }}',
-            element: '{{ url('/dashboard/settings/elm/settings') }}'
+            element: '{{ url('/dashboard/settings/elm/user_account') }}'
+        },
+        user_account: {
+            path: '{{ url('/dashboard/settings/user_account') }}',
+            element: '{{ url('/dashboard/settings/elm/user_account') }}'
         },
         email_setting: {
             path: '{{ url('/dashboard/settings/email_setting') }}',
@@ -104,6 +160,13 @@ document.addEventListener('DOMContentLoaded', async function() {
             });
             const data = await response.text();
             content.innerHTML = data;
+            if(window.location.pathname.split('/').pop() === 'deactivation'){
+                submitButton.style.display = 'none';
+            }else{ 
+                submitButton.style.display = '';
+            }
+            await initializeForm();
+            initializeTomSelect(); 
         } catch (error) {
             console.error('Error loading content:', error);
         } finally {
@@ -164,4 +227,6 @@ document.addEventListener('DOMContentLoaded', async function() {
 });
 
 </script>
+
+ 
 @endsection

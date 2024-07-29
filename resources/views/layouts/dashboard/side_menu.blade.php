@@ -76,7 +76,7 @@
             <li>
                 <a href="{{ url('/dashboard/hrms/employees/') }}" class="side-menu__link ">
                     <i data-tw-merge="" data-lucide="layout-dashboard" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
-                    <div class="side-menu__link__title">Dashboard Overview</div>
+                    <div class="side-menu__link__title">Quick Overview</div>
                 </a>
                 
                 <!-- END: Second Child -->
@@ -100,7 +100,30 @@
                 <!-- BEGIN: Second Child -->
                 <!-- END: Second Child -->
             </li>
-            
+            <li class="side-menu__divider">
+                COMPANY
+            </li>
+            <li>
+                <a href="{{ url('dashboard/hrms/company/list') }}" class="side-menu__link ">
+                    <i data-tw-merge="" data-lucide="app-window" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
+                    <div class="side-menu__link__title">Companies</div>
+                </a>
+                <!-- BEGIN: Second Child -->
+            </li>
+            <li>
+                <a href="{{ url('/dashboard/settings/user_account') }}" class="side-menu__link ">
+                    <i data-tw-merge="" data-lucide="settings" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
+                    <div class="side-menu__link__title">My Account</div>
+                </a>
+                <!-- BEGIN: Second Child -->
+            </li>
+            <li>
+                <a href="hurricane-file-manager-list.html" class="side-menu__link ">
+                    <i data-tw-merge="" data-lucide="user-plus" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
+                    <div class="side-menu__link__title">Users</div>
+                </a>
+                <!-- BEGIN: Second Child -->
+            </li>
         </ul>
     </div>
 </div>
