@@ -1,6 +1,6 @@
 <div class="box box--stacked flex flex-col p-5">
     <div class="mb-6 flex items-center border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
-        Notification Settings
+    {{ $data['page_title'] }}
     </div>
     <div>
         <div role="alert" class="alert relative border rounded-md px-5 py-4 border-primary text-primary dark:border-primary mb-2 flex items-center border-primary/20 bg-primary/5 px-4">
@@ -190,42 +190,13 @@
                 </select>
             </div>
         </div>
-        <div class="mt-3 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
-            <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-1/2">
-                <div class="text-left">
-                    <div class="flex items-center">
-                        <div class="font-medium">
-                            Receive a daily overview ('Daily Digest') of your
-                            task activity.
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-3 w-full flex-1 xl:mt-0">
-                <div class="flex flex-col items-center md:flex-row">
-                    <select data-tw-merge="" class="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1 first:rounded-b-none last:-mt-px last:rounded-t-none focus:z-10 first:md:rounded-r-none first:md:rounded-bl-md last:md:-ml-px last:md:mt-0 last:md:rounded-l-none last:md:rounded-tr-md [&:not(:first-child):not(:last-child)]:-mt-px [&:not(:first-child):not(:last-child)]:rounded-none [&:not(:first-child):not(:last-child)]:md:-ml-px [&:not(:first-child):not(:last-child)]:md:mt-0">
-                        <option value="Every day">Every day</option>
-                        <option value="Once a day">Once a day</option>
-                        <option value="Twice a day">Twice a day</option>
-                        <option value="No daily overview (disable Daily Digest)">
-                            No daily overview (disable Daily Digest)
-                        </option>
-                    </select>
-                    <select data-tw-merge="" class="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1 first:rounded-b-none last:-mt-px last:rounded-t-none focus:z-10 first:md:rounded-r-none first:md:rounded-bl-md last:md:-ml-px last:md:mt-0 last:md:rounded-l-none last:md:rounded-tr-md [&:not(:first-child):not(:last-child)]:-mt-px [&:not(:first-child):not(:last-child)]:rounded-none [&:not(:first-child):not(:last-child)]:md:-ml-px [&:not(:first-child):not(:last-child)]:md:mt-0">
-                        <option value="at 8:00 AM">at 8:00 AM</option>
-                        <option value="at 12:00 PM">at 12:00 PM</option>
-                        <option value="at 4:00 PM">at 4:00 PM</option>
-                        <option value="at 8:00 PM">at 8:00 PM</option>
-                    </select>
-                </div>
-            </div>
-        </div>
+         
         <div class="mt-7 text-slate-500">
-            To reduce interruptions, email notifications are bundled and
+            Email notifications are bundled and
             delivered when you're not actively using your device.
         </div>
     </div>
     <div class="mt-6 flex border-t border-dashed border-slate-300/70 pt-5 md:justify-end">
-        <button data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed text-primary dark:border-primary [&:hover:not(:disabled)]:bg-primary/10 w-full border-primary/50 px-4 md:w-auto">Save Changes</button>
+        
     </div>
 </div>

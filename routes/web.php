@@ -3,6 +3,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Response\AuthResponseController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HrmsController;
+use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\RecruitmentController;
 use App\Http\Controllers\SettingsController;
@@ -58,6 +59,7 @@ Route::controller(DashboardController::class)->group(function () {
                     Route::prefix('/elm')->group(function () {
                         Route::get('/settings', 'elm_settings');
                         Route::get('/email_setting', 'elm_email_setting');
+                        Route::get('/user_account', 'elm_account');
                         Route::get('/security', 'elm_security');
                         Route::get('/preferences', 'elm_preferences');
                         Route::get('/notification_setting', 'elm_notification_setting');
@@ -72,9 +74,16 @@ Route::controller(DashboardController::class)->group(function () {
             Route::prefix('/hrms')->group(function () {
                 Route::get('/', 'index')->name('hrms');
                 
-                
+                Route::prefix('/company')->group(function () {
+                    Route::controller(CompaniesController::class)->group(function () {
+                        //Route::get('/', 'index')->name('hrms');
+                        Route::get('/list', 'list')->name('company');
+                        Route::get('/new_company', 'create');
+                        Route::get('/update_company', 'update');
+                    });
+                });
+
                 //employees modules
-                
                 Route::prefix('/employee')->group(function () {
                     Route::controller(EmployeesController::class)->group(function () {
                         Route::get('/', 'index')->name('hrms');
@@ -113,6 +122,8 @@ Route::controller(DashboardController::class)->group(function () {
             Route::prefix('/payroll')->group(function () {
 
             });
+
+           
         });
     });
 });
