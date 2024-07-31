@@ -34,9 +34,11 @@ trait GuzzleTrait
             $response = $client->request($method, $url, $options);
             return json_decode($response->getBody(), true);
         } catch (RequestException $e) {
+            $data = json_decode($e->getResponse()->getBody()->getContents(), true);
             return [
                 'error' => true,
-                'message' => $e->hasResponse() ? $e->getResponse()->getBody()->getContents() : $e->getMessage(),
+                'message' => $data['message'],
+                'errors' => $data['errors'] ?? null,
             ];
         }
     }

@@ -32,6 +32,7 @@ Route::controller(AuthController::class)->group(function () {
             Route::post('/signup', 'index');
             Route::post('/forgot_password', 'index');
             Route::post('/password-recovery/{token}', 'elm_password_recovery')->name('elm_password_recovery');
+            Route::get('/signout', 'logout');
         });
     });
     Route::middleware(['isAjax', 'isActivated'])->group(function () {

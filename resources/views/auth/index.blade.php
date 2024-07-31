@@ -1,5 +1,16 @@
 @extends('layouts.auth.app')
 @section('content')
+<style>
+    .validation-error {
+        border-color: red; /* Highlight the input with a red border */
+    }
+
+    .validation-error-message {
+        color: red;
+        font-size: 0.9em;
+        margin-top: 0.25em;
+    }
+</style>
 <div id="auth-content" class="container grid grid-cols-12 px-5 py-10 sm:px-10 sm:py-14 md:px-36 lg:h-screen lg:max-w-[1550px] lg:py-0 lg:pl-14 lg:pr-12 xl:px-24 2xl:max-w-[1750px]">
     
         <div id="activate" style="display: none;" class="relative z-50 h-full col-span-12 p-7 sm:p-14 bg-white rounded-2xl lg:bg-transparent lg:pr-10 lg:col-span-5 xl:pr-24 2xl:col-span-4 lg:p-0 before:content-[''] before:absolute before:inset-0 before:-mb-3.5 before:bg-white/40 before:rounded-2xl before:mx-5">  
@@ -24,6 +35,8 @@
 </div>
 
 @include('layouts.auth.secondary')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
 	
 document.addEventListener('DOMContentLoaded', async function() {
@@ -60,6 +73,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             
                 const data = await response.text();
                 authContent.innerHTML = data;
+                addFormSubmitListeners();
             }else{
                 activate.style.display = 'block';
             }
@@ -116,6 +130,77 @@ document.addEventListener('DOMContentLoaded', async function() {
 		
         
 	});
+
+    async function addFormSubmitListeners() {
+        const forms = authContent.querySelectorAll('form');
+        forms.forEach(form => {
+            form.addEventListener('submit', async function(event) {
+                event.preventDefault();
+                const formData = new FormData(form);
+                const action = form.action;
+
+                try {
+                    const response = await fetch(action, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': csrfToken,
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                        body: formData
+                    });
+
+                    const result = await response.json();
+
+                    if (response.ok) {
+                        toastr.success("Login successful");
+                        localStorage.setItem('app_token', result.app_token);
+                        localStorage.setItem('name', result.name);
+                        localStorage.setItem('account', result.account);
+                        window.location.href = result.url;
+                    } else if (response.status === 422) {
+                        toastr.error(result.message);
+                        handleValidationErrors(result.errors);
+                    } else {
+                        toastr.error(result.message);
+                    }
+                } catch (error) {
+                    console.error('Error submitting form:', error);
+                    toastr.error('An unexpected error occurred.');
+                }
+            });
+        });
+    }
+
+    async function handleValidationErrors(errors) {
+        // Clear previous error messages
+        const errorElements = document.querySelectorAll('.validation-error-message');
+        errorElements.forEach(el => el.remove());
+
+        // Clear previous validation error classes
+        const errorInputs = document.querySelectorAll('.validation-error');
+        errorInputs.forEach(input => input.classList.remove('validation-error'));
+
+        // Display new error messages and add validation-error class
+        for (const [field, messages] of Object.entries(errors)) {
+            const input = document.getElementById(field);
+            if (input) {
+                input.classList.add('validation-error'); // Add the class to the input element
+
+                // Append error messages
+                messages.forEach(message => {
+                    const errorElement = document.createElement('div');
+                    errorElement.className = 'validation-error-message'; // Class for error messages
+                    errorElement.style.color = 'red'; // Style as needed
+                    errorElement.textContent = message;
+
+                    // Append the error element after the input field
+                    input.insertAdjacentElement('afterend', errorElement);
+                });
+            } else {
+                console.warn(`No input field found for ID: ${field}`);
+            }
+        }
+    }
 
     await initializeContent();
 });
