@@ -14,7 +14,7 @@ class AuthResponseController extends Controller
     protected $apiGatewayUrl;
     public function __construct()
     {
-        $this->apiGatewayUrl = config('apiendpoints.gateway');
+        $this->apiGatewayUrl = env('API_GATEWAY_SERVER');
     }
 
     public function signin(Request $request)
