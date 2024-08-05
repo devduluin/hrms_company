@@ -1,4 +1,3 @@
-    
     <script src="{{ asset('dist/js/vendors/tailwind-merge.js') }}"></script>
     <script src="{{ asset('dist/js/vendors/lucide.js') }}"></script>
     <script src="{{ asset('dist/js/vendors/dayjs.js') }}"></script>
@@ -23,7 +22,11 @@
     <script src="{{ asset('dist/js/themes/hurricane.js') }}"></script>
     <script src="{{ asset('dist/js/components/quick-search.js') }}"></script>
     <script src="{{ asset('dist/js/components/quick-search.js') }}"></script>
-    <script>initializeDropdown(); </script>
-</body>
+    <script src="{{ asset('dist/js/jquery-3.5.0.min.js') }}"></script>
+    <script>
+        initializeDropdown();
+    </script>
+    @stack('js')
+    </body>
 
-</html>
+    </html>

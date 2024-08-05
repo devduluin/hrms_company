@@ -6,12 +6,13 @@ use Illuminate\Http\Request;
 
 class EmployeesController extends Controller
 {
-    
+
     public function index()
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Data Overview';
-        
+        $data['apiUrl'] = config('apiendpoints.employees');
+
         return view('dashboard.hrms.employees.index', compact('data'));
     }
 
@@ -19,7 +20,8 @@ class EmployeesController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Data Employees';
-        
+        $data['apiUrl'] = config('apiendpoints.employees');
+
         return view('dashboard.hrms.employees.list', compact('data'));
     }
 
@@ -27,15 +29,15 @@ class EmployeesController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'New Employees';
-        
+
         return view('dashboard.hrms.employees.create', compact('data'));
     }
-    
+
     public function elm_employee_overview()
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'New Employee';
-        
+
         return view('dashboard.hrms.elm_employee_overview', compact('data'));
     }
 
@@ -43,7 +45,7 @@ class EmployeesController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'New Employee';
-        
+
         return view('dashboard.hrms.elm_employee_profile', compact('data'));
     }
 
@@ -51,7 +53,7 @@ class EmployeesController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'New Employee';
-        
+
         return view('dashboard.hrms.elm_employee_details', compact('data'));
     }
 
@@ -59,7 +61,7 @@ class EmployeesController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'New Employee';
-        
+
         return view('dashboard.hrms.elm_employee_contact', compact('data'));
     }
 }

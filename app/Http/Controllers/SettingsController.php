@@ -6,11 +6,18 @@ use Illuminate\Http\Request;
 
 class SettingsController extends Controller
 {
+    protected $apiGatewayUrl;
+    public function __construct()
+    {
+        $this->apiGatewayUrl = config('apiendpoints.gateway');
+    }
+
     public function index()
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Index Settings';
-        
+        $data['apiUrl'] = $this->apiGatewayUrl;
+
         return view('dashboard.settings.index', compact('data'));
     }
 
@@ -18,7 +25,7 @@ class SettingsController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Company Profile';
-        
+
         return view('dashboard.settings.elm_settings', compact('data'));
     }
 
@@ -26,7 +33,7 @@ class SettingsController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Account Settings';
-        
+
         return view('dashboard.settings.elm_account', compact('data'));
     }
 
@@ -34,7 +41,7 @@ class SettingsController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Email Settings';
-        
+
         return view('dashboard.settings.elm_email_setting', compact('data'));
     }
 
@@ -42,7 +49,7 @@ class SettingsController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Security Settings';
-        
+
         return view('dashboard.settings.elm_security', compact('data'));
     }
 
@@ -50,15 +57,15 @@ class SettingsController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Preferences Settings';
-        
+
         return view('dashboard.settings.elm_preferences', compact('data'));
     }
-    
+
     public function elm_notification_setting()
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Notification Settings';
-        
+
         return view('dashboard.settings.elm_notification_setting', compact('data'));
     }
 
@@ -66,7 +73,7 @@ class SettingsController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Deactivation Account';
-        
+
         return view('dashboard.settings.elm_deactivation', compact('data'));
     }
 }

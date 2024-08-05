@@ -16,10 +16,11 @@ class ActivatedMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $isActivated = $request->attributes->get('is_activated');
-			if($isActivated == false){
-				return redirect()->route('unactivated');
-			}
-			
-		return $next($request);
+        // dd($isActivated);
+        if ($isActivated == false) {
+            return redirect()->route('unactivated');
+        }
+
+        return $next($request);
     }
 }

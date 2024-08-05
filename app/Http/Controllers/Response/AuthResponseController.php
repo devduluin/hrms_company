@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class AuthResponseController extends Controller
 {
     use GuzzleTrait;
-    
+
     protected $apiGatewayUrl;
     public function __construct()
     {
@@ -24,7 +24,7 @@ class AuthResponseController extends Controller
         ];
         $response = $this->postRequest($this->apiGatewayUrl . '/users/login', $request->all(), $headers);
         if (isset($response) && $response['errors'] == null) {
-            if(isset($response['error']) && $response['error']) {
+            if (isset($response['error']) && $response['error']) {
                 return response()->json([
                     'message' => $response['message'],
                 ], 400);
@@ -78,7 +78,7 @@ class AuthResponseController extends Controller
     {
         $headers = [
             'accept' => 'application/json',
-            'Authorization' => 'Bearer ' . session()->get('app_token'),
+            'Authorization' => 'Bearer ' . $request->session()->get('app_token'),
         ];
         $response = $this->postRequest($this->apiGatewayUrl . '/users/logout', $request, $headers);
         if (isset($response)) {
