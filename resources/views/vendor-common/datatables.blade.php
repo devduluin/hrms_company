@@ -5,7 +5,9 @@
 @endPushOnce
 
 @pushOnce('js')
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.3/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.1.3/js/dataTables.tailwindcss.js"></script>
+    <script src="https://cdn.tailwindcss.com/"></script>
     <script src="{{ asset('dist/js/vendors/datatables/JSZip-2.5.0/jszip.min.js') }}"></script>
     <script src="{{ asset('dist/js/vendors/datatables/pdfmake-0.1.36/vfs_fonts.js') }}"></script>
     <script src="{{ asset('dist/js/vendors/datatables/Buttons-2.3.6/js/dataTables.buttons.min.js') }}"></script>

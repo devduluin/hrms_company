@@ -94,6 +94,8 @@
                                             <x-slot:thead>
                                                 <th data-value="first_name">First Name</th>
                                                 <th data-value="last_name">Last Name</th>
+                                                <th data-value="gender">Gender</th>
+                                                <th data-value="status">Status</th>
                                             </x-slot:thead>
                                         </x-datatable>
                                     </div>
