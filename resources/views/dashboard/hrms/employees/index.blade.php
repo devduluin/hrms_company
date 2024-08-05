@@ -589,7 +589,7 @@
             async function fetchLatestEmployees() {
                 try {
                     const raw = JSON.stringify({
-                        company_id: "7b1c7110-9c79-4cff-ab2f-a80e4d3073f3",
+                        company_id: localStorage.getItem("company"),
                         page: 1,
                         limit: 10,
                         sort: "ASC",

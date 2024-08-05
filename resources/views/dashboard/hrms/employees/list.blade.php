@@ -86,11 +86,7 @@
                                         <div class="text-base font-medium group-[.mode--light]:text-white mb-4">
                                             Data Employees
                                         </div>
-                                        @php
-                                            $company_id = '7b1c7110-9c79-4cff-ab2f-a80e4d3073f3';
-                                        @endphp
-                                        <x-datatable id="employeeTable" :url="$data['apiUrl'] . '/employee/datatables'" method="POST" :company_id="$company_id"
-                                            class="display">
+                                        <x-datatable id="employeeTable" :url="$data['apiUrl'] . '/employee/datatables'" method="POST" class="display">
                                             <x-slot:thead>
                                                 <th data-value="first_name">First Name</th>
                                                 <th data-value="last_name">Last Name</th>

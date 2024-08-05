@@ -71,7 +71,7 @@
                         length: d.length,
                         order: d.order,
                         search: d.search ? d.search.value : '',
-                        company_id: "{{ $company_id }}",
+                        company_id: localStorage.getItem("company"),
                         ...filters
                     };
                 },
@@ -80,7 +80,6 @@
             {{ $id }} = $({{ $id }}).DataTable({
                 processing: true,
                 serverSide: true,
-                // responsive: true,
                 lengthMenu: [
                     [10, 25, 50, 100, -1],
                     [10, 25, 50, 100, 'All'],

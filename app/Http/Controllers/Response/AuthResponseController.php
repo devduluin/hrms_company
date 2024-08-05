@@ -14,13 +14,14 @@ class AuthResponseController extends Controller
     protected $apiGatewayUrl;
     public function __construct()
     {
-        $this->apiGatewayUrl = env('API_GATEWAY_SERVER');
+        $this->apiGatewayUrl = config('apiendpoints.gateway');
     }
 
     public function signin(Request $request)
     {
         $headers = [
-            'Accept'        => 'application/json'
+            'Accept'        => 'application/json',
+            'x-account-type' => 'hris_company',
         ];
         $response = $this->postRequest($this->apiGatewayUrl . '/users/login', $request->all(), $headers);
         if (isset($response) && $response['errors'] == null) {
@@ -33,11 +34,13 @@ class AuthResponseController extends Controller
             $request->session()->put('app_token', $response['result']['token']);
             $request->session()->put('name', $response['result']['name']);
             $request->session()->put('account', $response['result']['account']);
+            $request->session()->put('company_id', $response['result']['secondary_id']);
             return response()->json([
                 'message' => $response['message'],
                 'app_token' => $response['result']['token'],
                 'name' => $response['result']['name'],
                 'account' => $response['result']['account'],
+                'company_id' => $response['result']['secondary_id'],
                 'url' => route('settings')
             ], 200);
         } else {
@@ -79,6 +82,7 @@ class AuthResponseController extends Controller
         $headers = [
             'accept' => 'application/json',
             'Authorization' => 'Bearer ' . $request->session()->get('app_token'),
+            'x-account-type' => 'hris_company',
         ];
         $response = $this->postRequest($this->apiGatewayUrl . '/users/logout', $request, $headers);
         if (isset($response)) {
@@ -86,6 +90,7 @@ class AuthResponseController extends Controller
             $request->session()->forget('app_token');
             $request->session()->forget('name');
             $request->session()->forget('account');
+            $request->session()->forget('company_id');
             $request->session()->flush();
             return redirect('signin');
         }
