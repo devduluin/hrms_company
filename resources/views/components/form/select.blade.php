@@ -8,6 +8,8 @@
     'required' => '' ?? false,
     'apiUrl',
     'columns',
+    'selected' => '',
+    'keys' => [],
 ])
 <div class="mt-2 flex-row xl:items-center">
     <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4 xl:w-60">
@@ -32,7 +34,11 @@
         <select id="{{ $name }}" name="{{ $name }}"
             {{ $attributes->merge(['class' => 'tom-select w-full'])->except(['id', 'name', 'tags', 'filter']) }}
             data-placeholder="{{ $label }}" data-title="{{ $label }}"
-            @if (isset($url)) data-url="{{ $url }}" data-api="{{ $apiUrl }}" data-selectType="{{ $columns }}" @endif
+            @if (isset($url)) data-url="{{ $url }}" @endif
+            @if (isset($apiUrl)) data-api="{{ $apiUrl }}" @endif
+            @if (isset($columns)) data-selectType="{{ $columns }}" @endif
+            @if (isset($selected)) data-selected="{{ $selected }}" @endif
+            @if (!empty($keys)) data-attributes="{{ json_encode($keys) }}" @endif
             data-placeholder="{{ $label }}" data-title="{{ $label }}"
             @error($name) border-danger @enderror">
             @if (isset($slot))

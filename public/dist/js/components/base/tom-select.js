@@ -1,16 +1,26 @@
 function initializeTomSelect() {
     (function () {
-        "use strict";
+        ("use strict");
         $(".tom-select").each(function () {
             let title = $(this).data("title");
             let url = $(this).data("url");
-            let api = $(this).data("api");
+            let api = $(this).data("api") ?? "";
             let company_id = localStorage.getItem("company");
-            let selectType = JSON.parse($(this).attr("data-selectType"));
+            let selectType = $(this).attr("data-selectType");
+            let selectedId = $(this).attr("data-selected");
+            const keysData = $(this).attr("data-attributes");
+
+            try {
+                selectType = JSON.parse(selectType);
+            } catch (e) {
+                selectType = null;
+            }
+
             let e = {
                 valueField: "id",
                 labelField: "name",
                 searchField: "name",
+                selectOnTab: true,
                 plugins: {
                     dropdown_input: {},
                 },
@@ -18,42 +28,73 @@ function initializeTomSelect() {
                 load: function (query, callback) {
                     if (!query.length) return callback();
 
-                    const payload = {
-                        draw: 0,
-                        start: 0,
-                        length: 10,
-                        search: query,
-                        order: [
-                            {
-                                column: 0,
-                                dir: "desc",
-                            },
-                        ],
-                        company_id: company_id,
-                    };
+                    if (api && selectType.length > 0) {
+                        const payload = {
+                            draw: 0,
+                            start: 0,
+                            length: 10,
+                            search: query,
+                            order: [
+                                {
+                                    column: 0,
+                                    dir: "desc",
+                                },
+                            ],
+                        };
 
-                    $.ajax({
-                        url: api,
-                        type: "POST",
-                        contentType: "application/json",
-                        data: JSON.stringify(payload),
-                        success: function (response) {
-                            const options = response.data.map((item) => {
-                                let name = selectType
-                                    .map((field) => item[field] || "")
-                                    .join(" ");
-                                return {
-                                    id: item.id,
-                                    name: name,
-                                };
-                            });
-                            callback(options);
-                        },
-                        error: function (xhr, status, error) {
-                            console.error("Error fetching data:", error);
-                            callback();
-                        },
-                    });
+                        if (keysData) {
+                            try {
+                                const jsonObject = JSON.parse(keysData);
+                                for (const [key, value] of Object.entries(
+                                    jsonObject
+                                )) {
+                                    payload[key] = value;
+                                }
+                            } catch (e) {
+                                console.error("Error parsing JSON:", e);
+                            }
+                        }
+
+                        $.ajax({
+                            url: api,
+                            type: "POST",
+                            contentType: "application/json",
+                            data: JSON.stringify(payload),
+                            success: function (response) {
+                                const options = response.data.map((item) => {
+                                    let name = selectType
+                                        .map((field) => item[field] || "")
+                                        .join(" ");
+                                    return {
+                                        id: item.id,
+                                        name: name,
+                                    };
+                                });
+                                callback(options);
+
+                                const tomSelectInstance = $(this)[0].tomselect;
+                                if (tomSelectInstance && selectedId) {
+                                    const selectedOption = options.find(
+                                        (option) => option.id === selectedId
+                                    );
+
+                                    if (selectedOption) {
+                                        tomSelectInstance.addOption({
+                                            value: selectedOption.id,
+                                            text: selectedOption.name,
+                                        });
+                                        tomSelectInstance.setValue(
+                                            selectedOption.id
+                                        );
+                                    }
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                console.error("Error fetching data:", error);
+                                callback();
+                            },
+                        });
+                    }
                 },
                 render: {
                     option_create: function (data, escape) {

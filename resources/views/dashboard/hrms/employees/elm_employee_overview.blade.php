@@ -1,362 +1,68 @@
+<div class="mb-6 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
+    Overview
+</div>
 <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-2 gap-5 mt-4">
+    <x-form.input id="first_name" label="First Name" name="first_name" required />
+    <x-form.input id="last_name" label="Last Name" name="last_name" required />
+    <x-form.select name="gender" id="gender" label="Gender" class="tom-select w-full" data-placeholder="Select Gender"
+        url="{{ url('dashboard/hrms/designation') }}" required>
+        <option value="">Select Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+    </x-form.select>
 
-    <x-form.input id="first_name" label="First Name" name="first_name"
-        guidelines="Choose a more specific subcategory that closely matches your product. It provides further details about your item." />
+    <x-form.datepicker id="joining_date" label="Joining Date" name="joining_date" required />
 
-    <x-form.input id="last_name" label="Last Name" name="last_name" />
+    <x-form.datepicker id="date_of_birth" label="Date of Birth" name="date_of_birth" required />
 
-    <x-form.input id="email" label="Email" name="email" type="email" required />
+    <x-form.select name="salutation" id="salutation" label="Salutation" class="tom-select w-full"
+        data-placeholder="Select salutation" url="{{ url('dashboard/hrms/designation') }}" required>
+        <option value="">Select salutation</option>
+        <option value="Mr">Mr.</option>
+        <option value="Mrs">Mrs.</option>
+        <option value="Ms">Ms.</option>
+    </x-form.select>
 
-    <x-form.select name="salutation" label="Salutation"
-        guidelines="Choose a more specific subcategory that closely matches your product. It provides further details about your item."
+    <x-form.select name="status" id="status" label="Status" class="tom-select w-full"
+        data-placeholder="Select Status" url="{{ url('dashboard/hrms/designation') }}" required>
+        <option value="">Select Status</option>
+        <option value="active">Active</option>
+        <option value="inactive">Inactive</option>
+        <option value="suspended">Suspended</option>
+        <option value="left">Left</option>
+    </x-form.select>
+</div>
+<div class="grid grid-cols-2 gap-5 mt-4">
+
+</div>
+<div class="mb-6 mt-4 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
+    Company Details
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-2 gap-5 mt-4">
+    <x-form.select id="company" name="company" label="Company" url="{{ url('dashboard/hrms/designation') }}"
+        apiUrl="http://localhost:5555/api/v1/company/datatables" columns='["company_name"]' :selected="$data['company']"
+        :keys="[
+            'company_id' => $data['company'],
+        ]" />
+
+    <x-form.select id="designation" name="designation" label="Designation" url="{{ url('dashboard/hrms/designation') }}"
+        apiUrl="http://localhost:4444/api/v1/employee/datatables" columns='["first_name", "last_name"]' />
+
+    <x-form.select id="branch" name="branch" label="Branch" url="{{ url('dashboard/hrms/designation') }}"
+        apiUrl="http://localhost:4444/api/v1/employee/datatables" columns='["first_name", "last_name"]' />
+
+    <x-form.select id="department" name="department" label="Department" url="{{ url('dashboard/hrms/designation') }}"
+        apiUrl="http://localhost:4444/api/v1/employee/datatables" columns='["first_name", "last_name"]' />
+
+    <x-form.select id="report_to" name="report_to" label="Reports to" url="{{ url('dashboard/hrms/designation') }}"
+        apiUrl="http://localhost:4444/api/v1/employee/datatables" columns='["first_name", "last_name"]' />
+
+    <x-form.select id="grade" name="grade" label="Grade" url="{{ url('dashboard/hrms/designation') }}"
+        apiUrl="http://localhost:4444/api/v1/employee/datatables" columns='["first_name", "last_name"]' />
+
+    <x-form.select id="employment_type" name="employment_type" label="Employment Type"
         url="{{ url('dashboard/hrms/designation') }}" apiUrl="http://localhost:4444/api/v1/employee/datatables"
         columns='["first_name", "last_name"]' />
-    {{-- <option value="0">
-            Toys & Games
-        </option>
-        <option value="1">
-            Food & Grocery
-        </option>
-        <option value="2">
-            Books
-        </option>
-        <option value="3">
-            Electronics
-        </option>
-        <option value="4">
-            Home & Garden
-        </option>
-        <option value="5">
-            Furniture
-        </option>
-        <option value="6">
-            Sports & Outdoors
-        </option>
-        <option value="7">
-            Beauty & Personal Care
-        </option>
-        <option value="8">
-            Jewelry
-        </option>
-        <option value="9">
-            Clothing
-        </option>
-    </x-form.select> --}}
-
-    {{-- <div class="mt-2 flex-row xl:items-center">
-        <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4 xl:w-60">
-            <div class="text-left">
-                <div class="flex items-center">
-                    <div class="font-medium">First Name</div>
-                    <div
-                        class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
-                        Required
-                    </div>
-                </div>
-                <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-
-                </div>
-            </div>
-        </div>
-        <div class="flex-1 sm:w-full flex-1 w-80 mt-3 xl:mt-0 mt-3 xl:mt-0">
-            <input data-tw-merge="" type="text" placeholder="Product name"
-                class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10">
-            <div data-tw-merge="" class="text-xs text-slate-500 mt-2">
-                Maximum character 0/70
-            </div>
-        </div>
-    </div> --}}
-    {{-- <div class="mt-2 flex-row xl:items-center">
-        <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4 xl:w-60">
-            <div class="text-left">
-                <div class="flex items-center">
-                    <div class="font-medium">Email Address</div>
-                    <div
-                        class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
-                        Required
-                    </div>
-                </div>
-                <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-
-                </div>
-            </div>
-        </div>
-        <div class="flex-1 sm:w-full flex-1 w-80 mt-3 xl:mt-0 mt-3 xl:mt-0">
-            <input data-tw-merge="" type="text" placeholder="Product name"
-                class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10">
-            <div data-tw-merge="" class="text-xs text-slate-500 mt-2">
-                Maximum character 0/70
-            </div>
-        </div>
-    </div> --}}
-    {{-- <div class="mt-2 flex-row xl:items-center">
-        <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4 xl:w-60">
-            <div class="text-left">
-                <div class="flex items-center">
-                    <div class="font-medium">Designation</div>
-                    <div
-                        class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
-                        Required
-                    </div>
-                </div>
-                <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-
-                </div>
-            </div>
-        </div>
-        <div class="flex-1 sm:w-full flex-1 w-80 mt-3 xl:mt-0 mt-3 xl:mt-0">
-            <select data-placeholder="Designation" data-title="Designation"
-                data-url="{{ url('dashboard/hrms/designation') }}" class="tom-select w-full">
-                <option value="0">
-                    Toys & Games
-                </option>
-                <option value="1">
-                    Food & Grocery
-                </option>
-                <option value="2">
-                    Books
-                </option>
-                <option value="3">
-                    Electronics
-                </option>
-                <option value="4">
-                    Home & Garden
-                </option>
-                <option value="5">
-                    Furniture
-                </option>
-                <option value="6">
-                    Sports & Outdoors
-                </option>
-                <option value="7">
-                    Beauty & Personal Care
-                </option>
-                <option value="8">
-                    Jewelry
-                </option>
-                <option value="9">
-                    Clothing
-                </option>
-            </select>
-            <div class="mt-1.5 mr-5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-                Choose a more specific subcategory that closely
-                matches your product. It provides further details
-                about your item.
-            </div>
-        </div>
-    </div> --}}
-    {{-- <div class="mt-2 flex-row xl:items-center">
-        <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4 xl:w-60">
-            <div class="text-left">
-                <div class="flex items-center">
-                    <div class="font-medium">Salutation</div>
-                    <div
-                        class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
-                        Required
-                    </div>
-                </div>
-                <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-
-                </div>
-            </div>
-        </div>
-        <div class="flex-1 mt-2 sm:w-full flex-1 w-80 mt-3 xl:mt-0 mt-3 xl:mt-0">
-            <select data-placeholder="Etalase" class="tom-select w-full">
-                <option value="0">
-                    Toys & Games
-                </option>
-                <option value="1">
-                    Food & Grocery
-                </option>
-                <option value="2">
-                    Books
-                </option>
-                <option value="3">
-                    Electronics
-                </option>
-                <option value="4">
-                    Home & Garden
-                </option>
-                <option value="5">
-                    Furniture
-                </option>
-                <option value="6">
-                    Sports & Outdoors
-                </option>
-                <option value="7">
-                    Beauty & Personal Care
-                </option>
-                <option value="8">
-                    Jewelry
-                </option>
-                <option value="9">
-                    Clothing
-                </option>
-            </select>
-            <div class="mt-1.5 mr-5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-                Choose a more specific subcategory that closely
-                matches your product. It provides further details
-                about your item.
-            </div>
-        </div>
-    </div>
-    <div class="mt-2 flex-row xl:items-center">
-        <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4 xl:w-60">
-            <div class="text-left">
-                <div class="flex items-center">
-                    <div class="font-medium">Employee Name</div>
-                    <div
-                        class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
-                        Required
-                    </div>
-                </div>
-                <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-
-                </div>
-            </div>
-        </div>
-        <div class="flex-1 sm:w-full flex-1 w-80 mt-3 xl:mt-0 mt-3 xl:mt-0">
-            <input data-tw-merge="" type="text" placeholder="Product name"
-                class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10">
-            <div data-tw-merge="" class="text-xs text-slate-500 mt-2">
-                Maximum character 0/70
-            </div>
-        </div>
-    </div>
-    <div class="mt-2 flex-row xl:items-center">
-        <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4 xl:w-60">
-            <div class="text-left">
-                <div class="flex items-center">
-                    <div class="font-medium">Email Address</div>
-                    <div
-                        class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
-                        Required
-                    </div>
-                </div>
-                <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-
-                </div>
-            </div>
-        </div>
-        <div class="flex-1 sm:w-full flex-1 w-80 mt-3 xl:mt-0 mt-3 xl:mt-0">
-            <input data-tw-merge="" type="text" placeholder="Product name"
-                class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10">
-            <div data-tw-merge="" class="text-xs text-slate-500 mt-2">
-                Maximum character 0/70
-            </div>
-        </div>
-    </div>
-    <div class="mt-2 flex-row xl:items-center">
-        <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4 xl:w-60">
-            <div class="text-left">
-                <div class="flex items-center">
-                    <div class="font-medium">Designation</div>
-                    <div
-                        class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
-                        Required
-                    </div>
-                </div>
-                <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-
-                </div>
-            </div>
-        </div>
-        <div class="flex-1 sm:w-full flex-1 w-80 mt-3 xl:mt-0 mt-3 xl:mt-0">
-            <select data-placeholder="Designation" data-title="Designation"
-                data-url="{{ url('dashboard/hrms/designation') }}" class="tom-select w-full">
-                <option value="0">
-                    Toys & Games
-                </option>
-                <option value="1">
-                    Food & Grocery
-                </option>
-                <option value="2">
-                    Books
-                </option>
-                <option value="3">
-                    Electronics
-                </option>
-                <option value="4">
-                    Home & Garden
-                </option>
-                <option value="5">
-                    Furniture
-                </option>
-                <option value="6">
-                    Sports & Outdoors
-                </option>
-                <option value="7">
-                    Beauty & Personal Care
-                </option>
-                <option value="8">
-                    Jewelry
-                </option>
-                <option value="9">
-                    Clothing
-                </option>
-            </select>
-            <div class="mt-1.5 mr-5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-                Choose a more specific subcategory that closely
-                matches your product. It provides further details
-                about your item.
-            </div>
-        </div>
-    </div>
-    <div class="mt-2 flex-row xl:items-center">
-        <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4 xl:w-60">
-            <div class="text-left">
-                <div class="flex items-center">
-                    <div class="font-medium">Salutation</div>
-                    <div
-                        class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
-                        Required
-                    </div>
-                </div>
-                <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-
-                </div>
-            </div>
-        </div>
-        <div class="flex-1 mt-2 sm:w-full flex-1 w-80 mt-3 xl:mt-0 mt-3 xl:mt-0">
-            <select data-placeholder="Etalase" class="tom-select w-full">
-                <option value="0">
-                    Toys & Games
-                </option>
-                <option value="1">
-                    Food & Grocery
-                </option>
-                <option value="2">
-                    Books
-                </option>
-                <option value="3">
-                    Electronics
-                </option>
-                <option value="4">
-                    Home & Garden
-                </option>
-                <option value="5">
-                    Furniture
-                </option>
-                <option value="6">
-                    Sports & Outdoors
-                </option>
-                <option value="7">
-                    Beauty & Personal Care
-                </option>
-                <option value="8">
-                    Jewelry
-                </option>
-                <option value="9">
-                    Clothing
-                </option>
-            </select>
-            <div class="mt-1.5 mr-5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-                Choose a more specific subcategory that closely
-                matches your product. It provides further details
-                about your item.
-            </div>
-        </div>
-    </div> --}}
 
 </div>
 <div class="grid grid-cols-2 gap-5 mt-4">

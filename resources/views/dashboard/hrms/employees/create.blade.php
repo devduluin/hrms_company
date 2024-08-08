@@ -31,7 +31,7 @@
                                         class="cursor-pointer block appearance-none px-3 py-2 border border-transparent text-slate-600 transition-colors dark:text-slate-400 [&.active]:text-slate-700 [&.active]:dark:text-white rounded-md py-1.5 dark:border-transparent [&.active]:text-slate-700 [&.active]:border [&.active]:shadow-sm [&.active]:font-medium [&.active]:border-slate-200 [&.active]:bg-white [&.active]:dark:text-slate-300 [&.active]:dark:bg-darkmode-400 [&.active]:dark:border-darkmode-400 active w-full py-2">
                                         <i data-tw-merge="" data-lucide="briefcase"
                                             class="inline-block h-5 w-5 mr-2 stroke-[1] "></i>
-                                        Employee Overview
+                                        Overview
                                     </button>
                                 </li>
                                 <li id="example-6-tab" data-tw-merge role="presentation"
@@ -40,7 +40,7 @@
                                         class="cursor-pointer block appearance-none px-3 py-2 border border-transparent text-slate-600 transition-colors dark:text-slate-400 [&.active]:text-slate-700 [&.active]:dark:text-white rounded-md py-1.5 dark:border-transparent [&.active]:text-slate-700 [&.active]:border [&.active]:shadow-sm [&.active]:font-medium [&.active]:border-slate-200 [&.active]:bg-white [&.active]:dark:text-slate-300 [&.active]:dark:bg-darkmode-400 [&.active]:dark:border-darkmode-400 w-full py-2">
                                         <i data-tw-merge="" data-lucide="user"
                                             class="inline-block h-5 w-5 mr-2 stroke-[1] "></i>
-                                        Employee Profile
+                                        Joining
                                     </button>
                                 </li>
                                 <li id="example-6-tab" data-tw-merge role="presentation"
@@ -49,7 +49,7 @@
                                         class="cursor-pointer block appearance-none px-3 py-2 border border-transparent text-slate-600 transition-colors dark:text-slate-400 [&.active]:text-slate-700 [&.active]:dark:text-white rounded-md py-1.5 dark:border-transparent [&.active]:text-slate-700 [&.active]:border [&.active]:shadow-sm [&.active]:font-medium [&.active]:border-slate-200 [&.active]:bg-white [&.active]:dark:text-slate-300 [&.active]:dark:bg-darkmode-400 [&.active]:dark:border-darkmode-400 w-full py-2">
                                         <i data-tw-merge="" data-lucide="file"
                                             class="inline-block h-5 w-5 mr-2 stroke-[1] "></i>
-                                        Employee Profile
+                                        Address
                                     </button>
                                 </li>
                                 <li id="example-6-tab" data-tw-merge role="presentation"
@@ -58,7 +58,43 @@
                                         class="cursor-pointer block appearance-none px-3 py-2 border border-transparent text-slate-600 transition-colors dark:text-slate-400 [&.active]:text-slate-700 [&.active]:dark:text-white rounded-md py-1.5 dark:border-transparent [&.active]:text-slate-700 [&.active]:border [&.active]:shadow-sm [&.active]:font-medium [&.active]:border-slate-200 [&.active]:bg-white [&.active]:dark:text-slate-300 [&.active]:dark:bg-darkmode-400 [&.active]:dark:border-darkmode-400 w-full py-2">
                                         <i data-tw-merge="" data-lucide="contact"
                                             class="inline-block h-5 w-5 mr-2 stroke-[1] "></i>
-                                        Employee Profile
+                                        Attendance
+                                    </button>
+                                </li>
+                                <li id="example-7-tab" data-tw-merge role="presentation"
+                                    class="focus-visible:outline-none flex-1">
+                                    <button data-tw-merge data-tw-target="#example-7" role="tab"
+                                        class="cursor-pointer block appearance-none px-3 py-2 border border-transparent text-slate-600 transition-colors dark:text-slate-400 [&.active]:text-slate-700 [&.active]:dark:text-white rounded-md py-1.5 dark:border-transparent [&.active]:text-slate-700 [&.active]:border [&.active]:shadow-sm [&.active]:font-medium [&.active]:border-slate-200 [&.active]:bg-white [&.active]:dark:text-slate-300 [&.active]:dark:bg-darkmode-400 [&.active]:dark:border-darkmode-400 w-full py-2">
+                                        <i data-tw-merge="" data-lucide="contact"
+                                            class="inline-block h-5 w-5 mr-2 stroke-[1] "></i>
+                                        Salary
+                                    </button>
+                                </li>
+                                <li id="example-8-tab" data-tw-merge role="presentation"
+                                    class="focus-visible:outline-none flex-1">
+                                    <button data-tw-merge data-tw-target="#example-8" role="tab"
+                                        class="cursor-pointer block appearance-none px-3 py-2 border border-transparent text-slate-600 transition-colors dark:text-slate-400 [&.active]:text-slate-700 [&.active]:dark:text-white rounded-md py-1.5 dark:border-transparent [&.active]:text-slate-700 [&.active]:border [&.active]:shadow-sm [&.active]:font-medium [&.active]:border-slate-200 [&.active]:bg-white [&.active]:dark:text-slate-300 [&.active]:dark:bg-darkmode-400 [&.active]:dark:border-darkmode-400 w-full py-2">
+                                        <i data-tw-merge="" data-lucide="contact"
+                                            class="inline-block h-5 w-5 mr-2 stroke-[1] "></i>
+                                        Personal
+                                    </button>
+                                </li>
+                                <li id="example-9-tab" data-tw-merge role="presentation"
+                                    class="focus-visible:outline-none flex-1">
+                                    <button data-tw-merge data-tw-target="#example-9" role="tab"
+                                        class="cursor-pointer block appearance-none px-3 py-2 border border-transparent text-slate-600 transition-colors dark:text-slate-400 [&.active]:text-slate-700 [&.active]:dark:text-white rounded-md py-1.5 dark:border-transparent [&.active]:text-slate-700 [&.active]:border [&.active]:shadow-sm [&.active]:font-medium [&.active]:border-slate-200 [&.active]:bg-white [&.active]:dark:text-slate-300 [&.active]:dark:bg-darkmode-400 [&.active]:dark:border-darkmode-400 w-full py-2">
+                                        <i data-tw-merge="" data-lucide="contact"
+                                            class="inline-block h-5 w-5 mr-2 stroke-[1] "></i>
+                                        Profile
+                                    </button>
+                                </li>
+                                <li id="example-10-tab" data-tw-merge role="presentation"
+                                    class="focus-visible:outline-none flex-1">
+                                    <button data-tw-merge data-tw-target="#example-10" role="tab"
+                                        class="cursor-pointer block appearance-none px-3 py-2 border border-transparent text-slate-600 transition-colors dark:text-slate-400 [&.active]:text-slate-700 [&.active]:dark:text-white rounded-md py-1.5 dark:border-transparent [&.active]:text-slate-700 [&.active]:border [&.active]:shadow-sm [&.active]:font-medium [&.active]:border-slate-200 [&.active]:bg-white [&.active]:dark:text-slate-300 [&.active]:dark:bg-darkmode-400 [&.active]:dark:border-darkmode-400 w-full py-2">
+                                        <i data-tw-merge="" data-lucide="contact"
+                                            class="inline-block h-5 w-5 mr-2 stroke-[1] "></i>
+                                        Exit
                                     </button>
                                 </li>
                             </ul>

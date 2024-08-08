@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Session;
+
 use Illuminate\Http\Request;
 
 class EmployeesController extends Controller
@@ -29,6 +31,8 @@ class EmployeesController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'New Employees';
+        $allSessions = session()->all();
+        $data['company'] = $allSessions['company_id'][0];
 
         return view('dashboard.hrms.employees.create', compact('data'));
     }
