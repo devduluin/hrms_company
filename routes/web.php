@@ -51,7 +51,7 @@ Route::controller(DashboardController::class)->group(function () {
 
     Route::prefix('/dashboard')->group(function () {
         Route::get('/', 'index')->name('dashboard');
-
+//edit
         Route::controller(SettingsController::class)->group(function () {
             Route::prefix('/settings')->group(function () {
                 Route::get('/', 'index')->name('settings');
