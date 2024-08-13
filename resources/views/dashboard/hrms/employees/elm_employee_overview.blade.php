@@ -40,25 +40,34 @@
 </div>
 <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-2 gap-5 mt-4">
     <x-form.select id="company" name="company" label="Company" url="{{ url('dashboard/hrms/designation') }}"
-        apiUrl="http://localhost:5555/api/v1/company/datatables" columns='["company_name"]' :selected="$data['company']"
+        apiUrl="{{ $data['apiCompanyUrl'] }}/company/datatables" columns='["company_name"]' :selected="$data['company']"
         :keys="[
             'company_id' => $data['company'],
         ]" />
 
     <x-form.select id="designation" name="designation" label="Designation" url="{{ url('dashboard/hrms/designation') }}"
-        apiUrl="http://localhost:4444/api/v1/employee/datatables" columns='["first_name", "last_name"]' />
+        apiUrl="{{ $data['apiCompanyUrl'] }}/designation/datatables" columns='["designation_name"]' :keys="[
+            'company_id' => $data['company'],
+        ]" />
 
     <x-form.select id="branch" name="branch" label="Branch" url="{{ url('dashboard/hrms/designation') }}"
-        apiUrl="http://localhost:4444/api/v1/employee/datatables" columns='["first_name", "last_name"]' />
+        apiUrl="{{ $data['apiCompanyUrl'] }}/branch/datatables" columns='["branch_name"]' :keys="[
+            'company_id' => $data['company'],
+        ]" />
 
     <x-form.select id="department" name="department" label="Department" url="{{ url('dashboard/hrms/designation') }}"
-        apiUrl="http://localhost:4444/api/v1/employee/datatables" columns='["first_name", "last_name"]' />
+        apiUrl="{{ $data['apiCompanyUrl'] }}/department/datatables" columns='["department_name"]' :keys="[
+            'company_id' => $data['company'],
+        ]" />
 
     <x-form.select id="report_to" name="report_to" label="Reports to" url="{{ url('dashboard/hrms/designation') }}"
-        apiUrl="http://localhost:4444/api/v1/employee/datatables" columns='["first_name", "last_name"]' />
+        apiUrl="{{ $data['apiEmployeeUrl'] }}/employee/datatables" columns='["first_name","last_name"]'
+        :keys="[
+            'company_id' => $data['company'],
+        ]" />
 
     <x-form.select id="grade" name="grade" label="Grade" url="{{ url('dashboard/hrms/designation') }}"
-        apiUrl="http://localhost:4444/api/v1/employee/datatables" columns='["first_name", "last_name"]' />
+        apiUrl="http://localhost:4444/api/v1/employees/datatables" columns='["first_name", "last_name"]' />
 
     <x-form.select id="employment_type" name="employment_type" label="Employment Type"
         url="{{ url('dashboard/hrms/designation') }}" apiUrl="http://localhost:4444/api/v1/employee/datatables"

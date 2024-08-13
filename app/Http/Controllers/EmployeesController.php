@@ -33,6 +33,8 @@ class EmployeesController extends Controller
         $data['page_title']   = 'New Employees';
         $allSessions = session()->all();
         $data['company'] = $allSessions['company_id'][0];
+        $data['apiCompanyUrl'] = config('apiendpoints.companies');
+        $data['apiEmployeeUrl'] = config('apiendpoints.employees');
 
         return view('dashboard.hrms.employees.create', compact('data'));
     }
