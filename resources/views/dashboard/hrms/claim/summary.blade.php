@@ -3,69 +3,10 @@
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
 <div class="hurricane before:content-[''] before:z-[-1] before:w-screen before:bg-slate-50 before:top-0 before:h-screen before:fixed before:bg-texture-black before:bg-contain before:bg-fixed before:bg-[center_-20rem] before:bg-no-repeat">
-    @include('layouts.dashboard.menu')
-    <div id="contents-page" class="content transition-[margin,width] duration-100 px-5 xl:mr-2.5 mt-[75px] pt-[31px] pb-16 content--compact xl:ml-[275px] [&.content--compact]:xl:ml-[100px]">
-        <div class="container">
-            <div class="grid grid-cols-12 gap-x-6 gap-y-10">
-                <div class="col-span-12">
-                    <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center">
-                        <div class="text-base font-medium group-[.mode--light]:text-white">
-                            {{ $data['page_title'] }}
-                        </div>
-                        <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
-                            <a href="{{ url('dashboard/hrms/employee/new_employee') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                <i data-tw-merge="" data-lucide="plus" class=" h-4 w-4 stroke-[1.5] side-menu__link_icon"></i>
-                                <!-- Button Text -->
-                                New Employee
-                            </a>
-                        </div>
-                    </div>
-                    <div class="mt-3.5 flex flex-col gap-8">
-                        <div class="box box--stacked flex flex-col p-5">
-                            <div class="grid grid-cols-4 gap-5">
-                                <div class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                    <div class="text-base text-slate-500">Registered Users</div>
-                                    <div class="mt-1.5 text-2xl font-medium">457,204</div>
-                                    <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
-                                        <div class="flex items-center rounded-full border border-danger/10 bg-danger/10 py-[2px] pl-[7px] pr-1 text-xs font-medium text-danger">
-                                            3%
-                                            <i data-tw-merge="" data-lucide="chevron-down" class="ml-px h-4 w-4 stroke-[1.5]"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                    <div class="text-base text-slate-500">Active Users</div>
-                                    <div class="mt-1.5 text-2xl font-medium">122,721</div>
-                                    <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
-                                        <div class="flex items-center rounded-full border border-success/10 bg-success/10 py-[2px] pl-[7px] pr-1 text-xs font-medium text-success">
-                                            2%
-                                            <i data-tw-merge="" data-lucide="chevron-up" class="ml-px h-4 w-4 stroke-[1.5]"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                    <div class="text-base text-slate-500">New Users</div>
-                                    <div class="font-mediumm mt-1.5 text-2xl">489,223</div>
-                                    <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
-                                        <div class="flex items-center rounded-full border border-danger/10 bg-danger/10 py-[2px] pl-[7px] pr-1 text-xs font-medium text-danger">
-                                            3%
-                                            <i data-tw-merge="" data-lucide="chevron-down" class="ml-px h-4 w-4 stroke-[1.5]"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                    <div class="text-base text-slate-500">Login Activity</div>
-                                    <div class="font-mediumm mt-1.5 text-2xl">411,259</div>
-                                    <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
-                                        <div class="flex items-center rounded-full border border-success/10 bg-success/10 py-[2px] pl-[7px] pr-1 text-xs font-medium text-success">
-                                            8%
-                                            <i data-tw-merge="" data-lucide="chevron-up" class="ml-px h-4 w-4 stroke-[1.5]"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box box--stacked flex flex-col">
+        @include('layouts.dashboard.menu')        
+        <div id="contents-page" class="content transition-[margin,width] duration-100 px-5 xl:mr-2.5 mt-[75px] pt-[31px] pb-16 content--compact xl:ml-[275px] [&.content--compact]:xl:ml-[100px]">
+            <div class="container">
+                <div class="box box--stacked flex flex-col">
                             <div class="flex flex-col gap-y-2 p-5 sm:flex-row sm:items-center">
                                 <div>
                                     <div class="relative">
@@ -156,22 +97,19 @@
                                                 <input data-tw-merge="" type="checkbox" class="transition-all duration-100 ease-in-out shadow-sm border-slate-200 cursor-pointer rounded focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&[type='radio']]:checked:bg-primary [&[type='radio']]:checked:border-primary [&[type='radio']]:checked:border-opacity-10 [&[type='checkbox']]:checked:bg-primary [&[type='checkbox']]:checked:border-primary [&[type='checkbox']]:checked:border-opacity-10 [&:disabled:not(:checked)]:bg-slate-100 [&:disabled:not(:checked)]:cursor-not-allowed [&:disabled:not(:checked)]:dark:bg-darkmode-800/50 [&:disabled:checked]:opacity-70 [&:disabled:checked]:cursor-not-allowed [&:disabled:checked]:dark:bg-darkmode-800/50">
                                             </td>
                                             <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500">
-                                                Name
+                                                Employee Name
                                             </td>
                                             <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500">
-                                                Position
+                                                Company
                                             </td>
                                             <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 w-52 border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500">
-                                                Profile Completeness
+                                                Posting Date
                                             </td>
                                             <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 border-t border-slate-200/60 bg-slate-50 py-4 text-center font-medium text-slate-500">
-                                                Status
+                                                Paid Amount
                                             </td>
                                             <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500">
-                                                Joined Date
-                                            </td>
-                                            <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 w-20 border-t border-slate-200/60 bg-slate-50 py-4 text-center font-medium text-slate-500">
-                                                Action
+                                                Status
                                             </td>
                                         </tr>
                                     </thead>
@@ -883,6 +821,4 @@
                 </div>
             </div>
         </div>
-    </div> 
 </div>
-@endsection

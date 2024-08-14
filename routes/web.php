@@ -6,6 +6,8 @@ use App\Http\Controllers\HrmsController;
 use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\RecruitmentController;
+use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\ClaimController;
 use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
@@ -99,7 +101,26 @@ Route::controller(DashboardController::class)->group(function () {
                 Route::prefix('/recruitment')->group(function () {
                     Route::controller(RecruitmentController::class)->group(function () {
                         Route::get('/', 'index')->name('employee');
+                        Route::get('/create_applicant', 'create')->name('create_applicant');
                        
+                    });
+                });
+
+                // attendance modules
+                Route::prefix('/attendance')->group(function () {
+                    Route::controller(AttendanceController::class)->group(function () {
+                        Route::get('/', 'index')->name('attendance');
+                        Route::get('/summary', 'summary')->name('summary');
+                        Route::get('/shift_assignment', 'shift')->name('shift');
+                    });
+                });
+
+                // claim modules
+                Route::prefix('/claim')->group(function () {
+                    Route::controller(ClaimController::class)->group(function () {
+                        Route::get('/', 'index')->name('claim');
+                        Route::get('/summary', 'summary')->name('summary');
+                        Route::get('/travel_request', 'travel_request')->name('travel_request');
                     });
                 });
 

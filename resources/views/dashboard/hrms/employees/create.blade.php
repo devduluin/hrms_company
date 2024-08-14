@@ -51,14 +51,12 @@
                                  @include('dashboard.hrms.employees.elm_employee_overview')
                             </div>
                             <div data-transition data-selector=".active" data-enter="transition-[visibility,opacity] ease-linear duration-150" data-enter-from="!p-0 !h-0 overflow-hidden invisible opacity-0" data-enter-to="visible opacity-100" data-leave="transition-[visibility,opacity] ease-linear duration-150" data-leave-from="visible opacity-100" data-leave-to="!p-0 !h-0 overflow-hidden invisible opacity-0" id="example-6" role="tabpanel" aria-labelledby="example-6-tab" class="tab-pane leading-relaxed">
-                                @include('dashboard.hrms.employees.elm_employee_overview')
+                                @include('dashboard.hrms.employees.elm_employee_profile')
                             </div>
                         </div>
-                    </div> 
-                    
+                    </div>  
                 </div>
             </div>
-       
         </div>
     </div>
 </div>

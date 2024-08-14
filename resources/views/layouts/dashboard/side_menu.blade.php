@@ -31,14 +31,14 @@
             <li>
                 <a href="{{ url('/dashboard/hrms/employee') }}" class="side-menu__link ">
                     <i data-tw-merge="" data-lucide="users" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
-                    <div class="side-menu__link__title">Employee Lifecycle</div>
+                    <div class="side-menu__link__title">Employee</div>
                 </a>
                 
                 <!-- END: Second Child -->
             </li>
             
             <li>
-                <a href="hurricane-dashboard-overview-5.html" class="side-menu__link ">
+                <a href="{{ url('/dashboard/hrms/claim') }}" class="side-menu__link ">
                     <i data-tw-merge="" data-lucide="refresh-ccw-dot" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
                     <div class="side-menu__link__title">Expense Claim</div>
                 </a>
@@ -55,7 +55,7 @@
                 <!-- END: Second Child -->
             </li>
             <li>
-                <a href="hurricane-dashboard-overview-4.html" class="side-menu__link ">
+                <a href="{{ url('/dashboard/hrms/attendance') }}" class="side-menu__link ">
                     <i data-tw-merge="" data-lucide="calendar" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
                     <div class="side-menu__link__title">Shift & Attendance</div>
                 </a>

@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class AttendanceController extends Controller
+{
+    public function index()
+    {
+        $data['title']   = 'Duluin HRMS';
+        $data['page_title']   = 'Attendance Overview';
+        
+        return view('dashboard.hrms.attendance.index', compact('data'));
+    }
+
+    public function summary()
+    {
+        $data['title']   = 'Duluin HRMS';
+        $data['page_title']   = 'Attendance Overview';
+        
+        return view('dashboard.hrms.attendance.summary', compact('data'));
+    }
+
+    public function shift()
+    {
+        $data['title']   = 'Duluin HRMS';
+        $data['page_title']   = 'New Shift Assignment';
+        
+        return view('dashboard.hrms.attendance.shift_assignment', compact('data'));
+    }
+}
