@@ -194,7 +194,7 @@
                         messages.forEach(message => {
                             const errorElement = document.createElement('div');
                             errorElement.className =
-                            'validation-error-message'; // Class for error messages
+                                'validation-error-message'; // Class for error messages
                             errorElement.style.color = 'red'; // Style as needed
                             errorElement.textContent = message;
 

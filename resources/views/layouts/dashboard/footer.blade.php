@@ -1,7 +1,6 @@
     <script src="{{ asset('dist/js/vendors/tailwind-merge.js') }}"></script>
     <script src="{{ asset('dist/js/vendors/lucide.js') }}"></script>
     <script src="{{ asset('dist/js/vendors/dayjs.js') }}"></script>
-    <script src="{{ asset('dist/js/vendors/litepicker.js') }}"></script>
     <script src="{{ asset('dist/js/vendors/tiny-slider.js') }}"></script>
     <script src="{{ asset('dist/js/vendors/popper.js') }}"></script>
     <script src="{{ asset('dist/js/vendors/dropdown.js') }}"></script>
@@ -12,7 +11,6 @@
     <script src="{{ asset('dist/js/vendors/modal.js') }}"></script>
     <script src="{{ asset('dist/js/components/base/theme-color.js') }}"></script>
     <script src="{{ asset('dist/js/components/base/lucide.js') }}"></script>
-    <script src="{{ asset('dist/js/components/base/litepicker.js') }}"></script>
     <script src="{{ asset('dist/js/components/base/tiny-slider.js') }}"></script>
     <script src="{{ asset('dist/js/utils/colors.js') }}"></script>
     <script src="{{ asset('dist/js/utils/helper.js') }}"></script>

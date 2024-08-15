@@ -43,3 +43,7 @@
         @enderror
 </div>
 </div>
+@pushOnce('js')
+<script src="{{ asset('dist/js/vendors/litepicker.js') }}"></script>
+<script src="{{ asset('dist/js/components/base/litepicker.js') }}"></script>
+@endpushOnce
