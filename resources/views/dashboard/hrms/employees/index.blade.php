@@ -592,7 +592,7 @@
                         company_id: localStorage.getItem("company"),
                         page: 1,
                         limit: 10,
-                        sort: "ASC",
+                        sort: "DESC",
                     });
 
                     const requestOptions = {

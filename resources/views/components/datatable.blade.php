@@ -33,6 +33,7 @@
                 var searchable = $(item).attr('searchable') !== 'false' || $(item).attr('searchable') === undefined;
                 var visible = $(item).attr('visible') !== 'false' || $(item).attr('visible') === undefined;
                 var render = $(item).data('render');
+
                 let tmp = {
                     data: $(item).data('value'),
                     orderable: orderable,
@@ -50,7 +51,6 @@
                         }
                     };
                 }
-
                 {{ $id }}TableColumns.push(tmp);
             });
 

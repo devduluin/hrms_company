@@ -5,7 +5,7 @@
 @endPushOnce
 
 @pushOnce('js')
-    <script src="https://cdn.datatables.net/2.1.3/js/dataTables.js"></script>
+    <script src="{{ asset('dist/js/vendors/datatables/DataTables-1.13.3/js/jquery.dataTables.js') }}"></script>
     <script src="https://cdn.datatables.net/2.1.3/js/dataTables.tailwindcss.js"></script>
     <script src="https://cdn.tailwindcss.com/"></script>
     <script src="{{ asset('dist/js/vendors/datatables/JSZip-2.5.0/jszip.min.js') }}"></script>
