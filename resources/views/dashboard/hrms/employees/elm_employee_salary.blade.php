@@ -1,24 +1,29 @@
-{{-- <form id="employee-joining-form" method="post" action="http://localhost:4444/api/v1/employee" autocomplete="off" novalidate
-    class="employee-joining-form">
+{{-- <form id="employee-attendance-form" method="post" action="http://localhost:4444/api/v1/employee" autocomplete="off"
+    novalidate class="employee-attendance-form">
     @csrf --}}
 <div class="mb-6 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
-    Joining
+    Salary
 </div>
 <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-2 gap-5 mt-4">
-    <x-form.select id="applicant_id" name="applicant_id" label="Job Applicant" url="{{ url('dashboard/hrms/applicant') }}"
-        apiUrl="{{ $data['apiCompanyUrl'] }}/applicant/datatables" columns='["applicant_name"]' :keys="[
+    <x-form.input id="cost_to_company" label="Cost to Company (CTC)" name="cost_to_company" />
+
+    <x-form.select id="payroll_cost_center" name="payroll_cost_center" label="Payroll Cost Center"
+        url="{{ url('dashboard/hrms/designation') }}" apiUrl="{{ $data['apiCompanyUrl'] }}/company/datatables"
+        columns='["company_name"]' :selected="$data['company']" :keys="[
             'company_id' => $data['company'],
         ]">
-        <option value="">Select Applicant</option>
+        <option value="">Select Company</option>
     </x-form.select>
-    <x-form.datepicker id="confirmation_date" label="Confirmation Date" name="confirmation_date" />
-    <x-form.input id="notice_day" type="number" label="Notice (days)" name="notice_day" />
-    <x-form.datepicker id="offer_date" label="Offer Date" name="offer_date" />
-    <x-form.datepicker id="contract_end_date" label="Contract End Date" name="contract_end_date" />
-    <x-form.datepicker id="date_of_retirement" label="Date of Retirement" name="date_of_retirement" />
-</div>
-<div class="grid grid-cols-2 gap-5 mt-4">
 
+    <x-form.select name="salary_currency" id="salary_currency" label="Salary Currency" class="tom-select w-full"
+        data-placeholder="Select salutation" url="{{ url('dashboard/hrms/designation') }}">
+        <option value="">Select currency</option>
+    </x-form.select>
+
+    <x-form.select name="salary_mode" id="salary_mode" label="Salary Mode" class="tom-select w-full"
+        data-placeholder="Select salutation" url="{{ url('dashboard/hrms/designation') }}">
+        <option value="">Select mode</option>
+    </x-form.select>
 </div>
 <div class="grid grid-cols-2 gap-5 mt-4">
 
@@ -26,16 +31,14 @@
 <div class="mb-6 mt-4 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
 
 </div>
-{{-- <x-form.button label="Save changes" id="save-joining-btn" style="primary" type="submit" icon="save" /> --}}
-{{-- </form> --}}
-{{-- @include('vendor-common.toastr')
+{{-- <x-form.button label="Save changes" id="save-btn" style="primary" type="submit" icon="save" />
+</form>
+@include('vendor-common.toastr')
 @push('js')
     <script>
         $(document).ready(function() {
-            //$("#employee-joining-form").on('submit', async function(e) {
-            $("#save-joining-btn").on('click', function(e) {
+            $("#employee-attendance-form").on('submit', async function(e) {
                 e.preventDefault();
-                const form = $("#employee-joining-form").closest('form');
                 const formData = $(this).serializeArray();
                 const data = {};
                 formData.forEach(field => {
