@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="">
-    <title>{{ $data['title'] }} - {{ $data['page_title'] }}</title>
+    <title>{{ $title }} - {{ $page_title }}</title>
     <!-- BEGIN: CSS Assets-->
 
     <link rel="stylesheet" href="{{ asset('dist/css/vendors/litepicker.css') }}">
@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{{ asset('dist/css/vendors/simplebar.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/themes/hurricane.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/vendors/toastify.css') }}">
     @stack('css')
 
     <script src="{{ asset('dist/js/vendors/dom.js') }}"></script>

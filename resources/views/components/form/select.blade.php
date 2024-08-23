@@ -12,7 +12,7 @@
     'keys' => [],
 ])
 <div class="mt-2 flex-row xl:items-center">
-    <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4 xl:w-60">
+    <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4">
         <div class="text-left">
             <div class="flex items-center">
                 @if (isset($label))
@@ -30,8 +30,8 @@
             </div>
         </div>
     </div>
-    <div class="flex-1 sm:w-full flex-1 w-80 mt-3 xl:mt-0 mt-3 xl:mt-0">
-        <select id="{{ $name }}" name="{{ $name }}"
+    <div class="flex-1 sm:w-full mt-3 xl:mt-0">
+        <select id="{{ $name }}" name="{{ $name }}" class="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1"
             {{ $attributes->merge(['class' => 'tom-select w-full'])->except(['id', 'name', 'tags', 'filter']) }}
             data-placeholder="{{ $label }}" data-title="{{ $label }}"
             @if (isset($url)) data-url="{{ $url }}" @endif

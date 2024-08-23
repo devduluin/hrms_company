@@ -165,7 +165,7 @@
                 }
             };
 
-            const apiUrl = '{{ $data['apiUrl'] }}/users/user';
+            const apiUrl = '{{ $apiUrl }}/users/user';
 
             async function loadContent(url) {
                 try {

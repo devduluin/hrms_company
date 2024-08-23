@@ -28,11 +28,11 @@ class SubdomainMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-
         $protocol     = $request->secure() ? 'https://' : 'http://';
-        $host         = $protocol . $request->getHost();
-        $gateway     = env('API_GATEWAY_SERVER') . '/v1/needvalidatemyhost';
-        $cacheKey    = md5($host);
+        // $host         = config('app.host');
+        $host         = 'http://127.0.0.1:8000';
+        $gateway      = env('API_GATEWAY_SERVER') . '/v1/needvalidatemyhost';
+        $cacheKey     = md5($host);
         $options = [
             'headers' => [
                 'Content-Type' => 'application/json',
@@ -47,17 +47,17 @@ class SubdomainMiddleware
                 $response = $this->client->request('GET', $gateway, $options);
                 $apiResponse = json_decode($response->getBody(), true);
             } catch (RequestException $e) {
-                // dd($e->getMessage());
+                dd($e->getMessage());
                 \Log::error('Guzzle request error: ' . $e->getMessage());
                 abort(404);
             }
             return $apiResponse;
         });
 
-
         if (($apiResponse['host'] != $host) || ($apiResponse['is_allowed'] != true)) {
             abort(404);
         }
+
         if ($apiResponse['is_activated'] == false) {
             Cache::forget($cacheKey);
         }
@@ -65,7 +65,7 @@ class SubdomainMiddleware
         Config::set('app.url', $host);
 
         //Development porpose
-        if ($host === 'http://127.0.0.1') {
+        if ($host === 'http://127.0.0.1:8000') {
             Config::set('app.url', 'http://127.0.0.1:8000');
         }
 

@@ -15,7 +15,7 @@
                             @csrf
                             <div class="flex flex-col mb-4 gap-y-3 md:h-10 md:flex-row md:items-center">
                                 <div class="text-base font-medium group-[.mode--light]:text-white">
-                                    {{ $data['page_title'] }}
+                                    {{ $page_title }}
                                 </div>
                                 <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
                                     <button onclick="history.go(-1)"

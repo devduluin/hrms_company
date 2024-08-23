@@ -21,6 +21,7 @@
     <script src="{{ asset('dist/js/components/quick-search.js') }}"></script>
     <script src="{{ asset('dist/js/components/quick-search.js') }}"></script>
     <script src="{{ asset('dist/js/jquery-3.5.0.min.js') }}"></script>
+    <script src="{{ asset('dist/js/vendors/toastify.js') }}"></script>
     <script>
         initializeDropdown();
     </script>

@@ -57,6 +57,9 @@
             let ajax = {
                 url: '{{ $url }}',
                 method: "{{ $method }}",
+                headers: {
+                    'Authorization': 'Bearer ' + 'xN9P6a8sL2bV3iR4fC5J6Q7kT8yU9wZ0',
+                },
                 data: function(d) {
                     let filters = {};
                     @if (count($filter) > 0)

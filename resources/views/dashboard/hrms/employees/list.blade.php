@@ -14,7 +14,7 @@
                     <div class="col-span-12">
                         <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center">
                             <div class="text-base font-medium group-[.mode--light]:text-white">
-                                {{ $data['page_title'] }}
+                                {{ $page_title }}
                             </div>
                             <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
                                 <a href="{{ url('dashboard/hrms/employee/new_employee') }}" data-tw-merge=""
@@ -86,7 +86,7 @@
                                         <div class="text-base font-medium group-[.mode--light]:text-white mb-4">
                                             Data Employees
                                         </div>
-                                        <x-datatable id="employeeTable" :url="$data['apiUrl'] . '/employee/datatables'" method="POST" class="display">
+                                        <x-datatable id="employeeTable" :url="$apiUrl . '/employee/datatables'" method="POST" class="display">
                                             <x-slot:thead>
                                                 <th data-value="first_name">First Name</th>
                                                 <th data-value="last_name">Last Name</th>

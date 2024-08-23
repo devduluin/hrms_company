@@ -604,7 +604,7 @@
                         redirect: "follow"
                     };
 
-                    const url = `{{ $data['apiUrl'] }}/employee/all`;
+                    const url = `{{ $apiUrl }}/employee/all`;
                     const response = await fetch(url, requestOptions);
 
                     if (!response.ok) {
