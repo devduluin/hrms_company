@@ -31,7 +31,7 @@ class SubdomainMiddleware
         $protocol     = $request->secure() ? 'https://' : 'http://';
         $host 		= $protocol . $request->getHost();
 
-        $gateway      = env('API_GATEWAY_SERVER') . '/v1/needvalidatemyhost';
+        $gateway      = config('apiendpoints.gateway') . '/v1/needvalidatemyhost';
         $cacheKey     = md5($host);
         $options = [
             'headers' => [
