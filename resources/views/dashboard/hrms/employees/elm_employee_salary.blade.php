@@ -8,9 +8,9 @@
     <x-form.input id="cost_to_company" label="Cost to Company (CTC)" name="cost_to_company" />
 
     <x-form.select id="payroll_cost_center" name="payroll_cost_center" label="Payroll Cost Center"
-        url="{{ url('dashboard/hrms/designation') }}" apiUrl="{{ $data['apiCompanyUrl'] }}/company/datatables"
-        columns='["company_name"]' :selected="$data['company']" :keys="[
-            'company_id' => $data['company'],
+        url="{{ url('dashboard/hrms/designation') }}" apiUrl="{{ $apiCompanyUrl }}/company/datatables"
+        columns='["company_name"]' :selected="$company" :keys="[
+            'company_id' => $company,
         ]">
         <option value="">Select Company</option>
     </x-form.select>

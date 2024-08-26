@@ -36,9 +36,9 @@
 </div>
 <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-2 gap-5 mt-2">
     <x-form.select id="health_insurance" name="health_insurance" label="Health Insurance Provider"
-        url="{{ url('dashboard/hrms/designation') }}" apiUrl="{{ $data['apiCompanyUrl'] }}/branch/datatables"
+        url="{{ url('dashboard/hrms/designation') }}" apiUrl="{{ $apiCompanyUrl }}/branch/datatables"
         columns='["branch_name"]' :keys="[
-            'company_id' => $data['company'],
+            'company_id' => $company,
         ]">
         <option value="">Select Provider</option>
     </x-form.select>

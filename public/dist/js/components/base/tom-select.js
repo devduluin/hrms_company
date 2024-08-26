@@ -5,6 +5,7 @@ function initializeTomSelect() {
             let title = $(this).data("title");
             let url = $(this).data("url");
             let api = $(this).data("api") ?? "";
+            console.log("API Url : ", api);
             let company_id = localStorage.getItem("company");
             let selectType = $(this).attr("data-selectType");
             let selectedId = $(this).attr("data-selected");

@@ -6,8 +6,8 @@
 </div>
 <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-2 gap-5 mt-4">
     <x-form.select id="applicant_id" name="applicant_id" label="Job Applicant" url="{{ url('dashboard/hrms/applicant') }}"
-        apiUrl="{{ $data['apiCompanyUrl'] }}/applicant/datatables" columns='["applicant_name"]' :keys="[
-            'company_id' => $data['company'],
+        apiUrl="{{ $apiCompanyUrl }}/applicant/datatables" columns='["applicant_name"]' :keys="[
+            'company_id' => $company,
         ]">
         <option value="">Select Applicant</option>
     </x-form.select>
