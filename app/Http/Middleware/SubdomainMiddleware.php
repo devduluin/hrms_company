@@ -29,9 +29,9 @@ class SubdomainMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $protocol     = $request->secure() ? 'https://' : 'http://';
-        // $host         = config('app.host');
-        $host         = 'http://127.0.0.1:8000';
-        $gateway      = env('API_GATEWAY_SERVER') . '/v1/needvalidatemyhost';
+        $host 		= $protocol . $request->getHost();
+
+        $gateway      = config('apiendpoints.gateway') . '/v1/needvalidatemyhost';
         $cacheKey     = md5($host);
         $options = [
             'headers' => [
