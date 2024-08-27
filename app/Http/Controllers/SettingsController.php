@@ -26,7 +26,7 @@ class SettingsController extends Controller
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Company Profile';
 
-        return view('dashboard.settings.elm_settings',$data);
+        return view('dashboard.settings.elm_settings', $data);
     }
 
     public function elm_account()

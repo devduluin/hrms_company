@@ -33,7 +33,8 @@ class AuthMiddleware
             'Authorization' => 'Bearer ' . $appToken,
         ];
 
-        $response = $this->getRequest(config('apiendpoints.sso') . '/users/user', '', $headers);
+        // $response = $this->getRequest(config('apiendpoints.sso') . '/users/user', '', $headers);
+        $response = $this->getRequest(config('apiendpoints.gateway') . '/users/user', '', $headers);
 
         return isset($response['result']) && !isset($response['error']);
     }

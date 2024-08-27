@@ -29,7 +29,7 @@ class SubdomainMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $protocol     = $request->secure() ? 'https://' : 'http://';
-        $host 		= $protocol . $request->getHost();
+        $host         = $protocol . $request->getHost();
 
         $gateway      = config('apiendpoints.gateway') . '/v1/needvalidatemyhost';
         $cacheKey     = md5($host);
@@ -47,7 +47,7 @@ class SubdomainMiddleware
                 $response = $this->client->request('GET', $gateway, $options);
                 $apiResponse = json_decode($response->getBody(), true);
             } catch (RequestException $e) {
-                dd($e->getMessage());
+                // dd($e->getMessage());
                 \Log::error('Guzzle request error: ' . $e->getMessage());
                 abort(404);
             }
