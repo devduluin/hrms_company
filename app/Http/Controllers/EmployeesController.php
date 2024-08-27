@@ -9,11 +9,17 @@ use Illuminate\Http\Request;
 class EmployeesController extends Controller
 {
 
+    protected $apiGatewayUrl;
+    public function __construct()
+    {
+        $this->apiGatewayUrl = config('apiendpoints.gateway');
+    }
+
     public function index()
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Data Overview';
-        $data['apiUrl'] = config('apiendpoints.employees');
+        $data['apiUrl'] = $this->apiGatewayUrl;
 
         return view('dashboard.hrms.employees.index', $data);
     }
@@ -22,7 +28,7 @@ class EmployeesController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Data Employees';
-        $data['apiUrl'] = config('apiendpoints.employees');
+        $data['apiUrl'] = $this->apiGatewayUrl . '/v1/employees';
 
         return view('dashboard.hrms.employees.list', $data);
     }
@@ -33,8 +39,8 @@ class EmployeesController extends Controller
         $data['page_title']   = 'New Employees';
         $allSessions = session()->all();
         $data['company'] = $allSessions['company_id'][0];
-        $data['apiCompanyUrl'] = config('apiendpoints.companies');
-        $data['apiEmployeeUrl'] = config('apiendpoints.employees');
+        $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
+        $data['apiEmployeeUrl'] = $this->apiGatewayUrl . '/v1/employees';
 
         return view('dashboard.hrms.employees.create', $data);
     }
