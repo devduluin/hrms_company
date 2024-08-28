@@ -600,7 +600,8 @@
                         method: "POST",
                         headers: {
                             'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${appToken}`
+                            'Authorization': `Bearer ${appToken}`,
+                            'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
                         },
                         body: raw,
                         redirect: "follow"

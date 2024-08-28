@@ -59,7 +59,8 @@
                 url: '{{ $url }}',
                 method: "{{ $method }}",
                 headers: {
-                    'Authorization': `Bearer ${appToken}`
+                    'Authorization': `Bearer ${appToken}`,
+                    'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
                 },
                 data: function(d) {
                     let filters = {};
