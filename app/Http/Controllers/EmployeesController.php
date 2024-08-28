@@ -19,7 +19,7 @@ class EmployeesController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Data Overview';
-        $data['apiUrl'] = $this->apiGatewayUrl;
+        $data['apiUrl'] = $this->apiGatewayUrl . '/v1/employees';
 
         return view('dashboard.hrms.employees.index', $data);
     }
