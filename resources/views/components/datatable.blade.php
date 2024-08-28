@@ -27,6 +27,7 @@
         if ({{ $id }}) {
             let {{ $id }}Columns = $({{ $id }}).find('thead tr th');
             let {{ $id }}TableColumns = [];
+            const appToken = localStorage.getItem('app_token');
 
             $.each({{ $id }}Columns, function(idx, item) {
                 var orderable = $(item).attr('orderable') !== 'false' || $(item).attr('orderable') === undefined;
@@ -58,7 +59,7 @@
                 url: '{{ $url }}',
                 method: "{{ $method }}",
                 headers: {
-                    'Authorization': 'Bearer ' + 'xN9P6a8sL2bV3iR4fC5J6Q7kT8yU9wZ0',
+                    'Authorization': `Bearer ${appToken}`
                 },
                 data: function(d) {
                     let filters = {};

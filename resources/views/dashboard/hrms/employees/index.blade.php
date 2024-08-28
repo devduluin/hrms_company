@@ -588,6 +588,7 @@
 
             async function fetchLatestEmployees() {
                 try {
+                    const appToken = localStorage.getItem('app_token');
                     const raw = JSON.stringify({
                         company_id: localStorage.getItem("company"),
                         page: 1,
@@ -598,7 +599,8 @@
                     const requestOptions = {
                         method: "POST",
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${appToken}`
                         },
                         body: raw,
                         redirect: "follow"
