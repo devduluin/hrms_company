@@ -10,6 +10,7 @@ function initializeTomSelect() {
             let selectType = $(this).attr("data-selectType");
             let selectedId = $(this).attr("data-selected");
             const keysData = $(this).attr("data-attributes");
+            const appToken = localStorage.getItem("app_token");
 
             try {
                 selectType = JSON.parse(selectType);
@@ -60,6 +61,10 @@ function initializeTomSelect() {
                             url: api,
                             type: "POST",
                             contentType: "application/json",
+                            headers: {
+                                Authorization: `Bearer ${appToken}`,
+                                "X-Forwarded-Host": `${window.location.protocol}//${window.location.hostname}`,
+                            },
                             data: JSON.stringify(payload),
                             success: function (response) {
                                 const options = response.data.map((item) => {
