@@ -103,9 +103,9 @@
 
                     handleResponse(response);
                 } catch (xhr) {
-                    console.log(xhr.responseText);
-                    const response = JSON.parse(xhr.responseText);
-                    if (response.status === "error" && response.code === 400) {
+                    if (xhr.status === 422) {
+                        console.log(xhr.responseText);
+                        const response = JSON.parse(xhr.responseText);
                         handleErrorResponse(response, formId);
                     } else {
                         toastr.error('An error occurred while processing your request.');
