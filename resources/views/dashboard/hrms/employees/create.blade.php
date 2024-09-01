@@ -175,41 +175,30 @@
             // }
 
 
-            function handleErrorResponse(response, formId) {
-                const errorString = response.error || 'An error occurred.';
-                const errorMessages = errorString.split(', ').map(msg => msg.trim());
+            function handleErrorResponse(result, tabId) {
+                const errorString = result.error || 'An error occurred.';
+                toastr.error(`There were validation errors on tab ${tabId}`);
+                const errorMessages = errorString.split(', ');
 
                 $('.error-message').remove();
 
-                // Create a map to store field errors
-                const fieldErrors = {};
+                const errorPattern = /\"([^\"]+)\"/g;
+                let match;
 
-                // Extract field-specific errors
-                errorMessages.forEach(message => {
-                    const match = /\"([^\"]+)\"/.exec(message);
-                    if (match) {
-                        const field = match[1];
-                        if (field !== 'employee_id') {
-                            fieldErrors[field] = fieldErrors[field] || [];
-                            fieldErrors[field].push(message);
-                        }
-                    }
-                });
+                while ((match = errorPattern.exec(errorMessages)) !== null) {
+                    const field = match[1];
+                    if (field !== 'employee_id') {
+                        let fieldName = field.replace(/_/g, " ").replace(/\b\w/g, char => char.toUpperCase());
+                        const input = $(`[name="${field}"]`);
 
-                // Display errors next to the respective fields
-                for (const [field, messages] of Object.entries(fieldErrors)) {
-                    const fieldName = field.replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase());
-                    const input = $(`[name="${field}"]`);
-
-                    input.addClass('is-invalid');
-                    messages.forEach(msg => {
+                        input.addClass('is-invalid');
                         input.before(
-                            `<div class="error-message text-danger mt-1 text-xs text-slate-500 sm:ml-auto sm:mt-0 mb-2">${fieldName} ${msg}</div>`
+                            `<div class="error-message text-danger mt-1 text-xs text-slate-500 sm:ml-auto sm:mt-0 mb-2">${fieldName} is not allowed to be empty</div>`
                         );
-                    });
+                        // toastr.error(`${fieldName} is not allowed to be empty`);
+                    }
                 }
 
-                // Scroll to the first error field
                 const firstErrorField = $('.error-message').first();
                 if (firstErrorField.length) {
                     $('html, body').animate({
