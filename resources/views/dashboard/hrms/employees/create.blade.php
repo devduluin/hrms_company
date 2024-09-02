@@ -128,14 +128,46 @@
                 if (response.success) {
                     if ($("#employee_id").val() === "") {
                         toastr.success(response.message);
+
+                        // send email notification
+                        handleNotification(response);
                     } else {
                         toastr.success("Data has been updated successfully");
                     }
-                    console.log("Employee ID : ", response.data.employee.id);
+                    // console.log("Employee ID : ", response.data.employee.id);
                     $("#employee_id").val(response.data.employee.id);
                 } else {
                     toastr.error(response.message);
                 }
+            }
+
+            function handleNotification(response) {
+                console.log(response);
+                $.ajax({
+                    url: `{{ $apiGateway }}/send_verification_email`,
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${appToken}`,
+                        'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
+                    },
+                    crossDomain: true,
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content'),
+                        employee_id: response.data.employee.id,
+                        company_id: response.data.employee.company_id,
+                        personal_email: response.data.addressData.personal_email,
+                        phone_number: response.data.addressData.mobile_phone,
+                        first_name: response.data.employee.first_name,
+                        last_name: response.data.employee.last_name,
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        toastr.success('Verification email sent successfully.');
+                    },
+                    error: function(error) {
+                        toastr.error('Failed to send verification email.');
+                    }
+                });
             }
 
             // Global variable to hold the observer

@@ -41,6 +41,7 @@ class EmployeesController extends Controller
         $data['company'] = $allSessions['company_id'][0];
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
         $data['apiEmployeeUrl'] = $this->apiGatewayUrl . '/v1/employees';
+        $data['apiGateway'] = $this->apiGatewayUrl . '/users';
 
         return view('dashboard.hrms.employees.create', $data);
     }
