@@ -1,29 +1,29 @@
 <?php
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\JobController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Response\AuthResponseController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HrmsController;
-use App\Http\Controllers\CompaniesController;
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Controllers\BranchController;
+use App\Http\Middleware\VerifyAjaxRequest;
+use App\Http\Controllers\CurrencyController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ApplicantController;
+use App\Http\Controllers\CompaniesController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeesController;
+use App\Http\Controllers\LeaveTypeController;
+use App\Http\Controllers\ShiftTypeController;
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\DesignationController;
+use App\Http\Controllers\HolidaydateController;
 use App\Http\Controllers\RecruitmentController;
+use App\Http\Controllers\ShiftRequestController;
+use App\Http\Controllers\Response\AuthResponseController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\ClaimController;
-use App\Http\Controllers\BranchController;
-use App\Http\Controllers\CurrencyController;
-use App\Http\Controllers\DesignationController;
-use App\Http\Controllers\DepartmentController;
-use App\Http\Controllers\HolidaydateController;
-use App\Http\Controllers\JobController;
-use App\Http\Controllers\LeaveTypeController;
-use App\Http\Controllers\ShiftRequestController;
-use App\Http\Controllers\ShiftTypeController;
-use App\Http\Controllers\SettingsController;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Redirect;
-use App\Http\Middleware\VerifyAjaxRequest;
-use Illuminate\Http\Request;
 
 
 Route::controller(AuthController::class)->group(function () {
@@ -63,13 +63,12 @@ Route::controller(DashboardController::class)->group(function () {
 
     Route::prefix('/dashboard')->group(function () {
         Route::get('/', 'index')->name('dashboard');
-
         Route::controller(SettingsController::class)->group(function () {
             Route::prefix('/settings')->group(function () {
                 Route::get('/', 'index')->name('settings');
                 Route::get('/{any}', 'index');
 
-                Route::middleware('isAjax')->group(function () {
+                Route::middleware(['isAjax', 'isLoggedIn'])->group(function () {
                     Route::prefix('/elm')->group(function () {
                         Route::get('/settings', 'elm_settings');
                         Route::get('/email_setting', 'elm_email_setting');
@@ -78,85 +77,144 @@ Route::controller(DashboardController::class)->group(function () {
                         Route::get('/preferences', 'elm_preferences');
                         Route::get('/notification_setting', 'elm_notification_setting');
                         Route::get('/deactivation', 'elm_deactivation');
-
                     });
                 });
             });
         });
 
-        Route::controller(HrmsController::class)->group(function () {
-            Route::prefix('/hrms')->group(function () {
-                Route::get('/', 'index')->name('hrms');
+        Route::middleware('isLoggedIn')->group(function () {
+            Route::controller(HrmsController::class)->group(function () {
+                Route::prefix('/hrms')->group(function () {
+                    Route::get('/', 'index')->name('hrms');
 
-                Route::prefix('/company')->group(function () {
-                    Route::controller(CompaniesController::class)->group(function () {
-                        //Route::get('/', 'index')->name('hrms');
-                        Route::get('/list', 'list')->name('company');
-                        Route::get('/new_company', 'create');
-                        Route::get('/update_company', 'update');
+
+                    Route::prefix('/company')->group(function () {
+                        Route::controller(CompaniesController::class)->group(function () {
+                            Route::get('/', 'index')->name('hrms.company');
+                            Route::get('/new_company', 'create')->name('hrms.company.create');
+                            Route::get('/edit_company', 'edit');
+                            Route::get('/show', 'show')->name('hrms.company.show');
+                            Route::get('/setting', 'setting')->name('hrms.company.setting');
+                        });
                     });
-                });
 
-                //employees modules
-                Route::prefix('/employee')->group(function () {
-                    Route::controller(EmployeesController::class)->group(function () {
-                        Route::get('/', 'index')->name('hrms');
-                        Route::get('/list', 'list')->name('employee');
-                        Route::get('/new_employee', 'create');
-                        Route::get('/update_employee', 'update');
-
+                    Route::prefix('/applicants')->group(function () {
+                        Route::controller(ApplicantController::class)->group(function () {
+                            Route::get('/', 'index')->name('hrms.applicants');
+                        });
                     });
-                });
 
-                //recruitment modules
-                Route::prefix('/recruitment')->group(function () {
-                    Route::controller(RecruitmentController::class)->group(function () {
-                        Route::get('/', 'index')->name('employee');
-                        Route::get('/create_applicant', 'create')->name('create_applicant');
-
+                    Route::prefix('/branch')->group(function () {
+                        Route::controller(BranchController::class)->group(function () {
+                            Route::get('/', 'index')->name('hrms.branch');
+                            Route::get('/create', 'create')->name('hrms.branch.create');
+                        });
                     });
-                });
 
-                // attendance modules
-                Route::prefix('/attendance')->group(function () {
-                    Route::controller(AttendanceController::class)->group(function () {
-                        Route::get('/', 'index')->name('attendance');
-                        Route::get('/summary', 'summary')->name('summary');
-                        Route::get('/shift_assignment', 'shift')->name('shift');
+                    Route::prefix('/currency')->group(function () {
+                        Route::controller(CurrencyController::class)->group(function () {
+                            Route::get('/', 'index')->name('hrms.currency');
+                            Route::get('/create', 'create')->name('hrms.currency.create');
+                        });
                     });
-                });
 
-                // claim modules
-                Route::prefix('/claim')->group(function () {
-                    Route::controller(ClaimController::class)->group(function () {
-                        Route::get('/', 'index')->name('claim');
-                        Route::get('/summary', 'summary')->name('summary');
-                        Route::get('/travel_request', 'travel_request')->name('travel_request');
+                    Route::prefix('/designation')->group(function () {
+                        Route::controller(DesignationController::class)->group(function () {
+                            Route::get('/', 'index')->name('hrms.designation');
+                            Route::get('/create', 'create')->name('hrms.designation.create');
+                        });
                     });
-                });
+
+                    Route::prefix('/department')->group(function () {
+                        Route::controller(DepartmentController::class)->group(function () {
+                            Route::get('/', 'index')->name('hrms.department');
+                            Route::get('/create', 'create')->name('hrms.department.create');
+                        });
+                    });
+
+                    Route::prefix('/holiday-date')->group(function () {
+                        Route::controller(HolidaydateController::class)->group(function () {
+                            Route::get('/', 'index')->name('hrms.holidaydate');
+                            Route::get('/create', 'create')->name('hrms.holidaydate.create');
+                        });
+                    });
+
+                    Route::prefix('/jobs')->group(function () {
+                        Route::controller(JobController::class)->group(function () {
+                            Route::get('/', 'index')->name('hrms.jobs');
+                            Route::get('/create', 'create')->name('hrms.job.create');
+                        });
+                    });
+
+                    Route::prefix('/leave-type')->group(function () {
+                        Route::controller(LeaveTypeController::class)->group(function () {
+                            Route::get('/', 'index')->name('hrms.leave-type');
+                            Route::get('/create', 'create')->name('hrms.leave-type.create');
+                        });
+                    });
+
+                    Route::prefix('/shift-request-approver')->group(function () {
+                        Route::controller(ShiftRequestController::class)->group(function () {
+                            Route::get('/', 'index')->name('hrms.shiftrequest');
+                        });
+                    });
+
+                    Route::prefix('/shift-type')->group(function () {
+                        Route::controller(ShiftTypeController::class)->group(function () {
+                            Route::get('/', 'index')->name('hrms.shifttype');
+                        });
+                    });
+
+                    //employees modules
+                    Route::prefix('/employee')->group(function () {
+                        Route::controller(EmployeesController::class)->group(function () {
+                            Route::get('/', 'index')->name('hrms');
+                            Route::get('/list', 'list')->name('employee');
+                            Route::get('/new_employee', 'create');
+                            Route::get('/update_employee', 'update');
+                        });
+                    });
+
+                    //recruitment modules
+                    Route::prefix('/recruitment')->group(function () {
+                        Route::controller(RecruitmentController::class)->group(function () {
+                            Route::get('/', 'index')->name('employee');
+                        });
+                    });
+
+                    // attendance modules
+                    Route::prefix('/attendance')->group(function () {
+                        Route::controller(AttendanceController::class)->group(function () {
+                            Route::get('/', 'index')->name('attendance');
+                            Route::get('/summary', 'summary')->name('summary');
+                            Route::get('/shift_assignment', 'shift')->name('shift');
+                        });
+                    });
+
+                    // claim modules
+                    Route::prefix('/claim')->group(function () {
+                        Route::controller(ClaimController::class)->group(function () {
+                            Route::get('/', 'index')->name('claim');
+                            Route::get('/summary', 'summary')->name('summary');
+                            Route::get('/travel_request', 'travel_request')->name('travel_request');
+                        });
+                    });
 
                     //other modules
 
 
-
-
-                //dynamic content
-                //Route::get('/{any}', 'index');
-                Route::middleware('isAjax')->group(function () {
-                    Route::prefix('/elm')->group(function () {
-                        Route::get('/hrms', 'elm_hrms');
-                        Route::get('/employees', 'elm_overview');
+                    //dynamic content
+                    //Route::get('/{any}', 'index');
+                    Route::middleware('isAjax')->group(function () {
+                        Route::prefix('/elm')->group(function () {
+                            Route::get('/hrms', 'elm_hrms');
+                            Route::get('/employees', 'elm_overview');
+                        });
                     });
-
                 });
 
+                Route::prefix('/payroll')->group(function () {});
             });
-
-            Route::prefix('/payroll')->group(function () {
-
-            });
-
-
         });
     });
 });
