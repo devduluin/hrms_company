@@ -10,8 +10,8 @@ trait GuzzleTrait
     protected function getClient()
     {
         return new Client([
-            'base_uri' => env('API_GATEWAY_SERVER'), 
-            'timeout'  => 5.0, 
+            'base_uri' => env('API_GATEWAY_SERVER'),
+            'timeout'  => 5.0,
         ]);
     }
 
@@ -34,6 +34,7 @@ trait GuzzleTrait
             $response = $client->request($method, $url, $options);
             return json_decode($response->getBody(), true);
         } catch (RequestException $e) {
+            info($e);
             $data = json_decode($e->getResponse()->getBody()->getContents(), true);
             return [
                 'error' => true,
@@ -43,9 +44,12 @@ trait GuzzleTrait
         }
     }
 
-    public function getRequest($url, $id, $headers = [])
+    public function getRequest($url, $id = '', $headers = [])
     {
-        return $this->handleRequest('GET', "{$url}/{$id}", [], $headers);
+        if (!empty($id)) {
+            return $this->handleRequest('GET', "{$url}/{$id}", [], $headers);
+        }
+        return $this->handleRequest('GET', "{$url}", [], $headers);
     }
 
     public function deleteRequest($url, $id, $headers = [])

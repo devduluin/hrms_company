@@ -10,7 +10,7 @@ class AttendanceController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Attendance Overview';
-        
+
         return view('dashboard.hrms.attendance.index', compact('data'));
     }
 
@@ -18,7 +18,7 @@ class AttendanceController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Attendance Overview';
-        
+
         return view('dashboard.hrms.attendance.summary', compact('data'));
     }
 
@@ -26,7 +26,7 @@ class AttendanceController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'New Shift Assignment';
-        
+
         return view('dashboard.hrms.attendance.shift_assignment', compact('data'));
     }
 }

@@ -1,13 +1,24 @@
 <?php
+
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Response\AuthResponseController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HrmsController;
 use App\Http\Controllers\CompaniesController;
+use App\Http\Controllers\ApplicantController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\RecruitmentController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\ClaimController;
+use App\Http\Controllers\BranchController;
+use App\Http\Controllers\CurrencyController;
+use App\Http\Controllers\DesignationController;
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\HolidaydateController;
+use App\Http\Controllers\JobController;
+use App\Http\Controllers\LeaveTypeController;
+use App\Http\Controllers\ShiftRequestController;
+use App\Http\Controllers\ShiftTypeController;
 use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
@@ -17,16 +28,16 @@ use Illuminate\Http\Request;
 
 Route::controller(AuthController::class)->group(function () {
     Route::prefix('/')->group(function () {
-		Route::get('/', function (Request $request) {			
-				return redirect()->route('signin');
-			})->name('index'); 
-		Route::middleware('isActivated')->group(function () {
-			Route::get('/signin', 'index')->name('signin');
-			Route::get('/signup', 'index')->name('signup');
-			Route::get('/forgot_password', 'index')->name('forgot-password');
-			Route::get('/password-recovery/{token}', 'elm_password_recovery')->name('elm_password_recovery');
-		});
-		Route::get('/unactivated', 'unactivated')->name('unactivated');
+        Route::get('/', function (Request $request) {
+            return redirect()->route('signin');
+        })->name('index');
+        Route::middleware('isActivated')->group(function () {
+            Route::get('/signin', 'index')->name('signin');
+            Route::get('/signup', 'index')->name('signup');
+            Route::get('/forgot_password', 'index')->name('forgot-password');
+            Route::get('/password-recovery/{token}', 'elm_password_recovery')->name('elm_password_recovery');
+        });
+        Route::get('/unactivated', 'unactivated')->name('unactivated');
     });
     Route::controller(AuthResponseController::class)->group(function () {
         Route::prefix('/auth')->group(function () {
@@ -49,15 +60,15 @@ Route::controller(AuthController::class)->group(function () {
 
 
 Route::controller(DashboardController::class)->group(function () {
-	
+
     Route::prefix('/dashboard')->group(function () {
         Route::get('/', 'index')->name('dashboard');
-       
+
         Route::controller(SettingsController::class)->group(function () {
             Route::prefix('/settings')->group(function () {
                 Route::get('/', 'index')->name('settings');
                 Route::get('/{any}', 'index');
-                
+
                 Route::middleware('isAjax')->group(function () {
                     Route::prefix('/elm')->group(function () {
                         Route::get('/settings', 'elm_settings');
@@ -67,7 +78,7 @@ Route::controller(DashboardController::class)->group(function () {
                         Route::get('/preferences', 'elm_preferences');
                         Route::get('/notification_setting', 'elm_notification_setting');
                         Route::get('/deactivation', 'elm_deactivation');
-                    
+
                     });
                 });
             });
@@ -76,7 +87,7 @@ Route::controller(DashboardController::class)->group(function () {
         Route::controller(HrmsController::class)->group(function () {
             Route::prefix('/hrms')->group(function () {
                 Route::get('/', 'index')->name('hrms');
-                
+
                 Route::prefix('/company')->group(function () {
                     Route::controller(CompaniesController::class)->group(function () {
                         //Route::get('/', 'index')->name('hrms');
@@ -93,7 +104,7 @@ Route::controller(DashboardController::class)->group(function () {
                         Route::get('/list', 'list')->name('employee');
                         Route::get('/new_employee', 'create');
                         Route::get('/update_employee', 'update');
-     
+
                     });
                 });
 
@@ -102,7 +113,7 @@ Route::controller(DashboardController::class)->group(function () {
                     Route::controller(RecruitmentController::class)->group(function () {
                         Route::get('/', 'index')->name('employee');
                         Route::get('/create_applicant', 'create')->name('create_applicant');
-                       
+
                     });
                 });
 
@@ -124,7 +135,7 @@ Route::controller(DashboardController::class)->group(function () {
                     });
                 });
 
-                //other modules
+                    //other modules
 
 
 
@@ -136,7 +147,7 @@ Route::controller(DashboardController::class)->group(function () {
                         Route::get('/hrms', 'elm_hrms');
                         Route::get('/employees', 'elm_overview');
                     });
-                    
+
                 });
 
             });
@@ -145,7 +156,7 @@ Route::controller(DashboardController::class)->group(function () {
 
             });
 
-           
+
         });
     });
 });

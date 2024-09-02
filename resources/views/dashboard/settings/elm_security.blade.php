@@ -1,7 +1,7 @@
 <div class="box box--stacked flex flex-col p-5">
 <form id="settingForm" action="{{ url('/api/setting/password') }}">
     <div class="mb-6 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
-    {{ $data['page_title'] }}
+    {{ $page_title }}
     </div>
     <div>
         <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">

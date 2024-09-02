@@ -104,7 +104,7 @@
                 COMPANY
             </li>
             <li>
-                <a href="{{ url('dashboard/hrms/company/list') }}" class="side-menu__link ">
+                <a href="{{ route('hrms.company') }}" class="side-menu__link ">
                     <i data-tw-merge="" data-lucide="app-window" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
                     <div class="side-menu__link__title">Companies</div>
                 </a>

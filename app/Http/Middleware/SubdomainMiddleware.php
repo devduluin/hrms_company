@@ -19,62 +19,61 @@ class SubdomainMiddleware
     public function __construct()
     {
         $this->client = new GuzzleClient();
-		  
     }
-	
-	/**
+
+    /**
      * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
     {
-	   
-	   $protocol 	= $request->secure() ? 'https://' : 'http://';
-       $host 		= $protocol . $request->getHost();
-       $gateway     = env('API_GATEWAY_SERVER') . '/v1/needvalidatemyhost';
-       $cacheKey    = md5($host);
-	   $options = [
-			'headers' => [
-				'Content-Type' => 'application/json',
-				'Connection' => 'Keep-Alive',
-				'Keep-Alive' => 'timeout=5, max=100',
-				'X-Forwarded-Host' => $host,
-			],
-		];
-		
+        $protocol     = $request->secure() ? 'https://' : 'http://';
+        $host         = $protocol . $request->getHost();
+
+        $gateway      = config('apiendpoints.gateway') . '/v1/needvalidatemyhost';
+        $cacheKey     = md5($host);
+        $options = [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Connection' => 'Keep-Alive',
+                'Keep-Alive' => 'timeout=5, max=100',
+                'X-Forwarded-Host' => $host,
+            ],
+        ];
+
         $apiResponse = Cache::remember($cacheKey, 120, function () use ($request, $gateway, $options) {
             try {
                 $response = $this->client->request('GET', $gateway, $options);
                 $apiResponse = json_decode($response->getBody(), true);
-			} catch (RequestException $e) {
-				 
+            } catch (RequestException $e) {
+                // dd($e->getMessage());
                 \Log::error('Guzzle request error: ' . $e->getMessage());
                 abort(404);
-            } 
+            }
             return $apiResponse;
         });
-		 
 
         if (($apiResponse['host'] != $host) || ($apiResponse['is_allowed'] != true)) {
             abort(404);
         }
-        if($apiResponse['is_activated'] == false){
+
+        if ($apiResponse['is_activated'] == false) {
             Cache::forget($cacheKey);
         }
 
         Config::set('app.url', $host);
-        
+
         //Development porpose
-        if ($host === 'http://localhost') {
-            Config::set('app.url', 'http://localhost/hris/public');
+        if ($host === 'http://127.0.0.1:8000') {
+            Config::set('app.url', 'http://127.0.0.1:8000');
         }
-	   
-       URL::forceRootUrl(Config::get('app.url'));
 
-	   $request->attributes->set('host', $host);
-	   $request->attributes->set('is_activated', $apiResponse['is_activated']);
+        URL::forceRootUrl(Config::get('app.url'));
 
-       return $next($request);
+        $request->attributes->set('host', $host);
+        $request->attributes->set('is_activated', $apiResponse['is_activated']);
+
+        return $next($request);
     }
 }

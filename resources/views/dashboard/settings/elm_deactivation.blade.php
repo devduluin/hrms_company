@@ -1,6 +1,6 @@
 <div class="box box--stacked flex flex-col p-5">
     <div class="mb-6 flex items-center border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
-        {{ $data['page_title'] }}
+        {{ $page_title }}
     </div>
     <div>
         <div class="leading-relaxed">
