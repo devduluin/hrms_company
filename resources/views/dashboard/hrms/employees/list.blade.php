@@ -86,10 +86,7 @@
                                         <div class="text-base font-medium group-[.mode--light]:text-white mb-4">
                                             Data Employees
                                         </div>
-                                        {{-- <x-datatable id="employeeTable" :url="$apiUrl . '/employee/datatables'" method="POST" class="display"> --}}
-                                        <x-datatable id="employeeTable"
-                                            url="http://localhost:4444/api/v1/employee/datatables" method="POST"
-                                            class="display">
+                                        <x-datatable id="employeeTable" :url="$apiUrl . '/employee/datatables'" method="POST" class="display">
                                             <x-slot:thead>
                                                 <th data-value="first_name">First Name</th>
                                                 <th data-value="last_name">Last Name</th>
