@@ -40,10 +40,26 @@ class EmployeesController extends Controller
         $allSessions = session()->all();
         $data['company'] = $allSessions['company_id'][0];
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
-        $data['apiEmployeeUrl'] = $this->apiGatewayUrl . '/v1/employees';
+        // $data['apiEmployeeUrl'] = $this->apiGatewayUrl . '/v1/employees';
+        $data['apiEmployeeUrl'] = 'http://localhost:4444/api/v1';
         $data['apiGateway'] = $this->apiGatewayUrl . '/users';
 
         return view('dashboard.hrms.employees.create', $data);
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $data['title'] = 'Duluin HRMS';
+        $data['page_title'] = 'Edit Employee';
+        $allSessions = session()->all();
+        $data['company'] = $allSessions['company_id'][0];
+        $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
+        // $data['apiEmployeeUrl'] = $this->apiGatewayUrl . '/v1/employees';
+        $data['apiEmployeeUrl'] = 'http://localhost:4444/api/v1';
+        $data['apiGateway'] = $this->apiGatewayUrl . '/users';
+        $data['employee_id'] = $id;
+
+        return view('dashboard.hrms.employees.edit', $data);
     }
 
     public function elm_employee_overview()

@@ -15,16 +15,16 @@
                                 {{ $page_title }}
                             </div>
                             <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
-                                <button onclick="history.go(-1)"
+                                <a href="{{ url('/dashboard/hrms/employee/list') }}"
                                     class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md w-24">
                                     <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
-                                </button>
-                                {{-- <x-form.button label="Save changes" id="save-btn" style="primary" type="submit"
-                                    icon="save" /> --}}
+                                </a>
+                                <x-form.button label="Send Verification Email" id="verification-btn" style="primary"
+                                    type="mailIcon" icon="save" />
                             </div>
                         </div>
                         <div class="mt-1.5 flex flex-col">
-                            <input type="hidden" name="employee_id" id="employee_id" value="" />
+                            <input type="hidden" name="employee_id" id="employee_id" value="{{ $employee_id }}" />
                             @include('dashboard.hrms.employees.tabs')
                             <div class="box box--stacked flex flex-col p-5">
                                 @include('dashboard.hrms.employees.tab-content')
@@ -51,29 +51,104 @@
             let lastActiveTabId = initialTab.data('tw-target');
             console.log(lastActiveTabId);
             const appToken = localStorage.getItem('app_token');
+            const employee_id = $("#employee_id").val();
 
-            $('ul[role="tablist"] li button[role="tab"]').on('click', async function(e) {
-                const newTabId = $(this).data('tw-target');
+            // call get data handler
+            handleGetData(employee_id, lastActiveTabId);
 
-                if (lastActiveTabId !== newTabId) {
-                    e.preventDefault();
-                    await handleFormSubmission(lastActiveTabId);
-                    lastActiveTabId = newTabId;
-                    console.log(lastActiveTabId);
+            // $('ul[role="tablist"] li button[role="tab"]').on('click', async function(e) {
+            //     const newTabId = $(this).data('tw-target');
+            //     if (lastActiveTabId !== newTabId) {
+            //         e.preventDefault();
+            //         // await handleFormSubmission(lastActiveTabId);
+            //         // await handleGetData(employee_id, newTabId);
+            //         lastActiveTabId = newTabId;
+            //         console.log(lastActiveTabId);
 
-                    $(lastActiveTabId + "-btn").click(async function(e) {
-                        console.log(lastActiveTabId + "-form");
-                        e.preventDefault();
-                        await handleFormSubmission(lastActiveTabId);
-                    });
-                }
-            });
+            //         $(lastActiveTabId + "-btn").click(async function(e) {
+            //             console.log(lastActiveTabId + "-form");
+            //             e.preventDefault();
+            //             // await handleFormSubmission(lastActiveTabId);
+            //             // await handleGetData(employee_id, newTabId);
+            //         });
+            //     }
+            // });
 
             $(lastActiveTabId + "-btn").click(async function(e) {
                 console.log(lastActiveTabId + "-form");
                 e.preventDefault();
                 await handleFormSubmission(lastActiveTabId);
             });
+
+            function handleGetData(employee_id, tabId) {
+                console.log("Last active ID : ", tabId);
+                console.log("Employee ID : ", employee_id);
+
+                $.ajax({
+                    url: `{{ $apiEmployeeUrl }}/employee/${employee_id}`,
+                    type: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${appToken}`,
+                        'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.success) {
+                            if (!response.data.is_verified) {
+                                $("#verification-btn").removeClass("hidden");
+                            } else {
+                                $("#verification-btn").addClass("hidden");
+                            }
+                            $("#first_name").val(response.data.first_name);
+                            $("#last_name").val(response.data.last_name);
+                            $("#phone_number").val(response.data.addressContact.mobile_phone);
+                            $("#personal_email").val(response.data.addressContact.personal_email);
+                            $("#gender").val(response.data.gender);
+
+                            const genderSelect = $('#gender')[0].tomselect;
+                            const genderValue = response.data.gender;
+                            if (!genderSelect.options[genderValue]) {
+                                genderSelect.addOption({
+                                    value: genderValue,
+                                    text: genderValue
+                                });
+                            }
+                            genderSelect.setValue(genderValue);
+
+                            $("#date_of_joining").val(response.data.date_of_joining);
+                            $("#date_of_birth").val(response.data.date_of_birth);
+                            $("#place_of_birth").val(response.data.place_of_birth);
+
+                            const salutationSelect = $('#salutation')[0].tomselect;
+                            const salutationValue = response.data.salutation;
+                            if (!salutationSelect.options[salutationValue]) {
+                                salutationSelect.addOption({
+                                    value: salutationValue,
+                                    text: salutationValue
+                                });
+                            }
+                            salutationSelect.setValue(salutationValue);
+
+                            const statusSelect = $('#status')[0].tomselect;
+                            const statusValue = response.data.status;
+                            if (!statusSelect.options[statusValue]) {
+                                statusSelect.addOption({
+                                    value: statusValue,
+                                    text: statusValue
+                                });
+                            }
+                            statusSelect.setValue(statusValue);
+                        } else {
+                            console.log(response.message);
+                        }
+                    },
+                    error: function(xhr) {
+                        console.log(xhr.responseText);
+                        const response = JSON.parse(xhr.responseText);
+                        handleErrorResponse(response, tabId);
+                    }
+                });
+            }
 
             async function handleFormSubmission(formId) {
                 const currentForm = $(formId + "-form");
@@ -135,16 +210,18 @@
                     }
                     // console.log("Employee ID : ", response.data.employee.id);
                     $("#employee_id").val(response.data.employee.id);
-                    // TODO: Redirect to employee detail page
-                    location.href =
-                        `{{ url('dashboard/hrms/employee') }}/edit_employee/${response.data.employee.id}`;
                 } else {
                     toastr.error(response.message);
                 }
             }
 
-            function handleNotification(response) {
-                console.log(response);
+            // click on verification-btn
+            $("#verification-btn").click(function() {
+                handleNotification();
+            });
+
+            function handleNotification() {
+                console.log("sending process");
                 $.ajax({
                     url: `{{ $apiGateway }}/send_verification_email`,
                     method: 'POST',
@@ -155,12 +232,12 @@
                     crossDomain: true,
                     data: {
                         _token: $('meta[name="csrf-token"]').attr('content'),
-                        employee_id: response.data.employee.id,
-                        company_id: response.data.employee.company_id,
-                        personal_email: response.data.addressData.personal_email,
-                        phone_number: response.data.addressData.mobile_phone,
-                        first_name: response.data.employee.first_name,
-                        last_name: response.data.employee.last_name,
+                        employee_id: `{{ $employee_id }}`,
+                        company_id: localStorage.getItem('company'),
+                        personal_email: $("#personal_email").val(),
+                        phone_number: $("#phone_number").val(),
+                        first_name: $("#first_name").val(),
+                        last_name: $("#last_name").val(),
                     },
                     dataType: 'json',
                     success: function(data) {

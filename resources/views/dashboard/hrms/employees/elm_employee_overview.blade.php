@@ -1,4 +1,4 @@
-    <form id="overview-form" method="post" action="{{ $apiEmployeeUrl }}/employee">
+    <form id="overview-form" method="post" action="{{ $apiEmployeeUrl }}/employee/">
         @csrf
         <div class="mb-6 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
             Overview
