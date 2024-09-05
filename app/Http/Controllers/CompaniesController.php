@@ -4,13 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+
 class CompaniesController extends Controller
 {
+    protected $apiGatewayUrl, $companyApiUrl;
+    public function __construct()
+    {
+        $this->apiGatewayUrl = config('apiendpoints.gateway');
+        $this->companyApiUrl = $this->apiGatewayUrl . '/v1/companies';
+    }
+
     public function index()
     {
         $data['title']   = 'Companies';
         $data['page_title']   = 'Data Companies';
-        
+        $data['companyApiUrl'] = $this->companyApiUrl;
+
         return view('dashboard.hrms.companies.index', $data);
     }
 
@@ -23,10 +32,10 @@ class CompaniesController extends Controller
         //         "limit"   => 10,
         //         "sort"    => "ASC"
         //     ];
-            
+
         //     $response = Http::withToken('xN9P6a8sL2bV3iR4fC5J6Q7kT8yU9wZ0')
         //                     ->post("http://localhost:4444/api/v1/company/lists", $postData);
-            
+
         //     $dataCompanies = $response->json();
         //     $data['table'] = $response['data'];
         //     $data['meta'] = $response['meta'];
@@ -36,7 +45,7 @@ class CompaniesController extends Controller
 
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Data Companies';
-        
+
         return view('dashboard.hrms.companies.index', $data);
     }
 
@@ -44,7 +53,7 @@ class CompaniesController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Add new company';
-        
+
         return view('dashboard.hrms.companies.create', $data);
     }
 
@@ -60,6 +69,7 @@ class CompaniesController extends Controller
     {
         $data['title'] = "Profile company";
         $data['page_title'] = "Profile company";
+        $data['companyApiUrl'] = $this->companyApiUrl;
 
         return view('dashboard.hrms.companies.show', $data);
     }
@@ -68,9 +78,8 @@ class CompaniesController extends Controller
     {
         $data['title'] = "Company setting";
         $data['page_title'] = "Company setting";
+        $data['companyApiUrl'] = $this->companyApiUrl;
 
         return view('dashboard.hrms.companies.setting', $data);
     }
-    
-    
 }
