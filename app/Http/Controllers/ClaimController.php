@@ -11,7 +11,7 @@ class ClaimController extends Controller
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Claim Dashbaord';
         
-        return view('dashboard.hrms.claim.index', compact('data'));
+        return view('dashboard.hrms.claim.index', $data);
     }
 
     public function summary()
@@ -19,7 +19,7 @@ class ClaimController extends Controller
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Expense Claim Summary';
         
-        return view('dashboard.hrms.claim.summary', compact('data'));
+        return view('dashboard.hrms.claim.summary', $data);
     }
 
     public function travel_request()
@@ -27,6 +27,6 @@ class ClaimController extends Controller
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'New Travel Request';
         
-        return view('dashboard.hrms.claim.travel_request', compact('data'));
+        return view('dashboard.hrms.claim.travel_request', $data);
     }
 }

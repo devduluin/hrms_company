@@ -24,6 +24,8 @@ use App\Http\Controllers\ShiftRequestController;
 use App\Http\Controllers\Response\AuthResponseController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\ClaimController;
+use App\Http\Controllers\PayoutController;
+use App\Http\Controllers\LeaveController;
 
 
 Route::controller(AuthController::class)->group(function () {
@@ -31,12 +33,12 @@ Route::controller(AuthController::class)->group(function () {
         Route::get('/', function (Request $request) {
             return redirect()->route('signin');
         })->name('index');
-        Route::middleware('isActivated')->group(function () {
+        // Route::middleware('isActivated')->group(function () {
             Route::get('/signin', 'index')->name('signin');
             Route::get('/signup', 'index')->name('signup');
             Route::get('/forgot_password', 'index')->name('forgot-password');
             Route::get('/password-recovery/{token}', 'elm_password_recovery')->name('elm_password_recovery');
-        });
+        // });
         Route::get('/unactivated', 'unactivated')->name('unactivated');
     });
     Route::controller(AuthResponseController::class)->group(function () {
@@ -48,13 +50,13 @@ Route::controller(AuthController::class)->group(function () {
             Route::get('/signout', 'logout');
         });
     });
-    Route::middleware(['isAjax', 'isActivated'])->group(function () {
+    // Route::middleware(['isAjax', 'isActivated'])->group(function () {
         Route::prefix('/elm')->group(function () {
             Route::get('/signin', 'elm_signin')->name('elm_signin');
             Route::get('/signup', 'elm_signup')->name('elm_signup');
             Route::get('/forgot_password', 'elm_forgot_password')->name('elm_forgot_password');
-        });
-    });
+        }); 
+    // });
 });
 
 
@@ -179,6 +181,8 @@ Route::controller(DashboardController::class)->group(function () {
                     Route::prefix('/recruitment')->group(function () {
                         Route::controller(RecruitmentController::class)->group(function () {
                             Route::get('/', 'index')->name('employee');
+                            Route::get('/create_applicant', 'create')->name('create_applicant');
+                            
                         });
                     });
 
@@ -188,6 +192,7 @@ Route::controller(DashboardController::class)->group(function () {
                             Route::get('/', 'index')->name('attendance');
                             Route::get('/summary', 'summary')->name('summary');
                             Route::get('/shift_assignment', 'shift')->name('shift');
+                            Route::get('/shift_list', 'shift_list')->name('shift_list');
                         });
                     });
 
@@ -197,9 +202,29 @@ Route::controller(DashboardController::class)->group(function () {
                             Route::get('/', 'index')->name('claim');
                             Route::get('/summary', 'summary')->name('summary');
                             Route::get('/travel_request', 'travel_request')->name('travel_request');
+                            Route::get('/travel_list', 'travel_list')->name('travel_list');
+                        });
+                    });
+                    
+                    //payroll modules
+                    Route::prefix('/payout')->group(function () {
+                        Route::controller(PayoutController::class)->group(function () {
+                            Route::get('/', 'index')->name('payout');
+                            Route::get('/salary_slip', 'salary_slip')->name('salary_slip');
+                            Route::get('/settings', 'settings')->name('settings');
+                            Route::get('/income_tax', 'income_tax')->name('income_tax');
+                            Route::get('/benefit_claim', 'benefit_claim')->name('benefit_claim');
+                            Route::get('/tax_slab_list', 'tax_slab_list')->name('tax_slab_list');
+                            Route::get('/benefit_list', 'benefit_list')->name('benefit_list');
                         });
                     });
 
+                    //leave modules
+                    Route::prefix('/leave')->group(function () {
+                        Route::controller(LeaveController::class)->group(function () {
+                            Route::get('/', 'index')->name('payout');
+                        });
+                    });
                     //other modules
 
 
@@ -212,8 +237,6 @@ Route::controller(DashboardController::class)->group(function () {
                         });
                     });
                 });
-
-                Route::prefix('/payroll')->group(function () {});
             });
         });
     });

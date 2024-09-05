@@ -11,7 +11,7 @@ class RecruitmentController extends Controller
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Data Employees';
         
-        return view('dashboard.hrms.recruitment.index', compact('data'));
+        return view('dashboard.hrms.recruitment.index', $data);
     }
     
     public function create()
@@ -19,6 +19,6 @@ class RecruitmentController extends Controller
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'New Job Applicant';
         
-        return view('dashboard.hrms.recruitment.create', compact('data'));
+        return view('dashboard.hrms.recruitment.create', $data);
     }
 }

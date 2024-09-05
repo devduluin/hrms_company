@@ -10,7 +10,7 @@
                 <div class="col-span-12">
                     <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center">
                         <div class="text-base font-medium group-[.mode--light]:text-white">
-                            {{ $data['page_title'] }}
+                            Employee List
                         </div>
                         <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
                             <a href="{{ url('dashboard/hrms/employee/new_employee') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
@@ -21,50 +21,6 @@
                         </div>
                     </div>
                     <div class="mt-3.5 flex flex-col gap-8">
-                        <div class="box box--stacked flex flex-col p-5">
-                            <div class="grid grid-cols-4 gap-5">
-                                <div class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                    <div class="text-base text-slate-500">Registered Users</div>
-                                    <div class="mt-1.5 text-2xl font-medium">457,204</div>
-                                    <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
-                                        <div class="flex items-center rounded-full border border-danger/10 bg-danger/10 py-[2px] pl-[7px] pr-1 text-xs font-medium text-danger">
-                                            3%
-                                            <i data-tw-merge="" data-lucide="chevron-down" class="ml-px h-4 w-4 stroke-[1.5]"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                    <div class="text-base text-slate-500">Active Users</div>
-                                    <div class="mt-1.5 text-2xl font-medium">122,721</div>
-                                    <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
-                                        <div class="flex items-center rounded-full border border-success/10 bg-success/10 py-[2px] pl-[7px] pr-1 text-xs font-medium text-success">
-                                            2%
-                                            <i data-tw-merge="" data-lucide="chevron-up" class="ml-px h-4 w-4 stroke-[1.5]"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                    <div class="text-base text-slate-500">New Users</div>
-                                    <div class="font-mediumm mt-1.5 text-2xl">489,223</div>
-                                    <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
-                                        <div class="flex items-center rounded-full border border-danger/10 bg-danger/10 py-[2px] pl-[7px] pr-1 text-xs font-medium text-danger">
-                                            3%
-                                            <i data-tw-merge="" data-lucide="chevron-down" class="ml-px h-4 w-4 stroke-[1.5]"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                    <div class="text-base text-slate-500">Login Activity</div>
-                                    <div class="font-mediumm mt-1.5 text-2xl">411,259</div>
-                                    <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
-                                        <div class="flex items-center rounded-full border border-success/10 bg-success/10 py-[2px] pl-[7px] pr-1 text-xs font-medium text-success">
-                                            8%
-                                            <i data-tw-merge="" data-lucide="chevron-up" class="ml-px h-4 w-4 stroke-[1.5]"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div class="box box--stacked flex flex-col">
                             <div class="flex flex-col gap-y-2 p-5 sm:flex-row sm:items-center">
                                 <div>

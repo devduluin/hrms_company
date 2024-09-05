@@ -95,26 +95,8 @@
                                 </div>
                             </div>
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                                <div
-                                    class="box col-span-2  rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm ">
-                                    <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center">
-                                        <div class="font-medium mt-1.5 text-xl">
-                                            Attendance Overview
-                                        </div>
-                                        <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row sm:ml-auto">
-                                            <div class="select-with-icon">
-                                                <select data-tw-merge=""
-                                                    class="align-self-stretch ml-auto  flex flex-col gap-x-3 gap-y-2 sm:ml-auto sm:flex-row disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1 mt-2 flex-1">
-                                                    <option value="This Month">
-                                                        This Month
-                                                    </option>
-                                                    <option value="Last Month">
-                                                        Last Month
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="box col-span-2  rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm ">
+                                    <x-chart.stackbar label="Attendance Overview" option1="This Month" />
                                 </div>
                                 <div class="grid grid-rows-2 gap-4 col col-span-1">
                                     <div
@@ -232,21 +214,15 @@
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mt-4">
-                <div class="text-left">
-                    <a class="flex items-center" href="{{ url('/dashboard/hrms/attendance/summary') }}">
-                        <div class="font-medium mr-2">Attendance Summary</div>
-                        <i data-tw-merge="" data-lucide="arrow-up-right"
-                            class="inline-block h-5 w-5 mr-2 stroke-[1] "></i>
-                    </a>
+            <div class="box p-4 mt-4">
+                <div class="text-m font-medium">
+                    More Action
                 </div>
-                <div class="text-left">
-                    <a class="flex items-center" href="{{ url('/dashboard/hrms/attendance/shift_assignment') }}">
-                        <div class="font-medium mr-2">New Shift Assignment</div>
-                        <i data-tw-merge="" data-lucide="arrow-up-right"
-                            class="inline-block h-5 w-5 mr-2 stroke-[1] "></i>
-                    </a>
-                </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mt-4">
+                        <x-action  label="Attendance Summary" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/summary') }}" />
+                        <x-action  label="New Shift Assignment" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/shift_assignment') }}" />
+                        <x-action  label="Employee Shift List" icon="arrow-up-right" url="{{ url('/dashboard/hrms/claim/shift_list') }}" />
+                    </div>
             </div>
         </div>
     @endsection
