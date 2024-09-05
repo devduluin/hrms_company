@@ -6,17 +6,17 @@
     </div>
     <div class="scrollable-ref w-full h-full z-20 px-5 mt-3.5 overflow-y-auto overflow-x-hidden pb-10 [-webkit-mask-image:-webkit-linear-gradient(top,rgba(10,0,0,0),black_30px)] [&:-webkit-scrollbar]:w-0 [&:-webkit-scrollbar]:bg-transparent [&_.simplebar-content]:p-0 [&_.simplebar-track.simplebar-vertical]:w-[10px] [&_.simplebar-track.simplebar-vertical]:mr-0.5 [&_.simplebar-track.simplebar-vertical_.simplebar-scrollbar]:before:bg-slate-400/30">
         <ul class="scrollable">
-            
-            <li class="side-menu__divider">
-                HR OPERATIONS
-            </li>
-            <li>
+            <li class="mt-4">
                 <a href="{{ url('/dashboard/hrms/') }}" class="side-menu__link ">
                     <i data-tw-merge="" data-lucide="layout-dashboard" class="stroke-[1] w-5 h-5 side-menu__link__icon blue-icon"></i>
                     <div class="side-menu__link__title">Quick Overview</div>
                 </a>
                 
                 <!-- END: Second Child -->
+            </li>
+            
+            <li class="side-menu__divider">
+                HR OPERATIONS
             </li>
             
             <li>
@@ -31,31 +31,22 @@
             <li>
                 <a href="{{ url('/dashboard/hrms/employee') }}" class="side-menu__link ">
                     <i data-tw-merge="" data-lucide="users" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
-                    <div class="side-menu__link__title">Employee Lifecycle</div>
+                    <div class="side-menu__link__title">Employee</div>
                 </a>
                 
                 <!-- END: Second Child -->
             </li>
             
             <li>
-                <a href="hurricane-dashboard-overview-5.html" class="side-menu__link ">
+                <a href="{{ url('/dashboard/hrms/claim') }}" class="side-menu__link ">
                     <i data-tw-merge="" data-lucide="refresh-ccw-dot" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
                     <div class="side-menu__link__title">Expense Claim</div>
                 </a>
                 <!-- BEGIN: Second Child -->
                 <!-- END: Second Child -->
             </li>
-           
             <li>
-                <a href="hurricane-dashboard-overview-3.html" class="side-menu__link ">
-                    <i data-tw-merge="" data-lucide="star" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
-                    <div class="side-menu__link__title">Performance</div>
-                </a>
-                <!-- BEGIN: Second Child -->
-                <!-- END: Second Child -->
-            </li>
-            <li>
-                <a href="hurricane-dashboard-overview-4.html" class="side-menu__link ">
+                <a href="{{ url('/dashboard/hrms/attendance') }}" class="side-menu__link ">
                     <i data-tw-merge="" data-lucide="calendar" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
                     <div class="side-menu__link__title">Shift & Attendance</div>
                 </a>
@@ -63,7 +54,7 @@
                 <!-- END: Second Child -->
             </li>
             <li>
-                <a href="hurricane-dashboard-overview-6.html" class="side-menu__link ">
+                <a href="{{ url('/dashboard/hrms/leave') }}" class="side-menu__link ">
                     <i data-tw-merge="" data-lucide="briefcase" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
                     <div class="side-menu__link__title">Leaves</div>
                 </a>
@@ -74,28 +65,12 @@
                 PAYROLL
             </li>
             <li>
-                <a href="{{ url('/dashboard/hrms/employees/') }}" class="side-menu__link ">
-                    <i data-tw-merge="" data-lucide="layout-dashboard" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
-                    <div class="side-menu__link__title">Quick Overview</div>
-                </a>
-                
-                <!-- END: Second Child -->
-            </li>
-            <li>
-                <a href="hurricane-inbox.html" class="side-menu__link ">
+                <a href="{{ url('/dashboard/hrms/payout') }}" class="side-menu__link ">
                     <i data-tw-merge="" data-lucide="coins" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
                     <div class="side-menu__link__title">Salary Payout</div>
                     <div class="side-menu__link__badge">
                         4
                     </div>
-                </a>
-                <!-- BEGIN: Second Child -->
-                <!-- END: Second Child -->
-            </li>
-            <li>
-                <a href="hurricane-file-manager-list.html" class="side-menu__link ">
-                    <i data-tw-merge="" data-lucide="percent" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
-                    <div class="side-menu__link__title">Tax & Benefit</div>
                 </a>
                 <!-- BEGIN: Second Child -->
                 <!-- END: Second Child -->

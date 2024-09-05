@@ -12,7 +12,7 @@ class HrmsController extends Controller
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'HRMS Index';
         
-        return view('dashboard.hrms.index', compact('data'));
+        return view('dashboard.hrms.index', $data);
     }
 
     public function elm_hrms()
@@ -20,7 +20,7 @@ class HrmsController extends Controller
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'HRMS Dashboard';
         
-        return view('dashboard.hrms.elm_hrms', compact('data'));
+        return view('dashboard.hrms.elm_hrms', $data);
     }
 
     public function elm_overview()
@@ -28,7 +28,7 @@ class HrmsController extends Controller
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Data Employees';
         
-        return view('dashboard.hrms.elm_dashboard', compact('data'));
+        return view('dashboard.hrms.elm_dashboard', $data);
     }
 
     public function elm_applicant()
@@ -36,7 +36,7 @@ class HrmsController extends Controller
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'New Job Applicant';
         
-        return view('dashboard.hrms.elm_applicant', compact('data'));
+        return view('dashboard.hrms.elm_applicant', $data);
     }
 
     public function elm_employee_overview()
@@ -44,7 +44,7 @@ class HrmsController extends Controller
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'New Employee';
         
-        return view('dashboard.hrms.elm_employee_overview', compact('data'));
+        return view('dashboard.hrms.elm_employee_overview', $data);
     }
 
     public function elm_employee_profile()
@@ -52,7 +52,7 @@ class HrmsController extends Controller
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'New Employee';
         
-        return view('dashboard.hrms.elm_employee_profile', compact('data'));
+        return view('dashboard.hrms.elm_employee_profile', $data);
     }
 
     public function elm_employee_details()
@@ -60,7 +60,7 @@ class HrmsController extends Controller
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'New Employee';
         
-        return view('dashboard.hrms.elm_employee_details', compact('data'));
+        return view('dashboard.hrms.elm_employee_details', $data);
     }
 
     public function elm_employee_contact()
@@ -68,7 +68,7 @@ class HrmsController extends Controller
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'New Employee';
         
-        return view('dashboard.hrms.elm_employee_contact', compact('data'));
+        return view('dashboard.hrms.elm_employee_contact', $data);
     }
 }
 

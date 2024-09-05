@@ -3,25 +3,10 @@
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
 <div class="hurricane before:content-[''] before:z-[-1] before:w-screen before:bg-slate-50 before:top-0 before:h-screen before:fixed before:bg-texture-black before:bg-contain before:bg-fixed before:bg-[center_-20rem] before:bg-no-repeat">
-    @include('layouts.dashboard.menu')
-    <div id="contents-page" class="content transition-[margin,width] duration-100 px-5 xl:mr-2.5 mt-[75px] pt-[31px] pb-16 content--compact xl:ml-[275px] [&.content--compact]:xl:ml-[100px]">
-        <div class="container">
-            <div class="grid grid-cols-12 gap-x-6 gap-y-10">
-                <div class="col-span-12">
-                    <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center">
-                        <div class="text-base font-medium group-[.mode--light]:text-white">
-                            Employee List
-                        </div>
-                        <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
-                            <a href="{{ url('dashboard/hrms/employee/new_employee') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                <i data-tw-merge="" data-lucide="plus" class=" h-4 w-4 stroke-[1.5] side-menu__link_icon"></i>
-                                <!-- Button Text -->
-                                New Employee
-                            </a>
-                        </div>
-                    </div>
-                    <div class="mt-3.5 flex flex-col gap-8">
-                        <div class="box box--stacked flex flex-col">
+        @include('layouts.dashboard.menu')        
+        <div id="contents-page" class="content transition-[margin,width] duration-100 px-5 xl:mr-2.5 mt-[75px] pt-[31px] pb-16 content--compact xl:ml-[275px] [&.content--compact]:xl:ml-[100px]">
+            <div class="container">
+                <div class="box box--stacked flex flex-col">
                             <div class="flex flex-col gap-y-2 p-5 sm:flex-row sm:items-center">
                                 <div>
                                     <div class="relative">
@@ -112,22 +97,19 @@
                                                 <input data-tw-merge="" type="checkbox" class="transition-all duration-100 ease-in-out shadow-sm border-slate-200 cursor-pointer rounded focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&[type='radio']]:checked:bg-primary [&[type='radio']]:checked:border-primary [&[type='radio']]:checked:border-opacity-10 [&[type='checkbox']]:checked:bg-primary [&[type='checkbox']]:checked:border-primary [&[type='checkbox']]:checked:border-opacity-10 [&:disabled:not(:checked)]:bg-slate-100 [&:disabled:not(:checked)]:cursor-not-allowed [&:disabled:not(:checked)]:dark:bg-darkmode-800/50 [&:disabled:checked]:opacity-70 [&:disabled:checked]:cursor-not-allowed [&:disabled:checked]:dark:bg-darkmode-800/50">
                                             </td>
                                             <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500">
-                                                Name
+                                                Employee Name
                                             </td>
                                             <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500">
-                                                Position
+                                                Company
                                             </td>
                                             <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 w-52 border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500">
-                                                Profile Completeness
+                                                Posting Date
                                             </td>
                                             <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 border-t border-slate-200/60 bg-slate-50 py-4 text-center font-medium text-slate-500">
-                                                Status
+                                                Paid Amount
                                             </td>
                                             <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500">
-                                                Joined Date
-                                            </td>
-                                            <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 w-20 border-t border-slate-200/60 bg-slate-50 py-4 text-center font-medium text-slate-500">
-                                                Action
+                                                Status
                                             </td>
                                         </tr>
                                     </thead>
@@ -769,227 +751,74 @@
                                                     <div class="ml-1.5 whitespace-nowrap">
                                                         Inactive
                                                     </div>
-                                                </td>
-                                                <td data-tw-merge=""
-                                                    class="px-5 border-b dark:border-darkmode-300 border-dashed py-4 dark:bg-darkmode-600">
-                                                    <div
-                                                        class="w-24 py-2 rounded flex items-center justify-center bg-danger/10">
-                                                        <div class="ml-1.5 whitespace-nowrap text-danger">
-                                                            Interview
+                                                </div>
+                                            </td>
+                                            <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 border-dashed py-4 dark:bg-darkmode-600">
+                                                <div class="whitespace-nowrap">
+                                                    April 25, 2011
+                                                </div>
+                                            </td>
+                                            <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 relative border-dashed py-4 dark:bg-darkmode-600">
+                                                <div class="flex items-center justify-center">
+                                                    <div data-tw-merge="" data-tw-placement="bottom-end" class="dropdown relative h-5"><button data-tw-toggle="dropdown" aria-expanded="false" class="cursor-pointer h-5 w-5 text-slate-500"><i data-tw-merge="" data-lucide="more-vertical" class="stroke-[1] w-5 h-5 fill-slate-400/70 stroke-slate-400/70"></i>
+                                                        </button>
+                                                        <div data-transition="" data-selector=".show" data-enter="transition-all ease-linear duration-150" data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1" data-enter-to="!mt-1 visible opacity-100 translate-y-0" data-leave="transition-all ease-linear duration-150" data-leave-from="!mt-1 visible opacity-100 translate-y-0" data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1" class="dropdown-menu absolute z-[9999] hidden">
+                                                            <div data-tw-merge="" class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 w-40">
+                                                                <a class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge="" data-lucide="check-square" class="stroke-[1] mr-2 h-4 w-4"></i>
+                                                                    Edit</a>
+                                                                <a class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item text-danger"><i data-tw-merge="" data-lucide="trash2" class="stroke-[1] mr-2 h-4 w-4"></i>
+                                                                    Delete</a>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </td>
-                                                <td data-tw-merge=""
-                                                    class="px-5 border-b dark:border-darkmode-300 relative border-dashed py-4 dark:bg-darkmode-600">
-                                                    <div class="flex space-x-2">
-                                                        <a href="{{ url('dashboard/hrms/new_job_applicant') }}"
-                                                            class="flex items-center p-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                            <!-- Icon Edit (Pencil) -->
-                                                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
-                                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                                    stroke-width="2"
-                                                                    d="M11 5.586l6.707 6.707-7.778 7.778L3.222 13.364l7.778-7.778zM18.364 7.05l1.415 1.415a1 1 0 0 1 0 1.415l-7.778 7.778-2.121-.707.707-2.121 7.778-7.778a1 1 0 0 1 1.415 0z" />
-                                                            </svg>
-                                                        </a>
-                                                        <a
-                                                            class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item text-danger">
-                                                            <!-- Icon Delete (Trash) -->
-                                                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
-                                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                                    stroke-width="2"
-                                                                    d="M6 18a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6zM8 11v5m4-5v5m4-5v5m1-7h-9m9 0h-9m1-7h5m-5 0h5" />
-                                                            </svg>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div
-                                    class="flex-reverse flex flex-col-reverse flex-wrap items-center gap-y-2 p-5 sm:flex-row">
-                                    <nav class="mr-auto w-full flex-1 sm:w-auto">
-                                        <ul class="flex w-full mr-0 sm:mr-auto sm:w-auto">
-                                            <li class="flex-1 sm:flex-initial">
-                                                <a data-tw-merge=""
-                                                    class="transition duration-200 border items-center justify-center py-2 rounded-md cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed min-w-0 sm:min-w-[40px] shadow-none font-normal flex border-transparent text-slate-800 sm:mr-2 dark:text-slate-300 px-1 sm:px-3"><i
-                                                        data-tw-merge="" data-lucide="chevrons-left"
-                                                        class="stroke-[1] h-4 w-4"></i></a>
-                                            </li>
-                                            <li class="flex-1 sm:flex-initial">
-                                                <a data-tw-merge=""
-                                                    class="transition duration-200 border items-center justify-center py-2 rounded-md cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed min-w-0 sm:min-w-[40px] shadow-none font-normal flex border-transparent text-slate-800 sm:mr-2 dark:text-slate-300 px-1 sm:px-3"><i
-                                                        data-tw-merge="" data-lucide="chevron-left"
-                                                        class="stroke-[1] h-4 w-4"></i></a>
-                                            </li>
-                                            <li class="flex-1 sm:flex-initial">
-                                                <a data-tw-merge=""
-                                                    class="transition duration-200 border items-center justify-center py-2 rounded-md cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed min-w-0 sm:min-w-[40px] shadow-none font-normal flex border-transparent text-slate-800 sm:mr-2 dark:text-slate-300 px-1 sm:px-3">...</a>
-                                            </li>
-                                            <li class="flex-1 sm:flex-initial">
-                                                <a data-tw-merge=""
-                                                    class="transition duration-200 border items-center justify-center py-2 rounded-md cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed min-w-0 sm:min-w-[40px] shadow-none font-normal flex border-transparent text-slate-800 sm:mr-2 dark:text-slate-300 px-1 sm:px-3">1</a>
-                                            </li>
-                                            <li class="flex-1 sm:flex-initial">
-                                                <a data-tw-merge=""
-                                                    class="transition duration-200 border items-center justify-center py-2 rounded-md cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed min-w-0 sm:min-w-[40px] shadow-none font-normal flex border-transparent text-slate-800 sm:mr-2 dark:text-slate-300 px-1 sm:px-3 !box dark:bg-darkmode-400">2</a>
-                                            </li>
-                                            <li class="flex-1 sm:flex-initial">
-                                                <a data-tw-merge=""
-                                                    class="transition duration-200 border items-center justify-center py-2 rounded-md cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed min-w-0 sm:min-w-[40px] shadow-none font-normal flex border-transparent text-slate-800 sm:mr-2 dark:text-slate-300 px-1 sm:px-3">3</a>
-                                            </li>
-                                            <li class="flex-1 sm:flex-initial">
-                                                <a data-tw-merge=""
-                                                    class="transition duration-200 border items-center justify-center py-2 rounded-md cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed min-w-0 sm:min-w-[40px] shadow-none font-normal flex border-transparent text-slate-800 sm:mr-2 dark:text-slate-300 px-1 sm:px-3">...</a>
-                                            </li>
-                                            <li class="flex-1 sm:flex-initial">
-                                                <a data-tw-merge=""
-                                                    class="transition duration-200 border items-center justify-center py-2 rounded-md cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed min-w-0 sm:min-w-[40px] shadow-none font-normal flex border-transparent text-slate-800 sm:mr-2 dark:text-slate-300 px-1 sm:px-3"><i
-                                                        data-tw-merge="" data-lucide="chevron-right"
-                                                        class="stroke-[1] h-4 w-4"></i></a>
-                                            </li>
-                                            <li class="flex-1 sm:flex-initial">
-                                                <a data-tw-merge=""
-                                                    class="transition duration-200 border items-center justify-center py-2 rounded-md cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed min-w-0 sm:min-w-[40px] shadow-none font-normal flex border-transparent text-slate-800 sm:mr-2 dark:text-slate-300 px-1 sm:px-3"><i
-                                                        data-tw-merge="" data-lucide="chevrons-right"
-                                                        class="stroke-[1] h-4 w-4"></i></a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                    <select data-tw-merge=""
-                                        class="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1 rounded-[0.5rem] sm:w-20">
-                                        <option>10</option>
-                                        <option>25</option>
-                                        <option>35</option>
-                                        <option>50</option>
-                                    </select>
-                                </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="flex-reverse flex flex-col-reverse flex-wrap items-center gap-y-2 p-5 sm:flex-row">
+                                <nav class="mr-auto w-full flex-1 sm:w-auto">
+                                    <ul class="flex w-full mr-0 sm:mr-auto sm:w-auto">
+                                        <li class="flex-1 sm:flex-initial">
+                                            <a data-tw-merge="" class="transition duration-200 border items-center justify-center py-2 rounded-md cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed min-w-0 sm:min-w-[40px] shadow-none font-normal flex border-transparent text-slate-800 sm:mr-2 dark:text-slate-300 px-1 sm:px-3"><i data-tw-merge="" data-lucide="chevrons-left" class="stroke-[1] h-4 w-4"></i></a>
+                                        </li>
+                                        <li class="flex-1 sm:flex-initial">
+                                            <a data-tw-merge="" class="transition duration-200 border items-center justify-center py-2 rounded-md cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed min-w-0 sm:min-w-[40px] shadow-none font-normal flex border-transparent text-slate-800 sm:mr-2 dark:text-slate-300 px-1 sm:px-3"><i data-tw-merge="" data-lucide="chevron-left" class="stroke-[1] h-4 w-4"></i></a>
+                                        </li>
+                                        <li class="flex-1 sm:flex-initial">
+                                            <a data-tw-merge="" class="transition duration-200 border items-center justify-center py-2 rounded-md cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed min-w-0 sm:min-w-[40px] shadow-none font-normal flex border-transparent text-slate-800 sm:mr-2 dark:text-slate-300 px-1 sm:px-3">...</a>
+                                        </li>
+                                        <li class="flex-1 sm:flex-initial">
+                                            <a data-tw-merge="" class="transition duration-200 border items-center justify-center py-2 rounded-md cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed min-w-0 sm:min-w-[40px] shadow-none font-normal flex border-transparent text-slate-800 sm:mr-2 dark:text-slate-300 px-1 sm:px-3">1</a>
+                                        </li>
+                                        <li class="flex-1 sm:flex-initial">
+                                            <a data-tw-merge="" class="transition duration-200 border items-center justify-center py-2 rounded-md cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed min-w-0 sm:min-w-[40px] shadow-none font-normal flex border-transparent text-slate-800 sm:mr-2 dark:text-slate-300 px-1 sm:px-3 !box dark:bg-darkmode-400">2</a>
+                                        </li>
+                                        <li class="flex-1 sm:flex-initial">
+                                            <a data-tw-merge="" class="transition duration-200 border items-center justify-center py-2 rounded-md cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed min-w-0 sm:min-w-[40px] shadow-none font-normal flex border-transparent text-slate-800 sm:mr-2 dark:text-slate-300 px-1 sm:px-3">3</a>
+                                        </li>
+                                        <li class="flex-1 sm:flex-initial">
+                                            <a data-tw-merge="" class="transition duration-200 border items-center justify-center py-2 rounded-md cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed min-w-0 sm:min-w-[40px] shadow-none font-normal flex border-transparent text-slate-800 sm:mr-2 dark:text-slate-300 px-1 sm:px-3">...</a>
+                                        </li>
+                                        <li class="flex-1 sm:flex-initial">
+                                            <a data-tw-merge="" class="transition duration-200 border items-center justify-center py-2 rounded-md cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed min-w-0 sm:min-w-[40px] shadow-none font-normal flex border-transparent text-slate-800 sm:mr-2 dark:text-slate-300 px-1 sm:px-3"><i data-tw-merge="" data-lucide="chevron-right" class="stroke-[1] h-4 w-4"></i></a>
+                                        </li>
+                                        <li class="flex-1 sm:flex-initial">
+                                            <a data-tw-merge="" class="transition duration-200 border items-center justify-center py-2 rounded-md cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed min-w-0 sm:min-w-[40px] shadow-none font-normal flex border-transparent text-slate-800 sm:mr-2 dark:text-slate-300 px-1 sm:px-3"><i data-tw-merge="" data-lucide="chevrons-right" class="stroke-[1] h-4 w-4"></i></a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                                <select data-tw-merge="" class="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1 rounded-[0.5rem] sm:w-20">
+                                    <option>10</option>
+                                    <option>25</option>
+                                    <option>35</option>
+                                    <option>50</option>
+                                </select>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
-
-
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', async function() {
-
-            async function initializeContent() {
-                await fetchLatestEmployees();
-                // await ApexCharts();
-            }
-
-            // async function ApexCharts() {
-            //     var options = {
-            //         series: [44, 55, 41, 17, 15],
-            //         chart: {
-            //             type: 'donut',
-            //         },
-            //         responsive: [{
-            //             breakpoint: 480,
-            //             options: {
-            //                 chart: {
-            //                     width: 200
-            //                 },
-            //                 legend: {
-            //                     position: 'bottom'
-            //                 }
-            //             }
-            //         }]
-            //     };
-
-            //     var chart = new ApexCharts(document.querySelector("#chart"), options);
-            //     chart.render();
-            // }
-
-            async function fetchLatestEmployees() {
-                try {
-                    const appToken = localStorage.getItem('app_token');
-                    const raw = JSON.stringify({
-                        company_id: localStorage.getItem("company"),
-                        page: 1,
-                        limit: 10,
-                        sort: "DESC",
-                    });
-
-                    const requestOptions = {
-                        method: "POST",
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${appToken}`,
-                            'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
-                        },
-                        body: raw,
-                        redirect: "follow"
-                    };
-
-                    const url = `{{ $apiUrl }}/employee/all`;
-                    const response = await fetch(url, requestOptions);
-
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-
-                    const employees = await response.json();
-                    const employeeData = employees.data;
-
-                    const employeeContainer = document.querySelector('.latestEmployee');
-                    employeeContainer.innerHTML = '';
-
-                    employeeData.forEach(employee => {
-                        const employeeElement = document.createElement('div');
-                        const employeeCompany = 'Duluin'; //employee.company_id ?? 'Duluin';
-                        const employeeDepartment = employee.department_id ?? 'IT Development';
-                        const employeeDateOfJoining = new Date(employee.date_of_joining) ?? 'N/A';
-
-                        employeeElement.classList.add('flex', 'flex-col', 'sm:flex-row',
-                            'justify-between',
-                            'items-center', 'gap-10', 'pt-4');
-
-                        employeeElement.innerHTML = `
-                            <div class="w-full font-medium mt-1.5 text-l">
-                            <a class="whitespace-nowrap font-medium" href="#">
-                                ${employee.first_name} ${employee.last_name}
-                            </a>
-                            <div class="col-2">
-                                <div class="flex items-center gap-2 justify-content-between">
-                                <div class="mt-0.5 whitespace-nowrap text-xs text-slate-500">
-                                    ${employeeCompany}
-                                </div>
-                                <div class="mt-0.5 whitespace-nowrap text-xs text-slate-500">
-                                    |
-                                </div>
-                                <div class="mt-0.5 whitespace-nowrap text-xs text-slate-500">
-                                    ${employeeDepartment}
-                                </div>
-                                </div>
-                            </div>
-                            </div>
-                            <div class="w-full flex pl-12 py-4 text-blue ml-auto">
-                            <div class="ml-auto">
-                                ${employeeDateOfJoining.toLocaleDateString('id-ID')}
-                            </div>
-                            </div>
-                        `;
-
-                        employeeContainer.appendChild(employeeElement);
-                    });
-                } catch (error) {
-                    console.error('Error fetching employees:', error);
-                    const employeeContainer = document.querySelector('.latestEmployee');
-                    employeeContainer.innerHTML =
-                        `<div class="alert alert-danger d-flex align-items-center" role="alert"><svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg><div >No data available</div></div>`;
-                }
-            }
-
-
-            await initializeContent();
-        });
-    </script>
-@endsection
+</div>

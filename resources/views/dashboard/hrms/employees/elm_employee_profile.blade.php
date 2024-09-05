@@ -40,6 +40,9 @@
                         {{-- Work Experience Form Here --}}
                     </div>
                 </div>
+                <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+
+                </div>
             </div>
             <div data-tw-merge
                 class="accordion-item py-4 first:-mt-4 last:-mb-4 [&amp;:not(:last-child)]:border-b [&amp;:not(:last-child)]:border-slate-200/60 [&amp;:not(:last-child)]:dark:border-darkmode-400">
@@ -56,7 +59,14 @@
                         {{-- History in Company Form Here --}}
                     </div>
                 </div>
+                <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+
+                </div>
             </div>
+        </div>
+        <div class="flex-1 sm:w-full w-80 mt-3 xl:mt-0">
+            <input data-tw-merge="" type="date" placeholder="Select a date"
+                class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80">
         </div>
     </div>
     <x-form.button label="Save changes" id="profile-btn" style="primary" type="button" icon="save" />
