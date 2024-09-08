@@ -354,8 +354,8 @@
                                 });
                             }
                             bloodGroupSelect.setValue(bloodGroupValue);
-                            $("#family_background").val(response.data.addressContact.family_background);
-                            $("#health_detail").val(response.data.addressContact.health_details);
+                            $("#family_background").val(response.data.personalData.family_background);
+                            $("#health_detail").val(response.data.personalData.health_details);
                             const healthInsuranceSelect = $('#health_insurance')[0]
                                 .tomselect;
                             const healthInsuranceValue = response.data.personalData
@@ -367,10 +367,10 @@
                                 });
                             }
                             healthInsuranceSelect.setValue(healthInsuranceValue);
-                            $("#passport_number").val(response.data.addressContact.passport_number);
-                            $("#date_of_issued").val(response.data.addressContact.date_of_issued);
-                            $("#valid_upto").val(response.data.addressContact.valid_upto);
-                            $("#place_of_issued").val(response.data.addressContact.place_of_issued);
+                            $("#passport_number").val(response.data.personalData.passport_number);
+                            $("#date_of_issued").val(response.data.personalData.date_of_issued);
+                            $("#valid_upto").val(response.data.personalData.valid_upto);
+                            $("#place_of_issued").val(response.data.personalData.place_of_issued);
 
                             // profile
                             $("#cover_letter").val(response.data.profile.bio_cover_letter);
