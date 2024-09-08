@@ -26,6 +26,6 @@
 <!-- END: Head -->
 
 <body>
-
+    @include('layouts.dashboard.toastify')
     @yield('content')
     @include('layouts.dashboard.footer')

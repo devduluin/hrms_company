@@ -170,7 +170,7 @@ Route::controller(DashboardController::class)->group(function () {
                     //employees modules
                     Route::prefix('/employee')->group(function () {
                         Route::controller(EmployeesController::class)->group(function () {
-                            Route::get('/', 'index')->name('hrms');
+                            Route::get('/', 'list')->name('hrms');
                             Route::get('/list', 'list')->name('employee');
                             Route::get('/edit_employee/{id}', 'edit');
                             Route::get('/new_employee', 'create');

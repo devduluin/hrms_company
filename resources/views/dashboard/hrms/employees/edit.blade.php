@@ -43,47 +43,39 @@
     <script src="{{ asset('dist/js/vendors/tab.js') }}"></script>
     <script>
         $(document).ready(function() {
-            // Initialize the first tab as active
             const initialTab = $('ul[role="tablist"] li:first-child button');
             initialTab.addClass('active');
             $(initialTab.data('tw-target')).addClass('active').removeAttr('style').show();
 
             let lastActiveTabId = initialTab.data('tw-target');
-            console.log(lastActiveTabId);
             const appToken = localStorage.getItem('app_token');
             const employee_id = $("#employee_id").val();
 
-            // call get data handler
+            $('ul[role="tablist"] li button[role="tab"]').on('click', async function(e) {
+                const newTabId = $(this).data('tw-target');
+
+                if (lastActiveTabId !== newTabId) {
+                    e.preventDefault();
+                    lastActiveTabId = newTabId;
+                    $(lastActiveTabId + "-btn").click(async function(e) {
+                        // console.log(lastActiveTabId + "-form");
+                        e.preventDefault();
+                        await handleFormSubmission(lastActiveTabId);
+                    });
+                }
+            });
+
             handleGetData(employee_id, lastActiveTabId);
 
-            // $('ul[role="tablist"] li button[role="tab"]').on('click', async function(e) {
-            //     const newTabId = $(this).data('tw-target');
-            //     if (lastActiveTabId !== newTabId) {
-            //         e.preventDefault();
-            //         // await handleFormSubmission(lastActiveTabId);
-            //         // await handleGetData(employee_id, newTabId);
-            //         lastActiveTabId = newTabId;
-            //         console.log(lastActiveTabId);
-
-            //         $(lastActiveTabId + "-btn").click(async function(e) {
-            //             console.log(lastActiveTabId + "-form");
-            //             e.preventDefault();
-            //             // await handleFormSubmission(lastActiveTabId);
-            //             // await handleGetData(employee_id, newTabId);
-            //         });
-            //     }
-            // });
-
             $(lastActiveTabId + "-btn").click(async function(e) {
-                console.log(lastActiveTabId + "-form");
+                console.log("oke");
                 e.preventDefault();
                 await handleFormSubmission(lastActiveTabId);
             });
 
-            function handleGetData(employee_id, tabId) {
-                console.log("Last active ID : ", tabId);
-                console.log("Employee ID : ", employee_id);
+            console.log("current tab is " + lastActiveTabId);
 
+            async function handleGetData(employee_id, tabId) {
                 $.ajax({
                     url: `{{ $apiEmployeeUrl }}/employee/${employee_id}`,
                     type: 'GET',
@@ -92,13 +84,15 @@
                         'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
                     },
                     dataType: 'json',
-                    success: function(response) {
+                    success: await
+                    function(response) {
                         if (response.success) {
                             if (!response.data.is_verified) {
                                 $("#verification-btn").removeClass("hidden");
                             } else {
                                 $("#verification-btn").addClass("hidden");
                             }
+                            $("#employee_card_id").val(response.data.employee_id);
                             $("#first_name").val(response.data.first_name);
                             $("#last_name").val(response.data.last_name);
                             $("#phone_number").val(response.data.addressContact.mobile_phone);
@@ -138,16 +132,258 @@
                                 });
                             }
                             statusSelect.setValue(statusValue);
+
+                            const companySelect = $('#company_id')[0].tomselect;
+                            const companyValue = response.data.company_id;
+
+                            companySelect.on('load', function() {
+                                if (!companySelect.options[companyValue]) {
+                                    companySelect.addOption({
+                                        value: companyValue,
+                                        text: response.data.company_id_rel
+                                            .company_name
+                                    });
+                                }
+                                companySelect.setValue(companyValue);
+                            });
+
+                            const designationSelect = $('#designation_id')[0].tomselect;
+                            const designationValue = response.data.designation_id;
+
+                            designationSelect.on('load', function() {
+                                if (!designationSelect.options[designationValue]) {
+                                    designationSelect.addOption({
+                                        value: designationValue,
+                                        text: response.data.designation_id_rel
+                                            .designation_name
+                                    });
+                                }
+                                designationSelect.setValue(designationValue);
+                            });
+
+                            const branchSelect = $('#branch_id')[0].tomselect;
+                            const branchValue = response.data.branch_id;
+
+                            branchSelect.on('load', function() {
+                                if (!branchSelect.options[branchValue]) {
+                                    branchSelect.addOption({
+                                        value: branchValue,
+                                        text: response.data.branch_id_rel
+                                            .branch_name
+                                    });
+                                }
+                                branchSelect.setValue(branchValue);
+                            });
+
+                            const departmentSelect = $('#department_id')[0].tomselect;
+                            const departmentValue = response.data.department_id;
+
+                            departmentSelect.on('load', function() {
+                                if (!departmentSelect.options[departmentValue]) {
+                                    departmentSelect.addOption({
+                                        value: departmentValue,
+                                        text: response.data.department_id_rel
+                                            .department_name
+                                    });
+                                }
+                                departmentSelect.setValue(departmentValue);
+                            });
+
+                            const gradeSelect = $('#grade_id')[0].tomselect;
+                            const gradeValue = response.data.grade_id;
+
+                            gradeSelect.on('load', function() {
+                                if (!gradeSelect.options[gradeValue]) {
+                                    gradeSelect.addOption({
+                                        value: gradeValue,
+                                        text: response.data.grade_id_rel
+                                            .employee_grade_name
+                                    });
+                                }
+                                gradeSelect.setValue(gradeValue);
+                            });
+
+                            const employmentTypeSelect = $('#employee_type_id')[0].tomselect;
+                            const employmentTypeValue = response.data.employee_type_id;
+
+                            employmentTypeSelect.on('load', function() {
+                                if (!employmentTypeSelect.options[employmentTypeValue]) {
+                                    employmentTypeSelect.addOption({
+                                        value: employmentTypeValue,
+                                        text: response.data.employee_type_id_rel
+                                            .employment_type_name
+                                    });
+                                }
+                                employmentTypeSelect.setValue(employmentTypeValue);
+                            });
+
+                            const reportSelect = $('#report_to')[0].tomselect;
+                            const reportValue = response.data.report_to;
+
+                            reportSelect.on('load', function() {
+                                if (!reportSelect.options[reportValue]) {
+                                    reportSelect.addOption({
+                                        value: reportValue,
+                                        text: response.data.report_to
+                                    });
+                                }
+                                reportSelect.setValue(reportValue);
+                            });
+
+                            // joining
+                            $("#confirmation_date").val(response.data.joinHistory.confirmation_date);
+                            $("#notice_day").val(response.data.joinHistory.notice_day);
+                            $("#offer_date").val(response.data.joinHistory.offer_date);
+                            $("#contract_end_date").val(response.data.joinHistory.contract_end_date);
+                            $("#date_of_retirement").val(response.data.joinHistory.date_of_retirement);
+
+                            // address contact
+                            $("#company_email").val(response.data.addressContact.company_email);
+                            $("#current_address").val(response.data.addressContact.current_address);
+                            $("#permanent_address").val(response.data.addressContact.permanent_address);
+                            $("#emergency_contact_name").val(response.data.addressContact
+                                .emergency_contact_name);
+                            $("#emergency_phone").val(response.data.addressContact
+                                .emergency_phone);
+                            $("#relation").val(response.data.addressContact
+                                .relation);
+
+                            const preferedContactEmailSelect = $('#prefered_contact_email')[0]
+                                .tomselect;
+                            const preferedContactEmailValue = response.data.addressContact
+                                .prefered_contact_email;
+                            if (!preferedContactEmailSelect.options[preferedContactEmailValue]) {
+                                preferedContactEmailSelect.addOption({
+                                    value: preferedContactEmailValue,
+                                    text: preferedContactEmailValue
+                                });
+                            }
+                            preferedContactEmailSelect.setValue(preferedContactEmailValue);
+
+                            const currentAddressSelect = $('#current_address_status')[0]
+                                .tomselect;
+                            const currentAddressValue = response.data.addressContact
+                                .current_address_status;
+                            if (!currentAddressSelect.options[currentAddressValue]) {
+                                currentAddressSelect.addOption({
+                                    value: currentAddressValue,
+                                    text: currentAddressValue
+                                });
+                            }
+                            currentAddressSelect.setValue(currentAddressValue);
+
+                            const permanentAddressSelect = $('#permanent_address_status')[0]
+                                .tomselect;
+                            const permanentAddressValue = response.data.addressContact
+                                .permanent_address_status;
+                            if (!permanentAddressSelect.options[permanentAddressValue]) {
+                                permanentAddressSelect.addOption({
+                                    value: permanentAddressValue,
+                                    text: permanentAddressValue
+                                });
+                            }
+                            permanentAddressSelect.setValue(permanentAddressValue);
+
+                            // attendance & leaves
+                            $("#attendance_device_id").val(response.data.attendanceLeave
+                                .attendance_device_id);
+
+                            const expenseApproverSelect = $('#expense_approver')[0].tomselect;
+                            const expenseApproverValue = response.data.attendanceLeave
+                                .expense_approver;
+
+                            expenseApproverSelect.on('load', function() {
+                                if (!expenseApproverSelect.options[expenseApproverValue]) {
+                                    expenseApproverSelect.addOption({
+                                        value: expenseApproverValue,
+                                        text: expenseApproverValue
+                                    });
+                                }
+                                expenseApproverSelect.setValue(expenseApproverValue);
+                            });
+
+                            const shiftApproverSelect = $('#ship_request_approver')[0].tomselect;
+                            const shiftApproverValue = response.data.attendanceLeave
+                                .ship_request_approver;
+
+                            shiftApproverSelect.on('load', function() {
+                                if (!shiftApproverSelect.options[shiftApproverValue]) {
+                                    shiftApproverSelect.addOption({
+                                        value: shiftApproverValue,
+                                        text: shiftApproverValue
+                                    });
+                                }
+                                shiftApproverSelect.setValue(shiftApproverValue);
+                            });
+
+                            const leaveApproverSelect = $('#leave_approver')[0].tomselect;
+                            const leaveApproverValue = response.data.attendanceLeave
+                                .leave_approver;
+
+                            leaveApproverSelect.on('load', function() {
+                                if (!leaveApproverSelect.options[leaveApproverValue]) {
+                                    leaveApproverSelect.addOption({
+                                        value: leaveApproverValue,
+                                        text: leaveApproverValue
+                                    });
+                                }
+                                leaveApproverSelect.setValue(leaveApproverValue);
+                            });
+
+                            // personal data
+                            const maritalStatusSelect = $('#marital_status')[0]
+                                .tomselect;
+                            const maritalStatusValue = response.data.personalData
+                                .marital_status;
+                            if (!maritalStatusSelect.options[maritalStatusValue]) {
+                                maritalStatusSelect.addOption({
+                                    value: maritalStatusValue,
+                                    text: maritalStatusValue
+                                });
+                            }
+                            maritalStatusSelect.setValue(maritalStatusValue);
+
+                            const bloodGroupSelect = $('#blood_group')[0]
+                                .tomselect;
+                            const bloodGroupValue = response.data.personalData
+                                .blood_group;
+                            if (!bloodGroupSelect.options[bloodGroupValue]) {
+                                bloodGroupSelect.addOption({
+                                    value: bloodGroupValue,
+                                    text: bloodGroupValue
+                                });
+                            }
+                            bloodGroupSelect.setValue(bloodGroupValue);
+                            $("#family_background").val(response.data.addressContact.family_background);
+                            $("#health_detail").val(response.data.addressContact.health_details);
+                            const healthInsuranceSelect = $('#health_insurance')[0]
+                                .tomselect;
+                            const healthInsuranceValue = response.data.personalData
+                                .health_insurance;
+                            if (!healthInsuranceSelect.options[healthInsuranceValue]) {
+                                healthInsuranceSelect.addOption({
+                                    value: healthInsuranceValue,
+                                    text: healthInsuranceValue
+                                });
+                            }
+                            healthInsuranceSelect.setValue(healthInsuranceValue);
+                            $("#passport_number").val(response.data.addressContact.passport_number);
+                            $("#date_of_issued").val(response.data.addressContact.date_of_issued);
+                            $("#valid_upto").val(response.data.addressContact.valid_upto);
+                            $("#place_of_issued").val(response.data.addressContact.place_of_issued);
+
+                            // profile
+                            $("#cover_letter").val(response.data.profile.bio_cover_letter);
                         } else {
-                            console.log(response.message);
+                            showErrorNotification('error', response.message);
                         }
                     },
                     error: function(xhr) {
-                        console.log(xhr.responseText);
                         const response = JSON.parse(xhr.responseText);
                         handleErrorResponse(response, tabId);
                     }
                 });
+                return false;
             }
 
             async function handleFormSubmission(formId) {
@@ -158,15 +394,16 @@
                 data.company_id = localStorage.getItem('company');
                 data.employee_id = employeeId;
                 $('.error-message').hide();
+                const submitMethod = employeeId !== '' ? 'PUT' : 'POST';
 
                 if (employeeId == "" && formId !== "#overview") {
-                    toastr.error("Please create Employee Overview data first");
+                    showErrorNotification('error', "Please create Employee Overview data first");
                 }
 
                 try {
                     const response = await $.ajax({
                         url: currentForm.attr('action'),
-                        type: 'POST',
+                        type: submitMethod,
                         contentType: 'application/json',
                         headers: {
                             'Authorization': `Bearer ${appToken}`,
@@ -179,11 +416,10 @@
                     handleResponse(response);
                 } catch (xhr) {
                     if (xhr.status === 422) {
-                        console.log(xhr.responseText);
                         const response = JSON.parse(xhr.responseText);
                         handleErrorResponse(response, formId);
-                    } else {
-                        toastr.error('An error occurred while processing your request.');
+                    } else if (xhr.status === 500) {
+                        showErrorNotification('error', 'An error occurred while processing your request.');
                     }
                     // activateTab(formId);
                 }
@@ -202,16 +438,15 @@
             function handleResponse(response) {
                 if (response.success) {
                     if ($("#employee_id").val() === "") {
-                        toastr.success(response.message);
+                        showSuccessNotification('success', response.message);
                         // send email notification
                         handleNotification(response);
                     } else {
-                        toastr.success("Data has been updated successfully");
+                        showSuccessNotification('success', "Data has been updated successfully");
                     }
-                    // console.log("Employee ID : ", response.data.employee.id);
                     $("#employee_id").val(response.data.employee.id);
                 } else {
-                    toastr.error(response.message);
+                    showErrorNotification('error', response.message);
                 }
             }
 
@@ -241,17 +476,18 @@
                     },
                     dataType: 'json',
                     success: function(data) {
-                        toastr.success('Verification email sent successfully.');
+                        showSuccessNotification('success', 'Verification email sent successfully.');
+                        $("#verification-btn").hide();
                     },
                     error: function(error) {
-                        toastr.error('Failed to send verification email.');
+                        showErrorNotification('error', 'Failed to send verification email.');
                     }
                 });
             }
 
             function handleErrorResponse(result, tabId) {
                 const errorString = result.error || 'An error occurred.';
-                toastr.error(`There were validation errors on tab ${tabId}`);
+                showErrorNotification('error', `There were validation errors on tab ${tabId}`);
                 const errorMessages = errorString.split(', ');
 
                 $('.error-message').remove();
@@ -267,7 +503,7 @@
 
                         input.addClass('is-invalid');
                         input.before(
-                            `<div class="error-message text-danger mt-1 text-xs text-slate-500 sm:ml-auto sm:mt-0 mb-2">${fieldName} is not allowed to be empty</div>`
+                            `<div class="error-message text-danger mt-1 text-xs sm:ml-auto sm:mt-0 mb-2">${fieldName} is not allowed to be empty</div>`
                         );
                     }
                 }

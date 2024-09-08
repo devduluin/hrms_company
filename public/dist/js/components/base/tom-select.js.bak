@@ -1,6 +1,6 @@
 function initializeTomSelect() {
     (function () {
-        "use strict";
+        ("use strict");
         $(".tom-select").each(function () {
             let title = $(this).data("title");
             let url = $(this).data("url");
@@ -12,14 +12,16 @@ function initializeTomSelect() {
             const appToken = localStorage.getItem("app_token");
 
             console.log("selectedId", selectedId);
+            console.log("select Type", selectType);
 
             try {
                 selectType = JSON.parse(selectType);
             } catch (e) {
+                console.log(e.message);
                 selectType = null;
             }
 
-            let config = {
+            let e = {
                 valueField: "id",
                 labelField: "name",
                 searchField: "name",
@@ -29,12 +31,17 @@ function initializeTomSelect() {
                 },
                 create: true,
                 load: function (query, callback) {
+                    if (!query.length) {
+                        console.log("gak ada");
+                        return callback();
+                    }
+
                     if (api && selectType.length > 0) {
                         const payload = {
                             draw: 0,
                             start: 0,
                             length: 10,
-                            search: query || "", // query is optional now
+                            search: query,
                             order: [
                                 {
                                     column: 0,
@@ -75,34 +82,25 @@ function initializeTomSelect() {
                                         name: name,
                                     };
                                 });
-
-                                // Check if selectedId exists in options, otherwise add it manually
-                                if (
-                                    selectedId &&
-                                    !options.some(
-                                        (option) => option.id === selectedId
-                                    )
-                                ) {
-                                    // Add the selected option if it does not exist in the loaded options
-                                    options.push({
-                                        id: selectedId,
-                                        name: `Selected Option (${selectedId})`, // You can customize the name as needed
-                                    });
-                                }
-
                                 callback(options);
 
                                 const tomSelectInstance = $(this)[0].tomselect;
-
-                                // Set selected value if selectedId exists
+                                console.log("selected ID : ", selectedId);
                                 if (tomSelectInstance && selectedId) {
-                                    tomSelectInstance.addOption({
-                                        value: selectedId,
-                                        text: `Selected Option (${selectedId})`, // Customize this label as necessary
-                                    });
-                                    tomSelectInstance.setValue(selectedId);
-                                    tomSelectInstance.settings.placeholder = `Selected Option (${selectedId})`;
-                                    tomSelectInstance.input.placeholder = `Selected Option (${selectedId})`;
+                                    const selectedOption = options.find(
+                                        (option) => option.id === selectedId
+                                    );
+
+                                    if (selectedOption) {
+                                        console.log("sama");
+                                        tomSelectInstance.addOption({
+                                            value: selectedOption.id,
+                                            text: selectedOption.name,
+                                        });
+                                        tomSelectInstance.setValue(
+                                            selectedOption.id
+                                        );
+                                    }
                                 }
                             },
                             error: function (xhr, status, error) {
@@ -145,18 +143,18 @@ function initializeTomSelect() {
             };
 
             $(this).data("placeholder") &&
-                (config.placeholder = $(this).data("placeholder"));
+                (e.placeholder = $(this).data("placeholder"));
             $(this).attr("multiple") !== void 0 &&
-                (config = {
-                    ...config,
+                (e = {
+                    ...e,
                     plugins: {
-                        ...config.plugins,
+                        ...e.plugins,
                         remove_button: {
                             title: "Remove this item",
                         },
                     },
-                    persist: false,
-                    create: true,
+                    persist: !1,
+                    create: !0,
                     onDelete: function (t) {
                         return confirm(
                             t.length > 1
@@ -170,20 +168,17 @@ function initializeTomSelect() {
                     },
                 });
             $(this).data("header") &&
-                (config = {
-                    ...config,
+                (e = {
+                    ...e,
                     plugins: {
-                        ...config.plugins,
+                        ...e.plugins,
                         dropdown_header: {
                             title: $(this).data("header"),
                         },
                     },
                 });
 
-            const tomSelectInstance = new TomSelect(this, config);
-
-            // Load options on page load without typing
-            tomSelectInstance.load("");
+            new TomSelect(this, e);
         });
     })();
 }

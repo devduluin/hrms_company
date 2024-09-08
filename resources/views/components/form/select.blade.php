@@ -11,6 +11,9 @@
     'selected' => '',
     'keys' => [],
 ])
+
+{{-- @dump($selected) --}}
+
 <div class="mt-2 flex-row xl:items-center">
     <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:w-60">
         <div class="text-left">
@@ -24,9 +27,6 @@
                         Required
                     </div>
                 @endif
-            </div>
-            <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-
             </div>
         </div>
     </div>
@@ -53,8 +53,11 @@
     </div>
 </div>
 @include('vendor-common.tomselect')
+
 @pushOnce('js')
     <script>
-        initializeTomSelect();
+        $(document).ready(function() {
+            initializeTomSelect();
+        });
     </script>
 @endpushOnce

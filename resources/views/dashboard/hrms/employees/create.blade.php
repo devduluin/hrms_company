@@ -43,13 +43,11 @@
     <script src="{{ asset('dist/js/vendors/tab.js') }}"></script>
     <script>
         $(document).ready(function() {
-            // Initialize the first tab as active
             const initialTab = $('ul[role="tablist"] li:first-child button');
             initialTab.addClass('active');
             $(initialTab.data('tw-target')).addClass('active').removeAttr('style').show();
 
             let lastActiveTabId = initialTab.data('tw-target');
-            console.log(lastActiveTabId);
             const appToken = localStorage.getItem('app_token');
 
             $('ul[role="tablist"] li button[role="tab"]').on('click', async function(e) {
@@ -59,7 +57,6 @@
                     e.preventDefault();
                     await handleFormSubmission(lastActiveTabId);
                     lastActiveTabId = newTabId;
-                    console.log(lastActiveTabId);
 
                     $(lastActiveTabId + "-btn").click(async function(e) {
                         console.log(lastActiveTabId + "-form");
@@ -70,7 +67,6 @@
             });
 
             $(lastActiveTabId + "-btn").click(async function(e) {
-                console.log(lastActiveTabId + "-form");
                 e.preventDefault();
                 await handleFormSubmission(lastActiveTabId);
             });
@@ -83,9 +79,8 @@
                 data.company_id = localStorage.getItem('company');
                 data.employee_id = employeeId;
                 $('.error-message').hide();
-
                 if (employeeId == "" && formId !== "#overview") {
-                    toastr.error("Please create Employee Overview data first");
+                    showErrorNotification('error', "Please create Employee Overview data first");
                 }
 
                 try {
@@ -108,7 +103,7 @@
                         const response = JSON.parse(xhr.responseText);
                         handleErrorResponse(response, formId);
                     } else {
-                        toastr.error('An error occurred while processing your request.');
+                        showErrorNotification('error', 'An error occurred while processing your request.');
                     }
                     // activateTab(formId);
                 }
@@ -127,19 +122,16 @@
             function handleResponse(response) {
                 if (response.success) {
                     if ($("#employee_id").val() === "") {
-                        toastr.success(response.message);
-                        // send email notification
-                        handleNotification(response);
+                        showSuccessNotification('success', response.message);
+                        // handleNotification(response);
                     } else {
-                        toastr.success("Data has been updated successfully");
+                        showSuccessNotification('success', "Data has been updated successfully");
                     }
-                    // console.log("Employee ID : ", response.data.employee.id);
                     $("#employee_id").val(response.data.employee.id);
-                    // TODO: Redirect to employee detail page
                     location.href =
                         `{{ url('dashboard/hrms/employee') }}/edit_employee/${response.data.employee.id}`;
                 } else {
-                    toastr.error(response.message);
+                    showErrorNotification('error', response.message);
                 }
             }
 
@@ -164,17 +156,17 @@
                     },
                     dataType: 'json',
                     success: function(data) {
-                        toastr.success('Verification email sent successfully.');
+                        showSuccessNotification('success', 'Verification email sent successfully.');
                     },
                     error: function(error) {
-                        toastr.error('Failed to send verification email.');
+                        showErrorNotification('error', 'Failed to send verification email.');
                     }
                 });
             }
 
             function handleErrorResponse(result, tabId) {
                 const errorString = result.error || 'An error occurred.';
-                toastr.error(`There were validation errors on tab ${tabId}`);
+                showErrorNotification('error', `There were validation errors on tab ${tabId}`);
                 const errorMessages = errorString.split(', ');
 
                 $('.error-message').remove();
@@ -190,7 +182,7 @@
 
                         input.addClass('is-invalid');
                         input.before(
-                            `<div class="error-message text-danger mt-1 text-xs text-slate-500 sm:ml-auto sm:mt-0 mb-2">${fieldName} is not allowed to be empty</div>`
+                            `<div class="error-message text-danger mt-1 text-xs sm:ml-auto sm:mt-0 mb-2">${fieldName} is not allowed to be empty</div>`
                         );
                     }
                 }
