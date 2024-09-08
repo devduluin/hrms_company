@@ -374,6 +374,20 @@
 
                             // profile
                             $("#cover_letter").val(response.data.profile.bio_cover_letter);
+
+                            // exit
+                            $("#resignation_letter_date").val(response.data.exitHistory
+                                .resignation_letter_date);
+                            $("#exit_interview_held_on").val(response.data.exitHistory
+                                .exit_interview_held_on);
+                            $("#relieving_date").val(response.data.exitHistory
+                                .relieving_date);
+                            $("#new_workplace").val(response.data.exitHistory
+                                .new_workplace);
+                            $("#reason_for_leaving").val(response.data.exitHistory
+                                .reason_for_leaving);
+                            $("#feedback").val(response.data.exitHistory
+                                .feedback);
                         } else {
                             showErrorNotification('error', response.message);
                         }
