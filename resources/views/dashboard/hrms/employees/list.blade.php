@@ -83,9 +83,9 @@
                             <div class="box box--stacked flex flex-col">
                                 <div class="table gap-y-2 p-5 sm:flex-row sm:items-center">
                                     <div>
-                                        <div class="text-base font-medium group-[.mode--light]:text-white mb-4">
+                                        {{-- <div class="text-base font-medium group-[.mode--light]:text-white mb-4">
                                             Data Employees
-                                        </div>
+                                        </div> --}}
                                         <x-datatable id="employeeTable" :url="$apiUrl . '/employee/datatables'" method="POST" class="display">
                                             <x-slot:thead>
                                                 <th data-value="first_name">First Name</th>
