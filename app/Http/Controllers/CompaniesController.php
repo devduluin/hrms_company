@@ -34,7 +34,7 @@ class CompaniesController extends Controller
         //     ];
 
         //     $response = Http::withToken('xN9P6a8sL2bV3iR4fC5J6Q7kT8yU9wZ0')
-        //                     ->post("http://localhost:4444/api/v1/company/lists", $postData);
+        //                     ->post("http://apidev.duluin.com/api/v1/company/lists", $postData);
 
         //     $dataCompanies = $response->json();
         //     $data['table'] = $response['data'];

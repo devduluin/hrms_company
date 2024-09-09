@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-span-12 flex flex-col gap-y-7 xl:col-span-9">
                     <div class="box box--stacked flex flex-col p-5">
-                        <x-datatable id="shiftTypeTable" :url="'http://localhost:4444/api/v1/shift-type/datatable'" method="POST" class="display">
+                        <x-datatable id="shiftTypeTable" :url="'http://apidev.duluin.com/api/v1/shift-type/datatable'" method="POST" class="display">
                             <x-slot:thead>
                                 <th data-value="shift_type_name">Shift type name</th>
                                 <th data-value="start_time">Start time</th>

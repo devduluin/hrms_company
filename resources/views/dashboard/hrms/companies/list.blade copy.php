@@ -112,7 +112,7 @@
                                             <div class="text-base font-medium group-[.mode--light]:text-white mb-4">
                                                 Data Employees
                                             </div>
-                                            <x-datatable id="employeeTable" :url="'http://localhost:4444/api/v1/company/lists'" method="POST" class="display">
+                                            <x-datatable id="employeeTable" :url="'http://apidev.duluin.com/api/v1/company/lists'" method="POST" class="display">
                                                 <x-slot:thead>
                                                     <th data-value="company_name">Company Name</th>
                                                     <th data-value="domain">Domain</th>

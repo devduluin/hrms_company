@@ -159,7 +159,7 @@
     let companyId = localStorage.getItem('company');
     async function getCompanybyId() {
         try {
-            const response = await fetch('http://localhost:4444/api/v1/company/'+companyId, {
+            const response = await fetch('http://apidev.duluin.com/api/v1/company/'+companyId, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -208,7 +208,7 @@
         
 
         try {
-            const response = await fetch('http://localhost:4444/api/v1/company/'+companyId, {
+            const response = await fetch('http://apidev.duluin.com/api/v1/company/'+companyId, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
