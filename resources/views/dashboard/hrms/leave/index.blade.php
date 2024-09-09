@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div class="box box--stacked flex flex-col p-5 mt-6">
-                    <x-datatable id="applicantTable" :url="'http://localhost:4444/api/v1/branch/datatable'" method="POST" class="display">
+                    <x-datatable id="applicantTable" :url="'http://apidev.duluin.com/api/v1/branch/datatable'" method="POST" class="display">
                         <x-slot:thead>
                             <th data-value="employee_name">Employee Name</th>
                             <th data-value="company">Company</th>

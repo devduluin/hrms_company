@@ -41,7 +41,7 @@ class EmployeesController extends Controller
         $data['company'] = $allSessions['company_id'][0];
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
         $data['apiEmployeeUrl'] = $this->apiGatewayUrl . '/v1/employees';
-        // $data['apiEmployeeUrl'] = 'http://localhost:4444/api/v1';
+        // $data['apiEmployeeUrl'] = 'http://apidev.duluin.com/api/v1';
         $data['apiGateway'] = $this->apiGatewayUrl . '/users';
 
         return view('dashboard.hrms.employees.create', $data);
@@ -55,7 +55,7 @@ class EmployeesController extends Controller
         $data['company'] = $allSessions['company_id'][0];
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
         $data['apiEmployeeUrl'] = $this->apiGatewayUrl . '/v1/employees';
-        // $data['apiEmployeeUrl'] = 'http://localhost:4444/api/v1';
+        // $data['apiEmployeeUrl'] = 'http://apidev.duluin.com/api/v1';
         $data['apiGateway'] = $this->apiGatewayUrl . '/users';
         $data['employee_id'] = $id;
 

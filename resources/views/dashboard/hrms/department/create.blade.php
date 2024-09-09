@@ -100,7 +100,7 @@
         };
 
         try {
-            const response = await fetch('http://localhost:4444/api/v1/department', {
+            const response = await fetch('http://apidev.duluin.com/api/v1/department', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

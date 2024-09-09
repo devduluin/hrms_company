@@ -46,6 +46,7 @@ class SubdomainMiddleware
             try {
                 $response = $this->client->request('GET', $gateway, $options);
                 $apiResponse = json_decode($response->getBody(), true);
+                // dd($apiResponse);
             } catch (RequestException $e) {
                 // dd($e->getMessage());
                 \Log::error('Guzzle request error: ' . $e->getMessage());

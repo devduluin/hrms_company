@@ -75,7 +75,7 @@
         };
 
         try {
-            const response = await fetch('http://localhost:4444/api/v1/holiday-date', {
+            const response = await fetch('http://apidev.duluin.com/api/v1/holiday-date', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

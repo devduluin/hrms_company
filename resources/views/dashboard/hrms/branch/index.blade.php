@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-span-12 flex flex-col gap-y-7 xl:col-span-9">
                     <div class="box box--stacked flex flex-col p-5">
-                        <x-datatable id="branchTable" :url="'http://localhost:4444/api/v1/branch/datatable'" method="POST" class="display">
+                        <x-datatable id="branchTable" :url="'http://apidev.duluin.com/api/v1/branch/datatable'" method="POST" class="display">
                             <x-slot:thead>
                                 <th data-value="branch_name">Branch name</th>
                                 <th data-value="createdAt" data-render="dateRender">Created at</th>

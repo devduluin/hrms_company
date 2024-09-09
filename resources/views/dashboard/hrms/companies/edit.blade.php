@@ -82,7 +82,7 @@
 
     async function getCompanybyId() {
         try {
-            const response = await fetch('http://localhost:4444/api/v1/company/54601ab0-cd67-46a3-864b-b30a4771ebc9', {
+            const response = await fetch('http://apidev.duluin.com/api/v1/company/54601ab0-cd67-46a3-864b-b30a4771ebc9', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -129,7 +129,7 @@
         };
 
         try {
-            const response = await fetch('http://localhost:4444/api/v1/company/54601ab0-cd67-46a3-864b-b30a4771ebc9', {
+            const response = await fetch('http://apidev.duluin.com/api/v1/company/54601ab0-cd67-46a3-864b-b30a4771ebc9', {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
