@@ -246,6 +246,19 @@
                             $("#offer_date").val(response.data.joinHistory.offer_date);
                             $("#contract_end_date").val(response.data.joinHistory.contract_end_date);
                             $("#date_of_retirement").val(response.data.joinHistory.date_of_retirement);
+                            const jobApplicantSelect = $('#applicant_id')[0].tomselect;
+                            const jobApplicantValue = response.data.joinHistory
+                                .job_applicant_id;
+
+                            jobApplicantSelect.on('load', function() {
+                                if (!jobApplicantSelect.options[jobApplicantValue]) {
+                                    jobApplicantSelect.addOption({
+                                        value: jobApplicantValue,
+                                        text: jobApplicantValue
+                                    });
+                                }
+                                jobApplicantSelect.setValue(jobApplicantValue);
+                            });
 
                             // address contact
                             $("#company_email").val(response.data.addressContact.company_email);
