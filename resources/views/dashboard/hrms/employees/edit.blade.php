@@ -147,75 +147,85 @@
                                 companySelect.setValue(companyValue);
                             });
 
-                            const designationSelect = $('#designation_id')[0].tomselect;
-                            const designationValue = response.data.designation_id;
+                            if (response.data.designation_id_rel !== null) {
+                                const designationSelect = $('#designation_id')[0].tomselect;
+                                const designationValue = response.data.designation_id;
 
-                            designationSelect.on('load', function() {
-                                if (!designationSelect.options[designationValue]) {
-                                    designationSelect.addOption({
-                                        value: designationValue,
-                                        text: response.data.designation_id_rel
-                                            .designation_name
-                                    });
-                                }
-                                designationSelect.setValue(designationValue);
-                            });
+                                designationSelect.on('load', function() {
+                                    if (!designationSelect.options[designationValue]) {
+                                        designationSelect.addOption({
+                                            value: designationValue,
+                                            text: response.data.designation_id_rel
+                                                .designation_name
+                                        });
+                                    }
+                                    designationSelect.setValue(designationValue);
+                                });
+                            }
 
-                            const branchSelect = $('#branch_id')[0].tomselect;
-                            const branchValue = response.data.branch_id;
+                            if (response.data.branch_id_rel !== null) {
+                                const branchSelect = $('#branch_id')[0].tomselect;
+                                const branchValue = response.data.branch_id;
 
-                            branchSelect.on('load', function() {
-                                if (!branchSelect.options[branchValue]) {
-                                    branchSelect.addOption({
-                                        value: branchValue,
-                                        text: response.data.branch_id_rel
-                                            .branch_name
-                                    });
-                                }
-                                branchSelect.setValue(branchValue);
-                            });
+                                branchSelect.on('load', function() {
+                                    if (!branchSelect.options[branchValue]) {
+                                        branchSelect.addOption({
+                                            value: branchValue,
+                                            text: response.data.branch_id_rel
+                                                .branch_name
+                                        });
+                                    }
+                                    branchSelect.setValue(branchValue);
+                                });
+                            }
 
-                            const departmentSelect = $('#department_id')[0].tomselect;
-                            const departmentValue = response.data.department_id;
+                            if (response.data.department_id_rel !== null) {
+                                const departmentSelect = $('#department_id')[0].tomselect;
+                                const departmentValue = response.data.department_id;
 
-                            departmentSelect.on('load', function() {
-                                if (!departmentSelect.options[departmentValue]) {
-                                    departmentSelect.addOption({
-                                        value: departmentValue,
-                                        text: response.data.department_id_rel
-                                            .department_name
-                                    });
-                                }
-                                departmentSelect.setValue(departmentValue);
-                            });
+                                departmentSelect.on('load', function() {
+                                    if (!departmentSelect.options[departmentValue]) {
+                                        departmentSelect.addOption({
+                                            value: departmentValue,
+                                            text: response.data.department_id_rel
+                                                .department_name
+                                        });
+                                    }
+                                    departmentSelect.setValue(departmentValue);
+                                });
+                            }
 
-                            const gradeSelect = $('#grade_id')[0].tomselect;
-                            const gradeValue = response.data.grade_id;
+                            if (response.data.grade_id_rel !== null) {
+                                const gradeSelect = $('#grade_id')[0].tomselect;
+                                const gradeValue = response.data.grade_id;
 
-                            gradeSelect.on('load', function() {
-                                if (!gradeSelect.options[gradeValue]) {
-                                    gradeSelect.addOption({
-                                        value: gradeValue,
-                                        text: response.data.grade_id_rel
-                                            .employee_grade_name
-                                    });
-                                }
-                                gradeSelect.setValue(gradeValue);
-                            });
+                                gradeSelect.on('load', function() {
+                                    if (!gradeSelect.options[gradeValue]) {
+                                        gradeSelect.addOption({
+                                            value: gradeValue,
+                                            text: response.data.grade_id_rel
+                                                .employee_grade_name
+                                        });
+                                    }
+                                    gradeSelect.setValue(gradeValue);
+                                });
+                            }
 
-                            const employmentTypeSelect = $('#employee_type_id')[0].tomselect;
-                            const employmentTypeValue = response.data.employee_type_id;
+                            if (response.data.employee_type_id_rel !== null) {
+                                const employmentTypeSelect = $('#employee_type_id')[0].tomselect;
+                                const employmentTypeValue = response.data.employee_type_id;
 
-                            employmentTypeSelect.on('load', function() {
-                                if (!employmentTypeSelect.options[employmentTypeValue]) {
-                                    employmentTypeSelect.addOption({
-                                        value: employmentTypeValue,
-                                        text: response.data.employee_type_id_rel
-                                            .employment_type_name
-                                    });
-                                }
-                                employmentTypeSelect.setValue(employmentTypeValue);
-                            });
+                                employmentTypeSelect.on('load', function() {
+                                    if (!employmentTypeSelect.options[employmentTypeValue]) {
+                                        employmentTypeSelect.addOption({
+                                            value: employmentTypeValue,
+                                            text: response.data.employee_type_id_rel
+                                                .employment_type_name
+                                        });
+                                    }
+                                    employmentTypeSelect.setValue(employmentTypeValue);
+                                });
+                            }
 
                             const reportSelect = $('#report_to')[0].tomselect;
                             const reportValue = response.data.report_to;
@@ -285,50 +295,52 @@
                             permanentAddressSelect.setValue(permanentAddressValue);
 
                             // attendance & leaves
-                            $("#attendance_device_id").val(response.data.attendanceLeave
-                                .attendance_device_id);
+                            if (response.data.attendanceLeave !== null) {
+                                $("#attendance_device_id").val(response.data.attendanceLeave
+                                    .attendance_device_id);
 
-                            const expenseApproverSelect = $('#expense_approver')[0].tomselect;
-                            const expenseApproverValue = response.data.attendanceLeave
-                                .expense_approver;
+                                const expenseApproverSelect = $('#expense_approver')[0].tomselect;
+                                const expenseApproverValue = response.data.attendanceLeave
+                                    .expense_approver;
 
-                            expenseApproverSelect.on('load', function() {
-                                if (!expenseApproverSelect.options[expenseApproverValue]) {
-                                    expenseApproverSelect.addOption({
-                                        value: expenseApproverValue,
-                                        text: expenseApproverValue
-                                    });
-                                }
-                                expenseApproverSelect.setValue(expenseApproverValue);
-                            });
+                                expenseApproverSelect.on('load', function() {
+                                    if (!expenseApproverSelect.options[expenseApproverValue]) {
+                                        expenseApproverSelect.addOption({
+                                            value: expenseApproverValue,
+                                            text: expenseApproverValue
+                                        });
+                                    }
+                                    expenseApproverSelect.setValue(expenseApproverValue);
+                                });
 
-                            const shiftApproverSelect = $('#ship_request_approver')[0].tomselect;
-                            const shiftApproverValue = response.data.attendanceLeave
-                                .ship_request_approver;
+                                const shiftApproverSelect = $('#ship_request_approver')[0].tomselect;
+                                const shiftApproverValue = response.data.attendanceLeave
+                                    .ship_request_approver;
 
-                            shiftApproverSelect.on('load', function() {
-                                if (!shiftApproverSelect.options[shiftApproverValue]) {
-                                    shiftApproverSelect.addOption({
-                                        value: shiftApproverValue,
-                                        text: shiftApproverValue
-                                    });
-                                }
-                                shiftApproverSelect.setValue(shiftApproverValue);
-                            });
+                                shiftApproverSelect.on('load', function() {
+                                    if (!shiftApproverSelect.options[shiftApproverValue]) {
+                                        shiftApproverSelect.addOption({
+                                            value: shiftApproverValue,
+                                            text: shiftApproverValue
+                                        });
+                                    }
+                                    shiftApproverSelect.setValue(shiftApproverValue);
+                                });
 
-                            const leaveApproverSelect = $('#leave_approver')[0].tomselect;
-                            const leaveApproverValue = response.data.attendanceLeave
-                                .leave_approver;
+                                const leaveApproverSelect = $('#leave_approver')[0].tomselect;
+                                const leaveApproverValue = response.data.attendanceLeave
+                                    .leave_approver;
 
-                            leaveApproverSelect.on('load', function() {
-                                if (!leaveApproverSelect.options[leaveApproverValue]) {
-                                    leaveApproverSelect.addOption({
-                                        value: leaveApproverValue,
-                                        text: leaveApproverValue
-                                    });
-                                }
-                                leaveApproverSelect.setValue(leaveApproverValue);
-                            });
+                                leaveApproverSelect.on('load', function() {
+                                    if (!leaveApproverSelect.options[leaveApproverValue]) {
+                                        leaveApproverSelect.addOption({
+                                            value: leaveApproverValue,
+                                            text: leaveApproverValue
+                                        });
+                                    }
+                                    leaveApproverSelect.setValue(leaveApproverValue);
+                                });
+                            }
 
                             // personal data
                             const maritalStatusSelect = $('#marital_status')[0]
@@ -388,6 +400,17 @@
                                 .reason_for_leaving);
                             $("#feedback").val(response.data.exitHistory
                                 .feedback);
+                            const leaveEncashedSelect = $('#leave_encashed')[0]
+                                .tomselect;
+                            const leaveEncashedValue = response.data.exitHistory
+                                .leave_encashed;
+                            if (!leaveEncashedSelect.options[leaveEncashedValue]) {
+                                leaveEncashedSelect.addOption({
+                                    value: leaveEncashedValue,
+                                    text: leaveEncashedValue
+                                });
+                            }
+                            leaveEncashedSelect.setValue(leaveEncashedValue);
                         } else {
                             showErrorNotification('error', response.message);
                         }

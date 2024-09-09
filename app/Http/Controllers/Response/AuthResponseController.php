@@ -41,7 +41,7 @@ class AuthResponseController extends Controller
                 'name' => $response['result']['name'],
                 'account' => $response['result']['account'],
                 'company_id' => $response['result']['secondary_id'],
-                'url' => route('settings')
+                'url' => url('dashboard/hrms')
             ], 200);
         } else {
             return response()->json([
@@ -56,9 +56,7 @@ class AuthResponseController extends Controller
         dd($request->all());
     }
 
-    public function signup(Request $request)
-    {
-    }
+    public function signup(Request $request) {}
 
 
     public function user(Request $request)
@@ -69,13 +67,9 @@ class AuthResponseController extends Controller
         return $response;
     }
 
-    public function password_recovery($token)
-    {
-    }
+    public function password_recovery($token) {}
 
-    public function verify_email(Request $request)
-    {
-    }
+    public function verify_email(Request $request) {}
 
     public function logout(Request $request)
     {

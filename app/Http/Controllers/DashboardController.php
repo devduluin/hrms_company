@@ -11,9 +11,7 @@ class DashboardController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Welcome to Dashboard Duluin HRMS';
-        
-        return view('dashboard.index', compact('data'));
+
+        return view('dashboard.index', $data);
     }
-
-
 }

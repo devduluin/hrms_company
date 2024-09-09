@@ -155,21 +155,26 @@
                             const result = await response.json();
 
                             if (response.ok) {
-                                toastr.success("Login successful");
+                                // toastr.success("Login successful");
+                                showSuccessNotification('success', "Login successful");
                                 localStorage.setItem('app_token', result.app_token);
                                 localStorage.setItem('name', result.name);
                                 localStorage.setItem('account', result.account);
                                 localStorage.setItem('company', result.company_id);
                                 window.location.href = result.url;
                             } else if (response.status === 422) {
-                                toastr.error(result.message);
+                                // toastr.error(result.message);
+                                showErrorNotification('error', result.message);
                                 handleValidationErrors(result.errors);
                             } else {
-                                toastr.error(result.message);
+                                // toastr.error(result.message);
+                                showErrorNotification('error', result.message);
                             }
                         } catch (error) {
                             console.error('Error submitting form:', error);
-                            toastr.error('An unexpected error occurred.');
+                            // toastr.error('An unexpected error occurred.');
+                            showErrorNotification('error',
+                                'An unexpected error occurred.');
                         }
                     });
                 });
