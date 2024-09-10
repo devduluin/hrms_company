@@ -28,55 +28,55 @@
                                 <div class="grid grid-cols-4 gap-5">
                                     <div
                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                        <div class="text-base text-slate-500">Registered Users</div>
-                                        <div class="mt-1.5 text-2xl font-medium">457,204</div>
-                                        <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
+                                        <div class="text-base text-slate-500">Total Employees</div>
+                                        <div class="mt-1.5 text-2xl font-medium" id="totalEmployeesCount">0</div>
+                                        {{-- <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
                                             <div
                                                 class="flex items-center rounded-full border border-danger/10 bg-danger/10 py-[2px] pl-[7px] pr-1 text-xs font-medium text-danger">
                                                 3%
                                                 <i data-tw-merge="" data-lucide="chevron-down"
                                                     class="ml-px h-4 w-4 stroke-[1.5]"></i>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div
                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                        <div class="text-base text-slate-500">Active Users</div>
-                                        <div class="mt-1.5 text-2xl font-medium">122,721</div>
-                                        <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
+                                        <div class="text-base text-slate-500">Employees Active</div>
+                                        <div class="mt-1.5 text-2xl font-medium" id="totalEmployeesActive">0</div>
+                                        {{-- <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
                                             <div
                                                 class="flex items-center rounded-full border border-success/10 bg-success/10 py-[2px] pl-[7px] pr-1 text-xs font-medium text-success">
                                                 2%
                                                 <i data-tw-merge="" data-lucide="chevron-up"
                                                     class="ml-px h-4 w-4 stroke-[1.5]"></i>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div
                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                        <div class="text-base text-slate-500">New Users</div>
-                                        <div class="font-mediumm mt-1.5 text-2xl">489,223</div>
-                                        <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
+                                        <div class="text-base text-slate-500">Employee Leave</div>
+                                        <div class="font-mediumm mt-1.5 text-2xl" id="totalEmployeesLeave">0</div>
+                                        {{-- <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
                                             <div
                                                 class="flex items-center rounded-full border border-danger/10 bg-danger/10 py-[2px] pl-[7px] pr-1 text-xs font-medium text-danger">
                                                 3%
                                                 <i data-tw-merge="" data-lucide="chevron-down"
                                                     class="ml-px h-4 w-4 stroke-[1.5]"></i>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div
                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                        <div class="text-base text-slate-500">Login Activity</div>
-                                        <div class="font-mediumm mt-1.5 text-2xl">411,259</div>
-                                        <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
+                                        <div class="text-base text-slate-500">New Employee</div>
+                                        <div class="font-mediumm mt-1.5 text-2xl" id="totalNewEmployee">0</div>
+                                        {{-- <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
                                             <div
                                                 class="flex items-center rounded-full border border-success/10 bg-success/10 py-[2px] pl-[7px] pr-1 text-xs font-medium text-success">
                                                 8%
                                                 <i data-tw-merge="" data-lucide="chevron-up"
                                                     class="ml-px h-4 w-4 stroke-[1.5]"></i>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
@@ -90,6 +90,8 @@
                                             <x-slot:thead>
                                                 <th data-value="first_name">First Name</th>
                                                 <th data-value="last_name">Last Name</th>
+                                                <th data-value="company_id_rel" data-render="getCompany">Company
+                                                </th>
                                                 <th data-value="grade_id_rel" data-render="getGrade">Grade
                                                 </th>
                                                 <th data-value="designation_id_rel" data-render="getDesignation">Designation
@@ -120,6 +122,13 @@
             } else {
                 return `<div class="flex items-center justify-center text-danger"><div class="ml-1.5 whitespace-nowrap">Inactive</div></div>`;
             }
+        }
+
+        function getCompany(data, type, row, meta) {
+            if (data !== null) {
+                return data.company_name;
+            }
+            return 'N/A';
         }
 
         function getDesignation(data, type, row, meta) {
@@ -166,5 +175,46 @@
     </div>
 </div>`;
         }
+
+        async function initializeContent() {
+            await fetchLatestEmployees();
+            // await ApexCharts();
+        }
+
+        async function fetchLatestEmployees() {
+            try {
+                const appToken = localStorage.getItem('app_token');
+                const company_id = localStorage.getItem('company');
+                const requestOptions = {
+                    method: "GET",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${appToken}`,
+                        'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
+                    },
+                };
+
+                // const url = `{{ $apiUrl }}/employee/employees_summary/${company_id}`;
+                const url =
+                    `http://localhost:4444/api/v1/employee/employees_summary/8df3d756-7c97-4fea-96a3-de5bc9ae9073`;
+                const response = await fetch(url, requestOptions);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const employees = await response.json();
+                const employeeData = employees.data;
+                $("#totalEmployeesCount").html(employeeData.employees_total);
+                $("#totalEmployeesActive").html(employeeData.employees_active);
+                $("#totalEmployeesLeave").html(employeeData.employees_leave);
+                $("#totalNewEmployee").html(employeeData.new_employees);
+                console.log(employeeData);
+            } catch (error) {
+                console.error('Error fetching employees:', error);
+            }
+        }
+
+        initializeContent();
     </script>
 @endpush
