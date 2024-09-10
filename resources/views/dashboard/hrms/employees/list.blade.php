@@ -194,9 +194,7 @@
                     },
                 };
 
-                // const url = `{{ $apiUrl }}/employee/employees_summary/${company_id}`;
-                const url =
-                    `http://localhost:4444/api/v1/employee/employees_summary/8df3d756-7c97-4fea-96a3-de5bc9ae9073`;
+                const url = `{{ $apiUrl }}/employee/employees_summary/${company_id}`;
                 const response = await fetch(url, requestOptions);
 
                 if (!response.ok) {
