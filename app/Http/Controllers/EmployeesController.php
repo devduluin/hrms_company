@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Session;
-
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class EmployeesController extends Controller
 {
@@ -92,5 +93,18 @@ class EmployeesController extends Controller
         $data['page_title']   = 'New Employee';
 
         return view('dashboard.hrms.elm_employee_contact', $data);
+    }
+
+    public function upload(Request $request)
+    {
+        // Validate the file input
+        // $request->validate([
+        //     'file' => 'required|file|mimes:jpg,jpeg,png,pdf,doc,docx|max:2048',
+        // ]);
+
+        // Store the file in MinIO
+        $filePath = Storage::disk('minio')->put('employees\text.txt', 'test');
+        dd($filePath);
+        // return back()->with('success', 'File uploaded successfully. Path: ' . $filePath);
     }
 }
