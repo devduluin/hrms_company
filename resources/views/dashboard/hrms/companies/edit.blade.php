@@ -130,7 +130,7 @@
 
         try {
             const response = await fetch('http://apidev.duluin.com/api/v1/company/54601ab0-cd67-46a3-864b-b30a4771ebc9', {
-                method: 'PATCH',
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer xN9P6a8sL2bV3iR4fC5J6Q7kT8yU9wZ0' 
