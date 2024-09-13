@@ -1,3 +1,8 @@
+<div class="mb-6 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
+    Personal
+</div>
+<x-dropzonefile folder="employees" action="http://apidev.duluin.com/api/users/file_uploader" label="Employee Picture"
+    id="employee_picture" />
 @if (isset($employee_id))
     <form id="personal-form" method="post" action="{{ $apiEmployeeUrl }}/employee_personal_data/{{ $employee_id }}"
         autocomplete="off" novalidate class="personal-form">
@@ -6,10 +11,8 @@
             novalidate class="personal-form">
 @endif
 @csrf
-<div class="mb-6 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
-    Personal
-</div>
 <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-2 gap-5 mt-4">
+    <input type="hidden" name="avatar" id="avatar">
     <x-form.select name="marital_status" id="marital_status" label="Marital Status" class="tom-select w-full"
         data-placeholder="Select Status" url="{{ url('dashboard/hrms/designation') }}">
         <option value="">Select Status</option>
