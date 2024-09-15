@@ -166,7 +166,8 @@
 
             function handleErrorResponse(result, tabId) {
                 const errorString = result.error || 'An error occurred.';
-                showErrorNotification('error', `There were validation errors on tab ${tabId}`);
+                showErrorNotification('error',
+                    `There were validation errors on tab ${tabId}. Message : ${result.message}`, errorString);
                 const errorMessages = errorString.split(', ');
 
                 $('.error-message').remove();
