@@ -70,16 +70,24 @@ class CompaniesController extends Controller
         $data['title'] = "Profile company";
         $data['page_title'] = "Profile company";
         $data['companyApiUrl'] = $this->companyApiUrl;
+        $allSessions = session()->all();
+        $data['company'] = $allSessions['company_id'][0];
+        $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
 
         return view('dashboard.hrms.companies.show', $data);
     }
 
-    public function setting()
+    public function preview()
     {
-        $data['title'] = "Company setting";
-        $data['page_title'] = "Company setting";
+        $data['title'] = "Company preview";
+        $data['page_title'] = "Company preview";
         $data['companyApiUrl'] = $this->companyApiUrl;
+        $allSessions = session()->all();
+        $data['company'] = $allSessions['company_id'][0];
+        $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
+        $data['apiEmployeeUrl'] = $this->apiGatewayUrl . '/v1/employees';
+        $data['apiGateway'] = $this->apiGatewayUrl . '/users';
 
-        return view('dashboard.hrms.companies.setting', $data);
+        return view('dashboard.hrms.companies.preview', $data);
     }
 }
