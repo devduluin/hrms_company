@@ -11,7 +11,7 @@
                 <div class="col-span-12">
                     <div class="flex flex-col mb-4 gap-y-3 md:h-10 md:flex-row md:items-center">
                         <div class="text-base font-medium group-[.mode--light]:text-white">
-                            {{ $data['page_title'] }}
+                            {{ $page_title }}
                         </div>
                         <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
                         <button id="submitButton" data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-blue-theme border-blue-theme text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"><i data-tw-merge="" data-lucide="external-link" class="mr-3 h-4 w-4 stroke-[1.3]"></i>

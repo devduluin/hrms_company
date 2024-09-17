@@ -215,12 +215,10 @@
         });
 
         let companyId = localStorage.getItem('company');
-        let comapanySettingId = "";
+        const appToken = localStorage.getItem('app_token');
         async function getCompanybyId() {
             try {
-                let companyId = localStorage.getItem('company');
-                const appToken = localStorage.getItem('app_token');
-                const response = await fetch(`{{ $companyApiUrl }}/company/setting/` + companyId, {
+                const response = await fetch(`{{ $companyApiUrl }}/company/` + companyId, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -234,35 +232,15 @@
                     throw new Error('Network response was not ok');
                 }
 
-                //tampilkan data company setting
-                document.getElementById('employee_naming_by').value = result.data.employee_naming_by;
-                document.getElementById('standard_working_hours').value = result.data.standard_working_hours;
-                document.getElementById('retirement_age').value = result.data.retirement_age;
-                document.getElementById('send_leave_notification').value = result.data.send_leave_notification;
-                document.getElementById('leave_approval_notification_template').value = result.data
-                    .leave_approval_notification_template;
-                document.getElementById('expense_approver_mandatory_in_expense_claim').value = result.data
-                    .expense_approver_mandatory_in_expense_claim;
-                document.getElementById('show_leaves_of_all_department_members_in_calendar').value = result.data
-                    .show_leaves_of_all_department_members_in_calendar;
-                document.getElementById('auto_leave_encashment').value = result.data.auto_leave_encashment;
-                document.getElementById('leave_approver_mandatory_in_leave_application').value = result.data
-                    .leave_approver_mandatory_in_leave_application;
-                document.getElementById('restrict_backdated_leave_application').value = result.data
-                    .restrict_backdated_leave_application;
-                document.getElementById('allow_multiple_shift_assignments_for_same_date').value = result.data
-                    .allow_multiple_shift_assignments_for_same_date;
-                document.getElementById('check_vacancies_on_job_offer_creation').value = result.data
-                    .check_vacancies_on_job_offer_creation;
-                document.getElementById('send_interview_reminder').value = result.data.send_interview_reminder;
-                document.getElementById('send_interview_feedback_reminder').value = result.data
-                    .send_interview_feedback_reminder;
-                document.getElementById('sender').value = result.data.sender;
-                document.getElementById('allow_employee_checkin_from_mobile_app').value = result.data
-                    .allow_employee_checkin_from_mobile_app;
-                document.getElementById('allow_geolocation_tracking').value = result.data.allow_geolocation_tracking;
+                //tampilkan data company
+                document.getElementById('company_name').value = result.data.company_name;
+                document.getElementById('domain').value = result.data.domain;
+                document.getElementById('date_of_establishment').value = result.data.date_of_establishment;
+                document.getElementById('default_holiday_list').value = result.data.default_holiday_list;
+                document.getElementById('status').value = result.data.status;
+                document.getElementById('default_currency').value = result.data.default_currency;
+
                 showSuccessNotification(result.message, "The operation was completed successfully.");
-                return comapanySettingId = result.data.id;
 
             } catch (error) {
                 console.error('Error:', error);
@@ -270,49 +248,35 @@
             }
         }
 
-        //update company settings
-        document.getElementById('formUpdateCompanySetting').addEventListener('submit', async function(event) {
+        document.getElementById('formUpdateCompany').addEventListener('submit', async function(event) {
             event.preventDefault();
 
             const formData = new FormData(this);
 
             const data = {
-                employee_naming_by: formData.get('employee_naming_by'),
-                standard_working_hours: formData.get('standard_working_hours'),
-                retirement_age: formData.get('retirement_age'),
-                send_leave_notification: formData.get('send_leave_notification'),
-                leave_approval_notification_template: formData.get('leave_approval_notification_template'),
-                expense_approver_mandatory_in_expense_claim: formData.get(
-                    'expense_approver_mandatory_in_expense_claim'),
-                show_leaves_of_all_department_members_in_calendar: formData.get(
-                    'show_leaves_of_all_department_members_in_calendar'),
-                auto_leave_encashment: formData.get('auto_leave_encashment'),
-                leave_approver_mandatory_in_leave_application: formData.get(
-                    'leave_approver_mandatory_in_leave_application'),
-                restrict_backdated_leave_application: formData.get('restrict_backdated_leave_application'),
-                allow_multiple_shift_assignments_for_same_date: formData.get(
-                    'allow_multiple_shift_assignments_for_same_date'),
-                check_vacancies_on_job_offer_creation: formData.get(
-                    'check_vacancies_on_job_offer_creation'),
-                send_interview_reminder: formData.get('send_interview_reminder'),
-                send_interview_feedback_reminder: formData.get('send_interview_feedback_reminder'),
-                sender: formData.get('sender'),
-                allow_employee_checkin_from_mobile_app: formData.get(
-                    'allow_employee_checkin_from_mobile_app'),
-                allow_geolocation_tracking: formData.get('allow_geolocation_tracking'),
+                company_name: formData.get('company_name'),
+                domain: formData.get('domain'),
+                date_of_establishment: formData.get('date_of_establishment'),
+                // parent_company: formData.get('parent_company'),
+                parent_company: localStorage.getItem('company'),
+                status: formData.get('status'),
+                default_currency: formData.get('default_currency'),
+                default_holiday_list: formData.get('default_holiday_list')
             };
 
+            console.log(data);
+
+
             try {
-                const response = await fetch(`{{ $companyApiUrl }}/company/setting/` +
-                    comapanySettingId, {
-                        method: 'PATCH',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${appToken}`,
-                            'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
-                        },
-                        body: JSON.stringify(data)
-                    });
+                const response = await fetch(`{{ $companyApiUrl }}/company/` + companyId, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${appToken}`,
+                        'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
+                    },
+                    body: JSON.stringify(data)
+                });
 
                 const responseData = await response.json();
 

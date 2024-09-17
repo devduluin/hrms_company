@@ -27,7 +27,6 @@ use App\Http\Controllers\ClaimController;
 use App\Http\Controllers\PayoutController;
 use App\Http\Controllers\LeaveController;
 
-Route::get('employee_pictures', [EmployeesController::class, 'upload']); //->name('employee_picture');
 
 Route::controller(AuthController::class)->group(function () {
     Route::prefix('/')->group(function () {
@@ -95,11 +94,11 @@ Route::controller(DashboardController::class)->group(function () {
                         Route::controller(CompaniesController::class)->group(function () {
                             Route::get('/', 'index')->name('hrms.company');
                             Route::get('/new_company', 'create')->name('hrms.company.create');
-                            Route::get('/edit_company', 'edit');
+                            Route::get('/edit_company', 'edit')->name('hrms.company.edit');;
                             Route::get('/show', 'show')->name('hrms.company.show');
-                            Route::get('/setting', 'setting')->name('hrms.company.setting');
+                            Route::get('/preview', 'preview')->name('hrms.company.preview');
                         });
-                    });
+});
 
                     Route::prefix('/applicants')->group(function () {
                         Route::controller(ApplicantController::class)->group(function () {
@@ -176,7 +175,6 @@ Route::controller(DashboardController::class)->group(function () {
                             Route::get('/edit_employee/{id}', 'edit');
                             Route::get('/new_employee', 'create');
                             Route::get('/update_employee', 'update');
-                            Route::post('/employee_picture', 'upload')->name('employee_picture');
                         });
                     });
 

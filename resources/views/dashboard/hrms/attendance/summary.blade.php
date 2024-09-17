@@ -8,7 +8,7 @@
         <div class="container">
             <div class="flex col-2 md:h-10 md:flex-row md:items-center">
                     <div class="text-base font-medium group-[.mode--light]:text-white">
-                    {{ $data['page_title'] }}
+                    {{ $page_title }}
                     </div>
             </div>
             <div class="box box--stacked flex flex-col">
