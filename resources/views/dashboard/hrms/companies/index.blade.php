@@ -31,301 +31,13 @@
                             <div class="box box--stacked flex flex-col">
                                 <div class="flex flex-col gap-y-2 p-5 sm:flex-row sm:items-center">
                                     <div>
-                                        <div class="relative">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                                stroke-linecap="round" stroke-linejoin="round" data-lucide="search"
-                                                class="lucide lucide-search absolute inset-y-0 left-0 z-10 my-auto ml-3 h-4 w-4 stroke-[1.3] text-slate-500">
-                                                <circle cx="11" cy="11" r="8"></circle>
-                                                <path d="m21 21-4.3-4.3"></path>
-                                            </svg>
-                                            <input type="text" placeholder="Search company..."
-                                                class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 rounded-[0.5rem] pl-9 sm:w-64">
-                                        </div>
+                                        <x-searchbar type="text" placeholder="Search" />
                                     </div>
                                 </div>
                                 <div class="overflow-hidden">
                                     <div class="-mx-5 grid grid-cols-12 border-y border-dashed px-5">
-                                        <div
-                                            class="col-span-12 flex flex-col border-b border-r border-dashed border-slate-300/80 px-5 py-5 sm:col-span-6 xl:col-span-3 [&amp;:nth-child(4n)]:border-r-0 [&amp;:nth-last-child(-n+4)]:border-b-0">
-                                            <div
-                                                class="image-fit h-52 overflow-hidden rounded-lg before:absolute before:left-0 before:top-0 before:z-10 before:block before:h-full before:w-full  before:from-slate-900/90 before:to-black/20">
-                                                <img class="rounded-md" src="{{ asset('img/logo/duluin.jpg') }}"
-                                                    alt="Tailwise - Admin Dashboard Template">
-                                            </div>
-                                            <div class="pt-5">
-                                                <div
-                                                    class="mb-5 mt-auto flex flex-col gap-3.5 border-b border-dashed border-slate-300/70 pb-5">
-                                                    <div class="flex items-center">
-                                                        <div class="text-base font-medium">DULUIN</div>
-                                                        <div class="ml-auto">
-                                                            <div
-                                                                class="flex items-center rounded-md border border-success/10 bg-success/10 px-1.5 py-px text-xs font-medium text-success">
-                                                                <span class="-mt-px">
-                                                                    Active
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="flex items-center">
-                                                    <a class="mr-auto flex items-center text-primary"
-                                                        href="{{ route('hrms.company.show') }}">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round" data-lucide="kanban-square"
-                                                            class="lucide lucide-kanban-square mr-1.5 h-4 w-4 stroke-[1.3]">
-                                                            <rect width="18" height="18" x="3" y="3" rx="2">
-                                                            </rect>
-                                                            <path d="M8 7v7"></path>
-                                                            <path d="M12 7v4"></path>
-                                                            <path d="M16 7v9"></path>
-                                                        </svg>
-                                                        Preview
-                                                    </a>
-                                                    <a class="mr-3 flex items-center" href="#">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round" data-lucide="check-square"
-                                                            class="lucide lucide-check-square mr-1.5 h-4 w-4 stroke-[1.3]">
-                                                            <polyline points="9 11 12 14 22 4"></polyline>
-                                                            <path
-                                                                d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11">
-                                                            </path>
-                                                        </svg>
-                                                        Edit
-                                                    </a>
-                                                    <a class="flex items-center text-danger" href="#">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round" data-lucide="trash2"
-                                                            class="lucide lucide-trash2 mr-1.5 h-4 w-4 stroke-[1.3]">
-                                                            <path d="M3 6h18"></path>
-                                                            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
-                                                            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
-                                                            <line x1="10" x2="10" y1="11"
-                                                                y2="17"></line>
-                                                            <line x1="14" x2="14" y1="11"
-                                                                y2="17"></line>
-                                                        </svg>
-                                                        Delete
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                            class="col-span-12 flex flex-col border-b border-r border-dashed border-slate-300/80 px-5 py-5 sm:col-span-6 xl:col-span-3 [&amp;:nth-child(4n)]:border-r-0 [&amp;:nth-last-child(-n+4)]:border-b-0">
-                                            <div
-                                                class="image-fit h-52 overflow-hidden rounded-lg before:absolute before:left-0 before:top-0 before:z-10 before:block before:h-full before:w-full  before:from-slate-900/90 before:to-black/20">
-                                                <img class="rounded-md" src="{{ asset('img/logo/duluin.jpg') }}"
-                                                    alt="Tailwise - Admin Dashboard Template">
-                                            </div>
-                                            <div class="pt-5">
-                                                <div
-                                                    class="mb-5 mt-auto flex flex-col gap-3.5 border-b border-dashed border-slate-300/70 pb-5">
-                                                    <div class="flex items-center">
-                                                        <div class="text-base font-medium">DULUIN</div>
-                                                        <div class="ml-auto">
-                                                            <div
-                                                                class="flex items-center rounded-md border border-success/10 bg-success/10 px-1.5 py-px text-xs font-medium text-success">
-                                                                <span class="-mt-px">
-                                                                    Active
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="flex items-center">
-                                                    <a class="mr-auto flex items-center text-primary"
-                                                        href="{{ route('hrms.company.show') }}">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round" data-lucide="kanban-square"
-                                                            class="lucide lucide-kanban-square mr-1.5 h-4 w-4 stroke-[1.3]">
-                                                            <rect width="18" height="18" x="3" y="3"
-                                                                rx="2"></rect>
-                                                            <path d="M8 7v7"></path>
-                                                            <path d="M12 7v4"></path>
-                                                            <path d="M16 7v9"></path>
-                                                        </svg>
-                                                        Preview
-                                                    </a>
-                                                    <a class="mr-3 flex items-center" href="#">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round" data-lucide="check-square"
-                                                            class="lucide lucide-check-square mr-1.5 h-4 w-4 stroke-[1.3]">
-                                                            <polyline points="9 11 12 14 22 4"></polyline>
-                                                            <path
-                                                                d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11">
-                                                            </path>
-                                                        </svg>
-                                                        Edit
-                                                    </a>
-                                                    <a class="flex items-center text-danger" href="#">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round" data-lucide="trash2"
-                                                            class="lucide lucide-trash2 mr-1.5 h-4 w-4 stroke-[1.3]">
-                                                            <path d="M3 6h18"></path>
-                                                            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
-                                                            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
-                                                            <line x1="10" x2="10" y1="11"
-                                                                y2="17"></line>
-                                                            <line x1="14" x2="14" y1="11"
-                                                                y2="17"></line>
-                                                        </svg>
-                                                        Delete
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                            class="col-span-12 flex flex-col border-b border-r border-dashed border-slate-300/80 px-5 py-5 sm:col-span-6 xl:col-span-3 [&amp;:nth-child(4n)]:border-r-0 [&amp;:nth-last-child(-n+4)]:border-b-0">
-                                            <div
-                                                class="image-fit h-52 overflow-hidden rounded-lg before:absolute before:left-0 before:top-0 before:z-10 before:block before:h-full before:w-full  before:from-slate-900/90 before:to-black/20">
-                                                <img class="rounded-md" src="{{ asset('img/logo/duluin.jpg') }}"
-                                                    alt="Tailwise - Admin Dashboard Template">
-                                            </div>
-                                            <div class="pt-5">
-                                                <div
-                                                    class="mb-5 mt-auto flex flex-col gap-3.5 border-b border-dashed border-slate-300/70 pb-5">
-                                                    <div class="flex items-center">
-                                                        <div class="text-base font-medium">DULUIN</div>
-                                                        <div class="ml-auto">
-                                                            <div
-                                                                class="flex items-center rounded-md border border-success/10 bg-success/10 px-1.5 py-px text-xs font-medium text-success">
-                                                                <span class="-mt-px">
-                                                                    Active
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="flex items-center">
-                                                    <a class="mr-auto flex items-center text-primary"
-                                                        href="{{ route('hrms.company.show') }}">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round" data-lucide="kanban-square"
-                                                            class="lucide lucide-kanban-square mr-1.5 h-4 w-4 stroke-[1.3]">
-                                                            <rect width="18" height="18" x="3" y="3"
-                                                                rx="2"></rect>
-                                                            <path d="M8 7v7"></path>
-                                                            <path d="M12 7v4"></path>
-                                                            <path d="M16 7v9"></path>
-                                                        </svg>
-                                                        Preview
-                                                    </a>
-                                                    <a class="mr-3 flex items-center" href="#">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round" data-lucide="check-square"
-                                                            class="lucide lucide-check-square mr-1.5 h-4 w-4 stroke-[1.3]">
-                                                            <polyline points="9 11 12 14 22 4"></polyline>
-                                                            <path
-                                                                d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11">
-                                                            </path>
-                                                        </svg>
-                                                        Edit
-                                                    </a>
-                                                    <a class="flex items-center text-danger" href="#">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round" data-lucide="trash2"
-                                                            class="lucide lucide-trash2 mr-1.5 h-4 w-4 stroke-[1.3]">
-                                                            <path d="M3 6h18"></path>
-                                                            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
-                                                            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
-                                                            <line x1="10" x2="10" y1="11"
-                                                                y2="17"></line>
-                                                            <line x1="14" x2="14" y1="11"
-                                                                y2="17"></line>
-                                                        </svg>
-                                                        Delete
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                            class="col-span-12 flex flex-col border-b border-r border-dashed border-slate-300/80 px-5 py-5 sm:col-span-6 xl:col-span-3 [&amp;:nth-child(4n)]:border-r-0 [&amp;:nth-last-child(-n+4)]:border-b-0">
-                                            <div
-                                                class="image-fit h-52 overflow-hidden rounded-lg before:absolute before:left-0 before:top-0 before:z-10 before:block before:h-full before:w-full  before:from-slate-900/90 before:to-black/20">
-                                                <img class="rounded-md" src="{{ asset('img/logo/duluin.jpg') }}"
-                                                    alt="Tailwise - Admin Dashboard Template">
-                                            </div>
-                                            <div class="pt-5">
-                                                <div
-                                                    class="mb-5 mt-auto flex flex-col gap-3.5 border-b border-dashed border-slate-300/70 pb-5">
-                                                    <div class="flex items-center">
-                                                        <div class="text-base font-medium">DULUIN</div>
-                                                        <div class="ml-auto">
-                                                            <div
-                                                                class="flex items-center rounded-md border border-success/10 bg-success/10 px-1.5 py-px text-xs font-medium text-success">
-                                                                <span class="-mt-px">
-                                                                    Active
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="flex items-center">
-                                                    <a class="mr-auto flex items-center text-primary"
-                                                        href="{{ route('hrms.company.show') }}">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round" data-lucide="kanban-square"
-                                                            class="lucide lucide-kanban-square mr-1.5 h-4 w-4 stroke-[1.3]">
-                                                            <rect width="18" height="18" x="3" y="3"
-                                                                rx="2"></rect>
-                                                            <path d="M8 7v7"></path>
-                                                            <path d="M12 7v4"></path>
-                                                            <path d="M16 7v9"></path>
-                                                        </svg>
-                                                        Preview
-                                                    </a>
-                                                    <a class="mr-3 flex items-center" href="#">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round" data-lucide="check-square"
-                                                            class="lucide lucide-check-square mr-1.5 h-4 w-4 stroke-[1.3]">
-                                                            <polyline points="9 11 12 14 22 4"></polyline>
-                                                            <path
-                                                                d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11">
-                                                            </path>
-                                                        </svg>
-                                                        Edit
-                                                    </a>
-                                                    <a class="flex items-center text-danger" href="#">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round" data-lucide="trash2"
-                                                            class="lucide lucide-trash2 mr-1.5 h-4 w-4 stroke-[1.3]">
-                                                            <path d="M3 6h18"></path>
-                                                            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
-                                                            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
-                                                            <line x1="10" x2="10" y1="11"
-                                                                y2="17"></line>
-                                                            <line x1="14" x2="14" y1="11"
-                                                                y2="17"></line>
-                                                        </svg>
-                                                        Delete
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <x-company_list name="DULUIN" status="active" url_preview="{{ route('hrms.company.preview') }}"></x-company_list>
+                                        
                                     </div>
                                 </div>
                                 <div
@@ -383,6 +95,21 @@
                                     </select>
                                 </div>
                             </div>
+                        </div>
+                        <div class="box p-4 mt-6">
+                            <div class="text-m font-medium">
+                                More Setting
+                            </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mt-4">
+                                    <x-action  label="Branch" icon="split" url="{{ route('hrms.branch') }}" />
+                                    <x-action  label="Currency" icon="circle-dollar-sign" url="{{ route('hrms.currency') }}" />
+                                    <x-action  label="Designation" icon="clipboard" url="{{ route('hrms.designation') }}" />                                   
+                                    <x-action  label="Department" icon="layout-template" url="{{ route('hrms.department') }}" />                                   
+                                    <x-action  label="Job" icon="briefcase" url="{{ route('hrms.jobs') }}" />
+                                    <x-action  label="Leave Type" icon="arrow-up-right" url="{{ route('hrms.leave-type') }}" />
+                                    <x-action  label="Shift Requester Approver" icon="git-pull-request-create" url="{{ route('hrms.shiftrequest') }}" />
+                                    <x-action  label="Shift Type" icon="door-open" url="{{ route('hrms.shifttype') }}" />
+                                </div>
                         </div>
                     </div>
                 </div>
