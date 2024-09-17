@@ -100,11 +100,12 @@
                             <div class="text-m font-medium">
                                 More Setting
                             </div>
-                                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mt-4">
+                                <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-5 mt-4">
                                     <x-action  label="Branch" icon="split" url="{{ route('hrms.branch') }}" />
                                     <x-action  label="Currency" icon="circle-dollar-sign" url="{{ route('hrms.currency') }}" />
                                     <x-action  label="Designation" icon="clipboard" url="{{ route('hrms.designation') }}" />                                   
                                     <x-action  label="Department" icon="layout-template" url="{{ route('hrms.department') }}" />                                   
+                                    <x-action  label="Holidays Date" icon="calendar-x-2" url="{{ route('hrms.holidaydate') }}" />                                   
                                     <x-action  label="Job" icon="briefcase" url="{{ route('hrms.jobs') }}" />
                                     <x-action  label="Leave Type" icon="arrow-up-right" url="{{ route('hrms.leave-type') }}" />
                                     <x-action  label="Shift Requester Approver" icon="git-pull-request-create" url="{{ route('hrms.shiftrequest') }}" />

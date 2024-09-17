@@ -171,7 +171,7 @@
                                         <div class="flex items-center">
                                             <div class="image-fit zoom-in h-9 w-9">
                                                 <img data-placement="top" title="Meryl Streep"
-                                                    src="dist/images/users/user2-50x50.jpg"
+                                                    src=""
                                                     alt="Tailwise - Admin Dashboard Template"
                                                     class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]">
                                             </div>
@@ -269,7 +269,7 @@
                                         <div class="flex items-center">
                                             <div class="image-fit zoom-in h-9 w-9">
                                                 <img data-placement="top" title="Cate Blanchett"
-                                                    src="dist/images/users/user8-50x50.jpg"
+                                                    src=""
                                                     alt="Tailwise - Admin Dashboard Template"
                                                     class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]">
                                             </div>
@@ -367,7 +367,7 @@
                                         <div class="flex items-center">
                                             <div class="image-fit zoom-in h-9 w-9">
                                                 <img data-placement="top" title="Jennifer Lawrence"
-                                                    src="dist/images/users/user6-50x50.jpg"
+                                                    src=""
                                                     alt="Tailwise - Admin Dashboard Template"
                                                     class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]">
                                             </div>
@@ -465,7 +465,7 @@
                                         <div class="flex items-center">
                                             <div class="image-fit zoom-in h-9 w-9">
                                                 <img data-placement="top" title="Angelina Jolie"
-                                                    src="dist/images/users/user4-50x50.jpg"
+                                                    src=""
                                                     alt="Tailwise - Admin Dashboard Template"
                                                     class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]">
                                             </div>
@@ -563,7 +563,7 @@
                                         <div class="flex items-center">
                                             <div class="image-fit zoom-in h-9 w-9">
                                                 <img data-placement="top" title="Tom Hanks"
-                                                    src="dist/images/users/user1-50x50.jpg"
+                                                    src=""
                                                     alt="Tailwise - Admin Dashboard Template"
                                                     class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]">
                                             </div>
@@ -661,7 +661,7 @@
                                         <div class="flex items-center">
                                             <div class="image-fit zoom-in h-9 w-9">
                                                 <img data-placement="top" title="Johnny Depp"
-                                                    src="dist/images/users/user7-50x50.jpg"
+                                                    src=""
                                                     alt="Tailwise - Admin Dashboard Template"
                                                     class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]">
                                             </div>
@@ -759,7 +759,7 @@
                                         <div class="flex items-center">
                                             <div class="image-fit zoom-in h-9 w-9">
                                                 <img data-placement="top" title="Leonardo DiCaprio"
-                                                    src="dist/images/users/user3-50x50.jpg"
+                                                    src=""
                                                     alt="Tailwise - Admin Dashboard Template"
                                                     class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]">
                                             </div>
@@ -857,7 +857,7 @@
                                         <div class="flex items-center">
                                             <div class="image-fit zoom-in h-9 w-9">
                                                 <img data-placement="top" title="Brad Pitt"
-                                                    src="dist/images/users/user5-50x50.jpg"
+                                                    src=""
                                                     alt="Tailwise - Admin Dashboard Template"
                                                     class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]">
                                             </div>
@@ -955,7 +955,7 @@
                                         <div class="flex items-center">
                                             <div class="image-fit zoom-in h-9 w-9">
                                                 <img data-placement="top" title="Julia Roberts"
-                                                    src="dist/images/users/user10-50x50.jpg"
+                                                    src=""
                                                     alt="Tailwise - Admin Dashboard Template"
                                                     class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]">
                                             </div>
@@ -1053,7 +1053,7 @@
                                         <div class="flex items-center">
                                             <div class="image-fit zoom-in h-9 w-9">
                                                 <img data-placement="top" title="Denzel Washington"
-                                                    src="dist/images/users/user9-50x50.jpg"
+                                                    src=""
                                                     alt="Tailwise - Admin Dashboard Template"
                                                     class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]">
                                             </div>

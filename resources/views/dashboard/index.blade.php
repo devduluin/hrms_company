@@ -328,17 +328,17 @@
                                             <div class="ml-auto flex">
                                                 <div class="image-fit zoom-in h-8 w-8">
                                                     <img class="rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]"
-                                                        src="dist/images/products/product3-400x400.jpg"
+                                                        src=""
                                                         alt="Tailwise - Admin Dashboard Template">
                                                 </div>
                                                 <div class="image-fit zoom-in -ml-3 h-8 w-8">
                                                     <img class="rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]"
-                                                        src="{{ asset('dist/images/products/product6-400x400.jpg') }}"
+                                                        src=""
                                                         alt="Tailwise - Admin Dashboard Template">
                                                 </div>
                                                 <div class="image-fit zoom-in -ml-3 h-8 w-8">
                                                     <img class="rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]"
-                                                        src="dist/images/products/product7-400x400.jpg"
+                                                        src=""
                                                         alt="Tailwise - Admin Dashboard Template">
                                                 </div>
                                             </div>
@@ -368,17 +368,17 @@
                                             <div class="ml-auto flex">
                                                 <div class="image-fit zoom-in h-8 w-8">
                                                     <img class="rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]"
-                                                        src="dist/images/products/product6-400x400.jpg"
+                                                        src=""
                                                         alt="Tailwise - Admin Dashboard Template">
                                                 </div>
                                                 <div class="image-fit zoom-in -ml-3 h-8 w-8">
                                                     <img class="rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]"
-                                                        src="dist/images/products/product1-400x400.jpg"
+                                                        src=""
                                                         alt="Tailwise - Admin Dashboard Template">
                                                 </div>
                                                 <div class="image-fit zoom-in -ml-3 h-8 w-8">
                                                     <img class="rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]"
-                                                        src="dist/images/products/product8-400x400.jpg"
+                                                        src=""
                                                         alt="Tailwise - Admin Dashboard Template">
                                                 </div>
                                             </div>
@@ -408,17 +408,17 @@
                                             <div class="ml-auto flex">
                                                 <div class="image-fit zoom-in h-8 w-8">
                                                     <img class="rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]"
-                                                        src="dist/images/products/product9-400x400.jpg"
+                                                        src=""
                                                         alt="Tailwise - Admin Dashboard Template">
                                                 </div>
                                                 <div class="image-fit zoom-in -ml-3 h-8 w-8">
                                                     <img class="rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]"
-                                                        src="dist/images/products/product2-400x400.jpg"
+                                                        src=""
                                                         alt="Tailwise - Admin Dashboard Template">
                                                 </div>
                                                 <div class="image-fit zoom-in -ml-3 h-8 w-8">
                                                     <img class="rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]"
-                                                        src="dist/images/products/product2-400x400.jpg"
+                                                        src=""
                                                         alt="Tailwise - Admin Dashboard Template">
                                                 </div>
                                             </div>
@@ -448,17 +448,17 @@
                                             <div class="ml-auto flex">
                                                 <div class="image-fit zoom-in h-8 w-8">
                                                     <img class="rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]"
-                                                        src="dist/images/products/product6-400x400.jpg"
+                                                        src=""
                                                         alt="Tailwise - Admin Dashboard Template">
                                                 </div>
                                                 <div class="image-fit zoom-in -ml-3 h-8 w-8">
                                                     <img class="rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]"
-                                                        src="dist/images/products/product1-400x400.jpg"
+                                                        src=""
                                                         alt="Tailwise - Admin Dashboard Template">
                                                 </div>
                                                 <div class="image-fit zoom-in -ml-3 h-8 w-8">
                                                     <img class="rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]"
-                                                        src="dist/images/products/product2-400x400.jpg"
+                                                        src=""
                                                         alt="Tailwise - Admin Dashboard Template">
                                                 </div>
                                             </div>
@@ -488,17 +488,17 @@
                                             <div class="ml-auto flex">
                                                 <div class="image-fit zoom-in h-8 w-8">
                                                     <img class="rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]"
-                                                        src="dist/images/products/product10-400x400.jpg"
+                                                        src=""
                                                         alt="Tailwise - Admin Dashboard Template">
                                                 </div>
                                                 <div class="image-fit zoom-in -ml-3 h-8 w-8">
                                                     <img class="rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]"
-                                                        src="dist/images/products/product9-400x400.jpg"
+                                                        src=""
                                                         alt="Tailwise - Admin Dashboard Template">
                                                 </div>
                                                 <div class="image-fit zoom-in -ml-3 h-8 w-8">
                                                     <img class="rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]"
-                                                        src="dist/images/products/product9-400x400.jpg"
+                                                        src=""
                                                         alt="Tailwise - Admin Dashboard Template">
                                                 </div>
                                             </div>
@@ -584,19 +584,19 @@
                                             <div class="mb-1 flex">
                                                 <div class="image-fit zoom-in h-5 w-5">
                                                     <img data-placement="top" title="Wireless Earbuds with Mic"
-                                                        src="dist/images/products/product9-400x400.jpg"
+                                                        src=""
                                                         alt="Tailwise - Admin Dashboard Template"
                                                         class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]">
                                                 </div>
                                                 <div class="image-fit zoom-in -ml-1.5 h-5 w-5">
                                                     <img data-placement="top" title="Bluetooth Speaker with Bass Boost"
-                                                        src="dist/images/products/product5-400x400.jpg"
+                                                        src=""
                                                         alt="Tailwise - Admin Dashboard Template"
                                                         class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]">
                                                 </div>
                                                 <div class="image-fit zoom-in -ml-1.5 h-5 w-5">
                                                     <img data-placement="top" title="Wireless Gaming Mouse"
-                                                        src="dist/images/products/product1-400x400.jpg"
+                                                        src=""
                                                         alt="Tailwise - Admin Dashboard Template"
                                                         class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]">
                                                 </div>
@@ -700,19 +700,19 @@
                                             <div class="mb-1 flex">
                                                 <div class="image-fit zoom-in h-5 w-5">
                                                     <img data-placement="top" title="Wireless Earbuds with Mic"
-                                                        src="dist/images/products/product2-400x400.jpg"
+                                                        src=""
                                                         alt="Tailwise - Admin Dashboard Template"
                                                         class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]">
                                                 </div>
                                                 <div class="image-fit zoom-in -ml-1.5 h-5 w-5">
                                                     <img data-placement="top" title="8-Cup Coffee Maker"
-                                                        src="dist/images/products/product10-400x400.jpg"
+                                                        src=""
                                                         alt="Tailwise - Admin Dashboard Template"
                                                         class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]">
                                                 </div>
                                                 <div class="image-fit zoom-in -ml-1.5 h-5 w-5">
                                                     <img data-placement="top" title="Smart Home Security Camera"
-                                                        src="dist/images/products/product7-400x400.jpg"
+                                                        src=""
                                                         alt="Tailwise - Admin Dashboard Template"
                                                         class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]">
                                                 </div>
@@ -816,19 +816,19 @@
                                             <div class="mb-1 flex">
                                                 <div class="image-fit zoom-in h-5 w-5">
                                                     <img data-placement="top" title="Smartphone Charging Dock"
-                                                        src="dist/images/products/product8-400x400.jpg"
+                                                        src=""
                                                         alt="Tailwise - Admin Dashboard Template"
                                                         class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]">
                                                 </div>
                                                 <div class="image-fit zoom-in -ml-1.5 h-5 w-5">
                                                     <img data-placement="top" title="Wireless Earbuds with Mic"
-                                                        src="dist/images/products/product4-400x400.jpg"
+                                                        src=""
                                                         alt="Tailwise - Admin Dashboard Template"
                                                         class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]">
                                                 </div>
                                                 <div class="image-fit zoom-in -ml-1.5 h-5 w-5">
                                                     <img data-placement="top" title="Wireless Gaming Mouse"
-                                                        src="dist/images/products/product5-400x400.jpg"
+                                                        src=""
                                                         alt="Tailwise - Admin Dashboard Template"
                                                         class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]">
                                                 </div>
@@ -932,19 +932,19 @@
                                             <div class="mb-1 flex">
                                                 <div class="image-fit zoom-in h-5 w-5">
                                                     <img data-placement="top" title="Bluetooth Speaker with Bass Boost"
-                                                        src="dist/images/products/product3-400x400.jpg"
+                                                        src=""
                                                         alt="Tailwise - Admin Dashboard Template"
                                                         class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]">
                                                 </div>
                                                 <div class="image-fit zoom-in -ml-1.5 h-5 w-5">
                                                     <img data-placement="top" title="Wireless Earbuds with Mic"
-                                                        src="dist/images/products/product8-400x400.jpg"
+                                                        src=""
                                                         alt="Tailwise - Admin Dashboard Template"
                                                         class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]">
                                                 </div>
                                                 <div class="image-fit zoom-in -ml-1.5 h-5 w-5">
                                                     <img data-placement="top" title="Professional DSLR Camera"
-                                                        src="dist/images/products/product5-400x400.jpg"
+                                                        src=""
                                                         alt="Tailwise - Admin Dashboard Template"
                                                         class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]">
                                                 </div>
@@ -1048,19 +1048,19 @@
                                             <div class="mb-1 flex">
                                                 <div class="image-fit zoom-in h-5 w-5">
                                                     <img data-placement="top" title="Smart Home Security Camera"
-                                                        src="dist/images/products/product8-400x400.jpg"
+                                                        src=""
                                                         alt="Tailwise - Admin Dashboard Template"
                                                         class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]">
                                                 </div>
                                                 <div class="image-fit zoom-in -ml-1.5 h-5 w-5">
                                                     <img data-placement="top" title="Bluetooth Speaker with Bass Boost"
-                                                        src="dist/images/products/product8-400x400.jpg"
+                                                        src=""
                                                         alt="Tailwise - Admin Dashboard Template"
                                                         class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]">
                                                 </div>
                                                 <div class="image-fit zoom-in -ml-1.5 h-5 w-5">
                                                     <img data-placement="top" title="Ultra HD 4K Smart TV"
-                                                        src="dist/images/products/product8-400x400.jpg"
+                                                        src=""
                                                         alt="Tailwise - Admin Dashboard Template"
                                                         class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]">
                                                 </div>

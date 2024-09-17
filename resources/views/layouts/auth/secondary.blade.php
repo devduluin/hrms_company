@@ -12,16 +12,16 @@
             <div class="flex flex-col gap-3 mt-10 xl:flex-row xl:items-center">
                 <div class="flex items-center">
                     <div class="image-fit zoom-in h-9 w-9 2xl:h-11 2xl:w-11">
-                        <img data-placement="top" title="Meryl Streep" src="dist/images/users/user2-50x50.jpg" alt="Tailwise - Admin Dashboard Template" class="tooltip cursor-pointer rounded-full border-[3px] border-white/50">
+                        <img data-placement="top" title="Meryl Streep" src="" alt="Tailwise - Admin Dashboard Template" class="tooltip cursor-pointer rounded-full border-[3px] border-white/50">
                     </div>
                     <div class="-ml-3 image-fit zoom-in h-9 w-9 2xl:h-11 2xl:w-11">
-                        <img data-placement="top" title="Brad Pitt" src="dist/images/users/user5-50x50.jpg" alt="Tailwise - Admin Dashboard Template" class="tooltip cursor-pointer rounded-full border-[3px] border-white/50">
+                        <img data-placement="top" title="Brad Pitt" src="" alt="Tailwise - Admin Dashboard Template" class="tooltip cursor-pointer rounded-full border-[3px] border-white/50">
                     </div>
                     <div class="-ml-3 image-fit zoom-in h-9 w-9 2xl:h-11 2xl:w-11">
-                        <img data-placement="top" title="Johnny Depp" src="dist/images/users/user7-50x50.jpg" alt="Tailwise - Admin Dashboard Template" class="tooltip cursor-pointer rounded-full border-[3px] border-white/50">
+                        <img data-placement="top" title="Johnny Depp" src="" alt="Tailwise - Admin Dashboard Template" class="tooltip cursor-pointer rounded-full border-[3px] border-white/50">
                     </div>
                     <div class="-ml-3 image-fit zoom-in h-9 w-9 2xl:h-11 2xl:w-11">
-                        <img data-placement="top" title="Julia Roberts" src="dist/images/users/user10-50x50.jpg" alt="Tailwise - Admin Dashboard Template" class="tooltip cursor-pointer rounded-full border-[3px] border-white/50">
+                        <img data-placement="top" title="Julia Roberts" src="" alt="Tailwise - Admin Dashboard Template" class="tooltip cursor-pointer rounded-full border-[3px] border-white/50">
                     </div>
                 </div>
                 <div class="text-base text-white/70 xl:ml-2 2xl:ml-3">
