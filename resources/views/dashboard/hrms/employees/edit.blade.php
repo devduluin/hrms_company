@@ -370,8 +370,8 @@
 
                             const bloodGroupSelect = $('#blood_group')[0]
                                 .tomselect;
-                            const bloodGroupValue = response.data.personalData
-                                .blood_group;
+                            const bloodGroupValue = response.data.personalData.blood_group;
+                            console.log("Data blood group here : ", bloodGroupValue);
                             if (!bloodGroupSelect.options[bloodGroupValue]) {
                                 bloodGroupSelect.addOption({
                                     value: bloodGroupValue,
@@ -424,6 +424,18 @@
                                 });
                             }
                             leaveEncashedSelect.setValue(leaveEncashedValue);
+
+                            const costCenterSelect = $('#payroll_cost_center')[0]
+                                .tomselect;
+                            const costCenterValue = response.data.exitHistory
+                                .leave_encashed;
+                            if (!costCenterSelect.options[costCenterValue]) {
+                                costCenterSelect.addOption({
+                                    value: costCenterValue,
+                                    text: costCenterValue
+                                });
+                            }
+                            costCenterSelect.setValue(costCenterValue);
                         } else {
                             showErrorNotification('error', response.message);
                         }

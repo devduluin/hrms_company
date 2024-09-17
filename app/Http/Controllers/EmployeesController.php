@@ -56,6 +56,7 @@ class EmployeesController extends Controller
         $data['company'] = $allSessions['company_id'][0];
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
         $data['apiEmployeeUrl'] = $this->apiGatewayUrl . '/v1/employees';
+        $data['apiPayrollUrl'] = $this->apiGatewayUrl . '/v1/payrolls';
         // $data['apiEmployeeUrl'] = 'http://apidev.duluin.com/api/v1';
         $data['apiGateway'] = $this->apiGatewayUrl . '/users';
         $data['employee_id'] = $id;
@@ -103,8 +104,10 @@ class EmployeesController extends Controller
         // ]);
 
         // Store the file in MinIO
-        $filePath = Storage::disk('minio')->put('employees\text.txt', 'test');
-        dd($filePath);
-        // return back()->with('success', 'File uploaded successfully. Path: ' . $filePath);
+        $fileName = 'employees/text3.txt';
+        $filePath = Storage::disk('minio')->put($fileName, 'test lagi');
+        // $path = Storage::disk('minio')->putFileAs('employees', 'testeuy.txt');
+        $fileUrl = 'https://apis3.hrms.duluin.com/hrms/' . $fileName;
+        echo $fileUrl;
     }
 }
