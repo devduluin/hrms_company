@@ -95,6 +95,18 @@
                     </div>
                 </div>
                 <div class="overflow-auto xl:overflow-visible">
+                    <x-datatable id="employeeTable" :url="$apiUrl . '/employee/datatables'" method="POST" class="display">
+                        <x-slot:thead>
+                            <th data-value="first_name">Employee Name</th>
+                            <th data-value="last_name">Designation</th>
+                            <th data-value="company_id_rel" data-render="getCompany">Checkin time
+                            </th>
+                            <th data-value="grade_id_rel" data-render="getGrade">Checkout time
+                            </th>
+                            <th data-value="status" data-render="getStatus">Status</th>
+                            <th data-value="id" data-render="getActionBtn">Action</th>
+                        </x-slot:thead>
+                    </x-datatable>
                     <table data-tw-merge="" class="w-full text-left border-b border-slate-200/60">
                         <thead data-tw-merge="" class="">
                             <tr data-tw-merge="" class="">
@@ -108,7 +120,7 @@
                                     Designation
                                 </td>
                                 <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 w-52 border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500">
-                                    Type
+                                    Checkout time
                                 </td>
                                 <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 border-t border-slate-200/60 bg-slate-50 py-4 text-center font-medium text-slate-500">
                                     Check in time
