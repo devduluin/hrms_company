@@ -23,7 +23,7 @@
                                     <div
                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
                                         <div class="text-base text-slate-500">Total Present</div>
-                                        <div class="mt-1.5 text-2xl font-medium text-right">457,204</div>
+                                        <div class="mt-1.5 text-2xl font-medium text-right" id="totalPresent">0</div>
                                         <div class="col-2">
                                             <div class="flex justify-end gap-2">
                                                 <div
@@ -41,7 +41,7 @@
                                     <div
                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
                                         <div class="text-base text-slate-500">Total Absent</div>
-                                        <div class="mt-1.5 text-2xl font-medium text-right">122,721</div>
+                                        <div class="mt-1.5 text-2xl font-medium text-right" id="totalAbsent">0</div>
                                         <div class="col-2">
                                             <div class="flex justify-end gap-2">
                                                 <div
@@ -58,8 +58,8 @@
                                     </div>
                                     <div
                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                        <div class="text-base text-slate-500">Late</div>
-                                        <div class="font-mediumm mt-1.5 text-2xl text-right">489,223</div>
+                                        <div class="text-base text-slate-500">Late Entry</div>
+                                        <div class="font-mediumm mt-1.5 text-2xl text-right" id="lateEntry">0</div>
                                         <div class="col-2">
                                             <div class="flex justify-end gap-2">
                                                 <div
@@ -76,8 +76,8 @@
                                     </div>
                                     <div
                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                        <div class="text-base text-slate-500">Exit</div>
-                                        <div class="font-mediumm mt-1.5 text-2xl text-right">411,259</div>
+                                        <div class="text-base text-slate-500">Early Exit</div>
+                                        <div class="font-mediumm mt-1.5 text-2xl text-right" id="earlyExit">0</div>
                                         <div class="col-2">
                                             <div class="flex justify-end gap-2">
                                                 <div
@@ -118,14 +118,8 @@
                                             </div>
                                         </div>
                                         <div class="flex items-center gap-2 mt-4">
-                                            <div class="text-3xl font-semibold text-gray-800">
-                                                250
-                                            </div>
-                                            <div
-                                                class="flex items-center text-green-500 bg-green-100 rounded-full py-1 px-3 text-xs font-medium">
-                                                <i data-tw-merge="" data-lucide="arrow-down"
-                                                    class="ml-px mr-2 h-4 w-4 stroke-[1.5] side-menu__link_icon"></i>
-                                                10%
+                                            <div class="text-3xl font-semibold text-gray-800" id="totalEmployee">
+                                                0
                                             </div>
                                         </div>
                                         <div class="flex justify-between mt-4">
@@ -140,15 +134,15 @@
                                         </div>
                                         <div class="mt-4 flex justify-between text-sm">
                                             <div class="">
-                                                <span class="block text-xl text-black">60%</span>
-                                                <span class="block text-slate-500">150 employee</span>
+                                                <span class="block text-xl text-black">100%</span>
+                                                <span class="block text-slate-500">17 employee</span>
                                             </div>
                                             <div class="text-slate-500">
                                                 vs
                                             </div>
                                             <div class="text-black">
-                                                <span class="block text-xl text-right text-black">40%</span>
-                                                <span class="block text-slate-500">100 employee</span>
+                                                <span class="block text-xl text-right text-black">0%</span>
+                                                <span class="block text-slate-500">0 employee</span>
                                             </div>
                                         </div>
                                         <div class="mt-4 h-2 w-full bg-blue-600 rounded-full overflow-hidden">
@@ -226,3 +220,42 @@
             </div>
         </div>
     @endsection
+@push('js')
+    <script type="text/javascript">
+        $(document).ready(function() {
+           countAttendanceThisMonth();
+           countEmployee();
+        });
+
+        async function countAttendanceThisMonth() {
+           var param = {
+                url: "{{ $apiUrl }}",
+                method: "GET",
+           }
+
+           await transAjax(param).then((result) => {
+            console.log(result);
+               $('#totalPresent').html(result.data.totalPresent)
+               $('#totalAbsent').html(result.data.totalAbsent)
+               $('#lateEntry').html(result.data.lateEntry)
+               $('#earlyExit').html(result.data.earlyExit)
+           }).catch((err) => {
+                console.log(err);
+           });
+        }
+
+        async function countEmployee() {
+            var param = {
+                url: "{{ $url_count_employee }}",
+                method: "GET",
+            }
+
+            await transAjax(param).then((result) => {
+            // console.log(result.data.employees_total);
+               $('#totalEmployee').html(result.data.employees_total)
+           }).catch((err) => {
+                console.log(err);
+           });
+        }
+    </script>
+@endpush

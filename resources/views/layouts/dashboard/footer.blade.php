@@ -25,6 +25,24 @@
     <script>
         initializeDropdown();
     </script>
+    <script type="text/javascript">
+        const appToken = localStorage.getItem('app_token');
+        async function transAjax(data) {
+            html = null;
+            data.headers = {
+                'Authorization': `Bearer ${appToken}`,
+                'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`,
+                'Content-Type': 'application/json',
+            }
+            await $.ajax(data).done(function(res) {
+                    html = res;
+                })
+                .fail(function() {
+                    return false;
+                })
+            return html
+        }
+    </script>
     @stack('js')
     </body>
 
