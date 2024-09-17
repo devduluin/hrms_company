@@ -80,7 +80,7 @@
                 <div data-tw-merge="" data-tw-placement="bottom-end" class="dropdown relative ml-5"><button
                         data-tw-toggle="dropdown" aria-expanded="false"
                         class="cursor-pointer image-fit h-[36px] w-[36px] overflow-hidden rounded-full border-[3px] border-white/[0.15]"><img
-                            src="dist/images/users/user10-50x50.jpg" alt="Tailwise - Admin Dashboard Template">
+                            src="" alt="Tailwise - Admin Dashboard Template">
                     </button>
                     <div data-transition="" data-selector=".show" data-enter="transition-all ease-linear duration-150"
                         data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1"
@@ -407,18 +407,13 @@
                                                 <div class="grid grid-cols-3 overflow-hidden rounded-[0.6rem]">
                                                     <div
                                                         class="image-fit h-12 cursor-pointer overflow-hidden border border-slate-100 saturate-[.6] hover:saturate-100 sm:h-20">
-                                                        <img src="dist/images/projects/project10-400x400.jpg"
-                                                            alt="Tailwise - Admin Dashboard Template">
                                                     </div>
                                                     <div
                                                         class="image-fit h-12 cursor-pointer overflow-hidden border border-slate-100 saturate-[.6] hover:saturate-100 sm:h-20">
-                                                        <img src="dist/images/projects/project9-400x400.jpg"
-                                                            alt="Tailwise - Admin Dashboard Template">
                                                     </div>
                                                     <div
                                                         class="image-fit h-12 cursor-pointer overflow-hidden border border-slate-100 saturate-[.6] hover:saturate-100 sm:h-20">
-                                                        <img src="dist/images/projects/project4-400x400.jpg"
-                                                            alt="Tailwise - Admin Dashboard Template">
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -449,18 +444,15 @@
                                                 <div class="grid grid-cols-3 overflow-hidden rounded-[0.6rem]">
                                                     <div
                                                         class="image-fit h-12 cursor-pointer overflow-hidden border border-slate-100 saturate-[.6] hover:saturate-100 sm:h-20">
-                                                        <img src="dist/images/projects/project9-400x400.jpg"
-                                                            alt="Tailwise - Admin Dashboard Template">
+                                                        
                                                     </div>
                                                     <div
                                                         class="image-fit h-12 cursor-pointer overflow-hidden border border-slate-100 saturate-[.6] hover:saturate-100 sm:h-20">
-                                                        <img src="dist/images/projects/project1-400x400.jpg"
-                                                            alt="Tailwise - Admin Dashboard Template">
+                                                       
                                                     </div>
                                                     <div
                                                         class="image-fit h-12 cursor-pointer overflow-hidden border border-slate-100 saturate-[.6] hover:saturate-100 sm:h-20">
-                                                        <img src="dist/images/projects/project1-400x400.jpg"
-                                                            alt="Tailwise - Admin Dashboard Template">
+                                                    
                                                     </div>
                                                 </div>
                                             </div>
@@ -500,8 +492,7 @@
                                     <div>
                                         <div
                                             class="image-fit h-11 w-11 overflow-hidden rounded-full border-2 border-slate-200/70">
-                                            <img src="dist/images/users/user8-50x50.jpg"
-                                                alt="Tailwise - Admin Dashboard Template">
+                                        
                                         </div>
                                     </div>
                                     <div class="sm:ml-5">
@@ -513,18 +504,13 @@
                                             <div class="grid grid-cols-3 overflow-hidden rounded-[0.6rem]">
                                                 <div
                                                     class="image-fit h-12 cursor-pointer overflow-hidden border border-slate-100 saturate-[.6] hover:saturate-100 sm:h-16">
-                                                    <img src="dist/images/projects/project5-400x400.jpg"
-                                                        alt="Tailwise - Admin Dashboard Template">
+                                                    
                                                 </div>
                                                 <div
                                                     class="image-fit h-12 cursor-pointer overflow-hidden border border-slate-100 saturate-[.6] hover:saturate-100 sm:h-16">
-                                                    <img src="dist/images/projects/project4-400x400.jpg"
-                                                        alt="Tailwise - Admin Dashboard Template">
                                                 </div>
                                                 <div
                                                     class="image-fit h-12 cursor-pointer overflow-hidden border border-slate-100 saturate-[.6] hover:saturate-100 sm:h-16">
-                                                    <img src="dist/images/projects/project4-400x400.jpg"
-                                                        alt="Tailwise - Admin Dashboard Template">
                                                 </div>
                                             </div>
                                         </div>
@@ -538,8 +524,7 @@
                                     <div>
                                         <div
                                             class="image-fit h-11 w-11 overflow-hidden rounded-full border-2 border-slate-200/70">
-                                            <img src="dist/images/users/user8-50x50.jpg"
-                                                alt="Tailwise - Admin Dashboard Template">
+            
                                         </div>
                                     </div>
                                     <div class="sm:ml-5">
@@ -560,8 +545,6 @@
                                     <div>
                                         <div
                                             class="image-fit h-11 w-11 overflow-hidden rounded-full border-2 border-slate-200/70">
-                                            <img src="dist/images/users/user8-50x50.jpg"
-                                                alt="Tailwise - Admin Dashboard Template">
                                         </div>
                                     </div>
                                     <div class="sm:ml-5">

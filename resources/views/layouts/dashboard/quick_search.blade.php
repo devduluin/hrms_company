@@ -75,9 +75,7 @@
                     </div>
                     <div class="mt-3.5 flex flex-col gap-1">
                         <a class="flex items-center gap-2.5 rounded-md border border-transparent p-1 hover:border-slate-100 hover:bg-slate-50/80" href="#">
-                            <div class="image-fit zoom-in box h-6 w-6 overflow-hidden rounded-full border-2 border-slate-200/70">
-                                <img src="dist/images/users/user7-50x50.jpg" alt="Tailwise - Admin Dashboard Template">
-                            </div>
+                            
                             <div class="truncate font-medium">
                                 Johnny Depp
                             </div>
@@ -86,9 +84,7 @@
                             </div>
                         </a>
                         <a class="flex items-center gap-2.5 rounded-md border border-transparent p-1 hover:border-slate-100 hover:bg-slate-50/80" href="#">
-                            <div class="image-fit zoom-in box h-6 w-6 overflow-hidden rounded-full border-2 border-slate-200/70">
-                                <img src="dist/images/users/user1-50x50.jpg" alt="Tailwise - Admin Dashboard Template">
-                            </div>
+                            
                             <div class="truncate font-medium">
                                 Tom Hanks
                             </div>
@@ -97,9 +93,7 @@
                             </div>
                         </a>
                         <a class="flex items-center gap-2.5 rounded-md border border-transparent p-1 hover:border-slate-100 hover:bg-slate-50/80" href="#">
-                            <div class="image-fit zoom-in box h-6 w-6 overflow-hidden rounded-full border-2 border-slate-200/70">
-                                <img src="dist/images/users/user8-50x50.jpg" alt="Tailwise - Admin Dashboard Template">
-                            </div>
+                            
                             <div class="truncate font-medium">
                                 Cate Blanchett
                             </div>
@@ -166,7 +160,6 @@
                     <div class="mt-3.5 flex flex-col gap-1">
                         <a class="flex items-center gap-2.5 rounded-md border border-transparent p-1 hover:border-slate-100 hover:bg-slate-50/80" href="#">
                             <div class="image-fit zoom-in box h-6 w-6 overflow-hidden rounded-full border-2 border-slate-200/70">
-                                <img src="dist/images/products/product2-400x400.jpg" alt="Tailwise - Admin Dashboard Template">
                             </div>
                             <div class="truncate font-medium">
                                 High-Performance Laptop
@@ -177,7 +170,6 @@
                         </a>
                         <a class="flex items-center gap-2.5 rounded-md border border-transparent p-1 hover:border-slate-100 hover:bg-slate-50/80" href="#">
                             <div class="image-fit zoom-in box h-6 w-6 overflow-hidden rounded-full border-2 border-slate-200/70">
-                                <img src="dist/images/products/product4-400x400.jpg" alt="Tailwise - Admin Dashboard Template">
                             </div>
                             <div class="truncate font-medium">
                                 Smartphone Charging Dock
@@ -188,7 +180,6 @@
                         </a>
                         <a class="flex items-center gap-2.5 rounded-md border border-transparent p-1 hover:border-slate-100 hover:bg-slate-50/80" href="#">
                             <div class="image-fit zoom-in box h-6 w-6 overflow-hidden rounded-full border-2 border-slate-200/70">
-                                <img src="dist/images/products/product4-400x400.jpg" alt="Tailwise - Admin Dashboard Template">
                             </div>
                             <div class="truncate font-medium">
                                 Wireless Noise-Cancelling Headphones

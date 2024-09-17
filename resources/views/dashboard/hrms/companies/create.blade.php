@@ -14,47 +14,25 @@
                             {{ $page_title ?? config('app.name') }}
                         </div>
                         <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
-                            <a href="{{ route('hrms.company') }}" data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"><i data-tw-merge="" data-lucide="arrow-left" class="stroke-[1] w-5 h-5 mx-auto block"></i>
-                                back</a>
+                            <button 
+                            class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary shadow-md w-100">                                <i data-tw-merge="" data-lucide="save" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Save Changes
+                            </button> 
                         </div>
                     </div>
                     <div class="box mt-5">
                     <form id="form-submit">
                         <div class="p-7">
-                            <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-2 gap-2 mt-5">
+                            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-2 mt-5">
                                 <input type="hidden" name="user_id" value="3c5b06b2-b224-4029-a7a9-a0291dbe723c">
                                 <x-form.input id="company_name" label="Company   Name" name="company_name" required />
                                 <x-form.input id="domain" label="Domain" name="domain" required />
                                 <x-form.input type="date" id="date_of_establishment" label="Date of establishment" name="date_of_establishment" required />
-                                
-                                <div class="mt-3 w-full flex-1 xl:mt-0">
-                                    <label for="">ok</label>
-                                    <select class="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1">
-                                        <option value="Sales Department">
-                                            Sales Department
-                                        </option>
-                                        <option value="Project Management">
-                                            Project Management
-                                        </option>
-                                        <option value="Engineering">
-                                            Engineering
-                                        </option>
-                                        <option value="Human Resources">
-                                            Human Resources
-                                        </option>
-                                        <option value="Marketing Department">
-                                            Marketing Department
-                                        </option>
-                                    </select>
-                                </div>
-
-                                <input type="hidden" name="default_holiday_list" value="off">
-                            </div>
-                            <div class="mt-5">
-                                <button type="submit" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200">  <i data-tw-merge="" data-lucide="send" class="stroke-[1] w-5 h-5 mx-auto block"></i>
-                                    Submit</button>
-                                <button type="reset" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"> <i data-tw-merge="" data-lucide="rotate-ccw" class="stroke-[1] w-5 h-5 mx-auto block"></i>
-                                    Reset</button>
+                                <x-form.select name="currency" id="currency" label="Default Currency" class=" w-full"
+                                    data-placeholder="Select Currency"  required>
+                                    <option value="">Select Currency</option>
+                                    <option value="male">IDR</option>
+                                    <option value="female">USD</option>
+                                </x-form.select>
                             </div>
                             
                         </div>
