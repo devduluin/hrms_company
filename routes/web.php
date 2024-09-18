@@ -193,6 +193,7 @@ Route::controller(DashboardController::class)->group(function () {
                             Route::get('/summary', 'summary')->name('summary');
                             Route::get('/shift_assignment', 'shift')->name('shift');
                             Route::get('/shift_list', 'shift_list')->name('shift_list');
+                            Route::get('/report', 'report')->name('report');
                         });
                     });
 

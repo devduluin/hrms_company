@@ -156,13 +156,6 @@
                                             <div class="g-col-6 font-medium mt-1.5 text-xl">
                                                 Latest Overtime Application
                                             </div>
-                                            <div class="flex flex-col gap-x-3 gap-y-2 ml-auto sm:ml-auto justify-end">
-                                                <a href="{{ url('dashboard/hrms/employee/list') }}"
-                                                    class=" flex px-2 py-2 bg-blue-600 text-white text-center text-sm font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-800 transition duration-200 ease-in-out sm:w-full">
-                                                    <i data-tw-merge="" data-lucide="plus"
-                                                        class=" h-4 w-4 stroke-[1.5] side-menu__link_icon"></i>
-                                                </a>
-                                            </div>
                                         </div>
                                         <div class=" w-full font-medium mt-1.5 text-l">
                                             <a class="whitespace-nowrap font-medium" href="#">
@@ -216,6 +209,7 @@
                         <x-action  label="Attendance Summary" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/summary') }}" />
                         <x-action  label="New Shift Assignment" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/shift_assignment') }}" />
                         <x-action  label="Employee Shift List" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/shift_list') }}" />
+                        <x-action  label="Attendance Report" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/report') }}" />
                     </div>
             </div>
         </div>

@@ -5,13 +5,17 @@
     <div id="contents-page" class="content transition-[margin,width] duration-100 px-5 xl:mr-2.5 mt-[75px] pt-[31px] pb-16 content--compact xl:ml-[275px] [&.content--compact]:xl:ml-[100px]">
         <div class="container">
             <div class="flex col-2 md:h-10 md:flex-row md:items-center">
-                    <div class="text-base font-medium group-[.mode--light]:text-white">
+                    <!-- <div class="text-base font-medium group-[.mode--light]:text-white">
                     {{ $page_title }}
-                    </div>
+                    </div> -->
             </div>
             <div class="box box--stacked flex flex-col">
                 <div class="flex flex-col gap-y-2 p-5 sm:flex-row sm:items-center">
+                    <div class="text-base font-medium group-[.mode--light]:text-white">
+                        {{ $page_title }}
+                    </div>
                     <div class="flex flex-col gap-x-3 gap-y-2 sm:ml-auto sm:flex-row">
+                        
                         <div data-tw-merge="" data-tw-placement="bottom-end" class="dropdown relative"><button data-tw-merge="" data-tw-toggle="dropdown" aria-expanded="false" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed border-secondary text-slate-500 dark:border-darkmode-100/40 dark:text-slate-300 [&:hover:not(:disabled)]:bg-secondary/20 [&:hover:not(:disabled)]:dark:bg-darkmode-100/10 w-full sm:w-auto"><i data-tw-merge="" data-lucide="download" class="mr-2 h-4 w-4 stroke-[1.3]"></i>
                                 Export
                                 <i data-tw-merge="" data-lucide="chevron-down" class="ml-2 h-4 w-4 stroke-[1.3]"></i></button>

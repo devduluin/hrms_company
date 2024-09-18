@@ -59,7 +59,7 @@ class CompaniesController extends Controller
 
     public function edit()
     {
-        $data['title'] = "Edit data company";
+        $data['title'] = 'Duluin HRMS' ;
         $data['page_title'] = "Edit data company";
 
         return view('dashboard.hrms.companies.edit', $data);
@@ -67,7 +67,7 @@ class CompaniesController extends Controller
 
     public function show()
     {
-        $data['title'] = "Profile company";
+        $data['title'] = 'Duluin HRMS';
         $data['page_title'] = "Profile company";
         $data['companyApiUrl'] = $this->companyApiUrl;
         $allSessions = session()->all();
@@ -79,7 +79,7 @@ class CompaniesController extends Controller
 
     public function preview()
     {
-        $data['title'] = "Company preview";
+        $data['title'] = 'Duluin HRMS';
         $data['page_title'] = "Company preview";
         $data['companyApiUrl'] = $this->companyApiUrl;
         $allSessions = session()->all();
