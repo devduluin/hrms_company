@@ -100,7 +100,7 @@
                                     <th data-value="time_out">Checkout time
                                     </th>
                                     <th data-value="attendance_status">Status</th>
-                                    {{-- <th data-value="id" data-render="getActionBtn">Action</th> --}}
+                                    <th data-value="id" data-render="getActionBtn">Action</th>
                                 </x-slot:thead>
                             </x-datatable>
                         </div>
@@ -118,5 +118,100 @@
             }
             return 'N/A';
         }
+
+        function getStatus(data, type, row, meta) {
+            if (data === 'active') {
+                return `<div class="flex items-center justify-center text-success"><div class="ml-1.5 whitespace-nowrap"><i data-tw-merge data-lucide="check" class="text-success"></i> Active</div></div>`;
+            } else {
+                return `<div class="flex items-center justify-center text-danger"><div class="ml-1.5 whitespace-nowrap">Inactive</div></div>`;
+            }
+        }
+
+        function getCompany(data, type, row, meta) {
+            if (data !== null) {
+                return data.company_name;
+            }
+            return 'N/A';
+        }
+
+        function getDesignation(data, type, row, meta) {
+            if (data !== null) {
+                return data.designation_name;
+            }
+            return 'N/A';
+        }
+
+        function getDepartment(data, type, row, meta) {
+            if (data !== null) {
+                return data.department_name;
+            }
+            return 'N/A';
+        }
+
+        function getBranch(data, type, row, meta) {
+            if (data !== null) {
+                return data.branch_name;
+            }
+            return 'N/A';
+        }
+
+        function getGrade(data, type, row, meta) {
+            if (data !== null) {
+                return data.employee_grade_name;
+            }
+            return 'N/A';
+        }
+
+        function getActionBtn(data, type, row, meta) {
+            const url = `{{ url('dashboard/hrms/attendance/detail') }}`;
+            console.log(url);
+            return `<div data-tw-merge data-tw-placement="bottom-end" class="">
+            <button data-tw-merge data-tw-toggle="dropdown" aria-expanded="false" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary">
+                <a href="` + url + `" class=" flex items-center  transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item">
+                    Lihat Detail
+                </a>
+            </button>
+                
+            </div>`;
+        }
+
+        // async function initializeContent() {
+        //     await fetchLatestEmployees();
+        //     // await ApexCharts();
+        // }
+
+        // async function fetchLatestEmployees() {
+        //     try {
+        //         const appToken = localStorage.getItem('app_token');
+        //         const company_id = localStorage.getItem('company');
+        //         const requestOptions = {
+        //             method: "GET",
+        //             headers: {
+        //                 'Content-Type': 'application/json',
+        //                 'Authorization': `Bearer ${appToken}`,
+        //                 'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
+        //             },
+        //         };
+
+        //         const url = `{{ $apiUrl }}/employee/employees_summary/${company_id}`;
+        //         const response = await fetch(url, requestOptions);
+
+        //         if (!response.ok) {
+        //             throw new Error(`HTTP error! status: ${response.status}`);
+        //         }
+
+        //         const employees = await response.json();
+        //         const employeeData = employees.data;
+        //         $("#totalEmployeesCount").html(employeeData.employees_total);
+        //         $("#totalEmployeesActive").html(employeeData.employees_active);
+        //         $("#totalEmployeesLeave").html(employeeData.employees_leave);
+        //         $("#totalNewEmployee").html(employeeData.new_employees);
+        //         console.log(employeeData);
+        //     } catch (error) {
+        //         console.error('Error fetching employees:', error);
+        //     }
+        // }
+
+        initializeContent();
     </script>
 @endpush
