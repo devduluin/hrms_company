@@ -1,4 +1,4 @@
-@extends('layouts.dashboard.app') 
+@extends('layouts.dashboard.app')
 @section('content')
 <div class="hurricane before:content-[''] before:z-[-1] before:w-screen before:bg-slate-50 before:top-0 before:h-screen before:fixed before:bg-texture-black before:bg-contain before:bg-fixed before:bg-[center_-20rem] before:bg-no-repeat">
     @include('layouts.dashboard.menu')
@@ -76,7 +76,7 @@
                         Attendance Details
                     </div>
                     <div class="flex justify-center" id="photo">
-                        
+
                     </div>
                     <div class=" grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-5 mt-4">
                         <div class="field my-4">
@@ -114,7 +114,7 @@
             </div>
         </div>
     </div>
-</div> 
+</div>
 @endsection
 @push('js')
     <script type="text/javascript">
@@ -134,20 +134,20 @@
                 let attendance = result.data;
 
                 console.log(attendance);
-                
-                $('#employee_name').html(employee.first_name);             
-                $('#first_name').html(employee.first_name);             
-                $('#last_name').html(employee.last_name);             
-                $('#personal_email').html(employee.addressContact.personal_email);             
-                $('#mobile_phone').html(employee.addressContact.mobile_phone);     
-                
+
+                $('#employee_name').html(employee.first_name);
+                $('#first_name').html(employee.first_name);
+                $('#last_name').html(employee.last_name);
+                $('#personal_email').html(employee.addressContact.personal_email);
+                $('#mobile_phone').html(employee.addressContact.mobile_phone);
+
                 $("#check_in").html(attendance.time_in);
                 $("#check_out").html(attendance.time_out ? attendance.time_out : '-');
                 $("#status").html(attendance.attendance_status);
                 $('#photo').html(`<img src="${attendance.photo_in}" alt=" photo" style="width: 100px; height: 100px;" class="rounded-md shadow-md" />`)
             }).catch((err) => {
                 console.log(err);
-                
+
             });
         }
     </script>

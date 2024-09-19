@@ -32,16 +32,21 @@
                             More Actions
                         </div>
                     </div> 
-                    <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-5 mt-4  text-blue-900">
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4  text-blue-900">
                         <x-action label="Create Salary Slip" icon="arrow-up-right" url="{{ url('/dashboard/hrms/payout/salary_slip') }}"/>
                         <x-action label="Payroll Setting" icon="arrow-up-right" url="{{ url('/dashboard/hrms/payout/settings') }}"/>
-                        <x-action label="Income Tax Slab List" icon="arrow-up-right" url="{{ url('/dashboard/hrms/payout/tax_slab_list') }}"/>
-                        
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-5 mt-4  text-blue-900">
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4  text-blue-900">
+                        <x-action label="Income Tax Slab List" icon="arrow-up-right" url="{{ url('/dashboard/hrms/payout/tax_slab_list') }}"/>
                         <x-action label="New Income Tax Slab" icon="arrow-up-right" url="{{ url('/dashboard/hrms/payout/income_tax') }}"/>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4  text-blue-900">
                         <x-action label="Employee Benefit Claim List" icon="arrow-up-right" url="{{ url('/dashboard/hrms/payout/benefit_list') }}"/>
                         <x-action label="New Employee Benefit Claim" icon="arrow-up-right" url="{{ url('/dashboard/hrms/payout/benefit_claim') }}"/>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4  text-blue-900">
+                        <x-action label="Salary Component" icon="arrow-up-right" url="{{ url('/dashboard/hrms/payout/create_component') }}"/>
+                        <x-action label="Payroll Period" icon="arrow-up-right" url="{{ url('/dashboard/hrms/payout/payroll_period') }}"/>
                     </div>
                 </div> 
             </div>

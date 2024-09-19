@@ -77,4 +77,21 @@ class PayoutController extends Controller
 
         return view('dashboard.payroll.payout.benefit_list', $data);
     }
+    public function payroll_period()
+    {
+        $data['title']   = 'Duluin HRMS';
+        $data['page_title']   = 'Payroll Period';
+        $allSessions = session()->all();
+
+        return view('dashboard.payroll.payout.payroll_period', $data);
+    }
+    public function create_component()
+    {
+        $data['title']   = 'Duluin HRMS';
+        $data['page_title']   = 'Create Salary Component';
+        $allSessions = session()->all();
+
+        return view('dashboard.payroll.payout.salary_component.create', $data);
+    }
+
 }
