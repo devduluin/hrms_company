@@ -24,7 +24,7 @@
                                 <th data-value="employee_name">Employee name</th>
                                 <th data-value="company">Company</th>
                                 <th data-value="start_ date">Start Date</th>
-                                <th data-value="end_date" >End Date</th>
+                                <th data-value="end_date" >E    nd Date</th>
                                 <th data-value="id">Action</th> 
                             </x-slot:thead>
                         </x-datatable>
