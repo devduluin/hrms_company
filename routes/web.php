@@ -218,6 +218,8 @@ Route::controller(DashboardController::class)->group(function () {
                             Route::get('/benefit_claim', 'benefit_claim')->name('benefit_claim');
                             Route::get('/tax_slab_list', 'tax_slab_list')->name('tax_slab_list');
                             Route::get('/benefit_list', 'benefit_list')->name('benefit_list');
+                            Route::get('/payroll_period', 'payroll_period')->name('payroll_period');
+                            Route::get('/create_component', 'create_component')->name('create_component');
                         });
                     });
 
