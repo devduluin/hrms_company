@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 class PayoutController extends Controller
 {
     protected $apiGatewayUrl;
+    public function __construct()
+    {
+        $this->apiGatewayUrl = config('apiendpoints.gateway');
+    }
     public function index()
     {
         $data['title']   = 'Duluin HRMS';
@@ -73,5 +77,4 @@ class PayoutController extends Controller
 
         return view('dashboard.payroll.payout.benefit_list', $data);
     }
-
 }
