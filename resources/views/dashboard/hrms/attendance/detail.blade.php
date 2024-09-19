@@ -1,7 +1,5 @@
 @extends('layouts.dashboard.app') 
 @section('content')
-<link rel="stylesheet" href="{{ asset('dist/css/vendors/tom-select.css') }}">
-
 <div class="hurricane before:content-[''] before:z-[-1] before:w-screen before:bg-slate-50 before:top-0 before:h-screen before:fixed before:bg-texture-black before:bg-contain before:bg-fixed before:bg-[center_-20rem] before:bg-no-repeat">
     @include('layouts.dashboard.menu')
 
@@ -15,59 +13,59 @@
                     <x-form.button id="back" label="Back to Summary" style="primary" icon="arrow-left" url="{{ url('dashboard/hrms/attendance/summary') }}" ></x-form.button>
                 </div>
             </div>
-            <div class="grid grid-cols-12 gap-x-6 gap-y-5">
-                <div class="box p-4 col-span-12">
+            <div class="grid grid-cols-12 gap-x-6 gap-y-5 mt-3">
+                {{-- <div class="box p-4 col-span-12">
                     <div>
                         <div id="employee_name" class="font-medium text-lg">
-                            Muahammad Idris
+                           -
                         </div>
                         <div id="job">
                             Full Stack Developer
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="box p-4 col-span-12">
                     <div class="mb-6 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
                         Personal Information
                     </div>
                     <div class=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mt-4">
                         <div class="field">
-                            <div id="first_name">
+                            <div>
                                 <div id="label" class="text-s">
                                     First Name
                                 </div>
-                                <div id="description" class="text-m font-bold">
-                                    Muhammad
+                                <div id="first_name" class="text-m font-bold">
+                                   -
                                 </div>
                             </div>
                         </div>
                         <div class="field">
-                            <div id="first_name">
+                            <div>
                                 <div id="label" class="text-m text-slate-300">
                                     Last Name
                                 </div>
-                                <div id="description" class="text-m font-bold">
-                                    Idris
+                                <div id="last_name" class="text-m font-bold">
+                                    -
                                 </div>
                             </div>
                         </div>
                         <div class="field">
-                            <div id="first_name">
+                            <div>
                                 <div id="label" class="text-m">
                                     Email
                                 </div>
-                                <div id="description" class="text-m font-bold">
-                                    idris@duluin.com
+                                <div id="personal_email" class="text-m font-bold">
+                                    -
                                 </div>
                             </div>
                         </div>
                         <div class="field">
-                            <div id="first_name">
+                            <div>
                                 <div id="label" class="text-m">
                                     Phone
                                 </div>
-                                <div id="description" class="text-m font-bold">
-                                    08128923
+                                <div id="mobile_phone" class="text-m font-bold">
+                                   -
                                 </div>
                             </div>
                         </div>
@@ -77,36 +75,36 @@
                     <div class="mb-6 mt-4 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
                         Attendance Details
                     </div>
-                    <div class="flex justify-center">
-                        <img src="" alt=" Foto Absensi" style="width: 100px; height: 100px;" class="rounded-md shadow-md" />
+                    <div class="flex justify-center" id="photo">
+                        
                     </div>
                     <div class=" grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-5 mt-4">
                         <div class="field my-4">
-                            <div id="check_in">
+                            <div>
                                 <div id="label" class="text-m">
                                     Check in time
                                 </div>
-                                <div id="description" class="text-m font-bold">
-                                    09.30
+                                <div id="check_in" class="text-m font-bold">
+                                    -
                                 </div>
                             </div>
                         </div>
                         <div class="field my-4">
-                            <div id="check_out">
+                            <div>
                                 <div id="label" class="text-m">
                                     Check out time
                                 </div>
-                                <div id="description" class="text-m font-bold">
-                                    17.03
+                                <div id="check_out" class="text-m font-bold">
+                                   -
                                 </div>
                             </div>
                         </div>
                         <div class="field my-4">
-                            <div id="check_in">
+                            <div>
                                 <div id="label" class="text-m">
                                     Status
                                 </div>
-                                <div id="description" class="text-m font-bold">
+                                <div id="status" class="text-m font-bold">
                                     WFO
                                 </div>
                             </div>
@@ -117,8 +115,40 @@
         </div>
     </div>
 </div> 
-<script>
-    initializeTomSelect();
-</script>
-
 @endsection
+@push('js')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            getPersonalEmployee();
+        });
+
+        async function getPersonalEmployee()
+        {
+            var param = {
+                url: "{{ $apiUrl }}",
+                method: "GET",
+            }
+
+            await transAjax(param).then((result) => {
+                let employee = result.data.employee_id_rel;
+                let attendance = result.data;
+
+                console.log(attendance);
+                
+                $('#employee_name').html(employee.first_name);             
+                $('#first_name').html(employee.first_name);             
+                $('#last_name').html(employee.last_name);             
+                $('#personal_email').html(employee.addressContact.personal_email);             
+                $('#mobile_phone').html(employee.addressContact.mobile_phone);     
+                
+                $("#check_in").html(attendance.time_in);
+                $("#check_out").html(attendance.time_out ? attendance.time_out : '-');
+                $("#status").html(attendance.attendance_status);
+                $('#photo').html(`<img src="${attendance.photo_in}" alt=" photo" style="width: 100px; height: 100px;" class="rounded-md shadow-md" />`)
+            }).catch((err) => {
+                console.log(err);
+                
+            });
+        }
+    </script>
+@endpush

@@ -28,11 +28,11 @@ class AttendanceController extends Controller
         $data['apiUrl'] = $this->apiGatewayUrl . "/v1/attendance/attendance/datatable";
         return view('dashboard.hrms.attendance.summary', $data);
     }
-    public function detail()
+    public function detail($id)
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Attendance Overview';
-        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/attendance/attendance/datatable";
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/attendance/attendance/".$id;
         return view('dashboard.hrms.attendance.detail', $data);
     }
 
