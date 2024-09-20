@@ -219,7 +219,11 @@ Route::controller(DashboardController::class)->group(function () {
                             Route::get('/tax_slab_list', 'tax_slab_list')->name('tax_slab_list');
                             Route::get('/benefit_list', 'benefit_list')->name('benefit_list');
                             Route::get('/payroll_period', 'payroll_period')->name('payroll_period');
-                            Route::get('/create_component', 'create_component')->name('create_component');
+                            Route::prefix('salary_component')->group(function () {
+                                Route::get('/list_component', 'salary_component_list')->name('list_component');
+                                Route::get('/create_component', 'create_component')->name('create_component');
+                                Route::get('/edit_component/{id}', 'edit_component')->name('edit_component');
+                            });
                         });
                     });
 

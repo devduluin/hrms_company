@@ -85,13 +85,35 @@ class PayoutController extends Controller
 
         return view('dashboard.payroll.payout.payroll_period', $data);
     }
+
+    public function salary_component_list(Request $request)
+    {
+        $data['title']  = 'Duluin HRMS';
+        $data['page_title'] = 'Salary Components';
+        $data['apiPayrollUrl'] = $this->apiGatewayUrl . '/v1/salary_components';
+
+        return view('dashboard.payroll.payout.salary_component.list', $data);
+    }
+
     public function create_component()
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Create Salary Component';
+        $data['apiPayrollUrl'] = $this->apiGatewayUrl . '/v1/salary_components';
         $allSessions = session()->all();
 
         return view('dashboard.payroll.payout.salary_component.create', $data);
+    }
+
+    public function edit_component($id, Request $request)
+    {
+        $data['title']   = 'Duluin HRMS';
+        $data['page_title']   = 'Create Salary Component';
+        $data['apiPayrollUrl'] = $this->apiGatewayUrl . '/v1/salary_components';
+        $data['salaryComponentId'] = $id;
+        $allSessions = session()->all();
+
+        return view('dashboard.payroll.payout.salary_component.edit', $data);
     }
 
 }

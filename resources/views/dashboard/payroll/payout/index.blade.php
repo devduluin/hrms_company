@@ -31,7 +31,7 @@
                         <div class="text-left text-lg font-medium mt-2">
                             More Actions
                         </div>
-                    </div> 
+                    </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4  text-blue-900">
                         <x-action label="Create Salary Slip" icon="arrow-up-right" url="{{ url('/dashboard/hrms/payout/salary_slip') }}"/>
                         <x-action label="Payroll Setting" icon="arrow-up-right" url="{{ url('/dashboard/hrms/payout/settings') }}"/>
@@ -45,10 +45,10 @@
                         <x-action label="New Employee Benefit Claim" icon="arrow-up-right" url="{{ url('/dashboard/hrms/payout/benefit_claim') }}"/>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4  text-blue-900">
-                        <x-action label="Salary Component" icon="arrow-up-right" url="{{ url('/dashboard/hrms/payout/create_component') }}"/>
+                        <x-action label="Salary Component" icon="arrow-up-right" url="{{ url('/dashboard/hrms/payout/salary_component/list_component') }}"/>
                         <x-action label="Payroll Period" icon="arrow-up-right" url="{{ url('/dashboard/hrms/payout/payroll_period') }}"/>
                     </div>
-                </div> 
+                </div>
             </div>
         </div>
     </div>

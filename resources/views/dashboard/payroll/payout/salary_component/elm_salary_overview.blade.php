@@ -1,9 +1,9 @@
 
-<form id="overview-form" method="post" action="">
+<form id="overview-form" method="post" action="{{ $apiPayrollUrl }}/salary_component">
     @csrf
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-2">
         <div class=" gap-5 mt-2">
-            <x-form.input id="employee_name" label="Name" name="employee_name" required />
+            <x-form.input id="name" label="Name" name="name" required />
             <x-form.select name="type" id="type" label="Type" class="tom-select w-full"
                 data-placeholder="Select Type" url="{{ url('dashboard/hrms/designation') }}" required>
                 <option value="earning">Earning</option>
@@ -12,33 +12,33 @@
             <x-form.input id="description" label="Description" name="description" required />
         </div>
         <div class="gap-y-6 mt-2">
-            <x-checkbox id="is_depends_on_payment_days"
+            <x-checkbox
                 label="Depends on Payment Days"
-                name="is_depends_on_payment_days"
+                name="depends_on_payment_day" id="depends_on_payment_day"
                 guidelines="" />
-            <x-checkbox id="is_tax_applicable"
+            <x-checkbox
                 label="Is Tax Applicable"
-                name="is_tax_applicable"
+                name="is_tax_applicable" id="is_tax_applicable"
                 guidelines="" />
-            <x-checkbox id="is_deduct_full_tax_on_selected_payroll_date"
+            <x-checkbox
                 label="Deduct Full Tax on Selected Payroll Date"
-                name="is_deduct_full_tax_on_selected_payroll_date"
+                name="deduct_tax_on_payroll_date" id="deduct_tax_on_payroll_date"
                 guidelines="" />
-            <x-checkbox id="is_round_to_the_nearest_integer"
+            <x-checkbox
                 label="Round to the Nearest Integer"
-                name="is_round_to_the_nearest_integer"
+                name="round_nearest_integer" id="round_nearest_integer"
                 guidelines="" />
-            <x-checkbox id="is_statistical_component"
-                label="Statistical Component"
-                name="is_statistical_component"
-                guidelines="If enabled, the value specified or calculated in this component will not contribute to the earnings or deduction. However, it's value can be referenced by other components that can be added or deducted" />
-            <x-checkbox id="is_do_not_include_in_total"
+{{--            <x-checkbox id="is_statistical_component"--}}
+{{--                label="Statistical Component"--}}
+{{--                name="is_statistical_component" id="is_statistical_component"--}}
+{{--                guidelines="If enabled, the value specified or calculated in this component will not contribute to the earnings or deduction. However, it's value can be referenced by other components that can be added or deducted" />--}}
+            <x-checkbox
                 label="Do Not Include in Total"
-                name="is_do_not_include_in_total"
+                name="include_in_total" id="include_in_total"
                 guidelines="" />
-            <x-checkbox id="is_remove_if_zero_valued"
+            <x-checkbox
                 label="Remove if Zero Valued"
-                name="is_remove_if_zero_valued"
+                name="remove_if_zero" id="remove_if_zero"
                 guidelines="If enabled, the component will not be displayed in the salary slip if the amount is zero" />
             <x-checkbox id="is_disable"
                 label="Disable"
@@ -49,9 +49,15 @@
     <div class="grid grid-cols-2 gap-5 mt-4">
 
     </div>
-    <div class="mb-6 mt-4 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
-        Account
+{{--    <div class="mb-6 mt-4 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">--}}
+{{--        Account--}}
+{{--    </div>--}}
+{{--    <x-table_custom h1="No" h2="Company" h3="Account">--}}
+{{--    </x-table_custom>--}}
+    <div class="grid grid-cols-2 gap-5 mt-4">
+
     </div>
-    <x-table_custom h1="No" h2="Company" h3="Account">
-    </x-table_custom>
+    <div class="mt-6 flex border-t border-dashed border-slate-300/70 pt-5 md:justify-end">
+        <x-form.button label="Save changes" id="overview-btn" style="primary" type="button" icon="save" />
+    </div>
 </form>

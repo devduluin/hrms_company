@@ -42,6 +42,7 @@ class EmployeesController extends Controller
         $data['company'] = $allSessions['company_id'][0];
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
         $data['apiEmployeeUrl'] = $this->apiGatewayUrl . '/v1/employees';
+        $data['apiPayrollUrl'] = $this->apiGatewayUrl . '/v1/payrolls';
         // $data['apiEmployeeUrl'] = 'http://apidev.duluin.com/api/v1';
         $data['apiGateway'] = $this->apiGatewayUrl . '/users';
 
