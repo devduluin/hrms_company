@@ -3,12 +3,11 @@
     @csrf
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-2">
         <div class=" gap-5 mt-2">
-            <x-form.input id="employee_name" label=" Name" name="employee_name" required />
-            <x-form.input id="abbr" label="Abbr" name="abbr" required />
+            <x-form.input id="employee_name" label="Name" name="employee_name" required />
             <x-form.select name="type" id="type" label="Type" class="tom-select w-full"
                 data-placeholder="Select Type" url="{{ url('dashboard/hrms/designation') }}" required>
-                <option value="male">Earning</option>
-                <option value="female">Deduction</option>
+                <option value="earning">Earning</option>
+                <option value="deduction">Deduction</option>
             </x-form.select>
             <x-form.input id="description" label="Description" name="description" required />
         </div>
