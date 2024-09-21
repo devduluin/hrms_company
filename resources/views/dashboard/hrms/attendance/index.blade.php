@@ -9,17 +9,14 @@
     <div
         class="hurricane before:content-[''] before:z-[-1] before:w-screen before:bg-slate-50 before:top-0 before:h-screen before:fixed before:bg-texture-black before:bg-contain before:bg-fixed before:bg-[center_-20rem] before:bg-no-repeat">
         @include('layouts.dashboard.menu')
-
-
         <div id="contents-page"
             class="content transition-[margin,width] duration-100 px-5 xl:mr-2.5 mt-[75px] pt-[31px] pb-16 content--compact xl:ml-[275px] [&.content--compact]:xl:ml-[100px]">
             <div class="container">
-
                 <div class="grid grid-cols-12 gap-x-6 gap-y-10">
                     <div class="col-span-12">
                         <div class="mt-3.5 flex flex-col gap-8">
-                            <div class="box box--stacked flex flex-col p-5">
-                                <div class="grid grid-cols-4 gap-5">
+                            <div class="box box--stacked p-5">
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
                                     <div
                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
                                         <div class="text-base text-slate-500">Total Present</div>
@@ -100,7 +97,7 @@
                                 </div>
                                 <div class="grid grid-rows-2 gap-4 col col-span-1">
                                     <div
-                                        class="flex flex-col box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                        class=" box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
                                         <div class="flex items-center justify-between">
                                             <div class="text-xl font-medium text-gray-500">
                                                 Total Employee
@@ -151,7 +148,7 @@
                                         </div>
                                     </div>
                                     <div
-                                        class="flex flex-col box col-span-4 h-fit rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                        class=" box col-span-4 h-fit rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
                                         <div class="flex col-2">
                                             <div class="g-col-6 font-medium mt-1.5 text-xl">
                                                 Latest Overtime Application
@@ -198,19 +195,19 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="box p-4 mt-4">
+                            <div class="text-m font-medium">
+                                More Action
+                            </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mt-4">
+                                    <x-action  label="Attendance Summary" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/summary') }}" />
+                                    <x-action  label="New Shift Assignment" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/shift_assignment') }}" />
+                                    <x-action  label="Employee Shift List" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/shift_list') }}" />
+                                    <x-action  label="Attendance Report" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/report') }}" />
+                                </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="box p-4 mt-4">
-                <div class="text-m font-medium">
-                    More Action
-                </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mt-4">
-                        <x-action  label="Attendance Summary" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/summary') }}" />
-                        <x-action  label="New Shift Assignment" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/shift_assignment') }}" />
-                        <x-action  label="Employee Shift List" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/shift_list') }}" />
-                        <x-action  label="Attendance Report" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/report') }}" />
-                    </div>
             </div>
         </div>
     @endsection
