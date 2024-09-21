@@ -89,5 +89,13 @@ class PayoutController extends Controller
 
         return view('dashboard.payroll.payout.salary_component.create', $data);
     }
+    public function salary_structure()
+    {
+        $data['title']   = 'Duluin HRMS';
+        $data['page_title']   = 'Create Salary Structure';
+        $allSessions = session()->all();
+
+        return view('dashboard.payroll.payout.salary_structure.create', $data);
+    }
 
 }

@@ -9,14 +9,14 @@
         <div class="container gap-y-5">
             <div class="flex flex-col gap-y-5 md:h-10 md:flex-row md:items-center">
                 <div class="text-base font-medium">
-                    Detail Attendance
+                    Attendance Detail
                 </div>
                 <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
                     <x-form.button id="back" label="Back to Summary" style="primary" icon="arrow-left" url="{{ url('dashboard/hrms/attendance/summary') }}" ></x-form.button>
                 </div>
             </div>
             <div class="grid grid-cols-12 gap-x-6 gap-y-5">
-                <div class="box p-4 col-span-12">
+                <div class="box p-4 col-span-12 mt-4">
                     <div>
                         <div id="employee_name" class="font-medium text-lg">
                             Muahammad Idris
@@ -74,16 +74,20 @@
                     </div>
                 </div>
                 <div class="box p-4 col-span-12">
-                    <div class="mb-6 mt-4 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
+                    <div class=" mt-4  text-[0.94rem] font-medium">
                         Attendance Details
                     </div>
+                    <div class="ml-6 mb-6 mt-2 p-2 text-xs font-regular bg-primary/10 text-primary rounded-2xl" style="display: inline-block">
+                        10 September 2024
+                    </div>
+                    <div class="border-b border-dashed border-slate-300/70"></div>
                     <div class=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mt-4">     
                         <div class=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mt-2" id="checkin">
-                            <div class="flex justify-center">
+                            <div class="flex justify-center mt-4">
                                 <img src="" alt=" Foto Absensi" style="width: 100px; height: 100px;" class="rounded-md shadow-md" />
                             </div>
                             <div class=" gap-5 ">
-                                <div class="field my-4">
+                                <div class="field ">
                                     <div id="check_in">
                                         <div id="label" class="text-m">
                                             Check in time
@@ -93,8 +97,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
-                                <div class="field my-4">
+                                <div class="field mt-2">
                                     <div id="check_in">
                                         <div id="label" class="text-m">
                                             Status
@@ -104,14 +107,24 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="field mt-2">
+                                    <div id="check_in_status">
+                                        <div id="label" class="text-m">
+                                            Check in Status
+                                        </div>
+                                        <div id="description" class="text-m font-bold">
+                                            Late
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mt-4" id="checkin">
-                            <div class="flex justify-center">
+                            <div class="flex justify-center mt-4">
                                 <img src="" alt=" Foto Absensi" style="width: 100px; height: 100px;" class="rounded-md shadow-md" />
                             </div>
                             <div class=" gap-5 ">
-                                <div class="field my-4">
+                                <div class="field ">
                                     <div id="check_out">
                                         <div id="label" class="text-m">
                                             Check out time
@@ -121,8 +134,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="field my-4">
-                                    <div id="check_in">
+                                <div class="field mt-2">
+                                    <div id="check_out">
                                         <div id="label" class="text-m">
                                             Status
                                         </div>
@@ -131,16 +144,43 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="field mt-2">
+                                    <div id="check_out_status">
+                                        <div id="label" class="text-m">
+                                            Check out Status
+                                        </div>
+                                        <div id="description" class="text-m font-bold">
+                                            Early Exit
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="mb-6 mt-6 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
+                        Location
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mt-4" id="evidence">
+                        <div class=" justify-center" id="map_checkin">
+                            <div class="label mb-4">
+                                Check in Location
+                            </div>
+                            <img src="" alt="Map Checkin" style="width: 400px; height: 400px;" class="rounded-md shadow-md" />
+                        </div>
+                        <div class="justify-center" id="map_checkout">
+                            <div class="label mb-4">
+                                Check out Location
+                            </div>
+                            <img src="" alt="Map Checkin" style="width: 400px; height: 400px;" class="rounded-md shadow-md" />
+                        </div>
+
+                    </div>
                 </div>
+                <div class="box p-4 col-span-12">
+                
             </div>
         </div>
     </div>
 </div> 
-<script>
-    initializeTomSelect();
-</script>
 
 @endsection

@@ -220,6 +220,7 @@ Route::controller(DashboardController::class)->group(function () {
                             Route::get('/benefit_list', 'benefit_list')->name('benefit_list');
                             Route::get('/payroll_period', 'payroll_period')->name('payroll_period');
                             Route::get('/create_component', 'create_component')->name('create_component');
+                            Route::get('/salary_structure', 'salary_structure')->name('salary_structure');
                         });
                     });
 
