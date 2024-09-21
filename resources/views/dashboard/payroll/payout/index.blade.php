@@ -48,6 +48,9 @@
                         <x-action label="Salary Component" icon="arrow-up-right" url="{{ url('/dashboard/hrms/payout/salary_component/list_component') }}"/>
                         <x-action label="Payroll Period" icon="arrow-up-right" url="{{ url('/dashboard/hrms/payout/payroll_period') }}"/>
                     </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4  text-blue-900">
+                        <x-action label="Salary structure" icon="arrow-up-right" url="{{ url('/dashboard/hrms/payout/salary_structure') }}"/>                    
+                    </div>
                 </div>
             </div>
         </div>

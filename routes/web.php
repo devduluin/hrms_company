@@ -224,6 +224,7 @@ Route::controller(DashboardController::class)->group(function () {
                                 Route::get('/create_component', 'create_component')->name('create_component');
                                 Route::get('/edit_component/{id}', 'edit_component')->name('edit_component');
                             });
+                            Route::get('/salary_structure', 'salary_structure')->name('salary_structure');
                         });
                     });
 

@@ -72,43 +72,111 @@
                     </div>
                 </div>
                 <div class="box p-4 col-span-12">
-                    <div class="mb-6 mt-4 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
+                    <div class=" mt-4 pb-5 text-[0.94rem] font-medium">
                         Attendance Details
                     </div>
-                    <div class="flex justify-center" id="photo">
-
+                    <div id="attendance_date" class="ml-6 mb-6  p-2 text-xs font-regular bg-primary/10 text-primary rounded-2xl" style="display: inline-block ">
+                        10 September 2024
                     </div>
-                    <div class=" grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-5 mt-4">
-                        <div class="field my-4">
-                            <div>
-                                <div id="label" class="text-m">
-                                    Check in time
+                    <div class="border-b border-dashed border-slate-300/70"></div>
+                    <div class=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mt-4">     
+                        <div class=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mt-2" id="checkin">
+                            <div class="flex justify-center mt-4">
+                                <img src="" alt=" Foto Absensi" style="width: 100px; height: 100px;" class="rounded-md shadow-md" />
+                            </div>
+                            <div class=" gap-5 ">
+                                <div class="field ">
+                                    <div id="field">
+                                        <div id="label" class="text-m">
+                                            Check in time
+                                        </div>
+                                        <div id="check_in" class="text-m font-bold">
+                                            -
+                                        </div>
+                                    </div>
                                 </div>
-                                <div id="check_in" class="text-m font-bold">
-                                    -
+                                <div class="field mt-2">
+                                    <div id="check_in">
+                                        <div id="label" class="text-m">
+                                            Status
+                                        </div>
+                                        <div id="status" class="text-m font-bold">
+                                            -
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="field mt-2">
+                                    <div id="check_in_status">
+                                        <div id="label" class="text-m">
+                                            Check in Status
+                                        </div>
+                                        <div id="check_in_status" class="text-m font-bold">
+                                            -
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="field my-4">
-                            <div>
-                                <div id="label" class="text-m">
-                                    Check out time
+                        <div class=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mt-4" id="checkin">
+                            <div class="flex justify-center mt-4" id="photo">
+                                <img src="" alt=" Foto Absensi" style="width: 100px; height: 100px;" class="rounded-md shadow-md" />
+                            </div>
+                            <div class=" gap-5 ">
+                                <div class="field ">
+                                    <div id="field">
+                                        <div id="label" class="text-m">
+                                            Check out time
+                                        </div>
+                                        <div id="check_out" class="text-m font-bold">
+                                            17.03
+                                        </div>
+                                    </div>
                                 </div>
-                                <div id="check_out" class="text-m font-bold">
-                                   -
+                                <div class="field mt-2">
+                                    <div id="check_out">
+                                        <div id="label" class="text-m">
+                                            Status
+                                        </div>
+                                        <div id="status" class="text-m font-bold">
+                                            -
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="field mt-2">
+                                    <div id="check_out_status">
+                                        <div id="label" class="text-m">
+                                            Check out Status
+                                        </div>
+                                        <div id="check_out_status" class="text-m font-bold">
+                                            -
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="field my-4">
-                            <div>
-                                <div id="label" class="text-m">
-                                    Status
-                                </div>
-                                <div id="status" class="text-m font-bold">
-                                    WFO
-                                </div>
+                    </div>
+                    <div class="mb-6 mt-6 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
+                        Location
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mt-4" id="evidence">
+                        <div class="justify-center" id="map_checkin">
+                            <div class="label mb-4">
+                                Check in Location
+                            </div>
+                            <div id="map_checkin">
+                                <img src="" alt="Map Checkout" style="width: 400px; height: 400px;" class="rounded-md shadow-md" />
                             </div>
                         </div>
+                        <div class="justify-center" id="map_checkout">
+                            <div class="label mb-4">
+                                Check out Location
+                            </div>
+                            <div id="map_checkout">
+                                <img src="" alt="Map Checkout" style="width: 400px; height: 400px;" class="rounded-md shadow-md" />
+                            </div>
+                        </div>
+                    </div>
+                    
                     </div>
                 </div>
             </div>
