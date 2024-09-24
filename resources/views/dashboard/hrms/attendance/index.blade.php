@@ -11,9 +11,8 @@
         @include('layouts.dashboard.menu')
         <div id="contents-page"
             class="content transition-[margin,width] duration-100 px-5 xl:mr-2.5 mt-[75px] pt-[31px] pb-16 content--compact xl:ml-[275px] [&.content--compact]:xl:ml-[100px]">
-            <div class="container">
-                <div class="grid grid-cols-12 gap-x-6 gap-y-10">
-                    <div class="col-span-12">
+                <div class="grid  grid-cols-1 md:grid-cols-12 gap-x-6 gap-y-10">
+                    <div class= "col-span-12 w-full">
                         <div class="mt-3.5 flex flex-col gap-8">
                             <div class="box box--stacked p-5">
                                 <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
@@ -208,7 +207,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
     @endsection
 @push('js')

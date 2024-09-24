@@ -1,4 +1,6 @@
 @props([
+    'id'=> '' , 
+    'class' => '',
     'h1',
     'h2' => '',
     'h3' => '',
@@ -22,7 +24,10 @@
     }
     
     .table th, .table td {
-        padding: 12px;
+        padding-right: auto;
+        padding-left: 12px;
+        padding-bottom: 12px;
+        padding-top: 12px;
         text-align: left;
     }
     
@@ -39,7 +44,7 @@
 
 
 <div class="table-responsive relative overflow-x-auto sm:rounded-lg">
-    <table class="table w-full">
+    <table class="table w-full" id="{{ $id }}">
         <thead class="bg-slate-700">
             <tr>
                 <th >

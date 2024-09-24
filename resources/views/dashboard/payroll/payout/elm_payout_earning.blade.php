@@ -1,112 +1,40 @@
 <form id="overview-form" method="post" action="">
         @csrf
-        <div class="mb-6 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
-            Overview
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-2 gap-5 mt-4">
-            <x-form.input id="first_name" label="First Name" name="first_name" required />
-            <x-form.input id="last_name" label="Last Name" name="last_name" required />
-            <x-form.input id="phone_number" label="Phone Number" name="phone_number" required />
-            <x-form.input id="personal_email" label="Personal Email" name="personal_email" required />
-            <x-form.select name="gender" id="gender" label="Gender" class="tom-select w-full"
-                data-placeholder="Select Gender" url="{{ url('dashboard/hrms/designation') }}" required>
-                <option value="">Select Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-            </x-form.select>
-
-            <x-form.datepicker id="date_of_joining" label="Joining Date" name="date_of_joining" required />
-
-            <x-form.datepicker id="date_of_birth" label="Date of Birth" name="date_of_birth" required />
-
-            <x-form.input id="place_of_birth" label="Place of Birth" name="place_of_birth" required />
-
-            <x-form.select name="salutation" id="salutation" label="Salutation" class="tom-select w-full"
-                data-placeholder="Select salutation" url="{{ url('dashboard/hrms/designation') }}" required>
-                <option value="">Select salutation</option>
-                <option value="mr">Mr.</option>
-                <option value="mrs">Mrs.</option>
-                <option value="ms">Ms.</option>
-            </x-form.select>
-
-            <x-form.select name="status" id="status" label="Status" class="tom-select w-full"
-                data-placeholder="Select Status" url="{{ url('dashboard/hrms/designation') }}" required>
-                <option value="">Select Status</option>
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-                <option value="suspended">Suspended</option>
-                <option value="left">Left</option>
-            </x-form.select>
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4">
+            <div>
+                <div class="mb-4">
+                    Earnings
+                </div>
+                <x-table_custom h1="No" h2="Component" h3="Amount(IDR)" ></x-table_custom>
+                <div class="mt-4">
+                    <x-form.button id="add_row" label="Add Row" style="tertiary">
+                    </x-form.button>
+                </div>
+            </div>
+            <div>
+                <div class="mb-4">
+                    Deduction
+                </div>
+                <x-table_custom h1="No" h2="Component" h3="Amount(IDR)"></x-table_custom>
+                <div class="mt-4">
+                    <x-form.button id="add_row" label="Add Row" style="tertiary">
+                    </x-form.button>
+                </div>
+            </div>
         </div>
         <div class="grid grid-cols-2 gap-5 mt-4">
 
         </div>
         <div class="mb-6 mt-4 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
-            Company Details
+            Totals
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-2 gap-5 mt-4">
-            <x-form.select id="company_id" name="company_id" label="Company"
-                url="{{ url('dashboard/hrms/designation') }}" apiUrl="{{ $apiCompanyUrl }}/company/datatables"
-                columns='["company_name"]' :selected="$company" :keys="[
-                    'company_id' => $company,
-                ]">
-                <option value="">Select Company</option>
-            </x-form.select>
-
-            <x-form.select id="designation_id" name="designation_id" label="Designation"
-                url="{{ url('dashboard/hrms/designation') }}" apiUrl="{{ $apiCompanyUrl }}/designation/datatables"
-                columns='["designation_name"]' :keys="[
-                    'company_id' => $company,
-                ]">
-                <option value="">Select Designation</option>
-            </x-form.select>
-
-            <x-form.select id="branch_id" name="branch_id" label="Branch" url="{{ url('dashboard/hrms/designation') }}"
-                apiUrl="{{ $apiCompanyUrl }}/branch/datatables" columns='["branch_name"]' :keys="[
-                    'company_id' => $company,
-                ]">
-                <option value="">Select Branch</option>
-            </x-form.select>
-
-            <x-form.select id="department_id" name="department_id" label="Department"
-                url="{{ url('dashboard/hrms/designation') }}" apiUrl="{{ $apiCompanyUrl }}/department/datatables"
-                columns='["department_name"]' :keys="[
-                    'company_id' => $company,
-                ]">
-                <option value="">Select Department</option>
-            </x-form.select>
-
-            <x-form.select id="report_to" name="report_to" label="Reports to"
-                url="{{ url('dashboard/hrms/designation') }}" apiUrl="{{ $apiEmployeeUrl }}/employee/datatables"
-                columns='["first_name","last_name"]' :keys="[
-                    'company_id' => $company,
-                ]">
-                <option value="">Select Employee</option>
-            </x-form.select>
-
-            <x-form.select id="grade_id" name="grade_id" label="Grade" url="{{ url('dashboard/hrms/designation') }}"
-                apiUrl="{{ $apiCompanyUrl }}/employee-grade/datatables" columns='["employee_grade_name"]'
-                :keys="[
-                    'company_id' => $company,
-                ]">
-                <option value="">Select Grade</option>
-            </x-form.select>
-
-            <x-form.select id="employee_type_id" name="employee_type_id" label="Employment Type"
-                url="{{ url('dashboard/hrms/designation') }}"
-                apiUrl="{{ $apiCompanyUrl }}/employment-type/datatables" columns='["employment_type_name"]'
-                :keys="[
-                    'company_id' => $company,
-                ]">
-                <option value="">Select Employment Type</option>
-            </x-form.select>
-
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4">
+            <x-form.input id="gross_pay" label="Gross Pay" name="Rp 0,00" required />
+            <x-form.input id="total_deduction" label="Total Deduction" name="total_deduction" required />
+            <x-form.input id="gross_pay_company" label="Gross Pay (Company Currency)" name="gross_pay_company" required />
+            <x-form.input id="total_deduction_company" label="Total Deduction (Company Currency)" name="total_deduction_company" required />
+            <x-form.input id="gross_year_to_date" label="Gross Year to Date" name="gross_year_to_date" required />
+            <x-form.input id="gross_year_to_date_company" label="Gross Year to Date (Company Currency)" name="gross_year_to_date_company" required />
         </div>
-        <div class="grid grid-cols-2 gap-5 mt-4">
-
-        </div>
-        <div class="mb-6 mt-4 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
-
-        </div>
-        <x-form.button label="Save changes" id="overview-btn" style="primary" type="button" icon="save" />
+        
     </form>
