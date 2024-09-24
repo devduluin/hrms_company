@@ -109,6 +109,9 @@ class PayoutController extends Controller
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Create Salary Structure';
         $allSessions = session()->all();
+        $data['company'] = $allSessions['company_id'][0];
+        $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
+        $allSessions = session()->all();
 
         return view('dashboard.payroll.payout.salary_structure.create', $data);
     }

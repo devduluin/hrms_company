@@ -16,7 +16,7 @@
                             </div>
                             <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
                                 <button onclick="history.go(-1)"
-                                    class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed border-primary text-primary dark:border-primary shadow-md w-100"  href="{{ $url ?? '' }}"> 
+                                    class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed border-primary text-primary dark:border-primary shadow-md w-100"  href="{{ $url ?? '' }}">
                                     <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
                                 </button>
                                 <x-form.button label="Save changes" id="save-btn" style="primary" type="submit"
@@ -64,7 +64,7 @@
                     $(lastActiveTabId + "-btn").click(async function(e) {
                         console.log(lastActiveTabId + "-form");
                         e.preventDefault();
-                        await handleFormSubmission(lastActiveTabId);
+                        // await handleFormSubmission(lastActiveTabId);
                     });
                 }
             });
@@ -72,7 +72,7 @@
             $(lastActiveTabId + "-btn").click(async function(e) {
                 console.log(lastActiveTabId + "-form");
                 e.preventDefault();
-                await handleFormSubmission(lastActiveTabId);
+                // await handleFormSubmission(lastActiveTabId);
             });
 
             async function handleFormSubmission(formId) {
