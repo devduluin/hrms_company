@@ -31,6 +31,8 @@ class PayoutController extends Controller
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
         $data['apiEmployeeUrl'] = $this->apiGatewayUrl . '/v1/employees';
         $data['apiGateway'] = $this->apiGatewayUrl . '/users';
+        $data['apiPayrollUrl'] = $this->apiGatewayUrl . '/v1/salary_structures';
+        $data['apiAttendanceUrl'] = $this->apiGatewayUrl . '/v1/attendance';
 
         return view('dashboard.payroll.payout.salary_slip', $data);
     }
