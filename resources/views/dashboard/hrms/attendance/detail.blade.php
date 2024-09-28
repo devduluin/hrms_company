@@ -76,7 +76,7 @@
                         Attendance Details
                     </div>
                     <div id="attendance_date" class="ml-6 mb-6  p-2 text-xs font-regular bg-primary/10 text-primary rounded-2xl" style="display: inline-block ">
-                        10 September 2024
+                        -
                     </div>
                     <div class="border-b border-dashed border-slate-300/70"></div>
                     <div class=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mt-4">     
@@ -106,7 +106,7 @@
                                     </div>
                                 </div>
                                 <div class="field mt-2">
-                                    <div id="check_in_status">
+                                    <div>
                                         <div id="label" class="text-m">
                                             Check in Status
                                         </div>
@@ -143,7 +143,7 @@
                                     </div>
                                 </div>
                                 <div class="field mt-2">
-                                    <div id="check_out_status">
+                                    <div>
                                         <div id="label" class="text-m">
                                             Check out Status
                                         </div>
@@ -209,8 +209,11 @@
                 $('#personal_email').html(employee.addressContact.personal_email);
                 $('#mobile_phone').html(employee.addressContact.mobile_phone);
 
+                $("#attendance_date").html(attendance.attendance_date);
                 $("#check_in").html(attendance.time_in);
+                $("#check_in_status").html(attendance.checkin_status);
                 $("#check_out").html(attendance.time_out ? attendance.time_out : '-');
+                $("#check_out_status").html(attendance.checkout_status);
                 $("#status").html(attendance.attendance_status);
                 $('#photo').html(`<img src="${attendance.photo_in}" alt=" photo" style="width: 100px; height: 100px;" class="rounded-md shadow-md" />`)
             }).catch((err) => {

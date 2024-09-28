@@ -36,8 +36,53 @@
                                 </div>
                                 <div class="overflow-hidden">
                                     <div class="-mx-5 grid grid-cols-12 border-y border-dashed px-5">
-                                        <x-company_list name="DULUIN" status="active" url_preview="{{ route('hrms.company.preview') }}"></x-company_list>
-                                        
+                                        <div class="col-span-12 flex flex-col border-b border-r border-dashed border-slate-300/80 px-5 py-5 sm:col-span-6 xl:col-span-3 [&amp;:nth-child(4n)]:border-r-0 [&amp;:nth-last-child(-n+4)]:border-b-0">
+                                            <div
+                                                class="image-fit h-52 overflow-hidden rounded-lg before:absolute before:left-0 before:top-0 before:z-10 before:block before:h-full before:w-full  before:from-slate-900/90 before:to-black/20">
+                                                <img class="rounded-md" src="{{ asset('img/logo/duluin.jpg') }}"
+                                                    alt="Tailwise - Admin Dashboard Template">
+                                            </div>
+                                            <div class="pt-5">
+                                                <div
+                                                    class="mb-5 mt-auto flex flex-col gap-3.5 border-b border-dashed border-slate-300/70 pb-5">
+                                                    <div class="flex items-center">
+                                                        <div class="text-base font-medium" id="compnayName">...</div>
+                                                    </div>
+                                                </div>
+                                                <div class="flex items-center">
+                                                    <a class="mr-auto flex items-center text-primary" href ="/">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="24" viewBox="0 0 24 24" fill="none"
+                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round" data-lucide="pencil"
+                                                            class="lucide lucide-kanban-square mr-1.5 h-4 w-4 stroke-[1.3]">
+                                                            <rect width="18" height="18" x="3" y="3" rx="2">
+                                                            </rect>
+                                                            <path d="M8 7v7"></path>
+                                                            <path d="M12 7v4"></path>
+                                                            <path d="M16 7v9"></path>
+                                                        </svg>
+                                                        Edit
+                                                    </a>
+                                                    <a class="flex items-center text-danger" href ="{{ $url_delete ?? '' }}">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="24" viewBox="0 0 24 24" fill="none"
+                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round" data-lucide="trash2"
+                                                            class="lucide lucide-trash2 mr-1.5 h-4 w-4 stroke-[1.3]">
+                                                            <path d="M3 6h18"></path>
+                                                            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                                                            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                                                            <line x1="10" x2="10" y1="11"
+                                                                y2="17"></line>
+                                                            <line x1="14" x2="14" y1="11"
+                                                                y2="17"></line>
+                                                        </svg>
+                                                        Delete
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div
@@ -138,91 +183,24 @@
             getCompanies();
         });
 
-        let companyId = localStorage.getItem('company');
         async function getCompanies() {
             try {
-                const response = await fetch(`{{ $companyApiUrl }}/company`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer xN9P6a8sL2bV3iR4fC5J6Q7kT8yU9wZ0'
-                    },
-                });
-
-                const result = await response.json();
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                var param = {
+                    url: "{{ $apiUrl }}",
+                    method: "GET",
+                    data: {
+                        user_id: '3c5b06b2-b224-4029-a7a9-a0291dbe723c'
+                    }
                 }
 
-                //tampilkan data company
-
-                // showSuccessNotification(result.message, "The operation was completed successfully.");
-
+                await transAjax(param).then((result) => {
+                   const data = result.data[0];
+                   $("#compnayName").html(data.company_name);
+                });
             } catch (error) {
                 console.error('Error:', error);
                 alert('An error occurred while submitting the data');
             }
         }
-
-        // document.getElementById('formUpdateCompany').addEventListener('submit', async function (event) {
-        //     event.preventDefault();
-
-        //     const formData = new FormData(this);
-
-        //     const data = {
-        //         company_name: formData.get('company_name'),
-        //         domain: formData.get('domain'),
-        //         date_of_establishment: formData.get('date_of_establishment'),
-        //         // parent_company: formData.get('parent_company'),
-        //         parent_company: '54601ab0-cd67-46a3-864b-b30a4771ebc9',
-        //         status: formData.get('status'),
-        //         default_currency: formData.get('default_currency'),
-        //         default_holiday_list: formData.get('default_holiday_list')
-        //     };
-
-        //     console.log(data);
-
-
-        //     try {
-        //         const response = await fetch('http://apidev.duluin.com/api/v1/company/'+companyId, {
-        //             method: 'PATCH',
-        //             headers: {
-        //                 'Content-Type': 'application/json',
-        //                 'Authorization': 'Bearer xN9P6a8sL2bV3iR4fC5J6Q7kT8yU9wZ0'
-        //             },
-        //             body: JSON.stringify(data)
-        //         });
-
-        //         const responseData = await response.json();
-
-        //         if (!response.ok) {
-        //             throw new Error('Network response was not ok');
-        //         }
-
-        //         showSuccessNotification(responseData.message, "The operation was completed successfully.");
-
-        //     } catch (error) {
-        //         console.error('Error:', error);
-        //         alert('An error occurred while submitting the data');
-        //     }
-        // });
-
-        // function showSuccessNotification(title, message) {
-        //     var notificationContent = document.getElementById("success-notification-content");
-        //     document.getElementById("success-title").textContent = title;
-        //     document.getElementById("success-message").textContent = message;
-
-        //     Toastify({
-        //         node: $("#success-notification-content")
-        //             .clone()
-        //             .removeClass("hidden")[0],
-        //         duration: 3000,
-        //         newWindow: true,
-        //         close: true,
-        //         gravity: "top",
-        //         position: "right",
-        //         stopOnFocus: true,
-        //     }).showToast();
-        // }
     </script>
 @endpush

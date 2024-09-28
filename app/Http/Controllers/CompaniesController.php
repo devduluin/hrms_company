@@ -7,19 +7,17 @@ use Illuminate\Support\Facades\Http;
 
 class CompaniesController extends Controller
 {
-    protected $apiGatewayUrl, $companyApiUrl;
+    protected $apiGatewayUrl;
     public function __construct()
     {
         $this->apiGatewayUrl = config('apiendpoints.gateway');
-        $this->companyApiUrl = $this->apiGatewayUrl . '/v1/companies';
     }
 
     public function index()
     {
         $data['title']   = 'Companies';
         $data['page_title']   = 'Data Companies';
-        $data['companyApiUrl'] = $this->companyApiUrl;
-
+        $data['apiUrl'] = $this->apiGatewayUrl . '/v1/companies/company';
         return view('dashboard.hrms.companies.index', $data);
     }
 

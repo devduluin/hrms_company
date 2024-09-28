@@ -22,13 +22,11 @@
                 </div> -->
                 <div class="col-span-12 flex flex-col gap-y-7 xl:col-span-9">
                     <div class="box box--stacked flex flex-col p-5">
-                        <x-datatable id="applicantTable" :url="'http://apidev.duluin.com/api/v1/designation/datatable'" method="POST" class="display">
+                        <x-datatable id="applicantTable" :url="$apiUrl" method="POST" class="display">
                             <x-slot:thead>
                                 <th data-value="designation_name">Designation name</th>
-                                <th data-value="createdAt">Created at</th>
-                                {{-- <th data-value="fraction_units">Fraction units</th> --}}
-                                {{-- <th data-value="status" data-render="getStatus">Status</th>
-                                <th data-value="id" data-render="getActionBtn">Action</th> --}}
+                                <th data-value="createdAt" data-render="dateFormat">Created at</th>
+                                {{-- <th data-value="id" data-render="getActionBtn">Action</th> --}}
                             </x-slot:thead>
                         </x-datatable>
                         </div>
@@ -61,6 +59,24 @@
             } else {
                 return `<div class="flex items-center justify-center text-danger"><div class="ml-1.5 whitespace-nowrap">Inactive</div></div>`;
             }
+        }
+
+        //buat format tanggal 2024-09-23 dari tanggal 2024-09-23T14:42:29.000Z
+        function dateFormat(data, type, row, meta) {
+        // Pastikan 'data' adalah string tanggal valid
+        if (data) {
+            // Buat objek Date dari string
+            const date = new Date(data);
+
+            // Dapatkan bagian tahun, bulan, dan hari dari objek Date
+            const year = date.getFullYear();
+            const month = ('0' + (date.getMonth() + 1)).slice(-2); // Tambah 1 karena bulan di JavaScript berbasis 0
+            const day = ('0' + date.getDate()).slice(-2);
+
+            // Format tanggal menjadi YYYY-MM-DD
+            return `${year}-${month}-${day}`;
+        }
+            return data; // Jika data tidak ada, kembalikan data asli
         }
 
         function getActionBtn(data, type, row, meta) {
