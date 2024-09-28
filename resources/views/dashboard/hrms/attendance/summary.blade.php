@@ -113,6 +113,8 @@
 @push('js')
     <script type="text/javascript">
         function getName(data, type, row, meta) {
+            console.log(data);
+            
             if (data !== null) {
                 return data.first_name + ' ' + data.last_name;
             }
