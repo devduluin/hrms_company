@@ -5,98 +5,92 @@
         }
     </style>
 @endPush
-<form id="overview-form" method="post" action="">
-    @csrf
-    <div class="grid grid-cols-1 md:grid-cols-1 xl:grid-cols-1 gap-5 mt-4">
-        <div>
-            {{-- <div class="mb-7">
+<div class="grid grid-cols-1 md:grid-cols-1 xl:grid-cols-1 gap-5 mt-4">
+    <div>
+        {{-- <div class="mb-7">
                 <x-form.button type="button" id="add-earning-row" label="Add New Earning" style="tertiary">
                 </x-form.button>
             </div> --}}
-            <div class="card-body">
-                <div
-                    class="relative mb-4 mt-2 rounded-[0.6rem] border border-slate-200/80 dark:border-darkmode-400 mr-5">
-                    <div class="absolute left-0 -mt-2 ml-4 bg-white px-3 text-xs uppercase text-slate-500">
-                        <div class="-mt-px">Earning</div>
-                    </div>
-                    <div class="mt-2 flex flex-col gap-3.5 px-5 py-5">
-                        <div class="preview relative [&amp;.hide]:overflow-hidden [&amp;.hide]:h-0">
-                            <div class="overflow-x-auto">
-                                <table class="w-full text-left table-earning-editable table-edits">
-                                    <thead class="bg-slate-200/60 dark:bg-slate-200">
-                                        <tr>
-                                            <th
-                                                class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
-                                                Component</th>
-                                            <th
-                                                class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
-                                                Amount</th>
-                                            <th
-                                                class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
-                                                <i data-lucide="settings" class="inline-block h-5 w-5 mr-2"></i>
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="editable-earning-table">
-                                    </tbody>
-                                </table>
-                            </div>
+        <div class="card-body">
+            <div class="relative mb-4 mt-2 rounded-[0.6rem] border border-slate-200/80 dark:border-darkmode-400 mr-5">
+                <div class="absolute left-0 -mt-2 ml-4 bg-white px-3 text-xs uppercase text-slate-500">
+                    <div class="-mt-px">Earning</div>
+                </div>
+                <div class="mt-2 flex flex-col gap-3.5 px-5 py-5">
+                    <div class="preview relative [&amp;.hide]:overflow-hidden [&amp;.hide]:h-0">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left table-earning-editable table-edits">
+                                <thead class="bg-slate-200/60 dark:bg-slate-200">
+                                    <tr>
+                                        <th
+                                            class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
+                                            Component</th>
+                                        <th
+                                            class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
+                                            Amount</th>
+                                        <th
+                                            class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
+                                            <i data-lucide="settings" class="inline-block h-5 w-5 mr-2"></i>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="editable-earning-table">
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="card-body">
-                <div
-                    class="relative mb-4 mt-4 rounded-[0.6rem] border border-slate-200/80 dark:border-darkmode-400 mr-5">
-                    <div class="absolute left-0 -mt-2 ml-4 bg-white px-3 text-xs uppercase text-slate-500">
-                        <div class="-mt-px">Deduction</div>
-                    </div>
-                    <div class="mt-2 flex flex-col gap-3.5 px-5 py-5">
-                        <div class="preview relative [&amp;.hide]:overflow-hidden [&amp;.hide]:h-0">
-                            <div class="overflow-x-auto">
-                                <table class="w-full text-left table-earning-editable table-edits">
-                                    <thead class="bg-slate-200/60 dark:bg-slate-200">
-                                        <tr>
-                                            <th
-                                                class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
-                                                Component</th>
-                                            <th
-                                                class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
-                                                Amount</th>
-                                            <th
-                                                class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
-                                                <i data-lucide="settings" class="inline-block h-5 w-5 mr-2"></i>
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="editable-deduction-table">
-                                    </tbody>
-                                </table>
-                            </div>
+        </div>
+        <div class="card-body">
+            <div class="relative mb-4 mt-4 rounded-[0.6rem] border border-slate-200/80 dark:border-darkmode-400 mr-5">
+                <div class="absolute left-0 -mt-2 ml-4 bg-white px-3 text-xs uppercase text-slate-500">
+                    <div class="-mt-px">Deduction</div>
+                </div>
+                <div class="mt-2 flex flex-col gap-3.5 px-5 py-5">
+                    <div class="preview relative [&amp;.hide]:overflow-hidden [&amp;.hide]:h-0">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left table-earning-editable table-edits">
+                                <thead class="bg-slate-200/60 dark:bg-slate-200">
+                                    <tr>
+                                        <th
+                                            class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
+                                            Component</th>
+                                        <th
+                                            class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
+                                            Amount</th>
+                                        <th
+                                            class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
+                                            <i data-lucide="settings" class="inline-block h-5 w-5 mr-2"></i>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="editable-deduction-table">
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="grid grid-cols-2 gap-5 mt-4">
+</div>
+<div class="grid grid-cols-2 gap-5 mt-4">
 
-    </div>
-    <div class="mb-6 mt-4 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
-        Totals
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4">
-        <x-form.input id="gross_pay" label="Gross Pay" name="Rp 0,00" readonly />
-        <input type="hidden" id="gross_pay_hidden" required />
+</div>
+<div class="mb-6 mt-4 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
+    Totals
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4">
+    <x-form.input id="gross_pay" label="Gross Pay" name="gross_pay" readonly />
+    <input type="hidden" id="gross_pay_hidden" name="gross_pay_hidden" required />
 
-        <x-form.input id="total_deduction" label="Total Deduction" name="total_deduction" readonly />
-        <input type="hidden" id="total_deduction_hidden" required />
+    <x-form.input id="total_deduction" label="Total Deduction" name="total_deduction" readonly />
+    <input type="hidden" id="total_deduction_hidden" name="total_deduction_hidden" required />
 
-        <x-form.input id="net_pay" label="Net Pay" name="Rp 0,00" readonly />
-        <input type="hidden" id="net_pay_hidden" required />
-    </div>
-
-</form>
+    <x-form.input id="net_pay" label="Net Pay" name="net_pay" readonly />
+    <input type="hidden" id="net_pay_hidden" name="net_pay_hidden" required />
+</div>
 @push('js')
     <script>
         $(document).ready(function() {
@@ -175,6 +169,8 @@
                     style: 'currency',
                     currency: 'IDR'
                 }).format(totalEarningAmount));
+
+                countTotalNetPay(totalEarningAmount, $("#total_deduction_hidden").val());
             });
 
             $(document).on('click', '.save-deduction', function(e) {
@@ -208,7 +204,19 @@
                     style: 'currency',
                     currency: 'IDR'
                 }).format(totalDeductionAmount));
+
+                countTotalNetPay($("#gross_pay_hidden").val(), totalDeductionAmount);
             });
+
+            function countTotalNetPay(grossPay, totalDeduction) {
+                let netPay = parseFloat(grossPay) - parseFloat(totalDeduction);
+                $("#net_pay_hidden").val(netPay);
+                // Display the total sum somewhere on the page
+                $('#net_pay').val(new Intl.NumberFormat('id-ID', {
+                    style: 'currency',
+                    currency: 'IDR'
+                }).format(netPay));
+            }
 
             $(document).on('click', function(e) {
                 // e.preventDefault();

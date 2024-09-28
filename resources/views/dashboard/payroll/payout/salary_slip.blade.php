@@ -20,17 +20,20 @@
                                     href="{{ $url ?? '' }}">
                                     <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
                                 </button>
-                                <x-form.button label="Save changes" id="save-btn" style="primary" type="submit"
+                                <x-form.button label="Save changes" id="save-payslip-btn" style="primary" type="button"
                                     icon="save" />
                             </div>
                         </div>
-                        <div class="mt-1.5 flex flex-col">
-                            <input type="hidden" name="employee_id" id="employee_id" value="" />
-                            @include('dashboard.payroll.payout.tabs')
-                            <div class="box box--stacked flex flex-col p-5">
-                                @include('dashboard.payroll.payout.tab-content')
+                        <form id="payslip-form" method="post" action="http://apidev.duluin.com/api/v1/payslip/payroll_entry">
+                            @csrf
+                            <div class="mt-1.5 flex flex-col">
+                                <input type="hidden" name="employee_id" id="employee_id" value="" />
+                                @include('dashboard.payroll.payout.tabs')
+                                <div class="box box--stacked flex flex-col p-5">
+                                    @include('dashboard.payroll.payout.tab-content')
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -198,6 +201,14 @@
                             currency: 'IDR'
                         }).format(totalEarningAmount));
 
+                        $('#net_pay').val(new Intl.NumberFormat('id-ID', {
+                            style: 'currency',
+                            currency: 'IDR'
+                        }).format(totalEarningAmount));
+                        $("#net_pay_hidden").val(totalEarningAmount);
+
+                        countTotalNetPay(totalEarningAmount, $("#total_deduction_hidden").val());
+
                         row.innerHTML = `
                     <td class="border-b-2 dark:border-darkmode-300 border-l border-r border-t px-4 py-2"
                         data-field="name" width="35%">
@@ -264,6 +275,8 @@
                             currency: 'IDR'
                         }).format(totalDeductionAmount));
 
+                        countTotalNetPay($("#gross_pay_hidden").val(), totalDeductionAmount);
+
                         row.innerHTML = `
                     <td class="border-b-2 dark:border-darkmode-300 border-l border-r border-t px-4 py-2"
                         data-field="name" width="35%">
@@ -309,8 +322,17 @@
                 }
             }
 
+            function countTotalNetPay(grossPay, totalDeduction) {
+                let netPay = parseFloat(grossPay) - parseFloat(totalDeduction);
+                $("#net_pay_hidden").val(netPay);
+
+                $('#net_pay').val(new Intl.NumberFormat('id-ID', {
+                    style: 'currency',
+                    currency: 'IDR'
+                }).format(netPay));
+            }
+
             function getDeduction() {
-                // get earning and deduction
                 let structureValue = $('#salary_stucture').val();
                 $.ajax({
                     url: `http://apidev.duluin.com/api/v1/structure_earning_deductions/structure_earning_deduction/all`, // Ubah URL sesuai endpoint yang diinginkan
@@ -404,6 +426,113 @@ http://apidev.duluin.com/api/v1/attendance/attendance/total-attendance/${employe
                         }
                     }
                 });
+            }
+
+            $("#save-payslip-btn").click(async function(e) {
+                e.preventDefault();
+                await handleFormSubmission();
+            });
+
+            async function handleFormSubmission() {
+                const currentForm = $("#payslip-form");
+                const data = serializeFormData(currentForm);
+                const appToken = localStorage.getItem('app_token');
+
+                // Get salary_component_id values
+                let salaryComponentIds = $("input[name='salary_component_id']").map(function() {
+                    return $(this).val();
+                }).get();
+
+                // Get salary_component_amount values
+                let salaryComponentAmounts = $("input[name='salary_component_amount']").map(function() {
+                    return $(this).val();
+                }).get();
+
+                // Append salaryComponentIds to the serialized form data
+                data.salary_component_id = salaryComponentIds;
+                data.salary_component_amount = salaryComponentAmounts;
+
+                // Log the updated data object
+                console.log("Form Data:", data);
+
+                data._token = $('meta[name="csrf-token"]').attr('content');
+                data.company_id = localStorage.getItem('company');
+                $('.error-message').hide();
+
+                try {
+                    const response = await $.ajax({
+                        url: currentForm.attr('action'),
+                        type: 'POST',
+                        contentType: 'application/json',
+                        headers: {
+                            'Authorization': `Bearer ${appToken}`,
+                            'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
+                        },
+                        data: JSON.stringify(data),
+                        dataType: 'json'
+                    });
+
+                    handleResponse(response);
+                } catch (xhr) {
+                    if (xhr.status === 422) {
+                        console.log(xhr.responseText);
+                        const response = JSON.parse(xhr.responseText);
+                        handleErrorResponse(response, currentForm);
+                    } else {
+                        showErrorNotification('error', 'An error occurred while processing your request.');
+                    }
+                }
+                return false;
+            }
+
+            function serializeFormData(form) {
+                const formData = form.serializeArray();
+                const data = {};
+                formData.forEach(field => {
+                    data[field.name] = field.value;
+                });
+                return data;
+            }
+
+            function handleResponse(response) {
+                if (response.success) {
+                    location.href =
+                        `{{ url('dashboard/hrms/payout') }}`;
+                } else {
+                    showErrorNotification('error', response.message);
+                }
+            }
+
+            function handleErrorResponse(result, tabId) {
+                const errorString = result.error || 'An error occurred.';
+                showErrorNotification('error',
+                    `There were validation errors on tab ${tabId}. Message : ${result.message}`, errorString);
+                const errorMessages = errorString.split(', ');
+
+                $('.error-message').remove();
+
+                const errorPattern = /\"([^\"]+)\"/g;
+                let match;
+
+                while ((match = errorPattern.exec(errorMessages)) !== null) {
+                    const field = match[1];
+                    if (field !== 'employee_id') {
+                        let fieldName = field.replace(/_/g, " ").replace(/\b\w/g, char => char.toUpperCase());
+                        const input = $(`[name="${field}"]`);
+
+                        input.addClass('is-invalid');
+                        input.before(
+                            `<div class="error-message text-danger mt-1 text-xs sm:ml-auto sm:mt-0 mb-2">${fieldName} is not allowed to be empty</div>`
+                        );
+                    }
+                }
+
+                const firstErrorField = $('.error-message').first();
+                if (firstErrorField.length) {
+                    $('html, body').animate({
+                        scrollTop: firstErrorField.offset().top - 100
+                    }, 500);
+                }
             }
         });
     </script>
