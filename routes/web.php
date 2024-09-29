@@ -195,6 +195,7 @@ Route::controller(DashboardController::class)->group(function () {
                             Route::get('/shift_assignment', 'shift')->name('shift');
                             Route::get('/shift_list', 'shift_list')->name('shift_list');
                             Route::get('/report', 'report')->name('report');
+                            Route::get('/new_shift_assignment', 'new_assignment')->name('shift');
                         });
                     });
 

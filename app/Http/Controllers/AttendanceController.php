@@ -51,6 +51,13 @@ class AttendanceController extends Controller
 
         return view('dashboard.hrms.attendance.shift_list', $data);
     }
+    public function new_assignment()
+    {
+        $data['title']   = 'Duluin HRMS';
+        $data['page_title']   = 'New Shift Assignment';
+
+        return view('dashboard.hrms.attendance.new_assignment', $data);
+    }
     public function report()
     {
         $data['title']   = 'Duluin HRMS';

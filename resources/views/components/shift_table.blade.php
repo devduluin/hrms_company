@@ -42,7 +42,6 @@
 
 </style>
 
-
 <div class="table-responsive relative overflow-x-auto sm:rounded-lg">
     <table class="table w-full" id="{{ $id }}">
         <thead class="bg-slate-700">
@@ -67,33 +66,4 @@
 </div>
 
 
-@include('vendor-common.datatables')
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function() {
-        // Fungsi untuk cek semua checkbox
-        $('#selectAll').on('click', function() {
-            $('tbody input[type="checkbox"]').prop('checked', this.checked);
-            toggleAssignShiftButton();
-        });
-
-        // Event listener untuk setiap checkbox di dalam tbody
-        $('tbody').on('change', 'input[type="checkbox"]', function() {
-            toggleAssignShiftButton();
-        });
-
-        // Fungsi untuk menampilkan atau menyembunyikan tombol Assign Shift
-        function toggleAssignShiftButton() {
-            // Hitung jumlah checkbox yang dicentang
-            var checkedCount = $('tbody input[type="checkbox"]:checked').length;
-
-            if (checkedCount > 0) {
-                $('#assignShiftContainer').fadeIn(); // Munculkan tombol jika ada yang dicentang
-            } else {
-                $('#assignShiftContainer').fadeOut(); // Sembunyikan tombol jika tidak ada yang dicentang
-            }
-        }
-    });
-</script>
 
