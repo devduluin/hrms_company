@@ -23,7 +23,7 @@
                 </div> -->
                 <div class="col-span-12 flex flex-col gap-y-7 xl:col-span-9">
                     <div class="box box--stacked flex flex-col p-5">
-                        <x-datatable id="applicantTable" :url="'http://apidev.duluin.com/api/v1/leave-type/datatable'" method="POST" class="display">
+                        <x-datatable id="applicantTable" :url="$apiUrl" method="POST" class="display">
                             <x-slot:thead>
                                 <th data-value="leave_type_name">Leave type name</th>
                                 <th data-value="maximum_leave_allocation_allowed">Maximum leave allocation allowed</th>
