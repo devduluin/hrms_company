@@ -55,7 +55,7 @@
 @push('js')
     <script>
         function getStatus(data, type, row, meta) {
-            
+
             if (data === 'active') {
                 return `<div class="flex items-center justify-center text-success"><div class="ml-1.5 whitespace-nowrap"><i data-tw-merge data-lucide="check" class="text-success"></i> Active</div></div>`;
             } else {

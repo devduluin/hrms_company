@@ -115,7 +115,7 @@ class PayoutController extends Controller
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
         $allSessions = session()->all();
 
-        return view('dashboard.payroll.payout.salary_structure.create', $data);
+        return view('dashboard.payroll.payout.salary_structure.list', $data);
     }
 
     public function edit_component($id, Request $request)
