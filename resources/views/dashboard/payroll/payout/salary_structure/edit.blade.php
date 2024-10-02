@@ -20,12 +20,11 @@
                                     href="{{ $url ?? '' }}">
                                     <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
                                 </button>
-                                {{-- <x-form.button label="Save changes" id="save-btn" style="primary" type="submit"
-                                    icon="save" /> --}}
                             </div>
                         </div>
                         <div class="mt-1.5 flex flex-col">
-                            <input type="hidden" name="salary_structure_id" id="salary_structure_id" value="" />
+                            <input type="hidden" name="salary_structure_id" id="salary_structure_id"
+                                value="{{ $salary_structure_id }}" />
                             @include('dashboard.payroll.payout.salary_structure.tabs')
                             <div class="box box--stacked flex flex-col p-5">
                                 @include('dashboard.payroll.payout.salary_structure.tab-content')
@@ -50,17 +49,16 @@
             $(initialTab.data('tw-target')).addClass('active').removeAttr('style').show();
 
             let lastActiveTabId = initialTab.data('tw-target');
-            console.log(lastActiveTabId);
             const appToken = localStorage.getItem('app_token');
+            const salary_structure_id = $("#salary_structure_id").val();
 
             $('ul[role="tablist"] li button[role="tab"]').on('click', async function(e) {
                 const newTabId = $(this).data('tw-target');
 
                 if (lastActiveTabId !== newTabId) {
                     e.preventDefault();
-                    await handleFormSubmission(lastActiveTabId);
+                    // await handleFormSubmission(lastActiveTabId);
                     lastActiveTabId = newTabId;
-                    console.log(lastActiveTabId);
 
                     $(lastActiveTabId + "-btn").click(async function(e) {
                         console.log(lastActiveTabId + "-form");
@@ -70,11 +68,89 @@
                 }
             });
 
+            handleGetData(salary_structure_id, lastActiveTabId);
+
             $(lastActiveTabId + "-btn").click(async function(e) {
-                console.log(lastActiveTabId + "-form");
                 e.preventDefault();
                 await handleFormSubmission(lastActiveTabId);
             });
+
+            async function handleGetData(salary_structure_id, tabId) {
+                $.ajax({
+                    url: `{{ $apiPayrollUrl }}/salary_structure/${salary_structure_id}`,
+                    type: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${appToken}`,
+                        'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
+                    },
+                    dataType: 'json',
+                    success: await
+                    function(response) {
+                        if (response.success) {
+                            $("#name").val(response.data.name);
+                            const companySelect = $('#company_id')[0].tomselect;
+                            const companyValue = response.data.company_id;
+
+                            companySelect.on('load', function() {
+                                if (!companySelect.options[companyValue]) {
+                                    companySelect.addOption({
+                                        value: companyValue,
+                                        text: response.data.company_id_rel
+                                            .company_name
+                                    });
+                                }
+                                companySelect.setValue(companyValue);
+                            });
+
+                            $("#is_active").attr("checked", response.data.is_active == 1 ? true :
+                                false);
+                            $("#leave_enchashment_amount").val(response.data.leave_enchashment_amount);
+                            $("#max_benefits").val(response.data.max_benefits);
+                            $("#is_salary_slip_based_on_timesheet").attr("checked", response.data
+                                .is_salary_slip_based_on_timesheet == 1 ? true :
+                                false);
+
+                            const frequencySelect = $('#payroll_frequency')[0].tomselect;
+                            const frequencyValue = response.data.payroll_frequency;
+
+                            if (!frequencySelect.options[frequencyValue]) {
+                                frequencySelect.addOption({
+                                    value: frequencyValue,
+                                    text: frequencyValue
+                                });
+                            }
+                            frequencySelect.setValue(frequencyValue);
+
+                            if (response.data.currency_id !== null) {
+                                const currencySelect = $('#currency')[0].tomselect;
+                                const currencyValue = response.data.currency_id;
+
+                                currencySelect.on('load', function() {
+                                    if (!currencySelect.options[currencyValue]) {
+                                        currencySelect.addOption({
+                                            value: currencyValue,
+                                            text: currencyValue
+                                        });
+                                    }
+                                    currencySelect.setValue(currencyValue);
+                                });
+                            }
+
+                            if (response.data.structureEarning !== null) {
+                                $.each(response.data.structureEarning, function(index, item) {
+                                    addRowToTable('editable-earning-table', 'earningRowCount',
+                                        item);
+                                });
+                                $.each(response.data.structureDeduction, function(index, item) {
+                                    addRowToTable('editable-deduction-table',
+                                        'deductionRowCount',
+                                        item);
+                                });
+                            }
+                        }
+                    }
+                });
+            }
 
             async function handleFormSubmission(formId) {
                 const currentForm = $(formId + "-form");
@@ -83,13 +159,16 @@
                 data._token = $('meta[name="csrf-token"]').attr('content');
                 data.company_id = localStorage.getItem('company');
                 $('.error-message').hide();
-                if (salary_structure_id == "" && formId !== "#details-form") {
-                    showErrorNotification('error', "Please create salary structure detail data first");
-                }
 
                 data.is_active = $("#is_active").is(":checked") ? 1 : 0;
                 data.is_salary_slip_based_on_timesheet = $("#is_salary_slip_based_on_timesheet").is(
                     ":checked") ? 1 : 0;
+                data.salary_structure_id = salary_structure_id;
+
+                if (formId === '#earning') {
+                    const earningDeductionData = getEarningDeductionData();
+                    $.extend(data, earningDeductionData);
+                }
 
                 try {
                     const response = await $.ajax({
@@ -118,6 +197,58 @@
                 return false;
             }
 
+            function getEarningDeductionData() {
+                var earnings = [];
+                var deductions = [];
+
+                $('#editable-earning-table tr').each(function() {
+                    var $row = $(this); // Use jQuery to refer to the current row
+                    var salaryComponentId = $row.find('select[name="salary_component_id"]').val();
+                    var amount = $row.find('input[name="amount"]').val();
+                    var paymentDayDepend = $row.find('input[name="payment_day_depend"]').prop(
+                        'checked') ? 1 : 0;
+                    var taxApplicable = $row.find('input[name="tax_applicable"]').prop('checked') ? 1 : 0;
+                    var formulaBased = $row.find('input[name="formula_based"]').prop('checked') ? 1 : 0;
+
+                    earnings.push({
+                        type: 'earning',
+                        salary_component_id: salaryComponentId,
+                        amount: amount,
+                        payment_day_depend: paymentDayDepend,
+                        tax_applicable: taxApplicable,
+                        formula_based: formulaBased
+                    });
+                });
+
+                // Collect deductions data
+                $('#editable-deduction-table tr').each(function() {
+                    var $row = $(this); // Use jQuery to refer to the current row
+                    var salaryComponentId = $row.find('select[name="salary_component_id"]').val();
+                    var amount = $row.find('input[name="amount"]').val();
+                    var paymentDayDepend = $row.find('input[name="payment_day_depend"]').prop(
+                        'checked') ? 1 : 0;
+                    var taxApplicable = $row.find('input[name="tax_applicable"]').prop('checked') ? 1 : 0;
+                    var formulaBased = $row.find('input[name="formula_based"]').prop('checked') ? 1 : 0;
+
+                    deductions.push({
+                        type: 'deduction',
+                        salary_component_id: salaryComponentId,
+                        amount: amount,
+                        payment_day_depend: paymentDayDepend,
+                        tax_applicable: taxApplicable,
+                        formula_based: formulaBased
+                    });
+                });
+
+                // Combine earnings and deductions
+                var formData = {
+                    earnings: earnings,
+                    deductions: deductions,
+                };
+
+                return formData;
+            }
+
             function serializeFormData(form) {
                 const formData = form.serializeArray();
                 const data = {};
@@ -129,10 +260,11 @@
 
             function handleResponse(response) {
                 if (response.success) {
-                    toastr.success(response.message);
-                    $("#salary_structure_id").val(response.data.id);
-                    location.href =
-                        `{{ url('dashboard/hrms/payout/salary_structure') }}/edit/${response.data.id}`;
+                    if ($("#salary_structure_id").val() === "") {
+                        toastr.success(response.message);
+                    } else {
+                        toastr.success("Data has been updated successfully");
+                    }
                 } else {
                     toastr.error(response.message);
                 }

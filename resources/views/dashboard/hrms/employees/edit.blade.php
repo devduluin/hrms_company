@@ -312,12 +312,28 @@
                                 $("#attendance_device_id").val(response.data.attendanceLeave
                                     .attendance_device_id);
 
+                                const defaultShiftSelect = $('#default_ship')[0].tomselect;
+                                const defaultShiftValue = response.data.attendanceLeave
+                                    .default_ship;
+
+                                defaultShiftSelect.on('load', function() {
+                                    if (!defaultShiftSelect.options[defaultShiftValue]) {
+                                        defaultShiftSelect.addOption({
+                                            value: defaultShiftValue,
+                                            text: defaultShiftValue
+                                        });
+                                    }
+                                    defaultShiftSelect.setValue(defaultShiftValue);
+                                });
+
                                 const expenseApproverSelect = $('#expense_approver')[0].tomselect;
                                 const expenseApproverValue = response.data.attendanceLeave
                                     .expense_approver;
 
                                 expenseApproverSelect.on('load', function() {
                                     if (!expenseApproverSelect.options[expenseApproverValue]) {
+                                        console.log("Expense Approver Value: " +
+                                            expenseApproverValue);
                                         expenseApproverSelect.addOption({
                                             value: expenseApproverValue,
                                             text: expenseApproverValue
@@ -350,6 +366,7 @@
                                             value: leaveApproverValue,
                                             text: leaveApproverValue
                                         });
+                                        console.log("Ada");
                                     }
                                     leaveApproverSelect.setValue(leaveApproverValue);
                                 });

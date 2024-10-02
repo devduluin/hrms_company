@@ -19,7 +19,7 @@
         <option value="">Select Holiday List</option>
     </x-form.select>
     <x-form.select id="default_ship" name="default_ship" label="Default Ship"
-        url="{{ url('dashboard/hrms/designation') }}" apiUrl="{{ $apiCompanyUrl }}/shift-type/datatables"
+        url="{{ url('dashboard/hrms/designation') }}" apiUrl="{{ $apiCompanyUrl }}/shift-type/datatable"
         columns='["shift_type_name"]' :keys="[
             'company_id' => $company,
         ]">

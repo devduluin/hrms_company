@@ -126,35 +126,35 @@
 
         function getCompany(data, type, row, meta) {
             if (data !== null) {
-                return data.company_name;
+                return data?.company_name ?? 'N/A';
             }
             return 'N/A';
         }
 
         function getDesignation(data, type, row, meta) {
             if (data !== null) {
-                return data.designation_name;
+                return data?.designation_name ?? 'N/A';
             }
             return 'N/A';
         }
 
         function getDepartment(data, type, row, meta) {
             if (data !== null) {
-                return data.department_name;
+                return data?.department_name ?? 'N/A';
             }
             return 'N/A';
         }
 
         function getBranch(data, type, row, meta) {
             if (data !== null) {
-                return data.branch_name;
+                return data?.branch_name ?? 'N/A';
             }
             return 'N/A';
         }
 
         function getGrade(data, type, row, meta) {
             if (data !== null) {
-                return data.employee_grade_name;
+                return data?.employee_grade_name ?? 'N/A';
             }
             return 'N/A';
         }

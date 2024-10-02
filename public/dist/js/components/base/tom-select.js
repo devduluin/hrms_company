@@ -11,8 +11,6 @@ function initializeTomSelect() {
             const keysData = $(this).attr("data-attributes");
             const appToken = localStorage.getItem("app_token");
 
-            console.log("selectedId", selectedId);
-
             try {
                 selectType = JSON.parse(selectType);
             } catch (e) {
@@ -33,7 +31,7 @@ function initializeTomSelect() {
                         const payload = {
                             draw: 0,
                             start: 0,
-                            length: 10,
+                            length: 25,
                             search: query || "", // query is optional now
                             order: [
                                 {

@@ -67,7 +67,8 @@
         </x-form.select>
 
         <x-form.select id="branch_id" name="branch_id" label="Branch" url="{{ url('dashboard/hrms/designation') }}"
-            apiUrl="{{ $apiCompanyUrl }}/branch/datatables" columns='["branch_name"]' :keys="[
+            apiUrl="http://apidev.duluin.com/api/v1/branch/branch/datatable" columns='["branch_name"]'
+            :keys="[
                 'company_id' => $company,
             ]">
             <option value="">Select Branch</option>
