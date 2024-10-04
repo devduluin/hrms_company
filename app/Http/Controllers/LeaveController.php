@@ -47,5 +47,22 @@ class LeaveController extends Controller
 
         return view('dashboard.hrms.leave.leave_allocation.create', $data);
     }
+
+    public function application()
+    {
+        $data['title']   = 'Duluin HRMS';
+        $data['page_title']   = 'Leave Application';
+        $data['apiUrl'] = $this->apiGatewayUrl . '/v1/employees';
+
+        return view('dashboard.hrms.leave.leave_application.index', $data);
+    }
+    public function create_application()
+    {
+        $data['title']   = 'Duluin HRMS';
+        $data['page_title']   = 'Add Leave Allocation';
+        $data['apiUrl'] = $this->apiGatewayUrl . '/v1/employees';
+
+        return view('dashboard.hrms.leave.leave_application.create', $data);
+    }
    
 }

@@ -26,5 +26,7 @@ Route::prefix('/leave')->group(function () {
         Route::get('/create_holiday', 'create_holiday')->name('create_holiday');
         Route::get('/allocation', 'allocation')->name('allocation');
         Route::get('/create_allocation', 'create_allocation')->name('allocation');
+        Route::get('/application', 'application')->name('application');
+        Route::get('/create_application', 'create_application')->name('allocation');
     });
 });

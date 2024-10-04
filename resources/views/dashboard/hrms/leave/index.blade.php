@@ -32,7 +32,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mt-4">
                             <x-action  label="Holiday List" icon="arrow-up-right" url="{{ url('/dashboard/hrms/leave/holiday') }}" />
                             <x-action  label="Leave Allocation" icon="arrow-up-right" url="{{ url('/dashboard/hrms/leave/allocation') }}" />
-                            <x-action  label="Leave Application" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/shift_list') }}" />
+                            <x-action  label="Leave Application" icon="arrow-up-right" url="{{ url('/dashboard/hrms/leave/application') }}" />
                         </div>
                 </div>  
         </div>
