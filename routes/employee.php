@@ -11,6 +11,7 @@ Route::prefix('/employee')->group(function () {
         Route::get('/edit_employee/{id}', 'edit');
         Route::get('/new_employee', 'create');
         Route::get('/update_employee', 'update');
+        Route::get('/import_employee', 'import');
     });
 });
 

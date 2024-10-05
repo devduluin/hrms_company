@@ -18,6 +18,10 @@
                             </div>
                             <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
                                 <a href="{{ url('dashboard/hrms/employee/new_employee') }}" data-tw-merge=""
+                                    class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 w-48"><i
+                                        data-tw-merge="" data-lucide="upload" class="mr-2 h-4 w-4 stroke-[1.3]"></i>
+                                    Import Data</a>
+                                <a href="{{ url('dashboard/hrms/employee/new_employee') }}" data-tw-merge=""
                                     class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"><i
                                         data-tw-merge="" data-lucide="pen-line" class="mr-2 h-4 w-4 stroke-[1.3]"></i>
                                     Add New Employee</a>
@@ -80,6 +84,11 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- Add this in your HTML to show progress -->
+                            {{-- <div>
+                                <p>Import Progress: <span id="progressValue">0</span>%</p>
+                                <progress id="progressBar" value="0" max="100"></progress>
+                            </div> --}}
                             <div class="box box--stacked flex flex-col">
                                 <div class="table gap-y-2 p-5 sm:flex-row sm:items-center">
                                     <div>
@@ -94,7 +103,8 @@
                                                 </th>
                                                 <th data-value="grade_id_rel" data-render="getGrade">Grade
                                                 </th>
-                                                <th data-value="designation_id_rel" data-render="getDesignation">Designation
+                                                <th data-value="designation_id_rel" data-render="getDesignation">
+                                                    Designation
                                                 </th>
                                                 <th data-value="department_id_rel" data-render="getDepartment">Department
                                                 </th>
