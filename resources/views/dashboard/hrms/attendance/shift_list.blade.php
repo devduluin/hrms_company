@@ -19,11 +19,11 @@
                     </div>  
                     <div class="mt-1.5 flex flex-col">
                     <div class="box box--stacked flex flex-col p-5">
-                        <x-datatable id="applicantTable" :url="'http://apidev.duluin.com/api/v1/branch/datatable'" method="POST" class="display">
+                        <x-datatable id="applicantTable" :url="$apiUrl" method="POST" class="display">
                             <x-slot:thead>
-                                <th data-value="employee_name">Employee name</th>
-                                <th data-value="company">Company</th>
-                                <th data-value="shift">Shift</th>
+                                <th data-value="employee_id_rel" data-render="employeeName">Employee name</th>
+                                <th data-value="company_id_rel" data-render="companyName">Company</th>
+                                <th data-value="shift_type_id_rel" data-render="shiftName">Shift</th>
                                 <!-- <th data-value="id">Action</th>  -->
                             </x-slot:thead>
                         </x-datatable>
@@ -42,27 +42,48 @@
 
 @endsection
 
-<!-- @push('js')
+@push('js')
 
-<script>
+<script type="text/javascript">
 
-    function getActionBtn(data, type, row, meta) {
-        const url = `{{ url('dashboard/hrms/employee/edit_employee') }}/${data}`;
-        console.log(url);
-        return `<div data-tw-merge data-tw-placement="bottom-end" class="dropdown relative"><button data-tw-merge data-tw-toggle="dropdown" aria-expanded="false" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary">Action</button>
-        <div data-transition data-selector=".show" data-enter="transition-all ease-linear duration-150" data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1" data-enter-to="!mt-1 visible opacity-100 translate-y-0" data-leave="transition-all ease-linear duration-150" data-leave-from="!mt-1 visible opacity-100 translate-y-0" data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1" class="dropdown-menu absolute z-[9999] hidden">
-        <div data-tw-merge class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 w-40">
-        <a class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="printer" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
-        Pindah Shift</a>
-        <a href="` + url + `" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="external-link" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
-        Edit</a>
-        <a class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="file-text" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
-        Hapus</a>
-        </div>
-        </div>
-        </div>`;
+    function employeeName(data) {
+        if(data) {
+            return data.first_name + ' ' + data.last_name;
+        }
+        return 'N/A';
     }
 
+    function companyName(data, type, row, meta) {
+        if (data !== null) {
+            
+            return data.company_name;
+        }
+        return 'N/A';
+    }
+    
+    function shiftName(data) {
+        if(data) {
+            return data.shift_type_name;
+        }
+        return 'N/A';
+    }
+    // function getActionBtn(data, type, row, meta) {
+    //     const url = `{{ url('dashboard/hrms/employee/edit_employee') }}/${data}`;
+    //     console.log(url);
+    //     return `<div data-tw-merge data-tw-placement="bottom-end" class="dropdown relative"><button data-tw-merge data-tw-toggle="dropdown" aria-expanded="false" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary">Action</button>
+    //     <div data-transition data-selector=".show" data-enter="transition-all ease-linear duration-150" data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1" data-enter-to="!mt-1 visible opacity-100 translate-y-0" data-leave="transition-all ease-linear duration-150" data-leave-from="!mt-1 visible opacity-100 translate-y-0" data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1" class="dropdown-menu absolute z-[9999] hidden">
+    //     <div data-tw-merge class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 w-40">
+    //     <a class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="printer" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
+    //     Pindah Shift</a>
+    //     <a href="` + url + `" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="external-link" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
+    //     Edit</a>
+    //     <a class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="file-text" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
+    //     Hapus</a>
+    //     </div>
+    //     </div>
+    //     </div>`;
+    // }
+
 </script>
-@endpush -->
+@endpush
 
