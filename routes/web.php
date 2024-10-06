@@ -89,7 +89,6 @@ Route::controller(DashboardController::class)->group(function () {
                 Route::prefix('/hrms')->group(function () {
                     Route::get('/', 'index')->name('hrms');
 
-
                     //import route dari module compnay
                     require __DIR__ . '/company.php';
 

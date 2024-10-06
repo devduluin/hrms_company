@@ -50,7 +50,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="flex items-center">
-                                                    <a class="mr-auto flex items-center text-primary" href ="/">
+                                                    <a class="mr-auto flex items-center text-primary" href ="{{ route('hrms.company.edit') }}">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                             height="24" viewBox="0 0 24 24" fill="none"
                                                             stroke="currentColor" stroke-width="2" stroke-linecap="round"

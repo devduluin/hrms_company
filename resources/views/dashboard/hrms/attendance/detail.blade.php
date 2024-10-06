@@ -81,7 +81,7 @@
                     <div class="border-b border-dashed border-slate-300/70"></div>
                     <div class=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mt-4">     
                         <div class=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mt-2" id="checkin">
-                            <div class="flex justify-center mt-4">
+                            <div class="flex justify-center mt-4" id="photo_in">
                                 <img src="" alt=" Foto Absensi" style="width: 100px; height: 100px;" class="rounded-md shadow-md" />
                             </div>
                             <div class=" gap-5 ">
@@ -118,7 +118,7 @@
                             </div>
                         </div>
                         <div class=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mt-4" id="checkin">
-                            <div class="flex justify-center mt-4" id="photo">
+                            <div class="flex justify-center mt-4" id="photo_out">
                                 <img src="" alt=" Foto Absensi" style="width: 100px; height: 100px;" class="rounded-md shadow-md" />
                             </div>
                             <div class=" gap-5 ">
@@ -155,10 +155,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mb-6 mt-6 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
+                    {{-- <div class="mb-6 mt-6 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
                         Location
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mt-4" id="evidence">
+                    </div> --}}
+                    {{-- <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mt-4" id="evidence">
                         <div class="justify-center" id="map_checkin">
                             <div class="label mb-4">
                                 Check in Location
@@ -175,7 +175,7 @@
                                 <img src="" alt="Map Checkout" style="width: 400px; height: 400px;" class="rounded-md shadow-md" />
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     
                     </div>
                 </div>
@@ -215,10 +215,10 @@
                 $("#check_out").html(attendance.time_out ? attendance.time_out : '-');
                 $("#check_out_status").html(attendance.checkout_status);
                 $("#status").html(attendance.attendance_status);
-                $('#photo').html(`<img src="${attendance.photo_in}" alt=" photo" style="width: 100px; height: 100px;" class="rounded-md shadow-md" />`)
+                $('#photo_in').html(`<img src="${attendance.photo_in}" alt=" photo" style="width: 100px; height: 100px;" class="rounded-md shadow-md" />`)
+                $('#photo_out').html(`<img src="${attendance.photo_out}" alt=" photo" style="width: 100px; height: 100px;" class="rounded-md shadow-md" />`)
             }).catch((err) => {
                 console.log(err);
-
             });
         }
     </script>

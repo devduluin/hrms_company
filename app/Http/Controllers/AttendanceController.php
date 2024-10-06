@@ -36,19 +36,18 @@ class AttendanceController extends Controller
         return view('dashboard.hrms.attendance.detail', $data);
     }
 
-    public function shift()
+    public function shift(Request $request)
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'New Shift Assignment';
-        // $data['apiUrl'] = $this->apiGatewayUrl . "/v1/attendance/attendance/total-attendance/" . $request->session()->get('company_id')[0];
-
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/shift-assignment/shift-assignment";
         return view('dashboard.hrms.attendance.shift_assignment', $data);
     }
-    public function shift_list()
+    public function shift_list(Request $request)
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Shift List';
-
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/shift-request/shift-request/datatable";
         return view('dashboard.hrms.attendance.shift_list', $data);
     }
     public function new_assignment()
