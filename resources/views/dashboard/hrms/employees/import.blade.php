@@ -45,11 +45,9 @@
                             <div class="preview-component">
                                 <div>
                                     <p class="leading-relaxed">
-                                        The "Dropzone" component allows you to implement file
-                                        upload functionality in your web application with the
-                                        ability to validate file types before uploading. This
-                                        example demonstrates how to create a "Dropzone" with
-                                        file type validation using accepted file formats.
+                                        Drop your Employee file in .xls or .xlsx format. it will automatically importing
+                                        your
+                                        employee data.
                                     </p>
                                     <div
                                         class="relative mb-4 mt-7 rounded-[0.6rem] border border-slate-200/80 dark:border-darkmode-400">
@@ -61,11 +59,6 @@
                                                 <div class="dz-message" data-dz-message="">
                                                     <div class="text-lg font-medium">
                                                         Drop files here or click to upload.
-                                                    </div>
-                                                    <div class="text-gray-600">
-                                                        This is just a demo dropzone. Selected files are
-                                                        <span class="font-medium">not</span> actually
-                                                        uploaded.
                                                     </div>
                                                 </div>
                                             </form>
@@ -79,9 +72,9 @@
             </div>
         </div>
     @endsection
+    @include('vendor-common.toastr')
     @push('js')
         <script src="{{ asset('dist/js/vendors/dropzone.js') }}"></script>
-        {{-- <script src="{{ asset('dist/js/components/base/dropzone.js') }}"></script> --}}
     @endPush
     @push('js')
         <script type="text/javascript">
@@ -96,51 +89,56 @@
                         const appToken = localStorage.getItem('app_token');
 
                         let t = {
-                            url: "http://duluin-hris-account.test/api/users/employees/import",
+                            url: "http://apidev.duluin.com/api/users/employees/import",
                             headers: {
-                                // 'Authorization': `Bearer ${appToken}`,
-                                'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5YzZlZjY1Ni02NTNkLTQ2OTUtYWMwMC0wZDdmMTg3Njk0Y2EiLCJqdGkiOiI2MzJiYWQxMzMxMTE5ZmExM2RiNGZhZDg0NGRlZjUzN2NhYWM1OTY0YzQzMjhkNzhiMmZiN2YzM2Q4N2YyMWY4YTUyY2E5MTI4YTJkMjEyNSIsImlhdCI6MTcyODAwMjkyNC4yOTEzMzIsIm5iZiI6MTcyODAwMjkyNC4yOTEzMzQsImV4cCI6MTc1OTUzODkyMy45MjU5NSwic3ViIjoiMGVhMWE5YTktYWNlOS00YmFhLWE3ZTktMWNlOGYxZWI1OTFiIiwic2NvcGVzIjpbImhyaXNfZW1wbG95ZWUiLCJocmlzX2NvbXBhbnkiXX0.peaOO7dB32onTD0aXli70Tf5nroR8hS-jUb_h9UOf3dCxISuAgnSe1kDvw7pZjBKYTGW494bBUr1B6n2CENqhifOCe_yM32RFaavOUSZ9LH7cVdS_eWu4BIDuGEi-V1PtwJ2RN6OOdAdflFCpRlkqnEbeazar84vBpDd7sCpTGPwZQdfV8NvINKDgCll39_9Z6Mp7gdDxXV_cJf89oagS6zWRXcalVw1wlhF5yy-QNYnvWuoozpWo3xRUnJTpQWvl4owk_-c91fJHCVcOIa6PPZU3D-aW4-NA7RWfxGyiEV8vNUcr7_KK1anbTEwc63DdHHT2X2P-3QZoM8H4vK2E1BXZ4E-P-Og_yjQnqsNO_ZLglBcDCV99ZhkOEPLozkbpLgHf1UlKcgtU_M41eTBxfSLXV_a8i7ErvQIBdsThcKmsD3IND3LaK9mSn4-m9C7XmmRy6Vx-6GTu2lD2juxEdtVKgcWMvxAihErkvmuS6CjxuaIbWtJWi6gmqJMfdrSLgON2GNTxWyFZ3i_0dn9uQqkZO-WxyCOflapc7sCS6WQ_3xzHfiRtxAogtMZBAElG5E0vp7djoIDmQNYUJV3soJv5RNRv0QnmYGjuvr2NyMw917QL_VJOWvOoGw1ONyrF1GdV4MR39-jHlK4pRgP4Nyl3DcbxkfTO3IDAR-wf3E`,
+                                'Authorization': `Bearer ${appToken}`,
                                 'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
                             },
                             accept: (file, done) => {
-                                console.log("Uploaded");
-                                done();
+                                const acceptedMimeTypes = [
+                                    'application/vnd.ms-excel',
+                                    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+                                ];
+
+                                if (!acceptedMimeTypes.includes(file.type)) {
+                                    showErrorNotification('error',
+                                        "Error! Only Excel files are accepted.");
+                                } else {
+                                    console.log("Uploaded");
+                                    done();
+                                }
                             },
-                            maxFilesize: 5, // 5MB limit for files
+                            maxFilesize: 5,
                             init: function() {
                                 this.on("sending", (file, xhr, formData) => {
                                     const folder = dropzoneElement.attr("data-folder") ||
                                         "employees_document";
                                     formData.append("folder", folder);
-                                    console.log("Folder added to request:", folder);
                                 });
 
                                 this.on("success", (file, response) => {
-                                    console.log("File successfully uploaded");
-                                    console.log("Response from server:", response);
                                     if (response.success) {
-                                        console.log("Message:", response.message);
-                                        console.log("File URL:", response.file);
-                                        console.log("Import Key:", response.importKey);
                                         localStorage.removeItem("importKey");
                                         localStorage.setItem("importKey", response.importKey);
                                         checkProgress(response.importKey);
                                     } else {
-                                        console.error("Upload failed:", response.message);
+                                        showErrorNotification('error',
+                                            response.message);
                                     }
                                 });
 
                                 this.on("error", (file, message) => {
                                     if (file.size > this.options.maxFilesize * 1024 * 1024) {
-                                        alert("Error! File too large.");
+                                        showErrorNotification('error',
+                                            "Error! File too large.");
                                         this.removeFile(file);
                                     } else {
-                                        alert(message);
+                                        showErrorNotification('error', message);
                                     }
                                 });
 
                                 this.on("maxfilesexceeded", (file) => {
-                                    alert("No more files please!");
+                                    showErrorNotification('error', "No more files please!");
                                     this.removeFile(file);
                                 });
                             }
@@ -154,7 +152,8 @@
                                     .data("file-types")
                                     .split("|");
                                 if (acceptedTypes.indexOf(file.type) === -1) {
-                                    alert("Error! Files of this type are not accepted");
+                                    showErrorNotification('error',
+                                        "Error! Files of this type are not accepted");
                                     done("Error! Files of this type are not accepted");
                                 } else {
                                     console.log("Uploaded");
@@ -170,9 +169,9 @@
             function checkProgress(importkey) {
                 $("#progressBarBox").removeClass("hidden");
                 const key = importkey;
-                fetch(`http://duluin-hris-account.test/api/users/employees/import-progress/${key}`, {
+                fetch(`http://apidev.duluin.com/api/users/employees/import-progress/${key}`, {
                         headers: {
-                            'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5YzZlZjY1Ni02NTNkLTQ2OTUtYWMwMC0wZDdmMTg3Njk0Y2EiLCJqdGkiOiI2MzJiYWQxMzMxMTE5ZmExM2RiNGZhZDg0NGRlZjUzN2NhYWM1OTY0YzQzMjhkNzhiMmZiN2YzM2Q4N2YyMWY4YTUyY2E5MTI4YTJkMjEyNSIsImlhdCI6MTcyODAwMjkyNC4yOTEzMzIsIm5iZiI6MTcyODAwMjkyNC4yOTEzMzQsImV4cCI6MTc1OTUzODkyMy45MjU5NSwic3ViIjoiMGVhMWE5YTktYWNlOS00YmFhLWE3ZTktMWNlOGYxZWI1OTFiIiwic2NvcGVzIjpbImhyaXNfZW1wbG95ZWUiLCJocmlzX2NvbXBhbnkiXX0.peaOO7dB32onTD0aXli70Tf5nroR8hS-jUb_h9UOf3dCxISuAgnSe1kDvw7pZjBKYTGW494bBUr1B6n2CENqhifOCe_yM32RFaavOUSZ9LH7cVdS_eWu4BIDuGEi-V1PtwJ2RN6OOdAdflFCpRlkqnEbeazar84vBpDd7sCpTGPwZQdfV8NvINKDgCll39_9Z6Mp7gdDxXV_cJf89oagS6zWRXcalVw1wlhF5yy-QNYnvWuoozpWo3xRUnJTpQWvl4owk_-c91fJHCVcOIa6PPZU3D-aW4-NA7RWfxGyiEV8vNUcr7_KK1anbTEwc63DdHHT2X2P-3QZoM8H4vK2E1BXZ4E-P-Og_yjQnqsNO_ZLglBcDCV99ZhkOEPLozkbpLgHf1UlKcgtU_M41eTBxfSLXV_a8i7ErvQIBdsThcKmsD3IND3LaK9mSn4-m9C7XmmRy6Vx-6GTu2lD2juxEdtVKgcWMvxAihErkvmuS6CjxuaIbWtJWi6gmqJMfdrSLgON2GNTxWyFZ3i_0dn9uQqkZO-WxyCOflapc7sCS6WQ_3xzHfiRtxAogtMZBAElG5E0vp7djoIDmQNYUJV3soJv5RNRv0QnmYGjuvr2NyMw917QL_VJOWvOoGw1ONyrF1GdV4MR39-jHlK4pRgP4Nyl3DcbxkfTO3IDAR-wf3E`,
+                            'Authorization': `Bearer ${appToken}`,
                             'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
                         },
                     })
@@ -186,10 +185,10 @@
 
                         if (progress < 100) {
                             $('#autoReloadComponent').html(`Import is ${progress}% completed. Please wait...`);
-                            setTimeout(() => checkProgress(importkey), 1000); // Recursive call with key
+                            setTimeout(() => checkProgress(importkey), 1000);
                         } else {
                             $('autoReloadComponent').html('Import completed successfully!');
-                            alert('Import completed!');
+                            showSuccessNotification('success', 'Import completed!');
                         }
                     })
                     .catch(error => {
@@ -197,7 +196,5 @@
                         $('#autoReloadComponent').html('Error occurred while processing. Please try again.');
                     });
             }
-
-            // setInterval(() => checkProgress(localStorage.getItem("importKey")), 5000);
         </script>
     @endpush
