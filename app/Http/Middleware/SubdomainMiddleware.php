@@ -31,8 +31,8 @@ class SubdomainMiddleware
         $protocol     = $request->secure() ? 'https://' : 'http://';
         $host         = $protocol . $request->getHost();
         // $host         = "http://127.0.0.1:8000";
-       // $gateway      = config('apiendpoints.gateway') . '/v1/needvalidatemyhost';
-        $gateway      = 'http://api_gatway.test/api/v1/needvalidatemyhost';
+        $gateway      = config('apiendpoints.gateway') . '/v1/needvalidatemyhost';
+        //$gateway      = 'http://api_gatway.test/api/v1/needvalidatemyhost';
         $cacheKey     = md5($host);
         $options = [
             'headers' => [
