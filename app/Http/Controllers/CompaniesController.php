@@ -13,11 +13,12 @@ class CompaniesController extends Controller
         $this->apiGatewayUrl = config('apiendpoints.gateway');
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $data['title']   = 'Companies';
         $data['page_title']   = 'Data Companies';
         $data['apiUrl'] = $this->apiGatewayUrl . '/v1/companies/company';
+        $data['userId'] = $request->session()->get('user_id');
         return view('dashboard.hrms.companies.index', $data);
     }
 
