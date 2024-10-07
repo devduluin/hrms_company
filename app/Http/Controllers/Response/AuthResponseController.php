@@ -15,6 +15,7 @@ class AuthResponseController extends Controller
     public function __construct()
     {
         $this->apiGatewayUrl = config('apiendpoints.gateway');
+        //$this->apiGatewayUrl = 'http://api_gatway.test/api';
     }
 
     public function signin(Request $request)
@@ -56,7 +57,87 @@ class AuthResponseController extends Controller
         dd($request->all());
     }
 
-    public function signup(Request $request) {}
+    public function signup(Request $request) 
+    {
+        $headers = [
+            'Accept'        => 'application/json',
+            'x-account-type' => 'hris_company',
+        ];
+
+        $response = $this->postRequest($this->apiGatewayUrl . '/users/register', $request->all(), $headers);
+        
+        if (isset($response) && $response['errors'] == null) {
+            if (isset($response['error']) && $response['error']) {
+                return response()->json([
+                    'message' => $response['message'],
+                ], 400);
+            }
+            $redirect   = $response['result']['redirect'] ?? 'http://devhris.duluin.com';
+            return response()->json([
+                'url' => $redirect
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => $response['message'],
+                'errors' => $response['errors']
+            ], 422);
+        }
+
+        //dd($request->all());
+    }
+
+    public function complete_company_register(Request $request)
+    {
+        
+        $protocol     = $request->secure() ? 'https://' : 'http://';
+        $host         = $protocol . $request->getHost();
+
+        $headers = [
+            'Accept'        => 'application/json',
+            'Authorization' => 'Bearer ' . $request->session()->get('app_token'),
+            'X-Forwarded-Host' => $host,
+        ];
+
+        $data = [
+            'user_id'        => $request->user_id,
+            'company_name' => $request->company_name,
+            'date_of_establishment' => $request->date_of_establishment,
+            'default_currency' => $request->default_currency,
+            'domain' => $request->domain,
+            'parent_company' => "1",
+            'default_holiday_list' => 'off',
+            'status' => 'enable',
+        ];
+ 
+        $response = $this->postRequest($this->apiGatewayUrl . '/v1/companies/company', $data, $headers);
+         
+        if (isset($response)) {
+            if (isset($response['error']) && $response['error']) {
+                return response()->json([
+                    'message' => $response['message'],
+                ], 400);
+            }
+			
+            $userAccount['user_id'] 		= $request->user_id;
+            $userAccount['secondary_id'] 	= $response['data']['id'];
+			$responseUser = $this->postRequest($this->apiGatewayUrl . '/users/register/set_secondary_id', $userAccount, $headers);
+			 
+            if (isset($responseUser)) {
+                $request->session()->forget('company_id');
+                $request->session()->put('company_id', $userAccount['secondary_id']);
+                $redirect   = url('dashboard/hrms/company');
+				return response()->json([
+					'url' => $redirect
+				], 200);
+			}
+           
+        } else {
+            return response()->json([
+                'message' => $response['message'],
+                'errors' => $response['errors']
+            ], 422);
+        }
+    }
 
 
     public function user(Request $request)

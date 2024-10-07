@@ -38,7 +38,7 @@ trait GuzzleTrait
             $data = json_decode($e->getResponse()->getBody()->getContents(), true);
             return [
                 'error' => true,
-                'message' => $data['message'],
+                'message' => $data ?? null,
                 'errors' => $data['errors'] ?? null,
             ];
         }
