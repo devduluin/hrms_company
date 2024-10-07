@@ -121,10 +121,11 @@ class AuthResponseController extends Controller
             $userAccount['user_id'] 		= $request->user_id;
             $userAccount['secondary_id'] 	= $response['data']['id'];
 			$responseUser = $this->postRequest($this->apiGatewayUrl . '/users/register/set_secondary_id', $userAccount, $headers);
-			if (isset($responseUser)) {
+			 
+            if (isset($responseUser)) {
                 $request->session()->forget('company_id');
                 $request->session()->put('company_id', $userAccount['secondary_id']);
-                $redirect   = url('dashboard/hrms');
+                $redirect   = url('dashboard/hrms/company');
 				return response()->json([
 					'url' => $redirect
 				], 200);
