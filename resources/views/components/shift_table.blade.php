@@ -103,7 +103,7 @@
 <script type="text/javascript">
     var page = 1;
     var perPage = 10;
-    var shiftTypeId = "";
+    // var shiftTypeId = "";
     $(document).ready(async function () {
         loadDataShiftAssignment();
     });
@@ -112,9 +112,9 @@
         filterTable();
     });
 
-    function filterShiftId(value) {
-        shiftTypeId= value;
-    }
+    // function filterShiftId(value) {
+    //     shiftTypeId= value;
+    // }
     function filterTable() {
         loadDataShiftAssignment();
     }
@@ -128,7 +128,7 @@
                 company_id: localStorage.getItem('company'),
                 page: page,
                 limit: perPage,
-                shift_type_id: shiftTypeId
+                // shift_type_id: shiftTypeId
             }
         }
 
