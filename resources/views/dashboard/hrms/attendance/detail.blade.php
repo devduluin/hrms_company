@@ -7,177 +7,156 @@
         <div class="container gap-y-5">
             <div class="flex flex-col gap-y-5 md:h-10 md:flex-row md:items-center">
                 <div class="text-base font-medium">
-                    Detail Attendance
+                    Attendance
                 </div>
                 <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
-                    <x-form.button id="back" label="Back to Summary" style="primary" icon="arrow-left" url="{{ url('dashboard/hrms/attendance/summary') }}" ></x-form.button>
+                    <a href="{{ route('hrms.attendance.summary') }}" type="button" class="btn btn-primary transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary shadow-md w-100">
+                        <svg class="mr-2 h-4 w-4 stroke-[1.3]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+                        Back</a>
                 </div>
             </div>
-            <div class="grid grid-cols-12 gap-x-6 gap-y-5 mt-3">
-                {{-- <div class="box p-4 col-span-12">
-                    <div>
-                        <div id="employee_name" class="font-medium text-lg">
-                           -
-                        </div>
-                        <div id="job">
-                            Full Stack Developer
-                        </div>
-                    </div>
-                </div> --}}
-                <div class="box p-4 col-span-12">
-                    <div class="mb-6 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
-                        Personal Information
-                    </div>
-                    <div class=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mt-4">
-                        <div class="field">
-                            <div>
-                                <div id="label" class="text-s">
-                                    First Name
+            <div class="mt-3.5 grid grid-cols-10 gap-5">
+                <div class="col-span-12 xl:col-span-3">
+                    <div class="box flex flex-col p-5">
+                        <div class="flex flex-col gap-5">
+                            <div class="relative mt-3 rounded-[0.6rem] border border-slate-200/80 dark:border-darkmode-400">
+                                <div class="absolute left-0 -mt-2 ml-4 bg-white px-3 text-xs uppercase text-slate-500">
+                                    <div class="-mt-px">Photo chekin</div>
                                 </div>
-                                <div id="first_name" class="text-m font-bold">
-                                   -
-                                </div>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <div>
-                                <div id="label" class="text-m text-slate-300">
-                                    Last Name
-                                </div>
-                                <div id="last_name" class="text-m font-bold">
-                                    -
-                                </div>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <div>
-                                <div id="label" class="text-m">
-                                    Email
-                                </div>
-                                <div id="personal_email" class="text-m font-bold">
-                                    -
-                                </div>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <div>
-                                <div id="label" class="text-m">
-                                    Phone
-                                </div>
-                                <div id="mobile_phone" class="text-m font-bold">
-                                   -
+                                <div class="mt-2.5 flex flex-col p-4">
+                                    <div class="flex items-center">
+                                        <div class="flex" id="photo_in">
+                                            <img src="" alt=" Foto Absensi" class="rounded-md shadow-md" />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="box p-4 col-span-12">
-                    <div class=" mt-4 pb-5 text-[0.94rem] font-medium">
-                        Attendance Details
-                    </div>
-                    <div id="attendance_date" class="ml-6 mb-6  p-2 text-xs font-regular bg-primary/10 text-primary rounded-2xl" style="display: inline-block ">
-                        -
-                    </div>
-                    <div class="border-b border-dashed border-slate-300/70"></div>
-                    <div class=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mt-4">     
-                        <div class=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mt-2" id="checkin">
-                            <div class="flex justify-center mt-4" id="photo_in">
-                                <img src="" alt=" Foto Absensi" style="width: 100px; height: 100px;" class="rounded-md shadow-md" />
+                <div class="col-span-12 flex flex-col gap-7 xl:col-span-7">
+                    <div class="box flex flex-col p-5">
+                        <div class="relative mt-3 rounded-[0.6rem] border border-slate-200/80 dark:border-darkmode-400">
+                            <div class="absolute left-0 -mt-2 ml-4 bg-white px-3 text-xs uppercase text-slate-500">
+                                <div class="-mt-px">Employee Details</div>
                             </div>
-                            <div class=" gap-5 ">
-                                <div class="field ">
-                                    <div id="field">
-                                        <div id="label" class="text-m">
-                                            Check in time
-                                        </div>
-                                        <div id="check_in" class="text-m font-bold">
-                                            -
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="field mt-2">
-                                    <div id="check_in">
-                                        <div id="label" class="text-m">
-                                            Status
-                                        </div>
-                                        <div id="status" class="text-m font-bold">
-                                            -
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="field mt-2">
-                                    <div>
-                                        <div id="label" class="text-m">
-                                            Check in Status
-                                        </div>
-                                        <div id="check_in_status" class="text-m font-bold">
-                                            -
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mt-4" id="checkin">
-                            <div class="flex justify-center mt-4" id="photo_out">
-                                <img src="" alt=" Foto Absensi" style="width: 100px; height: 100px;" class="rounded-md shadow-md" />
-                            </div>
-                            <div class=" gap-5 ">
-                                <div class="field ">
-                                    <div id="field">
-                                        <div id="label" class="text-m">
-                                            Check out time
-                                        </div>
-                                        <div id="check_out" class="text-m font-bold">
-                                            17.03
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="field mt-2">
-                                    <div id="check_out">
-                                        <div id="label" class="text-m">
-                                            Status
-                                        </div>
-                                        <div id="status" class="text-m font-bold">
-                                            -
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="field mt-2">
-                                    <div>
-                                        <div id="label" class="text-m">
-                                            Check out Status
-                                        </div>
-                                        <div id="check_out_status" class="text-m font-bold">
-                                            -
-                                        </div>
-                                    </div>
+                            <div class="mt-2.5 flex flex-col gap-5 p-5">
+                                <div class="overflow-auto xl:overflow-visible">
+                                    <table class="w-full text-left border-b border-dashed border-slate-200/80">
+                                        <tbody>
+                                            <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
+                                                <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                    <div class="flex items-center">
+                                                        <p class="whitespace-nowrap font-medium" href="#">
+                                                           <span class="font-bold">ID:</span> <span id="employeeId">-</span>
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
+                                                <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                    <div class="flex items-center">
+                                                        <p class="whitespace-nowrap font-medium" href="#">
+                                                           <span class="font-bold">Name:</span> <span id="name">-</span>
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
+                                                <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                    <div class="flex items-center">
+                                                        <p class="whitespace-nowrap font-medium" href="#">
+                                                           <span class="font-bold">Email:</span> <span id="email">-</span>
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
+                                                <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                    <div class="flex items-center">
+                                                        <p class="whitespace-nowrap font-medium" href="#">
+                                                           <span class="font-bold">Mobile Phone:</span> <span id="phone">-</span>
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="mb-6 mt-6 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
-                        Location
-                    </div> --}}
-                    {{-- <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mt-4" id="evidence">
-                        <div class="justify-center" id="map_checkin">
-                            <div class="label mb-4">
-                                Check in Location
+                    <div class="box flex flex-col p-5">
+                        <div class="relative rounded-[0.6rem] border border-slate-200/80 dark:border-darkmode-400">
+                            <div class="absolute left-0 -mt-2 ml-4 bg-white px-3 text-xs uppercase text-slate-500">
+                                <div class="-mt-px">Attendance Details</div>
                             </div>
-                            <div id="map_checkin">
-                                <img src="" alt="Map Checkout" style="width: 400px; height: 400px;" class="rounded-md shadow-md" />
+                            <div class="mt-2.5 flex flex-col gap-5 p-5">
+                                <div class="overflow-auto xl:overflow-visible">
+                                    <table class="w-full text-left border-b border-dashed border-slate-200/80">
+                                        <tbody>
+                                            <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
+                                                <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                    <div class="flex items-center">
+                                                        <p class="whitespace-nowrap font-medium" href="#">
+                                                           <span class="font-bold">Attendance Date:</span> <span id="attendance_date">-</span>
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
+                                                <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                    <div class="flex items-center">
+                                                        <p class="whitespace-nowrap font-medium" href="#">
+                                                           <span class="font-bold">Attendance Status:</span> <span id="attendance_status">-</span>
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
+                                                <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                    <div class="flex items-center">
+                                                        <p class="whitespace-nowrap font-medium" href="#">
+                                                           <span class="font-bold">Checkin Time:</span> <span id="check_in">-</span>
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
+                                                <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                    <div class="flex items-center">
+                                                        <p class="whitespace-nowrap font-medium" href="#">
+                                                           <span class="font-bold">Check in status:</span> <span id="check_in_status">-</span>
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
+                                                <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                    <div class="flex items-center">
+                                                        <p class="whitespace-nowrap font-medium" href="#">
+                                                           <span class="font-bold">Lat long:</span> <span id="latlong">-</span>
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
+                                                <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                    <div class="flex items-center">
+                                                        <div id="map" style="height: 400px; width: 100%;"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                        <div class="justify-center" id="map_checkout">
-                            <div class="label mb-4">
-                                Check out Location
-                            </div>
-                            <div id="map_checkout">
-                                <img src="" alt="Map Checkout" style="width: 400px; height: 400px;" class="rounded-md shadow-md" />
-                            </div>
-                        </div>
-                    </div> --}}
-                    
                     </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-12 gap-x-6 gap-y-5 mt-5">
+                
                 </div>
             </div>
         </div>
@@ -185,6 +164,9 @@
 </div>
 @endsection
 @push('js')
+<script defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD8y5ZQcuol7vxOkXii_wsHqYhCNL0uEM&libraries=geometry&callback">
+</script>
     <script type="text/javascript">
         $(document).ready(function() {
             getPersonalEmployee();
@@ -203,23 +185,78 @@
 
                 console.log(attendance);
 
-                $('#employee_name').html(employee.first_name);
-                $('#first_name').html(employee.first_name);
-                $('#last_name').html(employee.last_name);
-                $('#personal_email').html(employee.addressContact.personal_email);
-                $('#mobile_phone').html(employee.addressContact.mobile_phone);
+                $('#employeeId').html(employee.employee_id);
+                $('#name').html(employee.first_name + ' ' + employee.last_name);
+                $('#email').html(employee.addressContact.personal_email);
+                $('#phone').html(employee.addressContact.mobile_phone);
 
                 $("#attendance_date").html(attendance.attendance_date);
                 $("#check_in").html(attendance.time_in);
+                $("#attendance_status").html(attendance.attendance_status);
                 $("#check_in_status").html(attendance.checkin_status);
-                $("#check_out").html(attendance.time_out ? attendance.time_out : '-');
-                $("#check_out_status").html(attendance.checkout_status);
-                $("#status").html(attendance.attendance_status);
-                $('#photo_in').html(`<img src="${attendance.photo_in}" alt=" photo" style="width: 100px; height: 100px;" class="rounded-md shadow-md" />`)
-                $('#photo_out').html(`<img src="${attendance.photo_out}" alt=" photo" style="width: 100px; height: 100px;" class="rounded-md shadow-md" />`)
+                $("#latlong").html(attendance.latlong_in);
+                $('#photo_in').html(`<img src="${attendance.photo_in}" alt="photo" style="width: 100%; hegight:50%;" class="rounded-md shadow-md" />`)
+                initMap(attendance.latlong_in);
             }).catch((err) => {
                 console.log(err);
             });
         }
+
+        // const lat = data.lat_long_masuk.substring(10, '');
+        // const long = data.lat_long_masuk.substring(11);
+
+        
+        
+
+        function initMap(value) {
+
+            let coordinates = value.split(',');
+            let lat = coordinates[0];
+            let long = coordinates[1];
+
+            const mapOptions = {
+                zoom: 16,
+                center: { lat: parseFloat(lat), lng: parseFloat(long) },
+                disableDefaultUI: false,
+                scrollWheel: true,
+                draggable: false
+            };
+
+            const map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+            const marker = new google.maps.Marker({
+                position: mapOptions.center,
+                map: map,
+                draggable: true
+            });
+        }
+
+        // const lat = "37.4220936";
+        // const long = "-122.083922";
+
+        // let mapOptions, map, marker;
+        // infoWindow = '';
+
+        // element = document.getElementById('map');
+
+        // mapOptions = {
+        //     zoom: 16,
+        //     center: {
+        //         lat: parseFloat(lat),
+        //         lng: parseFloat(long),
+        //     },
+        //     disableDefaultUI: false,
+        //     scrollWheel: true,
+        //     draggable: false,
+        // };
+
+        // map = new google.maps.Map(element, mapOptions);
+
+        // marker = new google.maps.Marker({
+        //     position: mapOptions.center,
+        //     map: map,
+        //     // icon: 'http://pngimages.net/sites/default/files/google-maps-png-image-70164.png',
+        //     draggable: true
+        // });
     </script>
 @endpush
