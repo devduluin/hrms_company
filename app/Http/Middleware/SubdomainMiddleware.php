@@ -32,6 +32,7 @@ class SubdomainMiddleware
         $host         = $protocol . $request->getHost();
         // $host         = "http://127.0.0.1:8000";
         $gateway      = config('apiendpoints.gateway') . '/v1/needvalidatemyhost';
+        //$gateway      = 'http://api_gatway.test/api/v1/needvalidatemyhost';
         $cacheKey     = md5($host);
         $options = [
             'headers' => [
@@ -48,7 +49,7 @@ class SubdomainMiddleware
                 $apiResponse = json_decode($response->getBody(), true);
                 // dd($apiResponse);
             } catch (RequestException $e) {
-                // dd($e->getMessage());
+                 //dd($e->getMessage());
                 \Log::error('Guzzle request error: ' . $e->getMessage());
                 abort(404);
             }

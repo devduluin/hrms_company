@@ -18,4 +18,11 @@ class LeaveTypeController extends Controller
         $data['apiUrl'] = $this->apiGatewayUrl . "/v1/leave-type/leave-type/datatable";
         return view('dashboard.hrms.leavetype.index', $data);
     }
+    public function create()
+    {
+        $data['title'] = "Data leave types";
+        $data['page_title'] = "Data leave types";
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/leave-type/leave-type/datatable";
+        return view('dashboard.hrms.leavetype.create', $data);
+    }
 }

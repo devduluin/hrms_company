@@ -25,8 +25,8 @@
                         <div class="box box--stacked flex flex-col p-5">
                             <div>
                                 <input type="hidden" name="holiday_id" value="123e4567-e89b-12d3-a456-426614174001">
-                                <x-form._input id="description" name="description" label="Description" required="true" placholder=""/>
-                                <x-form._inputdate id="date" name="date" label="Date" required="true" placholder=""/>
+                                <x-form._input id="leave_type_name" name="leave_type_name" label="Leave Type Name" required="true" placholder=""/>
+                                <x-form._input id="maximum_leave_allocation" name="maximum_leave_allocation" label="Maximum Leave Allocation Allowed" required="true" placholder=""/>
                             </div>
                      
                             <div class="mt-6 flex border-t border-dashed border-slate-300/70 pt-5">

@@ -44,7 +44,8 @@ Route::controller(AuthController::class)->group(function () {
     Route::controller(AuthResponseController::class)->group(function () {
         Route::prefix('/auth')->group(function () {
             Route::post('/signin', 'signin');
-            Route::post('/signup', 'index');
+            Route::post('/signup', 'signup');
+            Route::post('/complete_company_register', 'complete_company_register');
             Route::post('/forgot_password', 'index');
             Route::post('/password-recovery/{token}', 'elm_password_recovery')->name('elm_password_recovery');
             Route::get('/signout', 'logout');
@@ -64,27 +65,29 @@ Route::controller(AuthController::class)->group(function () {
 Route::controller(DashboardController::class)->group(function () {
 
     Route::prefix('/dashboard')->group(function () {
-        Route::get('/', 'index')->name('dashboard');
-        Route::controller(SettingsController::class)->group(function () {
-            Route::prefix('/settings')->group(function () {
-                Route::get('/', 'index')->name('settings');
-                Route::get('/{any}', 'index');
+        Route::middleware('isLoggedIn')->group(function () {
 
-                Route::middleware(['isAjax', 'isLoggedIn'])->group(function () {
-                    Route::prefix('/elm')->group(function () {
-                        Route::get('/settings', 'elm_settings');
-                        Route::get('/email_setting', 'elm_email_setting');
-                        Route::get('/user_account', 'elm_account');
-                        Route::get('/security', 'elm_security');
-                        Route::get('/preferences', 'elm_preferences');
-                        Route::get('/notification_setting', 'elm_notification_setting');
-                        Route::get('/deactivation', 'elm_deactivation');
+            Route::controller(SettingsController::class)->group(function () {
+                Route::get('/setup_account', 'setup_account');
+                Route::prefix('/settings')->group(function () {
+                    Route::get('/', 'index')->name('settings');
+                    Route::get('/{any}', 'index');
+
+                    Route::middleware(['isAjax', 'isLoggedIn'])->group(function () {
+                        Route::prefix('/elm')->group(function () {
+                            Route::get('/settings', 'elm_settings');
+                            Route::get('/email_setting', 'elm_email_setting');
+                            Route::get('/user_account', 'elm_account');
+                            Route::get('/security', 'elm_security');
+                            Route::get('/preferences', 'elm_preferences');
+                            Route::get('/notification_setting', 'elm_notification_setting');
+                            Route::get('/deactivation', 'elm_deactivation');
+                        });
                     });
                 });
             });
-        });
 
-        Route::middleware('isLoggedIn')->group(function () {
+       
             Route::controller(HrmsController::class)->group(function () {
                 Route::prefix('/hrms')->group(function () {
                     Route::get('/', 'index')->name('hrms');

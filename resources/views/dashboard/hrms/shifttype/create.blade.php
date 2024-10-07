@@ -25,8 +25,9 @@
                         <div class="box box--stacked flex flex-col p-5">
                             <div>
                                 <input type="hidden" name="holiday_id" value="123e4567-e89b-12d3-a456-426614174001">
-                                <x-form._input id="description" name="description" label="Description" required="true" placholder=""/>
-                                <x-form._inputdate id="date" name="date" label="Date" required="true" placholder=""/>
+                                <x-form._input id="shift_type_name" name="shift_type_name" label="Shift Type Name" required="true" placholder=""/>
+                                <x-form._input id="start_time" name="start_time" label="Start Time" required="true" placholder=""/>
+                                <x-form._input id="end_time" name="end_time" label="End Time" required="true" placholder=""/>
                             </div>
                      
                             <div class="mt-6 flex border-t border-dashed border-slate-300/70 pt-5">
