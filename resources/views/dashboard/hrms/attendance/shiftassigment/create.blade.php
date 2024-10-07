@@ -18,15 +18,13 @@
                                     {{ $page_title }}
                                 </div>
                                 <div class="flex flex-col gap-x-1 sm:flex-row md:ml-auto" id="assignShiftContainer">
-                                    <x-filter></x-filter>
-                                    <x-shift></x-shift>
-                                    <a href="{{ route('hrms.shift-assignment.create') }}" type="button" class="btn btn-primary transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary shadow-md w-100">
-                                        <svg class="mr-2 h-4 w-4 stroke-[1.3]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-                                        New  Shift Assignment</a>
-                                    </button>                                
+                                    <a href="{{ route('hrms.shift-assignment') }}" type="button" class="btn btn-primary transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary shadow-md w-100">
+                                        <svg class="mr-2 h-4 w-4 stroke-[1.3]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+                                        Back</a>
+                                    <x-create_shift></x-create_shift>
                                 </div>
                             </div>
-                            <x-shift_table id="assignShiftContainer" apiUrl="{{ $apiUrl }}" h1="Employee" h2="Company" h3="Department" h4="Designation" h5="Shift"></x-table_custom>
+                            <x-create_shift_table id="assignShiftContainer" apiUrl="{{ $apiUrl }}" h1="Employee" h2="Company" h3="Department" h4="Designation" h5="Shift"></x-table_custom>
                         </div>
                         <div class=" fixed z-10 flex items-center justify-center " id="modalOverlay" >
                             <div class="modal fade box p-4 inset-0 z-50 hidden" id="assignShiftModal"  tabindex="-1" aria-labelledby="assignShiftModalLabel" aria-hidden="true">
@@ -73,32 +71,36 @@
         // Fungsi untuk cek semua checkbox
         $('#selectAll').on('click', function() {
             $('tbody input[type="checkbox"]').prop('checked', this.checked);
-            toggleAssignShiftButton();
         });
 
-        // Event listener untuk setiap checkbox di dalam tbody
-        $('tbody').on('change', 'input[type="checkbox"]', function() {
-            toggleAssignShiftButton();
-        });
 
-        // Event listener untuk menampilkan modal dan background abu-abu
-        $('#assignShiftButton').on('click', function() {
-            $('#modalOverlay').removeClass('hidden'); // Tampilkan overlay
-            $('#assignShiftModal').removeClass('hidden'); // Tampilkan modal
-        });
+    // // Fungsi untuk mengirim data ke server
+    // function sendSelectedEmployeesToServer() {
+    //     const selectedEmployees = getCheckedEmployees(); // Mengambil employee yang dipilih
+        
+    //     if (selectedEmployees.length > 0) {
+    //         // Mengirim data ke server menggunakan fetch (POST request)
+    //         fetch('URL_ENDPOINT_KAMU', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify({ employees: selectedEmployees }) // Mengirim data employee sebagai JSON
+    //         })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             console.log('Success:', data);
+    //         })
+    //         .catch((error) => {
+    //             console.error('Error:', error);
+    //         });
+    //     } else {
+    //         console.log('Tidak ada karyawan yang dipilih.');
+    //     }
+    // }
 
-        // Fungsi untuk menampilkan, menyembunyikan, dan mengubah label tombol Assign Shift
-        function toggleAssignShiftButton() {
-            var checkedCount = $('tbody input[type="checkbox"]:checked').length;
-
-            if (checkedCount > 0) {
-                $('#assignShiftButton').prop('disabled', false);
-                $('#assignShiftButton').html('Assign Shift (' + checkedCount + ')');
-            } else {
-                $('#assignShiftButton').prop('disabled', true);
-                $('#assignShiftButton').html('Assign Shift');
-            }
-        }
+    // // Tambahkan event listener untuk tombol kirim
+    // document.querySelector('#submit-button').addEventListener('click', sendSelectedEmployeesToServer);
     });
 </script>
 

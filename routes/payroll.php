@@ -30,11 +30,18 @@ Route::prefix('/payout')->group(function () {
             Route::get('/edit_component/{id}', 'edit_component')->name('edit_component');
         });
         Route::prefix('/salary_structure')->group(function () {
-           Route::controller(SalaryStructureController::class)->group(function () {
-               Route::get('/', 'index');
-               Route::get('/create', 'create');
-               Route::get('/edit/{id}', 'edit');
-           }) ;
+            Route::controller(SalaryStructureController::class)->group(function () {
+                Route::get('/', 'index');
+                Route::get('/create', 'create');
+                Route::get('/edit/{id}', 'edit');
+            });
+        });
+        Route::prefix('/salary_structure_assignment')->group(function () {
+            Route::controller(SalaryStructureAssignmentController::class)->group(function () {
+                Route::get('/', 'index');
+                Route::get('/create', 'create');
+                Route::get('/edit/{id}', 'edit');
+            });
         });
     });
 });

@@ -55,11 +55,11 @@ class CompaniesController extends Controller
         return view('dashboard.hrms.companies.create', $data);
     }
 
-    public function edit()
+    public function edit(Request $request)
     {
         $data['title'] = 'Duluin HRMS' ;
         $data['page_title'] = "Edit data company";
-
+        $data['apiUrl'] = $this->apiGatewayUrl . '/v1/companies/company/' . $request->session()->get('company_id')[0];
         return view('dashboard.hrms.companies.edit', $data);
     }
 

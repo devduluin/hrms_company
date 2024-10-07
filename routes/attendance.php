@@ -9,11 +9,18 @@ Route::prefix('/attendance')->group(function () {
         Route::get('/', 'index')->name('attendance');
         Route::get('/summary', 'summary')->name('summary');
         Route::get('/detail/{id}', 'detail')->name('detail');
-        Route::get('/shift_assignment', 'shift')->name('shift');
+        // Route::get('/shift_assignment', 'shift')->name('shift');
         Route::get('/shift_list', 'shift_list')->name('shift_list');
         Route::get('/report', 'report')->name('report');
-        Route::get('/new_shift_assignment', 'new_assignment')->name('shift');
+        Route::get('/new_shift_assignment', 'new_assignment')->name('shift-assignment');
     });
+
+    //route for shift assignment
+    Route::controller(Attendance\ShfitAssigmentController::class)->group(function() {
+        Route::get('shift-assignment', 'index')->name('hrms.shift-assignment');
+        Route::get('shift-assignment/cretae', 'create')->name('hrms.shift-assignment.create');
+    });
+    //end route for shift assignment
 });
 
 //leave modules
