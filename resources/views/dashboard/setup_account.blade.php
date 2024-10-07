@@ -163,15 +163,14 @@
                         method: 'POST',
                         body: JSON.stringify(data),
                         headers: {
-                            'X-CSRF-TOKEN': csrfToken,
-                            'X-Requested-With': 'XMLHttpRequest'
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer {{ $token }}'
                         }
                     });
 
                     const result = await response.json();
 
                     if (response.ok) {
-                        console.log(result);
                         window.location.href = result.url;
                     } else {
                         console.error('Error submitting form');
