@@ -136,7 +136,7 @@
 
     </div>
     <script>
-        
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         async function initializeForm() {
             const form = document.getElementById('settingForm');
             const loadingText = document.getElementById('loadingText');
@@ -163,13 +163,15 @@
                         method: 'POST',
                         body: JSON.stringify(data),
                         headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': 'Bearer {{ $token }}'
+                            'X-CSRF-TOKEN': csrfToken,
+                            'X-Requested-With': 'XMLHttpRequest'
                         }
                     });
 
+                    const result = await response.json();
+
                     if (response.ok) {
-                        console.log('Form submitted successfully');
+                        console.log(result);
                     } else {
                         console.error('Error submitting form');
                     }

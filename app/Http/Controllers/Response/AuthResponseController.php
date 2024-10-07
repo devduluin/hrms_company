@@ -104,24 +104,29 @@ class AuthResponseController extends Controller
             'date_of_establishment' => $request->date_of_establishment,
             'default_currency' => $request->default_currency,
             'domain' => $request->domain,
-            'parent_company' => 1,
+            'parent_company' => "1",
             'default_holiday_list' => 'off',
             'status' => 'enable',
         ];
  
         $response = $this->postRequest($this->apiGatewayUrl . '/v1/companies/company', $data, $headers);
          
-        if (isset($response) && $response['errors'] == null) {
+        if (isset($response) && $response['success'] == true) {
             if (isset($response['error']) && $response['error']) {
                 return response()->json([
                     'message' => $response['message'],
                 ], 400);
             }
-            
-            //$redirect   = $response['result']['redirect'] ?? 'http://devhris.duluin.com';
-            return response()->json([
-                'url' => $redirect
-            ], 200);
+			
+            $userAccount['user_id'] 		= $request->user_id;
+            $userAccount['secondary_id'] 	= $response['data']['id'];
+			$response = $this->postRequest($this->apiGatewayUrl . '/users/register/set_secondary_id', $userAccount, $headers);
+			if (isset($response) && $response['success'] == true) {
+				return response()->json([
+					'url' => $redirect
+				], 200);
+			}
+           
         } else {
             return response()->json([
                 'message' => $response['message'],
