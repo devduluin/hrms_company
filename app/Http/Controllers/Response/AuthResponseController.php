@@ -89,10 +89,13 @@ class AuthResponseController extends Controller
     public function complete_company_register(Request $request)
     {
         //dd($request->all());
+        $protocol     = $request->secure() ? 'https://' : 'http://';
+        $host         = $protocol . $request->getHost();
+
         $headers = [
             'Accept'        => 'application/json',
             'Authorization' => 'Bearer ' . $request->session()->get('app_token'),
-            'x-account-type' => 'hris_company',
+            'X-Forwarded-Host' => $host,
         ];
 
         $response = $this->postRequest($this->apiGatewayUrl . '/v1/companies/company', $request->all(), $headers);
