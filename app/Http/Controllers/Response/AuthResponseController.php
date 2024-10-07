@@ -88,7 +88,7 @@ class AuthResponseController extends Controller
 
     public function complete_company_register(Request $request)
     {
-        //dd($request->all());
+        
         $protocol     = $request->secure() ? 'https://' : 'http://';
         $host         = $protocol . $request->getHost();
 
@@ -98,8 +98,19 @@ class AuthResponseController extends Controller
             'X-Forwarded-Host' => $host,
         ];
 
-        $response = $this->postRequest($this->apiGatewayUrl . '/v1/companies/company', $request->all(), $headers);
-        dd($response);
+        $data = [
+            'user_id'        => $request->user_id,
+            'company_name' => $request->company_name,
+            'date_of_establishment' => $request->date_of_establishment,
+            'default_currency' => $request->default_currency,
+            'domain' => $request->domain,
+            'parent_company' => 1,
+            'default_holiday_list' => 'off',
+            'status' => 'enable',
+        ];
+ 
+        $response = $this->postRequest($this->apiGatewayUrl . '/v1/companies/company', $data, $headers);
+         
         if (isset($response) && $response['errors'] == null) {
             if (isset($response['error']) && $response['error']) {
                 return response()->json([
