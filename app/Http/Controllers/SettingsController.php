@@ -21,6 +21,17 @@ class SettingsController extends Controller
         return view('dashboard.settings.index', $data);
     }
 
+    public function setup_account(Request $request)
+    {
+        $data['title']   = 'Duluin HRMS';
+        $data['page_title']   = 'Company Information';
+        $data['apiUrl'] = $this->apiGatewayUrl.'/users/register/step_company';
+        $data['token']  =   $request->session()->get('app_token');
+        $data['user']   = $request->user;
+         
+        return view('dashboard.setup_account', $data);
+    }
+
     public function elm_settings()
     {
         $data['title']   = 'Duluin HRMS';

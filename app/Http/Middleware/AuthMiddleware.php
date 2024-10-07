@@ -18,15 +18,31 @@ class AuthMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+        
+        $company_id = $request->session()->get('company_id');
+        if(isset($company_id)){
+             
+            if($request->session()->get('company_id')[0] == null){
+                $lastSegment = $request->segment(count($request->segments()));
+                if($lastSegment != 'setup_account'){
+                    return redirect(url('dashboard/setup_account'));
+                }
+            
+            };
+        }
+
         $appToken = $request->session()->get('app_token');
-        if ($appToken == null || !$this->isUserAuthenticated($appToken)) {
+        $user       = $this->isUserAuthenticated($appToken);
+        if ($appToken == null || !$user) {
+             
             $this->clearSession($request);
             return redirect('signin', 201);
         }
+        $request->user  = $user;
         return $next($request);
     }
 
-    private function isUserAuthenticated(string $appToken): bool
+    private function isUserAuthenticated($appToken)
     {
         $headers = [
             'accept' => 'application/json',
@@ -34,9 +50,15 @@ class AuthMiddleware
         ];
 
         // $response = $this->getRequest(config('apiendpoints.sso') . '/users/user', '', $headers);
+        // $response = $this->getRequest('http://api_gatway.test/api/users/user', '', $headers);
         $response = $this->getRequest(config('apiendpoints.gateway') . '/users/user', '', $headers);
-
-        return isset($response['result']) && !isset($response['error']);
+        if(isset($response['result']) && !isset($response['error'])){
+            
+            return $response['result'];
+        }else{
+            return false;
+        }
+       
     }
 
     private function clearSession(Request $request): void
