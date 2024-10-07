@@ -120,8 +120,8 @@ class AuthResponseController extends Controller
 			
             $userAccount['user_id'] 		= $request->user_id;
             $userAccount['secondary_id'] 	= $response['data']['id'];
-			$response = $this->postRequest($this->apiGatewayUrl . '/users/register/set_secondary_id', $userAccount, $headers);
-			if (isset($response) && $response['success'] == true) {
+			$responseUser = $this->postRequest($this->apiGatewayUrl . '/users/register/set_secondary_id', $userAccount, $headers);
+			if (isset($responseUser)) {
 				return response()->json([
 					'url' => $redirect
 				], 200);
