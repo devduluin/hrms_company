@@ -172,6 +172,7 @@
 
                     if (response.ok) {
                         console.log(result);
+                        window.location.href = result.url;
                     } else {
                         console.error('Error submitting form');
                     }
