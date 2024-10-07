@@ -35,10 +35,10 @@ trait GuzzleTrait
             return json_decode($response->getBody(), true);
         } catch (RequestException $e) {
             info($e);
-            $data = json_decode($e->getResponse()->getBody()->getContents(), true);
+            $data = $e->getResponse()->getBody()->getContents();
             return [
                 'error' => true,
-                'message' => $data['message'],
+                'message' => $data ?? null,
                 'errors' => $data['errors'] ?? null,
             ];
         }
