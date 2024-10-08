@@ -32,6 +32,7 @@ class AuthResponseController extends Controller
                 ], 400);
             }
 
+            $request->session()->put('user_id', $response['result']['user_id']);
             $request->session()->put('app_token', $response['result']['token']);
             $request->session()->put('name', $response['result']['name']);
             $request->session()->put('account', $response['result']['account']);
