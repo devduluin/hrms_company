@@ -300,7 +300,7 @@
                 if (!form.reportValidity()) {
                     // If form is invalid, stop the submission
                     submitButton.disabled = false;
-                    loadingText.innerHTML = 'Save Changes';
+                    loadingText.innerHTML = 'Complete Registration';
                     return;
                 }
                 const formData = new FormData(form);
@@ -328,7 +328,7 @@
                 } finally {
                     // Restore button state
                     submitButton.disabled = false;
-                    loadingText.innerHTML = 'Save Changes';
+                    loadingText.innerHTML = 'Complete Registration';
                 }
             }
 
