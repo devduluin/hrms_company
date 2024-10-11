@@ -24,23 +24,23 @@ class CompaniesController extends Controller
 
     public function list(Request $request)
     {
-        // if($request->ajax()) {
-        //     $postData = [
-        //         "user_id" => '3c5b06b2-b224-4029-a7a9-a0291dbe723c',
-        //         "page"    => 1,
-        //         "limit"   => 10,
-        //         "sort"    => "ASC"
-        //     ];
+        if($request->ajax()) {
+            $postData = [
+                "user_id" => '3c5b06b2-b224-4029-a7a9-a0291dbe723c',
+                "page"    => 1,
+                "limit"   => 10,
+                "sort"    => "ASC"
+            ];
 
-        //     $response = Http::withToken('xN9P6a8sL2bV3iR4fC5J6Q7kT8yU9wZ0')
-        //                     ->post("http://apidev.duluin.com/api/v1/company/lists", $postData);
+            $response = Http::withToken('xN9P6a8sL2bV3iR4fC5J6Q7kT8yU9wZ0')
+                            ->post("http://apidev.duluin.com/api/v1/company/lists", $postData);
 
-        //     $dataCompanies = $response->json();
-        //     $data['table'] = $response['data'];
-        //     $data['meta'] = $response['meta'];
+            $dataCompanies = $response->json();
+            $data['table'] = $response['data'];
+            $data['meta'] = $response['meta'];
 
-        //     return view('dashboard.hrms.companies._data_table', $data);
-        // }
+            return view('dashboard.hrms.companies._data_table', $data);
+        }
 
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Data Companies';

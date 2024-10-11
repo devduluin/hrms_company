@@ -25,7 +25,7 @@
                         <div class="box box--stacked flex flex-col p-5">
                             <div>
                                 <input type="hidden" name="holiday_id" value="123e4567-e89b-12d3-a456-426614174001">
-                                <x-form._input id="description" name="description" label="Description" required="true" placholder=""/>
+                                <x-form._input id="approve_type" name="approve_type" label="Approve Type" required="true" placholder=""/>
                                 <x-form._inputdate id="date" name="date" label="Date" required="true" placholder=""/>
                             </div>
                      

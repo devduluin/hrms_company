@@ -11,7 +11,7 @@
                 </div>
                 <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
                     <x-form.button id="back" label="Back to Dashboard" style="secondary" icon="arrow-left" url="{{ url('dashboard/hrms') }}" ></x-button>
-                    <x-form.button id="new_leavetype" label="Add new leave type" style="primary" icon="plus" url="" ></x-button>
+                    <x-form.button id="new_leavetype" label="Add new leave type" style="primary" icon="plus" url="{{ url('dashboard/hrms/leave-type/create') }}" ></x-button>
                 </div>
                 </div>
             </div>
