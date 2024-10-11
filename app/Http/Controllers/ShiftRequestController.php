@@ -18,4 +18,11 @@ class ShiftRequestController extends Controller
         $data['apiUrl'] = $this->apiGatewayUrl . "/v1/request-approver/request-approver/datatable";
         return view('dashboard.hrms.shiftrequest.index', $data);
     }
+    public function create()
+    {
+        $data['title'] = "Data shift request";
+        $data['page_title'] = "New shift request";
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/request-approver/request-approver/datatable";
+        return view('dashboard.hrms.shiftrequest.create', $data);
+    }
 }

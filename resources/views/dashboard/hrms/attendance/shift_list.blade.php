@@ -14,7 +14,10 @@
                             Shift List
                         </div>
                         <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
-                            <x-form.button label="Add Shift Assignment" id="overview-btn" style="primary" type="button" icon="plus"/>
+                            <a href="{{ url('dashboard/hrms/attendance/shift_assignment') }}" data-tw-merge=""
+                                class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"><i
+                                    data-tw-merge="" data-lucide="plus" class="mr-2 h-4 w-4 stroke-[1.3]"></i>
+                                Add Shift Assignment </a>  
                         </div>
                     </div>  
                     <div class="mt-1.5 flex flex-col">

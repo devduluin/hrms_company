@@ -377,6 +377,7 @@
                                     <x-action  label="New Shift Assignment" icon="arrow-up-right" url="{{ route('hrms.shift-assignment') }}" />
                                     <x-action  label="Employee Shift List" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/shift_list') }}" />
                                     <x-action  label="Attendance Report" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/report') }}" />
+                                    <x-action  label="Shift Type" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/shift_type') }}" />
                                 </div>
                         </div>
                     </div>
