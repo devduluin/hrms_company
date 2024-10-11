@@ -189,7 +189,7 @@
                     url: "{{ $apiUrl }}",
                     method: "GET",
                     data: {
-                        user_id: '3c5b06b2-b224-4029-a7a9-a0291dbe723c'
+                        user_id: "{{ $userId }}"
                     }
                 }
 

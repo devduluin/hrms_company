@@ -65,55 +65,70 @@
                 </td> --}}
             </tr>
         </thead>
+        <tr id="loading">
+            <td colspan="6">
+                <div class="col-span-6 flex flex-col items-center justify-end sm:col-span-3 xl:col-span-2">
+                    <span class="h-8 w-8">
+                        <svg class="h-full w-full" width="20" viewBox="0 0 135 140" xmlns="http://www.w3.org/2000/svg" fill="#64748b">
+                            <rect y="10" width="15" height="120" rx="6">
+                                <animate values="120;110;100;90;80;70;60;50;40;140;120" attributeName="height" begin="0.5s" dur="1s" calcMode="linear" repeatCount="indefinite"></animate>
+                                <animate values="10;15;20;25;30;35;40;45;50;0;10" attributeName="y" begin="0.5s" dur="1s" calcMode="linear" repeatCount="indefinite"></animate>
+                            </rect>
+                            <rect x="30" y="10" width="15" height="120" rx="6">
+                                <animate values="120;110;100;90;80;70;60;50;40;140;120" attributeName="height" begin="0.25s" dur="1s" calcMode="linear" repeatCount="indefinite"></animate>
+                                <animate values="10;15;20;25;30;35;40;45;50;0;10" attributeName="y" begin="0.25s" dur="1s" calcMode="linear" repeatCount="indefinite"></animate>
+                            </rect>
+                            <rect x="60" width="15" height="140" rx="6">
+                                <animate values="120;110;100;90;80;70;60;50;40;140;120" attributeName="height" begin="0s" dur="1s" calcMode="linear" repeatCount="indefinite"></animate>
+                                <animate values="10;15;20;25;30;35;40;45;50;0;10" attributeName="y" begin="0s" dur="1s" calcMode="linear" repeatCount="indefinite"></animate>
+                            </rect>
+                            <rect x="90" y="10" width="15" height="120" rx="6">
+                                <animate values="120;110;100;90;80;70;60;50;40;140;120" attributeName="height" begin="0.25s" dur="1s" calcMode="linear" repeatCount="indefinite"></animate>
+                                <animate values="10;15;20;25;30;35;40;45;50;0;10" attributeName="y" begin="0.25s" dur="1s" calcMode="linear" repeatCount="indefinite"></animate>
+                            </rect>
+                            <rect x="120" y="10" width="15" height="120" rx="6">
+                                <animate values="120;110;100;90;80;70;60;50;40;140;120" attributeName="height" begin="0.5s" dur="1s" calcMode="linear" repeatCount="indefinite"></animate>
+                                <animate values="10;15;20;25;30;35;40;45;50;0;10" attributeName="y" begin="0.5s" dur="1s" calcMode="linear" repeatCount="indefinite"></animate>
+                            </rect>
+                        </svg>
+                    </span>
+                </div>
+            </td>
+        </tr>
         <tbody id="shiftAssigmentTable">
-            <tr id="loading">
-                <td colspan="6">
-                    <div class="col-span-6 flex flex-col items-center justify-end sm:col-span-3 xl:col-span-2">
-                        <span class="h-8 w-8">
-                            <svg class="h-full w-full" width="20" viewBox="0 0 135 140" xmlns="http://www.w3.org/2000/svg" fill="#64748b">
-                                <rect y="10" width="15" height="120" rx="6">
-                                    <animate values="120;110;100;90;80;70;60;50;40;140;120" attributeName="height" begin="0.5s" dur="1s" calcMode="linear" repeatCount="indefinite"></animate>
-                                    <animate values="10;15;20;25;30;35;40;45;50;0;10" attributeName="y" begin="0.5s" dur="1s" calcMode="linear" repeatCount="indefinite"></animate>
-                                </rect>
-                                <rect x="30" y="10" width="15" height="120" rx="6">
-                                    <animate values="120;110;100;90;80;70;60;50;40;140;120" attributeName="height" begin="0.25s" dur="1s" calcMode="linear" repeatCount="indefinite"></animate>
-                                    <animate values="10;15;20;25;30;35;40;45;50;0;10" attributeName="y" begin="0.25s" dur="1s" calcMode="linear" repeatCount="indefinite"></animate>
-                                </rect>
-                                <rect x="60" width="15" height="140" rx="6">
-                                    <animate values="120;110;100;90;80;70;60;50;40;140;120" attributeName="height" begin="0s" dur="1s" calcMode="linear" repeatCount="indefinite"></animate>
-                                    <animate values="10;15;20;25;30;35;40;45;50;0;10" attributeName="y" begin="0s" dur="1s" calcMode="linear" repeatCount="indefinite"></animate>
-                                </rect>
-                                <rect x="90" y="10" width="15" height="120" rx="6">
-                                    <animate values="120;110;100;90;80;70;60;50;40;140;120" attributeName="height" begin="0.25s" dur="1s" calcMode="linear" repeatCount="indefinite"></animate>
-                                    <animate values="10;15;20;25;30;35;40;45;50;0;10" attributeName="y" begin="0.25s" dur="1s" calcMode="linear" repeatCount="indefinite"></animate>
-                                </rect>
-                                <rect x="120" y="10" width="15" height="120" rx="6">
-                                    <animate values="120;110;100;90;80;70;60;50;40;140;120" attributeName="height" begin="0.5s" dur="1s" calcMode="linear" repeatCount="indefinite"></animate>
-                                    <animate values="10;15;20;25;30;35;40;45;50;0;10" attributeName="y" begin="0.5s" dur="1s" calcMode="linear" repeatCount="indefinite"></animate>
-                                </rect>
-                            </svg>
-                        </span>
-                    </div>
-                </td>
-            </tr>
+          
         </tbody>
     </table>
 </div>
 <script type="text/javascript">
+    var page = 1;
+    var perPage = 10;
+    // var shiftTypeId = "";
     $(document).ready(async function () {
         loadDataShiftAssignment();
     });
 
+    $("#filter").click(function(e) {
+        filterTable();
+    });
+
+    // function filterShiftId(value) {
+    //     shiftTypeId= value;
+    // }
+    function filterTable() {
+        loadDataShiftAssignment();
+    }
+
     async function loadDataShiftAssignment() {
-        var page = 1;
-        var perPage = 10;
+        
         var param = {
             url: "{{ $apiUrl }}",
             method: "GET",
             data: {
                 company_id: localStorage.getItem('company'),
                 page: page,
-                limit: perPage
+                limit: perPage,
+                // shift_type_id: shiftTypeId
             }
         }
 

@@ -32,6 +32,7 @@ class AuthResponseController extends Controller
                 ], 400);
             }
 
+            $request->session()->put('user_id', $response['result']['user_id']);
             $request->session()->put('app_token', $response['result']['token']);
             $request->session()->put('name', $response['result']['name']);
             $request->session()->put('account', $response['result']['account']);
@@ -98,18 +99,19 @@ class AuthResponseController extends Controller
             'X-Forwarded-Host' => $host,
         ];
 
+        // dd($request->all());
         $data = [
             'user_id'        => $request->user_id,
             'company_name' => $request->company_name,
             'date_of_establishment' => $request->date_of_establishment,
             'default_currency' => $request->default_currency,
             'domain' => $request->domain,
-            'parent_company' => "1",
-            'default_holiday_list' => 'off',
-            'status' => 'enable',
+            'latlong'   => $request->latlong,
+            'address'    => $request->address,
         ];
  
         $response = $this->postRequest($this->apiGatewayUrl . '/v1/companies/company', $data, $headers);
+        // $response = $this->postRequest('http://localhost:4444/api/v1/company', $data, $headers);
          
         if (isset($response)) {
             if (isset($response['error']) && $response['error']) {
