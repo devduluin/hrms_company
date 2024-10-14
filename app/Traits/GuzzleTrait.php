@@ -32,15 +32,12 @@ trait GuzzleTrait
 
         try {
             $response = $client->request($method, $url, $options);
-            return json_decode($response->getBody(), true);
+            //return json_decode($response->getBody(), true);
+            return $response;
         } catch (RequestException $e) {
             info($e);
-            $data = json_decode($e->getResponse()->getBody()->getContents(), true);
-            return [
-                'error' => true,
-                'message' => $data ?? null,
-                'errors' => $data['errors'] ?? null,
-            ];
+            return $e->getResponse();
+            
         }
     }
 

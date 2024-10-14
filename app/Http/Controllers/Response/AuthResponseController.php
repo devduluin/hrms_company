@@ -6,14 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Traits\GuzzleTrait;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Http\Response;
 
 class AuthResponseController extends Controller
 {
     use GuzzleTrait;
 
     protected $apiGatewayUrl;
-    public function __construct()
+    public function __construct(protected ResponseFactory $responseFactory)
     {
+        
         $this->apiGatewayUrl = config('apiendpoints.gateway');
         //$this->apiGatewayUrl = 'http://api_gatway.test/api';
     }
@@ -25,31 +28,29 @@ class AuthResponseController extends Controller
             'x-account-type' => 'hris_company',
         ];
         $response = $this->postRequest($this->apiGatewayUrl . '/users/login', $request->all(), $headers);
-        if (isset($response) && $response['errors'] == null) {
-            if (isset($response['error']) && $response['error']) {
-                return response()->json([
-                    'message' => $response['message'],
-                ], 400);
-            }
-
-            $request->session()->put('user_id', $response['result']['user_id']);
-            $request->session()->put('app_token', $response['result']['token']);
-            $request->session()->put('name', $response['result']['name']);
-            $request->session()->put('account', $response['result']['account']);
-            $request->session()->put('company_id', $response['result']['secondary_id']);
+        $responseBody = json_decode($response->getBody(), true);
+         
+        if (isset($responseBody) && $responseBody['errors'] == null) {
+             
+            $request->session()->put('user_id', $responseBody['result']['user_id']);
+            $request->session()->put('app_token', $responseBody['result']['token']);
+            $request->session()->put('name', $responseBody['result']['name']);
+            $request->session()->put('account', $responseBody['result']['account']);
+            $request->session()->put('company_id', $responseBody['result']['secondary_id']);
             return response()->json([
-                'message' => $response['message'],
-                'app_token' => $response['result']['token'],
-                'name' => $response['result']['name'],
-                'account' => $response['result']['account'],
-                'company_id' => $response['result']['secondary_id'],
-                'url' => url('dashboard/hrms')
+                'message' => $responseBody['message'],
+                'app_token' => $responseBody['result']['token'],
+                'name' => $responseBody['result']['name'],
+                'account' => $responseBody['result']['account'],
+                'company_id' => $responseBody['result']['secondary_id'] ?? null,
+                'redirect' => url('dashboard/hrms')
             ], 200);
         } else {
-            return response()->json([
-                'message' => $response['message'],
-                'errors' => $response['errors']
-            ], 422);
+            return $this->responseFactory->make(
+                content: $response->getBody(),
+                status: $response->getStatusCode(),
+                headers: ['Content-Type' => $response->getHeader('Content-Type')]
+            );
         }
     }
 
@@ -66,25 +67,29 @@ class AuthResponseController extends Controller
         ];
 
         $response = $this->postRequest($this->apiGatewayUrl . '/users/register', $request->all(), $headers);
+         
+        return $this->responseFactory->make(
+            content: $response->getBody(),
+            status: $response->getStatusCode(),
+            headers: ['Content-Type' => $response->getHeader('Content-Type')]
+        );
         
-        if (isset($response) && $response['errors'] == null) {
-            if (isset($response['error']) && $response['error']) {
-                return response()->json([
-                    'message' => $response['message'],
-                ], 400);
-            }
-            $redirect   = $response['result']['redirect'] ?? 'http://devhris.duluin.com';
-            return response()->json([
-                'url' => $redirect
-            ], 200);
-        } else {
-            return response()->json([
-                'message' => $response['message'],
-                'errors' => $response['errors']
-            ], 422);
-        }
+    }
 
-        //dd($request->all());
+    public function activate_account(Request $request) 
+    {
+        $headers = [
+            'Accept'        => 'application/json',
+            'x-account-type' => 'hris_company',
+        ];
+
+        $response = $this->postRequest($this->apiGatewayUrl . '/users/register/activate_account', $request->all(), $headers);
+        
+        return $this->responseFactory->make(
+            content: $response->getBody(),
+            status: $response->getStatusCode(),
+            headers: ['Content-Type' => $response->getHeader('Content-Type')]
+        );
     }
 
     public function complete_company_register(Request $request)
@@ -111,19 +116,19 @@ class AuthResponseController extends Controller
         ];
  
         $response = $this->postRequest($this->apiGatewayUrl . '/v1/companies/company', $data, $headers);
-        // $response = $this->postRequest('http://localhost:4444/api/v1/company', $data, $headers);
+        $responseBody = json_decode($response->getBody(), true);
          
-        if (isset($response)) {
-            if (isset($response['error']) && $response['error']) {
+        if (isset($responseBody)) {
+            if (isset($responseBody['error']) && $responseBody['error']) {
                 return response()->json([
-                    'message' => $response['message'],
+                    'message' => $responseBody['message'],
                 ], 400);
             }
-			
-            $userAccount['user_id'] 		= $request->user_id;
-            $userAccount['secondary_id'] 	= $response['data']['id'];
-			$responseUser = $this->postRequest($this->apiGatewayUrl . '/users/register/set_secondary_id', $userAccount, $headers);
 			 
+            $userAccount['user_id'] 		= $responseBody->user_id;
+            $userAccount['secondary_id'] 	= $responseBody['data']['id'];
+			$response2 = $this->postRequest($this->apiGatewayUrl . '/users/register/set_secondary_id', $userAccount, $headers);
+			$responseUser = json_decode($response2->getBody(), true); 
             if (isset($responseUser)) {
                 $request->session()->forget('company_id');
                 $request->session()->put('company_id', $userAccount['secondary_id']);
@@ -134,10 +139,11 @@ class AuthResponseController extends Controller
 			}
            
         } else {
-            return response()->json([
-                'message' => $response['message'],
-                'errors' => $response['errors']
-            ], 422);
+            return $this->responseFactory->make(
+                content: $response->getBody(),
+                status: $response->getStatusCode(),
+                headers: ['Content-Type' => $response->getHeader('Content-Type')]
+            );
         }
     }
 
@@ -162,7 +168,8 @@ class AuthResponseController extends Controller
             'x-account-type' => 'hris_company',
         ];
         $response = $this->postRequest($this->apiGatewayUrl . '/users/logout', $request, $headers);
-        if (isset($response)) {
+        $responseBody = json_decode($response->getBody(), true);
+        if (isset($responseBody)) {
             $request->session()->invalidate();
             $request->session()->forget('app_token');
             $request->session()->forget('name');

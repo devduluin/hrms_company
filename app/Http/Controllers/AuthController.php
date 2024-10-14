@@ -34,9 +34,17 @@ class AuthController extends Controller
     public function elm_signup()
     {
         $data['title']   = 'Duluin HRMS';
-        $data['page_title']   = 'Pendaftaran Daftar Akun';
+        $data['page_title']   = 'Signup User';
 
         return view('auth.elm_signup', compact('data'));
+    }
+
+    public function elm_activate_account()
+    {
+        $data['title']   = 'Duluin HRMS';
+        $data['page_title']   = 'Signup Account';
+        
+        return view('auth.elm_activate_account', compact('data'));
     }
 
     public function elm_forgot_password()
