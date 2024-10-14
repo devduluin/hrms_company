@@ -85,6 +85,25 @@
                         ...filters
                     };
                 },
+                dataSrc: function(response) {
+                    if (response.message === "Data not found") {
+                        return [];
+                    } else {
+                        return response.data;
+                    }
+                },
+                error: function(xhr, status, error) {
+                    $('#{{ $id }}_processing').hide();
+                    console.error('AJAX request failed:', error);
+                },
+                complete: function(response) {
+                    $('#{{ $id }}_processing').hide();
+                    if (response.responseJSON.message === "Data not found") {
+                        $('#{{ $id }} tbody').html(
+                            '<tr><td colspan="10" class="text-center">No data found</td></tr>'
+                        );
+                    }
+                }
             }
 
             if ($.fn.DataTable.isDataTable('#{{ $id }}')) {
