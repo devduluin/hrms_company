@@ -26,6 +26,19 @@
                                     </button>                                
                                 </div>
                             </div>
+                            <x-datatable id="employeeTable"
+                                url="http://apidev.duluin.com/api/v1/salary_structure_assignments/salary_structure_assignment/employeeDatatables"
+                                method="POST" class="display">
+                                <x-slot:thead>
+                                    <th data-value="employee_id_rel" data-render="getEmployee">Name</th>
+                                    <th data-value="salaryStructureAssignment.salaryStructure.name">Salary
+                                        Structure</th>
+                                    <th data-value="salaryStructureAssignment.salaryStructure.is_active"
+                                        data-render="getStatus">Status
+                                    </th>
+                                    <th data-value="id" data-render="getActionBtn">Action</th>
+                                </x-slot:thead>
+                            </x-datatable>
                             <x-shift_table id="assignShiftContainer" apiUrl="{{ $apiUrl }}" h1="Employee" h2="Company" h3="Department" h4="Designation" h5="Shift"></x-table_custom>
                         </div>
                         <div class=" fixed z-10 flex items-center justify-center " id="modalOverlay" >
