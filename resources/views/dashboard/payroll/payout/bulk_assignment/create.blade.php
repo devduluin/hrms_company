@@ -50,11 +50,34 @@
                                     Quick Filters
                                 </div>
                                 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 p-4">
-                                    <x-form.input id="branch" label="Branch" name="branch" />
-                                    <x-form.input id="employee_grade" label="Employee Grade" name="employee_grade"  />
-                                    <x-form.input id="department" label="Department" name="department" />
-                                    <x-form.input id="employment_type" label="Employment Type" name="employment_type" />
-                                    <x-form.input id="designation" label="Designation" name="designation" />
+                                    <x-form.select id="branch_id" name="branch_id" label="Branch" url="{{ url('dashboard/hrms/branch') }}"
+                                        apiUrl="http://apidev.duluin.com/api/v1/branch/branch/datatable" columns='["branch_name"]'
+                                        :keys="[
+                                            'company_id' => $company,
+                                        ]">
+                                        <option value="">Select Branch</option>
+                                    </x-form.select>
+                                    <x-form.select id="grade_id" name="grade_id" label="Grade" url="{{ url('dashboard/hrms/designation') }}"
+                                        apiUrl="{{ $apiCompanyUrl }}/employee-grade/datatables" columns='["employee_grade_name"]'
+                                        :keys="[
+                                            'company_id' => $company,
+                                        ]">
+                                        <option value="">Select Grade</option>
+                                    </x-form.select>
+                                    <x-form.select id="department_id" name="department_id" label="Department"
+                                        url="{{ url('dashboard/hrms/department') }}" apiUrl="{{ $apiCompanyUrl }}/department/datatables"
+                                        columns='["department_name"]' :keys="[
+                                            'company_id' => $company,
+                                        ]">
+                                        <option value="">Select Department</option>
+                                    </x-form.select>
+                                    <x-form.select id="designation_id" name="designation_id" label="Designation"
+                                        url="{{ url('dashboard/hrms/designation') }}" apiUrl="{{ $apiCompanyUrl }}/designation/datatables"
+                                        columns='["designation_name"]' :keys="[
+                                            'company_id' => $company,
+                                            'search',
+                                        ]">
+                                    </x-form.select>
                                 </div>
                                 <div class="mt-6 mb-6 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
                                     Advanced Filters

@@ -75,7 +75,7 @@
         </x-form.select>
 
         <x-form.select id="department_id" name="department_id" label="Department"
-            url="{{ url('dashboard/hrms/designation') }}" apiUrl="{{ $apiCompanyUrl }}/department/datatables"
+            url="{{ url('dashboard/hrms/department') }}" apiUrl="{{ $apiCompanyUrl }}/department/datatables"
             columns='["department_name"]' :keys="[
                 'company_id' => $company,
             ]">
