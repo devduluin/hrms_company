@@ -10,7 +10,7 @@
                     <div class="text-left text-slate-500">
                         Select Shift
                     </div>
-                    <select data-tw-merge="" onchange="getShiftId(this.value)" id="shift" class="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1 mt-2 flex-1">
+                    <select data-tw-merge="" onchange="getShiftId(this.value)" id="shift" class="shift-type disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1 mt-2 flex-1">
                 
                     </select>
                 </div>
@@ -61,25 +61,30 @@
         }
 
         await transAjax(param).then((result) => {
-            let shift = result.data;
-            let selectElement = document.getElementById("shift");
-            const defaultOption = document.createElement("option");
-            defaultOption.value = "";
-            defaultOption.textContent = "--select--"; 
-            defaultOption.disabled = true; 
-            defaultOption.selected = true;  
-            selectElement.appendChild(defaultOption);
-            shift.forEach((shift) => {
-                const option = document.createElement("option");
-                option.value = shift.id;
-                option.textContent = shift.shift_type_name;
-                selectElement.appendChild(option);
+        let shift = result.data;
+        let selectElements = document.getElementsByClassName("shift-type");
+
+        Array.from(selectElements).forEach(selectElement => {
+        selectElement.innerHTML = "";
+
+        const defaultOption = document.createElement("option");
+        defaultOption.value = "";
+        defaultOption.textContent = "--select--";
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+        selectElement.appendChild(defaultOption);
+
+        shift.forEach((shift) => {
+            const option = document.createElement("option");
+            option.value = shift.id;
+            option.textContent = shift.shift_type_name;
+            selectElement.appendChild(option);
             });
+        });
         }).catch((error) => {
             console.log(error);
         });
     }
-        
 
     function getShiftId(value) {
         shiftTypeId = value;
@@ -116,7 +121,6 @@
 
         sudmitButton(true);
         await transAjax(param).then((result) => {
-            console.log(result);
             sudmitButton(false);
             showSuccessNotification("Shift Assignment", "This shift was successfully implemented.");
             $('#loading').show();

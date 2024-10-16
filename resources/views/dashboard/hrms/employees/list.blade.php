@@ -111,6 +111,7 @@
                                                 <th data-value="branch_id_rel" data-render="getBranch">Branch
                                                 </th>
                                                 <th data-value="status" data-render="getStatus">Status</th>
+                                                <th data-value="is_verified" data-render="getMobileStatus">Mobile</th>
                                                 <th data-value="id" data-render="getActionBtn">Action</th>
                                             </x-slot:thead>
                                         </x-datatable>
@@ -131,6 +132,14 @@
                 return `<div class="flex items-center justify-center text-success"><div class="ml-1.5 whitespace-nowrap"><i data-tw-merge data-lucide="check" class="text-success"></i> Active</div></div>`;
             } else {
                 return `<div class="flex items-center justify-center text-danger"><div class="ml-1.5 whitespace-nowrap">Inactive</div></div>`;
+            }
+        }
+
+        function getMobileStatus(data, type, row, meta) {
+            if (data) {
+                return `<div class="flex items-center justify-center text-success"><div class="ml-1.5 whitespace-nowrap"><i data-tw-merge data-lucide="check" class="text-success"></i> Active</div></div>`;
+            } else {
+                return `<div class="flex items-center justify-center text-danger"><div class="ml-1.5 whitespace-nowrap">N/A</div></div>`;
             }
         }
 

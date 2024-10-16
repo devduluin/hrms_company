@@ -415,7 +415,7 @@
                             $("#place_of_issued").val(response.data.personalData.place_of_issued);
 
                             // profile
-                            $("#cover_letter").val(response.data.profile.bio_cover_letter);
+                            $("#bio_cover_letter").val(response.data.profile.bio_cover_letter);
 
                             // exit
                             $("#resignation_letter_date").val(response.data.exitHistory
