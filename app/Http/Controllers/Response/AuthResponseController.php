@@ -31,20 +31,28 @@ class AuthResponseController extends Controller
         $responseBody = json_decode($response->getBody(), true);
          
         if (isset($responseBody) && $responseBody['errors'] == null) {
-             
-            $request->session()->put('user_id', $responseBody['result']['user_id']);
-            $request->session()->put('app_token', $responseBody['result']['token']);
-            $request->session()->put('name', $responseBody['result']['name']);
-            $request->session()->put('account', $responseBody['result']['account']);
-            $request->session()->put('company_id', $responseBody['result']['secondary_id']);
-            return response()->json([
-                'message' => $responseBody['message'],
-                'app_token' => $responseBody['result']['token'],
-                'name' => $responseBody['result']['name'],
-                'account' => $responseBody['result']['account'],
-                'company_id' => $responseBody['result']['secondary_id'] ?? null,
-                'redirect' => url('dashboard/hrms')
-            ], 200);
+            if($response->getStatusCode() == 200){
+           
+                $request->session()->put('user_id', $responseBody['result']['user_id']);
+                $request->session()->put('app_token', $responseBody['result']['token']);
+                $request->session()->put('name', $responseBody['result']['name']);
+                $request->session()->put('account', $responseBody['result']['account']);
+                $request->session()->put('company_id', $responseBody['result']['secondary_id']);
+                return response()->json([
+                    'message' => $responseBody['message'],
+                    'app_token' => $responseBody['result']['token'],
+                    'name' => $responseBody['result']['name'],
+                    'account' => $responseBody['result']['account'],
+                    'company_id' => $responseBody['result']['secondary_id'] ?? null,
+                    'redirect' => url('dashboard/hrms')
+                ], 200);
+            }else{
+                return $this->responseFactory->make(
+                    content: $response->getBody(),
+                    status: $response->getStatusCode(),
+                    headers: ['Content-Type' => $response->getHeader('Content-Type')]
+                );
+            }
         } else {
             return $this->responseFactory->make(
                 content: $response->getBody(),
