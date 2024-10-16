@@ -26,6 +26,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\ClaimController;
 use App\Http\Controllers\PayoutController;
 use App\Http\Controllers\LeaveController;
+use App\Http\Controllers\SingleAssignmentController;
 
 
 Route::controller(AuthController::class)->group(function () {

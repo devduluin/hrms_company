@@ -27,7 +27,7 @@
         <x-form.input id="place_of_birth" label="Place of Birth" name="place_of_birth" required />
 
         <x-form.select name="salutation" id="salutation" label="Salutation" class="tom-select w-full"
-            data-placeholder="Select salutation" url="{{ url('dashboard/hrms/designation') }}" required>
+            data-placeholder="Select salutation" url="{{ url('dashboard/hrms/salutation') }}" required>
             <option value="">Select salutation</option>
             <option value="mr">Mr.</option>
             <option value="mrs">Mrs.</option>
@@ -35,7 +35,7 @@
         </x-form.select>
 
         <x-form.select name="status" id="status" label="Status" class="tom-select w-full"
-            data-placeholder="Select Status" url="{{ url('dashboard/hrms/designation') }}" required>
+            data-placeholder="Select Status" url="{{ url('dashboard/hrms/status') }}" required>
             <option value="">Select Status</option>
             <option value="active">Active</option>
             <option value="inactive">Inactive</option>
@@ -66,7 +66,7 @@
             ]">
         </x-form.select>
 
-        <x-form.select id="branch_id" name="branch_id" label="Branch" url="{{ url('dashboard/hrms/designation') }}"
+        <x-form.select id="branch_id" name="branch_id" label="Branch" url="{{ url('dashboard/hrms/branch') }}"
             apiUrl="http://apidev.duluin.com/api/v1/branch/branch/datatable" columns='["branch_name"]'
             :keys="[
                 'company_id' => $company,
