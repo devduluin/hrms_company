@@ -20,7 +20,7 @@
     <script src="{{ asset('dist/js/themes/hurricane.js') }}"></script>
     <script src="{{ asset('dist/js/components/quick-search.js') }}"></script>
     <script src="{{ asset('dist/js/components/quick-search.js') }}"></script>
-    <script src="{{ asset('dist/js/jquery-3.5.0.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="{{ asset('dist/js/vendors/toastify.js') }}"></script>
     <script>
         initializeDropdown();

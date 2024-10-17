@@ -132,8 +132,9 @@ class AuthResponseController extends Controller
                     'message' => $responseBody['message'],
                 ], 400);
             }
-			 
-            $userAccount['user_id'] 		= $responseBody->user_id;
+			//$responseBody   = $responseBody['data'];
+
+            $userAccount['user_id'] 		= $responseBody['data']['user_id'];
             $userAccount['secondary_id'] 	= $responseBody['data']['id'];
 			$response2 = $this->postRequest($this->apiGatewayUrl . '/users/register/set_secondary_id', $userAccount, $headers);
 			$responseUser = json_decode($response2->getBody(), true); 

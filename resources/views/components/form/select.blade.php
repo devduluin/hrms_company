@@ -35,6 +35,7 @@
             {{ $attributes->merge(['class' => 'mt-3 tom-select w-full'])->except(['id', 'name', 'tags', 'filter']) }}
             data-placeholder="{{ $label }}" data-title="{{ $label }}"
             @if (isset($url)) data-url="{{ $url }}" @endif
+            @if (isset($method)) data-method="{{ $method }}" @endif
             @if (isset($apiUrl)) data-api="{{ $apiUrl }}" @endif
             @if (isset($columns)) data-selectType="{{ $columns }}" @endif
             @if (isset($selected)) data-selected="{{ $selected }}" @endif
