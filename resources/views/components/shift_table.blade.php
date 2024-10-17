@@ -155,7 +155,7 @@
                     <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 border-dashed py-4 dark:bg-darkmode-600">
                         <div class="flex items-center">
                             <a class="whitespace-nowrap font-medium" href="#">
-                                ${shiftAssignment.company_id_rel.company_name}
+                                ${shiftAssignment.company_id_rel?.company_name ? shiftAssignment.company_id_rel.company_name : 'N/A'}
                             </a>
                         </div>
                     </td>

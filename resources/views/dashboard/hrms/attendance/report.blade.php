@@ -1,220 +1,59 @@
-@extends('layouts.dashboard.app')
-@push('css')
-<link rel="stylesheet" href="{{ asset('dist/css/vendors/full-calendar.css') }}">
-@endpush
+@extends('layouts.dashboard.app') 
 @section('content')
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/2.1.2/css/dataTables.tailwindcss.css">
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/2.1.2/js/dataTables.tailwindcss.js"></script>
 
 <div class="hurricane before:content-[''] before:z-[-1] before:w-screen before:bg-slate-50 before:top-0 before:h-screen before:fixed before:bg-texture-black before:bg-contain before:bg-fixed before:bg-[center_-20rem] before:bg-no-repeat">
     @include('layouts.dashboard.menu')
+
     <div id="contents-page" class="content transition-[margin,width] duration-100 px-5 xl:mr-2.5 mt-[75px] pt-[31px] pb-16 content--compact xl:ml-[275px] [&.content--compact]:xl:ml-[100px]">
         <div class="container">
             <div class="grid grid-cols-12 gap-x-6 gap-y-10">
                 <div class="col-span-12">
-                    <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center">
-                        <div class="text-base font-medium group-[.mode--light]:text-white">
-                            Calendar
-                        </div>
-                        <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
-                            <button class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="copy-plus" class="lucide lucide-copy-plus mr-3 h-4 w-4 stroke-[1.3]"><line x1="15" x2="15" y1="12" y2="18"></line><line x1="12" x2="18" y1="15" y2="15"></line><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>
-                                Add New Schedule</button>
-                        </div>
-                    </div>
-                    <div class="mt-3.5 flex flex-col gap-x-6 gap-y-10 lg:flex-row">
-                        <div class="w-full flex-none lg:w-[23rem]">
-                            <div class="flex flex-col gap-y-7">
-                                <div class="box box--stacked flex flex-col p-2">
-                                    <ul role="tablist" class="p-0.5 border rounded-lg dark:border-darkmode-400 w-full flex border-transparent bg-transparent">
-                                        <li id="example-1-tab" role="presentation" class="focus-visible:outline-none flex-1 first:rounded-l-[0.6rem] last:rounded-r-[0.6rem] [&amp;[aria-selected='true']_button]:border-primary/[0.15] [&amp;[aria-selected='true']_button]:bg-primary/[0.04] [&amp;[aria-selected='true']_button]:font-medium [&amp;[aria-selected='true']_button]:text-primary [&amp;[aria-selected='true']_button]:shadow-sm">
-                                            <button data-tw-target="#example-1" role="tab" class="cursor-pointer appearance-none px-3 border border-transparent transition-colors dark:text-slate-400 [&amp;.active]:text-slate-700 dark:border-transparent [&amp;.active]:border [&amp;.active]:shadow-sm [&amp;.active]:font-medium [&amp;.active]:border-slate-200 [&amp;.active]:bg-white [&amp;.active]:dark:text-slate-300 [&amp;.active]:dark:bg-darkmode-400 [&amp;.active]:dark:border-darkmode-400 active flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-[0.6rem] py-3 text-slate-500"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="send" class="lucide lucide-send h-4 w-4 stroke-[1.4]"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>
-                                                Upcoming
-                                                <span class="flex min-w-[1.15rem] items-center justify-center rounded-full bg-white text-xs">
-                                                    <span class="block h-full w-full rounded-full bg-theme-1/[0.75] px-1.5 py-0.5 leading-none text-white">
-                                                        14
-                                                    </span>
-                                                </span></button>
-                                        </li>
-                                        <li id="example-2-tab" role="presentation" class="focus-visible:outline-none flex-1 first:rounded-l-[0.6rem] last:rounded-r-[0.6rem] [&amp;[aria-selected='true']_button]:border-primary/[0.15] [&amp;[aria-selected='true']_button]:bg-primary/[0.04] [&amp;[aria-selected='true']_button]:font-medium [&amp;[aria-selected='true']_button]:text-primary [&amp;[aria-selected='true']_button]:shadow-sm">
-                                            <button data-tw-target="#example-2" role="tab" class="cursor-pointer appearance-none px-3 border border-transparent transition-colors dark:text-slate-400 [&amp;.active]:text-slate-700 dark:border-transparent [&amp;.active]:border [&amp;.active]:shadow-sm [&amp;.active]:font-medium [&amp;.active]:border-slate-200 [&amp;.active]:bg-white [&amp;.active]:dark:text-slate-300 [&amp;.active]:dark:bg-darkmode-400 [&amp;.active]:dark:border-darkmode-400 flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-[0.6rem] py-3 text-slate-500"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="user-plus" class="lucide lucide-user-plus h-4 w-4 stroke-[1.4]"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" x2="19" y1="8" y2="14"></line><line x1="22" x2="16" y1="11" y2="11"></line></svg>
-                                                Invite</button>
-                                        </li>
-                                    </ul>
+                    <div class="mt-1.5 flex flex-col">
+                        <div class="box flex flex-col p-5">
+                            <div class="flex flex-col mb-4 gap-y-3 md:h-10 md:flex-row md:items-center">
+                                <div class="text-base font-medium group-[.mode--light]:text-white">
+                                    {{ $page_title }}
                                 </div>
-                                <div class="tab-content">
-                                    <div data-transition="" data-selector=".active" data-enter="transition-[visibility,opacity] ease-linear duration-150" data-enter-from="!p-0 !h-0 overflow-hidden invisible opacity-0" data-enter-to="visible opacity-100" data-leave="transition-[visibility,opacity] ease-linear duration-150" data-leave-from="visible opacity-100" data-leave-to="!p-0 !h-0 overflow-hidden invisible opacity-0" id="example-1" role="tabpanel" aria-labelledby="example-1-tab" class="tab-pane active visible opacity-100" data-state="enter" style="width: 368px;">
-                                        <div id="calendar-events" class="full-calendar-draggable flex flex-col gap-y-6">
-                                            <div class="event box box--stacked relative flex cursor-move items-center gap-3.5 p-5">
-                                                <div>
-                                                    <div class="image-fit h-[4.5rem] w-[4.5rem] overflow-hidden rounded-2xl border-[3px] border-slate-200/70">
-                                                        <img src="{{ asset('dist/images') }}/projects/project3-400x400.jpg" alt="Tailwise - Admin Dashboard Template">
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <div class="event__title max-w-[7rem] truncate font-medium text-primary md:max-w-[12rem]">
-                                                        Team Building Workshop
-                                                    </div>
-                                                    <div class="mt-1 max-w-[7rem] truncate leading-relaxed text-slate-500 md:max-w-[12rem]">
-                                                        Team-building activities and games
-                                                    </div>
-                                                    <div class="mt-1 text-slate-500">
-                                                        <span class="event__days">
-                                                            5
-                                                        </span>
-                                                        Days <span class="mx-1">•</span> 09:30 AM
-                                                    </div>
-                                                </div>
-                                                <div data-tw-placement="bottom-end" class="dropdown absolute inset-y-0 right-0 my-auto mr-5 h-5 w-5 group-[.right]:left-0 group-[.right]:-ml-8"><button data-tw-toggle="dropdown" aria-expanded="false" class="cursor-pointer h-5 w-5 text-slate-500"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="more-vertical" class="lucide lucide-more-vertical stroke-[1] w-5 h-5 fill-slate-400/70 stroke-slate-400/70"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
-                                                    </button>
-                                                    <div data-transition="" data-selector=".show" data-enter="transition-all ease-linear duration-150" data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1" data-enter-to="!mt-1 visible opacity-100 translate-y-0" data-leave="transition-all ease-linear duration-150" data-leave-from="!mt-1 visible opacity-100 translate-y-0" data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1" class="dropdown-menu absolute z-[9999] hidden invisible opacity-0 translate-y-1" data-state="leave" style="display: none;">
-                                                        <div class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 w-40">
-                                                            <a class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="copy" class="lucide lucide-copy stroke-[1] mr-2 h-4 w-4"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>
-                                                                Copy Link</a>
-                                                            <a class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash" class="lucide lucide-trash stroke-[1] mr-2 h-4 w-4"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
-                                                                Delete</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="event box box--stacked relative flex cursor-move items-center gap-3.5 p-5">
-                                                <div>
-                                                    <div class="image-fit h-[4.5rem] w-[4.5rem] overflow-hidden rounded-2xl border-[3px] border-slate-200/70">
-                                                        <img src="{{ asset('dist/images') }}/projects/project5-400x400.jpg" alt="Tailwise - Admin Dashboard Template">
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <div class="event__title max-w-[7rem] truncate font-medium text-primary md:max-w-[12rem]">
-                                                        Community Cleanup
-                                                    </div>
-                                                    <div class="mt-1 max-w-[7rem] truncate leading-relaxed text-slate-500 md:max-w-[12rem]">
-                                                        Volunteer event to clean up the neighborhood
-                                                    </div>
-                                                    <div class="mt-1 text-slate-500">
-                                                        <span class="event__days">
-                                                            5
-                                                        </span>
-                                                        Days <span class="mx-1">•</span> 09:30 AM
-                                                    </div>
-                                                </div>
-                                                <div data-tw-placement="bottom-end" class="dropdown absolute inset-y-0 right-0 my-auto mr-5 h-5 w-5 group-[.right]:left-0 group-[.right]:-ml-8"><button data-tw-toggle="dropdown" aria-expanded="false" class="cursor-pointer h-5 w-5 text-slate-500"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="more-vertical" class="lucide lucide-more-vertical stroke-[1] w-5 h-5 fill-slate-400/70 stroke-slate-400/70"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
-                                                    </button>
-                                                    <div data-transition="" data-selector=".show" data-enter="transition-all ease-linear duration-150" data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1" data-enter-to="!mt-1 visible opacity-100 translate-y-0" data-leave="transition-all ease-linear duration-150" data-leave-from="!mt-1 visible opacity-100 translate-y-0" data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1" class="dropdown-menu absolute z-[9999] hidden invisible opacity-0 translate-y-1" data-state="leave" style="display: none;">
-                                                        <div class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 w-40">
-                                                            <a class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="copy" class="lucide lucide-copy stroke-[1] mr-2 h-4 w-4"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>
-                                                                Copy Link</a>
-                                                            <a class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash" class="lucide lucide-trash stroke-[1] mr-2 h-4 w-4"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
-                                                                Delete</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="event box box--stacked relative flex cursor-move items-center gap-3.5 p-5">
-                                                <div>
-                                                    <div class="image-fit h-[4.5rem] w-[4.5rem] overflow-hidden rounded-2xl border-[3px] border-slate-200/70">
-                                                        <img src="{{ asset('dist/images') }}/projects/project9-400x400.jpg" alt="Tailwise - Admin Dashboard Template">
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <div class="event__title max-w-[7rem] truncate font-medium text-primary md:max-w-[12rem]">
-                                                        Holiday Party
-                                                    </div>
-                                                    <div class="mt-1 max-w-[7rem] truncate leading-relaxed text-slate-500 md:max-w-[12rem]">
-                                                        Annual holiday celebration and party
-                                                    </div>
-                                                    <div class="mt-1 text-slate-500">
-                                                        <span class="event__days">
-                                                            4
-                                                        </span>
-                                                        Days <span class="mx-1">•</span> 09:30 AM
-                                                    </div>
-                                                </div>
-                                                <div data-tw-placement="bottom-end" class="dropdown absolute inset-y-0 right-0 my-auto mr-5 h-5 w-5 group-[.right]:left-0 group-[.right]:-ml-8"><button data-tw-toggle="dropdown" aria-expanded="false" class="cursor-pointer h-5 w-5 text-slate-500"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="more-vertical" class="lucide lucide-more-vertical stroke-[1] w-5 h-5 fill-slate-400/70 stroke-slate-400/70"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
-                                                    </button>
-                                                    <div data-transition="" data-selector=".show" data-enter="transition-all ease-linear duration-150" data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1" data-enter-to="!mt-1 visible opacity-100 translate-y-0" data-leave="transition-all ease-linear duration-150" data-leave-from="!mt-1 visible opacity-100 translate-y-0" data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1" class="dropdown-menu absolute z-[9999] hidden invisible opacity-0 translate-y-1" data-state="leave" style="display: none;">
-                                                        <div class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 w-40">
-                                                            <a class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="copy" class="lucide lucide-copy stroke-[1] mr-2 h-4 w-4"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>
-                                                                Copy Link</a>
-                                                            <a class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash" class="lucide lucide-trash stroke-[1] mr-2 h-4 w-4"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
-                                                                Delete</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="event box box--stacked relative flex cursor-move items-center gap-3.5 p-5">
-                                                <div>
-                                                    <div class="image-fit h-[4.5rem] w-[4.5rem] overflow-hidden rounded-2xl border-[3px] border-slate-200/70">
-                                                        <img src="{{ asset('dist/images') }}/projects/project10-400x400.jpg" alt="Tailwise - Admin Dashboard Template">
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <div class="event__title max-w-[7rem] truncate font-medium text-primary md:max-w-[12rem]">
-                                                        Company Retreat
-                                                    </div>
-                                                    <div class="mt-1 max-w-[7rem] truncate leading-relaxed text-slate-500 md:max-w-[12rem]">
-                                                        Team retreat in a scenic location
-                                                    </div>
-                                                    <div class="mt-1 text-slate-500">
-                                                        <span class="event__days">
-                                                            2
-                                                        </span>
-                                                        Days <span class="mx-1">•</span> 09:30 AM
-                                                    </div>
-                                                </div>
-                                                <div data-tw-placement="bottom-end" class="dropdown absolute inset-y-0 right-0 my-auto mr-5 h-5 w-5 group-[.right]:left-0 group-[.right]:-ml-8"><button data-tw-toggle="dropdown" aria-expanded="false" class="cursor-pointer h-5 w-5 text-slate-500"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="more-vertical" class="lucide lucide-more-vertical stroke-[1] w-5 h-5 fill-slate-400/70 stroke-slate-400/70"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
-                                                    </button>
-                                                    <div data-transition="" data-selector=".show" data-enter="transition-all ease-linear duration-150" data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1" data-enter-to="!mt-1 visible opacity-100 translate-y-0" data-leave="transition-all ease-linear duration-150" data-leave-from="!mt-1 visible opacity-100 translate-y-0" data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1" class="dropdown-menu absolute z-[9999] hidden invisible opacity-0 translate-y-1" data-state="leave" style="display: none;">
-                                                        <div class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 w-40">
-                                                            <a class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="copy" class="lucide lucide-copy stroke-[1] mr-2 h-4 w-4"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>
-                                                                Copy Link</a>
-                                                            <a class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash" class="lucide lucide-trash stroke-[1] mr-2 h-4 w-4"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
-                                                                Delete</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="event box box--stacked relative flex cursor-move items-center gap-3.5 p-5">
-                                                <div>
-                                                    <div class="image-fit h-[4.5rem] w-[4.5rem] overflow-hidden rounded-2xl border-[3px] border-slate-200/70">
-                                                        <img src="{{ asset('dist/images') }}/projects/project4-400x400.jpg" alt="Tailwise - Admin Dashboard Template">
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <div class="event__title max-w-[7rem] truncate font-medium text-primary md:max-w-[12rem]">
-                                                        Marketing Workshop
-                                                    </div>
-                                                    <div class="mt-1 max-w-[7rem] truncate leading-relaxed text-slate-500 md:max-w-[12rem]">
-                                                        Workshop on modern marketing strategies
-                                                    </div>
-                                                    <div class="mt-1 text-slate-500">
-                                                        <span class="event__days">
-                                                            2
-                                                        </span>
-                                                        Days <span class="mx-1">•</span> 09:30 AM
-                                                    </div>
-                                                </div>
-                                                <div data-tw-placement="bottom-end" class="dropdown absolute inset-y-0 right-0 my-auto mr-5 h-5 w-5 group-[.right]:left-0 group-[.right]:-ml-8"><button data-tw-toggle="dropdown" aria-expanded="false" class="cursor-pointer h-5 w-5 text-slate-500"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="more-vertical" class="lucide lucide-more-vertical stroke-[1] w-5 h-5 fill-slate-400/70 stroke-slate-400/70"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
-                                                    </button>
-                                                    <div data-transition="" data-selector=".show" data-enter="transition-all ease-linear duration-150" data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1" data-enter-to="!mt-1 visible opacity-100 translate-y-0" data-leave="transition-all ease-linear duration-150" data-leave-from="!mt-1 visible opacity-100 translate-y-0" data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1" class="dropdown-menu absolute z-[9999] hidden invisible opacity-0 translate-y-1" data-state="leave" style="display: none;">
-                                                        <div class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 w-40">
-                                                            <a class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="copy" class="lucide lucide-copy stroke-[1] mr-2 h-4 w-4"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>
-                                                                Copy Link</a>
-                                                            <a class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash" class="lucide lucide-trash stroke-[1] mr-2 h-4 w-4"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
-                                                                Delete</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="hidden p-3 text-center text-slate-500" id="calendar-no-events">
-                                                No events yet
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="flex flex-col gap-x-1 sm:flex-row md:ml-auto" id="assignShiftContainer">
+                                    <x-filter></x-filter>
+                                    <a href="{{ route('hrms.shift-assignment.create') }}" type="button" class="btn btn-primary transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary shadow-md w-100">
+                                        <svg class="mr-2 h-4 w-4 stroke-[1.3]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                                       Export to excel</a>
+                                    </button>                                
                                 </div>
                             </div>
-                        </div>
-                        <div class="flex w-full flex-col gap-y-7">
-                            <div class="box box--stacked flex flex-col p-5">
-                                <div class="full-calendar">
-                                    <div class="fc fc-media-screen fc-direction-ltr fc-theme-standard"><div class="fc-header-toolbar fc-toolbar fc-toolbar-ltr"><div class="fc-toolbar-chunk"><div class="fc-button-group"><button type="button" title="Previous month" aria-pressed="false" class="fc-prev-button fc-button fc-button-primary"><span class="fc-icon fc-icon-chevron-left" role="img"></span></button><button type="button" title="Next month" aria-pressed="false" class="fc-next-button fc-button fc-button-primary"><span class="fc-icon fc-icon-chevron-right" role="img"></span></button></div><button type="button" title="This month" aria-pressed="false" class="fc-today-button fc-button fc-button-primary">today</button></div><div class="fc-toolbar-chunk"><h2 class="fc-toolbar-title" id="fc-dom-1">January 2045</h2></div><div class="fc-toolbar-chunk"><div class="fc-button-group"><button type="button" title="month view" aria-pressed="true" class="fc-dayGridMonth-button fc-button fc-button-primary fc-button-active">month</button><button type="button" title="week view" aria-pressed="false" class="fc-timeGridWeek-button fc-button fc-button-primary">week</button><button type="button" title="day view" aria-pressed="false" class="fc-timeGridDay-button fc-button fc-button-primary">day</button><button type="button" title="list view" aria-pressed="false" class="fc-listWeek-button fc-button fc-button-primary">list</button></div></div></div><div aria-labelledby="fc-dom-1" class="fc-view-harness fc-view-harness-active" style="height: 596.296px;"><div class="fc-dayGridMonth-view fc-view fc-daygrid"><table role="grid" class="fc-scrollgrid  fc-scrollgrid-liquid"><thead role="rowgroup"><tr role="presentation" class="fc-scrollgrid-section fc-scrollgrid-section-header "><th role="presentation"><div class="fc-scroller-harness"><div class="fc-scroller" style="overflow: hidden;"><table role="presentation" class="fc-col-header " style="width: 803px;"><colgroup></colgroup><thead role="presentation"><tr role="row"><th role="columnheader" class="fc-col-header-cell fc-day fc-day-sun"><div class="fc-scrollgrid-sync-inner"><a aria-label="Sunday" class="fc-col-header-cell-cushion">Sun</a></div></th><th role="columnheader" class="fc-col-header-cell fc-day fc-day-mon"><div class="fc-scrollgrid-sync-inner"><a aria-label="Monday" class="fc-col-header-cell-cushion">Mon</a></div></th><th role="columnheader" class="fc-col-header-cell fc-day fc-day-tue"><div class="fc-scrollgrid-sync-inner"><a aria-label="Tuesday" class="fc-col-header-cell-cushion">Tue</a></div></th><th role="columnheader" class="fc-col-header-cell fc-day fc-day-wed"><div class="fc-scrollgrid-sync-inner"><a aria-label="Wednesday" class="fc-col-header-cell-cushion">Wed</a></div></th><th role="columnheader" class="fc-col-header-cell fc-day fc-day-thu"><div class="fc-scrollgrid-sync-inner"><a aria-label="Thursday" class="fc-col-header-cell-cushion">Thu</a></div></th><th role="columnheader" class="fc-col-header-cell fc-day fc-day-fri"><div class="fc-scrollgrid-sync-inner"><a aria-label="Friday" class="fc-col-header-cell-cushion">Fri</a></div></th><th role="columnheader" class="fc-col-header-cell fc-day fc-day-sat"><div class="fc-scrollgrid-sync-inner"><a aria-label="Saturday" class="fc-col-header-cell-cushion">Sat</a></div></th></tr></thead></table></div></div></th></tr></thead><tbody role="rowgroup"><tr role="presentation" class="fc-scrollgrid-section fc-scrollgrid-section-body  fc-scrollgrid-section-liquid"><td role="presentation"><div class="fc-scroller-harness fc-scroller-harness-liquid"><div class="fc-scroller fc-scroller-liquid-absolute" style="overflow: hidden auto;"><div class="fc-daygrid-body fc-daygrid-body-balanced " style="width: 803px;"><table role="presentation" class="fc-scrollgrid-sync-table" style="width: 803px; height: 545px;"><colgroup></colgroup><tbody role="presentation"><tr role="row"><td aria-labelledby="fc-dom-2" role="gridcell" data-date="2045-01-01" class="fc-day fc-day-sun fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 1, 2045" data-navlink="" tabindex="0" id="fc-dom-2" class="fc-daygrid-day-number">1</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 0px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-4" role="gridcell" data-date="2045-01-02" class="fc-day fc-day-mon fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 2, 2045" data-navlink="" tabindex="0" id="fc-dom-4" class="fc-daygrid-day-number">2</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 0px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-6" role="gridcell" data-date="2045-01-03" class="fc-day fc-day-tue fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 3, 2045" data-navlink="" tabindex="0" id="fc-dom-6" class="fc-daygrid-day-number">3</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 0px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-8" role="gridcell" data-date="2045-01-04" class="fc-day fc-day-wed fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 4, 2045" data-navlink="" tabindex="0" id="fc-dom-8" class="fc-daygrid-day-number">4</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 0px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-10" role="gridcell" data-date="2045-01-05" class="fc-day fc-day-thu fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 5, 2045" data-navlink="" tabindex="0" id="fc-dom-10" class="fc-daygrid-day-number">5</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-event-harness fc-daygrid-event-harness-abs" style="top: 0px; left: 0px; right: -229.945px;"><a class="fc-event fc-event-draggable fc-event-resizable fc-event-start fc-event-end fc-event-future fc-daygrid-event fc-daygrid-block-event fc-h-event"><div class="fc-event-main"><div class="fc-event-main-frame"><div class="fc-event-title-container"><div class="fc-event-title fc-sticky">Vue Vixens Day</div></div></div></div><div class="fc-event-resizer fc-event-resizer-end"></div></a></div><div class="fc-daygrid-day-bottom" style="margin-top: 33px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-12" role="gridcell" data-date="2045-01-06" class="fc-day fc-day-fri fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 6, 2045" data-navlink="" tabindex="0" id="fc-dom-12" class="fc-daygrid-day-number">6</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 33px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-14" role="gridcell" data-date="2045-01-07" class="fc-day fc-day-sat fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 7, 2045" data-navlink="" tabindex="0" id="fc-dom-14" class="fc-daygrid-day-number">7</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 33px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td></tr><tr role="row"><td aria-labelledby="fc-dom-16" role="gridcell" data-date="2045-01-08" class="fc-day fc-day-sun fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 8, 2045" data-navlink="" tabindex="0" id="fc-dom-16" class="fc-daygrid-day-number">8</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 0px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-18" role="gridcell" data-date="2045-01-09" class="fc-day fc-day-mon fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 9, 2045" data-navlink="" tabindex="0" id="fc-dom-18" class="fc-daygrid-day-number">9</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 0px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-20" role="gridcell" data-date="2045-01-10" class="fc-day fc-day-tue fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 10, 2045" data-navlink="" tabindex="0" id="fc-dom-20" class="fc-daygrid-day-number">10</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 0px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-22" role="gridcell" data-date="2045-01-11" class="fc-day fc-day-wed fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 11, 2045" data-navlink="" tabindex="0" id="fc-dom-22" class="fc-daygrid-day-number">11</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-event-harness fc-daygrid-event-harness-abs" style="top: 0px; left: 0px; right: -344.656px;"><a class="fc-event fc-event-draggable fc-event-resizable fc-event-start fc-event-end fc-event-future fc-daygrid-event fc-daygrid-block-event fc-h-event"><div class="fc-event-main"><div class="fc-event-main-frame"><div class="fc-event-title-container"><div class="fc-event-title fc-sticky">VueConfUS</div></div></div></div><div class="fc-event-resizer fc-event-resizer-end"></div></a></div><div class="fc-daygrid-day-bottom" style="margin-top: 33px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-24" role="gridcell" data-date="2045-01-12" class="fc-day fc-day-thu fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 12, 2045" data-navlink="" tabindex="0" id="fc-dom-24" class="fc-daygrid-day-number">12</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 33px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-26" role="gridcell" data-date="2045-01-13" class="fc-day fc-day-fri fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 13, 2045" data-navlink="" tabindex="0" id="fc-dom-26" class="fc-daygrid-day-number">13</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 33px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-28" role="gridcell" data-date="2045-01-14" class="fc-day fc-day-sat fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 14, 2045" data-navlink="" tabindex="0" id="fc-dom-28" class="fc-daygrid-day-number">14</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 33px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td></tr><tr role="row"><td aria-labelledby="fc-dom-30" role="gridcell" data-date="2045-01-15" class="fc-day fc-day-sun fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 15, 2045" data-navlink="" tabindex="0" id="fc-dom-30" class="fc-daygrid-day-number">15</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 0px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-32" role="gridcell" data-date="2045-01-16" class="fc-day fc-day-mon fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 16, 2045" data-navlink="" tabindex="0" id="fc-dom-32" class="fc-daygrid-day-number">16</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 0px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-34" role="gridcell" data-date="2045-01-17" class="fc-day fc-day-tue fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 17, 2045" data-navlink="" tabindex="0" id="fc-dom-34" class="fc-daygrid-day-number">17</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-event-harness fc-daygrid-event-harness-abs" style="top: 0px; left: 0px; right: -344.133px;"><a class="fc-event fc-event-draggable fc-event-resizable fc-event-start fc-event-end fc-event-future fc-daygrid-event fc-daygrid-block-event fc-h-event"><div class="fc-event-main"><div class="fc-event-main-frame"><div class="fc-event-title-container"><div class="fc-event-title fc-sticky">VueJS Amsterdam</div></div></div></div><div class="fc-event-resizer fc-event-resizer-end"></div></a></div><div class="fc-daygrid-day-bottom" style="margin-top: 33px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-36" role="gridcell" data-date="2045-01-18" class="fc-day fc-day-wed fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 18, 2045" data-navlink="" tabindex="0" id="fc-dom-36" class="fc-daygrid-day-number">18</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 33px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-38" role="gridcell" data-date="2045-01-19" class="fc-day fc-day-thu fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 19, 2045" data-navlink="" tabindex="0" id="fc-dom-38" class="fc-daygrid-day-number">19</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 33px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-40" role="gridcell" data-date="2045-01-20" class="fc-day fc-day-fri fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 20, 2045" data-navlink="" tabindex="0" id="fc-dom-40" class="fc-daygrid-day-number">20</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 33px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-42" role="gridcell" data-date="2045-01-21" class="fc-day fc-day-sat fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 21, 2045" data-navlink="" tabindex="0" id="fc-dom-42" class="fc-daygrid-day-number">21</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-event-harness" style="margin-top: 0px;"><a class="fc-event fc-event-draggable fc-event-start fc-event-future fc-daygrid-event fc-daygrid-block-event fc-h-event"><div class="fc-event-main"><div class="fc-event-main-frame"><div class="fc-event-title-container"><div class="fc-event-title fc-sticky">Vue Fes Japan 2045</div></div></div></div></a></div><div class="fc-daygrid-day-bottom" style="margin-top: 0px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td></tr><tr role="row"><td aria-labelledby="fc-dom-44" role="gridcell" data-date="2045-01-22" class="fc-day fc-day-sun fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 22, 2045" data-navlink="" tabindex="0" id="fc-dom-44" class="fc-daygrid-day-number">22</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-event-harness fc-daygrid-event-harness-abs" style="top: 0px; left: 0px; right: -114.711px;"><a class="fc-event fc-event-draggable fc-event-resizable fc-event-end fc-event-future fc-daygrid-event fc-daygrid-block-event fc-h-event"><div class="fc-event-main"><div class="fc-event-main-frame"><div class="fc-event-title-container"><div class="fc-event-title fc-sticky">Vue Fes Japan 2045</div></div></div></div><div class="fc-event-resizer fc-event-resizer-end"></div></a></div><div class="fc-daygrid-day-bottom" style="margin-top: 33px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-46" role="gridcell" data-date="2045-01-23" class="fc-day fc-day-mon fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 23, 2045" data-navlink="" tabindex="0" id="fc-dom-46" class="fc-daygrid-day-number">23</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 33px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-48" role="gridcell" data-date="2045-01-24" class="fc-day fc-day-tue fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 24, 2045" data-navlink="" tabindex="0" id="fc-dom-48" class="fc-daygrid-day-number">24</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-event-harness fc-daygrid-event-harness-abs" style="top: 0px; left: 0px; right: -229.422px;"><a class="fc-event fc-event-draggable fc-event-resizable fc-event-start fc-event-end fc-event-future fc-daygrid-event fc-daygrid-block-event fc-h-event"><div class="fc-event-main"><div class="fc-event-main-frame"><div class="fc-event-title-container"><div class="fc-event-title fc-sticky">Laracon 2045</div></div></div></div><div class="fc-event-resizer fc-event-resizer-end"></div></a></div><div class="fc-daygrid-day-bottom" style="margin-top: 33px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-50" role="gridcell" data-date="2045-01-25" class="fc-day fc-day-wed fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 25, 2045" data-navlink="" tabindex="0" id="fc-dom-50" class="fc-daygrid-day-number">25</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 33px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-52" role="gridcell" data-date="2045-01-26" class="fc-day fc-day-thu fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 26, 2045" data-navlink="" tabindex="0" id="fc-dom-52" class="fc-daygrid-day-number">26</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 33px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-54" role="gridcell" data-date="2045-01-27" class="fc-day fc-day-fri fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 27, 2045" data-navlink="" tabindex="0" id="fc-dom-54" class="fc-daygrid-day-number">27</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 0px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-56" role="gridcell" data-date="2045-01-28" class="fc-day fc-day-sat fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 28, 2045" data-navlink="" tabindex="0" id="fc-dom-56" class="fc-daygrid-day-number">28</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 0px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td></tr><tr role="row"><td aria-labelledby="fc-dom-58" role="gridcell" data-date="2045-01-29" class="fc-day fc-day-sun fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 29, 2045" data-navlink="" tabindex="0" id="fc-dom-58" class="fc-daygrid-day-number">29</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 0px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-60" role="gridcell" data-date="2045-01-30" class="fc-day fc-day-mon fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 30, 2045" data-navlink="" tabindex="0" id="fc-dom-60" class="fc-daygrid-day-number">30</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 0px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-62" role="gridcell" data-date="2045-01-31" class="fc-day fc-day-tue fc-day-future fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to January 31, 2045" data-navlink="" tabindex="0" id="fc-dom-62" class="fc-daygrid-day-number">31</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 0px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-64" role="gridcell" data-date="2045-02-01" class="fc-day fc-day-wed fc-day-future fc-day-other fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to February 1, 2045" data-navlink="" tabindex="0" id="fc-dom-64" class="fc-daygrid-day-number">1</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 0px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-66" role="gridcell" data-date="2045-02-02" class="fc-day fc-day-thu fc-day-future fc-day-other fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to February 2, 2045" data-navlink="" tabindex="0" id="fc-dom-66" class="fc-daygrid-day-number">2</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 0px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-68" role="gridcell" data-date="2045-02-03" class="fc-day fc-day-fri fc-day-future fc-day-other fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to February 3, 2045" data-navlink="" tabindex="0" id="fc-dom-68" class="fc-daygrid-day-number">3</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 0px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-70" role="gridcell" data-date="2045-02-04" class="fc-day fc-day-sat fc-day-future fc-day-other fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to February 4, 2045" data-navlink="" tabindex="0" id="fc-dom-70" class="fc-daygrid-day-number">4</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 0px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td></tr><tr role="row"><td aria-labelledby="fc-dom-72" role="gridcell" data-date="2045-02-05" class="fc-day fc-day-sun fc-day-future fc-day-other fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to February 5, 2045" data-navlink="" tabindex="0" id="fc-dom-72" class="fc-daygrid-day-number">5</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 0px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-74" role="gridcell" data-date="2045-02-06" class="fc-day fc-day-mon fc-day-future fc-day-other fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to February 6, 2045" data-navlink="" tabindex="0" id="fc-dom-74" class="fc-daygrid-day-number">6</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 0px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-76" role="gridcell" data-date="2045-02-07" class="fc-day fc-day-tue fc-day-future fc-day-other fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to February 7, 2045" data-navlink="" tabindex="0" id="fc-dom-76" class="fc-daygrid-day-number">7</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 0px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-78" role="gridcell" data-date="2045-02-08" class="fc-day fc-day-wed fc-day-future fc-day-other fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to February 8, 2045" data-navlink="" tabindex="0" id="fc-dom-78" class="fc-daygrid-day-number">8</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 0px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-80" role="gridcell" data-date="2045-02-09" class="fc-day fc-day-thu fc-day-future fc-day-other fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to February 9, 2045" data-navlink="" tabindex="0" id="fc-dom-80" class="fc-daygrid-day-number">9</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 0px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-82" role="gridcell" data-date="2045-02-10" class="fc-day fc-day-fri fc-day-future fc-day-other fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to February 10, 2045" data-navlink="" tabindex="0" id="fc-dom-82" class="fc-daygrid-day-number">10</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 0px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td><td aria-labelledby="fc-dom-84" role="gridcell" data-date="2045-02-11" class="fc-day fc-day-sat fc-day-future fc-day-other fc-daygrid-day"><div class="fc-daygrid-day-frame fc-scrollgrid-sync-inner"><div class="fc-daygrid-day-top"><a title="Go to February 11, 2045" data-navlink="" tabindex="0" id="fc-dom-84" class="fc-daygrid-day-number">11</a></div><div class="fc-daygrid-day-events"><div class="fc-daygrid-day-bottom" style="margin-top: 0px;"></div></div><div class="fc-daygrid-day-bg"></div></div></td></tr></tbody></table></div></div></div></td></tr></tbody></table></div></div></div>
-                                </div>
+                            <div class="table-responsive relative overflow-x-auto sm:rounded-lg">
+                                <table data-tw-merge="" class="w-full text-left border-b border-slate-200/60">
+                                    <thead data-tw-merge="" class="">
+                                        <tr data-tw-merge="" class="" id="daysHeader">
+                                            <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 w-5 border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500">
+                                                <input id="selectAll" data-tw-merge="" type="checkbox" class="transition-all duration-100 ease-in-out shadow-sm border-slate-200 cursor-pointer rounded focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&[type='radio']]:checked:bg-primary [&[type='radio']]:checked:border-primary [&[type='radio']]:checked:border-opacity-10 [&[type='checkbox']]:checked:bg-primary [&[type='checkbox']]:checked:border-primary [&[type='checkbox']]:checked:border-opacity-10 [&:disabled:not(:checked)]:bg-slate-100 [&:disabled:not(:checked)]:cursor-not-allowed [&:disabled:not(:checked)]:dark:bg-darkmode-800/50 [&:disabled:checked]:opacity-70 [&:disabled:checked]:cursor-not-allowed [&:disabled:checked]:dark:bg-darkmode-800/50">
+                                            </td>
+                                            <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 border-t border-slate-200/60 bg-slate-50 py-4 font-bold text-slate-500">
+                                                No.
+                                            </td>
+                                            <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 border-t border-slate-200/60 bg-slate-50 py-4 font-bold text-slate-500">
+                                                ID
+                                            </td>
+                                            <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 border-t border-slate-200/60 bg-slate-50 py-4 font-bold text-slate-500">
+                                                Employee Name
+                                            </td>
+                                            <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 border-t border-slate-200/60 bg-slate-50 py-4 font-bold text-slate-500">
+                                               Shift Type
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="attendanceBody">
+                                      
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -223,7 +62,159 @@
         </div>
     </div>
 </div>
-@endsection
 @push('js')
-<script src="{{ asset('dist/js/vendors/calendar/calendar.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        function generateYears() {
+            let currentYear = new Date().getFullYear();
+            let years = [];
+            for (let i = currentYear - 10; i <= currentYear + 10; i++) {
+                years.push(i);
+            }
+            return years;
+        }
+
+        function generateDays(month, year) {
+            let date = new Date(year, month, 1);
+            let days = [];
+            const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+            while (date.getMonth() === month) {
+                days.push({
+                    day: date.getDate(),
+                    dayName: dayNames[date.getDay()]
+                });
+                date.setDate(date.getDate() + 1);
+            }
+            return days;
+        }
+
+        function generateEmployeeData() {
+            return [
+                {
+                    no: 1,
+                    id: 'E001',
+                    name: 'John Doe',
+                    shift: 'Morning',
+                    attendance: {
+                        "1": "P", "2": "P", "3": "A", "4": "P", "5": "P", "6": "A", "7": "P",
+                        "8": "A", "9": "P", "10": "P", "11": "A", "12": "P", "13": "P", "14": "A",
+                        "15": "P", "16": "P", "17": "A", "18": "P", "19": "P", "20": "A", "21": "P",
+                        "22": "A", "23": "P", "24": "P", "25": "A", "26": "P", "27": "P", "28": "A",
+                        "29": "P", "30": "P", "31": "A"
+                    }
+                },
+                {
+                    no: 2,
+                    id: 'E002',
+                    name: 'Jane Smith',
+                    shift: 'Afternoon',
+                    attendance: {
+                        "1": "A", "2": "P", "3": "P", "4": "P", "5": "A", "6": "P", "7": "A",
+                        "8": "P", "9": "A", "10": "P", "11": "P", "12": "A", "13": "P", "14": "P",
+                        "15": "A", "16": "P", "17": "P", "18": "A", "19": "P", "20": "P", "21": "A",
+                        "22": "P", "23": "A", "24": "P", "25": "P", "26": "A", "27": "P", "28": "P",
+                        "29": "A", "30": "P", "31": "P"
+                    }
+                },
+                {
+                    no: 3,
+                    id: 'E003',
+                    name: 'Alice Johnson',
+                    shift: 'Night',
+                    attendance: {
+                        "1": "P", "2": "A", "3": "P", "4": "A", "5": "P", "6": "P", "7": "A",
+                        "8": "P", "9": "P", "10": "A", "11": "P", "12": "P", "13": "A", "14": "P",
+                        "15": "P", "16": "A", "17": "P", "18": "P", "19": "A", "20": "P", "21": "P",
+                        "22": "A", "23": "P", "24": "A", "25": "P", "26": "P", "27": "A", "28": "P",
+                        "29": "P", "30": "A", "31": "P"
+                    }
+                },
+                {
+                    no: 4,
+                    id: 'E004',
+                    name: 'Bob Brown',
+                    shift: 'Morning',
+                    attendance: {
+                        "1": "A", "2": "A", "3": "P", "4": "P", "5": "A", "6": "A", "7": "P",
+                        "8": "P", "9": "A", "10": "A", "11": "P", "12": "P", "13": "A", "14": "A",
+                        "15": "P", "16": "P", "17": "A", "18": "A", "19": "P", "20": "P", "21": "A",
+                        "22": "A", "23": "P", "24": "A", "25": "P", "26": "A", "27": "P", "28": "P",
+                        "29": "A", "30": "P", "31": "P"
+                    }
+                }
+            ];
+        }
+
+        function populateYears() {
+            const yearSelect = $('#yearSelect');
+            const years = generateYears();
+            years.forEach(year => {
+                yearSelect.append(`<option value="${year}">${year}</option>`);
+            });
+        }
+
+        function getAttendanceClass(status) {
+            switch (status) {
+                case 'P':
+                    return 'text-green-800'; // Success color text
+                case 'A':
+                    return 'text-red-800'; // Danger color text
+                default:
+                    return '';
+            }
+        }
+
+        function populateTable(month, year) {
+            const days = generateDays(month, year);
+            const employees = generateEmployeeData();
+            
+            let daysHeader = $('#daysHeader');
+            let attendanceBody = $('#attendanceBody');
+            
+            daysHeader.find('th:gt(3)').remove(); // Remove existing day headers, keep first 4 columns
+            
+            days.forEach(day => {
+                daysHeader.append(`<th class="py-2 px-4 border-b">${day.day} ${day.dayName}</th>`);
+            });
+            
+            // if ($.fn.dataTable.isDataTable('#attendanceTable')) {
+            //     $('#attendanceTable').DataTable().clear().destroy();
+            // }
+            
+            attendanceBody.empty(); // Clear existing data
+            
+            employees.forEach(employee => {
+                let row = `<tr>
+                    <td class="py-2 px-4 border-b">${employee.no}</td>
+                    <td class="py-2 px-4 border-b">${employee.id}</td>
+                    <td class="py-2 px-4 border-b">${employee.name}</td>
+                    <td class="py-2 px-4 border-b">${employee.shift}</td>`;
+                days.forEach(day => {
+                    row += `<td class="py-2 px-4 border-b ${getAttendanceClass(employee.attendance[day.day])} font-bold">
+                                ${employee.attendance[day.day] || ''}
+                            </td>`;
+                });
+                row += `</tr>`;
+                attendanceBody.append(row);
+            });
+            
+            $('#attendanceTable').DataTable({
+                paging: true,
+                searching: false,
+                ordering: false,
+                info: false
+            });
+        }
+
+        $('#monthSelect, #yearSelect').change(function() {
+            let selectedMonth = $('#monthSelect').val();
+            let selectedYear = $('#yearSelect').val();
+            populateTable(parseInt(selectedMonth), parseInt(selectedYear));
+        });
+
+        populateYears();
+        populateTable(new Date().getMonth(), new Date().getFullYear());
+    });
+</script>
 @endpush
+@endsection

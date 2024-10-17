@@ -78,5 +78,6 @@ Route::prefix('/shift-request-approver')->group(function () {
 Route::prefix('/shift-type')->group(function () {
     Route::controller(ShiftTypeController::class)->group(function () {
         Route::get('/', 'index')->name('hrms.shifttype');
+        Route::get('/create', 'create')->name('hrms.shifttype.create');
     });
 });
