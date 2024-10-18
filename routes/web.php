@@ -37,6 +37,7 @@ Route::controller(AuthController::class)->group(function () {
         Route::middleware('isActivated')->group(function () {
             Route::get('/signin', 'index')->name('signin');
             Route::get('/signup', 'index')->name('signup');
+            Route::get('/signup/activate_account', 'index')->name('activate_account');
             Route::get('/forgot_password', 'index')->name('forgot-password');
             Route::get('/password-recovery/{token}', 'elm_password_recovery')->name('elm_password_recovery');
         });
@@ -46,6 +47,7 @@ Route::controller(AuthController::class)->group(function () {
         Route::prefix('/auth')->group(function () {
             Route::post('/signin', 'signin');
             Route::post('/signup', 'signup');
+            Route::post('/activate_account', 'activate_account');
             Route::post('/complete_company_register', 'complete_company_register');
             Route::post('/forgot_password', 'index');
             Route::post('/password-recovery/{token}', 'elm_password_recovery')->name('elm_password_recovery');
@@ -56,6 +58,7 @@ Route::controller(AuthController::class)->group(function () {
         Route::prefix('/elm')->group(function () {
             Route::get('/signin', 'elm_signin')->name('elm_signin');
             Route::get('/signup', 'elm_signup')->name('elm_signup');
+            Route::get('/activate_account', 'elm_activate_account')->name('elm_activate_account');
             Route::get('/forgot_password', 'elm_forgot_password')->name('elm_forgot_password');
         });
     });
