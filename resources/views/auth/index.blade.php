@@ -264,7 +264,10 @@
             // Activate levels based on strength
             activateStrengthLevels(strength);
 
+            const confirmPassword = document.getElementById('confirm-password').value;
+            if(confirmPassword.length >= 1){
             validatePasswordMatch(); // Check password match when the main password changes
+            }
         }
 
         function resetStrengthLevels() {
