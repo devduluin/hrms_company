@@ -211,6 +211,8 @@
 
         $(document).ready(function() {
             getCompanybyId();
+            let userId = '{{ $userId }}' ;
+            $('input[name=user_id]').val(userId);
         });
 
         async function getCompanybyId() {
@@ -222,9 +224,10 @@
             await transAjax(param).then((result) => {
                 
                 const data = result.data;
+                 
                 $('input[name=company_name]').val(data.company_name);
                 $('input[name=parent_company]').val(data.parent_company);
-                $('textarea[name=address]').html(data.address);
+                $('input[name=address]').val(data.address);
                 $('select[name=default_currency]').val(data.default_currency).change();
                 $('select[name=language]').val(data.language).change();
                 $('select[name=time_zone]').val(data.time_zone).change();
