@@ -149,7 +149,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="mt-3 w-full flex-1 xl:mt-0">
-                                                                        <select id="timezoneSelect" name="timezone" data-title="Time Zone" data-url="{{ url('dashboard/settings/timezone') }}" data-placeholder="Select your timezone" class="tom-select w-full">
+                                                                        <select id="timezoneSelect" name="time_zone" data-title="Time Zone" data-url="{{ url('dashboard/settings/timezone') }}" data-placeholder="Select your timezone" class="tom-select w-full">
                                                                             <option value="Asia/Jakarta">
                                                                                 Asia/Jakarta (WIB)
                                                                             </option>
@@ -427,9 +427,6 @@
         $('input[name=user_id]').val(userId);
         });
 
-        
-
-        //update company
         $("#createCompany").submit(async function (e) {
             e.preventDefault();
             const currentForm = $(this);
@@ -450,8 +447,12 @@
             }
 
             try {
-                const result = await transAjax(param);
-                console.log(result);
+                const response = await transAjax(param);
+                console.log(response);
+                if (response.success == true) {
+                    showSuccessNotification(response.message, "The operation was completed successfully.");
+                    window.location = '{{ url("/dashboard/hrms/company/show") }}/'+response.data.id;
+                }
             } catch (xhr) {
                 const response = JSON.parse(xhr.responseText);
                 console.log(response);

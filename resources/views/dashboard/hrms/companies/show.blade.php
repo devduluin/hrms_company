@@ -224,10 +224,10 @@
                 const data = result.data;
                 $('input[name=company_name]').val(data.company_name);
                 $('input[name=parent_company]').val(data.parent_company);
-                $('textarea[name=address]').val(data.address);
+                $('textarea[name=address]').html(data.address);
                 $('select[name=default_currency]').val(data.default_currency).change();
                 $('select[name=language]').val(data.language).change();
-                $('select[name=timezone]').val(data.time_zone).change();
+                $('select[name=time_zone]').val(data.time_zone).change();
                 $('input[name=domain]').val(data.domain);
                 $('input[name=date_of_establishment]').val(data.date_of_establishment);
                 $('input[name=latlong]').val(data.latlong);
@@ -242,12 +242,13 @@
         //update company
         $("#updateCompany").submit(async function (e) {
             e.preventDefault();
-            
+            const currentForm = $(this);
             var formData = new FormData(this);
             var jsonData = {};
 
             formData.forEach(function(value, key){
                 jsonData[key] = value;
+                 
             });
 
             var param = {
@@ -262,8 +263,11 @@
             try {
                 const result = await transAjax(param);
                 console.log(result);
-            } catch (error) {
-                console.log(error);
+            } catch (xhr) {
+                const response = JSON.parse(xhr.responseText);
+                console.log(response);
+                handleErrorResponse(response, currentForm);
+                
             }
             $('#submitBtn').attr('disable', false);
             $('#loadingText').html('Save Changes');
@@ -276,6 +280,38 @@
             
             $("#updateCompany").submit();
         });
+
+        function handleErrorResponse(result, tabId) {
+            const errorString = result.error || 'An error occurred.';
+            showErrorNotification('error',
+                `There were validation errors on tab ${tabId}. Message : ${result.message}`, errorString);
+            const errorMessages = errorString.split(', ');
+
+            $('.error-message').remove();
+
+            const errorPattern = /\"([^\"]+)\"/g;
+            let match;
+
+            while ((match = errorPattern.exec(errorMessages)) !== null) {
+                const field = match[1];
+                if (field !== 'employee_id') {
+                    let fieldName = field.replace(/_/g, " ").replace(/\b\w/g, char => char.toUpperCase());
+                    const input = $(`[name="${field}"]`);
+
+                    input.addClass('is-invalid');
+                    input.before(
+                        `<div class="error-message text-danger mt-1 text-xs sm:ml-auto sm:mt-0 mb-2">${fieldName} is not allowed to be empty</div>`
+                    );
+                }
+            }
+
+            const firstErrorField = $('.error-message').first();
+            if (firstErrorField.length) {
+                $('html, body').animate({
+                    scrollTop: firstErrorField.offset().top - 100
+                }, 500);
+            }
+        }
 
     </script>
 @endpush
