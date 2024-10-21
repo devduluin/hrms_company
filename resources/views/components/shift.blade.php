@@ -53,7 +53,7 @@
     async function loadDataShiftType() {
         let companyId = localStorage.getItem('company');
         var param = {
-            url: "http://apidev.duluin.com/api/v1/shift-type/shift-type",
+            url: "http://apidev.duluin.com/api/v1/companies/shift-type",
             method: "GET",
             data: {
                 company_id: localStorage.getItem('company'),
@@ -106,7 +106,7 @@
 
         
         var param = {
-            url: "http://apidev.duluin.com/api/v1/shift-assignment/shift-assignment/bulkupdate",
+            url: "http://apidev.duluin.com/api/v1/attendance/shift-assignment/bulkupdate",
             method: "PUT",
             data: JSON.stringify({
                 employee_ids: checkedEmployeeIds,

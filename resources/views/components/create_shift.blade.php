@@ -49,7 +49,7 @@
     $(document).ready(async function () {
         let companyId = localStorage.getItem('company');
         var param = {
-            url: "http://apidev.duluin.com/api/v1/shift-type/shift-type",
+            url: "http://apidev.duluin.com/api/v1/companies/shift-type",
             method: "GET",
             data: {
                 company_id: localStorage.getItem('company'),
@@ -96,7 +96,7 @@
         }
         
         var param = {
-            url: "http://apidev.duluin.com/api/v1/shift-assignment/shift-assignment",
+            url: "http://apidev.duluin.com/api/v1/attendance/shift-assignment",
             method: "POST",
             data: JSON.stringify({ 
                 employee_ids: checkedEmployeeIds,
