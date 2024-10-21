@@ -7,12 +7,13 @@
     'filter' => [],
     'url',
     'trigger',
-    'order' => [[0, 'ASC']],
+    'order' => '' ?? [[0, 'ASC']],
     'downloadOptions' => false,
     'dtcomponent' => 'true',
     'dtheight' => '400',
     'company_id' => '',
 ])
+
 
 <div class="relative overflow-x-auto sm:rounded-lg">
     <table id="{{ $id }}" style="width:100%"
@@ -64,9 +65,9 @@
 					extend: 'pdfHtml5',
 					exportOptions: { orthogonal: 'export' }
 				}
-			     
+
 			],
-             
+
             dom: '@if ($dtcomponent == 'true') <"grid grid-cols-2 gap-4 mb-4"Bf> @endif<"grid grid-cols-1 gap-4 mb-4"t><"grid grid-cols-3 gap-4 mb-4"lip>',
             language: {
                 search: 'Search: ',
@@ -75,7 +76,7 @@
                 paginate: { 'first': 'First', 'last': 'Last', 'next': document.dir == "rtl" ? '&larr;' : '&rarr;', 'previous': document.dir == "rtl" ? '&rarr;' : '&larr;' }
             }
         });
-        
+
         if ({{ $id }}) {
             let {{ $id }}Columns = $({{ $id }}).find('thead tr th');
             let {{ $id }}TableColumns = [];
@@ -117,7 +118,7 @@
                 }
                 {{ $id }}TableColumns.push(tmp);
             });
- 
+
             let ajax = {
                 url: '{{ $url }}',
                 method: "{{ $method }}",
@@ -165,8 +166,8 @@
                         $('#{{ $id }} tbody').html(
                             '<tr><td colspan="10" class="text-center">No data found</td></tr>'
                         );
-                        
-                       
+
+
                     }
                 }
             }
@@ -176,11 +177,11 @@
             }
 
             {{ $id }} = $({{ $id }}).DataTable({
-               
+
                 ajax: ajax,
                 columns: {{ $id }}TableColumns,
                 order: @json($order),
-                
+
                 @if ($downloadOptions)
                     dom: 'Bfrtip',
                     buttons: [
@@ -188,7 +189,7 @@
                     ],
                 @endif
                 render: function (data, type, row, meta) {
-                    
+
                 },
                 createdRow: function ( row, data, index ) {
                     $('td', row).eq(-1).addClass('text-center');
@@ -198,8 +199,8 @@
                     $('.dataTables_filter input').addClass(
                         'px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500'
                     );
-                   
-                   
+
+
                     // Modify page length dropdown with the provided structure and classes
                     $('.dataTables_length').addClass(
                         'px-0 block sm:flex flex-col items-start xl:flex-row xl:items-center gap-y-2 mb-4');

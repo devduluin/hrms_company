@@ -24,7 +24,21 @@
                                     <x-create_shift></x-create_shift>
                                 </div>
                             </div>
-                            <x-create_shift_table id="assignShiftContainer" apiUrl="{{ $apiUrl }}" h1="Employee" h2="Company" h3="Department" h4="Designation" h5="Shift"></x-table_custom>
+                            <x-datatable id="employeeTable"
+                                url="$apiUrl"
+                                method="POST" class="display">
+                                <x-slot:thead>
+                                    <th data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 w-5 border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500">
+                                        <input id="selectAll" data-tw-merge="" type="checkbox" class="transition-all duration-100 ease-in-out shadow-sm border-slate-200 cursor-pointer rounded focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
+                                    </th>
+                                    <th data-value="employee_id_rel" data-render="getEmployee">Employee Name</th>
+                                    <th data-value="salaryStructureAssignment.salaryStructure.name">Company</th>
+                                    <th data-value="salaryStructureAssignment.salaryStructure.is_active"
+                                        data-render="getStatus">Department
+                                    </th>
+                                    <th data-value="status" data-render="status">Designation</th>
+                                </x-slot:thead>
+                            </x-datatable>
                         </div>
                         <div class=" fixed z-10 flex items-center justify-center " id="modalOverlay" >
                             <div class="modal fade box p-4 inset-0 z-50 hidden" id="assignShiftModal"  tabindex="-1" aria-labelledby="assignShiftModalLabel" aria-hidden="true">
@@ -67,11 +81,61 @@
 
 
 <script>
-    $(document).ready(function() {
-        // Fungsi untuk cek semua checkbox
-        $('#selectAll').on('click', function() {
+      $('#selectAll').on('click', function() {
             $('tbody input[type="checkbox"]').prop('checked', this.checked);
         });
+        
+        function getCheckbox(data, type, row, meta) {
+            return `<input id="selectAll"  type="checkbox" class="transition-all duration-100 ease-in-out shadow-sm border-slate-200 cursor-pointer rounded focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">`;
+        }
+
+        function getCompany(data, type, row, meta) {
+            if (data !== null) {
+                return data?.company_name ?? 'N/A';
+            }
+            return 'N/A';
+        }
+
+        function getDesignation(data, type, row, meta) {
+            if (data !== null) {
+                return data?.designation_name ?? 'N/A';
+            }
+            return 'N/A';
+        }
+
+        function getDepartment(data, type, row, meta) {
+            if (data !== null) {
+                return data?.department_name ?? 'N/A';
+            }
+            return 'N/A';
+        }
+
+        function getActionBtn(data, type, row, meta) {
+            const url = `{{ url('dashboard/hrms/employee/edit_employee') }}/${data}`;
+            console.log(url);
+            return `
+            <div data-tw-merge data-tw-placement="bottom-end" class="dropdown relative">
+                <button data-tw-merge data-tw-toggle="dropdown" aria-expanded="false" class="">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6h.01M12 12h.01M12 18h.01" />
+                    </svg>
+                </button>
+                <div data-transition data-selector=".show" data-enter="transition-all ease-linear duration-150" data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1" data-enter-to="!mt-1 visible opacity-100 translate-y-0" data-leave="transition-all ease-linear duration-150" data-leave-from="!mt-1 visible opacity-100 translate-y-0" data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1" class="dropdown-menu absolute z-[9999] hidden">
+                    <div data-tw-merge class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 w-40">
+                        <a class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="printer" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
+                            Detail</a>
+                        <a href="` + url + `" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="external-link" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
+                            Edit</a>
+                        <a class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="file-text" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
+                            Hapus</a>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        
+
+        initializeContent();
 
 
     // // Fungsi untuk mengirim data ke server

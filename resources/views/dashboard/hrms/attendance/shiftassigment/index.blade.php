@@ -15,7 +15,7 @@
                         <div class="box flex flex-col p-5">
                             <div class="flex flex-col mb-4 gap-y-3 md:h-10 md:flex-row md:items-center">
                                 <div class="text-base font-medium group-[.mode--light]:text-white">
-                                    {{ $page_title }}
+                                    Shift Assignment
                                 </div>
                                 <div class="flex flex-col gap-x-1 sm:flex-row md:ml-auto" id="assignShiftContainer">
                                     <x-filter></x-filter>
@@ -26,7 +26,19 @@
                                     </button>                                
                                 </div>
                             </div>
-                            <x-shift_table id="assignShiftContainer" apiUrl="{{ $apiUrl }}" h1="Employee" h2="Company" h3="Department" h4="Designation" h5="Shift"></x-table_custom>
+                            <x-datatable id="employeeTable"
+                                url="$apiUrl"
+                                method="POST" class="display">
+                                <x-slot:thead>
+                                    <th data-value="employee_id_rel" data-render="getEmployee">Employee Name</th>
+                                    <th data-value="salaryStructureAssignment.salaryStructure.name">Company</th>
+                                    <th data-value="salaryStructureAssignment.salaryStructure.is_active"
+                                        data-render="getStatus">Shift Type
+                                    </th>
+                                    <th data-value="status" data-render="status">Status</th>
+                                    <th data-value="id" data-render="getActionBtn">Action</th>
+                                </x-slot:thead>
+                            </x-datatable>
                         </div>
                         <div class=" fixed z-10 flex items-center justify-center " id="modalOverlay" >
                             <div class="modal fade box p-4 inset-0 z-50 hidden" id="assignShiftModal"  tabindex="-1" aria-labelledby="assignShiftModalLabel" aria-hidden="true">
