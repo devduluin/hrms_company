@@ -1,48 +1,211 @@
 @csrf
 
-    <div class="box box--stacked flex flex-col p-1.5">
-        <div
-            class="relative h-60 w-full rounded-[0.6rem] bg-gradient-to-b from-theme-1/95 to-theme-2/95">
-            <div
-                class="w-full h-full relative overflow-hidden before:content-[''] before:absolute before:inset-0 before:bg-texture-white before:-mt-[50rem] after:content-[''] after:absolute after:inset-0 after:bg-texture-white after:-mt-[50rem]">
-            </div>
-            <div class="absolute inset-x-0 top-0 mx-auto mt-36 h-32 w-32">
-                <div
-                    class="box image-fit h-full w-full overflow-hidden rounded-full border-[6px] border-white">
-                    <img src="{{ asset('img/logo/duluin.jpg') }}"
-                        alt="Tailwise - Admin Dashboard Template">
-                </div>
-                <div
-                    class="box absolute bottom-0 right-0 mb-2.5 mr-2.5 h-5 w-5 rounded-full border-2 border-white bg-success">
-                </div>
-            </div>
-        </div>
-        <div
-            class="flex flex-col gap-y-3 rounded-[0.6rem] bg-slate-50 p-5 pt-12 sm:flex-row sm:items-end">
-            <button
-                class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed text-primary dark:border-primary [&amp;:hover:not(:disabled)]:bg-primary/10 border-primary/50 sm:ml-auto"><svg
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round" data-lucide="image"
-                    class="lucide lucide-image mr-2.5 h-4 w-4 stroke-[1.3]">
-                    <rect width="18" height="18" x="3" y="3" rx="2"
-                        ry="2"></rect>
-                    <circle cx="9" cy="9" r="2"></circle>
-                    <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
-                </svg>
-                Upload Cover</button>
-        </div>
-    </div>
-    <x-form.input id="company_name" label="Company Name" name="company name" required />
-    <x-form.input id="domain" label="Domain" name="domain" required />
-    <x-form.datepicker id="date_of_establishment" label="Date Of Establishment" name="date_of_establishment" required />
-    <x-form.select name="currency" id="currency" label="Default Currency" class=" w-full"
-        data-placeholder="Select Currency"  required>
-        <option value="">Select Gender</option>
-        <option value="male">IDR</option>
-        <option value="female">USD</option>
-    </x-form.select>
-</form>
+<form id="updateCompany" method="post"  action="{{ url('auth/complete_company_register') }}">
+                             
+                            <div class="box box--stacked flex flex-col p-5">
+                                
+                                <div>
+                                    
+
+                                    <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
+                                        <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                                            <div class="text-left">
+                                                <div class="flex items-center">
+                                                    <div class="font-medium">Company Name</div>
+                                                    <div
+                                                        class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                                        Required
+                                                    </div>
+                                                </div>
+                                                <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+                                                    Enter the primary line of your company name.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3 w-full flex-1 xl:mt-0">
+                                            <input type="hidden" name="user_id" value="">
+                                            <input type="hidden" name="parent_company" value="">
+                                            <input data-tw-merge="" name="company_name" type="text" placeholder="PT. XYZ "
+                                                class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10">
+                                        </div>
+                                    </div>
+                                    <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
+                                        <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                                            <div class="text-left">
+                                                <div class="flex items-center">
+                                                    <div class="font-medium">Address Line</div>
+                                                    <div
+                                                        class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                                        Required
+                                                    </div>
+                                                </div>
+                                                <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+                                                    Enter the primary line of physical address,
+                                                    typically including building number and
+                                                    street name.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3 w-full flex-1 xl:mt-0">
+                                            <input name="address" data-tw-merge=""  placeholder="Address Line"
+                                                class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10">
+                                        </div>
+                                    </div>
+                                    <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
+                                        <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                                            <div class="text-left">
+                                                <div class="flex items-center">
+                                                    <div class="font-medium">Default Currency</div>
+                                                    <div
+                                                        class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                                        Required
+                                                    </div>
+                                                </div>
+                                                <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+                                                    Please specify the default you currency.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3 w-full flex-1 xl:mt-0">
+                                            <select name="default_currency" data-placeholder="Select your currency" class="tom-select w-full">
+                                                <option value="IDR">
+                                                    IDR
+                                                </option>
+                                               
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
+                                        <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                                            <div class="text-left">
+                                                <div class="flex items-center">
+                                                    <div class="font-medium">Language</div>
+                                                    <div class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                                        Required
+                                                    </div>
+                                                </div>
+                                                <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+                                                    Select your preferred language from the available
+                                                    options.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3 w-full flex-1 xl:mt-0">
+                                            <select id="languageSelect" name="language" data-title="Language" data-placeholder="Select your language" class="tom-select w-full" data-selected="">
+                                                <option value="en">
+                                                    English
+                                                </option>
+                                                <option value="id">
+                                                    Bahasa
+                                                </option> 
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
+                                        <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                                            <div class="text-left">
+                                                <div class="flex items-center">
+                                                    <div class="font-medium">Time Zone</div>
+                                                    <div class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                                        Required
+                                                    </div>
+                                                </div>
+                                                <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+                                                    Select your current time zone from the list of
+                                                    available options.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3 w-full flex-1 xl:mt-0">
+                                            <select id="timezoneSelect" name="time_zone" data-title="Time Zone" data-url="{{ url('dashboard/settings/timezone') }}" data-placeholder="Select your timezone" class="tom-select w-full">
+                                                <option value="Asia/Jakarta">
+                                                    Asia/Jakarta (WIB)
+                                                </option>
+                                                <option value="Asia/Ujung_Pandang">
+                                                    Asia/Ujung_Pandang (WITA)
+                                                </option>
+                                                <option value="Asia/Jayapura">
+                                                    Asia/Jayapura (WIT)
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
+                                        <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                                            <div class="text-left">
+                                                <div class="flex items-center">
+                                                    <div class="font-medium">Official Domain</div>
+                                                     
+                                                </div>
+                                                <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+                                                    Enter the official domain or website address.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3 w-full flex-1 xl:mt-0">
+                                            <input data-tw-merge="" name="domain" type="text" placeholder="www.xyz.com"
+                                                class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10">
+                                        </div>
+                                    </div>
+                                    <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
+                                        <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                                            <div class="text-left">
+                                                <div class="flex items-center">
+                                                    <div class="font-medium">Date of Establishment</div>
+                                                </div>
+                                                <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+                                                    This field is optional and can be used to provide date of establishment your company.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3 w-full flex-1 xl:mt-0">
+                                            <input data-tw-merge="" name="date_of_establishment" type="date" placeholder="Y-m-d"
+                                                class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10">
+                                        </div>
+                                    </div>
+                                     
+                                    <div class="mt-6 flex border-t border-dashed border-slate-300/70 pt-5 md:justify-end">
+                                    </div>
+                                    <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                                        <div class="text-left">
+                                            <div class="flex items-center">
+                                                <div class="font-medium">Company Coordinate</div>
+                                                <div
+                                                    class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                                    Required
+                                                </div>
+                                            </div>
+                                             
+                                        </div>
+                                    </div>
+                                    <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
+                                        
+                                        <div class="mt-3 w-full flex-1 xl:mt-0">
+                                         <input id="latlong" name="latlong" type="hidden" />
+                                            <input data-tw-merge="" name="address" id="start-search" type="text" placeholder="Type your company address"
+                                                class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10">
+                                                <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+                                                    This location will be used to set distance of presensi employees.
+                                                </div>
+                                            </div>
+                                        <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                                           
+                                        </div>
+                                    </div>
+                                    <div id="map" style="height: 400px" class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
+                                    
+                                        <div ></div>
+                                    </div>
+
+                                </div>
+                                
+                                <div class="mt-6 flex border-t border-dashed border-slate-300/70 pt-5 md:justify-end">
+                                </div>
+                                <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
+                                     
+                                </div>
+                            </div> 
+                            </form>
 
    
 

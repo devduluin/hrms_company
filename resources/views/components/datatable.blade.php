@@ -9,6 +9,8 @@
     'trigger',
     'order' => [[0, 'ASC']],
     'downloadOptions' => false,
+    'dtcomponent' => 'true',
+    'dtheight' => '400',
     'company_id' => '',
 ])
 
@@ -39,7 +41,7 @@
             autoWidth: true,
             selected: true,
             scrollX: true,
-            scrollY: 400,
+            scrollY: {{ $dtheight }},
             lengthMenu: [
                 [10, 25, 50, 100, -1],
                 [10, 25, 50, 100, 'All'],
@@ -65,7 +67,7 @@
 			     
 			],
              
-            dom: '<"grid grid-cols-2 gap-4 mb-4"Bf><"grid grid-cols-1 gap-4 mb-4"t><"grid grid-cols-3 gap-4 mb-4"lip>',
+            dom: '@if ($dtcomponent == 'true') <"grid grid-cols-2 gap-4 mb-4"Bf> @endif<"grid grid-cols-1 gap-4 mb-4"t><"grid grid-cols-3 gap-4 mb-4"lip>',
             language: {
                 search: 'Search: ',
                 searchPlaceholder: 'keywoard...',
