@@ -165,7 +165,7 @@
 @endsection
 @push('js')
 <script defer
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD8y5ZQcuol7vxOkXii_wsHqYhCNL0uEM&libraries=geometry&callback">
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7T5886HCdj0jMOWhW_aliRYP6NUnjSzE&libraries=geometry&callback">
 </script>
     <script type="text/javascript">
         $(document).ready(function() {
@@ -202,12 +202,6 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD8y5ZQcuol7vxOkXii_wsHqY
             });
         }
 
-        // const lat = data.lat_long_masuk.substring(10, '');
-        // const long = data.lat_long_masuk.substring(11);
-
-        
-        
-
         function initMap(value) {
 
             let coordinates = value.split(',');
@@ -227,36 +221,8 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD8y5ZQcuol7vxOkXii_wsHqY
             const marker = new google.maps.Marker({
                 position: mapOptions.center,
                 map: map,
-                draggable: true
+                draggable: false
             });
         }
-
-        // const lat = "37.4220936";
-        // const long = "-122.083922";
-
-        // let mapOptions, map, marker;
-        // infoWindow = '';
-
-        // element = document.getElementById('map');
-
-        // mapOptions = {
-        //     zoom: 16,
-        //     center: {
-        //         lat: parseFloat(lat),
-        //         lng: parseFloat(long),
-        //     },
-        //     disableDefaultUI: false,
-        //     scrollWheel: true,
-        //     draggable: false,
-        // };
-
-        // map = new google.maps.Map(element, mapOptions);
-
-        // marker = new google.maps.Marker({
-        //     position: mapOptions.center,
-        //     map: map,
-        //     // icon: 'http://pngimages.net/sites/default/files/google-maps-png-image-70164.png',
-        //     draggable: true
-        // });
     </script>
 @endpush
