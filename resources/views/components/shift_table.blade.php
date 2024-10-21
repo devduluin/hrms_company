@@ -136,7 +136,7 @@
             let shiftAssigments = result.data;
             let shiftAssigmentTable = document.getElementById('shiftAssigmentTable');
             let loading = document.getElementById('loading');
-            if(shiftAssigments && shiftAssigments.length > 1) {
+            if(shiftAssigments && shiftAssigments.length > 0) {
                 var row = "";
                 shiftAssigments.forEach(shiftAssignment => {
                 row += 
