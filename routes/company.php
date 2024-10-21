@@ -39,6 +39,7 @@ Route::prefix('/designation')->group(function () {
     Route::controller(DesignationController::class)->group(function () {
         Route::get('/', 'index')->name('hrms.designation');
         Route::get('/create', 'create')->name('hrms.designation.create');
+        Route::get('/update/{id}', 'update')->name('hrms.designation.update');
     });
 });
 
@@ -46,6 +47,7 @@ Route::prefix('/department')->group(function () {
     Route::controller(DepartmentController::class)->group(function () {
         Route::get('/', 'index')->name('hrms.department');
         Route::get('/create', 'create')->name('hrms.department.create');
+        Route::get('/update/{id}', 'update')->name('hrms.department.update');
     });
 });
 
@@ -67,6 +69,7 @@ Route::prefix('/leave-type')->group(function () {
     Route::controller(LeaveTypeController::class)->group(function () {
         Route::get('/', 'index')->name('hrms.leave-type');
         Route::get('/create', 'create')->name('hrms.leave-type.create');
+        Route::get('/update/{id}', 'update')->name('hrms.leave-type.update');
     });
 });
 

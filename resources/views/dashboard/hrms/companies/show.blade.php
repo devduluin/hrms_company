@@ -227,7 +227,7 @@
                  
                 $('input[name=company_name]').val(data.company_name);
                 $('input[name=parent_company]').val(data.parent_company);
-                $('input[name=address]').val(data.address);
+                $('textarea[name=address]').html(data.address);
                 $('select[name=default_currency]').val(data.default_currency).change();
                 $('select[name=language]').val(data.language).change();
                 $('select[name=time_zone]').val(data.time_zone).change();

@@ -30,7 +30,7 @@
                         <div class="mt-3.5 mb-5 ">
                             
                             <div class="box box--stacked flex flex-col p-5">
-                                <x-datatable id="companiesTable" :url="$apiUrl.'/datatables'" method="POST" class="display small" dtcomponent="false" dtheight="250">
+                                <x-datatable id="companiesTable" :url="$apiUrl.'/datatables'" method="POST" class="display border-b border-slate-200/60" dtcomponent="false" dtheight="250">
                                     <x-slot:thead>
                                         <th data-value="no" width="80px">No.</th>
                                         <th data-value="company_name" data-render="getCompany">Company Name</th>
@@ -52,7 +52,7 @@
                              
                                 <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-5 mt-4">
                                     <x-action  label="Branch" icon="split" url="{{ route('hrms.branch') }}" />
-                                    <x-action  label="Currency" icon="circle-dollar-sign" url="{{ route('hrms.currency') }}" />
+                                    
                                     <x-action  label="Designation" icon="clipboard" url="{{ route('hrms.designation') }}" />                                   
                                     <x-action  label="Department" icon="layout-template" url="{{ route('hrms.department') }}" />                                   
                                     <x-action  label="Holidays Date" icon="calendar-x-2" url="{{ route('hrms.holidaydate') }}" />                                   
@@ -94,8 +94,7 @@
                        
                         <a onClick="action('show', '`+data['id']+`')" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="external-link" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
                             Open</a>
-                        <a onClick="action('delete', '`+data['id']+`')" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="file-text" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
-                            Delete</a>
+                       
                         
                     </div>
                 </div>

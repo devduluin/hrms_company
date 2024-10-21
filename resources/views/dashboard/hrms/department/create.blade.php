@@ -27,12 +27,12 @@
                         @include('components._asside_company')
                     </div>
                 </div> -->
-                <div class="col-span-12 flex flex-col gap-y-7 sm:col-span-12 xl:col-span-6">
+                <div class="col-span-12 flex flex-col gap-y-7 sm:col-span-12 xl:col-span-12">
                     <form id="form-submit" method="post" action="{{ $apiUrl }}">
                         <div class="box box--stacked flex flex-col p-5">
-                            <div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4">
                                 <input type="hidden" name="is_group" value="true">
-                                <div class="gap-x-6 gap-y-10 mb-5">
+                                <div class="gap-x-6 gap-y-10 ">
                                 <x-form.select id="company_id" name="company_id" data-method="POST" label="Company Name" url="{{ url('dashboard/hrms/company/new_company') }}" required="true" 
                                     apiUrl="{{ $apiCompanyUrl }}" columns='["company_name"]' :selected="$company"
                                     :keys="[
@@ -41,28 +41,30 @@
                                     <option value="">Select Company</option>
                                 </x-form.select>
                                 </div>
-                                <div class="gap-x-6 gap-y-10 mb-5 mt-5">
+                                <div class="gap-x-6 gap-y-10 ">
                                 <x-form.select id="parent_department_id" name="parent_department_id" data-method="POST" label="Parent Department" url="{{ url('dashboard/hrms/department/create') }}"
-                                    apiUrl="{{ $apiDepartmentUrl }}" columns='["department_name"]' >
+                                    apiUrl="{{ $apiDepartmentUrl }}" columns='["department_name"]'  
+                                    :keys="[
+                                        'company_id' => $company,
+                                    ]">
                                     <option value="">Select Department</option>
                                 </x-form.select>
                                 </div>
-                                <div class="gap-x-6 gap-y-10 mb-5 mt-5">
-                                    <x-form.input id="department_name" name="department_name" label="Department Name" required="true" placholder=""/>
+                                <div class="gap-x-6 gap-y-10 ">
+                                    <x-form.input id="department_name" name="department_name" label="Department Name" required="true" placholder="" value="{{request()->get('item')}}"/>
                                 </div>
-                                <div class="gap-x-6 gap-y-10 mb-5 mt-5">
-                                    <x-form.input id="payroll_cost_center" name="payroll_cost_center" label="Payroll Cost Center" type="number" placholder=""/>
-                                </div>
-                                <div class="gap-x-6 gap-y-10 mb-5 mt-5">
+                               
+                                <div class="gap-x-6 gap-y-10 ">
                                     <div class="mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-64">
                                         <div class="text-left">
                                             <div class="flex items-center">
                                                 <div class="font-medium">Status</div>
                                             </div>
                                         </div>
+                                        <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3"></div>
                                     </div>
-                                    <div class="mt-3 w-80 flex-1 xl:mt-0">
-                                        <select required name="status" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10"">
+                                    <div class="mt-3 w-96 flex-1 xl:mt-0">
+                                        <select required name="status" data-title="Language" data-placeholder="Select your language" class="tom-select w-full" sclass="tom-select disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10"">
                                             
                                             <option value="enable">
                                                 Enable
@@ -73,8 +75,10 @@
                                         </select>
                                     </div>
                                 </div>
+                            
                             </div>
-                     
+                                
+                            </div>
                              
                         </form>
                 </div>
@@ -117,11 +121,13 @@
             success: await
             function(response) {   
                 if (response.success == true) {                    
-                    $("#branch_name").val(response.data.branch_name);
+                     
                     method  = 'PATCH';
-                    setTimeout(() => {
-                        $("select[name=company_id]").val(response.data.company_id).change();
-                    }, "2000");
+                    
+                    $("select[name=company_id]").val(response.data.company_id).change();
+                    $("select[name=parent_department_id]").val(response.data.parent_department_id).change();
+                    $("input[name=department_name]").val(response.data.department_name)
+                     
                 } else {
                     showErrorNotification('error', response.message);
                 }
@@ -179,7 +185,7 @@
 
     function handleResponse(response) {
         if (response.success == true) {
-            //history.back()
+            window.location=document.referrer;
         } else {
             showErrorNotification('error', response.message);
         }

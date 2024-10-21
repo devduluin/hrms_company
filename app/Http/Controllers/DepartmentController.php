@@ -15,7 +15,7 @@ class DepartmentController extends Controller
     {
         $data['title'] = "Data Department";
         $data['page_title'] = "Data department";
-        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/companies/department/datatables";
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/companies/department";
         return view('dashboard.hrms.department.index', $data);
     }
 
@@ -25,7 +25,7 @@ class DepartmentController extends Controller
         $data['page_title'] = "Add New Department";
         $allSessions = session()->all();
         $data['company'] = $allSessions['company_id'][0];
-        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/department/department";
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/companies/department";
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies/company/datatables';
         $data['apiDepartmentUrl'] = $this->apiGatewayUrl . "/v1/companies/department/datatables";
 
@@ -39,11 +39,11 @@ class DepartmentController extends Controller
         $allSessions = session()->all();
         $data['id'] = $id;
         $data['company'] = $allSessions['company_id'][0];
-        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/department/department";
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/companies/department";
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies/company/datatables';
         $data['apiDepartmentUrl'] = $this->apiGatewayUrl . "/v1/companies/department/datatables";
 
-        return view('dashboard.hrms.branch.create', $data);
+        return view('dashboard.hrms.department.create', $data);
     }
     
 }

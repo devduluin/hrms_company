@@ -16,7 +16,7 @@ class BranchController extends Controller
     {
         $data['title'] = "Data Branch";
         $data['page_title'] = "Data Branch";
-        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/branch/branch";
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/companies/branch";
         return view('dashboard.hrms.branch.index', $data);
     }
 
@@ -26,7 +26,7 @@ class BranchController extends Controller
         $data['page_title'] = "Add New Branch";
         $allSessions = session()->all();
         $data['company'] = $allSessions['company_id'][0];
-        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/branch/branch";
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/companies/branch";
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies/company/datatables';
        // $data['apiCompanyUrl'] = $this->apiGatewayUrl . "/v1/companies/company?company_id=".$data['company'];
 
@@ -40,7 +40,7 @@ class BranchController extends Controller
         $allSessions = session()->all();
         $data['id'] = $id;
         $data['company'] = $allSessions['company_id'][0];
-        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/branch/branch";
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/companies/branch";
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies/company/datatables';
         //$data['apiCompanyUrl'] = $this->apiGatewayUrl . "/v1/companies/company?company_id=".$data['company'];
 
