@@ -42,6 +42,20 @@ Route::prefix('/payout')->group(function () {
                 Route::get('/create', 'create');
                 Route::get('/edit/{id}', 'edit');
             });
+            Route::prefix('/bulk_assignment')->group(function () {
+                Route::controller(BulkAssignmentController::class)->group(function () {
+                    // Route::get('/', 'index');
+                    Route::get('/create', 'create');
+                    // Route::get('/edit/{id}', 'edit');
+                });
+            });
+        });
+        Route::prefix('/bulk_assignment')->group(function () {
+            Route::controller(BulkAssignmentController::class)->group(function () {
+                // Route::get('/', 'index');
+                Route::get('/create', 'create');
+                // Route::get('/edit/{id}', 'edit');
+            });
         });
     });
 });
