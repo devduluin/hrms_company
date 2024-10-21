@@ -15,7 +15,7 @@
 {{-- @dump($selected) --}}
 
 <div class="mt-3 flex-row xl:items-center">
-    <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right">
+    <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4">
         <div class="text-left">
             <div class="flex items-center">
                 @if (isset($label))
@@ -28,13 +28,15 @@
                     </div>
                 @endif
             </div>
+            
         </div>
     </div>
-    <div class="flex-1 sm:w-full w-80 mt-3 xl:mt-0">
+    <div class="flex-1 sm:w-full w-96 mt-3 xl:mt-0">
         <select id="{{ $name }}" name="{{ $name }}"
             {{ $attributes->merge(['class' => 'mt-3 tom-select w-full'])->except(['id', 'name', 'tags', 'filter']) }}
             data-placeholder="{{ $label }}" data-title="{{ $label }}"
             @if (isset($url)) data-url="{{ $url }}" @endif
+            @if (isset($method)) data-method="{{ $method }}" @endif
             @if (isset($apiUrl)) data-api="{{ $apiUrl }}" @endif
             @if (isset($columns)) data-selectType="{{ $columns }}" @endif
             @if (isset($selected)) data-selected="{{ $selected }}" @endif

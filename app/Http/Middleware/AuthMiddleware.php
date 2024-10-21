@@ -52,9 +52,10 @@ class AuthMiddleware
         // $response = $this->getRequest(config('apiendpoints.sso') . '/users/user', '', $headers);
         // $response = $this->getRequest('http://api_gatway.test/api/users/user', '', $headers);
         $response = $this->getRequest(config('apiendpoints.gateway') . '/users/user', '', $headers);
-        if(isset($response['result']) && !isset($response['error'])){
+        $responseBody = json_decode($response->getBody(), true);
+        if(isset($responseBody['result']) && !isset($responseBody['error'])){
             
-            return $response['result'];
+            return $responseBody['result'];
         }else{
             return false;
         }

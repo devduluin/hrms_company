@@ -13,16 +13,32 @@ class DesignationController extends Controller
     }
     public function index()
     {
-        $data['title'] = "Data desigantion";
+        $data['title'] = "Data Desigantion";
         $data['page_title'] = "Data desigantion";
-        $data['apiUrl'] = $this->apiGatewayUrl .'/v1/companies/designation/datatables';
+        $data['apiUrl'] = $this->apiGatewayUrl .'/v1/companies/designation';
         return view('dashboard.hrms.designation.index', $data);
     }
 
     public function create()
     {
-        $data['title'] = "Add new designation";
-        $data['page_title'] = "Add new designation";
+        $data['title'] = "Add New Designation";
+        $data['page_title'] = "Add new Designation";
+        $allSessions = session()->all();
+        $data['company'] = $allSessions['company_id'][0];
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/companies/designation";
+        $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies/company/datatables';
+
+        return view('dashboard.hrms.designation.create', $data);
+    }
+    public function update($id)
+    {
+        $data['title'] = "Update Designation";
+        $data['page_title'] = "Update Designation";
+        $allSessions = session()->all();
+        $data['id'] = $id;
+        $data['company'] = $allSessions['company_id'][0];
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/companies/designation";
+        $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies/company/datatables';
 
         return view('dashboard.hrms.designation.create', $data);
     }

@@ -10,7 +10,7 @@
             An HRIS provides a structured, single source of truth for employee information, making it easy to find and update details about employees. It stores documents securely, enables teams to visualize company structure and plan for hiring needs, and helps keep track of changes.
             </div>
             <div class="flex flex-col gap-3 mt-10 xl:flex-row xl:items-center">
-                <div class="flex items-center">
+                <!-- <div class="flex items-center">
                     <div class="image-fit zoom-in h-9 w-9 2xl:h-11 2xl:w-11">
                         <img data-placement="top" title="Meryl Streep" src="" alt="Tailwise - Admin Dashboard Template" class="tooltip cursor-pointer rounded-full border-[3px] border-white/50">
                     </div>
@@ -23,7 +23,7 @@
                     <div class="-ml-3 image-fit zoom-in h-9 w-9 2xl:h-11 2xl:w-11">
                         <img data-placement="top" title="Julia Roberts" src="" alt="Tailwise - Admin Dashboard Template" class="tooltip cursor-pointer rounded-full border-[3px] border-white/50">
                     </div>
-                </div>
+                </div> -->
                 <div class="text-base text-white/70 xl:ml-2 2xl:ml-3">
                     Over 7k+ strong and growing! Your journey begins here.
                 </div>

@@ -10,8 +10,8 @@
                     {{ $title ?? '' }}
                 </div>
                 <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
-                    <x-form.button id="back" label="Back to Dashboard" style="secondary" icon="arrow-left" url="{{ url('dashboard/hrms') }}" ></x-button>
-                    <x-form.button id="new_shift_type" label="Add new shift type" style="primary" icon="plus" url="" ></x-button>
+                <x-form.button id="back" label="Back" style="secondary" icon="arrow-left" url="{{ url('dashboard/hrms/company') }}" ></x-button>
+                <x-form.button id="new_shift_type" label="Add New Shift Type" style="primary" icon="plus" url="{{ url('dashboard/hrms/shift-type/create') }}" ></x-button>
                 </div>
                 </div>
             </div>
@@ -25,9 +25,12 @@
                     <div class="box box--stacked flex flex-col p-5">
                         <x-datatable id="shiftTypeTable" :url="$apiUrl" method="POST" class="display">
                             <x-slot:thead>
+                                <th data-value="no" width="80px">No.</th>
+                                <th data-value="company_id_rel" data-render="getCompany">Company</th>
                                 <th data-value="shift_type_name">Shift type name</th>
-                                <th data-value="start_time" data-render="dateFormat">Start time</th>
-                                <th data-value="end_time" data-render="dateFormat">End time</th>
+                                <th data-value="start_time" data-render="convertToTimezone">Start time</th>
+                                <th data-value="end_time" data-render="convertToTimezone">End time</th>
+                                <th data-value="null" data-render="getActionBtn" width="10%">Action</th>
                             </x-slot:thead>
                         </x-datatable>
                         </div>
@@ -62,18 +65,27 @@
             }
         }
 
-        function dateFormat(data, type, row, meta) {
-            if (data) {
-            const date = new Date(data);
+        function convertToTimezone(utcDateStr) {
+            const utcDate = new Date(utcDateStr);
+            const options = {
+                timeZone: 'Asia/Jakarta',
+                hour12: true,
+                hour: '2-digit',
+                minute: '2-digit'
+            };
 
-            const hours = ('0' + date.getUTCHours()).slice(-2);
-            const minutes = ('0' + date.getUTCMinutes()).slice(-2);
-                return `${hours}:${minutes}`;
-            }
-            return data; 
+            const time = utcDate.toLocaleTimeString('en-US', options);
+            
+            return time;
         }
 
-
+        function getCompany(data, type, row, meta) {
+            if (data !== null) {
+                return data?.company_name ?? 'N/A';
+            }
+            return 'N/A';
+        }
+        
         function getActionBtn(data, type, row, meta) {
             return `<div data-tw-merge data-tw-placement="bottom-end" class="dropdown relative"><button data-tw-merge data-tw-toggle="dropdown" aria-expanded="false" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed text-xs py-1.5 px-2 bg-primary border-primary text-white dark:border-primary w-24 w-24">Action</button>
                 <div data-transition data-selector=".show" data-enter="transition-all ease-linear duration-150" data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1" data-enter-to="!mt-1 visible opacity-100 translate-y-0" data-leave="transition-all ease-linear duration-150" data-leave-from="!mt-1 visible opacity-100 translate-y-0" data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1" class="dropdown-menu absolute z-[9999] hidden">

@@ -66,4 +66,22 @@ class AttendanceController extends Controller
 
         return view('dashboard.hrms.attendance.report', $data);
     }
+    public function shift_type()
+    {
+        $data['title']   = 'Duluin HRMS';
+        $data['page_title']   = 'Shift Type List';
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/attendance/attendance/datatable";
+
+
+        return view('dashboard.hrms.attendance.shift_type', $data);
+    }
+    public function new_shift_type()
+    {
+        $data['title']   = 'Duluin HRMS';
+        $data['page_title']   = 'New Shift Type';
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/attendance/attendance/datatable";
+
+
+        return view('dashboard.hrms.attendance.new_shift_type', $data);
+    }
 }

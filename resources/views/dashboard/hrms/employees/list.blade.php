@@ -23,7 +23,7 @@
                                     Import Data</a>
                                 <a href="{{ url('dashboard/hrms/employee/new_employee') }}" data-tw-merge=""
                                     class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"><i
-                                        data-tw-merge="" data-lucide="pen-line" class="mr-2 h-4 w-4 stroke-[1.3]"></i>
+                                        data-tw-merge="" data-lucide="plus" class="mr-2 h-4 w-4 stroke-[1.3]"></i>
                                     Add New Employee</a>
                             </div>
                         </div>
@@ -111,6 +111,7 @@
                                                 <th data-value="branch_id_rel" data-render="getBranch">Branch
                                                 </th>
                                                 <th data-value="status" data-render="getStatus">Status</th>
+                                                <th data-value="is_verified" data-render="getMobileStatus">Mobile</th>
                                                 <th data-value="id" data-render="getActionBtn">Action</th>
                                             </x-slot:thead>
                                         </x-datatable>
@@ -131,6 +132,14 @@
                 return `<div class="flex items-center justify-center text-success"><div class="ml-1.5 whitespace-nowrap"><i data-tw-merge data-lucide="check" class="text-success"></i> Active</div></div>`;
             } else {
                 return `<div class="flex items-center justify-center text-danger"><div class="ml-1.5 whitespace-nowrap">Inactive</div></div>`;
+            }
+        }
+
+        function getMobileStatus(data, type, row, meta) {
+            if (data) {
+                return `<div class="flex items-center justify-center text-success"><div class="ml-1.5 whitespace-nowrap"><i data-tw-merge data-lucide="check" class="text-success"></i> Active</div></div>`;
+            } else {
+                return `<div class="flex items-center justify-center text-danger"><div class="ml-1.5 whitespace-nowrap">N/A</div></div>`;
             }
         }
 
