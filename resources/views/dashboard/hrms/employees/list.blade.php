@@ -97,22 +97,30 @@
                                         </div> --}}
                                         <x-datatable id="employeeTable" :url="$apiUrl . '/employee/datatables'" method="POST" class="display">
                                             <x-slot:thead>
-                                                <th data-value="first_name">First Name</th>
-                                                <th data-value="last_name">Last Name</th>
-                                                <th data-value="company_id_rel" data-render="getCompany">Company
+                                                <th data-value="id" data-render="getId" orderable="true">#</th>
+                                                <th data-value="first_name" searchable="true" orderable="true">First Name
                                                 </th>
-                                                <th data-value="grade_id_rel" data-render="getGrade">Grade
+                                                <th data-value="last_name" searchable="true" orderable="true">Last Name</th>
+                                                <th data-value="company_id_rel" data-render="getCompany" orderable="false">
+                                                    Company
                                                 </th>
-                                                <th data-value="designation_id_rel" data-render="getDesignation">
+                                                <th data-value="grade_id_rel" data-render="getGrade" orderable="false">Grade
+                                                </th>
+                                                <th data-value="designation_id_rel" data-render="getDesignation"
+                                                    orderable="false">
                                                     Designation
                                                 </th>
-                                                <th data-value="department_id_rel" data-render="getDepartment">Department
+                                                <th data-value="department_id_rel" data-render="getDepartment"
+                                                    orderable="false">Department
                                                 </th>
-                                                <th data-value="branch_id_rel" data-render="getBranch">Branch
+                                                <th data-value="branch_id_rel" data-render="getBranch" orderable="false">
+                                                    Branch
                                                 </th>
-                                                <th data-value="status" data-render="getStatus">Status</th>
-                                                <th data-value="is_verified" data-render="getMobileStatus">Mobile</th>
-                                                <th data-value="id" data-render="getActionBtn">Action</th>
+                                                <th data-value="status" data-render="getStatus" orderable="false">Status
+                                                </th>
+                                                <th data-value="is_verified" data-render="getMobileStatus"
+                                                    orderable="false">Mobile</th>
+                                                <th data-value="id" data-render="getActionBtn" orderable="false">Action</th>
                                             </x-slot:thead>
                                         </x-datatable>
                                     </div>
@@ -127,6 +135,10 @@
 @endsection
 @push('js')
     <script>
+        function getId(data, type, row, meta) {
+            return meta.row + 1;
+        }
+
         function getStatus(data, type, row, meta) {
             if (data === 'active') {
                 return `<div class="flex items-center justify-center text-success"><div class="ml-1.5 whitespace-nowrap"><i data-tw-merge data-lucide="check" class="text-success"></i> Active</div></div>`;
@@ -180,7 +192,6 @@
 
         function getActionBtn(data, type, row, meta) {
             const url = `{{ url('dashboard/hrms/employee/edit_employee') }}/${data}`;
-            console.log(url);
             return `<div data-tw-merge data-tw-placement="bottom-end" class="dropdown relative"><button data-tw-merge data-tw-toggle="dropdown" aria-expanded="false" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary">Action</button>
                 <div data-transition data-selector=".show" data-enter="transition-all ease-linear duration-150" data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1" data-enter-to="!mt-1 visible opacity-100 translate-y-0" data-leave="transition-all ease-linear duration-150" data-leave-from="!mt-1 visible opacity-100 translate-y-0" data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1" class="dropdown-menu absolute z-[9999] hidden">
                     <div data-tw-merge class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 w-40">
