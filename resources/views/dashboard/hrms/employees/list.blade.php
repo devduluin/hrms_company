@@ -95,8 +95,13 @@
                                         {{-- <div class="text-base font-medium group-[.mode--light]:text-white mb-4">
                                             Data Employees
                                         </div> --}}
-                                        <x-datatable id="employeeTable" :url="$apiUrl . '/employee/datatables'" method="POST" class="display">
+                                        <x-datatable id="employeeTable" :url="$apiUrl . '/employee/datatables'" method="POST" class="display"
+                                            customButton="true" customButtonText="Send Verification Email"
+                                            customButtonFunction="sendEmailVerification()">
                                             <x-slot:thead>
+                                                <th data-value="id" data-render="getCheckBox" orderable="false">
+                                                    <input type="checkbox" id="select-all" />
+                                                </th>
                                                 <th data-value="id" data-render="getId" orderable="true">#</th>
                                                 <th data-value="first_name" searchable="true" orderable="true">First Name
                                                 </th>
@@ -135,6 +140,78 @@
 @endsection
 @push('js')
     <script>
+        $(document).ready(function() {
+            $('#select-all').on('click', function() {
+                var isChecked = $(this).is(':checked');
+                $('#employeeTable tbody input[type="checkbox"]').prop('checked', isChecked);
+                toggleCustomButton();
+            });
+
+            $('#employeeTable').on('change', 'tbody input[type="checkbox"]', function() {
+                if (!this.checked) {
+                    $('#select-all').prop('checked', false);
+                }
+                toggleCustomButton();
+            });
+
+            function toggleCustomButton() {
+                var anyChecked = $('#employeeTable tbody input[type="checkbox"]:checked').length > 0;
+                if (anyChecked) {
+                    employeeTable.buttons('.custom-btn').enable();
+                    $('.custom-btn').removeClass('d-none');
+                } else {
+                    employeeTable.buttons('.custom-btn').disable();
+                    $('.custom-btn').addClass('d-none');
+                }
+            }
+
+            employeeTable.buttons('.custom-btn').disable();
+
+            $(".custom-btn").click(function() {
+                var checkedValues = [];
+                $('#employeeTable tbody input[type="checkbox"]:checked').each(function() {
+                    var rowData = JSON.parse($(this).val());
+                    checkedValues.push({
+                        'employee_id': rowData.id,
+                        'first_name': rowData.first_name,
+                        'last_name': rowData.last_name,
+                        'personal_email': rowData.addressContact.personal_email,
+                        'company': rowData.company_id_rel.company_name,
+                        'company_id': rowData.company_id,
+                        'domain': rowData.company_id_rel.domain
+                    });
+                });
+                var jsonCheckedValues = JSON.stringify(checkedValues);
+                handleNotification(checkedValues);
+            });
+        });
+
+        function handleNotification(checkedValues) {
+            $.ajax({
+                url: `{{ $apiGateway }}/bulk_send_verification_email`,
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${appToken}`,
+                    'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
+                },
+                crossDomain: true,
+                data: JSON.stringify(checkedValues),
+                dataType: 'json',
+                success: function(data) {
+                    showSuccessNotification('success', 'Verification email sent successfully.');
+                    $("#verification-btn").hide();
+                },
+                error: function(error) {
+                    showErrorNotification('error', 'Failed to send verification email.');
+                }
+            });
+        }
+
+        // Updated getCheckBox function
+        function getCheckBox(data, type, row, meta) {
+            return `<input type="checkbox" name="selected_employees[]" value='${JSON.stringify(row)}'>`;
+        }
+
         function getId(data, type, row, meta) {
             return meta.row + 1;
         }
