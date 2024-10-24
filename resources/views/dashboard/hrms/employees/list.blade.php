@@ -190,6 +190,7 @@
             $.ajax({
                 url: `{{ $apiGateway }}/bulk_send_verification_email`,
                 method: 'POST',
+                contentType: 'application/json',
                 headers: {
                     'Authorization': `Bearer ${appToken}`,
                     'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
