@@ -410,6 +410,8 @@
                             }
                             healthInsuranceSelect.setValue(healthInsuranceValue);
                             $("#passport_number").val(response.data.personalData.passport_number);
+                            $("#identity_card_number").val(response.data.personalData
+                                .identity_card_number);
                             $("#date_of_issued").val(response.data.personalData.date_of_issued);
                             $("#valid_upto").val(response.data.personalData.valid_upto);
                             $("#place_of_issued").val(response.data.personalData.place_of_issued);
