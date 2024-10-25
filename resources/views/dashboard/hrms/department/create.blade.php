@@ -10,8 +10,15 @@
                     {{ $title ?? '' }}
                 </div>
                 <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
-                    <a href="{{ route('hrms.department') }}" data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"><i data-tw-merge="" data-lucide="arrow-left" class="stroke-[1] w-5 h-5 mx-auto block"></i>
-                        back</a>
+                    <button onclick="history.go(-1)"
+                        class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md w-24">
+                        <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
+                    </button>
+                    <button id="submitBtn" data-tw-merge=""
+                            class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-blue-theme border-blue-theme text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"><i
+                                data-tw-merge="" data-lucide="save" class="mr-3 h-4 w-4 stroke-[1.3]"></i>
+                            <span id="loadingText">Save Changes</span>
+                    </button>
                 </div>
             </div>
             <div class="mt-3.5 grid grid-cols-12 gap-x-6 gap-y-10">
@@ -20,46 +27,59 @@
                         @include('components._asside_company')
                     </div>
                 </div> -->
-                <div class="col-span-12 flex flex-col gap-y-7 xl:col-span-12">
-                    <form id="form-submit">
+                <div class="col-span-12 flex flex-col gap-y-7 sm:col-span-12 xl:col-span-12">
+                    <form id="form-submit" method="post" action="{{ $apiUrl }}">
                         <div class="box box--stacked flex flex-col p-5">
-                            <div>
-                                <input type="hidden" name="parent_department_id" value="123e4567-e89b-12d3-a456-426614174001">
+                            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4">
                                 <input type="hidden" name="is_group" value="true">
-                                <x-form._input id="department_name" name="department_name" label="Department name" required="true" placholder=""/>
-                                <x-form._input id="payroll_cost_center" name="payroll_cost_center" label="Payroll cost center" required="true" type="number" placholder=""/>
-                                <div class="block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
-                                    <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-64">
+                                <div class="gap-x-6 gap-y-10 ">
+                                <x-form.select id="company_id" name="company_id" data-method="POST" label="Company Name" url="{{ url('dashboard/hrms/company/new_company') }}" required="true" 
+                                    apiUrl="{{ $apiCompanyUrl }}" columns='["company_name"]' :selected="$company"
+                                    :keys="[
+                                        'company_id' => $company,
+                                    ]">
+                                    <option value="">Select Company</option>
+                                </x-form.select>
+                                </div>
+                                <div class="gap-x-6 gap-y-10 ">
+                                <x-form.select id="parent_department_id" name="parent_department_id" data-method="POST" label="Parent Department" url="{{ url('dashboard/hrms/department/create') }}"
+                                    apiUrl="{{ $apiDepartmentUrl }}" columns='["department_name"]'  
+                                    :keys="[
+                                        'company_id' => $company,
+                                    ]">
+                                    <option value="">Select Department</option>
+                                </x-form.select>
+                                </div>
+                                <div class="gap-x-6 gap-y-10 ">
+                                    <x-form.input id="department_name" name="department_name" label="Department Name" required="true" placholder="" value="{{request()->get('item')}}"/>
+                                </div>
+                               
+                                <div class="gap-x-6 gap-y-10 ">
+                                    <div class="mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-64">
                                         <div class="text-left">
                                             <div class="flex items-center">
                                                 <div class="font-medium">Status</div>
                                             </div>
                                         </div>
+                                        <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3"></div>
                                     </div>
-                                    <div class="mt-3 w-full flex-1 xl:mt-0">
-                                        <select required name="status" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10"">
-                                            <option value="">
-                                                --select status--
-                                            </option>
+                                    <div class="mt-3 w-96 flex-1 xl:mt-0">
+                                        <select required name="status" data-title="Language" data-placeholder="Select your language" class="tom-select w-full" sclass="tom-select disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10"">
+                                            
                                             <option value="enable">
-                                                enable
+                                                Enable
                                             </option>
                                             <option value="disable">
-                                                disable
+                                                Disable
                                             </option>
                                         </select>
                                     </div>
                                 </div>
+                            
                             </div>
-                     
-                            <div class="mt-6 flex border-t border-dashed border-slate-300/70 pt-5">
-                                <div class="mt-5">
-                                    <button type="submit" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="send" class="lucide lucide-send stroke-[1] w-5 h-5 mx-auto block"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>
-                                        Submit</button>
-                                    <button type="reset" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed border-primary text-primary dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="rotate-ccw" class="lucide lucide-rotate-ccw stroke-[1] w-5 h-5 mx-auto block"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
-                                        Reset</button>
-                                </div>
+                                
                             </div>
+                             
                         </form>
                 </div>
             </div>
@@ -81,68 +101,139 @@
 </div>
 @endsection
 @push('js')
-    <script type="text/javascript">
-        let companyId = localStorage.getItem('company');
+<script type="text/javascript">
+    
+    let currentForm = $("#form-submit");
+    let id   = '{{$id ?? ''}}';
+    let method      = 'POST';
+    let path        = currentForm.attr('action');
 
-        document.getElementById('form-submit').addEventListener('submit', async function (event) {
-        event.preventDefault();
+    async function handleGetData(id, currentForm) {
+        path    = `{{ $apiUrl }}/`+id;
+        $.ajax({
+            url: path,
+            type: 'GET',
+            headers: {
+                'Authorization': `Bearer ${appToken}`,
+                'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
+            },
+            dataType: 'json',
+            success: await
+            function(response) {   
+                if (response.success == true) {                    
+                     
+                    method  = 'PATCH';
+                    
+                    $("select[name=company_id]").val(response.data.company_id).change();
+                    $("select[name=parent_department_id]").val(response.data.parent_department_id).change();
+                    $("input[name=department_name]").val(response.data.department_name)
+                     
+                } else {
+                    showErrorNotification('error', response.message);
+                }
+            },
+            error: function(xhr) {
+                const response = JSON.parse(xhr.responseText);
+                handleErrorResponse(response, currentForm);
+            }
+        });
+        return false;
+    }
 
-        const formData = new FormData(this);
-
-        const data = {
-            company_id: companyId,
-            department_name: formData.get('department_name'),
-            payroll_cost_center: formData.get('payroll_cost_center'),
-            status: formData.get('status'),
-            
-            parent_department_id: formData.get('parent_department_id'),
-            is_group: formData.get('is_group'),
-        };
-
+    $("#form-submit").submit(async function (e) {
+        e.preventDefault();
+        
+        const data = serializeFormData(currentForm);
+        
         try {
-            const response = await fetch('http://apidev.duluin.com/api/v1/department', {
-                method: 'POST',
+            const response = await $.ajax({
+                url: path,
+                type: method,
+                contentType: 'application/json',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer xN9P6a8sL2bV3iR4fC5J6Q7kT8yU9wZ0' 
+                    'Authorization': `Bearer ${appToken}`,
+                    'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
                 },
-                body: JSON.stringify(data)
+                data: JSON.stringify(data),
+                dataType: 'json'
             });
 
-            const responseData = await response.json();
-            
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+            handleResponse(response);
+        } catch (xhr) {
+            console.log(xhr);
+            if (xhr.status === 422) {
+                console.log(xhr.responseText);
+                const response = JSON.parse(xhr.responseText);
+                handleErrorResponse(response, currentForm);
+            } else {
+                showErrorNotification('error', 'An error occurred while processing your request.');
             }
-
-            showSuccessNotification(responseData.message, "The operation was completed successfully.");
-
-        } catch (error) {
-            console.error('Error:', error);
-            alert('An error occurred while submitting the data');
+            
         }
+        $('#submitBtn').attr('disable', false);
+        $('#loadingText').html('Save Changes');
     });
 
-    function showSuccessNotification(title, message) {
-        var notificationContent = document.getElementById("success-notification-content");
-        document.getElementById("success-title").textContent = title;
-        document.getElementById("success-message").textContent = message;
-
-        // setTimeout(function() {
-        //     window.location.href = "/dashboard/hrms/currency";
-        // }, 3000); 
-
-        Toastify({
-            node: $("#success-notification-content")
-                .clone()
-                .removeClass("hidden")[0],
-            duration: 3000,
-            newWindow: true,
-            close: true,
-            gravity: "top",
-            position: "right",
-            stopOnFocus: true,
-        }).showToast();
+    function serializeFormData(form) {
+        const formData = form.serializeArray();
+        const data = {};
+        formData.forEach(field => {
+            data[field.name] = field.value;
+        });
+        return data;
     }
+
+    function handleResponse(response) {
+        if (response.success == true) {
+            window.location=document.referrer;
+        } else {
+            showErrorNotification('error', response.message);
+        }
+    }
+
+    function handleErrorResponse(result, tabId) {
+        const errorString = result.error || 'An error occurred.';
+        showErrorNotification('error',
+            `There were validation errors on tab ${tabId}. Message : ${result.message}`, errorString);
+        const errorMessages = errorString.split(', ');
+
+        $('.error-message').remove();
+
+        const errorPattern = /\"([^\"]+)\"/g;
+        let match;
+
+        while ((match = errorPattern.exec(errorMessages)) !== null) {
+            const field = match[1];
+            if (field !== 'employee_id') {
+                let fieldName = field.replace(/_/g, " ").replace(/\b\w/g, char => char.toUpperCase());
+                const input = $(`[name="${field}"]`);
+
+                input.addClass('is-invalid');
+                input.before(
+                    `<div class="error-message text-danger mt-1 text-xs sm:ml-auto sm:mt-0 mb-2">${fieldName} is not allowed to be empty</div>`
+                );
+            }
+        }
+
+        const firstErrorField = $('.error-message').first();
+        if (firstErrorField.length) {
+            $('html, body').animate({
+                scrollTop: firstErrorField.offset().top - 100
+            }, 500);
+        }
+    }
+
+    if(id){
+        handleGetData(id, currentForm);
+    }
+
+    $('#submitBtn').on('click', function (e) {
+        e.preventDefault();
+        $(this).attr('disable', true);
+        $('#loadingText').html('Saving...');
+        
+        $("#form-submit").submit();
+    });
+    
     </script>
 @endpush

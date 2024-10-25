@@ -26,6 +26,8 @@
 
         <x-form.input id="place_of_birth" label="Place of Birth" name="place_of_birth" required />
 
+        <x-form.input id="identity_card_number" label="Identity Card Number" name="identity_card_number" />
+
         <x-form.select name="salutation" id="salutation" label="Salutation" class="tom-select w-full"
             data-placeholder="Select salutation" url="{{ url('dashboard/hrms/salutation') }}" required>
             <option value="">Select salutation</option>

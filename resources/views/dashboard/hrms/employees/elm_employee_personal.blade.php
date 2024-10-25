@@ -13,6 +13,7 @@
 @csrf
 <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-2 gap-5 mt-4">
     <input type="hidden" name="avatar" id="avatar">
+
     <x-form.select name="marital_status" id="marital_status" label="Marital Status" class="tom-select w-full"
         data-placeholder="Select Status" url="{{ url('dashboard/hrms/designation') }}">
         <option value="">Select Status</option>
