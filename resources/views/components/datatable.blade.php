@@ -9,7 +9,12 @@
     'trigger',
     'order' => [[0, 'ASC']],
     'downloadOptions' => false,
+    'dtcomponent' => 'true',
+    'dtheight' => '400',
     'company_id' => '',
+    'customButton' => 'false',
+    'customButtonText' => '',
+    'customButtonFunction' => '',
 ])
 
 <div class="relative overflow-x-auto sm:rounded-lg">
@@ -29,7 +34,45 @@
 @push('js')
     <script>
         let {{ $id }} = $('#{{ $id }}');
-        $.extend( $.fn.dataTable.defaults, {
+        let buttonsConfig = [{
+                extend: 'copyHtml5',
+                exportOptions: {
+                    orthogonal: 'export'
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    orthogonal: 'export'
+                }
+            },
+            {
+                extend: 'csvHtml5',
+                exportOptions: {
+                    orthogonal: 'export'
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                exportOptions: {
+                    orthogonal: 'export'
+                }
+            }
+        ];
+
+        console.log(`{{ $customButtonFunction }}`)
+
+        if ({{ $customButton }}) {
+            buttonsConfig.unshift({
+                text: `{{ $customButtonText }}`,
+                action: function(e, dt, node, config) {
+                    // `{{ $customButtonFunction }}`
+                },
+                className: 'custom-btn'
+            });
+        }
+
+        $.extend($.fn.dataTable.defaults, {
             deferRender: true,
             scroller: true,
             stateSave: true,
@@ -39,41 +82,28 @@
             autoWidth: true,
             selected: true,
             scrollX: true,
-            scrollY: 400,
+            scrollY: {{ $dtheight }},
             lengthMenu: [
                 [10, 25, 50, 100, -1],
                 [10, 25, 50, 100, 'All'],
             ],
             pageLength: 25,
-			buttons: [
-				{
-					extend: 'copyHtml5',
-					exportOptions: { orthogonal: 'export' }
-				},
-				{
-					extend: 'excelHtml5',
-					exportOptions: { orthogonal: 'export' }
-				},
-				{
-					extend: 'csvHtml5',
-					exportOptions: { orthogonal: 'export' }
-				},
-				{
-					extend: 'pdfHtml5',
-					exportOptions: { orthogonal: 'export' }
-				}
-			     
-			],
-             
-            dom: '<"grid grid-cols-2 gap-4 mb-4"Bf><"grid grid-cols-1 gap-4 mb-4"t><"grid grid-cols-3 gap-4 mb-4"lip>',
+            buttons: buttonsConfig,
+
+            dom: '@if ($dtcomponent == 'true') <"grid grid-cols-2 gap-4 mb-4"Bf> @endif<"grid grid-cols-1 gap-4 mb-4"t><"grid grid-cols-3 gap-4 mb-4"lip>',
             language: {
                 search: 'Search: ',
                 searchPlaceholder: 'keywoard...',
                 lengthMenu: '<span class="me-3">Show:</span> _MENU_',
-                paginate: { 'first': 'First', 'last': 'Last', 'next': document.dir == "rtl" ? '&larr;' : '&rarr;', 'previous': document.dir == "rtl" ? '&rarr;' : '&larr;' }
+                paginate: {
+                    'first': 'First',
+                    'last': 'Last',
+                    'next': document.dir == "rtl" ? '&larr;' : '&rarr;',
+                    'previous': document.dir == "rtl" ? '&rarr;' : '&larr;'
+                }
             }
         });
-        
+
         if ({{ $id }}) {
             let {{ $id }}Columns = $({{ $id }}).find('thead tr th');
             let {{ $id }}TableColumns = [];
@@ -85,16 +115,17 @@
                 var visible = $(item).attr('visible') !== 'false' || $(item).attr('visible') === undefined;
                 var render = $(item).data('render');
                 let tmp = {};
-                if($(item).data('value') == 'no'){
+                if ($(item).data('value') == 'no') {
                     tmp = {
                         data: null, // Data is null as we want to auto-generate the index
                         orderable: false, // Set to false if you don't want this column to be orderable
                         searchable: false, // Set to false as it does not need to be searchable
-                        render: function (data, type, row, meta) {
-                            return meta.row + meta.settings._iDisplayStart + 1; // Display the row number (1-based index)
+                        render: function(data, type, row, meta) {
+                            return meta.row + meta.settings._iDisplayStart +
+                                1; // Display the row number (1-based index)
                         }
                     }
-                }else{
+                } else {
                     tmp = {
                         data: $(item).data('value'),
                         orderable: orderable,
@@ -115,7 +146,7 @@
                 }
                 {{ $id }}TableColumns.push(tmp);
             });
- 
+
             let ajax = {
                 url: '{{ $url }}',
                 method: "{{ $method }}",
@@ -144,7 +175,7 @@
                 beforeSend: function() {
                     $('.dt-input').addClass(
                         'disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&[type=`file`]]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 rounded-[0.5rem] pl-9 sm:w-64'
-                        );
+                    );
                 },
                 dataSrc: function(response) {
                     if (response.message === "Data not found") {
@@ -163,8 +194,8 @@
                         $('#{{ $id }} tbody').html(
                             '<tr><td colspan="10" class="text-center">No data found</td></tr>'
                         );
-                        
-                       
+
+
                     }
                 }
             }
@@ -174,21 +205,21 @@
             }
 
             {{ $id }} = $({{ $id }}).DataTable({
-               
+
                 ajax: ajax,
                 columns: {{ $id }}TableColumns,
                 order: @json($order),
-                
+
                 @if ($downloadOptions)
                     dom: 'Bfrtip',
                     buttons: [
                         'copy', 'csv', 'excel', 'pdf', 'print'
                     ],
                 @endif
-                render: function (data, type, row, meta) {
-                    
+                render: function(data, type, row, meta) {
+
                 },
-                createdRow: function ( row, data, index ) {
+                createdRow: function(row, data, index) {
                     $('td', row).eq(-1).addClass('text-center');
                 },
                 initComplete: function() {
@@ -196,8 +227,8 @@
                     $('.dataTables_filter input').addClass(
                         'px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500'
                     );
-                   
-                   
+
+
                     // Modify page length dropdown with the provided structure and classes
                     $('.dataTables_length').addClass(
                         'px-0 block sm:flex flex-col items-start xl:flex-row xl:items-center gap-y-2 mb-4');

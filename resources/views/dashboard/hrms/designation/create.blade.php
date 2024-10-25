@@ -10,8 +10,15 @@
                     {{ $title ?? '' }}
                 </div>
                 <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
-                    <a href="{{ route('hrms.designation') }}" data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"><i data-tw-merge="" data-lucide="arrow-left" class="stroke-[1] w-5 h-5 mx-auto block"></i>
-                        back</a>
+                    <button onclick="history.go(-1)"
+                        class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md w-24">
+                        <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
+                    </button>
+                    <button id="submitBtn" data-tw-merge=""
+                            class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-blue-theme border-blue-theme text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"><i
+                                data-tw-merge="" data-lucide="save" class="mr-3 h-4 w-4 stroke-[1.3]"></i>
+                            <span id="loadingText">Save Changes</span>
+                    </button>
                 </div>
             </div>
             <div class="mt-3.5 grid grid-cols-12 gap-x-6 gap-y-10">
@@ -20,22 +27,25 @@
                         @include('components._asside_company')
                     </div>
                 </div> -->
-                <div class="col-span-12 flex flex-col gap-y-7 xl:col-span-12">
-                    <form id="form-submit">
+                <div class="col-span-8 flex flex-col gap-y-7 sm:col-span-12 xl:col-span-6">
+                    <form id="form-submit" method="post" action="{{ $apiUrl }}">
                         <div class="box box--stacked flex flex-col p-5">
+                            
+                            <div class="gap-x-6 gap-y-10 mb-5">
+                            <x-form.select id="company_id" name="company_id" data-method="POST" label="Company Name" url="{{ url('dashboard/hrms/company/new_company') }}"
+                                apiUrl="{{ $apiCompanyUrl }}" columns='["company_name"]' :selected="$company"
+                                :keys="[
+                                    'company_id' => $company,
+                                ]" required>
+                                <option value="">Select Company</option>
+                            </x-form.select>
+                            </div>
                             <div>
-                                <x-form._input id="designation_name" name="designation_name" label="Designation name" required="true" placholder=""/>
+                                <x-form.input id="designation_name" label="Designation Name" name="designation_name" value="{{request()->get('item')}}" required />
                             </div>
-                     
-                            <div class="mt-6 flex border-t border-dashed border-slate-300/70 pt-5">
-                                <div class="mt-5">
-                                    <button type="submit" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="send" class="lucide lucide-send stroke-[1] w-5 h-5 mx-auto block"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>
-                                        Submit</button>
-                                    <button type="reset" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed  border-primary text-primary dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="rotate-ccw" class="lucide lucide-rotate-ccw stroke-[1] w-5 h-5 mx-auto block"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
-                                        Reset</button>
-                                </div>
-                            </div>
-                        </form>
+                             
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -56,63 +66,136 @@
 </div>
 @endsection
 @push('js')
-    <script type="text/javascript">
-        let companyId = localStorage.getItem('company');
+<script type="text/javascript">
+    
+    let currentForm = $("#form-submit");
+    let id   = '{{$id ?? ''}}';
+    let method      = 'POST';
+    let path        = currentForm.attr('action');
+        
+    async function handleGetData(id, currentForm) {
+        path    = `{{ $apiUrl }}/`+id;
+        $.ajax({
+            url: path,
+            type: 'GET',
+            headers: {
+                'Authorization': `Bearer ${appToken}`,
+                'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
+            },
+            dataType: 'json',
+            success: await
+            function(response) {   
+                if (response.success == true) {     
+                    method  = 'PATCH';               
+                    $("#designation_name").val(response.data.designation_name);
+                    $("select[name=company_id]").attr('data-selected',response.data.company_id).change();
+                     
+                    //initializeTomSelect();
+                } else {
+                    showErrorNotification('error', response.message);
+                }
+            },
+            error: function(xhr) {
+                const response = JSON.parse(xhr.responseText);
+                handleErrorResponse(response, currentForm);
+            }
+        });
+        return false;
+    }
 
-        document.getElementById('form-submit').addEventListener('submit', async function (event) {
-        event.preventDefault();
-
-        const formData = new FormData(this);
-
-        const data = {
-            company_id: companyId,
-            designation_name: formData.get('designation_name'),
-        };
-
+    $("#form-submit").submit(async function (e) {
+        e.preventDefault();
+        
+        const data = serializeFormData(currentForm);
+        
         try {
-            const response = await fetch('http://apidev.duluin.com/api/v1/designation', {
-                method: 'POST',
+            const response = await $.ajax({
+                url: path,
+                type: method,
+                contentType: 'application/json',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer xN9P6a8sL2bV3iR4fC5J6Q7kT8yU9wZ0' 
+                    'Authorization': `Bearer ${appToken}`,
+                    'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
                 },
-                body: JSON.stringify(data)
+                data: JSON.stringify(data),
+                dataType: 'json'
             });
 
-            const responseData = await response.json();
-            
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+            handleResponse(response);
+        } catch (xhr) {
+            console.log(xhr);
+            if (xhr.status === 422) {
+                console.log(xhr.responseText);
+                const response = JSON.parse(xhr.responseText);
+                handleErrorResponse(response, currentForm);
+            } else {
+                showErrorNotification('error', 'An error occurred while processing your request.');
             }
-
-            showSuccessNotification(responseData.message, "The operation was completed successfully.");
-
-        } catch (error) {
-            console.error('Error:', error);
-            alert('An error occurred while submitting the data');
+            
         }
+        $('#submitBtn').attr('disable', false);
+        $('#loadingText').html('Save Changes');
     });
 
-    function showSuccessNotification(title, message) {
-        var notificationContent = document.getElementById("success-notification-content");
-        document.getElementById("success-title").textContent = title;
-        document.getElementById("success-message").textContent = message;
-
-        // setTimeout(function() {
-        //     window.location.href = "/dashboard/hrms/currency";
-        // }, 3000); 
-
-        Toastify({
-            node: $("#success-notification-content")
-                .clone()
-                .removeClass("hidden")[0],
-            duration: 3000,
-            newWindow: true,
-            close: true,
-            gravity: "top",
-            position: "right",
-            stopOnFocus: true,
-        }).showToast();
+    function serializeFormData(form) {
+        const formData = form.serializeArray();
+        const data = {};
+        formData.forEach(field => {
+            data[field.name] = field.value;
+        });
+        return data;
     }
+
+    function handleResponse(response) {
+        if (response.success == true) {
+            showSuccessNotification(response.message, "The operation was completed successfully.");
+            window.location=document.referrer;
+        } else {
+            showErrorNotification('error', response.message);
+        }
+    }
+
+    function handleErrorResponse(result, tabId) {
+        const errorString = result.error || 'An error occurred.';
+        showErrorNotification('error',
+            `There were validation errors on tab ${tabId}. Message : ${result.message}`, errorString);
+        const errorMessages = errorString.split(', ');
+
+        $('.error-message').remove();
+
+        const errorPattern = /\"([^\"]+)\"/g;
+        let match;
+
+        while ((match = errorPattern.exec(errorMessages)) !== null) {
+            const field = match[1];
+            if (field !== 'employee_id') {
+                let fieldName = field.replace(/_/g, " ").replace(/\b\w/g, char => char.toUpperCase());
+                const input = $(`[name="${field}"]`);
+
+                input.addClass('is-invalid');
+                input.before(
+                    `<div class="error-message text-danger mt-1 text-xs sm:ml-auto sm:mt-0 mb-2">${fieldName} is not allowed to be empty</div>`
+                );
+            }
+        }
+
+        const firstErrorField = $('.error-message').first();
+        if (firstErrorField.length) {
+            $('html, body').animate({
+                scrollTop: firstErrorField.offset().top - 100
+            }, 500);
+        }
+    }
+     
+    if(id){
+        handleGetData(id, currentForm);
+    }
+    $('#submitBtn').on('click', function (e) {
+        e.preventDefault();
+        $(this).attr('disable', true);
+        $('#loadingText').html('Saving...');
+        
+        $("#form-submit").submit();
+    });
     </script>
 @endpush

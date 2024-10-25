@@ -8,10 +8,10 @@ function initializeTomSelect() {
             let api = $(this).data("api") ?? "";
             let company_id = localStorage.getItem("company");
             let selectType = $(this).attr("data-selectType");
-            let selectedId = $(this).attr("data-selected");
+            let selectedId = $(this).data("selected");
             const keysData = $(this).attr("data-attributes");
             const appToken = localStorage.getItem("app_token");
-
+            
             try {
                 selectType = JSON.parse(selectType);
             } catch (e) {
@@ -99,6 +99,7 @@ function initializeTomSelect() {
                                         value: selectedId,
                                         text: `Selected Option (${selectedId})`, // Customize this label as necessary
                                     });
+                                    
                                     tomSelectInstance.setValue(selectedId);
                                     tomSelectInstance.settings.placeholder = `Selected Option (${selectedId})`;
                                     tomSelectInstance.input.placeholder = `Selected Option (${selectedId})`;
@@ -183,6 +184,7 @@ function initializeTomSelect() {
 
             // Load options on page load without typing
             tomSelectInstance.load("");
+            
         });
     })();
 }

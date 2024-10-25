@@ -18,7 +18,7 @@ class CompaniesController extends Controller
         $data['title']   = 'Companies';
         $data['page_title']   = 'Data Companies';
         $data['apiUrl'] = $this->apiGatewayUrl . '/v1/companies/company';
-        $data['userId'] = $request->session()->get('user_id');
+        $data['company'] = $request->session()->get('company_id')[0];
         return view('dashboard.hrms.companies.index', $data);
     }
 
@@ -51,27 +51,31 @@ class CompaniesController extends Controller
     public function create()
     {
         $data['title']   = 'Duluin HRMS';
-        $data['page_title']   = 'Add new company';
+        $data['page_title']   = 'Add New Company';
+        $data['apiUrl'] = $this->apiGatewayUrl . '/v1/companies/company';
+        $data['userId'] = session()->get('user_id'); 
+        $data['company'] = null;
 
         return view('dashboard.hrms.companies.create', $data);
     }
 
-    public function edit(Request $request)
+    public function edit($id)
     {
         $data['title'] = 'Duluin HRMS' ;
         $data['page_title'] = "Edit data company";
-        $data['apiUrl'] = $this->apiGatewayUrl . '/v1/companies/company/' . $request->session()->get('company_id')[0];
+        $data['apiUrl'] = $this->apiGatewayUrl . '/v1/companies/company';
+        $allSessions = session()->all();
+        $data['company'] = $allSessions['company_id'][0];
         return view('dashboard.hrms.companies.edit', $data);
     }
 
-    public function show()
+    public function show($id)
     {
         $data['title'] = 'Duluin HRMS';
-        $data['page_title'] = "Profile company";
-        $data['companyApiUrl'] = $this->companyApiUrl;
-        $allSessions = session()->all();
-        $data['company'] = $allSessions['company_id'][0];
-        $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
+        $data['page_title'] = "Company Information";
+        $data['userId'] = session()->get('user_id'); 
+        $data['company'] = $id;
+        $data['apiUrl'] = $this->apiGatewayUrl . '/v1/companies/company';
 
         return view('dashboard.hrms.companies.show', $data);
     }

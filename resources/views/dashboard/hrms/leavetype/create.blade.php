@@ -10,8 +10,15 @@
                     {{ $title ?? '' }}
                 </div>
                 <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
-                    <a href="{{ route('hrms.holidaydate') }}" data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"><i data-tw-merge="" data-lucide="arrow-left" class="stroke-[1] w-5 h-5 mx-auto block"></i>
-                        back</a>
+                    <button onclick="history.go(-1)"
+                        class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md w-24">
+                        <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
+                    </button>
+                    <button id="submitBtn" data-tw-merge=""
+                            class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-blue-theme border-blue-theme text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"><i
+                                data-tw-merge="" data-lucide="save" class="mr-3 h-4 w-4 stroke-[1.3]"></i>
+                            <span id="loadingText">Save Changes</span>
+                    </button>
                 </div>
             </div>
             <div class="mt-3.5 grid grid-cols-12 gap-x-6 gap-y-10">
@@ -20,23 +27,85 @@
                         @include('components._asside_company')
                     </div>
                 </div> -->
-                <div class="col-span-12 flex flex-col gap-y-7 xl:col-span-12">
-                    <form id="form-submit">
+                <div class="col-span-12 flex flex-col gap-y-7 sm:col-span-12 xl:col-span-12">
+                    <form id="form-submit" method="post" action="{{ $apiUrl }}">
                         <div class="box box--stacked flex flex-col p-5">
-                            <div>
-                                <input type="hidden" name="holiday_id" value="123e4567-e89b-12d3-a456-426614174001">
-                                <x-form._input id="leave_type_name" name="leave_type_name" label="Leave Type Name" required="true" placholder=""/>
-                                <x-form._input id="maximum_leave_allocation" name="maximum_leave_allocation" label="Maximum Leave Allocation Allowed" required="true" placholder=""/>
-                            </div>
-                     
-                            <div class="mt-6 flex border-t border-dashed border-slate-300/70 pt-5">
-                                <div class="mt-5">
-                                    <button type="submit" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="send" class="lucide lucide-send stroke-[1] w-5 h-5 mx-auto block"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>
-                                        Submit</button>
-                                    <button type="reset" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed  border-primary text-primary dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="rotate-ccw" class="lucide lucide-rotate-ccw stroke-[1] w-5 h-5 mx-auto block"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
-                                        Reset</button>
+                            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4">
+                                
+                                <div class="gap-x-6 gap-y-10 ">
+                                    <div class="py-2">
+                                        <x-form.select id="company_id" name="company_id" data-method="POST" label="Company Name" url="{{ url('dashboard/hrms/company/new_company') }}" required="true" 
+                                            apiUrl="{{ $apiCompanyUrl }}" columns='["company_name"]' :selected="$company"
+                                            :keys="[
+                                                'company_id' => $company,
+                                            ]">
+                                            <option value="">Select Company</option>
+                                        </x-form.select>
+                                    </div>
+                                    <div class="py-2">
+                                        <x-form.input type="text" id="leave_type_name" name="leave_type_name" label="Leave Type Name" required="true" placholder="" value="{{request()->get('item')}}"/>
+                                    </div>
+                                    <div class="py-2">
+                                        <x-form.input type="number" id="maximum_leave_allocation_allowed" name="maximum_leave_allocation_allowed" label="Max Leave" required="true" placholder="" />
+                                    </div>
+                                    <div class="py-2">
+                                        <x-form.input type="number" id="applicable_after_working_days" name="applicable_after_working_days" label="Applicable After" required="true" placholder=""/>
+                                    </div>
                                 </div>
+
+                                <div class="gap-x-6 gap-y-10">
+                                    <div class="py-2">
+                                        <x-form.input type="number" id="maximum_consecutive_leaves_allowed" name="maximum_consecutive_leaves_allowed" label="Max Consecutive" placholder=""/>
+                                    </div>
+                                    <div class="py-2">
+                                        <div class="mt-3 flex-row xl:items-center">
+                                        <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4">
+                                            <div class="text-left">
+                                                <div class="flex items-center">
+                                                    <div class="font-medium">Status</div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3"></div>
+                                        </div>
+                                        <div class="flex-1 sm:w-full w-96 mt-3 xl:mt-0">
+                                            <select required name="status" data-title="Language" data-placeholder="Select your language" class="tom-select w-full" sclass="tom-select disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10"">
+                                                
+                                                <option value="enable">
+                                                    Enable
+                                                </option>
+                                                <option value="disable">
+                                                    Disable
+                                                </option>
+                                            </select>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div class="py-2">
+                                    <x-checkbox id="include_holidays_within_leaves_as_leaves"
+                                        label="Include Holidays Within Leaves as Leaves"
+                                        name="include_holidays_within_leaves_as_leaves"
+                                        guidelines="If checked, leave will include in holidays" />
+                                    </div>
+                                    <div class="py-2">
+                                    <x-checkbox id="is_compensatory"
+                                        label="Is Compensation"
+                                        name="is_compensatory"
+                                        guidelines="If checked, leave will count as a compensation" />
+                                    </div>
+                                    <div class="py-2">
+                                    <x-checkbox id="is_leave_without_pay"
+                                        label="Is Leave without Pay"
+                                        name="is_leave_without_pay"
+                                        guidelines="If checked, leave will not pay" />
+                                    </div>
+                                </div>
+                               
+                                 
+                            
                             </div>
+                                
+                            </div>
+                             
                         </form>
                 </div>
             </div>
@@ -58,66 +127,171 @@
 </div>
 @endsection
 @push('js')
-    <script type="text/javascript">
-        let companyId = localStorage.getItem('company');
+<script type="text/javascript">
+    
+    let currentForm = $("#form-submit");
+    let id   = '{{$id ?? ''}}';
+    let method      = 'POST';
+    let path        = currentForm.attr('action');
 
-        document.getElementById('form-submit').addEventListener('submit', async function (event) {
-        event.preventDefault();
+    async function handleGetData(id, currentForm) {
+        path    = `{{ $apiUrl }}/`+id;
+        $.ajax({
+            url: path,
+            type: 'GET',
+            headers: {
+                'Authorization': `Bearer ${appToken}`,
+                'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
+            },
+            dataType: 'json',
+            success: await
+            function(response) {   
+                if (response.success == true) {                    
+                     
+                    method  = 'PATCH';
+                    
+                    $("select[name=company_id]").val(response.data.company_id).change();
+                    $("select[name=status]").val(response.data.status).change();
+                    $("input[name=leave_type_name]").val(response.data.leave_type_name)
+                    $("input[name=maximum_leave_allocation_allowed]").val(response.data.maximum_leave_allocation_allowed)
+                    $("input[name=applicable_after_working_days]").val(response.data.applicable_after_working_days)
+                    $("input[name=maximum_consecutive_leaves_allowed]").val(response.data.maximum_consecutive_leaves_allowed)
+                    if (response.data.is_leave_without_pay) {
+                        $("#is_leave_without_pay").attr("checked", true);
+                    } else {
+                        $("#is_leave_without_pay").attr("checked", false);
+                    } 
+                    if (response.data.include_holidays_within_leaves_as_leaves) {
+                        $("#include_holidays_within_leaves_as_leaves").attr("checked", true);
+                    } else {
+                        $("#include_holidays_within_leaves_as_leaves").attr("checked", false);
+                    } 
+                    if (response.data.is_compensatory) {
+                        $("#is_compensatory").attr("checked", true);
+                    } else {
+                        $("#is_compensatory").attr("checked", false);
+                    } 
+                } else {
+                    showErrorNotification('error', response.message);
+                }
+            },
+            error: function(xhr) {
+                const response = JSON.parse(xhr.responseText);
+                handleErrorResponse(response, currentForm);
+            }
+        });
+        return false;
+    }
 
-        const formData = new FormData(this);
-
-        const data = {
-            company_id: companyId,
-            description: formData.get('description'),
-            date: formData.get('date'),
-            
-            holiday_id: formData.get('holiday_id'),
-        };
+    $("#form-submit").submit(async function (e) {
+        e.preventDefault();
+        
+        const data = serializeFormData(currentForm);
+        if ($("#include_holidays_within_leaves_as_leaves").is(":checked")) {
+            data.include_holidays_within_leaves_as_leaves = true;
+        } else {
+            data.include_holidays_within_leaves_as_leaves = false;
+        }
+        if ($("#is_compensatory").is(":checked")) {
+            data.is_compensatory = true;
+        } else {
+            data.is_compensatory = false;
+        }
+        if ($("#is_leave_without_pay").is(":checked")) {
+            data.is_leave_without_pay = true;
+        } else {
+            data.is_leave_without_pay = false;
+        }
 
         try {
-            const response = await fetch('http://apidev.duluin.com/api/v1/holiday-date', {
-                method: 'POST',
+            const response = await $.ajax({
+                url: path,
+                type: method,
+                contentType: 'application/json',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer xN9P6a8sL2bV3iR4fC5J6Q7kT8yU9wZ0' 
+                    'Authorization': `Bearer ${appToken}`,
+                    'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
                 },
-                body: JSON.stringify(data)
+                data: JSON.stringify(data),
+                dataType: 'json'
             });
 
-            const responseData = await response.json();
-            
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+            handleResponse(response);
+        } catch (xhr) {
+            console.log(xhr);
+            if (xhr.status === 422) {
+                console.log(xhr.responseText);
+                const response = JSON.parse(xhr.responseText);
+                handleErrorResponse(response, currentForm);
+            } else {
+                showErrorNotification('error', 'An error occurred while processing your request.');
             }
-
-            showSuccessNotification(responseData.message, "The operation was completed successfully.");
-
-        } catch (error) {
-            console.error('Error:', error);
-            alert('An error occurred while submitting the data');
+            
         }
+        $('#submitBtn').attr('disable', false);
+        $('#loadingText').html('Save Changes');
     });
 
-    function showSuccessNotification(title, message) {
-        var notificationContent = document.getElementById("success-notification-content");
-        document.getElementById("success-title").textContent = title;
-        document.getElementById("success-message").textContent = message;
-
-        // setTimeout(function() {
-        //     window.location.href = "/dashboard/hrms/currency";
-        // }, 3000); 
-
-        Toastify({
-            node: $("#success-notification-content")
-                .clone()
-                .removeClass("hidden")[0],
-            duration: 3000,
-            newWindow: true,
-            close: true,
-            gravity: "top",
-            position: "right",
-            stopOnFocus: true,
-        }).showToast();
+    function serializeFormData(form) {
+        const formData = form.serializeArray();
+        const data = {};
+        formData.forEach(field => {
+            data[field.name] = field.value;
+        });
+        return data;
     }
+
+    function handleResponse(response) {
+        if (response.success == true) {
+            window.location=document.referrer;
+        } else {
+            showErrorNotification('error', response.message);
+        }
+    }
+
+    function handleErrorResponse(result, tabId) {
+        const errorString = result.error || 'An error occurred.';
+        showErrorNotification('error',
+            `There were validation errors on tab ${tabId}. Message : ${result.message}`, errorString);
+        const errorMessages = errorString.split(', ');
+
+        $('.error-message').remove();
+
+        const errorPattern = /\"([^\"]+)\"/g;
+        let match;
+
+        while ((match = errorPattern.exec(errorMessages)) !== null) {
+            const field = match[1];
+            if (field !== 'employee_id') {
+                let fieldName = field.replace(/_/g, " ").replace(/\b\w/g, char => char.toUpperCase());
+                const input = $(`[name="${field}"]`);
+
+                input.addClass('is-invalid');
+                input.before(
+                    `<div class="error-message text-danger mt-1 text-xs sm:ml-auto sm:mt-0 mb-2">${fieldName} is not allowed to be empty</div>`
+                );
+            }
+        }
+
+        const firstErrorField = $('.error-message').first();
+        if (firstErrorField.length) {
+            $('html, body').animate({
+                scrollTop: firstErrorField.offset().top - 100
+            }, 500);
+        }
+    }
+
+    if(id){
+        handleGetData(id, currentForm);
+    }
+
+    $('#submitBtn').on('click', function (e) {
+        e.preventDefault();
+        $(this).attr('disable', true);
+        $('#loadingText').html('Saving...');
+        
+        $("#form-submit").submit();
+    });
+    
     </script>
 @endpush

@@ -1,5 +1,5 @@
 <div class="box box--stacked flex flex-col px-5 pb-6 pt-5">
-    <a href="{{ route('hrms.company.show') }}" class="{{ Request::is('dashboard/hrms/company/show*') ? 'active' : '' }} flex items-center py-3 first:-mt-3 last:-mb-3 [&amp;.active]:text-primary [&amp;.active]:font-medium hover:text-primary">
+    <a href="{{ route('hrms.company') }}" class="{{ Request::is('dashboard/hrms/company/show*') ? 'active' : '' }} flex items-center py-3 first:-mt-3 last:-mb-3 [&amp;.active]:text-primary [&amp;.active]:font-medium hover:text-primary">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building-2 mr-2"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>
         Profile Info
     </a>
