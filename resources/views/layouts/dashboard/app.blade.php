@@ -22,6 +22,7 @@
     @stack('css')
 
     <script src="{{ asset('dist/js/vendors/dom.js') }}"></script>
+    @include('vendor-common.icon')
 </head>
 <!-- END: Head -->
 

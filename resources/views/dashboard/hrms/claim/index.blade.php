@@ -83,6 +83,7 @@
                             </div>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                 <div class="box  my-6 p-5">
+                                    <div class="text-lg mb-2">Total Claim by Type</div>
                                     <div class="flex flex-col gap-y-5 lg:flex-row lg:items-center">
                                         <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row sm:items-center">
                                             <div class="relative">
@@ -120,7 +121,7 @@
                                     </div>
                                 </div>
                                 <div class="box my-6 p-5">
-                                    <div class="text-lg ">Total Claim</div>
+                                    <div class="text-lg mb-2">Total Claim Distribution</div>
                                     <div class="flex flex-col gap-y-5 lg:flex-row lg:items-center">
                                         <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row sm:items-center">
                                             <div class="relative">

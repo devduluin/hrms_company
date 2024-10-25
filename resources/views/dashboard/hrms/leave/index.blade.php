@@ -83,6 +83,7 @@
                             </div>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                 <div class="box  my-6 p-5">
+                                    <div class="text-lg mb-2">Leave by Type </div>
                                     <div class="flex flex-col gap-y-5 lg:flex-row lg:items-center">
                                         <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row sm:items-center">
                                             <div class="relative">
@@ -120,7 +121,7 @@
                                     </div>
                                 </div>
                                 <div class="box my-6 p-5">
-                                    <div class="text-lg mb-2">Total Claim Distribution</div>
+                                    <div class="text-lg mb-2">Total Leave Distribution</div>
                                     <div class="flex flex-col gap-y-5 lg:flex-row lg:items-center">
                                         <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row sm:items-center">
                                             <div class="relative">
@@ -153,12 +154,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="mt-3.5 flex flex-col gap-8">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                <x-chart.line  label="Leave Distribution" option1="This Month" option2="Last Month" />
-                                <x-chart.donut  label="Leaves by Type" option1="This Month" option2="Last Month" />
                             </div>
                         </div>
                     </div>

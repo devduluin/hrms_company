@@ -88,7 +88,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="box box--stacked mt-3.5 p-5">
+                            <div class="box  mt-3.5 p-5">
+                                <div class="text-lg mb-2">Total Payroll Distribution</div>
                                 <div class="flex flex-col gap-y-5 lg:flex-row lg:items-center">
                                     <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row sm:items-center">
                                         <div class="relative">
@@ -124,7 +125,7 @@
                                 <div class="mb-1 mt-7">
                                     <div class="mb-1 mt-7">
                                         <div class="w-auto h-[220px]">
-                                            <canvas class="chart report-bar-chart-5"></canvas>
+                                            <canvas class="chart report-line-chart-1"></canvas>
                                         </div>
                                     </div>
                                 </div>
@@ -178,7 +179,7 @@
 <script src="{{ asset('dist') }}/js/vendors/chartjs.js"></script>
 <script src="{{ asset('dist') }}/js/components/report-donut-chart-5.js"></script>
 <script src="{{ asset('dist') }}/js/components/base/litepicker.js"></script>
-<script src="{{ asset('dist') }}/js/components/report-bar-chart-5.js"></script>
+<script src="{{ asset('dist') }}/js/components/report-line-chart-1.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function() {
