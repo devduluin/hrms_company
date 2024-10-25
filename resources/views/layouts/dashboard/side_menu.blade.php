@@ -90,7 +90,7 @@
                 <!-- BEGIN: Second Child -->
             </li>
             <li>
-                <a href="hurricane-file-manager-list.html" class="side-menu__link ">
+                <a href="{{ url('/dashboard/hrms/user') }}" class="side-menu__link ">
                     <i data-tw-merge="" data-lucide="user-plus" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
                     <div class="side-menu__link__title">Users</div>
                 </a>

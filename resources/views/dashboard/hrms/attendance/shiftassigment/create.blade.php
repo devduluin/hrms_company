@@ -28,8 +28,8 @@
                                 url="$apiUrl"
                                 method="POST" class="display">
                                 <x-slot:thead>
-                                    <th data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 w-5 border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500">
-                                        <input id="selectAll" data-tw-merge="" type="checkbox" class="transition-all duration-100 ease-in-out shadow-sm border-slate-200 cursor-pointer rounded focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
+                                    <th data-value="id" data-render="getCheckBox" orderable="false">
+                                        <input type="checkbox" id="select-all" />
                                     </th>
                                     <th data-value="employee_id_rel" data-render="getEmployee">Employee Name</th>
                                     <th data-value="salaryStructureAssignment.salaryStructure.name">Company</th>
@@ -81,6 +81,52 @@
 
 
 <script>
+    $(document).ready(function() {
+        $('#select-all').on('click', function() {
+            var isChecked = $(this).is(':checked');
+            $('#employeeTable tbody input[type="checkbox"]').prop('checked', isChecked);
+            toggleCustomButton();
+        });
+
+        $('#employeeTable').on('change', 'tbody input[type="checkbox"]', function() {
+            if (!this.checked) {
+                $('#select-all').prop('checked', false);
+            }
+            toggleCustomButton();
+        });
+
+        function toggleCustomButton() {
+            var anyChecked = $('#employeeTable tbody input[type="checkbox"]:checked').length > 0;
+            if (anyChecked) {
+                employeeTable.buttons('.custom-btn').enable();
+                $('.custom-btn').removeClass('d-none');
+            } else {
+                employeeTable.buttons('.custom-btn').disable();
+                $('.custom-btn').addClass('d-none');
+            }
+        }
+
+        employeeTable.buttons('.custom-btn').disable();
+
+        $(".custom-btn").click(function() {
+            var checkedValues = [];
+            $('#employeeTable tbody input[type="checkbox"]:checked').each(function() {
+                var rowData = JSON.parse($(this).val());
+                checkedValues.push({
+                    'employee_id': rowData.id,
+                    'first_name': rowData.first_name,
+                    'last_name': rowData.last_name,
+                    'personal_email': rowData.addressContact.personal_email,
+                    'company': rowData.company_id_rel.company_name,
+                    'company_id': rowData.company_id,
+                    'domain': rowData.company_id_rel.domain
+                });
+            });
+            var jsonCheckedValues = JSON.stringify(checkedValues);
+            handleNotification(checkedValues);
+        });
+    });
+    
       $('#selectAll').on('click', function() {
             $('tbody input[type="checkbox"]').prop('checked', this.checked);
         });

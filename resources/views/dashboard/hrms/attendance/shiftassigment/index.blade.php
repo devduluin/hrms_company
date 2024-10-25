@@ -30,6 +30,9 @@
                                 url="$apiUrl"
                                 method="POST" class="display">
                                 <x-slot:thead>
+                                    <th data-value="id" data-render="getCheckBox" orderable="false">
+                                        <input type="checkbox" id="select-all" />
+                                    </th>
                                     <th data-value="employee_id_rel" data-render="getEmployee">Employee Name</th>
                                     <th data-value="salaryStructureAssignment.salaryStructure.name">Company</th>
                                     <th data-value="salaryStructureAssignment.salaryStructure.is_active"
@@ -81,6 +84,53 @@
 
 
 <script>
+    $(document).ready(function() {
+        $('#select-all').on('click', function() {
+            var isChecked = $(this).is(':checked');
+            $('#employeeTable tbody input[type="checkbox"]').prop('checked', isChecked);
+            toggleCustomButton();
+        });
+
+        $('#employeeTable').on('change', 'tbody input[type="checkbox"]', function() {
+            if (!this.checked) {
+                $('#select-all').prop('checked', false);
+            }
+            toggleCustomButton();
+        });
+
+        function toggleCustomButton() {
+            var anyChecked = $('#employeeTable tbody input[type="checkbox"]:checked').length > 0;
+            if (anyChecked) {
+                employeeTable.buttons('.custom-btn').enable();
+                $('.custom-btn').removeClass('d-none');
+            } else {
+                employeeTable.buttons('.custom-btn').disable();
+                $('.custom-btn').addClass('d-none');
+            }
+        }
+
+        employeeTable.buttons('.custom-btn').disable();
+
+        $(".custom-btn").click(function() {
+            var checkedValues = [];
+            $('#employeeTable tbody input[type="checkbox"]:checked').each(function() {
+                var rowData = JSON.parse($(this).val());
+                checkedValues.push({
+                    'employee_id': rowData.id,
+                    'first_name': rowData.first_name,
+                    'last_name': rowData.last_name,
+                    'personal_email': rowData.addressContact.personal_email,
+                    'company': rowData.company_id_rel.company_name,
+                    'company_id': rowData.company_id,
+                    'domain': rowData.company_id_rel.domain
+                });
+            });
+            var jsonCheckedValues = JSON.stringify(checkedValues);
+            handleNotification(checkedValues);
+        });
+    });
+
+
     $(document).ready(function() {
         // Fungsi untuk cek semua checkbox
         $('#selectAll').on('click', function() {
