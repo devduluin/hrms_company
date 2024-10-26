@@ -8,7 +8,7 @@
     'rows' => '' ?? 4,
 ])
 <div {{ $attributes->merge(['class' => 'mt-2 flex-row xl:items-center'])->except(['id', 'label', 'name']) }}>
-    <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4 xl:w-60">
+    <div class="inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-4 xl:w-60 mt-3">
         <div class="text-left">
             <div class="flex items-center">
                 @if (isset($label))
@@ -26,13 +26,13 @@
             </div>
         </div>
     </div>
-    <div class="flex-1 sm:w-full flex-1 w-100 mt-3 xl:mt-0 mt-3 xl:mt-0">
+    <div class="flex-1 sm:w-full w-100 xl:mt-0">
         <textarea id="{{ $id }}" name="{{ $name }}" rows="{{ $rows }}"
             class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10"
             placeholder="{{ $label }}"></textarea>
         @if ($required)
             @error($name)
-                <div data-tw-merge="" class="text-xs text-slate-500 mt-2 @error($name) text-danger @enderror">
+                <div data-tw-merge="" class="text-xs text-slate-500 @error($name) text-danger @enderror">
                     {{ $errors->messages()[$name][0] }}
                 </div>
             @enderror

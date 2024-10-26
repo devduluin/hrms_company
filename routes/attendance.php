@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/attendance')->group(function () {
-    Route::controller(AttendanceController::class)->group(function () {
+    Route::controller(Attendance\AttendanceController::class)->group(function () {
         Route::get('/', 'index')->name('attendance');
+        Route::get('/create', 'create')->name('hrms.attendance.create');
         Route::get('/summary', 'summary')->name('hrms.attendance.summary');
         Route::get('/detail/{id}', 'detail')->name('detail');
         // Route::get('/shift_assignment', 'shift')->name('shift');

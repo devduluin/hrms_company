@@ -119,19 +119,19 @@
             cache: false,
         }
 
-        sudmitButton(true);
+        submitButton(true);
         await transAjax(param).then((result) => {
-            sudmitButton(false);
+            submitButton(false);
             showSuccessNotification("Shift Assignment", "This shift was successfully implemented.");
             $('#loading').show();
             loadDataShiftAssignment();
         }).catch((err) => {
-            sudmitButton(false);
+            submitButton(false);
             console.log(err);
         })
     });
 
-    function sudmitButton(state) {
+    function submitButton(state) {
         if(state) {
             $("#submitButton").html('Apply...');
             $("#submitButton").attr('disabled', 'disabled');
