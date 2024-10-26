@@ -8,32 +8,34 @@
                     r = new Chart(a, {
                         type: "bar",
                         data: {
-                            labels: Array.from(
-                                { length: 15 },
-                                (o, t) => t + 15
-                            ),
+                            labels: [
+                                1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+                                15,
+                            ],
                             datasets: [
                                 {
                                     categoryPercentage: 0.4,
                                     barPercentage: 0.8,
                                     borderRadius: 2,
-                                    data: Array.from({ length: 15 }, (o) =>
-                                        _.random(1, 1e3)
-                                    ),
+                                    data: [
+                                        500, 300, 700, 200, 600, 900, 250, 450,
+                                        800, 120, 750, 340, 600, 420, 780,
+                                    ],
                                     borderWidth: 1,
-                                    borderColor: getColor("primary", 0.7),
-                                    backgroundColor: getColor("primary", 0.35),
+                                    borderColor: "rgba(0, 123, 255, 0.7)", // Color example for 'primary'
+                                    backgroundColor: "rgba(0, 123, 255, 0.35)", // Background color for 'primary'
                                 },
                                 {
                                     categoryPercentage: 0.4,
                                     barPercentage: 0.8,
                                     borderRadius: 2,
-                                    data: Array.from({ length: 15 }, (o) =>
-                                        _.random(1, 1e3)
-                                    ),
+                                    data: [
+                                        350, 620, 450, 780, 390, 560, 230, 670,
+                                        480, 290, 530, 690, 410, 350, 600,
+                                    ],
                                     borderWidth: 1,
-                                    borderColor: getColor("success", 0.7),
-                                    backgroundColor: getColor("success", 0.35),
+                                    borderColor: "rgba(40, 167, 69, 0.7)", // Color example for 'success'
+                                    backgroundColor: "rgba(40, 167, 69, 0.35)", // Background color for 'success'
                                 },
                             ],
                         },
@@ -60,29 +62,6 @@
                             },
                         },
                     });
-                helper.watchCssVariables(
-                    "html",
-                    ["color-primary", "color-success"],
-                    (o) => {
-                        (r.data.datasets[0].borderColor = getColor(
-                            "primary",
-                            0.7
-                        )),
-                            (r.data.datasets[0].backgroundColor = getColor(
-                                "primary",
-                                0.35
-                            )),
-                            (r.data.datasets[1].borderColor = getColor(
-                                "success",
-                                0.7
-                            )),
-                            (r.data.datasets[1].backgroundColor = getColor(
-                                "success",
-                                0.35
-                            )),
-                            r.update();
-                    }
-                );
             });
     })();
 })();
