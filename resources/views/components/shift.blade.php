@@ -47,10 +47,10 @@
 <script type="text/javascript">
     var shiftTypeId = "";
     $(document).ready(function () {
-        loadDataShiftAssignmentx()
+        loadDataShiftType()
     });
 
-    async function loadDataShiftAssignmentx() {
+    async function loadDataShiftType() {
         let companyId = localStorage.getItem('company');
         var param = {
             url: "http://apidev.duluin.com/api/v1/shift-type/shift-type",

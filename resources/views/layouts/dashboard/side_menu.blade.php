@@ -19,14 +19,14 @@
                 HR OPERATIONS
             </li>
             
-            <li>
+            <!-- <li>
                 <a href="{{ url('/dashboard/hrms/recruitment/') }}" class="side-menu__link ">
                     <i data-tw-merge="" data-lucide="user" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
                     <div class="side-menu__link__title">Recruitment</div>
                 </a>
                 
-                <!-- END: Second Child -->
-            </li>
+                END: Second Child -->
+            <!-- </li> -->
             
             <li>
                 <a href="{{ url('/dashboard/hrms/employee') }}" class="side-menu__link ">
@@ -68,9 +68,6 @@
                 <a href="{{ url('/dashboard/hrms/payout') }}" class="side-menu__link ">
                     <i data-tw-merge="" data-lucide="coins" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
                     <div class="side-menu__link__title">Salary Payout</div>
-                    <div class="side-menu__link__badge">
-                        4
-                    </div>
                 </a>
                 <!-- BEGIN: Second Child -->
                 <!-- END: Second Child -->

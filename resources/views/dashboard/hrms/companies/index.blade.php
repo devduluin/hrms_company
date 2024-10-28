@@ -27,127 +27,32 @@
                                     Add New Company</a>
                             </div>
                         </div>
-                        <div class="mt-3.5">
-                            <div class="box box--stacked flex flex-col">
-                                <div class="flex flex-col gap-y-2 p-5 sm:flex-row sm:items-center">
-                                    <div>
-                                        <x-searchbar type="text" placeholder="Search" />
-                                    </div>
+                        <div class="mt-3.5 mb-5 ">
+                            
+                            <div class="box box--stacked flex flex-col p-5">
+                                <x-datatable id="companiesTable" :url="$apiUrl.'/datatables'" method="POST" class="display border-b border-slate-200/60" dtcomponent="false" dtheight="250">
+                                    <x-slot:thead>
+                                        <th data-value="no" width="80px">No.</th>
+                                        <th data-value="company_name" data-render="getCompany">Company Name</th>
+                                        <th data-value="default_currency">Currency</th>
+                                        <th data-value="time_zone">Timezone</th>
+                                        <th data-value="domain">Domain</th>
+                                        <th data-value="null" data-render="getActionBtn" width="10%">Action</th>
+                                    </x-slot:thead>
+                                </x-datatable>
                                 </div>
-                                <div class="overflow-hidden">
-                                    <div class="-mx-5 grid grid-cols-12 border-y border-dashed px-5">
-                                        <div class="col-span-12 flex flex-col border-b border-r border-dashed border-slate-300/80 px-5 py-5 sm:col-span-6 xl:col-span-3 [&amp;:nth-child(4n)]:border-r-0 [&amp;:nth-last-child(-n+4)]:border-b-0">
-                                            <div
-                                                class="image-fit h-52 overflow-hidden rounded-lg before:absolute before:left-0 before:top-0 before:z-10 before:block before:h-full before:w-full  before:from-slate-900/90 before:to-black/20">
-                                                <img class="rounded-md" src="{{ asset('img/logo/duluin.jpg') }}"
-                                                    alt="Tailwise - Admin Dashboard Template">
-                                            </div>
-                                            <div class="pt-5">
-                                                <div
-                                                    class="mb-5 mt-auto flex flex-col gap-3.5 border-b border-dashed border-slate-300/70 pb-5">
-                                                    <div class="flex items-center">
-                                                        <div class="text-base font-medium" id="compnayName">...</div>
-                                                    </div>
-                                                </div>
-                                                <div class="flex items-center">
-                                                    <a class="mr-auto flex items-center text-primary" href ="{{ route('hrms.company.edit') }}">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round" data-lucide="pencil"
-                                                            class="lucide lucide-kanban-square mr-1.5 h-4 w-4 stroke-[1.3]">
-                                                            <rect width="18" height="18" x="3" y="3" rx="2">
-                                                            </rect>
-                                                            <path d="M8 7v7"></path>
-                                                            <path d="M12 7v4"></path>
-                                                            <path d="M16 7v9"></path>
-                                                        </svg>
-                                                        Edit
-                                                    </a>
-                                                    <a class="flex items-center text-danger" href ="{{ $url_delete ?? '' }}">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round" data-lucide="trash2"
-                                                            class="lucide lucide-trash2 mr-1.5 h-4 w-4 stroke-[1.3]">
-                                                            <path d="M3 6h18"></path>
-                                                            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
-                                                            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
-                                                            <line x1="10" x2="10" y1="11"
-                                                                y2="17"></line>
-                                                            <line x1="14" x2="14" y1="11"
-                                                                y2="17"></line>
-                                                        </svg>
-                                                        Delete
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div
-                                    class="flex-reverse flex flex-col-reverse flex-wrap items-center gap-y-2 p-5 sm:flex-row">
-                                    <nav class="mr-auto w-full flex-1 sm:w-auto">
-                                        <ul class="flex w-full mr-0 sm:mr-auto sm:w-auto">
-                                            <li class="flex-1 sm:flex-initial">
-                                                <a
-                                                    class="transition duration-200 border items-center justify-center py-2 rounded-md cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed min-w-0 sm:min-w-[40px] shadow-none font-normal flex border-transparent text-slate-800 sm:mr-2 dark:text-slate-300 px-1 sm:px-3"><svg
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        data-lucide="chevrons-left"
-                                                        class="lucide lucide-chevrons-left stroke-[1] h-4 w-4">
-                                                        <path d="m11 17-5-5 5-5"></path>
-                                                        <path d="m18 17-5-5 5-5"></path>
-                                                    </svg></a>
-                                            </li>
-                                            <li class="flex-1 sm:flex-initial">
-                                                <a
-                                                    class="transition duration-200 border items-center justify-center py-2 rounded-md cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed min-w-0 sm:min-w-[40px] shadow-none font-normal flex border-transparent text-slate-800 sm:mr-2 dark:text-slate-300 px-1 sm:px-3"><svg
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        data-lucide="chevron-left"
-                                                        class="lucide lucide-chevron-left stroke-[1] h-4 w-4">
-                                                        <path d="m15 18-6-6 6-6"></path>
-                                                    </svg></a>
-                                            </li>
-                                            <li class="flex-1 sm:flex-initial">
-                                                <a
-                                                    class="transition duration-200 border items-center justify-center py-2 rounded-md cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed min-w-0 sm:min-w-[40px] shadow-none font-normal flex border-transparent text-slate-800 sm:mr-2 dark:text-slate-300 px-1 sm:px-3 !box dark:bg-darkmode-400">1</a>
-                                            </li>
-
-                                            <li class="flex-1 sm:flex-initial">
-                                                <a
-                                                    class="transition duration-200 border items-center justify-center py-2 rounded-md cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed min-w-0 sm:min-w-[40px] shadow-none font-normal flex border-transparent text-slate-800 sm:mr-2 dark:text-slate-300 px-1 sm:px-3"><svg
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        data-lucide="chevrons-right"
-                                                        class="lucide lucide-chevrons-right stroke-[1] h-4 w-4">
-                                                        <path d="m6 17 5-5-5-5"></path>
-                                                        <path d="m13 17 5-5-5-5"></path>
-                                                    </svg></a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                    <select
-                                        class="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1 rounded-[0.5rem] sm:w-20">
-                                        <option>10</option>
-                                        <option>25</option>
-                                        <option>35</option>
-                                        <option>50</option>
-                                    </select>
-                                </div>
+                            </div>
+                                
                             </div>
                         </div>
-                        <div class="box p-4 mt-6">
-                            <div class="text-m font-medium">
-                                More Setting
+                        <div class="mt-5 text-base font-medium group-[.mode--light]:text-white">
+                            More Setting
                             </div>
+                        <div class="box p-4 mt-6">
+                             
                                 <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-5 mt-4">
+                                    <x-action  label="HR Setting" icon="settings" url="{{ route('hrms.hr_setting') }}" />
                                     <x-action  label="Branch" icon="split" url="{{ route('hrms.branch') }}" />
-                                    <x-action  label="Currency" icon="circle-dollar-sign" url="{{ route('hrms.currency') }}" />
                                     <x-action  label="Designation" icon="clipboard" url="{{ route('hrms.designation') }}" />                                   
                                     <x-action  label="Department" icon="layout-template" url="{{ route('hrms.department') }}" />                                   
                                     <x-action  label="Holidays Date" icon="calendar-x-2" url="{{ route('hrms.holidaydate') }}" />                                   
@@ -179,27 +84,44 @@
 @endsection
 @push('js')
     <script type="text/javascript">
-        $(document).ready(function() {
-            getCompanies();
-        });
+       function getActionBtn(data, type, row, meta) {
+            //console.log(data);
+            
+            return `<div data-tw-merge data-tw-placement="bottom-end" class="dropdown relative"><button data-tw-merge data-tw-toggle="dropdown" aria-expanded="false" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed text-xs py-1.5 px-2 bg-primary border-primary text-white dark:border-primary w-24 w-24">Action</button>
+                <div data-transition data-selector=".show" data-enter="transition-all ease-linear duration-150" data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1" data-enter-to="!mt-1 visible opacity-100 translate-y-0" data-leave="transition-all ease-linear duration-150" data-leave-from="!mt-1 visible opacity-100 translate-y-0" data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1" class="dropdown-menu absolute z-[9999] hidden">
+                    <div data-tw-merge class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 w-40">
+                        
+                       
+                        <a onClick="action('show', '`+data['id']+`')" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="external-link" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
+                            Open</a>
+                       
+                        
+                    </div>
+                </div>
+            </div>`;
+        }
 
-        async function getCompanies() {
-            try {
-                var param = {
-                    url: "{{ $apiUrl }}",
-                    method: "GET",
-                    data: {
-                        user_id: "{{ $userId }}"
+        function action(action, id){
+            
+            if(action === 'delete'){
+                const path    = `{{ $apiUrl }}/`+id;
+                Swal.fire({
+                    title: "Are you sure?",
+                    //text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        destroy(action, path)
+                    }else{
+                        branchTable.ajax.reload();
                     }
-                }
-
-                await transAjax(param).then((result) => {
-                   const data = result.data[0];
-                   $("#compnayName").html(data.company_name);
                 });
-            } catch (error) {
-                console.error('Error:', error);
-                alert('An error occurred while submitting the data');
+            }else{
+                location.href = '{{ url("/dashboard/hrms/company") }}/'+action+'/'+id;
             }
         }
     </script>

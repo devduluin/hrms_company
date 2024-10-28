@@ -57,13 +57,28 @@
                     path: '{{ url('/signin') }}',
                     element: '{{ url('/elm/signin') }}'
                 },
+                activate_account: {
+                    path: '{{ url('/signup/activate_account') }}',
+                    element: '{{ url('/elm/activate_account') }}'
+                },
                 forgot_password: {
                     path: '{{ url('/forgot_password') }}',
                     element: '{{ url('/elm/forgot_password') }}'
                 }
             };
 
+            function getQueryParams() {
+                const params = new URLSearchParams(window.location.search);
+                let paramObj = {};
+                params.forEach((value, key) => {
+                    paramObj[key] = value;
+                });
+                return params;
+            }
+
             async function loadContent(url) {
+                const params = getQueryParams();
+                if(params){ url = url+'?'+params};
                 try {
                     loadingIndicator.style.display = 'block';
                     const response = await fetch(url, {
@@ -97,7 +112,7 @@
 
                 if (route) {
                     await loadContent(route.element);
-                    history.replaceState(initialPath, '', route.path);
+                   // history.replaceState(initialPath, '', route.path);
                 }
             }
 
@@ -114,6 +129,7 @@
 
             window.addEventListener('popstate', async function(event) {
                 const route = routes[event.state];
+                
                 if (route) {
                     await loadContent(route.element);
                 }
@@ -153,21 +169,36 @@
                             });
 
                             const result = await response.json();
-
-                            if (response.ok) {
-                                // toastr.success("Login successful");
-                                showSuccessNotification('success', "Login successful");
+                            const item = result.result;
+                            
+                            if (response.status === 200) {
+                                 
+                                showSuccessNotification('success', result.message);
                                 localStorage.setItem('app_token', result.app_token);
                                 localStorage.setItem('name', result.name);
                                 localStorage.setItem('account', result.account);
                                 localStorage.setItem('company', result.company_id);
-                                window.location.href = result.url;
+                                window.location.href = result.redirect;
+                            } else if (response.status === 201) {
+                                showSuccessNotification('success', result.message);
+                                setTimeout(() => {
+                                window.location.href = item.redirect;
+                                }, "800");
+                            } else if (response.status === 302) {
+                                setTimeout(() => {
+                                    window.location.href = routes['activate_account']['path']+'?user_id='+item.data.id+'&email='+item.data.email+'&phone='+item.data.phone
+                                }, "800");
+                            }else if (response.status === 303) {
+                                showErrorNotification('error', result.message);
+                                setTimeout(() => {
+                                    window.location.href = routes['signin']['path'];
+                                }, "800");
                             } else if (response.status === 422) {
-                                // toastr.error(result.message);
+                               
                                 showErrorNotification('error', result.message);
                                 handleValidationErrors(result.errors);
                             } else {
-                                // toastr.error(result.message);
+                                 
                                 showErrorNotification('error', result.message);
                             }
                         } catch (error) {
@@ -214,5 +245,73 @@
 
             await initializeContent();
         });
+
+        function checkPasswordStrength() {
+            const password = document.getElementById('password').value;
+            
+            let strength = 0;
+
+            // Criteria for password strength
+            if (password.length >= 8) strength++;  // Length check
+            if (/[A-Z]/.test(password)) strength++;  // Uppercase check
+            if (/[a-z]/.test(password)) strength++;  // Lowercase check
+            if (/[0-9]/.test(password)) strength++;  // Numbers check
+            if (/[\W]/.test(password)) strength++;   // Special character check
+
+            // Reset all strength levels
+            resetStrengthLevels();
+
+            // Activate levels based on strength
+            activateStrengthLevels(strength);
+
+            const confirmPassword = document.getElementById('confirm-password').value;
+            if(confirmPassword.length >= 1){
+            validatePasswordMatch(); // Check password match when the main password changes
+            }
+        }
+
+        function resetStrengthLevels() {
+            // Remove 'active' class from all levels
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById(`strength-level-${i}`).classList.remove('active');
+            }
+        }
+
+        function activateStrengthLevels(strength) {
+            // Activate the levels based on the strength
+            for (let i = 1; i <= strength && i <= 4; i++) {
+                document.getElementById(`strength-level-${i}`).classList.add('active');
+            }
+                if(strength >= 3){
+                const confirmPassword = document.getElementById('confirm-password')
+                    confirmPassword.removeAttribute('disabled');
+                } else {
+                    confirmPassword.setAttribute('disabled', 'disabled');
+                }
+
+        }
+
+        function validatePasswordMatch(strength) {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const matchMessage = document.getElementById('password-match-message');
+
+            if (password === confirmPassword) {
+                matchMessage.textContent = "";
+                
+                
+                //if(strength >= 3){
+                    const btnSignup = document.getElementById('btnSignup')
+                    btnSignup.removeAttribute('disabled');
+                //} else {
+                    //btnSignup.setAttribute('disabled', 'disabled');
+                //}
+            } else {
+                matchMessage.textContent = "Passwords do not match!";
+                matchMessage.className = "text-orange-800 sm:text-sm";
+            }
+        }
+
+
     </script>
 @endsection
