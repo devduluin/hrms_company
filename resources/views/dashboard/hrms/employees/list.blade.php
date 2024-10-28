@@ -97,9 +97,6 @@
                                         </div> --}}
                                         <x-datatable id="employeeTable" :url="$apiUrl . '/employee/datatables'" method="POST" class="display">
                                             <x-slot:thead>
-                                                <th data-value="id" data-render="getCheckBox" orderable="false">
-                                                    <input type="checkbox" id="select-all" />
-                                                </th>
                                                 <th data-value="first_name">First Name</th>
                                                 <th data-value="last_name">Last Name</th>
                                                 <th data-value="company_id_rel" data-render="getCompany">Company
@@ -181,10 +178,6 @@
             return 'N/A';
         }
 
-        function getCheckBox(data, type, row, meta) {
-            return `<input type="checkbox" name="selected_employees[]" value='${JSON.stringify(row)}'>`;
-        }
-        
         function getActionBtn(data, type, row, meta) {
             const url = `{{ url('dashboard/hrms/employee/edit_employee') }}/${data}`;
             console.log(url);
