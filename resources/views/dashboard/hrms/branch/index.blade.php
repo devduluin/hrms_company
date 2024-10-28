@@ -6,7 +6,7 @@
     <div class="content transition-[margin,width] duration-100 px-5 pt-[56px] pb-16 relative z-20 content--compact xl:ml-[275px] [&amp;.content--compact]:xl:ml-[91px]">
         <div class="container mt-[65px]">
             <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center">
-                <div class="text-base font-medium group-[.mode--light]:text-white">
+                <div class="text-lg font-medium group-[.mode--light]:text-white">
                     {{ $title ?? '' }}
                 </div>
                 <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
@@ -24,7 +24,7 @@
                     <div class="box box--stacked flex flex-col p-5">
                         <x-datatable id="branchTable" :url="$apiUrl.'/datatable'" method="POST" class="display small">
                             <x-slot:thead>
-                                <th data-value="no" width="80px">No.</th>
+                                <th data-value="no" width="80px">#</th>
                                 <th data-value="company_id_rel" data-render="getCompany">Company</th>
                                 <th data-value="branch_name">Branch name</th>
                                 <th data-value="createdAt" data-render="dateFormat">Created at</th>

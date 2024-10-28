@@ -51,8 +51,8 @@
                         <div class="box p-4 mt-6">
                              
                                 <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-5 mt-4">
+                                    <x-action  label="HR Setting" icon="settings" url="{{ route('hrms.hr_setting') }}" />
                                     <x-action  label="Branch" icon="split" url="{{ route('hrms.branch') }}" />
-                                    
                                     <x-action  label="Designation" icon="clipboard" url="{{ route('hrms.designation') }}" />                                   
                                     <x-action  label="Department" icon="layout-template" url="{{ route('hrms.department') }}" />                                   
                                     <x-action  label="Holidays Date" icon="calendar-x-2" url="{{ route('hrms.holidaydate') }}" />                                   
