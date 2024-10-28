@@ -28,6 +28,13 @@ use App\Http\Controllers\PayoutController;
 use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\SingleAssignmentController;
 
+Route::get('lang/{locale}', function ($locale) {
+    if (in_array($locale, ['en', 'id'])) {
+        session(['locale' => $locale]);
+    }
+    return redirect()->back();
+});
+
 
 Route::controller(AuthController::class)->group(function () {
     Route::prefix('/')->group(function () {
@@ -91,7 +98,7 @@ Route::controller(DashboardController::class)->group(function () {
                 });
             });
 
-       
+
             Route::controller(HrmsController::class)->group(function () {
                 Route::prefix('/hrms')->group(function () {
                     Route::get('/', 'index')->name('hrms');

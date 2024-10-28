@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Payroll\PayrollSettingController;
 use Illuminate\Support\Facades\Route;
 
 // claim modules
@@ -18,7 +19,14 @@ Route::prefix('/payout')->group(function () {
     Route::controller(PayoutController::class)->group(function () {
         Route::get('/', 'index')->name('payout');
         Route::get('/salary_slip', 'salary_slip')->name('salary_slip');
-        Route::get('/settings', 'settings')->name('settings');
+        Route::controller(PayrollSettingController::class)->group(function () {
+            Route::prefix('settings')->group(function () {
+                Route::get('/list', 'index');
+                Route::get('/create', 'create');
+                Route::get('/edit/{id}', 'edit');
+            });
+        });
+        // Route::get('/settings', 'settings')->name('settings');
         Route::get('/income_tax', 'income_tax')->name('income_tax');
         Route::get('/benefit_claim', 'benefit_claim')->name('benefit_claim');
         Route::get('/tax_slab_list', 'tax_slab_list')->name('tax_slab_list');
