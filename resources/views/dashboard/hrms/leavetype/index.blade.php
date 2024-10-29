@@ -25,10 +25,11 @@
                     <div class="box box--stacked flex flex-col p-5">
                         <x-datatable id="liveTypeTable" :url="$apiUrl.'/datatable'" method="POST" class="display">
                             <x-slot:thead>
-                                <th data-value="no" width="80px">No.</th>
+                                <th data-value="no" width="60px">#</th>
+                                <th data-value="company_id_rel" data-render="getCompany">Company</th>
                                 <th data-value="leave_type_name">Leave type name</th>
-                                <th data-value="maximum_leave_allocation_allowed">Maximum leave allocation allowed</th>
-                                <th data-value="applicable_after_working_days">Applicable after working days</th>
+                                <th data-value="maximum_leave_allocation_allowed">Max leave allocation</th>
+                                <th data-value="applicable_after_working_days">Applicable after days</th>
                                 <th data-value="status" data-render="getStatus">Status</th>
                                 <th data-value="null" data-render="getActionBtn" width="10%">Action</th>
                             </x-slot:thead>

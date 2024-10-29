@@ -29,7 +29,7 @@
                         </div>
                         <div class="mt-1.5 flex flex-col">
                             <input type="hidden" name="employee_id" id="employee_id" value="" />
-                            @include('dashboard.hrms.companies.tabs')
+                            
                             <div class="box box--stacked flex flex-col p-5">
                                 @include('dashboard.hrms.companies.tab-content')
                             </div>

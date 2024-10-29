@@ -62,7 +62,7 @@ class CompaniesController extends Controller
     public function edit($id)
     {
         $data['title'] = 'Duluin HRMS' ;
-        $data['page_title'] = "Edit data company";
+        $data['page_title'] = "Update Data Company";
         $data['apiUrl'] = $this->apiGatewayUrl . '/v1/companies/company';
         $allSessions = session()->all();
         $data['company'] = $allSessions['company_id'][0];
@@ -71,13 +71,24 @@ class CompaniesController extends Controller
 
     public function show($id)
     {
-        $data['title'] = 'Duluin HRMS';
+        $data['title'] = 'Company Information';
         $data['page_title'] = "Company Information";
         $data['userId'] = session()->get('user_id'); 
         $data['company'] = $id;
         $data['apiUrl'] = $this->apiGatewayUrl . '/v1/companies/company';
 
         return view('dashboard.hrms.companies.show', $data);
+    }
+
+    public function hr_setting()
+    {
+        $data['title'] = 'Duluin HRMS';
+        $data['page_title'] = "HRMS Setting";
+        $data['userId'] = session()->get('user_id');  
+        $data['company'] = session()->get('company_id')[0];;
+        $data['apiUrl'] = $this->apiGatewayUrl . '/v1/companies/company/setting';
+         
+        return view('dashboard.hrms.companies.setting', $data);
     }
 
     public function preview()

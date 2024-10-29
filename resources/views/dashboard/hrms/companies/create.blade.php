@@ -246,7 +246,7 @@
              position = new google.maps.LatLng(lat, lng);
         }
         
-        console.log(position);
+        
         mapOptions = {
             zoom: 5,
             center: new google.maps.LatLng(-2.2496319, 109.9386476),

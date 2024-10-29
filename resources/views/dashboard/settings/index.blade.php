@@ -15,6 +15,10 @@
                                 HRMS Settings
                             </div>
                             <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
+                                <button onclick="history.go(-1)"
+                                    class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md w-24">
+                                    <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
+                                </button>
                                 <button id="submitButton" data-tw-merge=""
                                     class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-blue-theme border-blue-theme text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"><i
                                         data-tw-merge="" data-lucide="save" class="mr-3 h-4 w-4 stroke-[1.3]"></i>
@@ -185,7 +189,7 @@
                     }
                     await initializeForm();
                     initializeTomSelect();
-                    populateFormInputs(apiUrl);
+                    await populateFormInputs();
                 } catch (error) {
                     console.error('Error loading content:', error);
                 } finally {
@@ -206,13 +210,25 @@
                     const results = await response.json();
                     console.log(results);
 
-                    const firstName = document.getElementById('firstName');
+                    const name = document.getElementById('name');
+                    const phone = document.getElementById('phone');
                     const email = document.getElementById('email');
-                    if (firstName) {
-                        firstName.value = results.result.name;
+                    const last_login = document.getElementById('last_login');
+                    const last_login_ip = document.getElementById('last_login_ip');
+                    if (name) {
+                        name.value = results.result.name;
                     }
                     if (email) {
                         email.value = results.result.email;
+                    }
+                    if (phone) {
+                        phone.value = results.result.phone;
+                    }
+                    if (last_login) {
+                        last_login.value = results.result.last_login;
+                    }
+                    if (last_login_ip) {
+                        last_login_ip.value = results.result.last_login_ip;
                     }
                 } catch (error) {
                     console.error('Error fetching user data:', error);
@@ -227,7 +243,7 @@
                     console.log(route);
                     console.log(route.apiUrl);
                     await loadContent(route.element);
-                    await populateFormInputs();
+                    
                     history.replaceState(initialPath, '', route.path);
                     setActiveClassByPath();
                     updateBreadcrumb();
