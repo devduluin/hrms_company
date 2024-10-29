@@ -6,290 +6,87 @@
        
         
         <div id="contents-page" class="content transition-[margin,width] duration-100 px-5 xl:mr-2.5 mt-[75px] pt-[31px] pb-16 content--compact xl:ml-[275px] [&.content--compact]:xl:ml-[100px]">
+            <form id="form-submit">
             <div class="container">
-            <div class="grid grid-cols-12 gap-x-6 gap-y-10">
-                <div class="col-span-12">
-                    <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center">
-                        <div class="text-base font-medium group-[.mode--light]:text-white">
-                            {{ $page_title ?? config('app.name') }}
-                        </div>
-                        <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
-                            <button onclick="history.go(-1)"
-                                class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md w-24">
-                                <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
-                            </button>
-                            <button id="submitBtn" data-tw-merge=""
-                                    class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-blue-theme border-blue-theme text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"><i
-                                        data-tw-merge="" data-lucide="save" class="mr-3 h-4 w-4 stroke-[1.3]"></i>
-                                    <span id="loadingText">Save Changes</span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="mt-3.5 grid grid-cols-12 gap-x-6 gap-y-10">
-                <!-- <div class="relative col-span-12 xl:col-span-3">
-                    <div class="sticky top-[104px]">
-                        @include('components._asside_company')
-                    </div>
-                </div> -->
-                        <div class="col-span-12 flex flex-col gap-y-7 sm:col-span-12 xl:col-span-12">
-                            <form id="form-submit" method="post" action="{{ $apiUrl }}">
-                                <div class="box box--stacked flex flex-col p-5">
-                                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4">
-                                        
-                                        <div class="gap-x-6 gap-y-10 ">
-                                            <div class="py-2">
-                                                <x-form.select id="company_id" name="company_id" data-method="POST" label="Company Name" url="{{ url('dashboard/hrms/company/new_company') }}" required="true" 
-                                                    apiUrl="{{ $apiCompanyUrl }}" columns='["company_name"]' :selected="$company"
-                                                    :keys="[
-                                                        'company_id' => $company,
-                                                    ]">
-                                                    <option value="">Select Company</option>
-                                                </x-form.select>
-                                            </div>
-                                            <div class="py-2">
-                                                <x-form.input type="text" id="shift_type_name" name="shift_type_name" label="Shift Type Name" required="true" placholder="" value="{{request()->get('item')}}"/>
-                                            </div>
-                                            <div class="py-2">
-                                            <x-form.input type="datetime-local" id="start_time" name="start_time" label="Start Time" required="true" placholder=""/>
-                                            <input type="hidden" name="" value=""/>
-                                            </div>
-                                            <div class="py-2">
-                                            <x-form.input type="datetime-local" id="end_time" name="end_time" label="End Time" required="true" placholder=""/>
-                                            <input type="hidden" name="" value=""/>    
-                                            </div>
-                                        </div>
-
-                                        <div class="gap-x-6 gap-y-10">
-                                            <div class="py-2">
-                                            <x-form.input type="datetime-local" id="time_tolerance" name="time_tolerance" label="Time Torelance" placholder=""/>
-                                            <input type="hidden" name="time_tolerance" value=""/>
-                                            </div>
-                                            <div class="py-2">
-                                                <div class="mt-3 flex-row xl:items-center">
-                                                <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4">
-                                                    <div class="text-left">
-                                                        <div class="flex items-center">
-                                                            <div class="font-medium">Status</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3"></div>
-                                                </div>
-                                                <div class="flex-1 sm:w-full w-96 mt-3 xl:mt-0">
-                                                    <select required name="" data-title="Language" data-placeholder="Select your language" class="tom-select w-full" sclass="tom-select disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10"">
-                                                        
-                                                        <option value="enable">
-                                                            Enable
-                                                        </option>
-                                                        <option value="disable">
-                                                            Disable
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                </div>
-                                            </div>
-                                             
-                                        </div>
-                                    
-                                        
-                                    
+                <div class="grid grid-cols-12 gap-x-6 gap-y-10">
+                        <div class="col-span-12">
+                            <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center">
+                                <div class="text-base font-medium group-[.mode--light]:text-white">
+                                    {{ $page_title ?? config('app.name') }}
+                                </div>
+                                <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
+                                    <a href="{{ route("hrms.attendance") }}"
+                                    class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md w-24">
+                                    <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
+                                    </a> 
+                                    <button type="submit" id="btn_submit"
+                                    class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-blue-theme border-blue-theme text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"><i data-tw-merge="" data-lucide="save" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Save Changes
+                                    </button> 
+                                </div>
+                            </div>
+                            <div class="box mt-5">
+                                <div class="p-7">
+                                    <div class="grid md:grid-cols-3 xl:grid-cols-4">
+                                        <input type="hidden" name="user_id" value="3c5b06b2-b224-4029-a7a9-a0291dbe723c">
+                                        <x-form.input id="shift_type_name" label="Shift Type Name" name="shift_type_name" required />
+                                        <x-form.input type="datetime-local" id="start_time" label="Start Time" name="Start Time" required />
+                                        <x-form.input type="datetime-local" id="end_time" label="End Time" name="end_time" required />
+                                        <x-form.input type="time" id="time_tolerance" label="Time Tolerance" name="time_tolerance" required />
                                     </div>
-                                        
-                                    </div>
-                                    
-                                </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                 
                 </div>
-            </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="preview relative [&.hide]:overflow-hidden [&.hide]:h-0">
-    <div class="text-center">
-        <div id="success-notification-content" class="py-5 pl-5 pr-14 bg-white border border-slate-200/60 rounded-lg shadow-xl dark:bg-darkmode-600 dark:text-slate-300 dark:border-darkmode-600 hidden flex">
-            <i data-tw-merge="" data-lucide="check-circle" class="stroke-[1] w-5 h-5 text-success"></i>
-            <div class="ml-4 mr-4">
-                <div class="font-medium" id="success-title">...</div>
-                <div class="mt-1 text-slate-500" id="success-message">
-                   ...
-                </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
 @endsection
 @push('js')
 <script type="text/javascript">
-    
-    let currentForm = $("#form-submit");
-    let id   = '{{$id ?? ''}}';
-    let method      = 'POST';
-    let path        = currentForm.attr('action');
-
-    async function handleGetData(id, currentForm) {
-        path    = `{{ $apiUrl }}/`+id;
-        $.ajax({
-            url: path,
-            type: 'GET',
-            headers: {
-                'Authorization': `Bearer ${appToken}`,
-                'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
-            },
-            dataType: 'json',
-            success: await
-            function(response) {   
-                if (response.success == true) {                    
-                     
-                    method  = 'PATCH';
-                    console.log(response.data.start_time);
-                    $("select[name=company_id]").val(response.data.company_id).change();
-                    $("select[name=status]").val(response.data.status).change();
-                    $("input[name=shift_type_name]").val(response.data.shift_type_name)
-                    $("input[name=start_time]").val(response.data.start_time)
-                    $("input[name=time_tolerance]").val(response.data.time_tolerance)
-                    $("input[name=end_time]").val(response.data.end_time)
-                     
-                } else {
-                    showErrorNotification('error', response.message);
-                }
-            },
-            error: function(xhr) {
-                const response = JSON.parse(xhr.responseText);
-                handleErrorResponse(response, currentForm);
-            }
-        });
-        return false;
-    }
-
-    $("#form-submit").submit(async function (e) {
+    $("#form-submit").submit(async function store(e) {
         e.preventDefault();
+
+        //inisialisasi data shift type 
+        var formData = {
+            company_id: localStorage.getItem('company'),
+            shift_type_name: $("#shift_type_name").val(),
+            start_time: $("#start_time").val(),
+            end_time: $("#end_time").val(),
+            time_tolerance: $("#time_tolerance").val(),
+        };
         
-        const data = serializeFormData(currentForm);
-       
-        try {
-            const response = await $.ajax({
-                url: path,
-                type: method,
-                contentType: 'application/json',
-                headers: {
-                    'Authorization': `Bearer ${appToken}`,
-                    'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
-                },
-                data: JSON.stringify(data),
-                dataType: 'json'
-            });
-
-            handleResponse(response);
-        } catch (xhr) {
-            console.log(xhr);
-            if (xhr.status === 422) {
-                console.log(xhr.responseText);
-                const response = JSON.parse(xhr.responseText);
-                handleErrorResponse(response, currentForm);
-            } else {
-                showErrorNotification('error', 'An error occurred while processing your request.');
-            }
-            
+        var param = {
+            url: "{{ $apiUrlShiftType }}",
+            method: "POST",
+            data: JSON.stringify(formData),
+            processData: false,
+            contentType: false,
+            cache: false
         }
-        $('#submitBtn').attr('disable', false);
-        $('#loadingText').html('Save Changes');
-    });
 
-    function serializeFormData(form) {
-        const formData = form.serializeArray();
-        const data = {};
-        formData.forEach(field => {
-            data[field.name] = field.value;
+        saving(true);
+        await transAjax(param).then((result) => {
+            showSuccessNotification(result.message, "The operation was completed successfully.");
+            saving(false);
+            setTimeout(() => {
+                window.location.href = "/dashboard/hrms/shift-type";
+            }, 3000);
+        }).catch((error) => {
+            saving(false);
+            showErrorNotification(error.message, "An error occurred while processing your request.")
         });
-        return data;
-    }
 
-    function handleResponse(response) {
-        if (response.success == true) {
-            window.location=document.referrer;
-        } else {
-            showErrorNotification('error', response.message);
-        }
-    }
-
-    function handleErrorResponse(result, tabId) {
-        const errorString = result.error || 'An error occurred.';
-        showErrorNotification('error',
-            `There were validation errors on tab ${tabId}. Message : ${result.message}`, errorString);
-        const errorMessages = errorString.split(', ');
-
-        $('.error-message').remove();
-
-        const errorPattern = /\"([^\"]+)\"/g;
-        let match;
-
-        while ((match = errorPattern.exec(errorMessages)) !== null) {
-            const field = match[1];
-            if (field !== 'employee_id') {
-                let fieldName = field.replace(/_/g, " ").replace(/\b\w/g, char => char.toUpperCase());
-                const input = $(`[name="${field}"]`);
-
-                input.addClass('is-invalid');
-                input.before(
-                    `<div class="error-message text-danger mt-1 text-xs sm:ml-auto sm:mt-0 mb-2">${fieldName} is not allowed to be empty</div>`
-                );
+        function saving(state) {
+            if(state) {
+                $("#btn_submit").html('Saving...');
+                $("#btn_submit").attr('disabled', 'disabled');
+            }else {
+                $("#btn_submit").html('Saving Changes');
+                $("#btn_submit").removeAttr('disabled');
             }
-        }
-
-        const firstErrorField = $('.error-message').first();
-        if (firstErrorField.length) {
-            $('html, body').animate({
-                scrollTop: firstErrorField.offset().top - 100
-            }, 500);
-        }
-    }
-
-    if(id){
-        handleGetData(id, currentForm);
-    }
-
-    $('#submitBtn').on('click', function (e) {
-        e.preventDefault();
-        $(this).attr('disable', true);
-        $('#loadingText').html('Saving...');
-        
-        $("#form-submit").submit();
+         }
     });
-
-    $('#start_time').on('change', function() {
-        var value = formatDate($(this).val());
-        $('input[name=start_time]').val(value);
-    })
-
-    $('#end_time').on('change', function() {
-        var value = formatDate($(this).val());
-        $('input[name=end_time]').val(value);
-    })
-
-    $('#time_tolerance').on('change', function() {
-        var value = formatDate($(this).val());
-        $('input[name=time_tolerance]').val(value);
-    })
-
-    function formatDate(input) {
-        if (input) {
-            let date = new Date(input);
-
-            let year = date.getFullYear();
-            let month = String(date.getMonth() + 1).padStart(2, '0');
-            let day = String(date.getDate()).padStart(2, '0');
-            let hours = String(date.getHours()).padStart(2, '0');
-            let minutes = String(date.getMinutes()).padStart(2, '0');
-            let seconds = String(date.getSeconds()).padStart(2, '0');
-
-            let formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-            return formattedDate;
-        } else {
-            return "Invalid Date";
-        }
-    }
-    
 </script>
 @endpush
