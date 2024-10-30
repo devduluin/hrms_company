@@ -85,7 +85,7 @@ class CompaniesController extends Controller
         $data['title'] = 'Duluin HRMS';
         $data['page_title'] = "HRMS Setting";
         $data['userId'] = session()->get('user_id');  
-        $data['company'] = session()->get('company_id')[0];;
+        $data['company'] = session()->get('company_id')[0];
         $data['apiUrl'] = $this->apiGatewayUrl . '/v1/companies/company/setting';
          
         return view('dashboard.hrms.companies.setting', $data);

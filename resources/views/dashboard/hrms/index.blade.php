@@ -7,6 +7,24 @@
         
         <div id="contents-page" class="content transition-[margin,width] duration-100 px-5 xl:mr-2.5 mt-[75px] pt-[31px] pb-16 content--compact xl:ml-[275px] [&.content--compact]:xl:ml-[100px]">
             <div class="container">
+            @if (request()->get('initialize') == 'success')
+            <div class="flex flex-col gap-2 mb-5">
+                <div role="alert" class="alert relative border rounded-md px-5 py-4 bg-primary border-primary text-white dark:border-primary">
+                    <div class="flex items-center">
+                        <div class="flex items-center text-lg font-medium">
+                        <i data-tw-merge data-lucide="alert-circle" class="stroke-[1] w-5 h-5 mr-2 h-6 w-6 mr-2 h-6 w-6"></i>
+                            Welcome to the HRMS Dashboard!
+                        </div>
+                        <div class="ml-auto rounded-md bg-white px-1 text-xs text-slate-700">
+                            New
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                    We’re thrilled to have you onboard as part of our growing community. This platform is designed to streamline your HR tasks, from employee management to payroll processing, and everything in between.
+                    </div>
+                </div>
+            </div>
+            @endif
             @include('dashboard.hrms.elm_hrms')
                 <div id="loading-indicator" class="items-center" style="display: none;"></div>
                     

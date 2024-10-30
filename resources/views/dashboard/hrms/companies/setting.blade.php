@@ -30,7 +30,7 @@
                 <div class="col-span-12 flex flex-col gap-y-7 sm:col-span-12 xl:col-span-12">
                 <form id="form-submit" method="POST" action="{{ $apiUrl }}">
                     <input type="hidden" name="company_id" value="{{ $company }}" />
-                    <div class="box box--stacked flex flex-col p-5">
+                    <div class="box box--stacked flex flex-col p-7">
                         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-2">
                             <div class="text-lg pt-5 font-medium group-[.mode--light]:text-white">
                                 {{ 'Employee Settings' }}
@@ -128,7 +128,7 @@
                             <x-checkbox id="send_interview_feedback_reminder" label="Send interview feedback reminder"
                                 name="send_interview_feedback_reminder"  />
                                 </div>
-                            
+                            <div class="py-2">
                             <x-checkbox id="show_leaves_of_all_department_members_in_calendar" label="Show leaves of all department members in calendar"
                                 name="show_leaves_of_all_department_members_in_calendar"  />
                                 </div>

@@ -54,12 +54,12 @@
                                                 class="mr-3 h-4 w-4 stroke-[1.3]"></i>
                                             Preferences
                                         </a>
-                                        <a id="notification_setting" href="#"
+                                        <!-- <a id="notification_setting" href="#"
                                             class="menu-item flex items-center py-3 first:-mt-3 last:-mb-3 [&.active]:text-primary [&.active]:font-medium hover:text-primary">
                                             <i data-tw-merge="" data-lucide="bell-dot"
                                                 class="mr-3 h-4 w-4 stroke-[1.3]"></i>
                                             Notification Settings
-                                        </a>
+                                        </a> -->
                                         <a id="deactivation" href="#"
                                             class="menu-item flex items-center py-3 first:-mt-3 last:-mb-3 [&.active]:text-primary [&.active]:font-medium hover:text-primary">
                                             <i data-tw-merge="" data-lucide="trash2" class="mr-3 h-4 w-4 stroke-[1.3]"></i>
@@ -81,63 +81,77 @@
 
     </div>
     <script>
-        async function initializeForm() {
-            const form = document.getElementById('settingForm');
-            const loadingText = document.getElementById('loadingText');
-            const submitButton = document.getElementById("submitButton");
+        let loadingText = document.getElementById('loadingText');
+        let submitButton = document.getElementById("submitButton");
 
-            async function handleSubmit(event) {
-                event.preventDefault();
-                // Change button state to loading
+        async function initializeForm(formName) {
+            const form = document.getElementById(formName);
+            if (!form) {
                 submitButton.disabled = true;
-                loadingText.innerHTML = 'Saving...'; // Optionally add a class for styling
-
-                // Trigger form validation
-                if (!form.reportValidity()) {
-                    // If form is invalid, stop the submission
-                    submitButton.disabled = false;
-                    loadingText.innerHTML = 'Save Changes';
-                    return;
-                }
-                const formData = new FormData(form);
-                const data = Object.fromEntries(formData.entries());
-
-                try {
-                    const response = await fetch(form.action, {
-                        method: 'POST',
-                        body: JSON.stringify(data),
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    });
-
-                    if (response.ok) {
-                        console.log('Form submitted successfully');
-                    } else {
-                        console.error('Error submitting form');
-                    }
-                } catch (error) {
-                    console.error('Error submitting form', error);
-                } finally {
-                    // Restore button state
-                    submitButton.disabled = false;
-                    loadingText.innerHTML = 'Save Changes';
-                }
+            } else if(form) {
+                submitButton.disabled = false;
+                // Add event listener to submit button without invoking it immediately
+                submitButton.addEventListener('click', (event) => handleSubmit(event, form, submitButton, loadingText));
+            }else{
+                
             }
+       
+            
+        }
 
-            // Prevent the form from submitting normally
-            if (form) submitButton.addEventListener('click', handleSubmit);
+        async function handleSubmit(event, form, submitButton, loadingText) {
+             
+            // Change button state to loading
+            submitButton.disabled = true;
+            loadingText.innerHTML = 'Saving...'; // Optionally add a class for styling
+
+            // Trigger form validation
+            if (!form.reportValidity()) {
+                // If form is invalid, stop the submission
+                submitButton.disabled = false;
+                loadingText.innerHTML = 'Save Changes';
+                return;
+            }
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${appToken}`
+                    }
+                });
+
+                if (response.ok) {
+                    //console.log('Form submitted successfully');
+                    await populateFormInputs();
+                    showSuccessNotification(response.message, "The operation was completed successfully.");
+                } else {
+                    console.error('Error submitting form');
+                }
+            } catch (error) {
+                console.error('Error submitting form', error);
+            } finally {
+                // Restore button state
+                submitButton.disabled = false;
+                loadingText.innerHTML = 'Save Changes';
+            }
         }
     </script>
     <script src="{{ asset('dist/js/vendors/tom-select.js') }}"></script>
     <script src="{{ asset('dist/js/components/base/tom-select.js') }}"></script>
     <script>
+        const apiUrl = '{{ $apiUrl }}/users/user';
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
         document.addEventListener('DOMContentLoaded', async function() {
             const menu = document.getElementById("menus-page");
             const content = document.getElementById("contents-page");
             const loadingIndicator = document.getElementById("loading-indicator");
-            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
+            
             const routes = {
                 settings: {
                     path: '{{ url('/dashboard/settings') }}',
@@ -146,14 +160,17 @@
                 user_account: {
                     path: '{{ url('/dashboard/settings/user_account') }}',
                     element: '{{ url('/dashboard/settings/elm/user_account') }}',
+                    form: 'settingForm',
                 },
                 email_setting: {
                     path: '{{ url('/dashboard/settings/email_setting') }}',
                     element: '{{ url('/dashboard/settings/elm/email_setting') }}',
+                    form: '',
                 },
                 security: {
                     path: '{{ url('/dashboard/settings/security') }}',
                     element: '{{ url('/dashboard/settings/elm/security') }}',
+                    form: 'resetForm',
                 },
                 preferences: {
                     path: '{{ url('/dashboard/settings/preferences') }}',
@@ -169,9 +186,8 @@
                 }
             };
 
-            const apiUrl = '{{ $apiUrl }}/users/user';
-
-            async function loadContent(url) {
+            async function loadContent(route) {
+                const url = route.element;
                 try {
                     loadingIndicator.style.display = 'block';
                     const response = await fetch(url, {
@@ -187,7 +203,9 @@
                     } else {
                         submitButton.style.display = '';
                     }
-                    await initializeForm();
+                     
+                    
+                    await initializeForm(route.form);
                     initializeTomSelect();
                     await populateFormInputs();
                 } catch (error) {
@@ -197,7 +215,61 @@
                 }
             }
 
-            async function populateFormInputs() {
+            async function initializeContent() {
+                const initialPath = window.location.pathname.split('/').pop();
+                const route = routes[initialPath];
+
+                if (route) {
+                     
+                    await loadContent(route);
+                    
+                    history.replaceState(initialPath, '', route.path);
+                    setActiveClassByPath();
+                    updateBreadcrumb();
+                }
+            }
+
+            menu.addEventListener('click', async function(event) {
+                const id = event.target?.id;
+                const route = routes[id];
+                 
+                if (route) {
+                    event.preventDefault();
+                    window.history.pushState(id, '', route.path);
+                    await loadContent(route);
+                    setActiveClassByPath();
+                    updateBreadcrumb();
+                }
+            });
+
+            window.addEventListener('popstate', async function(event) {
+                const route = routes[event.state];
+                if (route) {
+                    await loadContent(route);
+                    setActiveClassByPath();
+                    updateBreadcrumb();
+                }
+            });
+
+            function setActiveClassByPath() {
+                const currentPath = window.location.pathname.split('/').pop();
+                const routeKey = Object.keys(routes).find(key => routes[key].path.endsWith(currentPath));
+
+                if (routeKey) {
+                    const menuItems = menu.querySelectorAll('.menu-item');
+                    menuItems.forEach(item => item.classList.remove('active'));
+
+                    const activeItem = menu.querySelector(`#${routeKey}`);
+                    if (activeItem) {
+                        activeItem.classList.add('active');
+                    }
+                }
+            }
+
+            await initializeContent();
+        });
+
+        async function populateFormInputs() {
                 try {
                     const appToken = localStorage.getItem('app_token');
                     const response = await fetch(apiUrl, {
@@ -208,7 +280,7 @@
                         }
                     });
                     const results = await response.json();
-                    console.log(results);
+                     
 
                     const name = document.getElementById('name');
                     const phone = document.getElementById('phone');
@@ -234,60 +306,5 @@
                     console.error('Error fetching user data:', error);
                 }
             }
-
-            async function initializeContent() {
-                const initialPath = window.location.pathname.split('/').pop();
-                const route = routes[initialPath];
-
-                if (route) {
-                    console.log(route);
-                    console.log(route.apiUrl);
-                    await loadContent(route.element);
-                    
-                    history.replaceState(initialPath, '', route.path);
-                    setActiveClassByPath();
-                    updateBreadcrumb();
-                }
-            }
-
-            menu.addEventListener('click', async function(event) {
-                const id = event.target?.id;
-                const route = routes[id];
-                console.log(id);
-                if (route) {
-                    event.preventDefault();
-                    window.history.pushState(id, '', route.path);
-                    await loadContent(route.element);
-                    setActiveClassByPath();
-                    updateBreadcrumb();
-                }
-            });
-
-            window.addEventListener('popstate', async function(event) {
-                const route = routes[event.state];
-                if (route) {
-                    await loadContent(route.element);
-                    setActiveClassByPath();
-                    updateBreadcrumb();
-                }
-            });
-
-            function setActiveClassByPath() {
-                const currentPath = window.location.pathname.split('/').pop();
-                const routeKey = Object.keys(routes).find(key => routes[key].path.endsWith(currentPath));
-
-                if (routeKey) {
-                    const menuItems = menu.querySelectorAll('.menu-item');
-                    menuItems.forEach(item => item.classList.remove('active'));
-
-                    const activeItem = menu.querySelector(`#${routeKey}`);
-                    if (activeItem) {
-                        activeItem.classList.add('active');
-                    }
-                }
-            }
-
-            await initializeContent();
-        });
     </script>
 @endsection

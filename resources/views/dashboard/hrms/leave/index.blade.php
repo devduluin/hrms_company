@@ -15,22 +15,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="box box--stacked flex flex-col p-5 mt-6">
-                    <x-datatable id="applicantTable" :url="'http://apidev.duluin.com/api/v1/branch/datatable'" method="POST" class="display">
-                        <x-slot:thead>
-                            <th data-value="employee_name">Employee Name</th>
-                            <th data-value="company">Company</th>
-                            <th data-value="leave_type">Leave Type</th>
-                            <th data-value="leave_date">Date</th>
-                        </x-slot:thead>
-                    </x-datatable>
-                </div>
+                 
                 <div class="box p-4 mt-4">
                     <div class="text-m font-medium">
                         More Action
                     </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mt-4">
-                            <x-action  label="Holiday List" icon="arrow-up-right" url="{{ url('/dashboard/hrms/leave/holiday') }}" />
+                            <x-action  label="Holidays List" icon="calendar-x-2" url="{{ url('/dashboard/hrms/leave/holiday') }}" />
+                            <x-action  label="Leave Type" icon="arrow-up-right" url="{{ route('hrms.leave-type') }}" />
                             <x-action  label="Leave Allocation" icon="arrow-up-right" url="{{ url('/dashboard/hrms/leave/allocation') }}" />
                             <x-action  label="Leave Application" icon="arrow-up-right" url="{{ url('/dashboard/hrms/leave/application') }}" />
                         </div>

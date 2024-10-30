@@ -220,7 +220,7 @@
 
                 },
                 createdRow: function(row, data, index) {
-                    $('td', row).eq(-1).addClass('text-center');
+                    //$('td', row).eq(-1).addClass('text-center');
                 },
                 initComplete: function() {
                     // Style the search input

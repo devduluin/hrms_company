@@ -29,6 +29,21 @@ class AuthMiddleware
                 }
             
             };
+            $appToken = $request->session()->get('app_token');
+            $headers = [
+                'accept' => 'application/json',
+                'Authorization' => 'Bearer ' . $appToken,
+            ];
+
+            $response = $this->getRequest(config('apiendpoints.gateway') . '/v1/companies/company/setting/'. $company_id[0], '', $headers);
+            $responseBody = json_decode($response->getBody(), true);
+             
+            if(!isset($responseBody['data'])){
+                $lastSegment = $request->segment(count($request->segments()));
+                if($lastSegment != 'setup_initialize'){
+                return redirect(url('dashboard/hrms/setup_initialize'));
+                }
+            };
         }
 
         $appToken = $request->session()->get('app_token');
