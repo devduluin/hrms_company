@@ -20,8 +20,8 @@ class AuthMiddleware
     {
         
         $company_id = $request->session()->get('company_id');
-        if(isset($company_id)){
-             
+        if(!$company_id){
+            
             if($company_id == null){
                 $lastSegment = $request->segment(count($request->segments()));
                 if($lastSegment != 'setup_account'){
