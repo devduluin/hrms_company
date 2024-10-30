@@ -293,11 +293,8 @@
                                     {{-- <x-action  label="Employee Shift List" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/shift_list') }}" /> --}}
                                     <x-action  label="Shift Type" icon="arrow-up-right" url="{{ url('/dashboard/hrms/shift-type') }}" />
                                     <x-action  label="Attendance Report" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/report') }}" />
-<<<<<<< HEAD
                                     <x-action  label="Shift Type" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/shift_type') }}" />
                                     <x-action  label="Shift Requester Approver" icon="git-pull-request-create" url="{{ route('hrms.attendance.shiftrequest') }}" />
-=======
->>>>>>> c296cdedcbb87c352cefbbebda7b41b8214fbe05
                                 </div>
                         </div>
                     </div>
