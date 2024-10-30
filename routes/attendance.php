@@ -5,16 +5,32 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/attendance')->group(function () {
-    Route::controller(AttendanceController::class)->group(function () {
-        Route::get('/', 'index')->name('attendance');
+    Route::controller(Attendance\AttendanceController::class)->group(function () {
+        Route::get('/', 'index')->name('hrms.attendance');
+        Route::get('/create', 'create')->name('hrms.attendance.create');
         Route::get('/summary', 'summary')->name('hrms.attendance.summary');
         Route::get('/detail/{id}', 'detail')->name('detail');
         // Route::get('/shift_assignment', 'shift')->name('shift');
         Route::get('/shift_list', 'shift_list')->name('shift_list');
         Route::get('/report', 'report')->name('report');
+        Route::get('/report/print', 'print')->name('hrms.attendance.print');
         Route::get('/new_shift_assignment', 'new_assignment')->name('shift-assignment');
-        Route::get('/shift_type', 'shift_type')->name('shift_type');
-        Route::get('/new_shift_type', 'new_shift_type')->name('new_shift_type');
+
+        Route::prefix('/shift_type')->group(function () {
+            Route::controller(ShiftTypeController::class)->group(function () {
+                Route::get('/', 'index')->name('hrms.attendance.shifttype');
+                Route::get('/create', 'create')->name('hrms.attendance.shifttype.create');
+                Route::get('/update/{id}', 'update')->name('hrms.attendance.shifttype.update');
+            });;
+        });
+
+        Route::prefix('/shift_request_approver')->group(function () {
+            Route::controller(ShiftRequestController::class)->group(function () {
+                Route::get('/', 'index')->name('hrms.attendance.shiftrequest');
+                Route::get('/create', 'create')->name('hrms.attendance.shiftrequest.create');
+                Route::get('/update/{id}', 'update')->name('hrms.attendance.shiftrequest.update');
+            });
+        });
     });
 
     //route for shift assignment

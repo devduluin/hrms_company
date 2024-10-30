@@ -52,6 +52,7 @@
         Company Details
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-2 gap-5 mt-4">
+        <input type="hidden" id="parent_company" name="parent_company" />
         <x-form.select id="company_id" name="company_id" label="Company" url="{{ url('dashboard/hrms/designation') }}"
             apiUrl="{{ $apiCompanyUrl }}/company/datatables" columns='["company_name"]' :selected="$company"
             :keys="[
@@ -84,8 +85,9 @@
             <option value="">Select Department</option>
         </x-form.select>
 
-        <x-form.select id="report_to" name="report_to" label="Reports to" url="{{ url('dashboard/hrms/designation') }}"
-            apiUrl="{{ $apiEmployeeUrl }}/employee/datatables" columns='["first_name","last_name"]' :keys="[
+        <x-form.select id="report_to" name="report_to" label="Reports to"
+            url="{{ url('dashboard/hrms/designation') }}" apiUrl="{{ $apiEmployeeUrl }}/employee/datatables"
+            columns='["first_name","last_name"]' :keys="[
                 'company_id' => $company,
             ]">
             <option value="">Select Employee</option>

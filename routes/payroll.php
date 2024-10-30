@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Payroll\PayrollPeriodeController;
+use App\Http\Controllers\Payroll\PayrollSettingController;
+use App\Http\Controllers\Payroll\SalaryComponentController;
 
 // claim modules
 Route::prefix('/claim')->group(function () {
@@ -18,16 +21,31 @@ Route::prefix('/payout')->group(function () {
     Route::controller(PayoutController::class)->group(function () {
         Route::get('/', 'index')->name('payout');
         Route::get('/salary_slip', 'salary_slip')->name('salary_slip');
-        Route::get('/settings', 'settings')->name('settings');
+        Route::controller(PayrollSettingController::class)->group(function () {
+            Route::prefix('settings')->group(function () {
+                Route::get('/list', 'index');
+                Route::get('/create', 'create');
+                Route::get('/edit/{id}', 'edit');
+            });
+        });
+        // Route::get('/settings', 'settings')->name('settings');
         Route::get('/income_tax', 'income_tax')->name('income_tax');
         Route::get('/benefit_claim', 'benefit_claim')->name('benefit_claim');
         Route::get('/tax_slab_list', 'tax_slab_list')->name('tax_slab_list');
         Route::get('/benefit_list', 'benefit_list')->name('benefit_list');
-        Route::get('/payroll_period', 'payroll_period')->name('payroll_period');
-        Route::prefix('salary_component')->group(function () {
-            Route::get('/list_component', 'salary_component_list')->name('list_component');
-            Route::get('/create_component', 'create_component')->name('create_component');
-            Route::get('/edit_component/{id}', 'edit_component')->name('edit_component');
+        Route::controller(PayrollPeriodeController::class)->group(function () {
+            Route::prefix('payroll_period')->group(function () {
+                Route::get('/', 'index');
+                Route::get('/create', 'create');
+                Route::get('/edit/{id}', 'edit');
+            });
+        });
+        Route::controller(SalaryComponentController::class)->group(function () {
+            Route::prefix('salary_component')->group(function () {
+                Route::get('/list_component', 'index')->name('list_component');
+                Route::get('/create_component', 'create')->name('create_component');
+                Route::get('/edit_component/{id}', 'edit')->name('edit_component');
+            });
         });
         Route::prefix('/salary_structure')->group(function () {
             Route::controller(SalaryStructureController::class)->group(function () {

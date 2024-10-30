@@ -30,11 +30,13 @@
                                     <div>
                                         <x-datatable id="employeeTable" :url="$apiPayrollUrl . '/salary_component/datatables'" method="POST" class="display">
                                             <x-slot:thead>
+                                                <th data-value="id" data-render="getId">#</th>
                                                 <th data-value="company_id_rel" data-render="getCompany">Company
                                                 </th>
                                                 <th data-value="name">Name</th>
                                                 <th data-value="description">Deskripsi</th>
                                                 <th data-value="type" data-render="getType">Tipe</th>
+                                                <th data-value="amount" data-render="convertCurrency">Amount</th>
                                                 <th data-value="id" data-render="getActionBtn">Action</th>
                                             </x-slot:thead>
                                         </x-datatable>
@@ -63,6 +65,18 @@
                 return data.company_name;
             }
             return 'N/A';
+        }
+
+        function convertCurrency(data, type, row, meta) {
+            return new Intl.NumberFormat({
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0,
+            }).format(data);
+        }
+
+        function getId(data, type, row, meta) {
+            return meta.row + 1;
         }
 
         function getActionBtn(data, type, row, meta) {

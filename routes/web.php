@@ -27,6 +27,14 @@ use App\Http\Controllers\ClaimController;
 use App\Http\Controllers\PayoutController;
 use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\SingleAssignmentController;
+use App\Http\Controllers\Users\UsersController;
+
+Route::get('lang/{locale}', function ($locale) {
+    if (in_array($locale, ['en', 'id'])) {
+        session(['locale' => $locale]);
+    }
+    return redirect()->back();
+});
 
 
 Route::controller(AuthController::class)->group(function () {
@@ -38,6 +46,7 @@ Route::controller(AuthController::class)->group(function () {
             Route::get('/signin', 'index')->name('signin');
             Route::get('/signup', 'index')->name('signup');
             Route::get('/signup/activate_account', 'index')->name('activate_account');
+            Route::get('/signup/setup_hrms', 'index')->name('setup_hrms');
             Route::get('/forgot_password', 'index')->name('forgot-password');
             Route::get('/password-recovery/{token}', 'elm_password_recovery')->name('elm_password_recovery');
         });
@@ -59,6 +68,8 @@ Route::controller(AuthController::class)->group(function () {
             Route::get('/signin', 'elm_signin')->name('elm_signin');
             Route::get('/signup', 'elm_signup')->name('elm_signup');
             Route::get('/activate_account', 'elm_activate_account')->name('elm_activate_account');
+            Route::get('/setup_hrms', 'elm_setup_hrms')->name('elm_setup_hrms');
+            
             Route::get('/forgot_password', 'elm_forgot_password')->name('elm_forgot_password');
         });
     });
@@ -69,10 +80,15 @@ Route::controller(AuthController::class)->group(function () {
 Route::controller(DashboardController::class)->group(function () {
 
     Route::prefix('/dashboard')->group(function () {
+        Route::get('/', function (Request $request) {
+            return redirect()->route('hrms.index');
+        })->name('dashboard');
         Route::middleware('isLoggedIn')->group(function () {
 
             Route::controller(SettingsController::class)->group(function () {
                 Route::get('/setup_account', 'setup_account');
+                
+
                 Route::prefix('/settings')->group(function () {
                     Route::get('/', 'index')->name('settings');
                     Route::get('/{any}', 'index');
@@ -91,10 +107,11 @@ Route::controller(DashboardController::class)->group(function () {
                 });
             });
 
-       
+
             Route::controller(HrmsController::class)->group(function () {
                 Route::prefix('/hrms')->group(function () {
-                    Route::get('/', 'index')->name('hrms');
+                    Route::get('/setup_initialize', 'setup_initialize');
+                    Route::get('/', 'index')->name('hrms.index');
 
                     //import route dari module compnay
                     require __DIR__ . '/company.php';
@@ -108,8 +125,6 @@ Route::controller(DashboardController::class)->group(function () {
                     //payroll modules
                     require __DIR__ . '/payroll.php';
 
-                    //other modules
-
                     //dynamic content
                     //Route::get('/{any}', 'index');
                     Route::middleware('isAjax')->group(function () {
@@ -119,6 +134,7 @@ Route::controller(DashboardController::class)->group(function () {
                         });
                     });
                 });
+                require __DIR__ . '/users.php';
             });
         });
     });

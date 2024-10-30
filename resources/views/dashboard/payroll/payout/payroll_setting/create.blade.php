@@ -24,19 +24,44 @@
                                 @csrf
                                 <div
                                     class="mb-6 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
-                                    Working Days and Hours
+                                    {{ __('message.working_days_and_hours_title') }}
                                 </div>
                                 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4">
+                                    <input type="hidden" id="parent_company" name="parent_company" />
+                                    <x-form.select id="company_id" name="company_id" label="Company"
+                                        url="{{ url('dashboard/hrms/designation') }}"
+                                        apiUrl="{{ $apiCompanyUrl }}/company/datatables" columns='["company_name"]'
+                                        :selected="$company" :keys="[
+                                            'company_id' => $company,
+                                        ]">
+                                        <option value="">Select Company</option>
+                                    </x-form.select>
                                     <x-form.select name="calculate_payroll_working_day" id="calculate_payroll_working_day"
-                                        label="Calculate Payroll Working Days Based On" class="tom-select w-full"
-                                        data-placeholder="Select option" required>
+                                        label="{{ __('payroll_setting.basic_payroll_calculation_by') }}"
+                                        class="tom-select w-full" data-placeholder="Select option" required>d[r4cfxx]
                                         <option value="">Select salutation</option>
                                         <option value="attendance">Attendance</option>
                                         <option value="leave">Leave</option>
                                     </x-form.select>
+                                    <x-form.select name="consider_unmarked_attendance_as"
+                                        id="consider_unmarked_attendance_as" label="Consider Unmarked Attendance As"
+                                        class="tom-select w-full" data-placeholder="Select option">
+                                        <option value="present">Present</option>
+                                        <option value="absent">Absent</option>
+                                    </x-form.select>
+                                    <x-form.select id="default_deduction_base_component"
+                                        name="default_deduction_base_component" label="Default Base Deduction Component"
+                                        url="{{ url('dashboard/hrms/designation') }}"
+                                        apiUrl="{{ $apiPayrollUrl }}/salary_component/datatables" columns='["name"]'
+                                        :keys="[
+                                            'company_id' => $company,
+                                            'type' => 'earning',
+                                        ]">
+                                        <option value="">Select Salary Component</option>
+                                    </x-form.select>
                                     <x-form.input id="max_working_against_timesheet"
-                                        label="Max working hours against Timesheet" name="max_working_against_timesheet"
-                                        required />
+                                        label="{{ __('payroll_setting.max_working_hours_against_timesheet') }}"
+                                        name="max_working_against_timesheet" required />
                                     <x-form.input id="fraction_of_daily_salary_half_day"
                                         label="Fraction of Daily Salary for Half Day"
                                         name="fraction_of_daily_salary_half_day" required />
@@ -44,10 +69,12 @@
                                         label="Include holidays in Total no of Working Days"
                                         name="is_include_holiday_in_total_work_day"
                                         guidelines="If checked, total no. of working days will include holidays, and this will reduce the value of Salary Per Day" />
-                                    <x-checkbox id="is_concider_marked_attendance_holiday"
-                                        label="Consider Marked Attendance on Holidays"
-                                        name="is_concider_marked_attendance_holiday"
-                                        guidelines="If checked, deduct payment days for absent attendance on holidays. By default, holidays are considered as paid" />
+                                    <div id="is_concider_marked_attendance_holiday_box" class="hidden">
+                                        <x-checkbox id="is_concider_marked_attendance_holiday"
+                                            label="Consider Marked Attendance on Holidays"
+                                            name="is_concider_marked_attendance_holiday"
+                                            guidelines="If checked, deduct payment days for absent attendance on holidays. By default, holidays are considered as paid" />
+                                    </div>
                                 </div>
                                 <div class="grid grid-cols-2 gap-5 mt-4">
 
@@ -83,75 +110,51 @@
                 await handleFormSubmission();
             });
 
-            handleGetData();
+            // get parent company id
+            $("#company_id").change(async function() {
+                const companyId = $(this).val();
+                try {
+                    if (companyId) {
+                        const response = await fetch(
+                            `{{ $apiCompanyUrl }}/company/${companyId}`, {
+                                method: 'GET',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Authorization': `Bearer ${localStorage.getItem('app_token')}`,
+                                    'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
+                                },
+                            });
 
-            async function handleGetData() {
-                $.ajax({
-                    url: `http://apidev.duluin.com/api/v1/payroll/payroll_setting/${localStorage.getItem('company')}`,
-                    type: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${appToken}`,
-                        'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
-                    },
-                    dataType: 'json',
-                    success: await
-                    function(response) {
-                        if (response.success) {
-                            // console.log(response.message);
-                            $("#max_working_against_timesheet").val(response.data
-                                .max_working_against_timesheet);
-                            $("#fraction_of_daily_salary_half_day").val(response.data
-                                .fraction_of_daily_salary_half_day);
-                            const calculateSelect = $('#calculate_payroll_working_day')[0].tomselect;
-                            const calculateValue = response.data.calculate_payroll_working_day;
-                            if (!calculateSelect.options[calculateValue]) {
-                                calculateSelect.addOption({
-                                    value: calculateValue,
-                                    text: calculateValue
-                                });
-                            }
-                            calculateSelect.setValue(calculateValue);
-
-                            if (response.data.is_concider_marked_attendance_holiday) {
-                                $("#is_concider_marked_attendance_holiday").attr("checked", true);
-                            } else {
-                                $("#is_concider_marked_attendance_holiday").attr("checked", false);
-                            }
-
-                            if (response.data.is_include_holiday_in_total_work_day) {
-                                $("#is_include_holiday_in_total_work_day").attr("checked", true);
-                            } else {
-                                $("#is_include_holiday_in_total_work_day").attr("checked", false);
-                            }
-
-                            if (response.data.is_disabled_rounded_total) {
-                                $("#is_disabled_rounded_total").attr("checked", true);
-                            } else {
-                                $("#is_disabled_rounded_total").attr("checked", false);
-                            }
-
-                            if (response.data.is_show_leave_balances_in_slip) {
-                                $("#is_show_leave_balances_in_slip").attr("checked", true);
-                            } else {
-                                $("#is_show_leave_balances_in_slip").attr("checked", false);
-                            }
-                        } else {
+                        if (!response.ok) {
                             showErrorNotification('error', response.message);
+                            throw new Error(`HTTP error! Status: ${response.status}`);
                         }
-                    },
-                    error: function(xhr) {
-                        const response = JSON.parse(xhr.responseText);
-                        handleErrorResponse(response, tabId);
+
+                        const parentCompany = await response.json();
+                        $("#parent_company").val(parentCompany.data.parent_company);
+                    } else {
+                        $("#parent_company").val("");
                     }
-                });
-                return false;
-            }
+                } catch (error) {
+                    console.error('Fetch error:', error);
+                    showErrorNotification('error', response.message);
+                }
+            });
+
+            $("#is_include_holiday_in_total_work_day").click(function() {
+                if ($(this).is(":checked")) {
+                    $("#is_concider_marked_attendance_holiday_box").removeClass("hidden");
+                } else {
+                    $("#is_concider_marked_attendance_holiday_box").addClass("hidden");
+                }
+            });
 
             async function handleFormSubmission(formId) {
                 const currentForm = $("#payroll-setting-form");
                 const data = serializeFormData(currentForm);
                 data._token = $('meta[name="csrf-token"]').attr('content');
-                data.company_id = localStorage.getItem('company');
+                data.company_id = $("#company_id").val();
+                data.parent_company = $("#parent_company").val();
                 $('.error-message').hide();
 
                 // Add a flag to prevent form submission
@@ -186,9 +189,8 @@
 
                 try {
                     const response = await $.ajax({
-                        url: currentForm.attr('action') +
-                            '/' + localStorage.getItem('company'),
-                        type: 'PUT',
+                        url: currentForm.attr('action'),
+                        type: 'POST',
                         contentType: 'application/json',
                         crossDomain: true,
                         headers: {
@@ -206,7 +208,8 @@
                         const response = JSON.parse(xhr.responseText);
                         handleErrorResponse(response, formId);
                     } else {
-                        showErrorNotification('error', 'An error occurred while processing your request.');
+                        const message = JSON.parse(xhr.responseText);
+                        showErrorNotification('error', message.message);
                     }
                 }
                 // return false;
@@ -227,14 +230,9 @@
 
             function handleResponse(response) {
                 if (response.success) {
-                    if ($("#employee_id").val() === "") {
-                        showSuccessNotification('success', response.message);
-                    } else {
-                        showSuccessNotification('success', "Data has been updated successfully");
-                    }
-                    $("#employee_id").val(response.data.employee.id);
+                    showSuccessNotification('success', response.message);
                     location.href =
-                        `{{ url('dashboard/hrms/employee') }}/edit_employee/${response.data.employee.id}`;
+                        `{{ url('dashboard/hrms/payout/settings') }}/edit/${response.data.id}`;
                 } else {
                     showErrorNotification('error', response.message);
                 }

@@ -28,9 +28,12 @@ class EmployeesController extends Controller
     public function list()
     {
         $data['title']   = 'Duluin HRMS';
+        $allSessions = session()->all();
         $data['page_title']   = 'Data Employees';
         $data['apiUrl'] = $this->apiGatewayUrl . '/v1/employees';
         $data['apiGateway'] = $this->apiGatewayUrl . '/users';
+        $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
+        $data['company'] = $allSessions['company_id'][0];
 
         return view('dashboard.hrms.employees.list', $data);
     }

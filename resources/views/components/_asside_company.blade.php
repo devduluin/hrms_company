@@ -39,11 +39,11 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-arrow-out-up-right mr-2"><path d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6"/><path d="m21 3-9 9"/><path d="M15 3h6v6"/></svg>
         Leave type
     </a>
-    <a href="{{ route('hrms.shiftrequest') }}" class="{{ Request::is('dashboard/hrms/shift-request-approver') ? 'active' : '' }} flex items-center py-3 first:-mt-3 last:-mb-3 [&amp;.active]:text-primary [&amp;.active]:font-medium hover:text-primary">
+    <a href="{{ route('hrms.attendance.shiftrequest') }}" class="{{ Request::is('dashboard/hrms/shift-request-approver') ? 'active' : '' }} flex items-center py-3 first:-mt-3 last:-mb-3 [&amp;.active]:text-primary [&amp;.active]:font-medium hover:text-primary">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-git-pull-request-create mr-2"><circle cx="6" cy="6" r="3"/><path d="M6 9v12"/><path d="M13 6h3a2 2 0 0 1 2 2v3"/><path d="M18 15v6"/><path d="M21 18h-6"/></svg>
         Shift request approver
     </a>
-    <a href="{{ route('hrms.shifttype') }}" class="{{ Request::is('dashboard/hrms/shift-type') ? 'active' : '' }} flex items-center py-3 first:-mt-3 last:-mb-3 [&amp;.active]:text-primary [&amp;.active]:font-medium hover:text-primary">
+    <a href="{{ route('hrms.attendance.shifttype') }}" class="{{ Request::is('dashboard/hrms/shift-type') ? 'active' : '' }} flex items-center py-3 first:-mt-3 last:-mb-3 [&amp;.active]:text-primary [&amp;.active]:font-medium hover:text-primary">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-door-open mr-2"><path d="M13 4h3a2 2 0 0 1 2 2v14"/><path d="M2 20h3"/><path d="M13 20h9"/><path d="M10 12v.01"/><path d="M13 4.562v16.157a1 1 0 0 1-1.242.97L5 20V5.562a2 2 0 0 1 1.515-1.94l4-1A2 2 0 0 1 13 4.561Z"/></svg>
         Shift type
     </a>

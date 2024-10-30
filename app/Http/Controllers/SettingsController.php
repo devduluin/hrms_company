@@ -36,6 +36,7 @@ class SettingsController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Company Profile';
+        
 
         return view('dashboard.settings.elm_settings', $data);
     }
@@ -44,6 +45,7 @@ class SettingsController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Account Settings';
+        $data['apiUrlUser'] = $this->apiGatewayUrl.'/users/user';
 
         return view('dashboard.settings.elm_account', $data);
     }
