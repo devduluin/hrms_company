@@ -15,7 +15,6 @@ Route::prefix('/attendance')->group(function () {
         Route::get('/report', 'report')->name('report');
         Route::get('/report/print', 'print')->name('hrms.attendance.print');
         Route::get('/new_shift_assignment', 'new_assignment')->name('shift-assignment');
-<<<<<<< HEAD
 
         Route::prefix('/shift_type')->group(function () {
             Route::controller(ShiftTypeController::class)->group(function () {
@@ -32,10 +31,6 @@ Route::prefix('/attendance')->group(function () {
                 Route::get('/update/{id}', 'update')->name('hrms.attendance.shiftrequest.update');
             });
         });
-=======
-        // Route::get('/shift_type', 'shift_type')->name('shift_type');
-        Route::get('/new_shift_type', 'new_shift_type')->name('new_shift_type');
->>>>>>> c296cdedcbb87c352cefbbebda7b41b8214fbe05
     });
 
     //route for shift assignment
