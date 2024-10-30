@@ -10,15 +10,17 @@
                     {{ $title ?? '' }}
                 </div>
                 <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
-                <button onclick="history.go(-1)"
-                        class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md w-24">
-                        <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
-                    </button>
-                <x-form.button id="new_shift_type" label="Add New Shift Type" style="primary" icon="plus" url="{{ url('dashboard/hrms/attendance/shift_type/create') }}" ></x-button>
+                <x-form.button id="back" label="Back" style="secondary" icon="arrow-left" url="{{ url('dashboard/hrms/company') }}" ></x-button>
+                <x-form.button id="new_shift_type" label="Add New Shift Type" style="primary" icon="plus" url="{{ url('dashboard/hrms/shift-type/create') }}" ></x-button>
                 </div>
-                
+                </div>
             </div>
             <div class="mt-3.5 gap-x-6 gap-y-10">
+                <!-- <div class="relative col-span-12 xl:col-span-3">
+                    <div class="sticky top-[104px]">
+                        @include('components._asside_company')
+                    </div>
+                </div> -->
                 <div class="col-span-12 flex flex-col gap-y-7 xl:col-span-9">
                     <div class="box box--stacked flex flex-col p-5">
                         <x-datatable id="shiftTypeTable" :url="$apiUrl.'/datatable'" method="POST" class="display">
@@ -54,31 +56,35 @@
 @endsection
 @push('js')
     <script>
-        function getCompany(data, type, row, meta) {
-            return data?.company_name ?? 'N/A';
+        function getStatus(data, type, row, meta) {
+            
+            if (data === 'active') {
+                return `<div class="flex items-center justify-center text-success"><div class="ml-1.5 whitespace-nowrap"><i data-tw-merge data-lucide="check" class="text-success"></i> Active</div></div>`;
+            } else {
+                return `<div class="flex items-center justify-center text-danger"><div class="ml-1.5 whitespace-nowrap">Inactive</div></div>`;
+            }
         }
-        // function getStatus(data, type, row, meta) {
-            
-        //     if (data === 'active') {
-        //         return `<div class="flex items-center justify-center text-success"><div class="ml-1.5 whitespace-nowrap"><i data-tw-merge data-lucide="check" class="text-success"></i> Active</div></div>`;
-        //     } else {
-        //         return `<div class="flex items-center justify-center text-danger"><div class="ml-1.5 whitespace-nowrap">Inactive</div></div>`;
-        //     }
-        // }
 
-        // function convertToTimezone(utcDateStr) {
-        //     const utcDate = new Date(utcDateStr);
-        //     const options = {
-        //         timeZone: 'Asia/Jakarta',
-        //         hour12: true,
-        //         hour: '2-digit',
-        //         minute: '2-digit'
-        //     };
+        function convertToTimezone(utcDateStr) {
+            const utcDate = new Date(utcDateStr);
+            const options = {
+                timeZone: 'Asia/Jakarta',
+                hour12: true,
+                hour: '2-digit',
+                minute: '2-digit'
+            };
 
-        //     const time = utcDate.toLocaleTimeString('en-US', options);
+            const time = utcDate.toLocaleTimeString('en-US', options);
             
-        //     return time;
-        // }
+            return time;
+        }
+
+        function getCompany(data, type, row, meta) {
+            if (data !== null) {
+                return data?.company_name ?? 'N/A';
+            }
+            return 'N/A';
+        }
         
         function getActionBtn(data, type, row, meta) {
             //console.log(data);
@@ -87,6 +93,7 @@
             <i class="fa-solid fa-list text-base"></i></button>
                 <div data-transition data-selector=".show" data-enter="transition-all ease-linear duration-150" data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1" data-enter-to="!mt-1 visible opacity-100 translate-y-0" data-leave="transition-all ease-linear duration-150" data-leave-from="!mt-1 visible opacity-100 translate-y-0" data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1" class="dropdown-menu absolute z-[9999] hidden">
                     <div data-tw-merge class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 w-40">
+                       
                        
                         <a onClick="action('update', '`+data['id']+`')" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="external-link" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
                             Update</a>
@@ -118,7 +125,7 @@
                     }
                 });
             }else{
-                location.href = '{{ url("/dashboard/hrms/attendance/shift_type") }}/'+action+'/'+id;
+                location.href = '{{ url("/dashboard/hrms/shift-type") }}/'+action+'/'+id;
             }
         }
 

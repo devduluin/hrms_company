@@ -19,6 +19,7 @@ class CompaniesController extends Controller
         $data['page_title']   = 'Data Companies';
         $data['apiUrl'] = $this->apiGatewayUrl . '/v1/companies/company';
         $data['company'] = $request->session()->get('company_id');
+         
         return view('dashboard.hrms.companies.index', $data);
     }
 

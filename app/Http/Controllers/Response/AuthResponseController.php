@@ -133,7 +133,7 @@ class AuthResponseController extends Controller
                 ], 400);
             }
 			//$responseBody   = $responseBody['data'];
-
+            
             $userAccount['user_id'] 		= $responseBody['data']['user_id'];
             $userAccount['secondary_id'] 	= $responseBody['data']['id'];
 			$response2 = $this->postRequest($this->apiGatewayUrl . '/users/register/set_secondary_id', $userAccount, $headers);
