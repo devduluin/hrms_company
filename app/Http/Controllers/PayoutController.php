@@ -82,16 +82,16 @@ class PayoutController extends Controller
 
         return view('dashboard.payroll.payout.benefit_list', $data);
     }
-    public function payroll_period()
+    /* public function payroll_period()
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Payroll Period';
         $allSessions = session()->all();
 
         return view('dashboard.payroll.payout.payroll_period', $data);
-    }
+    } */
 
-    public function salary_component_list(Request $request)
+    /* public function salary_component_list(Request $request)
     {
         $data['title']  = 'Duluin HRMS';
         $data['page_title'] = 'Salary Components';
@@ -99,9 +99,9 @@ class PayoutController extends Controller
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
 
         return view('dashboard.payroll.payout.salary_component.list', $data);
-    }
+    } */
 
-    public function create_component()
+    /* public function create_component()
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Create Salary Component';
@@ -111,7 +111,8 @@ class PayoutController extends Controller
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
 
         return view('dashboard.payroll.payout.salary_component.create', $data);
-    }
+    } */
+
     public function salary_structure()
     {
         $data['title']   = 'Duluin HRMS';
@@ -124,7 +125,7 @@ class PayoutController extends Controller
         return view('dashboard.payroll.payout.salary_structure.list', $data);
     }
 
-    public function edit_component($id, Request $request)
+    /* public function edit_component($id, Request $request)
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Create Salary Component';
@@ -135,5 +136,5 @@ class PayoutController extends Controller
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
 
         return view('dashboard.payroll.payout.salary_component.edit', $data);
-    }
+    } */
 }
