@@ -40,7 +40,7 @@ class AuthMiddleware
              
             if(!isset($responseBody['data'])){
                 $lastSegment = $request->segment(count($request->segments()));
-                if($lastSegment != 'setup_initialize'){
+                if($lastSegment != 'setup_initialize' || $lastSegment != 'setup_account'){
                 return redirect(url('dashboard/hrms/setup_initialize'));
                 }
             };
