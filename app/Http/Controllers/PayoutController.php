@@ -37,14 +37,17 @@ class PayoutController extends Controller
         return view('dashboard.payroll.payout.salary_slip', $data);
     }
 
-    public function settings()
-    {
-        $data['title']   = 'Duluin HRMS';
-        $data['page_title']   = 'Payroll Settings';
-        $allSessions = session()->all();
+    // public function settings()
+    // {
+    //     $data['title']   = 'Duluin HRMS';
+    //     $data['page_title']   = __('message.payroll_setting_title');
+    //     $allSessions = session()->all();
+    //     $data['company'] = $allSessions['company_id'][0];
+    //     $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
+    //     $allSessions = session()->all();
 
-        return view('dashboard.payroll.payout.settings', $data);
-    }
+    //     return view('dashboard.payroll.payout.settings', $data);
+    // }
 
     public function income_tax()
     {
@@ -79,33 +82,37 @@ class PayoutController extends Controller
 
         return view('dashboard.payroll.payout.benefit_list', $data);
     }
-    public function payroll_period()
+    /* public function payroll_period()
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Payroll Period';
         $allSessions = session()->all();
 
         return view('dashboard.payroll.payout.payroll_period', $data);
-    }
+    } */
 
-    public function salary_component_list(Request $request)
+    /* public function salary_component_list(Request $request)
     {
         $data['title']  = 'Duluin HRMS';
         $data['page_title'] = 'Salary Components';
         $data['apiPayrollUrl'] = $this->apiGatewayUrl . '/v1/salary_components';
+        $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
 
         return view('dashboard.payroll.payout.salary_component.list', $data);
-    }
+    } */
 
-    public function create_component()
+    /* public function create_component()
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Create Salary Component';
         $data['apiPayrollUrl'] = $this->apiGatewayUrl . '/v1/salary_components';
         $allSessions = session()->all();
+        $data['company'] = $allSessions['company_id'][0];
+        $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
 
         return view('dashboard.payroll.payout.salary_component.create', $data);
-    }
+    } */
+
     public function salary_structure()
     {
         $data['title']   = 'Duluin HRMS';
@@ -118,15 +125,16 @@ class PayoutController extends Controller
         return view('dashboard.payroll.payout.salary_structure.list', $data);
     }
 
-    public function edit_component($id, Request $request)
+    /* public function edit_component($id, Request $request)
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Create Salary Component';
         $data['apiPayrollUrl'] = $this->apiGatewayUrl . '/v1/salary_components';
         $data['salaryComponentId'] = $id;
         $allSessions = session()->all();
+        $data['company'] = $allSessions['company_id'][0];
+        $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
 
         return view('dashboard.payroll.payout.salary_component.edit', $data);
-    }
-
+    } */
 }

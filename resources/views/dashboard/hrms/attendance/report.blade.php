@@ -22,20 +22,36 @@
                                     {{ $page_title }}
                                 </div>
                                 <div class="flex flex-col gap-x-1 sm:flex-row md:ml-auto" id="assignShiftContainer">
-                                    <x-filter></x-filter>
-                                    <a href="{{ route('hrms.shift-assignment.create') }}" type="button" class="btn btn-primary transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary shadow-md w-100">
-                                        <svg class="mr-2 h-4 w-4 stroke-[1.3]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-                                       Export to excel</a>
-                                    </button>                                
+                                    <a href="{{ route("hrms.attendance") }}"
+                                    class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md w-24">
+                                    <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
+                                    </a>
+                                    <a href="{{ route("hrms.attendance.print") }}"
+                                    class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md w-24">
+                                    <i data-tw-merge="" data-lucide="printer" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Print
+                                    </a>
+                                    <div class="relative">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="calendar" class="lucide lucide-calendar absolute inset-y-0 left-0 z-10 my-auto ml-3 h-4 w-4 stroke-[1.3]"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
+                                        <input id="litepicker" name="filter_date" type="text" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 datepicker rounded-[0.3rem] pl-9 sm:w-64">
+                                    </div>
+                                    <span class="h-8 w-8" id="loading" style="display: none">
+                                        <svg class="h-full w-full" width="25" viewBox="-2 -2 42 42" xmlns="http://www.w3.org/2000/svg" stroke="#64748b">
+                                            <g fill="none" fill-rule="evenodd">
+                                                <g transform="translate(1 1)" stroke-width="4">
+                                                    <circle stroke-opacity=".5" cx="18" cy="18" r="18"></circle>
+                                                    <path d="M36 18c0-9.94-8.06-18-18-18">
+                                                        <animateTransform type="rotate" attributeName="transform" from="0 18 18" to="360 18 18" dur="1s" repeatCount="indefinite"></animateTransform>
+                                                    </path>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                    </span>
                                 </div>
                             </div>
                             <div class="table-responsive relative overflow-x-auto sm:rounded-lg">
                                 <table data-tw-merge="" class="w-full text-left border-b border-slate-200/60">
                                     <thead data-tw-merge="" class="">
                                         <tr data-tw-merge="" class="" id="daysHeader">
-                                            <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 w-5 border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500">
-                                                <input id="selectAll" data-tw-merge="" type="checkbox" class="transition-all duration-100 ease-in-out shadow-sm border-slate-200 cursor-pointer rounded focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&[type='radio']]:checked:bg-primary [&[type='radio']]:checked:border-primary [&[type='radio']]:checked:border-opacity-10 [&[type='checkbox']]:checked:bg-primary [&[type='checkbox']]:checked:border-primary [&[type='checkbox']]:checked:border-opacity-10 [&:disabled:not(:checked)]:bg-slate-100 [&:disabled:not(:checked)]:cursor-not-allowed [&:disabled:not(:checked)]:dark:bg-darkmode-800/50 [&:disabled:checked]:opacity-70 [&:disabled:checked]:cursor-not-allowed [&:disabled:checked]:dark:bg-darkmode-800/50">
-                                            </td>
                                             <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 border-t border-slate-200/60 bg-slate-50 py-4 font-bold text-slate-500">
                                                 No.
                                             </td>
@@ -44,9 +60,6 @@
                                             </td>
                                             <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 border-t border-slate-200/60 bg-slate-50 py-4 font-bold text-slate-500">
                                                 Employee Name
-                                            </td>
-                                            <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 border-t border-slate-200/60 bg-slate-50 py-4 font-bold text-slate-500">
-                                               Shift Type
                                             </td>
                                         </tr>
                                     </thead>
@@ -63,8 +76,11 @@
     </div>
 </div>
 @push('js')
+<script src="{{ asset('dist') }}/js/vendors/litepicker.js"></script>
+<script src="{{ asset('dist') }}/js/components/base/litepicker.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
+        var filter_date = "";
         function generateYears() {
             let currentYear = new Date().getFullYear();
             let years = [];
@@ -88,61 +104,28 @@
             return days;
         }
 
-        function generateEmployeeData() {
-            return [
-                {
-                    no: 1,
-                    id: 'E001',
-                    name: 'John Doe',
-                    shift: 'Morning',
-                    attendance: {
-                        "1": "P", "2": "P", "3": "A", "4": "P", "5": "P", "6": "A", "7": "P",
-                        "8": "A", "9": "P", "10": "P", "11": "A", "12": "P", "13": "P", "14": "A",
-                        "15": "P", "16": "P", "17": "A", "18": "P", "19": "P", "20": "A", "21": "P",
-                        "22": "A", "23": "P", "24": "P", "25": "A", "26": "P", "27": "P", "28": "A",
-                        "29": "P", "30": "P", "31": "A"
-                    }
-                },
-                {
-                    no: 2,
-                    id: 'E002',
-                    name: 'Jane Smith',
-                    shift: 'Afternoon',
-                    attendance: {
-                        "1": "A", "2": "P", "3": "P", "4": "P", "5": "A", "6": "P", "7": "A",
-                        "8": "P", "9": "A", "10": "P", "11": "P", "12": "A", "13": "P", "14": "P",
-                        "15": "A", "16": "P", "17": "P", "18": "A", "19": "P", "20": "P", "21": "A",
-                        "22": "P", "23": "A", "24": "P", "25": "P", "26": "A", "27": "P", "28": "P",
-                        "29": "A", "30": "P", "31": "P"
-                    }
-                },
-                {
-                    no: 3,
-                    id: 'E003',
-                    name: 'Alice Johnson',
-                    shift: 'Night',
-                    attendance: {
-                        "1": "P", "2": "A", "3": "P", "4": "A", "5": "P", "6": "P", "7": "A",
-                        "8": "P", "9": "P", "10": "A", "11": "P", "12": "P", "13": "A", "14": "P",
-                        "15": "P", "16": "A", "17": "P", "18": "P", "19": "A", "20": "P", "21": "P",
-                        "22": "A", "23": "P", "24": "A", "25": "P", "26": "P", "27": "A", "28": "P",
-                        "29": "P", "30": "A", "31": "P"
-                    }
-                },
-                {
-                    no: 4,
-                    id: 'E004',
-                    name: 'Bob Brown',
-                    shift: 'Morning',
-                    attendance: {
-                        "1": "A", "2": "A", "3": "P", "4": "P", "5": "A", "6": "A", "7": "P",
-                        "8": "P", "9": "A", "10": "A", "11": "P", "12": "P", "13": "A", "14": "A",
-                        "15": "P", "16": "P", "17": "A", "18": "A", "19": "P", "20": "P", "21": "A",
-                        "22": "A", "23": "P", "24": "A", "25": "P", "26": "A", "27": "P", "28": "P",
-                        "29": "A", "30": "P", "31": "P"
-                    }
-                }
-            ];
+        let companyId = localStorage.getItem("company");
+        async function generateEmployeeData() {
+            var param = {
+                url: "{{ $apiReportAttendance }}"+`?company_id=${companyId}&filter_date=`+filter_date,
+                method: "GET"
+            }
+            const response = await transAjax(param).then((result) => {
+                var repotAttendace = [];
+                var response = result.data;
+                response.forEach((data, index) => {
+                    repotAttendace.push({
+                        no: index + 1,
+                        id: data.employee_id_rel.employee_id,
+                        name: data.employee_id_rel.first_name + ' ' + data.employee_id_rel.last_name,
+                        shift: data.shift,
+                        attendance: data.attendance
+                    });
+                });
+                return repotAttendace;
+            });
+            $("#loading").attr('style', 'display: none');
+            return response;
         }
 
         function populateYears() {
@@ -153,20 +136,9 @@
             });
         }
 
-        function getAttendanceClass(status) {
-            switch (status) {
-                case 'P':
-                    return 'text-green-800'; // Success color text
-                case 'A':
-                    return 'text-red-800'; // Danger color text
-                default:
-                    return '';
-            }
-        }
-
-        function populateTable(month, year) {
+        async function populateTable(month, year) {
             const days = generateDays(month, year);
-            const employees = generateEmployeeData();
+            const employees = await generateEmployeeData();
             
             let daysHeader = $('#daysHeader');
             let attendanceBody = $('#attendanceBody');
@@ -174,12 +146,8 @@
             daysHeader.find('th:gt(3)').remove(); // Remove existing day headers, keep first 4 columns
             
             days.forEach(day => {
-                daysHeader.append(`<th class="py-2 px-4 border-b">${day.day} ${day.dayName}</th>`);
+                daysHeader.append(`<th class="py-2 px-4 border-b border-t border-slate-200/60 ${day.dayName == "Sat" ? 'bg-red-300' : 'bg-slate-50'} ${day.dayName == "Sun" ? 'bg-red-300' : 'bg-slate-50'} py-4 font-bold text-slate-500">${day.day} ${day.dayName}</th>`);
             });
-            
-            // if ($.fn.dataTable.isDataTable('#attendanceTable')) {
-            //     $('#attendanceTable').DataTable().clear().destroy();
-            // }
             
             attendanceBody.empty(); // Clear existing data
             
@@ -187,23 +155,17 @@
                 let row = `<tr>
                     <td class="py-2 px-4 border-b">${employee.no}</td>
                     <td class="py-2 px-4 border-b">${employee.id}</td>
-                    <td class="py-2 px-4 border-b">${employee.name}</td>
-                    <td class="py-2 px-4 border-b">${employee.shift}</td>`;
+                    <td class="py-2 px-4 border-b">${employee.name}</td>`;
                 days.forEach(day => {
-                    row += `<td class="py-2 px-4 border-b ${getAttendanceClass(employee.attendance[day.day])} font-bold">
-                                ${employee.attendance[day.day] || ''}
+                    let attendanceStatus = employee.attendance[day.day]; // Accessing attendance data by day
+                    row += `<td class="py-2 px-4 border-b ${day.dayName == "Sat" ? 'bg-red-100' : ''} ${day.dayName == "Sun" ? 'bg-red-100' : ''} ${attendanceStatus == 'P' ? 'text-green-800'  : 'text-red-800'} font-bold">
+                                ${attendanceStatus || ''}
                             </td>`;
                 });
                 row += `</tr>`;
                 attendanceBody.append(row);
             });
-            
-            $('#attendanceTable').DataTable({
-                paging: true,
-                searching: false,
-                ordering: false,
-                info: false
-            });
+            let table = new DataTable('#attendanceTable');
         }
 
         $('#monthSelect, #yearSelect').change(function() {
@@ -214,7 +176,14 @@
 
         populateYears();
         populateTable(new Date().getMonth(), new Date().getFullYear());
+
+        $(".litepicker").on("click", ".button-apply", function() {
+            $("#loading").removeAttr('style', 'display: none');
+           filter_date = $("#litepicker").val();
+           generateEmployeeData();
+        });
     });
 </script>
+
 @endpush
 @endsection
