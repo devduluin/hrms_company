@@ -34,8 +34,8 @@ class AuthMiddleware
                     'accept' => 'application/json',
                     'Authorization' => 'Bearer ' . $appToken,
                 ];
-    
-                $response = $this->getRequest(config('apiendpoints.gateway') . '/v1/companies/company/setting/'. $company_id[0], '', $headers);
+                $company_id = $request->session()->get('company_id')[0] ?? $request->session()->get('company_id') ;
+                $response = $this->getRequest(config('apiendpoints.gateway') . '/v1/companies/company/setting/'. $company_id, '', $headers);
                 $responseBody = json_decode($response->getBody(), true);
                  
                 if(!isset($responseBody['data'])){
