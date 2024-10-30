@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use App\Http\Middleware\SubdomainMiddleware;
 use App\Http\Middleware\ActivatedMiddleware;
 use App\Http\Middleware\AuthMiddleware;
+use App\Http\Middleware\SetLocale;
 use App\Http\Middleware\VerifyAjaxRequest;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -16,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->append(SubdomainMiddleware::class);
+        $middleware->appendToGroup('web', SetLocale::class);
         $middleware->alias([
             'isActivated' => ActivatedMiddleware::class,
             'isAjax' => VerifyAjaxRequest::class,

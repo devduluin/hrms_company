@@ -11,7 +11,7 @@
                 <div class="grid grid-cols-12 gap-x-6 gap-y-10">
                     <div class="col-span-12">
                         <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center">
-                            <div class="text-base font-medium group-[.mode--light]:text-white">
+                            <div class="ml-2 text-lg font-medium group-[.mode--light]:text-white">
                                 {{ $title }}
                             </div>
                             <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
@@ -45,21 +45,21 @@
                                 
                             </div>
                         </div>
-                        <div class="mt-5 text-base font-medium group-[.mode--light]:text-white">
-                            More Setting
+                        <div class="mt-5 ml-2 text-lg font-medium group-[.mode--light]:text-white">
+                            More Action
                             </div>
                         <div class="box p-4 mt-6">
                              
                                 <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-5 mt-4">
+                                    <x-action  label="HR Setting" icon="settings" url="{{ route('hrms.hr_setting') }}" />
                                     <x-action  label="Branch" icon="split" url="{{ route('hrms.branch') }}" />
-                                    
                                     <x-action  label="Designation" icon="clipboard" url="{{ route('hrms.designation') }}" />                                   
                                     <x-action  label="Department" icon="layout-template" url="{{ route('hrms.department') }}" />                                   
-                                    <x-action  label="Holidays Date" icon="calendar-x-2" url="{{ route('hrms.holidaydate') }}" />                                   
-                                    <x-action  label="Job" icon="briefcase" url="{{ route('hrms.jobs') }}" />
+                                                                       
+                                    <!-- <x-action  label="Job" icon="briefcase" url="{{ route('hrms.jobs') }}" /> -->
                                     <x-action  label="Leave Type" icon="arrow-up-right" url="{{ route('hrms.leave-type') }}" />
-                                    <x-action  label="Shift Requester Approver" icon="git-pull-request-create" url="{{ route('hrms.shiftrequest') }}" />
-                                    <x-action  label="Shift Type" icon="door-open" url="{{ route('hrms.shifttype') }}" />
+                                    
+                                    <x-action  label="Shift Type" icon="door-open" url="{{ route('hrms.attendance.shifttype') }}" />
                                 </div>
                         </div>
                     </div>
@@ -87,10 +87,10 @@
        function getActionBtn(data, type, row, meta) {
             //console.log(data);
             
-            return `<div data-tw-merge data-tw-placement="bottom-end" class="dropdown relative"><button data-tw-merge data-tw-toggle="dropdown" aria-expanded="false" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed text-xs py-1.5 px-2 bg-primary border-primary text-white dark:border-primary w-24 w-24">Action</button>
+            return `<div data-tw-merge data-tw-placement="bottom-end" class="dropdown relative"><button data-tw-merge data-tw-toggle="dropdown" aria-expanded="false" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none  [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed text-xs py-1.5 px-2 w-20">
+            <i class="fa-solid fa-list text-base"></i></button>
                 <div data-transition data-selector=".show" data-enter="transition-all ease-linear duration-150" data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1" data-enter-to="!mt-1 visible opacity-100 translate-y-0" data-leave="transition-all ease-linear duration-150" data-leave-from="!mt-1 visible opacity-100 translate-y-0" data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1" class="dropdown-menu absolute z-[9999] hidden">
                     <div data-tw-merge class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 w-40">
-                        
                        
                         <a onClick="action('show', '`+data['id']+`')" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="external-link" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
                             Open</a>

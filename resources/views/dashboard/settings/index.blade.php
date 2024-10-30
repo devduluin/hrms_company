@@ -15,6 +15,10 @@
                                 HRMS Settings
                             </div>
                             <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
+                                <button onclick="history.go(-1)"
+                                    class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md w-24">
+                                    <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
+                                </button>
                                 <button id="submitButton" data-tw-merge=""
                                     class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-blue-theme border-blue-theme text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"><i
                                         data-tw-merge="" data-lucide="save" class="mr-3 h-4 w-4 stroke-[1.3]"></i>
@@ -50,12 +54,12 @@
                                                 class="mr-3 h-4 w-4 stroke-[1.3]"></i>
                                             Preferences
                                         </a>
-                                        <a id="notification_setting" href="#"
+                                        <!-- <a id="notification_setting" href="#"
                                             class="menu-item flex items-center py-3 first:-mt-3 last:-mb-3 [&.active]:text-primary [&.active]:font-medium hover:text-primary">
                                             <i data-tw-merge="" data-lucide="bell-dot"
                                                 class="mr-3 h-4 w-4 stroke-[1.3]"></i>
                                             Notification Settings
-                                        </a>
+                                        </a> -->
                                         <a id="deactivation" href="#"
                                             class="menu-item flex items-center py-3 first:-mt-3 last:-mb-3 [&.active]:text-primary [&.active]:font-medium hover:text-primary">
                                             <i data-tw-merge="" data-lucide="trash2" class="mr-3 h-4 w-4 stroke-[1.3]"></i>
@@ -77,63 +81,77 @@
 
     </div>
     <script>
-        async function initializeForm() {
-            const form = document.getElementById('settingForm');
-            const loadingText = document.getElementById('loadingText');
-            const submitButton = document.getElementById("submitButton");
+        let loadingText = document.getElementById('loadingText');
+        let submitButton = document.getElementById("submitButton");
 
-            async function handleSubmit(event) {
-                event.preventDefault();
-                // Change button state to loading
+        async function initializeForm(formName) {
+            const form = document.getElementById(formName);
+            if (!form) {
                 submitButton.disabled = true;
-                loadingText.innerHTML = 'Saving...'; // Optionally add a class for styling
-
-                // Trigger form validation
-                if (!form.reportValidity()) {
-                    // If form is invalid, stop the submission
-                    submitButton.disabled = false;
-                    loadingText.innerHTML = 'Save Changes';
-                    return;
-                }
-                const formData = new FormData(form);
-                const data = Object.fromEntries(formData.entries());
-
-                try {
-                    const response = await fetch(form.action, {
-                        method: 'POST',
-                        body: JSON.stringify(data),
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    });
-
-                    if (response.ok) {
-                        console.log('Form submitted successfully');
-                    } else {
-                        console.error('Error submitting form');
-                    }
-                } catch (error) {
-                    console.error('Error submitting form', error);
-                } finally {
-                    // Restore button state
-                    submitButton.disabled = false;
-                    loadingText.innerHTML = 'Save Changes';
-                }
+            } else if(form) {
+                submitButton.disabled = false;
+                // Add event listener to submit button without invoking it immediately
+                submitButton.addEventListener('click', (event) => handleSubmit(event, form, submitButton, loadingText));
+            }else{
+                
             }
+       
+            
+        }
 
-            // Prevent the form from submitting normally
-            if (form) submitButton.addEventListener('click', handleSubmit);
+        async function handleSubmit(event, form, submitButton, loadingText) {
+             
+            // Change button state to loading
+            submitButton.disabled = true;
+            loadingText.innerHTML = 'Saving...'; // Optionally add a class for styling
+
+            // Trigger form validation
+            if (!form.reportValidity()) {
+                // If form is invalid, stop the submission
+                submitButton.disabled = false;
+                loadingText.innerHTML = 'Save Changes';
+                return;
+            }
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${appToken}`
+                    }
+                });
+
+                if (response.ok) {
+                    //console.log('Form submitted successfully');
+                    await populateFormInputs();
+                    showSuccessNotification(response.message, "The operation was completed successfully.");
+                } else {
+                    console.error('Error submitting form');
+                }
+            } catch (error) {
+                console.error('Error submitting form', error);
+            } finally {
+                // Restore button state
+                submitButton.disabled = false;
+                loadingText.innerHTML = 'Save Changes';
+            }
         }
     </script>
     <script src="{{ asset('dist/js/vendors/tom-select.js') }}"></script>
     <script src="{{ asset('dist/js/components/base/tom-select.js') }}"></script>
     <script>
+        const apiUrl = '{{ $apiUrl }}/users/user';
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
         document.addEventListener('DOMContentLoaded', async function() {
             const menu = document.getElementById("menus-page");
             const content = document.getElementById("contents-page");
             const loadingIndicator = document.getElementById("loading-indicator");
-            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
+            
             const routes = {
                 settings: {
                     path: '{{ url('/dashboard/settings') }}',
@@ -142,14 +160,17 @@
                 user_account: {
                     path: '{{ url('/dashboard/settings/user_account') }}',
                     element: '{{ url('/dashboard/settings/elm/user_account') }}',
+                    form: 'settingForm',
                 },
                 email_setting: {
                     path: '{{ url('/dashboard/settings/email_setting') }}',
                     element: '{{ url('/dashboard/settings/elm/email_setting') }}',
+                    form: '',
                 },
                 security: {
                     path: '{{ url('/dashboard/settings/security') }}',
                     element: '{{ url('/dashboard/settings/elm/security') }}',
+                    form: 'resetForm',
                 },
                 preferences: {
                     path: '{{ url('/dashboard/settings/preferences') }}',
@@ -165,9 +186,8 @@
                 }
             };
 
-            const apiUrl = '{{ $apiUrl }}/users/user';
-
-            async function loadContent(url) {
+            async function loadContent(route) {
+                const url = route.element;
                 try {
                     loadingIndicator.style.display = 'block';
                     const response = await fetch(url, {
@@ -183,39 +203,15 @@
                     } else {
                         submitButton.style.display = '';
                     }
-                    await initializeForm();
+                     
+                    
+                    await initializeForm(route.form);
                     initializeTomSelect();
-                    populateFormInputs(apiUrl);
+                    await populateFormInputs();
                 } catch (error) {
                     console.error('Error loading content:', error);
                 } finally {
                     loadingIndicator.style.display = 'none';
-                }
-            }
-
-            async function populateFormInputs() {
-                try {
-                    const appToken = localStorage.getItem('app_token');
-                    const response = await fetch(apiUrl, {
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest',
-                            'X-CSRF-TOKEN': csrfToken,
-                            'Authorization': `Bearer ${appToken}`
-                        }
-                    });
-                    const results = await response.json();
-                    console.log(results);
-
-                    const firstName = document.getElementById('firstName');
-                    const email = document.getElementById('email');
-                    if (firstName) {
-                        firstName.value = results.result.name;
-                    }
-                    if (email) {
-                        email.value = results.result.email;
-                    }
-                } catch (error) {
-                    console.error('Error fetching user data:', error);
                 }
             }
 
@@ -224,10 +220,9 @@
                 const route = routes[initialPath];
 
                 if (route) {
-                    console.log(route);
-                    console.log(route.apiUrl);
-                    await loadContent(route.element);
-                    await populateFormInputs();
+                     
+                    await loadContent(route);
+                    
                     history.replaceState(initialPath, '', route.path);
                     setActiveClassByPath();
                     updateBreadcrumb();
@@ -237,11 +232,11 @@
             menu.addEventListener('click', async function(event) {
                 const id = event.target?.id;
                 const route = routes[id];
-                console.log(id);
+                 
                 if (route) {
                     event.preventDefault();
                     window.history.pushState(id, '', route.path);
-                    await loadContent(route.element);
+                    await loadContent(route);
                     setActiveClassByPath();
                     updateBreadcrumb();
                 }
@@ -250,7 +245,7 @@
             window.addEventListener('popstate', async function(event) {
                 const route = routes[event.state];
                 if (route) {
-                    await loadContent(route.element);
+                    await loadContent(route);
                     setActiveClassByPath();
                     updateBreadcrumb();
                 }
@@ -273,5 +268,43 @@
 
             await initializeContent();
         });
+
+        async function populateFormInputs() {
+                try {
+                    const appToken = localStorage.getItem('app_token');
+                    const response = await fetch(apiUrl, {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'X-CSRF-TOKEN': csrfToken,
+                            'Authorization': `Bearer ${appToken}`
+                        }
+                    });
+                    const results = await response.json();
+                     
+
+                    const name = document.getElementById('name');
+                    const phone = document.getElementById('phone');
+                    const email = document.getElementById('email');
+                    const last_login = document.getElementById('last_login');
+                    const last_login_ip = document.getElementById('last_login_ip');
+                    if (name) {
+                        name.value = results.result.name;
+                    }
+                    if (email) {
+                        email.value = results.result.email;
+                    }
+                    if (phone) {
+                        phone.value = results.result.phone;
+                    }
+                    if (last_login) {
+                        last_login.value = results.result.last_login;
+                    }
+                    if (last_login_ip) {
+                        last_login_ip.value = results.result.last_login_ip;
+                    }
+                } catch (error) {
+                    console.error('Error fetching user data:', error);
+                }
+            }
     </script>
 @endsection

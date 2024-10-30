@@ -1,5 +1,5 @@
 <div class="box box--stacked flex flex-col p-5">
-<form id="settingForm" action="{{ url('/api/setting/password') }}">
+<form id="resetForm" action="{{ url('/api/setting/password') }}">
     <div class="mb-6 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
     {{ $page_title }}
     </div>

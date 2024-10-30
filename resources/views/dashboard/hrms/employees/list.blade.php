@@ -34,82 +34,78 @@
                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
                                         <div class="text-base text-slate-500">Total Employees</div>
                                         <div class="mt-1.5 text-2xl font-medium" id="totalEmployeesCount">0</div>
-                                        {{-- <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
-                                            <div
-                                                class="flex items-center rounded-full border border-danger/10 bg-danger/10 py-[2px] pl-[7px] pr-1 text-xs font-medium text-danger">
-                                                3%
-                                                <i data-tw-merge="" data-lucide="chevron-down"
-                                                    class="ml-px h-4 w-4 stroke-[1.5]"></i>
-                                            </div>
-                                        </div> --}}
                                     </div>
                                     <div
                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
                                         <div class="text-base text-slate-500">Employees Active</div>
                                         <div class="mt-1.5 text-2xl font-medium" id="totalEmployeesActive">0</div>
-                                        {{-- <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
-                                            <div
-                                                class="flex items-center rounded-full border border-success/10 bg-success/10 py-[2px] pl-[7px] pr-1 text-xs font-medium text-success">
-                                                2%
-                                                <i data-tw-merge="" data-lucide="chevron-up"
-                                                    class="ml-px h-4 w-4 stroke-[1.5]"></i>
-                                            </div>
-                                        </div> --}}
                                     </div>
                                     <div
                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
                                         <div class="text-base text-slate-500">Employee Leave</div>
                                         <div class="font-mediumm mt-1.5 text-2xl" id="totalEmployeesLeave">0</div>
-                                        {{-- <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
-                                            <div
-                                                class="flex items-center rounded-full border border-danger/10 bg-danger/10 py-[2px] pl-[7px] pr-1 text-xs font-medium text-danger">
-                                                3%
-                                                <i data-tw-merge="" data-lucide="chevron-down"
-                                                    class="ml-px h-4 w-4 stroke-[1.5]"></i>
-                                            </div>
-                                        </div> --}}
                                     </div>
                                     <div
                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
                                         <div class="text-base text-slate-500">New Employee</div>
                                         <div class="font-mediumm mt-1.5 text-2xl" id="totalNewEmployee">0</div>
-                                        {{-- <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
-                                            <div
-                                                class="flex items-center rounded-full border border-success/10 bg-success/10 py-[2px] pl-[7px] pr-1 text-xs font-medium text-success">
-                                                8%
-                                                <i data-tw-merge="" data-lucide="chevron-up"
-                                                    class="ml-px h-4 w-4 stroke-[1.5]"></i>
-                                            </div>
-                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
-                            <!-- Add this in your HTML to show progress -->
-                            {{-- <div>
-                                <p>Import Progress: <span id="progressValue">0</span>%</p>
-                                <progress id="progressBar" value="0" max="100"></progress>
-                            </div> --}}
+                            <div class="box box--stacked mt-3.5 p-5">
+                                <div class="flex flex-col gap-y-5 lg:flex-row lg:items-center">
+                                    <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row sm:items-center">
+                                        <div class="relative">
+                                            <x-form.select id="company_id" name="company_id" label="Company"
+                                                url="{{ url('dashboard/hrms/designation') }}"
+                                                apiUrl="{{ $apiCompanyUrl }}/company/datatables" columns='["company_name"]'
+                                                :selected="$company" :keys="[
+                                                    'company_id' => $company,
+                                                ]">
+                                                <option value="">Select Company</option>
+                                            </x-form.select>
+                                        </div>
+                                        <div class="relative">
+                                            <x-form.select id="designation_id" name="designation_id" label="Designation"
+                                                url="{{ url('dashboard/hrms/designation') }}"
+                                                apiUrl="{{ $apiCompanyUrl }}/designation/datatables"
+                                                columns='["designation_name"]' :keys="[
+                                                    'company_id' => $company,
+                                                    'search',
+                                                ]">
+                                            </x-form.select>
+                                        </div>
+                                        <div class="relative">
+                                            <button id="applyFilter" data-tw-merge
+                                                class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary w-24 w-24">Primary</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="box box--stacked flex flex-col">
                                 <div class="table gap-y-2 p-5 sm:flex-row sm:items-center">
                                     <div>
-                                        {{-- <div class="text-base font-medium group-[.mode--light]:text-white mb-4">
-                                            Data Employees
-                                        </div> --}}
                                         <x-datatable id="employeeTable" :url="$apiUrl . '/employee/datatables'" method="POST" class="display"
                                             customButton="true" customButtonText="Send Verification Email"
-                                            customButtonFunction="sendEmailVerification()">
+                                            customButtonFunction="sendEmailVerification()" :filter="[
+                                                'first_name' => '#name',
+                                                'designation_id' => '#designation_id',
+                                            ]">
                                             <x-slot:thead>
                                                 <th data-value="id" data-render="getCheckBox" orderable="false">
                                                     <input type="checkbox" id="select-all" />
                                                 </th>
                                                 <th data-value="id" data-render="getId" orderable="true">#</th>
-                                                <th data-value="first_name" searchable="true" orderable="true">First Name
+                                                <th data-value="first_name" searchable="true" orderable="true"
+                                                    searchable="true">First Name
                                                 </th>
-                                                <th data-value="last_name" searchable="true" orderable="true">Last Name</th>
+                                                <th data-value="last_name" searchable="true" orderable="true">Last Name
+                                                </th>
                                                 <th data-value="company_id_rel" data-render="getCompany" orderable="false">
                                                     Company
                                                 </th>
-                                                <th data-value="grade_id_rel" data-render="getGrade" orderable="false">Grade
+                                                <th data-value="grade_id_rel" data-render="getGrade" orderable="false">
+                                                    Grade
                                                 </th>
                                                 <th data-value="designation_id_rel" data-render="getDesignation"
                                                     orderable="false">
@@ -125,7 +121,8 @@
                                                 </th>
                                                 <th data-value="is_verified" data-render="getMobileStatus"
                                                     orderable="false">Mobile</th>
-                                                <th data-value="id" data-render="getActionBtn" orderable="false">Action</th>
+                                                <th data-value="id" data-render="getActionBtn" orderable="false">Action
+                                                </th>
                                             </x-slot:thead>
                                         </x-datatable>
                                     </div>
@@ -183,6 +180,10 @@
                 });
                 var jsonCheckedValues = JSON.stringify(checkedValues);
                 handleNotification(checkedValues);
+            });
+
+            $('#applyFilter').click(function() {
+                employeeTable.ajax.reload();
             });
         });
 

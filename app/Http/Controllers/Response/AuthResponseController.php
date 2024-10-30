@@ -141,7 +141,7 @@ class AuthResponseController extends Controller
             if (isset($responseUser)) {
                 $request->session()->forget('company_id');
                 $request->session()->put('company_id', $userAccount['secondary_id']);
-                $redirect   = url('dashboard/hrms/company');
+                $redirect   = url('dashboard/hrms/setup_initialize');
 				return response()->json([
 					'url' => $redirect
 				], 200);
@@ -167,7 +167,9 @@ class AuthResponseController extends Controller
 
     public function password_recovery($token) {}
 
-    public function verify_email(Request $request) {}
+    public function verify_email(Request $request) {
+
+    }
 
     public function logout(Request $request)
     {

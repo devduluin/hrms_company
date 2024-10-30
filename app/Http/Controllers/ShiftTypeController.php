@@ -24,6 +24,7 @@ class ShiftTypeController extends Controller
     {
         $data['title'] = "Add shift type";
         $data['page_title'] = "Add shift type";
+        $data['apiUrlShiftType'] = $this->apiGatewayUrl . "/v1/companies/shift-type";
         return view('dashboard.hrms.shifttype.create', $data);
     }
 }

@@ -7,12 +7,29 @@ use Illuminate\Http\Request;
 class HrmsController extends Controller
 {
     //
+    protected $apiGatewayUrl;
+    public function __construct()
+    {
+        $this->apiGatewayUrl = config('apiendpoints.gateway');
+    }
+
     public function index()
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'HRMS Index';
         
         return view('dashboard.hrms.index', $data);
+    }
+
+    public function setup_initialize(Request $request)
+    {
+        $data['title']   = 'Initialize HRMS';
+        $data['page_title']   = 'Initialize Dashboard';
+        $data['apiUrl'] = $this->apiGatewayUrl.'/users/step_initialize';
+        $data['token']  =   $request->session()->get('app_token');
+        $data['user']   = $request->user;
+        
+        return view('dashboard.hrms.setup_initialize', $data);
     }
 
     public function elm_hrms()

@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="csrf-token" value="{{ csrf_token() }}" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="">
@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="{{ asset('dist/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/vendors/toastify.css') }}">
     @stack('css')
+    @include('vendor-common.fontawesome')
 
     <script src="{{ asset('dist/js/vendors/dom.js') }}"></script>
     @include('vendor-common.icon')

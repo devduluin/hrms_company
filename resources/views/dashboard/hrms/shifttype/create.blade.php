@@ -6,113 +6,87 @@
        
         
         <div id="contents-page" class="content transition-[margin,width] duration-100 px-5 xl:mr-2.5 mt-[75px] pt-[31px] pb-16 content--compact xl:ml-[275px] [&.content--compact]:xl:ml-[100px]">
+            <form id="form-submit">
             <div class="container">
-            <div class="grid grid-cols-12 gap-x-6 gap-y-10">
-                <div class="col-span-12">
-                    <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center">
-                        <div class="text-base font-medium group-[.mode--light]:text-white">
-                            {{ $page_title ?? config('app.name') }}
-                        </div>
-                        <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
-                            <button 
-                            class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary shadow-md w-100">                                <i data-tw-merge="" data-lucide="save" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Save Changes
-                            </button> 
-                        </div>
-                    </div>
-                    <div class="box mt-5">
-                    <form id="form-submit">
-                        <div class="p-7">
-                            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-2 mt-5">
-                                <input type="hidden" name="user_id" value="3c5b06b2-b224-4029-a7a9-a0291dbe723c">
-                                <x-form.input id="company_name" label="Company   Name" name="company_name" required />
-                                <x-form.input id="domain" label="Domain" name="domain" required />
-                                {{-- <x-form.input type="date" id="date_of_establishment" label="Date of establishment" name="date_of_establishment" required /> --}}
-                                <x-form.input type="datetime-local" id="date_of_establishment" label="Date of establishment" name="date_of_establishment" required />
+                <div class="grid grid-cols-12 gap-x-6 gap-y-10">
+                        <div class="col-span-12">
+                            <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center">
+                                <div class="text-base font-medium group-[.mode--light]:text-white">
+                                    {{ $page_title ?? config('app.name') }}
+                                </div>
+                                <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
+                                    <a href="{{ route("hrms.attendance") }}"
+                                    class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md w-24">
+                                    <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
+                                    </a> 
+                                    <button type="submit" id="btn_submit"
+                                    class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-blue-theme border-blue-theme text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"><i data-tw-merge="" data-lucide="save" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Save Changes
+                                    </button> 
+                                </div>
                             </div>
-                            
+                            <div class="box mt-5">
+                                <div class="p-7">
+                                    <div class="grid md:grid-cols-3 xl:grid-cols-4">
+                                        <input type="hidden" name="user_id" value="3c5b06b2-b224-4029-a7a9-a0291dbe723c">
+                                        <x-form.input id="shift_type_name" label="Shift Type Name" name="shift_type_name" required />
+                                        <x-form.input type="datetime-local" id="start_time" label="Start Time" name="Start Time" required />
+                                        <x-form.input type="datetime-local" id="end_time" label="End Time" name="end_time" required />
+                                        <x-form.input type="time" id="time_tolerance" label="Time Tolerance" name="time_tolerance" required />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </form>
                 </div>
-            </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="preview relative [&.hide]:overflow-hidden [&.hide]:h-0">
-    <div class="text-center">
-        <div id="success-notification-content" class="py-5 pl-5 pr-14 bg-white border border-slate-200/60 rounded-lg shadow-xl dark:bg-darkmode-600 dark:text-slate-300 dark:border-darkmode-600 hidden flex">
-            <i data-tw-merge="" data-lucide="check-circle" class="stroke-[1] w-5 h-5 text-success"></i>
-            <div class="ml-4 mr-4">
-                <div class="font-medium" id="success-title">...</div>
-                <div class="mt-1 text-slate-500" id="success-message">
-                   ...
-                </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
 @endsection
 @push('js')
 <script type="text/javascript">
-    document.getElementById('form-submit').addEventListener('submit', async function (event) {
-        event.preventDefault();
+    $("#form-submit").submit(async function store(e) {
+        e.preventDefault();
 
-        const formData = new FormData(this);
-
-        const data = {
-            user_id: formData.get('user_id'),
-            company_name: formData.get('company_name'),
-            domain: formData.get('domain'),
-            date_of_establishment: formData.get('date_of_establishment'),
-            parent_company: formData.get('parent_company'),
-            status: formData.get('status'),
-            default_currency: formData.get('default_currency'),
-            default_holiday_list: formData.get('default_holiday_list')
+        //inisialisasi data shift type 
+        var formData = {
+            company_id: localStorage.getItem('company'),
+            shift_type_name: $("#shift_type_name").val(),
+            start_time: $("#start_time").val(),
+            end_time: $("#end_time").val(),
+            time_tolerance: $("#time_tolerance").val(),
         };
-
-        console.log(data);
         
-        try {
-            const response = await fetch('http://apidev.duluin.com/api/v1/companyx', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer xN9P6a8sL2bV3iR4fC5J6Q7kT8yU9wZ0' 
-                },
-                body: JSON.stringify(data)
-            });
+        var param = {
+            url: "{{ $apiUrlShiftType }}",
+            method: "POST",
+            data: JSON.stringify(formData),
+            processData: false,
+            contentType: false,
+            cache: false
+        }
 
-            const responseData = await response.json();
-            
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+        saving(true);
+        await transAjax(param).then((result) => {
+            showSuccessNotification(result.message, "The operation was completed successfully.");
+            saving(false);
+            setTimeout(() => {
+                window.location.href = "/dashboard/hrms/shift-type";
+            }, 3000);
+        }).catch((error) => {
+            saving(false);
+            showErrorNotification(error.message, "An error occurred while processing your request.")
+        });
+
+        function saving(state) {
+            if(state) {
+                $("#btn_submit").html('Saving...');
+                $("#btn_submit").attr('disabled', 'disabled');
+            }else {
+                $("#btn_submit").html('Saving Changes');
+                $("#btn_submit").removeAttr('disabled');
             }
-
-            showSuccessNotification(responseData.message, "The operation was completed successfully.");
-
-        } catch (error) {
-            console.error('Error:', error);
-            alert('An error occurred while submitting the data');
-        }
-
-        function showSuccessNotification(title, message) {
-            var notificationContent = document.getElementById("success-notification-content");
-            document.getElementById("success-title").textContent = title;
-            document.getElementById("success-message").textContent = message;
-
-            Toastify({
-                node: $("#success-notification-content")
-                    .clone()
-                    .removeClass("hidden")[0],
-                duration: 3000,
-                newWindow: true,
-                close: true,
-                gravity: "top",
-                position: "right",
-                stopOnFocus: true,
-            }).showToast();
-        }
+         }
     });
 </script>
 @endpush

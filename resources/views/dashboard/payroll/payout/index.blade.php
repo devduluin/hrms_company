@@ -1,10 +1,16 @@
 @extends('layouts.dashboard.app')
 @section('content')
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-<style>.show{display:block;}</style>
-<div class="hurricane before:content-[''] before:z-[-1] before:w-screen before:bg-slate-50 before:top-0 before:h-screen before:fixed before:bg-texture-black before:bg-contain before:bg-fixed before:bg-[center_-20rem] before:bg-no-repeat">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .show {
+            display: block;
+        }
+    </style>
+    <div
+        class="hurricane before:content-[''] before:z-[-1] before:w-screen before:bg-slate-50 before:top-0 before:h-screen before:fixed before:bg-texture-black before:bg-contain before:bg-fixed before:bg-[center_-20rem] before:bg-no-repeat">
         @include('layouts.dashboard.menu')
-        <div id="contents-page" class="content transition-[margin,width] duration-100 px-5 xl:mr-2.5 mt-[75px] pt-[31px] pb-16 content--compact xl:ml-[275px] [&.content--compact]:xl:ml-[100px]">
+        <div id="contents-page"
+            class="content transition-[margin,width] duration-100 px-5 xl:mr-2.5 mt-[75px] pt-[31px] pb-16 content--compact xl:ml-[275px] [&.content--compact]:xl:ml-[100px]">
             <div class="container">
                 <div class="grid grid-cols-12 gap-x-6 gap-y-10">
                     <div class="col-span-12">
@@ -146,31 +152,40 @@
                         </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4  text-blue-900">
-                        <x-action label="Create Salary Slip" icon="arrow-up-right" url="{{ url('/dashboard/hrms/payout/salary_slip') }}"/>
-                        <x-action label="Payroll Setting" icon="arrow-up-right" url="{{ url('/dashboard/hrms/payout/settings') }}"/>
+                        <x-action label="Create Salary Slip" icon="arrow-up-right"
+                            url="{{ url('/dashboard/hrms/payout/salary_slip') }}" />
+                        <x-action label="Payroll Setting" icon="arrow-up-right"
+                            url="{{ url('/dashboard/hrms/payout/settings/list') }}" />
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4  text-blue-900">
-                        <x-action label="Income Tax Slab List" icon="arrow-up-right" url="{{ url('/dashboard/hrms/payout/tax_slab_list') }}"/>
-                        <x-action label="New Income Tax Slab" icon="arrow-up-right" url="{{ url('/dashboard/hrms/payout/income_tax') }}"/>
+                        <x-action label="Income Tax Slab List" icon="arrow-up-right"
+                            url="{{ url('/dashboard/hrms/payout/tax_slab_list') }}" />
+                        <x-action label="New Income Tax Slab" icon="arrow-up-right"
+                            url="{{ url('/dashboard/hrms/payout/income_tax') }}" />
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4  text-blue-900">
-                        <x-action label="Employee Benefit Claim List" icon="arrow-up-right" url="{{ url('/dashboard/hrms/payout/benefit_list') }}"/>
-                        <x-action label="New Employee Benefit Claim" icon="arrow-up-right" url="{{ url('/dashboard/hrms/payout/benefit_claim') }}"/>
+                        <x-action label="Employee Benefit Claim List" icon="arrow-up-right"
+                            url="{{ url('/dashboard/hrms/payout/benefit_list') }}" />
+                        <x-action label="New Employee Benefit Claim" icon="arrow-up-right"
+                            url="{{ url('/dashboard/hrms/payout/benefit_claim') }}" />
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4  text-blue-900">
-                        <x-action label="Salary Component" icon="arrow-up-right" url="{{ url('/dashboard/hrms/payout/salary_component/list_component') }}"/>
-                        <x-action label="Payroll Period" icon="arrow-up-right" url="{{ url('/dashboard/hrms/payout/payroll_period') }}"/>
+                        <x-action label="Salary Component" icon="arrow-up-right"
+                            url="{{ url('/dashboard/hrms/payout/salary_component/list_component') }}" />
+                        <x-action label="Payroll Period" icon="arrow-up-right"
+                            url="{{ url('/dashboard/hrms/payout/payroll_period') }}" />
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4  text-blue-900">
-                        <x-action label="Salary Structure" icon="arrow-up-right" url="{{ url('/dashboard/hrms/payout/salary_structure') }}"/>                    
-                        <x-action label="Salary Structure Assignment" icon="arrow-up-right" url="{{ url('/dashboard/hrms/payout/salary_structure_assignment') }}"/>                    
+                        <x-action label="Salary Structure" icon="arrow-up-right"
+                            url="{{ url('/dashboard/hrms/payout/salary_structure') }}" />
+                        <x-action label="Salary Structure Assignment" icon="arrow-up-right"
+                            url="{{ url('/dashboard/hrms/payout/salary_structure_assignment') }}" />
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
+    </div>
 @endsection
 
 @push('js')

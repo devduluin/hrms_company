@@ -74,7 +74,8 @@
                 const data = serializeFormData(currentForm);
                 const employeeId = $("#employee_id").val();
                 data._token = $('meta[name="csrf-token"]').attr('content');
-                data.company_id = localStorage.getItem('company');
+                data.company_id = $("#company_id").val();
+                data.parent_company = $("#parent_company").val();
                 data.employee_id = employeeId;
                 $('.error-message').hide();
                 if (employeeId == "" && formId !== "#overview") {
@@ -193,6 +194,37 @@
                     }, 500);
                 }
             }
+
+            // get parent company id
+            $("#company_id").change(async function() {
+                const companyId = $(this).val();
+                try {
+                    if (companyId) {
+                        const response = await fetch(
+                            `{{ $apiCompanyUrl }}/company/${companyId}`, {
+                                method: 'GET',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Authorization': `Bearer ${localStorage.getItem('app_token')}`,
+                                    'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
+                                },
+                            });
+
+                        if (!response.ok) {
+                            showErrorNotification('error', response.message);
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+
+                        const parentCompany = await response.json();
+                        $("#parent_company").val(parentCompany.data.parent_company);
+                    } else {
+                        $("#parent_company").val("");
+                    }
+                } catch (error) {
+                    console.error('Fetch error:', error);
+                    showErrorNotification('error', response.message);
+                }
+            });
         });
     </script>
 @endpush
