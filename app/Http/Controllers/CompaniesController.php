@@ -18,7 +18,7 @@ class CompaniesController extends Controller
         $data['title']   = 'Companies';
         $data['page_title']   = 'Data Companies';
         $data['apiUrl'] = $this->apiGatewayUrl . '/v1/companies/company';
-        $data['company'] = $request->session()->get('company_id')[0];
+        $data['company'] = $request->session()->get('company_id');
         return view('dashboard.hrms.companies.index', $data);
     }
 
@@ -65,7 +65,7 @@ class CompaniesController extends Controller
         $data['page_title'] = "Update Data Company";
         $data['apiUrl'] = $this->apiGatewayUrl . '/v1/companies/company';
         $allSessions = session()->all();
-        $data['company'] = $allSessions['company_id'][0];
+        $data['company'] = $allSessions['company_id'];
         return view('dashboard.hrms.companies.edit', $data);
     }
 
@@ -85,7 +85,7 @@ class CompaniesController extends Controller
         $data['title'] = 'Duluin HRMS';
         $data['page_title'] = "HRMS Setting";
         $data['userId'] = session()->get('user_id');  
-        $data['company'] = session()->get('company_id')[0];
+        $data['company'] = session()->get('company_id');
         $data['apiUrl'] = $this->apiGatewayUrl . '/v1/companies/company/setting';
          
         return view('dashboard.hrms.companies.setting', $data);
@@ -97,7 +97,7 @@ class CompaniesController extends Controller
         $data['page_title'] = "Company preview";
         $data['companyApiUrl'] = $this->companyApiUrl;
         $allSessions = session()->all();
-        $data['company'] = $allSessions['company_id'][0];
+        $data['company'] = $allSessions['company_id'];
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
         $data['apiEmployeeUrl'] = $this->apiGatewayUrl . '/v1/employees';
         $data['apiGateway'] = $this->apiGatewayUrl . '/users';

@@ -23,7 +23,7 @@ class LeaveTypeController extends Controller
         $data['title'] = "Add New Leave Types";
         $data['page_title'] = "Add New Leave Types";
         $allSessions = session()->all();
-        $data['company'] = $allSessions['company_id'][0];
+        $data['company'] = $allSessions['company_id'];
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies/company/datatables';
         $data['apiUrl'] = $this->apiGatewayUrl . "/v1/companies/leave-type";
         return view('dashboard.hrms.leavetype.create', $data);
@@ -35,7 +35,7 @@ class LeaveTypeController extends Controller
         $data['page_title'] = "Update Leave Types";
         $allSessions = session()->all();
         $data['id'] = $id;
-        $data['company'] = $allSessions['company_id'][0];
+        $data['company'] = $allSessions['company_id'];
         $data['apiUrl'] = $this->apiGatewayUrl . "/v1/companies/leave-type";
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies/company/datatables';
         

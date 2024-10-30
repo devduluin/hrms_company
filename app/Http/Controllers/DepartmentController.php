@@ -24,7 +24,7 @@ class DepartmentController extends Controller
         $data['title'] = "Add New Department";
         $data['page_title'] = "Add New Department";
         $allSessions = session()->all();
-        $data['company'] = $allSessions['company_id'][0];
+        $data['company'] = $allSessions['company_id'];
         $data['apiUrl'] = $this->apiGatewayUrl . "/v1/companies/department";
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies/company/datatables';
         $data['apiDepartmentUrl'] = $this->apiGatewayUrl . "/v1/companies/department/datatables";
@@ -38,7 +38,7 @@ class DepartmentController extends Controller
         $data['page_title'] = "Updat Department";
         $allSessions = session()->all();
         $data['id'] = $id;
-        $data['company'] = $allSessions['company_id'][0];
+        $data['company'] = $allSessions['company_id'];
         $data['apiUrl'] = $this->apiGatewayUrl . "/v1/companies/department";
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies/company/datatables';
         $data['apiDepartmentUrl'] = $this->apiGatewayUrl . "/v1/companies/department/datatables";
