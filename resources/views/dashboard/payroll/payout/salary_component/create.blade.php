@@ -16,7 +16,8 @@
                             </div>
                             <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
                                 <button onclick="history.go(-1)"
-                                    class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed border-primary text-primary dark:border-primary shadow-md w-100"  href="{{ $url ?? '' }}">
+                                    class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed border-primary text-primary dark:border-primary shadow-md w-100"
+                                    href="{{ $url ?? '' }}">
                                     <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
                                 </button>
                             </div>
@@ -53,13 +54,13 @@
 
                 if (lastActiveTabId !== newTabId) {
                     e.preventDefault();
-                    await handleFormSubmission(lastActiveTabId);
+                    // await handleFormSubmission(lastActiveTabId);
                     lastActiveTabId = newTabId;
 
                     $(lastActiveTabId + "-btn").click(async function(e) {
                         // console.log(lastActiveTabId + "-form");
                         e.preventDefault();
-                        await handleFormSubmission(lastActiveTabId);
+                        // await handleFormSubmission(lastActiveTabId);
                     });
                 }
             });
@@ -164,6 +165,41 @@
                     $('html, body').animate({
                         scrollTop: firstErrorField.offset().top - 100
                     }, 500);
+                }
+            }
+
+            // get parent company id
+            $("#company_id").change(async function() {
+                await getParentCompany($(this).val());
+            });
+
+            async function getParentCompany(company) {
+                const companyId = company;
+                try {
+                    if (companyId) {
+                        const response = await fetch(
+                            `{{ $apiCompanyUrl }}/company/${companyId}`, {
+                                method: 'GET',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Authorization': `Bearer ${localStorage.getItem('app_token')}`,
+                                    'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
+                                },
+                            });
+
+                        if (!response.ok) {
+                            showErrorNotification('error', response.message);
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+
+                        const parentCompany = await response.json();
+                        $("#parent_company").val(parentCompany.data.parent_company);
+                    } else {
+                        $("#parent_company").val("");
+                    }
+                } catch (error) {
+                    console.error('Fetch error:', error);
+                    showErrorNotification('error', response.message);
                 }
             }
         });

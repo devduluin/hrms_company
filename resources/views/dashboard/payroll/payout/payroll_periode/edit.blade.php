@@ -1,5 +1,6 @@
 @extends('layouts.dashboard.app')
 @section('content')
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('dist/css/vendors/tom-select.css') }}">
 
     <div
@@ -15,18 +16,31 @@
                                 {{ $page_title }}
                             </div>
                             <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
-                                <button onclick="history.go(-1)"
-                                    class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed border-primary text-primary dark:border-primary shadow-md w-100"
-                                    href="{{ $url ?? '' }}">
-                                    <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
-                                </button>
+                                <x-form.button label="Save changes" id="save-btn" style="primary" type="submit"
+                                    icon="save" />
                             </div>
                         </div>
                         <div class="mt-1.5 flex flex-col">
-                            <input type="hidden" name="employee_id" id="employee_id" value="" />
-                            @include('dashboard.payroll.payout.salary_component.tabs')
                             <div class="box box--stacked flex flex-col p-5">
-                                @include('dashboard.payroll.payout.salary_component.tab-content')
+                                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 ">
+                                    <form id="payroll-periode-form" method="post"
+                                        action="http://apidev.duluin.com/api/v1/payroll_periodes/payroll_periode">
+                                        @csrf
+                                        <x-form.input id="name" label="Name" name="name" required />
+                                        <input type="hidden" id="parent_company" name="parent_company" />
+                                        <x-form.select id="company_id" name="company_id" label="Company"
+                                            url="{{ url('dashboard/hrms/designation') }}"
+                                            apiUrl="{{ $apiCompanyUrl }}/company/datatables" columns='["company_name"]'
+                                            :selected="$company" :keys="[
+                                                'company_id' => $company,
+                                            ]">
+                                            <option value="">Select Company</option>
+                                        </x-form.select>
+                                        <x-form.datepicker id="start_date" label="Start Date" name="start_date" required />
+                                        <x-form.datepicker id="end_date" label="End Date" name="end_date" required />
+                                        <x-form.datepicker id="pay_date" label="Payment Date" name="pay_date" required />
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -34,47 +48,25 @@
             </div>
         </div>
     </div>
+    </div>
 @endsection
-
 @include('vendor-common.toastr')
-
 @push('js')
-    <script src="{{ asset('dist/js/vendors/tab.js') }}"></script>
-    <script>
+    <script type="text/javascript">
+        console.log("testing");
         $(document).ready(function() {
-            const initialTab = $('ul[role="tablist"] li:first-child button');
-            initialTab.addClass('active');
-            $(initialTab.data('tw-target')).addClass('active').removeAttr('style').show();
-
-            let lastActiveTabId = initialTab.data('tw-target');
-            const appToken = localStorage.getItem('app_token');
-
-            $('ul[role="tablist"] li button[role="tab"]').on('click', async function(e) {
-                const newTabId = $(this).data('tw-target');
-
-                if (lastActiveTabId !== newTabId) {
-                    e.preventDefault();
-                    // await handleFormSubmission(lastActiveTabId);
-                    lastActiveTabId = newTabId;
-
-                    $(lastActiveTabId + "-btn").click(async function(e) {
-                        // console.log(lastActiveTabId + "-form");
-                        e.preventDefault();
-                        // await handleFormSubmission(lastActiveTabId);
-                    });
-                }
-            });
-
-            handleGetData(`{{ $salaryComponentId }}`, lastActiveTabId);
-
-            $(lastActiveTabId + "-btn").click(async function(e) {
+            $("#save-btn").click(async function(e) {
                 e.preventDefault();
-                await handleFormSubmission(lastActiveTabId);
+                await handleFormSubmission();
             });
+            let id = `{{ $id }}`;
 
-            async function handleGetData(id, tabId) {
+            handleGetData();
+
+            async function handleGetData() {
+                let tabId = "";
                 $.ajax({
-                    url: `{{ $apiPayrollUrl }}/salary_component/${id}`,
+                    url: `http://apidev.duluin.com/api/v1/payroll_periodes/payroll_periode/${id}`,
                     type: 'GET',
                     headers: {
                         'Authorization': `Bearer ${appToken}`,
@@ -84,16 +76,8 @@
                     success: await
                     function(response) {
                         if (response.success) {
+                            // console.log(response.message);
                             $("#name").val(response.data.name);
-                            const typeSelect = $('#type')[0].tomselect;
-                            const typeValue = response.data.type;
-                            if (!typeSelect.options[typeValue]) {
-                                typeSelect.addOption({
-                                    value: typeValue,
-                                    text: typeValue
-                                });
-                            }
-                            typeSelect.setValue(typeValue);
 
                             $("#parent_company").val(response.data
                                 .parent_company);
@@ -113,22 +97,9 @@
                             });
                             getParentCompany(companyValue);
 
-                            $("#description").val(response.data.description);
-                            $("#amount").val(parseFloat(response.data.amount));
-                            $("#depends_on_payment_day").attr("checked", response.data
-                                .depends_on_payment_day == 1 ? true : false);
-                            $("#is_tax_applicable").attr("checked", response.data.is_tax_applicable ==
-                                1 ? true : false);
-                            $("#deduct_tax_on_payroll_date").attr("checked", response.data
-                                .deduct_tax_on_payroll_date == 1 ? true : false);
-                            $("#round_nearest_integer").attr("checked", response.data
-                                .round_nearest_integer == 1 ? true : false);
-                            $("#include_in_total").attr("checked", response.data.include_in_total == 1 ?
-                                true : false);
-                            $("#remove_if_zero").attr("checked", response.data.remove_if_zero == 1 ?
-                                true : false);
-                            $("#is_disable").attr("checked", response.data.is_disable == 1 ? true :
-                                false);
+                            $("#start_date").val(response.data.start_date);
+                            $("#end_date").val(response.data.end_date);
+                            $("#pay_date").val(response.data.pay_date);
                         } else {
                             showErrorNotification('error', response.message);
                         }
@@ -142,27 +113,23 @@
             }
 
             async function handleFormSubmission(formId) {
-                const currentForm = $(formId + "-form");
+                const currentForm = $("#payroll-periode-form");
                 const data = serializeFormData(currentForm);
-                const employeeId = $("#employee_id").val();
                 data._token = $('meta[name="csrf-token"]').attr('content');
-                data.company_id = localStorage.getItem('company');
+                data.company_id = $("#company_id").val();
+                data.parent_company = $("#parent_company").val();
                 $('.error-message').hide();
-                if (formId !== "#overview") {
-                    showErrorNotification('error', "Please create component data first");
-                }
 
-                data.depends_on_payment_day = $("#depends_on_payment_day").is(":checked") ? 1 : 0;
-                data.is_tax_applicable = $("#is_tax_applicable").is(":checked") ? 1 : 0;
-                data.deduct_tax_on_payroll_date = $("#deduct_tax_on_payroll_date").is(":checked") ? 1 : 0;
-                data.round_nearest_integer = $("#round_nearest_integer").is(":checked") ? 1 : 0;
-                data.include_in_total = $("#include_in_total").is(":checked") ? 1 : 0;
-                data.remove_if_zero = $("#remove_if_zero").is(":checked") ? 1 : 0;
-                data.is_disable = $("#is_disable").is(":checked") ? 1 : 0;
+                // Add a flag to prevent form submission
+                if (currentForm.data('submitted')) {
+                    return false;
+                }
+                currentForm.data('submitted', true);
 
                 try {
                     const response = await $.ajax({
-                        url: currentForm.attr('action') + '/' + `{{ $salaryComponentId }}`,
+                        url: currentForm.attr('action') +
+                            '/' + id,
                         type: 'PUT',
                         contentType: 'application/json',
                         crossDomain: true,
@@ -171,7 +138,7 @@
                             'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
                         },
                         data: JSON.stringify(data),
-                        dataType: 'json'
+                        dataType: 'json',
                     });
 
                     handleResponse(response);
@@ -184,7 +151,11 @@
                         showErrorNotification('error', 'An error occurred while processing your request.');
                     }
                 }
+                // return false;
+                // Reset the flag after submission
+                currentForm.data('submitted', false);
                 return false;
+
             }
 
             function serializeFormData(form) {
@@ -199,8 +170,8 @@
             function handleResponse(response) {
                 if (response.success) {
                     showSuccessNotification('success', response.message);
-                    /*location.href =
-                        `{{ url('dashboard/hrms/payout/salary_component') }}/edit_component/${response.data.id}`;*/
+                    location.href =
+                        `{{ url('dashboard/hrms/payout/payroll_period') }}`;
                 } else {
                     showErrorNotification('error', response.message);
                 }
@@ -274,4 +245,4 @@
             }
         });
     </script>
-@endpush
+@endPush
