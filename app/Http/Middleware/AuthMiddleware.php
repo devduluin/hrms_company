@@ -22,7 +22,7 @@ class AuthMiddleware
         $company_id = $request->session()->get('company_id');
         if(isset($company_id)){
              
-            if($request->session()->get('company_id')[0] == null){
+            if($company_id == null){
                 $lastSegment = $request->segment(count($request->segments()));
                 if($lastSegment != 'setup_account'){
                     return redirect(url('dashboard/setup_account'));
@@ -34,7 +34,7 @@ class AuthMiddleware
                     'accept' => 'application/json',
                     'Authorization' => 'Bearer ' . $appToken,
                 ];
-                $company_id = $request->session()->get('company_id')[0] ?? $request->session()->get('company_id') ;
+               
                 $response = $this->getRequest(config('apiendpoints.gateway') . '/v1/companies/company/setting/'. $company_id, '', $headers);
                 $responseBody = json_decode($response->getBody(), true);
                  

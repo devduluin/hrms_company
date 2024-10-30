@@ -141,6 +141,7 @@ class AuthResponseController extends Controller
             if (isset($responseUser)) {
                 $request->session()->forget('company_id');
                 $request->session()->put('company_id', $userAccount['secondary_id']);
+                
                 $redirect   = url('dashboard/hrms/setup_initialize');
 				return response()->json([
 					'url' => $redirect
