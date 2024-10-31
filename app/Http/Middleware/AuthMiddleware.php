@@ -20,33 +20,36 @@ class AuthMiddleware
     {
         
         $company_id = $request->session()->get('company_id');
-        if(!$company_id){
+        
             
-            if($company_id == null){
+        if(($company_id == null) OR (!$company_id)){
+            $lastSegment = $request->segment(count($request->segments()));
+            if($lastSegment != 'setup_account'){
+                return redirect(url('dashboard/setup_account'));
+            }
+        
+        }else{
+            $appToken = $request->session()->get('app_token');
+            $headers = [
+                'accept' => 'application/json',
+                'Authorization' => 'Bearer ' . $appToken,
+            ];
+            
+            $response = $this->getRequest(config('apiendpoints.gateway') . '/v1/companies/company/setting/'. $company_id, '', $headers);
+            $responseBody = json_decode($response->getBody(), true);
+                
+            if(!isset($responseBody['data'])){
                 $lastSegment = $request->segment(count($request->segments()));
-                if($lastSegment != 'setup_account'){
-                    return redirect(url('dashboard/setup_account'));
-                }
-            
-            }else{
-                $appToken = $request->session()->get('app_token');
-                $headers = [
-                    'accept' => 'application/json',
-                    'Authorization' => 'Bearer ' . $appToken,
-                ];
-               
-                $response = $this->getRequest(config('apiendpoints.gateway') . '/v1/companies/company/setting/'. $company_id, '', $headers);
-                $responseBody = json_decode($response->getBody(), true);
-                 
-                if(!isset($responseBody['data'])){
-                    $lastSegment = $request->segment(count($request->segments()));
-                    if($lastSegment != 'setup_initialize'){
+                if($lastSegment != 'setup_initialize'){
                     return redirect(url('dashboard/hrms/setup_initialize'));
-                    }
-                };
+                }
             };
+            
+            session(['locale' => $responseBody['data']['company_id_rel']['language']]);
+            
+        };
            
-        }
+         
 
         $appToken = $request->session()->get('app_token');
         $user       = $this->isUserAuthenticated($appToken);

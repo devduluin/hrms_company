@@ -9,6 +9,7 @@ Route::prefix('/users')->group(function () {
         Route::get('/', 'index')->name('users');
         Route::get('/create', 'create')->name('user.create');
         Route::get('/update/{id}', 'update')->name('user.update');
+        Route::get('/show/{id}', 'show')->name('user.show');
         
     });
 });

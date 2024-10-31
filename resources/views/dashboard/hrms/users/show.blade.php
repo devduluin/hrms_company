@@ -7,12 +7,17 @@
         <div class="container mt-[65px]">
             <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center">
                 <div class="text-base font-medium group-[.mode--light]:text-white">
-                    {{ $title ?? '' }}
+                    {{ $page_title ?? '' }}
                 </div>
                 <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
                     <button onclick="history.go(-1)"
                         class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md w-24">
                         <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
+                    </button>
+                    <button id="btnBanned" data-tw-merge=""
+                            class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-danger focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-danger border-danger text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"><i
+                                data-tw-merge="" data-lucide="trash" class="mr-3 h-4 w-4 stroke-[1.3]"></i>
+                                <span id="">Banned</span>
                     </button>
                     <button id="submitBtn" data-tw-merge=""
                             class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-blue-theme border-blue-theme text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"><i
@@ -50,19 +55,33 @@
                                 <div class="gap-x-6 gap-y-10 ">
                                     <x-form.input id="email" name="email" label="Email" required="true" placholder="" value=""/>
                                 </div>
+                                <div class="gap-x-6 gap-y-10 ">
+                                    <x-form.input id="email_verified_at" readonly name="" label="Email Verified At" placholder="" value=""/>
+                                </div>
+                                <div class="gap-x-6 gap-y-10 ">
+                                    <x-form.input id="last_login" readonly name="" label="Last Login" placholder="" value=""/>
+                                </div>
+                                <div class="gap-x-6 gap-y-10 ">
+                                    <x-form.input id="last_login_ip" readonly name="" label="Last Login IP" placholder="" value=""/>
+                                </div>
+                                <div class="gap-x-6 gap-y-10 ">
+                                    <x-form.input id="banned_reason" readonly name="" label="Banned Reason" placholder="" value=""/>
+                                </div>
                                
                                 <div class="py-2">
                                     <x-checkbox id="is_banned"
                                         label="Is Banned"
                                         name="is_banned"
+                                        disabled
                                         guidelines="If checked, user will not be able to sign in" />
                                     </div>
                                     <div class="py-2">
                                     <x-checkbox id="send_email"
-                                        label="Send Email Activation"
+                                        label="Is Email Verified"
                                         name="send_email"
                                         checked="checked"
-                                        guidelines="If checked, user will get email to activate account" />
+                                        disabled
+                                        guidelines="If checked, user account already activated" />
                                     </div>
                             
                             </div>
@@ -109,13 +128,16 @@
             dataType: 'json',
             success: await
             function(response) {   
-                if (response.success == true) {                    
-                     
+                if (response.data) {                    
+                      
                     method  = 'PATCH';
-                    $("#company_id").val(response.data.company_id);
-                    
+                    $("#name").val(response.data.name);
+                    $("#phone").val(response.data.phone);
+                    $("#email").val(response.data.email);
+                    $("#company_id").val(response.data.secondary_id).change();
+                     
                     const company_idSelect = $('#company_id')[0].tomselect;
-                    const company_idValue = response.data.company_id;
+                    const company_idValue = response.data.secondary_id;
                     if (!company_idSelect.options[company_idValue]) {
                         company_idSelect.addOption({
                             value: company_idValue,
@@ -123,6 +145,7 @@
                         });
                     }
                     company_idSelect.setValue(company_idValue);
+
                 } else {
                     showErrorNotification('error', response.message);
                 }
@@ -186,8 +209,8 @@
     function handleResponse(response) {
          
         if (response) {
-            
-            window.location= '{{ url("/dashboard/hrms/users/show") }}/'+response.result.user.id;
+            showSuccessNotification(response.message, "The operation was completed successfully.");
+            handleGetData(id, currentForm)
         } else {
             showErrorNotification('error', response.message);
         }

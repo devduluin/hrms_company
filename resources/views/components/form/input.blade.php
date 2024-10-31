@@ -30,6 +30,7 @@
                             Required
                         </div>
                     @endif
+                    
                 </div>
                 <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
 

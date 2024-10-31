@@ -91,7 +91,7 @@ function initializeTomSelect() {
 
                                 callback(options);
 
-                                const tomSelectInstance = $(this)[0].tomselect;
+                                /* const tomSelectInstance = $(this)[0].tomselect;
 
                                 // Set selected value if selectedId exists
                                 if (tomSelectInstance && selectedId) {
@@ -103,13 +103,28 @@ function initializeTomSelect() {
                                     tomSelectInstance.setValue(selectedId);
                                     tomSelectInstance.settings.placeholder = `Selected Option (${selectedId})`;
                                     tomSelectInstance.input.placeholder = `Selected Option (${selectedId})`;
-                                }
+                                } */
                             },
                             error: function (xhr, status, error) {
                                 console.error("Error fetching data:", error);
                                 callback();
                             },
                         });
+                    }
+                },
+                onInitialize: function () {
+                    const tomSelectInstance = this;
+
+                    // Pre-select the option when TomSelect is initialized
+                    if (selectedId) {
+                        if (!tomSelectInstance.options[selectedId]) {
+                            tomSelectInstance.addOption({
+                                value: selectedId,
+                                text: selectedId
+                            });
+                        }
+                        
+                        tomSelectInstance.setValue(selectedId);
                     }
                 },
                 render: {

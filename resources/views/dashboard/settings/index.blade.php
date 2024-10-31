@@ -30,7 +30,7 @@
                                 <div class="sticky top-[104px]">
                                     <div class="box box--stacked flex flex-col px-5 pb-6 pt-5">
 
-                                        <a id="user_account" href="#"
+                                        <a id="#" href="{{ url('dashboard/settings/user_account') }}"
                                             class="menu-item flex items-center py-3 first:-mt-3 last:-mb-3 [&.active]:text-primary [&.active]:font-medium hover:text-primary">
                                             <i data-tw-merge="" data-lucide="user-check"
                                                 class="mr-3 h-4 w-4 stroke-[1.3]"></i>
@@ -42,13 +42,13 @@
                                                 class="mr-3 h-4 w-4 stroke-[1.3]"></i>
                                             Email Settings
                                         </a>
-                                        <a id="security" href="#"
+                                        <a id="" href="{{ url('dashboard/settings/security') }}"
                                             class="menu-item flex items-center py-3 first:-mt-3 last:-mb-3 [&.active]:text-primary [&.active]:font-medium hover:text-primary">
                                             <i data-tw-merge="" data-lucide="key-round"
                                                 class="mr-3 h-4 w-4 stroke-[1.3]"></i>
                                             Security
                                         </a>
-                                        <a id="preferences" href="#"
+                                        <a id="#" href="{{ url('dashboard/settings/preferences') }}"
                                             class="menu-item flex items-center py-3 first:-mt-3 last:-mb-3 [&.active]:text-primary [&.active]:font-medium hover:text-primary">
                                             <i data-tw-merge="" data-lucide="package-check"
                                                 class="mr-3 h-4 w-4 stroke-[1.3]"></i>
@@ -114,14 +114,15 @@
             }
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
-
+            const formMethod = form.getAttribute('method'); 
             try {
                 const response = await fetch(form.action, {
-                    method: 'POST',
+                    method: formMethod || 'POST',
                     body: JSON.stringify(data),
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${appToken}`
+                        'Authorization': `Bearer ${appToken}`,
+                        'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
                     }
                 });
 
@@ -129,6 +130,12 @@
                     //console.log('Form submitted successfully');
                     await populateFormInputs();
                     showSuccessNotification(response.message, "The operation was completed successfully.");
+                    if(form.id == 'settingForm'){
+                        const apiUrl = '{{ $apiUrl }}/users/user';
+                        await populateFormInputs(apiUrl);
+                    }else if(form.id == 'settingForm-3'){
+                        location.reload();
+                    }
                 } else {
                     console.error('Error submitting form');
                 }
@@ -144,7 +151,7 @@
     <script src="{{ asset('dist/js/vendors/tom-select.js') }}"></script>
     <script src="{{ asset('dist/js/components/base/tom-select.js') }}"></script>
     <script>
-        const apiUrl = '{{ $apiUrl }}/users/user';
+        
         const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
         document.addEventListener('DOMContentLoaded', async function() {
@@ -175,6 +182,7 @@
                 preferences: {
                     path: '{{ url('/dashboard/settings/preferences') }}',
                     element: '{{ url('/dashboard/settings/elm/preferences') }}',
+                    form: 'settingForm-3',
                 },
                 notification_setting: {
                     path: '{{ url('/dashboard/settings/notification_setting') }}',
@@ -204,10 +212,17 @@
                         submitButton.style.display = '';
                     }
                      
-                    
+                    console.log();
                     await initializeForm(route.form);
                     initializeTomSelect();
-                    await populateFormInputs();
+                    if(route.form == 'settingForm'){
+                        const apiUrl = '{{ $apiUrl }}/users/user';
+                        await populateFormInputs(apiUrl);
+                    }else if(route.form == 'settingForm-3'){
+                        const apiUrl = '{{ $apiUrl }}/v1/companies/company/'+localStorage.getItem('company');
+                        await populateFormInputs(apiUrl);
+                    }
+                    
                 } catch (error) {
                     console.error('Error loading content:', error);
                 } finally {
@@ -269,14 +284,15 @@
             await initializeContent();
         });
 
-        async function populateFormInputs() {
+        async function populateFormInputs(apiUrl) {
                 try {
                     const appToken = localStorage.getItem('app_token');
                     const response = await fetch(apiUrl, {
                         headers: {
                             'X-Requested-With': 'XMLHttpRequest',
                             'X-CSRF-TOKEN': csrfToken,
-                            'Authorization': `Bearer ${appToken}`
+                            'Authorization': `Bearer ${appToken}`,
+                            'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
                         }
                     });
                     const results = await response.json();
@@ -301,6 +317,30 @@
                     }
                     if (last_login_ip) {
                         last_login_ip.value = results.result.last_login_ip;
+                    }
+                    if(results.data){
+                    $("#language").val(results.data.language);
+                    $("#time_zoneSelect").val(results.data.time_zoneSelect);
+
+                    const languageSelect = $('#language')[0].tomselect;
+                    const languageValue = results.data.language;
+                    if (!languageSelect.options[languageValue]) {
+                        languageSelect.addOption({
+                            value: languageValue,
+                            text: languageValue
+                        });
+                    }
+                    languageSelect.setValue(languageValue);
+
+                    const time_zoneSelect = $('#time_zone')[0].tomselect;
+                    const time_zoneValue = results.data.time_zone;
+                    if (!time_zoneSelect.options[time_zoneValue]) {
+                        time_zoneSelect.addOption({
+                            value: time_zoneValue,
+                            text: time_zoneValue
+                        });
+                    }
+                    time_zoneSelect.setValue(time_zoneValue);
                     }
                 } catch (error) {
                     console.error('Error fetching user data:', error);

@@ -17,6 +17,7 @@ class SettingsController extends Controller
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Index Settings';
         $data['apiUrl'] = $this->apiGatewayUrl;
+        $data['apiUrlCompany'] = $this->apiGatewayUrl.'/v1/companies/company/'.session()->get('company_id');
 
         return view('dashboard.settings.index', $data);
     }
@@ -70,6 +71,8 @@ class SettingsController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Preferences Settings';
+        $data['company'] = session()->get('company_id');
+        $data['companyUrl'] = $this->apiGatewayUrl . '/v1/companies/company';
 
         return view('dashboard.settings.elm_preferences', $data);
     }

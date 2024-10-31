@@ -1,5 +1,5 @@
 <div class="box box--stacked flex flex-col p-5">
-<form id="settingForm" action="{{ url('/api/setting/preferences') }}">
+<form id="settingForm-3" method="PATCH" action="{{ $companyUrl.'/'.$company }}">
     <div class="mb-6 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
     {{ $page_title }}
     </div>
@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="mt-3 w-full flex-1 xl:mt-0">
-                <select id="languageSelect" name="languageSelect" data-title="Language" data-placeholder="Select your language" class="tom-select w-full">
+                <select id="language" name="language" data-title="Language" data-placeholder="Select your language" class="tom-select w-full">
                     <option value="en">
                         English
                     </option>
@@ -46,7 +46,7 @@
                 </div>
             </div>
             <div class="mt-3 w-full flex-1 xl:mt-0">
-                <select id="timezoneSelect" name="timezoneSelect" data-title="Time Zone" data-url="{{ url('dashboard/settings/timezone') }}" data-placeholder="Select your timezone" class="tom-select w-full">
+                <select id="time_zone" name="time_zone" data-title="Time Zone" data-url="{{ url('dashboard/settings/timezone') }}" data-placeholder="Select your timezone" class="tom-select w-full">
                     <option value="Asia/Jakarta">
                         Asia/Jakarta (WIB)
                     </option>

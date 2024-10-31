@@ -24,10 +24,10 @@ class UsersController extends Controller
 
     public function create()
     {
-        $data['title'] = "User Create";
+        $data['title'] = "User Module";
         $data['page_title'] = "Add New User";
         $data['apiUrl'] = $this->apiGatewayUrl . "/users/user";
-        $data['company'] = session()->get('company_id')[0];
+        $data['company'] = session()->get('company_id');
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies/company/datatables';
         
         return view('dashboard.hrms.users.create', $data);
@@ -35,13 +35,26 @@ class UsersController extends Controller
 
     public function update($id)
     {
-        $data['title'] = "User Create";
-        $data['page_title'] = "Add New User";
+        $data['title'] = "User Module";
+        $data['page_title'] = "Update User";
         $data['apiUrl'] = $this->apiGatewayUrl . "/users/user";
         $data['id'] =  $id;
-        $data['company'] = session()->get('company_id')[0];
+        $data['company'] = session()->get('company_id');
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies/company/datatables';
         
         return view('dashboard.hrms.users.create', $data);
+    }
+
+    public function show($id)
+    {
+        $data['title'] = "User Module";
+        $data['page_title'] = "User Detail";
+        $data['apiUrl'] = $this->apiGatewayUrl . "/users/user";
+        $data['id'] =  $id;
+        $data['company'] = session()->get('company_id');
+        $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies/company/datatables';
+        
+        
+        return view('dashboard.hrms.users.show', $data);
     }
 }
