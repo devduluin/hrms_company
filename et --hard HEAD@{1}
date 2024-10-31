@@ -1,0 +1,68 @@
+[33m123c188[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m HEAD@{0}: commit (merge): update user and companies
+[33m15b562a[m HEAD@{1}: commit: update user and companies
+[33m5c19eb5[m HEAD@{2}: commit: add initialize data
+[33mb1f4af7[m HEAD@{3}: commit: add initialize data
+[33mef85fc8[m HEAD@{4}: commit: add initialize data
+[33mcd60d52[m HEAD@{5}: commit: add initialize data
+[33m0bca371[m HEAD@{6}: commit: add initialize data
+[33mf2421cf[m HEAD@{7}: commit: add initialize data
+[33m8373250[m HEAD@{8}: commit: add initialize data
+[33m99ce22b[m HEAD@{9}: pull: Fast-forward
+[33mc03e8c2[m HEAD@{10}: commit: add initialize data
+[33m19d81b6[m HEAD@{11}: commit: add initialize data
+[33m8db5546[m HEAD@{12}: commit: add initialize data
+[33m095c7d3[m HEAD@{13}: commit: add initialize data
+[33m2431282[m HEAD@{14}: commit: add initialize data
+[33mf35434b[m HEAD@{15}: commit: add initialize data
+[33m4421c80[m HEAD@{16}: commit (merge): add initialize data
+[33m7333f6e[m HEAD@{17}: commit: add initialize data
+[33m0deb431[m HEAD@{18}: commit: update 28/10/2024
+[33m234f432[m HEAD@{19}: pull: Fast-forward
+[33mab34546[m HEAD@{20}: commit (merge): fix company api
+[33m2c61759[m HEAD@{21}: commit: fix company api
+[33m65bc1c4[m HEAD@{22}: commit: update frontend companies
+[33m339a3bb[m HEAD@{23}: commit: update frontend companies
+[33m4817794[m HEAD@{24}: commit: update frontend companies
+[33m58a32a0[m HEAD@{25}: commit: update CRUD company
+[33m9f4e4ac[m HEAD@{26}: commit: fix registration
+[33meebfcfd[m HEAD@{27}: commit: fix registration
+[33mfd3b7d5[m HEAD@{28}: pull: Merge made by the 'ort' strategy.
+[33mfb41612[m HEAD@{29}: commit: fix sign up
+[33md06779f[m HEAD@{30}: pull: Fast-forward
+[33mdfd2ed9[m HEAD@{31}: commit: add maps
+[33m2d7abe5[m[33m ([m[1;31morigin/idris[m[33m)[m HEAD@{32}: commit: add maps
+[33m015d6b5[m HEAD@{33}: commit (merge): add maps
+[33m8554d75[m HEAD@{34}: commit: add maps
+[33mbfbf9c0[m HEAD@{35}: commit: add registration company
+[33m9377bfb[m HEAD@{36}: commit: add registration company
+[33m7105f22[m HEAD@{37}: commit: add registration company
+[33m0933ac6[m HEAD@{38}: commit: add registration company
+[33m77f4fa2[m HEAD@{39}: commit: add registration company
+[33m247fb96[m HEAD@{40}: commit: add registration company
+[33mdb84672[m HEAD@{41}: commit: add registration company
+[33m947a91d[m HEAD@{42}: commit: add registration company
+[33mf341afb[m HEAD@{43}: commit: add registration company
+[33m9673f75[m HEAD@{44}: commit: add registration company
+[33m970a872[m HEAD@{45}: pull: Merge made by the 'ort' strategy.
+[33mf99dc17[m HEAD@{46}: commit: add registration company
+[33m594b3ae[m HEAD@{47}: pull: Fast-forward
+[33mc7bde19[m HEAD@{48}: reset: moving to HEAD
+[33mc7bde19[m HEAD@{49}: commit: fix gateway
+[33m537e41a[m HEAD@{50}: commit: fix gateway
+[33mce3416d[m HEAD@{51}: commit: fix bug host
+[33mb3cded8[m HEAD@{52}: pull: Fast-forward
+[33m1cc2368[m HEAD@{53}: commit: add test minio
+[33m57b669f[m HEAD@{54}: pull: Fast-forward
+[33m4e2a714[m HEAD@{55}: commit: update template
+[33mf37fbe0[m HEAD@{56}: commit: update layout
+[33mefe8bd2[m HEAD@{57}: pull: Fast-forward
+[33m53ee9a6[m HEAD@{58}: commit: add trait guzzle
+[33m510fe7e[m HEAD@{59}: commit: add validating subdomain
+[33m4a0a978[m HEAD@{60}: commit: add validating subdomain
+[33m3d1bf6e[m HEAD@{61}: commit: add validating subdomain
+[33m0681c19[m HEAD@{62}: commit: add validating subdomain
+[33m4dcd27e[m HEAD@{63}: commit: add middleware subdomain
+[33mb5857c8[m HEAD@{64}: commit: add hrms menu
+[33m548059d[m HEAD@{65}: pull: Fast-forward
+[33mfaaadb9[m HEAD@{66}: Branch: renamed refs/heads/master to refs/heads/main
+[33mfaaadb9[m HEAD@{68}: commit (initial): initial commit
