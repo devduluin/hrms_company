@@ -28,7 +28,7 @@ class PayrollSettingController extends Controller
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = __('message.payroll_setting_title');
         $allSessions = session()->all();
-        $data['company'] = $allSessions['company_id'][0];
+        $data['company'] = $allSessions['company_id'];
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
         $allSessions = session()->all();
         $data['apiPayrollUrl'] = $this->apiGatewayUrl . '/v1/salary_components';
@@ -42,7 +42,7 @@ class PayrollSettingController extends Controller
         $data['page_title']   = __('message.payroll_setting_title');
         $allSessions = session()->all();
         $data['id'] = $id;
-        $data['company'] = $allSessions['company_id'][0];
+        $data['company'] = $allSessions['company_id'];
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
         $allSessions = session()->all();
         $data['apiPayrollUrl'] = $this->apiGatewayUrl . '/v1/salary_components';

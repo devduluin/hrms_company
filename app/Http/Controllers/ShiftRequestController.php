@@ -23,7 +23,7 @@ class ShiftRequestController extends Controller
         $data['title'] = "Data Shift Request";
         $data['page_title'] = "New Shift Request";
         $allSessions = session()->all();
-        $data['company'] = $allSessions['company_id'][0];
+        $data['company'] = $allSessions['company_id'];
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies/company/datatables';
         $data['apiUrl'] = $this->apiGatewayUrl . "/v1/companies/request-approver";
         $data['apiDepartmentUrl'] = $this->apiGatewayUrl . "/v1/companies/department/datatables";
@@ -37,7 +37,7 @@ class ShiftRequestController extends Controller
         $data['page_title'] = "New Shift Request";
         $allSessions = session()->all();
         $data['id'] = $id;
-        $data['company'] = $allSessions['company_id'][0];
+        $data['company'] = $allSessions['company_id'];
         $data['apiUrl'] = $this->apiGatewayUrl . "/v1/companies/request-approver";
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies/company/datatables';
         $data['apiDepartmentUrl'] = $this->apiGatewayUrl . "/v1/companies/department/datatables";
