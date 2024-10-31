@@ -7,7 +7,7 @@
     'filter' => [],
     'url',
     'trigger',
-    'order' => [[0, 'ASC']],
+    'order' => '' ?? [[0, 'ASC']],
     'downloadOptions' => false,
     'dtcomponent' => 'true',
     'dtheight' => '400',
@@ -16,6 +16,7 @@
     'customButtonText' => '',
     'customButtonFunction' => '',
 ])
+
 
 <div class="relative overflow-x-auto sm:rounded-lg">
     <table id="{{ $id }}" style="width:100%"
@@ -228,10 +229,9 @@
                         'px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500'
                     );
 
-
                     // Modify page length dropdown with the provided structure and classes
                     $('.dataTables_length').addClass(
-                        'px-0 block sm:flex flex-col items-start xl:flex-row xl:items-center gap-y-2 mb-4');
+                        'block sm:flex flex-col items-start xl:flex-row xl:items-center gap-y-2 mb-4');
                     $('.dataTables_length label').addClass(
                         'inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right mr-3 whitespace-nowrap');
                     $('.dataTables_length select').addClass(

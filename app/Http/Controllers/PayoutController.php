@@ -27,7 +27,7 @@ class PayoutController extends Controller
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Create Salary Slip';
         $allSessions = session()->all();
-        $data['company'] = $allSessions['company_id'][0];
+        $data['company'] = $allSessions['company_id'];
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
         $data['apiEmployeeUrl'] = $this->apiGatewayUrl . '/v1/employees';
         $data['apiGateway'] = $this->apiGatewayUrl . '/users';
@@ -42,7 +42,7 @@ class PayoutController extends Controller
     //     $data['title']   = 'Duluin HRMS';
     //     $data['page_title']   = __('message.payroll_setting_title');
     //     $allSessions = session()->all();
-    //     $data['company'] = $allSessions['company_id'][0];
+    //     $data['company'] = $allSessions['company_id'];
     //     $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
     //     $allSessions = session()->all();
 
@@ -107,7 +107,7 @@ class PayoutController extends Controller
         $data['page_title']   = 'Create Salary Component';
         $data['apiPayrollUrl'] = $this->apiGatewayUrl . '/v1/salary_components';
         $allSessions = session()->all();
-        $data['company'] = $allSessions['company_id'][0];
+        $data['company'] = $allSessions['company_id'];
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
 
         return view('dashboard.payroll.payout.salary_component.create', $data);
@@ -118,7 +118,7 @@ class PayoutController extends Controller
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Create Salary Structure';
         $allSessions = session()->all();
-        $data['company'] = $allSessions['company_id'][0];
+        $data['company'] = $allSessions['company_id'];
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
         $allSessions = session()->all();
 
@@ -132,7 +132,7 @@ class PayoutController extends Controller
         $data['apiPayrollUrl'] = $this->apiGatewayUrl . '/v1/salary_components';
         $data['salaryComponentId'] = $id;
         $allSessions = session()->all();
-        $data['company'] = $allSessions['company_id'][0];
+        $data['company'] = $allSessions['company_id'];
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
 
         return view('dashboard.payroll.payout.salary_component.edit', $data);
