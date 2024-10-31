@@ -20,7 +20,7 @@ class SalaryStructureAssignmentController extends Controller
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Salary Structure Assignment';
         $allSessions = session()->all();
-        $data['company'] = $allSessions['company_id'][0];
+        $data['company'] = $allSessions['company_id'];
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
         $data['apiPayrollUrl'] = $this->apiGatewayUrl . '/v1/salary_structures';
         $allSessions = session()->all();
@@ -36,7 +36,7 @@ class SalaryStructureAssignmentController extends Controller
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Salary Structure Assignment';
         $allSessions = session()->all();
-        $data['company'] = $allSessions['company_id'][0];
+        $data['company'] = $allSessions['company_id'];
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
         $data['apiPayrollUrl'] = $this->apiGatewayUrl . '/v1/salary_structures';
         $data['apiEmployeeUrl'] = $this->apiGatewayUrl . '/v1/employees';
@@ -69,7 +69,7 @@ class SalaryStructureAssignmentController extends Controller
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Salary Structure Assignment';
         $allSessions = session()->all();
-        $data['company'] = $allSessions['company_id'][0];
+        $data['company'] = $allSessions['company_id'];
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
         $data['apiPayrollUrl'] = $this->apiGatewayUrl . '/v1/salary_structures';
         $data['apiEmployeeUrl'] = $this->apiGatewayUrl . '/v1/employees';

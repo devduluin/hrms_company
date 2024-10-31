@@ -30,7 +30,7 @@ class SalaryComponentController extends Controller
         $data['page_title']   = 'Create Salary Component';
         $data['apiPayrollUrl'] = $this->apiGatewayUrl . '/v1/salary_components';
         $allSessions = session()->all();
-        $data['company'] = $allSessions['company_id'][0];
+        $data['company'] = $allSessions['company_id'];
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
 
         return view('dashboard.payroll.payout.salary_component.create', $data);
@@ -43,7 +43,7 @@ class SalaryComponentController extends Controller
         $data['apiPayrollUrl'] = $this->apiGatewayUrl . '/v1/salary_components';
         $data['salaryComponentId'] = $id;
         $allSessions = session()->all();
-        $data['company'] = $allSessions['company_id'][0];
+        $data['company'] = $allSessions['company_id'];
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
 
         return view('dashboard.payroll.payout.salary_component.edit', $data);

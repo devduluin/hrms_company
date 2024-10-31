@@ -124,6 +124,9 @@ Route::controller(DashboardController::class)->group(function () {
 
                     //payroll modules
                     require __DIR__ . '/payroll.php';
+                    
+                    //payroll modules
+                    require __DIR__ . '/user.php';
 
                     //dynamic content
                     //Route::get('/{any}', 'index');
