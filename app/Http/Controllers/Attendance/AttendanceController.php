@@ -26,7 +26,7 @@ class AttendanceController extends Controller
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Add New Attendance';
         $allSessions = session()->all();
-        $data['company_id'] = $allSessions['company_id'][0];
+        $data['company_id'] = $allSessions['company_id'];
         $data['apiEmployeeUrl'] = $this->apiGatewayUrl . '/v1/employees/employee/all';
         $data['apiDetailEmployee'] = $this->apiGatewayUrl . '/v1/employees/employee/';
         $data['apiAttendance'] = $this->apiGatewayUrl . '/v1/attendance/attendance/operator/store';

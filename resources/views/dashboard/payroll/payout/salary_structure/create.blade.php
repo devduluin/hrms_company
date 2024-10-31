@@ -58,7 +58,7 @@
 
                 if (lastActiveTabId !== newTabId) {
                     e.preventDefault();
-                    await handleFormSubmission(lastActiveTabId);
+                    // await handleFormSubmission(lastActiveTabId);
                     lastActiveTabId = newTabId;
                     console.log(lastActiveTabId);
 
@@ -111,7 +111,8 @@
                         const response = JSON.parse(xhr.responseText);
                         handleErrorResponse(response, formId);
                     } else {
-                        toastr.error('An error occurred while processing your request.');
+                        showErrorNotification('error',
+                            `An error occurred while processing your request.`);
                     }
                     // activateTab(formId);
                 }
@@ -129,12 +130,12 @@
 
             function handleResponse(response) {
                 if (response.success) {
-                    toastr.success(response.message);
+                    showSuccessNotification('success', response.message);
                     $("#salary_structure_id").val(response.data.id);
                     location.href =
                         `{{ url('dashboard/hrms/payout/salary_structure') }}/edit/${response.data.id}`;
                 } else {
-                    toastr.error(response.message);
+                    showErrorNotification('error', response.message);
                 }
             }
 
@@ -174,7 +175,8 @@
 
             function handleErrorResponse(result, tabId) {
                 const errorString = result.error || 'An error occurred.';
-                toastr.error(`There were validation errors on tab ${tabId}`);
+                // toastr.error(`There were validation errors on tab ${tabId}`);
+                showErrorNotification('error', `There were validation errors on tab ${tabId}`);
                 const errorMessages = errorString.split(', ');
 
                 $('.error-message').remove();

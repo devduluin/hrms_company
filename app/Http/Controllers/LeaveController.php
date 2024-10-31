@@ -7,10 +7,16 @@ use Illuminate\Http\Request;
 class LeaveController extends Controller
 {
     protected $apiGatewayUrl;
+    public function __construct()
+    {
+        $this->apiGatewayUrl = config('apiendpoints.gateway');
+    }
+
     public function index()
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Leave Overview';
+        $data['apiUrl'] = $this->apiGatewayUrl . '/v1/employees';
 
         return view('dashboard.hrms.leave.index', $data);
     }

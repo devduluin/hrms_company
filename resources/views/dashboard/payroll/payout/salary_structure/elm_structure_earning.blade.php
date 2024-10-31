@@ -10,7 +10,10 @@
     @csrf
     <div class=" gap-5 mt-2">
         <div class="mb-7">
-            <x-form.button type="button" id="add-earning-row" label="Add New Earning" style="tertiary"></x-form.button>
+            {{-- <x-form.button type="button" id="add-earning-row" label="Add New Earning" style="tertiary"></x-form.button> --}}
+            <button type="button" id="add-earning-row"
+                class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium text-xs cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-slate-200 text-slate-700 dark:border-danger shadow-md w-100">Add
+                New Earning</button>
         </div>
         <div class="card-body">
             <div class="relative mb-4 mt-2 rounded-[0.6rem] border border-slate-200/80 dark:border-darkmode-400 mr-5">
@@ -56,8 +59,9 @@
         </div>
 
         <div class="mb-7">
-            <x-form.button type="button" id="add-deduction-row" label="Add New Deduction"
-                style="tertiary"></x-form.button>
+            <button type="button" id="add-deduction-row"
+                class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium text-xs cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-slate-200 text-slate-700 dark:border-danger shadow-md w-100">Add
+                New Deduction</button>
         </div>
         <div class="card-body">
             <div class="relative mb-4 mt-4 rounded-[0.6rem] border border-slate-200/80 dark:border-darkmode-400 mr-5">
@@ -242,11 +246,11 @@
             });
         }
 
-        document.getElementById('add-earning-row').addEventListener('click', function() {
+        $('#add-earning-row').on('click', function() {
             addRowToTable('editable-earning-table', 'earningRowCount');
         });
 
-        document.getElementById('add-deduction-row').addEventListener('click', function() {
+        $('#add-deduction-row').on('click', function() {
             addRowToTable('editable-deduction-table', 'deductionRowCount');
         });
 

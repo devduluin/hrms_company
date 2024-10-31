@@ -39,7 +39,7 @@
                         <div class="box flex flex-col p-5">
                             <div class="flex flex-col mb-4 gap-y-3 md:h-10 md:flex-row md:items-center">
                                 <div class="text-base font-medium group-[.mode--light]:text-white">
-                                    {{ $page_title }}
+                                    Shift Assignment
                                 </div>
                                 <div class="flex flex-col gap-x-1 sm:flex-row md:ml-auto" id="assignShiftContainer">
                                     <x-filter></x-filter>
@@ -51,19 +51,21 @@
                                 </div>
                             </div>
                             <x-datatable id="employeeTable"
-                                url="http://apidev.duluin.com/api/v1/salary_structure_assignments/salary_structure_assignment/employeeDatatables"
+                                url="$apiUrl"
                                 method="POST" class="display">
                                 <x-slot:thead>
-                                    <th data-value="employee_id_rel" data-render="getEmployee">Name</th>
-                                    <th data-value="salaryStructureAssignment.salaryStructure.name">Salary
-                                        Structure</th>
-                                    <th data-value="salaryStructureAssignment.salaryStructure.is_active"
-                                        data-render="getStatus">Status
+                                    <th data-value="id" data-render="getCheckBox" orderable="false">
+                                        <input type="checkbox" id="select-all" />
                                     </th>
+                                    <th data-value="employee_id_rel" data-render="getEmployee">Employee Name</th>
+                                    <th data-value="salaryStructureAssignment.salaryStructure.name">Company</th>
+                                    <th data-value="salaryStructureAssignment.salaryStructure.is_active"
+                                        data-render="getStatus">Shift Type
+                                    </th>
+                                    <th data-value="status" data-render="status">Status</th>
                                     <th data-value="id" data-render="getActionBtn">Action</th>
                                 </x-slot:thead>
-                            </x-datatable>
-                            <x-shift_table id="assignShiftContainer" apiUrl="{{ $apiUrl }}" h1="Employee" h2="Company" h3="Department" h4="Designation" h5="Shift"></x-table_custom>
+                            </x-datatable>
                         </div>
                         <div class=" fixed z-10 flex items-center justify-center " id="modalOverlay" >
                             <div class="modal fade box p-4 inset-0 z-50 hidden" id="assignShiftModal"  tabindex="-1" aria-labelledby="assignShiftModalLabel" aria-hidden="true">
@@ -116,121 +118,91 @@
         </div>
     </div>
 </div>
-@push('js')
-    <script type="text/javascript">
-        $(document).ready(function() {
-            getShiftType();
-        });
 
-        function getCheckBox(data, type, row, meta) {
-            return `<input type="checkbox" name="employee_id" value="${data}">`;
-        }
+<script src="{{ asset('dist/js/vendors/tab.js') }}"></script> 
+<script src="{{ asset('dist/js/vendors/tom-select.js') }}"></script>
+<script src="{{ asset('dist/js/components/base/tom-select.js') }}"></script> 
 
+
+<script>
+    $(document).ready(function() {
         $('#select-all').on('click', function() {
             var isChecked = $(this).is(':checked');
-            $('#shiftAssignmentTable tbody input[type="checkbox"]').prop('checked', isChecked);
+            $('#employeeTable tbody input[type="checkbox"]').prop('checked', isChecked);
+            toggleCustomButton();
         });
 
-        function getName(data, type, row, meta) {
-            if (data !== null) {
-                return data.first_name + ' ' + data.last_name;
+        $('#employeeTable').on('change', 'tbody input[type="checkbox"]', function() {
+            if (!this.checked) {
+                $('#select-all').prop('checked', false);
             }
-            return 'N/A';
-        }
+            toggleCustomButton();
+        });
 
-        function getCompany(data, type, row, meta) {
-           return data.company_name;
-        }
-
-        function getShiftTypeName(data, type, row, meta) {
-           return data.shift_type_name;
-        }
-
-        function shiftStartTime(data, type, row, meta) {
-            const startTime = new Date(data.start_time);
-            const endTime = new Date(data.end_time);
-            return startTime.toLocaleTimeString("en-GB", { hour: '2-digit', minute: '2-digit' }) + ' - ' + endTime.toLocaleTimeString("en-GB", { hour: '2-digit', minute: '2-digit' });
-        }
-
-        async function getShiftType()
-        {
-            let companyId = localStorage.getItem('company');
-            var param = {
-                url: "http://apidev.duluin.com/api/v1/companies/shift-type",
-                method: "GET",
-                data: {
-                    company_id: localStorage.getItem('company'),
-                }
+        function toggleCustomButton() {
+            var anyChecked = $('#employeeTable tbody input[type="checkbox"]:checked').length > 0;
+            if (anyChecked) {
+                employeeTable.buttons('.custom-btn').enable();
+                $('.custom-btn').removeClass('d-none');
+            } else {
+                employeeTable.buttons('.custom-btn').disable();
+                $('.custom-btn').addClass('d-none');
             }
+        }
 
-            await transAjax(param).then((result) => {
-                let shift = result.data;
+        employeeTable.buttons('.custom-btn').disable();
 
-                var html  = "";
-                shift.forEach((shift) => {
-                html += `
-                    <option value="${shift.id}">
-                        ${shift.shift_type_name}
-                    </option>
-                `  
+        $(".custom-btn").click(function() {
+            var checkedValues = [];
+            $('#employeeTable tbody input[type="checkbox"]:checked').each(function() {
+                var rowData = JSON.parse($(this).val());
+                checkedValues.push({
+                    'employee_id': rowData.id,
+                    'first_name': rowData.first_name,
+                    'last_name': rowData.last_name,
+                    'personal_email': rowData.addressContact.personal_email,
+                    'company': rowData.company_id_rel.company_name,
+                    'company_id': rowData.company_id,
+                    'domain': rowData.company_id_rel.domain
                 });
-                $("#shift").html(html);
-
-            }).catch((error) => {
-                console.log(error);
             });
-        }
-
-        //shift assignment
-        $('#updateShiftAssignment').submit(async function(e) {
-            e.preventDefault();
-
-            const checkedEmployeeIds = [];
-            document.querySelectorAll('input[name="employee_id"]:checked').forEach(checkbox => {
-                checkedEmployeeIds.push(checkbox.value);
-            });
-            
-            if(checkedEmployeeIds.length <= 0) {
-                return alert('Employee cannot be null');
-            }
-
-            var shiftTypeId = $("#shift").val();
-            var param = {
-                url: "{{ $apiUpdateBulkShift }}",
-                method: "PUT",
-                data: JSON.stringify({
-                    employee_ids: checkedEmployeeIds,
-                    shift_type_id: shiftTypeId,
-                    company_id: localStorage.getItem('company'),
-                    }
-                ),
-                processData: false,
-                contentType: false,
-                cache: false,
-            }
-
-            submitButton(true);
-            await transAjax(param).then((result) => {
-                submitButton(false);
-                showSuccessNotification("Shift Assignment", "This shift was successfully implemented.");
-                $('#loading').show();
-                setTimeout(() => {
-                    window.location.href = "{{ url()->current() }}"
-                }, 300);
-            }).catch((err) => {
-                submitButton(false);
-                console.log(err);
-            })
-
-            function submitButton(state) {
-                if(state) {
-                    $("#submitButton").html('Apply...');
-                    $("#submitButton").attr('disabled', 'disabled');
-                }else {
-                    $("#submitButton").html('Apply');
-                    $("#submitButton").removeAttr('disabled');
-                }
-            }
+            var jsonCheckedValues = JSON.stringify(checkedValues);
+            handleNotification(checkedValues);
         });
-    </script>
-@endpush
+    });
+
+
+    $(document).ready(function() {
+        // Fungsi untuk cek semua checkbox
+        $('#selectAll').on('click', function() {
+            $('tbody input[type="checkbox"]').prop('checked', this.checked);
+            toggleAssignShiftButton();
+        });
+
+        // Event listener untuk setiap checkbox di dalam tbody
+        $('tbody').on('change', 'input[type="checkbox"]', function() {
+            toggleAssignShiftButton();
+        });
+
+        // Event listener untuk menampilkan modal dan background abu-abu
+        $('#assignShiftButton').on('click', function() {
+            $('#modalOverlay').removeClass('hidden'); // Tampilkan overlay
+            $('#assignShiftModal').removeClass('hidden'); // Tampilkan modal
+        });
+
+        // Fungsi untuk menampilkan, menyembunyikan, dan mengubah label tombol Assign Shift
+        function toggleAssignShiftButton() {
+            var checkedCount = $('tbody input[type="checkbox"]:checked').length;
+
+            if (checkedCount > 0) {
+                $('#assignShiftButton').prop('disabled', false);
+                $('#assignShiftButton').html('Assign Shift (' + checkedCount + ')');
+            } else {
+                $('#assignShiftButton').prop('disabled', true);
+                $('#assignShiftButton').html('Assign Shift');
+            }
+        }
+    });
+</script>
+
+@endsection
