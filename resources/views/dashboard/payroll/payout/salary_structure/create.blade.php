@@ -58,14 +58,14 @@
 
                 if (lastActiveTabId !== newTabId) {
                     e.preventDefault();
-                    await handleFormSubmission(lastActiveTabId);
+                    // await handleFormSubmission(lastActiveTabId);
                     lastActiveTabId = newTabId;
                     console.log(lastActiveTabId);
 
                     $(lastActiveTabId + "-btn").click(async function(e) {
                         console.log(lastActiveTabId + "-form");
                         e.preventDefault();
-                        await handleFormSubmission(lastActiveTabId);
+                        // await handleFormSubmission(lastActiveTabId);
                     });
                 }
             });

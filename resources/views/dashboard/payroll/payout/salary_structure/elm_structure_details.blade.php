@@ -9,12 +9,10 @@
             ]">
             <option value="">Select Company</option>
         </x-form.select>
-        <x-form.select id="currency" name="currency" label="Currency" url="{{ url('dashboard/hrms/currency') }}"
-            apiUrl="http://apidev.duluin.com/api/v1/currency/currency/datatable" columns='["currency_name"]'
-            :keys="[
-                'company_id' => $company,
-            ]">
-            <option value="">Select Company</option>
+        <x-form.select name="currency" id="currency" label="Payroll Currency" class="tom-select w-full"
+            data-placeholder="Select Currency" required>
+            <option value="">Select Currency</option>
+            <option value="idr">Rupiah</option>
         </x-form.select>
 
         <x-checkbox id="is_active" label="Is Active" name="is_active" guidelines="" />
