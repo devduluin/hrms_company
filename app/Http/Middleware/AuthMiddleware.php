@@ -44,8 +44,9 @@ class AuthMiddleware
                     return redirect(url('dashboard/hrms/setup_initialize'));
                 }
             };
-            
-            session(['locale' => $responseBody['data']['company_id_rel']['language']]);
+            if(isset($responseBody['data']['company_id_rel'])){
+                session(['locale' => $responseBody['data']['company_id_rel']['language']]);
+            }
             
         };
            
