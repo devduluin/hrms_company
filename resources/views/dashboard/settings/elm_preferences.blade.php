@@ -46,7 +46,7 @@
                 </div>
             </div>
             <div class="mt-3 w-full flex-1 xl:mt-0">
-                <select id="time_zone" name="time_zone" data-title="Time Zone" data-url="{{ url('dashboard/settings/timezone') }}" data-placeholder="Select your timezone" class="tom-select w-full">
+                <select id="time_zone" name="time_zone" data-title="Time Zone"  data-placeholder="Select your timezone" class="tom-select w-full">
                     <option value="Asia/Jakarta">
                         Asia/Jakarta (WIB)
                     </option>

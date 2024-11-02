@@ -83,8 +83,15 @@
                 <!-- BEGIN: Second Child -->
             </li>
             <li>
-                <a href="{{ url('/dashboard/settings/user_account') }}" class="side-menu__link ">
+                <a href="{{ route('hrms.hr_setting') }}" class="side-menu__link ">
                     <i data-tw-merge="" data-lucide="settings" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
+                    <div class="side-menu__link__title">Settings</div>
+                </a>
+                <!-- BEGIN: Second Child -->
+            </li>
+            <li>
+                <a href="{{ url('/dashboard/settings/user_account') }}" class="side-menu__link ">
+                    <i data-tw-merge="" data-lucide="user" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
                     <div class="side-menu__link__title">My Account</div>
                 </a>
                 <!-- BEGIN: Second Child -->

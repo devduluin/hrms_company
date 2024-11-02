@@ -7,11 +7,19 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.1.2/css/buttons.dataTables.min.css">
     
     <style>
-        select.dt-input {
-            width: 60px;
+        
+        .dataTables_wrapper .dataTables_filter input {
+            --tw-border-opacity: 1;
+            border-color: rgb(226 232 240 / var(--tw-border-opacity));
+            font-size: 0.875rem;
+            line-height: 1.25rem;
         }
-        div.dt-paging {
-            justify-self: end;
+        .dataTables_wrapper .dataTables_length select {
+            width: 55px;
+            --tw-border-opacity: 1;
+            border-color: rgb(226 232 240 / var(--tw-border-opacity));
+            font-size: 0.875rem;
+            line-height: 1.25rem;
         }
     </style>
 @endPushOnce

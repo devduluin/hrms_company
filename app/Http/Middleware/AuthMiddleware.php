@@ -30,22 +30,26 @@ class AuthMiddleware
         
         }else{
             $appToken = $request->session()->get('app_token');
-            $headers = [
-                'accept' => 'application/json',
-                'Authorization' => 'Bearer ' . $appToken,
-            ];
+            $locale = $request->session()->get('locale');
             
-            $response = $this->getRequest(config('apiendpoints.gateway') . '/v1/companies/company/setting/'. $company_id, '', $headers);
-            $responseBody = json_decode($response->getBody(), true);
+            if(!$locale){
+                $headers = [
+                    'accept' => 'application/json',
+                    'Authorization' => 'Bearer ' . $appToken,
+                ];
                 
-            if(!isset($responseBody['data'])){
-                $lastSegment = $request->segment(count($request->segments()));
-                if($lastSegment != 'setup_initialize'){
-                    return redirect(url('dashboard/hrms/setup_initialize'));
+                $response = $this->getRequest(config('apiendpoints.gateway') . '/v1/companies/company/setting/'. $company_id, '', $headers);
+                $responseBody = json_decode($response->getBody(), true);
+                    
+                if(!isset($responseBody['data'])){
+                    $lastSegment = $request->segment(count($request->segments()));
+                    if($lastSegment != 'setup_initialize'){
+                        return redirect(url('dashboard/hrms/setup_initialize'));
+                    }
+                };
+                if(isset($responseBody['data']['company_id_rel'])){
+                    session(['locale' => $responseBody['data']['company_id_rel']['language']]);
                 }
-            };
-            if(isset($responseBody['data']['company_id_rel'])){
-                session(['locale' => $responseBody['data']['company_id_rel']['language']]);
             }
             
         };

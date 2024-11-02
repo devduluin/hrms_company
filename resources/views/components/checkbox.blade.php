@@ -9,7 +9,7 @@
         <input type="checkbox" id="{{ $id }}" name="{{ $name }}" class="form-checkbox {{ $customClass }}"
             {{ $disabled ? 'disabled' : '' }} {{ $checked }}>
 
-        <label class="ml-2 block text-sm text-gray-900">
+        <label for="{{ $id }}" class="ml-2 block text-sm text-gray-900">
             {{ $label }}
         </label>
         @if ($disabled)

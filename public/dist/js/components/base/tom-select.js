@@ -85,7 +85,7 @@ function initializeTomSelect() {
                                     // Add the selected option if it does not exist in the loaded options
                                     options.push({
                                         id: selectedId,
-                                        name: `Selected Option (${selectedId})`, // You can customize the name as needed
+                                        name: options.name, // You can customize the name as needed
                                     });
                                 }
 
@@ -112,7 +112,7 @@ function initializeTomSelect() {
                         });
                     }
                 },
-                onInitialize: function () {
+                onLoad: function () {
                     const tomSelectInstance = this;
 
                     // Pre-select the option when TomSelect is initialized
@@ -129,6 +129,7 @@ function initializeTomSelect() {
                 },
                 render: {
                     option_create: function (data, escape) {
+                         
                         if (url) {
                             return (
                                 '<div class="create" onclick="window.location.href=\'' +
@@ -155,6 +156,9 @@ function initializeTomSelect() {
                                 "</a></div>"
                             );
                         }
+                    },
+                    loading:function(data,escape){
+                        return '';
                     },
                 },
             };
