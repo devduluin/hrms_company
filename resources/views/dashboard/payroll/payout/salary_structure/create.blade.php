@@ -205,6 +205,44 @@
                     }, 500);
                 }
             }
+
+            // get parent company id
+            $("#company_id").change(async function() {
+                await getParentCompany($(this).val());
+            });
+
+            async function getParentCompany(company) {
+                const companyId = company;
+                try {
+                    if (companyId) {
+                        const response = await fetch(
+                            `{{ $apiCompanyUrl }}/company/${companyId}`, {
+                                method: 'GET',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Authorization': `Bearer ${localStorage.getItem('app_token')}`,
+                                    'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
+                                },
+                            });
+
+                        if (!response.ok) {
+                            showErrorNotification('error', response.message);
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+
+                        const parentCompany = await response.json();
+                        var company = parentCompany.data.parent_company == null ? parentCompany.data.id :
+                            parentCompany.data.parent_company;
+                        console.log("🚀 ~ getParentCompany ~ var company:", company);
+                        $("#parent_company").val(company);
+                    } else {
+                        $("#parent_company").val("");
+                    }
+                } catch (error) {
+                    console.error('Fetch error:', error);
+                    showErrorNotification('error', response.message);
+                }
+            }
         });
     </script>
 @endpush

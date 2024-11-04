@@ -6,7 +6,7 @@
             data-leave-to="!p-0 !h-0 overflow-hidden invisible opacity-0" id="{{ $tab }}" role="tabpanel"
             aria-labelledby="{{ $tab }}-tab"
             class="tab-pane leading-relaxed {{ $loop->first ? 'active' : '' }}">
-            @include('dashboard.payroll.payout.elm_payout_' . $tab)
+            @include('dashboard.payroll.payout.payslip.elm_payout_' . $tab)
         </div>
     @endforeach
 </div>

@@ -24,13 +24,14 @@
                                     icon="save" />
                             </div>
                         </div>
-                        <form id="payslip-form" method="post" action="http://apidev.duluin.com/api/v1/payslip/payroll_entry">
+                        <form id="payslip-form" method="post"
+                            action="http://apidev.duluin.com/api/v1/payslip/payroll_entry">
                             @csrf
                             <div class="mt-1.5 flex flex-col">
                                 <input type="hidden" name="employee_id" id="employee_id" value="" />
-                                @include('dashboard.payroll.payout.tabs')
+                                @include('dashboard.payroll.payout.payslip.tabs')
                                 <div class="box box--stacked flex flex-col p-5">
-                                    @include('dashboard.payroll.payout.tab-content')
+                                    @include('dashboard.payroll.payout.payslip.tab-content')
                                 </div>
                             </div>
                         </form>

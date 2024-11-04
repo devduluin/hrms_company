@@ -2,20 +2,19 @@
         Overview
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4">
-        <x-form.select id="employee_id" name="employee_id" label="Employee"
-            url="{{ url('dashboard/hrms/employee/new_employee') }}" apiUrl="{{ $apiEmployeeUrl }}/employee/datatables"
-            columns='["first_name","last_name"]' :keys="[
-                'company_id' => $company,
-            ]">
-        </x-form.select>
-        <input type="hidden" id="employee" name="employee" />
         <x-form.select id="company_id" name="company_id" label="Company" url="{{ url('dashboard/hrms/designation') }}"
-            apiUrl="{{ $apiCompanyUrl }}/company/datatables" columns='["company_name"]' :selected="$company"
-            :keys="[
+            :apiUrl="$apiCompanyUrl . '/company/datatables'" columns='["company_name"]' :selected="$company" :keys="[
                 'company_id' => $company,
-            ]">
+            ]" :data="['employee_id' => '#employee_id']">
             <option value="">Select Company</option>
         </x-form.select>
+        <x-form.select id="employee_id" name="employee_id" label="Employee"
+            url="{{ url('dashboard/hrms/employee/new_employee') }}" :apiUrl="$apiEmployeeUrl . '/employee/datatables'"
+            columns='["first_name","last_name"]' :keys="[
+                'company_id' => $company,
+            ]" :data="['company_id' => '#company_id']">
+        </x-form.select>
+        <input type="hidden" id="employee" name="employee" />
         <x-form.datepicker id="posting_date" label="Posting Date" name="posting_date" required />
         <x-form.select name="currency" id="currency" label="Currency" class="tom-select w-full"
             data-placeholder="Select Currency" url="{{ url('dashboard/hrms/designation') }}" required>
