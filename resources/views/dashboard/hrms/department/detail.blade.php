@@ -267,8 +267,18 @@
                     method  = 'PATCH';
                     company_id = response.data.company_id;
                     $("select[name=company_id]").val(response.data.company_id).change();
-                    $("select[name=parent_department_id]").val(response.data.parent_department_id).change();
-                    $("input[name=department_name]").val(response.data.department_name)
+                    $("input[name=department_name]").val(response.data.department_name);
+                    $("select[name=parent_department_id]").val(response.data.parent_department_id);
+                    
+                    const parent_department_id = $('#parent_department_id')[0].tomselect;
+                    const parent_department_idValue = response.data.parent_department_id;
+                    if (!parent_department_id.options[parent_department_idValue]) {
+                        parent_department_id.addOption({
+                            value: parent_department_idValue,
+                            text: parent_department_idValue
+                        });
+                    }
+                    parent_department_id.setValue(parent_department_idValue);
                     getResponseApprovers();
                 } else {
                     showErrorNotification('error', response.message);
@@ -485,12 +495,16 @@
                 success: function(response) {
                     const rowComponents = response.data;
                     const $selectElement = $('#getComponent-' + tableId + '-' + rowId);
-                    var selected = '';
+                   
                     var selectOption = '';
                     $.each(rowComponents, function(index, component) {
                         var employee_id = (data) === null ? null : data.employee_id
+                        
                         if(employee_id == component.id){
-                            selected = 'selected';
+                             
+                            var selected = 'selected="true"';
+                        }else{
+                            var selected = '';
                         }
                         selectOption +='<option value="'+component.id+'" '+selected+' data-email="'+component.addressContact.personal_email+'" data-designation="">'+component.first_name+' '+component.last_name+'</option>'
                         
