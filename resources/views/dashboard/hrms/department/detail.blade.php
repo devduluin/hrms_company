@@ -438,7 +438,7 @@
             
             if (employee_id) {
                 if(data.employee_id_rel){
-                    fullName = data ? data.employee_id_rel.fullname : 'Select Approver';
+                    fullName = data ? data.employee_id_rel.first_name+' '+data.employee_id_rel.last_name : 'Select Approver';
                     email = data ? data.employee_id_rel.addressContact.personal_email : null;
                 }else{
                     location.reload();
