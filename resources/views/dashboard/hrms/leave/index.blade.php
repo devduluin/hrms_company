@@ -15,7 +15,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="box box--stacked flex flex-col p-5 mt-6">
+                {{-- <div class="box box--stacked flex flex-col p-5 mt-6">
                     <x-datatable id="applicantTable" :url="'http://apidev.duluin.com/api/v1/branch/datatable'" method="POST" class="display">
                         <x-slot:thead>
                             <th data-value="employee_name">Employee Name</th>
@@ -24,7 +24,7 @@
                             <th data-value="leave_date">Date</th>
                         </x-slot:thead>
                     </x-datatable>
-                </div>
+                </div> --}}
                 <div class="box p-4 mt-4">
                     <div class="text-m font-medium">
                         More Action

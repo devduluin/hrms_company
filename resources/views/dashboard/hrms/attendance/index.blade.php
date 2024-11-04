@@ -376,23 +376,6 @@
            });
         }
 
-        //sementara
-        async function transAjaxx(data) {
-            html = null;
-            data.headers = {
-                'Authorization': `Bearer xN9P6a8sL2bV3iR4fC5J6Q7kT8yU9wZ0`,
-                'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`,
-                'Content-Type': 'application/json',
-            }
-            await $.ajax(data).done(function(res) {
-                    html = res;
-                })
-                .fail(function() {
-                    return false;
-                })
-            return html
-        }
-
         //ambil data chart attendance dari server
         async function getDataChart()
         {
@@ -404,7 +387,7 @@
             await transAjaxx(param).then((result) => {
                 const chart = result.data;
                 console.log(chart);
-
+                
                 //chart
                 let e = $(".report-bar-chart-5");
                 e.length &&

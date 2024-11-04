@@ -67,6 +67,8 @@
                                     <th data-value="employee_id_rel"  data-render="getName">Employee Name</th>
                                     <th data-value="company_id_rel" data-render="getCompany">Company</th>
                                     <th data-value="shift_type_id_rel" data-render="getShiftTypeName">Shift Type</th>
+                                    <th data-value="shift_type_id_rel" data-render="getStartDate">Start Date</th>
+                                    <th data-value="shift_type_id_rel" data-render="getEndTypeDate">End Date</th>
                                     <th style="text-align: center" data-value="shift_type_id_rel" data-render="shiftStartTime">Shift Time</th>
                                 </x-slot:thead>
                             </x-datatable>
@@ -94,7 +96,7 @@
 
         function getName(data, type, row, meta) {
             if (data !== null) {
-                return data.first_name + ' ' + data.last_name;
+                return data?.first_name  + ' ' + data?.last_name;
             }
             return 'N/A';
         }
@@ -105,6 +107,14 @@
 
         function getShiftTypeName(data, type, row, meta) {
            return data.shift_type_name;
+        }
+
+        function getStartDate(data, type, row, meta) {
+           return data.start_time.split(" ")[0];
+        }
+
+        function getEndTypeDate(data, type, row, meta) {
+           return data.end _time.split(" ")[0];
         }
 
         function shiftStartTime(data, type, row, meta) {
