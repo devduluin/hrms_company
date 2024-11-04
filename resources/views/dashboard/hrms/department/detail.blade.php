@@ -100,10 +100,10 @@
                                             <table class="w-full text-left table-earning-editable table-edits">
                                                 <thead class="bg-slate-200/60 dark:bg-slate-200">
                                                     <tr>
-                                                        <th
+                                                        <th width="60px"
                                                             class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
                                                             No</th>
-                                                        <th
+                                                        <th width="35%"
                                                             class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
                                                             Name</th>
                                                         <th
@@ -141,13 +141,13 @@
                                             <table class="w-full text-left table-earning-editable table-edits">
                                                 <thead class="bg-slate-200/60 dark:bg-slate-200">
                                                     <tr>
-                                                    <th
+                                                    <th width="60px"
                                                             class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
                                                             No</th>
                                                         <th
                                                             class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
                                                             Name</th>
-                                                        <th
+                                                        <th width="35%"
                                                             class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
                                                             Email</th>
                                                          
@@ -181,10 +181,10 @@
                                             <table class="w-full text-left table-earning-editable table-edits">
                                                 <thead class="bg-slate-200/60 dark:bg-slate-200">
                                                     <tr>
-                                                    <th
+                                                    <th width="60px"
                                                             class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
                                                             No</th>
-                                                        <th
+                                                        <th width="35%"
                                                             class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
                                                             Name</th>
                                                         <th
@@ -210,9 +210,7 @@
                             </div>
                         </div>
                       </div>
-                      <div class="mt-6 flex border-t border-dashed border-slate-300/70 pt-5 md:justify-end">
-                        <x-form.button label="Save changes" id="earning-btn" style="primary" type="button" icon="save" />
-                    </div>
+                       
                     </div>
                     
                 </form>
@@ -386,11 +384,13 @@
         //$("#approver-form").submit();
     });
 
-        let shiftRowCount = 0;
-        let leaveRowCount = 0;
-        let expenseRowCount = 0;
+    let rowCounts = {
+        shiftRowCount: 0,
+        leaveRowCount: 0,
+        expenseRowCount: 0
+    };
 
-        async function getResponseApprovers(){
+        function getResponseApprovers(){
             const data = {
                     company_id: company_id,
                     department_id: id,
@@ -399,57 +399,59 @@
                     "length": 10,
                 };
 
-            try {
-                const response = await $.ajax({
+                $.ajax({
                     url: '{{ $apiUrlApprover }}/datatable',
                     type: 'POST',
                     contentType: 'application/json',
                     headers: headers,
                     data: JSON.stringify(data),
-                    dataType: 'json'
-                });
-                document.getElementById('editable-shift-table').innerHTML = '';
-                document.getElementById('editable-leave-table').innerHTML = '';
-                document.getElementById('editable-expense-table').innerHTML = '';
-                $.each(response.data, function(k, v) {
-                    
-                    if(v.approve_type == 'shift_request'){
-                       
-                        addRowToTable('editable-shift-table', 'shiftRowCount', v);
-                    }else{
-                        //document.getElementById('editable-'+v.approve_type+'-table').innerHTML = '';
-                        addRowToTable('editable-'+v.approve_type+'-table', v.approve_type+'RowCount', v);
+                    cache: false, 
+                    dataType: 'json',
+                    success: function(response) {
+                        if(response.success == true){
+                            
+                            ['editable-shift-table', 'editable-leave-table', 'editable-expense-table'].forEach(tableId => {
+                                document.getElementById(tableId).innerHTML = '';
+                            });
+                            
+                            $.each(response.data, function(k, v) {
+                                
+                                const tableType = v.approve_type === 'shift_request' ? 'shift' : v.approve_type;
+                                addRowToTable(`editable-${tableType}-table`, `${tableType}RowCount`, v);
+                            });
+                        }
                     }
                 });
+               
                 
-            } catch (xhr) {
-                console.log(xhr);
-                if (xhr.status === 422) {
-                    console.log(xhr.responseText);
-                    const response = JSON.parse(xhr.responseText);
-                    handleErrorResponse(response, currentForm);
-                } else {
-                   // showErrorNotification('error', 'An error occurred while processing your request.');
-                }
-                
-            }
+             
         }
         
-        function createTableRow(rowId, tableId, data = null) {
-             
+         function createTableRow(rowId, tableId, data = null) {
             let rowNumber = document.querySelectorAll('#' + tableId + ' tr').length + 1;
             const componentType = tableId === 'editable-shift-table' ? 'editable-leave-table' : 'editable-expense-table';
-            let amountData = (data) === null ? 0 : data.amount;
             let rowDataId = (data) === null ? null : data.id;
             let employee_id = (data) === null ? null : data.employee_id
-            let email = (data) === null ? null : data.employee_id_rel.addressContact.personal_email
-            //let designation_name = (data) === null ? null : 'data.employee_id_rel.designation_id_rel.designation_name'
-            handleGetComponent(rowNumber, tableId, data);
-            return `<tr id="${rowId}">
-                    <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t">${rowNumber} <input name="type" value="${componentType}" type="hidden"></td>
+            
+            let fullName = 'Select Approver';
+            let email = '';
+            
+            if (employee_id) {
+                if(data.employee_id_rel){
+                    fullName = data ? data.employee_id_rel.fullname : 'Select Approver';
+                    email = data ? data.employee_id_rel.addressContact.personal_email : null;
+                }else{
+                    location.reload();
+                }
+            }
+           
+             
+           //handleGetComponent(rowNumber, tableId, data);
+            return `<tr id="${rowId}" data-id="${rowDataId}">
+                    <td width="60px" data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t">${rowNumber} <input name="type" value="${componentType}" type="hidden"></td>
                     <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t">
-                        <select name="employee_id" class="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1" id="getComponent-${tableId}-${rowNumber}" onChange="handleGetElement('${rowNumber}', '${tableId}')">
-                            <option value="">Select Approver</option>
+                        <select name="employee_id" class="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1" id="getComponent-${tableId}-${rowNumber}" onClick="handleGetComponent('${rowNumber}', '${tableId}', '${employee_id}')" onChange="handleGetElement('${rowNumber}', '${tableId}')">
+                            <option value="${employee_id}">${fullName}</option>
                         </select>
                         <!-- Preloader (initially hidden) -->
                         <div class="col-span-6 flex flex-col items-center justify-end sm:col-span-3 xl:col-span-2">
@@ -461,11 +463,28 @@
                         <button type="button" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed text-xs py-1.5 px-2 bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 w-24 w-24" onclick="deleteRow('${rowId}', '${tableId}', '${rowDataId}')">Delete</button>
                     </td>
                 </tr>`;
-            // $('#' + tableId).append(rowHtml);
-            if (data && typeof data.amount !== 'undefined') {
-                $('#getInputComponent-' + componentType + '-' + rowNumber).val(data.amount);
-            }
+             
         }
+
+        function getEmployeeData(employee_id) {
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    url: '{{ $apiUrlEmployee }}/' + employee_id,
+                    type: 'GET',
+                    contentType: 'application/json',
+                    headers: headers,
+                    cache: false,
+                    dataType: 'json',
+                    success: function(response) {
+                        resolve(response); // Resolve the promise with the response data
+                    },
+                    error: function(error) {
+                        reject(error); // Reject the promise if there's an error
+                    }
+                });
+            });
+        }
+
 
         function handleGetComponent(rowId, tableId, data = null) {
             const appToken = localStorage.getItem("app_token");
@@ -478,9 +497,9 @@
             }
 
             //$preloader.show();
-
+            $selectElement.html('<option>Please wait...</option>');
             $.ajax({
-                url: '{{ $apiUrlEmployee }}',
+                url: '{{ $apiUrlEmployee }}/datatables',
                 method: 'POST',
                 data: JSON.stringify({
                     company_id: localStorage.getItem("company"),
@@ -495,10 +514,10 @@
                 success: function(response) {
                     const rowComponents = response.data;
                     const $selectElement = $('#getComponent-' + tableId + '-' + rowId);
-                   
-                    var selectOption = '';
+                    $selectElement.html('');
+                    var selectOption = '<option>Select Approver</option>';
                     $.each(rowComponents, function(index, component) {
-                        var employee_id = (data) === null ? null : data.employee_id
+                        var employee_id = (data) === null ? null : data;
                         
                         if(employee_id == component.id){
                              
@@ -510,7 +529,7 @@
                         
                     });
 
-                    $selectElement.append(selectOption);
+                    $selectElement.html(selectOption);
                      
                 },
                 error: function(xhr, status, error) {
@@ -521,13 +540,11 @@
         }
 
         function handleGetElement(rowId, tableId){
-            const $selectElement = $(`#getComponent-${tableId}-${rowId}`);
-            const $selectedOption = $selectElement.find('option:selected');
-            $(`#getCol-2-${tableId}-${rowId}`).html($selectedOption.data('email'));
-            $(`#getCol-3-${tableId}-${rowId}`).html($selectedOption.data('designation'));
+            const $selectedOption = $(`#getComponent-${tableId}-${rowId} option:selected`);
+            $(`#getCol-2-${tableId}-${rowId}`).text($selectedOption.data('email'));
 
             postRow(rowId, tableId, $selectedOption);
-            console.log(rowId+' '+ tableId);
+                    
         }
 
         async function postRow(rowId, tableId, data = null) {
@@ -536,7 +553,18 @@
             }else{
                 approve_type = tableId.split('-')[1];
             }
-            var data = {
+            //console.log(`${tableId}-row-${rowId}`);
+            const $rowId = $(`#${tableId}-row-${rowId}`).data('id');
+
+            //console.log($rowId);
+            if($rowId){
+            var url = '{{ $apiUrlApprover }}/'+$rowId;
+            var method = 'PATCH'
+            }else{
+            var url = '{{ $apiUrlApprover }}';
+            var method = 'POST';
+            }
+            var datas = {
                 company_id: company_id, 
                 department_id: id, 
                 approve_type: approve_type, 
@@ -544,42 +572,32 @@
                 status: 'enable'  
             };
 
-            try {
-                const response = await $.ajax({
-                    url: '{{ $apiUrlApprover }}',
-                    type: 'POST',
+            $.ajax({
+                    url: url,
+                    type: method,
                     contentType: 'application/json',
                     headers: headers,
-                    data: JSON.stringify(data),
-                    dataType: 'json'
+                    data: JSON.stringify(datas),
+                    dataType: 'json',
+                    success: function(response) {
+                        if(response){
+                            showSuccessNotification(response.message, "The operation was completed successfully.");
+                            updateRowNumbers(tableId);
+                        }
+                    }
                 });
-                showSuccessNotification(response.message, "The operation was completed successfully.");
-                
-                getResponseApprovers();
-            } catch (xhr) {
-                console.log(xhr);
-                if (xhr.status === 422) {
-                    console.log(xhr.responseText);
-                    const response = JSON.parse(xhr.responseText);
-                    handleErrorResponse(response, currentForm);
-                } else {
-                    showErrorNotification('error', 'An error occurred while processing your request.');
-                }
-                
-            }
+            
         }
 
-        function addRowToTable(tableId, rowCountVar, data = null) {
-            if (typeof window[rowCountVar] === 'undefined' || isNaN(window[rowCountVar])) {
-                window[rowCountVar] = 0;
-            }
-            
+         function addRowToTable(tableId, rowCountVar, data = null) {
             const tableBody = document.getElementById(tableId);
-            const rowId = `${tableId}-row-${++window[rowCountVar]}`;
+                //rowCounts[rowCountVar] = (rowCounts[rowCountVar] || 0) + 1; // Ensure it's initialized and increment it
+                const index = document.querySelectorAll('#' + tableId + ' tr').length + 1;
+                const rowId = `${tableId}-row-${index}`;
+                const newRowHtml =  createTableRow(rowId, tableId, data);
+                
+                tableBody.insertAdjacentHTML('beforeend', newRowHtml);
             
-            tableBody.insertAdjacentHTML('beforeend', createTableRow(rowId, tableId, data));
-            
-           
         }
 
         function deleteRow(rowId, tableId, id = null) {
@@ -593,9 +611,9 @@
                     },
                     success: function(response) {
                         showSuccessNotification('approver deleted successfully', "The operation was completed successfully.");
-                        
-                        getResponseApprovers()
                         updateRowNumbers(tableId);
+                        getResponseApprovers()
+                        
                     },
                     error: function(xhr, status, error) {
                         console.error("Error deleting approver :", error);
