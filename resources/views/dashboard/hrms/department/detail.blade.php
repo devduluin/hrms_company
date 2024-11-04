@@ -144,10 +144,10 @@
                                                     <th width="60px"
                                                             class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
                                                             No</th>
-                                                        <th
+                                                        <th width="35%"
                                                             class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
                                                             Name</th>
-                                                        <th width="35%"
+                                                        <th 
                                                             class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
                                                             Email</th>
                                                          
