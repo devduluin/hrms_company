@@ -77,8 +77,6 @@
             deferRender: true,
             scroller: true,
             stateSave: true,
-            processing: true,
-            serverSide: true,
             responsive: true,
             autoWidth: true,
             selected: true,
@@ -163,11 +161,22 @@
                         @endforeach
                     @endif
 
+                    let searchableColumns = {{ $id }}TableColumns
+                    .filter(col => col.searchable === true && col.data)  // Ensure `searchable: true` and `data` is not empty
+                    .map(function(col, index) {
+                        return {
+                            data: col.data,
+                            searchable: col.searchable,
+                            orderable: col.orderable
+                        };
+                    });
+                  
                     return {
                         draw: d.draw,
                         start: d.start,
                         length: d.length,
                         order: d.order,
+                        columns: searchableColumns,
                         search: d.search ? d.search.value : '',
                         company_id: localStorage.getItem("company"),
                         ...filters
@@ -204,12 +213,16 @@
             if ($.fn.DataTable.isDataTable('#{{ $id }}')) {
                 $('#{{ $id }}').DataTable().destroy();
             }
-
+            
             {{ $id }} = $({{ $id }}).DataTable({
-
+                order: [
+                    [0, "desc"]
+                ],
+                processing: true,
+                serverSide: true,
                 ajax: ajax,
                 columns: {{ $id }}TableColumns,
-                order: @json($order),
+                
 
                 @if ($downloadOptions)
                     dom: 'Bfrtip',
@@ -224,19 +237,7 @@
                     //$('td', row).eq(-1).addClass('text-center');
                 },
                 initComplete: function() {
-                    // Style the search input
-                    $('.dataTables_filter input').addClass(
-                        'px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500'
-                    );
-
-                    // Modify page length dropdown with the provided structure and classes
-                    $('.dataTables_length').addClass(
-                        'block sm:flex flex-col items-start xl:flex-row xl:items-center gap-y-2 mb-4');
-                    $('.dataTables_length label').addClass(
-                        'inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right mr-3 whitespace-nowrap');
-                    $('.dataTables_length select').addClass(
-                        'bg-[length:20px_auto] disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 bg-chevron-black transition duration-200 ease-in-out w-full text-sm border-slate-300/60 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 flex-1'
-                    );
+                    
                 },
             });
 

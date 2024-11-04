@@ -42,8 +42,10 @@ class DepartmentController extends Controller
         $data['apiUrl'] = $this->apiGatewayUrl . "/v1/companies/department";
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies/company/datatables';
         $data['apiDepartmentUrl'] = $this->apiGatewayUrl . "/v1/companies/department/datatables";
+        $data['apiUrlApprover'] = $this->apiGatewayUrl . "/v1/companies/request-approver";
+        $data['apiUrlEmployee'] = $this->apiGatewayUrl . "/v1/employees/employee";
 
-        return view('dashboard.hrms.department.create', $data);
+        return view('dashboard.hrms.department.detail', $data);
     }
     
 }
