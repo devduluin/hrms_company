@@ -324,6 +324,7 @@
 
     function handleResponse(response) {
         if (response.success == true) {
+            showSuccessNotification(response.message, "The operation was completed successfully.");
             handleGetData(id, currentForm);
         } else {
             showErrorNotification('error', response.message);
@@ -418,7 +419,7 @@
                     const response = JSON.parse(xhr.responseText);
                     handleErrorResponse(response, currentForm);
                 } else {
-                    showErrorNotification('error', 'An error occurred while processing your request.');
+                   // showErrorNotification('error', 'An error occurred while processing your request.');
                 }
                 
             }
@@ -432,7 +433,7 @@
             let rowDataId = (data) === null ? null : data.id;
             let employee_id = (data) === null ? null : data.employee_id
             let email = (data) === null ? null : data.employee_id_rel.addressContact.personal_email
-            let designation_name = (data) === null ? null : 'data.employee_id_rel.designation_id_rel.designation_name'
+            //let designation_name = (data) === null ? null : 'data.employee_id_rel.designation_id_rel.designation_name'
             handleGetComponent(rowNumber, tableId, data);
             return `<tr id="${rowId}">
                     <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t">${rowNumber} <input name="type" value="${componentType}" type="hidden"></td>
@@ -491,7 +492,7 @@
                         if(employee_id == component.id){
                             selected = 'selected';
                         }
-                        selectOption +='<option value="'+component.id+'" '+selected+' data-email="'+component.addressContact.personal_email+'" data-designation="'+component.designation_id_rel.designation_name+'">'+component.first_name+' '+component.last_name+'</option>'
+                        selectOption +='<option value="'+component.id+'" '+selected+' data-email="'+component.addressContact.personal_email+'" data-designation="">'+component.first_name+' '+component.last_name+'</option>'
                         
                     });
 
