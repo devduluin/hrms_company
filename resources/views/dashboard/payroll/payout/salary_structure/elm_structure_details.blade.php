@@ -2,6 +2,7 @@
     @csrf
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-2">
         <x-form.input id="name" label="Name" name="name" required />
+        <input type="hidden" id="parent_company" name="parent_company" />
         <x-form.select id="company_id" name="company_id" label="Company" url="{{ url('dashboard/hrms/designation') }}"
             apiUrl="{{ $apiCompanyUrl }}/company/datatables" columns='["company_name"]' :selected="$company"
             :keys="[

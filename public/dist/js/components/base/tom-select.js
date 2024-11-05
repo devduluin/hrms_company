@@ -4,14 +4,15 @@ function initializeTomSelect() {
         $(".tom-select").each(function () {
             let title = $(this).data("title");
             let url = $(this).data("url");
-            let method = $(this).data("method") ?? 'POST';
+            let method = $(this).data("method") ?? "POST";
             let api = $(this).data("api") ?? "";
             let company_id = localStorage.getItem("company");
             let selectType = $(this).attr("data-selectType");
             let selectedId = $(this).data("selected");
             const keysData = $(this).attr("data-attributes");
             const appToken = localStorage.getItem("app_token");
-            
+            let data = $(this).data("dependant");
+
             try {
                 selectType = JSON.parse(selectType);
             } catch (e) {
@@ -29,7 +30,7 @@ function initializeTomSelect() {
                 create: true,
                 load: function (query, callback) {
                     if (api && selectType.length > 0) {
-                        const payload = {
+                        var payload = {
                             draw: 0,
                             start: 0,
                             length: 25,
@@ -53,6 +54,15 @@ function initializeTomSelect() {
                             } catch (e) {
                                 console.error("Error parsing JSON:", e);
                             }
+                        }
+
+                        // TODO : check dependant form specific element by id
+                        if (typeof data !== "undefined") {
+                            Object.entries(data).forEach(([key, selector]) => {
+                                payload[key] =
+                                    $(selector).val() ||
+                                    $(selector).data("selected");
+                            });
                         }
 
                         $.ajax({
@@ -99,7 +109,7 @@ function initializeTomSelect() {
                                         value: selectedId,
                                         text: `Selected Option (${selectedId})`, // Customize this label as necessary
                                     });
-                                    
+
                                     tomSelectInstance.setValue(selectedId);
                                     tomSelectInstance.settings.placeholder = `Selected Option (${selectedId})`;
                                     tomSelectInstance.input.placeholder = `Selected Option (${selectedId})`;
@@ -112,6 +122,106 @@ function initializeTomSelect() {
                         });
                     }
                 },
+                onChange: function (value) {
+                    // console.log(`#company_id changed to: ${value}`);
+                    // console.log("Dependant data onchange :", data);
+
+                    // TODO : update dependant form specific element by id
+                    if (typeof data !== "undefined") {
+                        Object.entries(data).forEach(([key, selector]) => {
+                            // console.log("Selector", selector);
+                            // console.log("value", value);
+                            $(selector).val(value);
+                            const keysData = $(this).attr("data-attributes");
+
+                            // TODO: call ajax to get the value
+                            var payload = {
+                                draw: 0,
+                                start: 0,
+                                length: 25,
+                                search: "", // query is optional now
+                                order: [
+                                    {
+                                        column: 0,
+                                        dir: "desc",
+                                    },
+                                ],
+                            };
+
+                            if (keysData) {
+                                try {
+                                    const jsonObject = JSON.parse(keysData);
+                                    for (const [key, value] of Object.entries(
+                                        jsonObject
+                                    )) {
+                                        payload[key] = value;
+                                    }
+                                } catch (e) {
+                                    console.error("Error parsing JSON:", e);
+                                }
+                            }
+
+                            payload = {
+                                ...payload,
+                                company_id: value,
+                            };
+
+                            console.log(
+                                "API Endpoint : ",
+                                $(`${selector}`).attr("data-api")
+                            );
+
+                            // $.ajax({
+                            //     url: $(selector).data("api"),
+                            //     type: $(selector).data("method"),
+                            //     contentType: "application/json",
+                            //     headers: {
+                            //         Authorization: `Bearer ${appToken}`,
+                            //         "X-Forwarded-Host": `${window.location.protocol}//${window.location.hostname}`,
+                            //     },
+                            //     data: JSON.stringify(payload),
+                            //     success: function (response) {
+                            //         const options = response.data.map(
+                            //             (item) => {
+                            //                 let name = selectType
+                            //                     .map(
+                            //                         (field) => item[field] || ""
+                            //                     )
+                            //                     .join(" ");
+                            //                 return {
+                            //                     id: item.id,
+                            //                     name: name,
+                            //                 };
+                            //             }
+                            //         );
+
+                            //         // Check if selectedId exists in options, otherwise add it manually
+                            //         if (
+                            //             selectedId &&
+                            //             !options.some(
+                            //                 (option) => option.id === selectedId
+                            //             )
+                            //         ) {
+                            //             // Add the selected option if it does not exist in the loaded options
+                            //             options.push({
+                            //                 id: selectedId,
+                            //                 name: options.name, // You can customize the name as needed
+                            //             });
+                            //         }
+
+                            //         // callback(options);
+                            //     },
+                            //     error: function (xhr, status, error) {
+                            //         console.error(
+                            //             "Error fetching data:",
+                            //             error
+                            //         );
+                            //         callback();
+                            //     },
+                            // });
+                        });
+                    }
+                },
                 onLoad: function () {
                     const tomSelectInstance = this;
 
@@ -120,16 +230,15 @@ function initializeTomSelect() {
                         if (!tomSelectInstance.options[selectedId]) {
                             tomSelectInstance.addOption({
                                 value: selectedId,
-                                text: selectedId
+                                text: selectedId,
                             });
                         }
-                        
+
                         tomSelectInstance.setValue(selectedId);
                     }
                 },
                 render: {
                     option_create: function (data, escape) {
-                         
                         if (url) {
                             return (
                                 '<div class="create" onclick="window.location.href=\'' +
@@ -157,8 +266,8 @@ function initializeTomSelect() {
                             );
                         }
                     },
-                    loading:function(data,escape){
-                        return '';
+                    loading: function (data, escape) {
+                        return "";
                     },
                 },
             };
@@ -203,7 +312,6 @@ function initializeTomSelect() {
 
             // Load options on page load without typing
             tomSelectInstance.load("");
-            
         });
     })();
 }

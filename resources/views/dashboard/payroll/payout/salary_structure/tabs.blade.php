@@ -2,7 +2,7 @@
     $tabs = [
         'details' => ['icon' => 'file', 'title' => 'Details'],
         'earning' => ['icon' => 'coins', 'title' => 'Earning & Deduction'],
-        'account' => ['icon' => 'user', 'title' => 'Account']
+        // 'account' => ['icon' => 'user', 'title' => 'Account']
     ];
 @endphp
 <ul data-tw-merge role="tablist"

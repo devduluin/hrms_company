@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Payroll\PayslipController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Payroll\PayrollPeriodeController;
 use App\Http\Controllers\Payroll\PayrollSettingController;
@@ -20,7 +21,15 @@ Route::prefix('/claim')->group(function () {
 Route::prefix('/payout')->group(function () {
     Route::controller(PayoutController::class)->group(function () {
         Route::get('/', 'index')->name('payout');
-        Route::get('/salary_slip', 'salary_slip')->name('salary_slip');
+        // Route::get('/salary_slip', 'salary_slip')->name('salary_slip');
+        Route::controller(PayslipController::class)->group(function () {
+            Route::prefix('salary_slip')->group(function () {
+                Route::get('/', 'index');
+                Route::get('/create', 'create');
+                Route::get('/edit/{id}', 'edit');
+                Route::get('/detail/{id}', 'show');
+            });
+        });
         Route::controller(PayrollSettingController::class)->group(function () {
             Route::prefix('settings')->group(function () {
                 Route::get('/list', 'index');

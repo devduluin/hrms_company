@@ -10,9 +10,8 @@
     'columns',
     'selected' => '',
     'keys' => [],
+    'data' => [],
 ])
-
-{{-- @dump($selected) --}}
 
 <div class="mt-3 flex-row xl:items-center">
     <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4">
@@ -28,7 +27,7 @@
                     </div>
                 @endif
             </div>
-            
+
         </div>
     </div>
     <div class="flex-1 sm:w-full w-96 mt-3 xl:mt-0">
@@ -41,6 +40,7 @@
             @if (isset($columns)) data-selectType="{{ $columns }}" @endif
             @if (isset($selected)) data-selected="{{ $selected }}" @endif
             @if (!empty($keys)) data-attributes="{{ json_encode($keys) }}" @endif
+            @if (!empty($data)) data-dependant="{{ json_encode($data) }}" @endif
             data-placeholder="{{ $label }}" data-title="{{ $label }}"
             @error($name) border-danger @enderror">
             @if (isset($slot))

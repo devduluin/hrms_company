@@ -13,8 +13,10 @@
                                 {{ $page_title }}
                             </div>
                             <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
-                                <a  class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"><i
-                                        data-tw-merge="" data-lucide="plus" class="mr-2 h-4 w-4 stroke-[1.3]" data-value="id" data-render="getDropdownBtn"></i>
+                                <a href="{{ url('dashboard/hrms/payout/salary_structure_assignment/create') }}"
+                                    class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"><i
+                                        data-tw-merge="" data-lucide="plus" class="mr-2 h-4 w-4 stroke-[1.3]"
+                                        data-value="id" data-render="getDropdownBtn"></i>
                                     Add New Assignment</a>
                             </div>
                         </div>
@@ -26,6 +28,7 @@
                                             url="http://apidev.duluin.com/api/v1/salary_structure_assignments/salary_structure_assignment/employeeDatatables"
                                             method="POST" class="display">
                                             <x-slot:thead>
+                                                <th data-value="id" data-render="getId">#</th>
                                                 <th data-value="employee_id_rel" data-render="getEmployee">Name</th>
                                                 <th data-value="salaryStructureAssignment.salaryStructure.name">Salary
                                                     Structure</th>
@@ -86,6 +89,10 @@
             } else {
                 return `<div class="flex items-center justify-center text-danger"><div class="ml-1.5 whitespace-nowrap">Inactive</div></div>`;
             }
+        }
+
+        function getId(data, type, row, meta) {
+            return meta.row + 1;
         }
 
         async function initializeContent() {

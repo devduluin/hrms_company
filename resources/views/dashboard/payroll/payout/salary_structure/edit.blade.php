@@ -123,6 +123,7 @@
                                 }
                                 companySelect.setValue(companyValue);
                             });
+                            getParentCompany(companyValue);
 
                             $("#is_active").attr("checked", response.data.is_active == 1 ? true :
                                 false);
@@ -142,6 +143,17 @@
                                 });
                             }
                             frequencySelect.setValue(frequencyValue);
+
+                            const currencySelect = $('#currency')[0].tomselect;
+                            const currencyValue = response.data.currency_id;
+
+                            if (!currencySelect.options[currencyValue]) {
+                                currencySelect.addOption({
+                                    value: currencyValue,
+                                    text: currencyValue
+                                });
+                            }
+                            currencySelect.setValue(currencyValue);
 
                             if (response.data.currency_id !== null) {
                                 const currencySelect = $('#currency')[0].tomselect;
@@ -212,7 +224,7 @@
                         const response = JSON.parse(xhr.responseText);
                         handleErrorResponse(response, formId);
                     } else {
-                        toastr.error('An error occurred while processing your request.');
+                        showErrorNotification('error', 'An error occurred while processing your request.');
                     }
                     // activateTab(formId);
                 }
@@ -283,12 +295,12 @@
             function handleResponse(response) {
                 if (response.success) {
                     if ($("#salary_structure_id").val() === "") {
-                        toastr.success(response.message);
+                        showSuccessNotification('success', response.message);
                     } else {
-                        toastr.success("Data has been updated successfully");
+                        showSuccessNotification('success', "Data has been updated successfully");
                     }
                 } else {
-                    toastr.error(response.message);
+                    showErrorNotification('error', response.message);
                 }
             }
 
@@ -328,7 +340,7 @@
 
             function handleErrorResponse(result, tabId) {
                 const errorString = result.error || 'An error occurred.';
-                toastr.error(`There were validation errors on tab ${tabId}`);
+                showErrorNotification('error', `There were validation errors on tab ${tabId}`);
                 const errorMessages = errorString.split(', ');
 
                 $('.error-message').remove();
@@ -355,6 +367,44 @@
                     $('html, body').animate({
                         scrollTop: firstErrorField.offset().top - 100
                     }, 500);
+                }
+            }
+
+            // get parent company id
+            $("#company_id").change(async function() {
+                await getParentCompany($(this).val());
+            });
+
+            async function getParentCompany(company) {
+                const companyId = company;
+                try {
+                    if (companyId) {
+                        const response = await fetch(
+                            `{{ $apiCompanyUrl }}/company/${companyId}`, {
+                                method: 'GET',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Authorization': `Bearer ${localStorage.getItem('app_token')}`,
+                                    'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
+                                },
+                            });
+
+                        if (!response.ok) {
+                            showErrorNotification('error', response.message);
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+
+                        const parentCompany = await response.json();
+                        var company = parentCompany.data.parent_company == null ? parentCompany.data.id :
+                            parentCompany.data.parent_company;
+                        console.log("🚀 ~ getParentCompany ~ var company:", company);
+                        $("#parent_company").val(company);
+                    } else {
+                        $("#parent_company").val("");
+                    }
+                } catch (error) {
+                    console.error('Fetch error:', error);
+                    showErrorNotification('error', response.message);
                 }
             }
         });
