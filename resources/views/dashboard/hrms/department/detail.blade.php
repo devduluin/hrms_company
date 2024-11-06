@@ -448,7 +448,7 @@
             return `<tr id="${rowId}" data-id="${rowDataId}" data-val="${employee_id}">
                     <td width="60px" data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t">${rowNumber} <input name="type" value="${componentType}" type="hidden"></td>
                     <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t">
-                        <select name="employee_id" class="tom-select tom-select disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10" id="getComponent-${tableId}-${rowNumber}" onmouseover="handleGetComponent('${rowNumber}', '${tableId}', '${data}')" onChange="handleGetElement('${rowNumber}', '${tableId}')">
+                        <select name="employee_id" class="tom-select disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10" id="getComponent-${tableId}-${rowNumber}" onmouseover="handleGetComponent('${rowNumber}', '${tableId}', '${data}')" onChange="handleGetElement('${rowNumber}', '${tableId}')">
                             <option value="${employee_id}" data-email="${email}">${fullName}</option>
                         </select>
                         <!-- Preloader (initially hidden) -->
@@ -489,12 +489,11 @@
             const componentType = tableId === 'editable-shift-table' ? 'editable-leave-table' : 'editable-expense-table';
             const $selectElement = $(`#getComponent-${tableId}-${rowId}`);
             const $col_2_Element = $(`#getCol-2-${tableId}-${rowId}`);
-           // const $preloader = $('#preloader-' + tableId + '-' + rowId);
+            
             if ($selectElement.find('option').length > 1) {
                 return;
             }
            
-            //$preloader.show();
            //$selectElement.html('<option>Please wait...</option>');
             initializeTomSelects($selectElement, data)
         }
@@ -566,7 +565,15 @@
                                 });
                                 
                                 callback(options);
-
+                                options.forEach((option) => {
+                                     
+                                    const optionHtml = `<option value="${option.id}" data-email="${option.email}">
+                                                            ${option.name}
+                                                        </option>`;
+                                     
+                                    $selectElement.append(optionHtml);
+                                });
+                                
                             },
                             error: function (xhr, status, error) {
                                 console.error("Error fetching data:", error);
@@ -581,13 +588,13 @@
                 render: {
                     option: function(data, escape) {
                          
-                        return '<div>' +
+                        return '<div class="option" data-email="'+ escape(data.email)+'">' +
                                 '<div class="title">' + escape(data.name) + '</div>' +
                                 '<span class="text-xs">' + escape(data.email) + '</span>' +
                             '</div>';
                     },
                     item: function(data, escape) {
-                        return '<div title="' + escape(data.id) + '">' + escape(data.name) + '</div>';
+                        return '<div class="item" data-email="'+ escape(data.email)+'">' + escape(data.name) + '</div>';
                     },
                     option_create: function (data, escape) {
                         if (url) {
@@ -633,11 +640,12 @@
         function handleGetElement(rowId, tableId) {
             // Get the selected option using plain JavaScript
             const selectedOption = document.querySelector(`#getComponent-${tableId}-${rowId} option:checked`);
+            const divOption = document.querySelector(`#getComponent-${tableId}-${rowId}-ts-control .item`);
             
             // Get the email from the 'data-email' attribute of the selected option
-            if (selectedOption) {
-                const email = selectedOption.getAttribute('data-email');
-
+            if (divOption) {
+                const email = divOption.getAttribute('data-email');
+                
                 // Set the text content of the column with the selected email
                 const colElement = document.getElementById(`getCol-2-${tableId}-${rowId}`);
                 if (email) {
