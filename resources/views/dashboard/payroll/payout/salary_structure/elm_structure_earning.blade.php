@@ -43,9 +43,6 @@
                                             Is tax applicable</th>
                                         <th
                                             class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
-                                            Amount based on formula</th>
-                                        <th
-                                            class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
                                             <i data-lucide="settings" class="inline-block h-5 w-5 mr-2"></i>
                                         </th>
                                     </tr>
@@ -91,9 +88,6 @@
                                             Is tax applicable</th>
                                         <th
                                             class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
-                                            Amount based on formula</th>
-                                        <th
-                                            class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
                                             <i data-lucide="settings" class="inline-block h-5 w-5 mr-2"></i>
                                         </th>
                                     </tr>
@@ -110,24 +104,24 @@
         <x-form.button label="Save changes" id="earning-btn" style="primary" type="button" icon="save" />
     </div>
 </form>
+@include('vendor-common.sweetalert')
 @push('js')
     <script>
         let earningRowCount = 0;
         let deductionRowCount = 0;
 
         function createTableRow(rowId, tableId, data = null) {
-            // console.log("rowId:", rowId);
-            // console.log("tableId:", tableId);
             let rowNumber = document.querySelectorAll('#' + tableId + ' tr').length + 1;
             const componentType = tableId === 'editable-earning-table' ? 'earning' : 'deduction';
             let amountData = (data) === null ? 0 : data.amount;
             let earningDeductionId = (data) === null ? null : data.id;
-            handleGetComponent(rowNumber, tableId, data);
+            // handleGetComponent(rowNumber, tableId, data);
+
             return `<tr id="${rowId}">
                     <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t">${rowNumber} <input name="type" value="${componentType}" type="hidden"></td>
                     <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t">
-                        <select name="salary_component_id" class="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1" id="getComponent-${tableId}-${rowNumber}" onclick="handleGetComponent('${rowNumber}', '${tableId}')">
-                            <option value="">Select Salary Component</option>
+                        <select name="salary_component_id" class="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1" id="getComponent-${tableId}-${rowNumber}" onclick="handleGetComponent('${rowNumber}', '${tableId}', '${data?.salaryComponent?.id || ''}')">
+                            <option value="${data?.salaryComponent?.id || ''}">${data?.salaryComponent?.name || 'Select Salary Component'}</option>
                         </select>
                         <!-- Preloader (initially hidden) -->
                         <div class="col-span-6 flex flex-col items-center justify-end sm:col-span-3 xl:col-span-2">
@@ -146,9 +140,8 @@
                         </div>
                     </td>
                     <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t"><input id="getInputComponent-${componentType}-${rowNumber}" name="amount" type="number" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10" name="amount" placeholder="0" value="${amountData}"></td>
-                    <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t"><input type="checkbox" name="payment_day_depend" class="transition-all duration-100 ease-in-out shadow-sm border-slate-200 cursor-pointer rounded focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&[type='radio']]:checked:bg-primary [&[type='radio']]:checked:border-primary [&[type='radio']]:checked:border-opacity-10 [&[type='checkbox']]:checked:bg-primary [&[type='checkbox']]:checked:border-primary [&[type='checkbox']]:checked:border-opacity-10 [&:disabled:not(:checked)]:bg-slate-100 [&:disabled:not(:checked)]:cursor-not-allowed [&:disabled:not(:checked)]:dark:bg-darkmode-800/50 [&:disabled:checked]:opacity-70 [&:disabled:checked]:cursor-not-allowed [&:disabled:checked]:dark:bg-darkmode-800/50"></td>
-                    <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t"><input type="checkbox" name="tax_applicable" class="transition-all duration-100 ease-in-out shadow-sm border-slate-200 cursor-pointer rounded focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&[type='radio']]:checked:bg-primary [&[type='radio']]:checked:border-primary [&[type='radio']]:checked:border-opacity-10 [&[type='checkbox']]:checked:bg-primary [&[type='checkbox']]:checked:border-primary [&[type='checkbox']]:checked:border-opacity-10 [&:disabled:not(:checked)]:bg-slate-100 [&:disabled:not(:checked)]:cursor-not-allowed [&:disabled:not(:checked)]:dark:bg-darkmode-800/50 [&:disabled:checked]:opacity-70 [&:disabled:checked]:cursor-not-allowed [&:disabled:checked]:dark:bg-darkmode-800/50"></td>
-                    <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t"><input type="checkbox" name="formula_based" class="transition-all duration-100 ease-in-out shadow-sm border-slate-200 cursor-pointer rounded focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&[type='radio']]:checked:bg-primary [&[type='radio']]:checked:border-primary [&[type='radio']]:checked:border-opacity-10 [&[type='checkbox']]:checked:bg-primary [&[type='checkbox']]:checked:border-primary [&[type='checkbox']]:checked:border-opacity-10 [&:disabled:not(:checked)]:bg-slate-100 [&:disabled:not(:checked)]:cursor-not-allowed [&:disabled:not(:checked)]:dark:bg-darkmode-800/50 [&:disabled:checked]:opacity-70 [&:disabled:checked]:cursor-not-allowed [&:disabled:checked]:dark:bg-darkmode-800/50"></td>
+                    <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t"><input type="checkbox" name="payment_day_depend" class="transition-all duration-100 ease-in-out shadow-sm border-slate-200 cursor-pointer rounded focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&[type='radio']]:checked:bg-primary [&[type='radio']]:checked:border-primary [&[type='radio']]:checked:border-opacity-10 [&[type='checkbox']]:checked:bg-primary [&[type='checkbox']]:checked:border-primary [&[type='checkbox']]:checked:border-opacity-10 [&:disabled:not(:checked)]:bg-slate-100 [&:disabled:not(:checked)]:cursor-not-allowed [&:disabled:not(:checked)]:dark:bg-darkmode-800/50 [&:disabled:checked]:opacity-70 [&:disabled:checked]:cursor-not-allowed [&:disabled:checked]:dark:bg-darkmode-800/50" ${data?.salaryComponent?.depends_on_payment_day == 1 ? 'checked' : ''}></td>
+                    <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t"><input type="checkbox" name="tax_applicable" class="transition-all duration-100 ease-in-out shadow-sm border-slate-200 cursor-pointer rounded focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&[type='radio']]:checked:bg-primary [&[type='radio']]:checked:border-primary [&[type='radio']]:checked:border-opacity-10 [&[type='checkbox']]:checked:bg-primary [&[type='checkbox']]:checked:border-primary [&[type='checkbox']]:checked:border-opacity-10 [&:disabled:not(:checked)]:bg-slate-100 [&:disabled:not(:checked)]:cursor-not-allowed [&:disabled:not(:checked)]:dark:bg-darkmode-800/50 [&:disabled:checked]:opacity-70 [&:disabled:checked]:cursor-not-allowed [&:disabled:checked]:dark:bg-darkmode-800/50" ${data?.salaryComponent?.is_tax_applicable == 1 ? 'checked' : ''}></td>
                     <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t">
                         <button type="button" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed text-xs py-1.5 px-2 bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 w-24 w-24" onclick="deleteRow('${rowId}', '${tableId}', '${earningDeductionId}')">Delete</button>
                     </td>
@@ -159,7 +152,7 @@
             }
         }
 
-        function handleGetComponent(rowId, tableId, data = null) {
+        function handleGetComponent(rowId, tableId, selectedId, data = null) {
             const appToken = localStorage.getItem("app_token");
             const componentType = tableId === 'editable-earning-table' ? 'earning' : 'deduction';
             const $selectElement = $(`#getComponent-${tableId}-${rowId}`);
@@ -194,7 +187,7 @@
                         $selectElement.append($('<option>', {
                             value: component.id,
                             text: component.name,
-                            selected: data && data.component_id === component.id
+                            selected: selectedId === component.id
                         }));
                     });
                     $preloader.hide();
@@ -216,21 +209,34 @@
         }
 
         function deleteRow(rowId, tableId, data = null) {
-            if (data != null) {
-                $.ajax({
-                    url: `http://apidev.duluin.com/api/v1/structure_earning_deductions/structure_earning_deduction/${data}`,
-                    method: 'DELETE',
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem("app_token")}`,
-                        "X-Forwarded-Host": `${window.location.protocol}//${window.location.hostname}`,
-                    },
-                    success: function(response) {
-                        toastr.success("Earning Deduction deleted successfully");
-                        document.getElementById(rowId).remove();
-                        updateRowNumbers(tableId);
-                    },
-                    error: function(xhr, status, error) {
-                        console.error("Error deleting salary component:", error);
+            if (data !== 'null') {
+                Swal.fire({
+                    title: "Are you sure?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: `http://apidev.duluin.com/api/v1/structure_earning_deductions/structure_earning_deduction/${data}`,
+                            method: 'DELETE',
+                            headers: {
+                                Authorization: `Bearer ${localStorage.getItem("app_token")}`,
+                                "X-Forwarded-Host": `${window.location.protocol}//${window.location.hostname}`,
+                            },
+                            success: function(response) {
+                                // toastr.success("Earning Deduction deleted successfully");
+                                showSuccessNotification('success',
+                                    "Earning Deduction deleted successfully");
+                                document.getElementById(rowId).remove();
+                                updateRowNumbers(tableId);
+                            },
+                            error: function(xhr, status, error) {
+                                console.error("Error deleting salary component:", error);
+                            }
+                        });
                     }
                 });
             } else {

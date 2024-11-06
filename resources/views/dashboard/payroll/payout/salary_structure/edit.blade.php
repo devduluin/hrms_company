@@ -20,9 +20,7 @@
                                     href="{{ $url ?? '' }}">
                                     <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
                                 </button>
-                                <div data-tw-merge data-tw-placement="bottom-end" class="dropdown relative"><button
-                                        data-tw-merge data-tw-toggle="dropdown" aria-expanded="false"
-                                        class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-dark border-dark text-white dark:bg-darkmode-800 dark:border-transparent dark:text-slate-300 [&:hover:not(:disabled)]:dark:dark:bg-darkmode-800/70 inline-block w-24 inline-block w-24">Create</button>
+                                <div data-tw-merge data-tw-placement="bottom-end" class="dropdown relative">
                                     <div data-transition data-selector=".show"
                                         data-enter="transition-all ease-linear duration-150"
                                         data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1"
