@@ -15,8 +15,8 @@
                         <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
                     </button>
                     <button id="submitBtn" data-tw-merge=""
-                            class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-blue-theme border-blue-theme text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"><i
-                                data-tw-merge="" data-lucide="save" class="mr-3 h-4 w-4 stroke-[1.3]"></i>
+                            class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-blue-theme border-blue-theme text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200">
+                            <i data-tw-merge="" data-lucide="save" class="mr-3 h-4 w-4 stroke-[1.3]"></i>
                             <span id="loadingText">Save Changes</span>
                     </button>
                 </div>
@@ -30,17 +30,9 @@
                 <div class="col-span-8 flex flex-col gap-y-7 sm:col-span-12 xl:col-span-6">
                     <form id="form-submit" method="post" action="{{ $apiUrl }}">
                         <div class="box box--stacked flex flex-col p-5">
-                            
+                            <input type="hidden" name="company_id" value="{{ $company }}"/>
                             <div class="gap-x-6 gap-y-10 mb-5">
-                            <x-form.select id="company_id" name="company_id" data-method="POST" label="Company Name" url="{{ url('dashboard/hrms/company/new_company') }}"
-                                apiUrl="{{ $apiCompanyUrl }}" columns='["company_name"]' :selected="$company"
-                                :keys="[
-                                    'company_id' => $company,
-                                ]" required>
-                                <option value="">Select Company</option>
-                            </x-form.select>
-                            </div>
-                            <div>
+                             
                                 <x-form.input id="branch_name" label="Branch Name" name="branch_name" value="{{request()->get('item')}}" required />
                             </div>
                              

@@ -28,8 +28,8 @@
                     <div class="box box--stacked flex flex-col p-5">
                         <x-datatable id="shiftTypeTable" :url="$apiUrl.'/datatable'" method="POST" class="display">
                             <x-slot:thead>
-                                <th data-value="no" width="80px">#</th>
-                                <th data-value="company_id_rel" data-render="getCompany">Company</th>
+                                <th data-value="no" width="60px">No.</th>
+                                
                                 <th data-value="shift_type_name">Shift type name</th>
                                 <th data-value="start_time" data-render="convertToTimezone">Start time</th>
                                 <th data-value="end_time" data-render="convertToTimezone">End time</th>

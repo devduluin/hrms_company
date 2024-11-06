@@ -33,15 +33,7 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4">
                                 
                                 <div class="gap-x-6 gap-y-10 ">
-                                    <div class="py-2">
-                                        <x-form.select id="company_id" name="company_id" data-method="POST" label="Company Name" url="{{ url('dashboard/hrms/company/new_company') }}" required="true" 
-                                            apiUrl="{{ $apiCompanyUrl }}" columns='["company_name"]' :selected="$company"
-                                            :keys="[
-                                                'company_id' => $company,
-                                            ]">
-                                            <option value="">Select Company</option>
-                                        </x-form.select>
-                                    </div>
+                                <input type="hidden" name="company_id" value="{{ $company }}"/>
                                     <div class="py-2">
                                         <x-form.input type="text" id="leave_type_name" name="leave_type_name" label="Leave Type Name" required="true" placholder="" value="{{request()->get('item')}}"/>
                                     </div>
@@ -51,12 +43,13 @@
                                     <div class="py-2">
                                         <x-form.input type="number" id="applicable_after_working_days" name="applicable_after_working_days" label="Applicable After" required="true" placholder=""/>
                                     </div>
-                                </div>
-
-                                <div class="gap-x-6 gap-y-10">
                                     <div class="py-2">
                                         <x-form.input type="number" id="maximum_consecutive_leaves_allowed" name="maximum_consecutive_leaves_allowed" label="Max Consecutive" placholder=""/>
                                     </div>
+                                </div>
+
+                                <div class="gap-x-6 gap-y-10">
+                                    
                                     <div class="py-2">
                                         <div class="mt-3 flex-row xl:items-center">
                                         <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4">
@@ -127,6 +120,12 @@
 </div>
 @endsection
 @push('js')
+@include('vendor-common.tomselect')
+<script>
+    $(document).ready(function() {
+        initializeTomSelect();
+    });
+</script>
 <script type="text/javascript">
     
     let currentForm = $("#form-submit");

@@ -27,7 +27,7 @@
                     <div class="box box--stacked flex flex-col p-5">
                         <x-datatable id="departmentTable" :url="$apiUrl.'/datatables'" method="POST" class="display small">
                             <x-slot:thead>
-                                <th data-value="no" width="60px">#</th>
+                                <th data-value="no" width="60px">No.</th>
                                 <th data-value="department_name">ID</th>
                                 <th data-value="advance_title">Advance Title</th>
                                 <th data-value="employee_rel_id" data-render="getDepartment">Employee Name</th>

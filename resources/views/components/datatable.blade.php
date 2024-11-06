@@ -89,7 +89,7 @@
             pageLength: 25,
             buttons: buttonsConfig,
 
-            dom: '@if ($dtcomponent == 'true') <"grid grid-cols-2 gap-4 mb-4"Bf> @endif<"grid grid-cols-1 gap-4 mb-4"t><"grid grid-cols-3 gap-4 mb-4"lip>',
+            dom: '@if ($dtcomponent == 'true') <"grid grid-cols-2 gap-4 mb-4"Bf> @endif<"grid grid-cols-1 gap-4 mb-4"t>@if ($dtcomponent == 'true')<"grid grid-cols-3 gap-4 mb-4"lip>@endif',
             language: {
                 search: 'Search: ',
                 searchPlaceholder: 'keywoard...',

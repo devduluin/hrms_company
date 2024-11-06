@@ -37,15 +37,7 @@
                                     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4">
                                         
                                         <div class="gap-x-6 gap-y-10 ">
-                                            <div class="py-2">
-                                                <x-form.select id="company_id" name="company_id" data-method="POST" label="Company Name" url="{{ url('dashboard/hrms/company/new_company') }}" required="true" 
-                                                    apiUrl="{{ $apiCompanyUrl }}" columns='["company_name"]' :selected="$company"
-                                                    :keys="[
-                                                        'company_id' => $company,
-                                                    ]">
-                                                    <option value="">Select Company</option>
-                                                </x-form.select>
-                                            </div>
+                                        <input type="hidden" name="company_id" value="{{ $company }}"/>
                                             <div class="py-2">
                                                 <x-form.input type="text" id="shift_type_name" name="shift_type_name" label="Shift Type Name" required="true" placholder="" value="{{request()->get('item')}}"/>
                                             </div>

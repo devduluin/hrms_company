@@ -82,8 +82,7 @@
                                     </div>
                                 </div>
                             </div> -->
-                            <div class="grid grid-cols-1 md:grid-cols-1 gap-5">
-                                
+                             
                                 <div class="box my-6 p-5">
                                     <div class="text-lg mb-2">Total Claim Distribution</div>
                                     <div class="flex flex-col gap-y-5 lg:flex-row lg:items-center">
@@ -118,7 +117,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -129,12 +128,12 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mt-4">
                         <x-action  label="Employee Expense" icon="arrow-up-right" url="{{ url('/dashboard/hrms/claim/expense') }}" />
                         <x-action  label="Employee Advance" icon="arrow-up-right" url="{{ url('/dashboard/hrms/claim/advance') }}" />
-                        <x-action  label="Travel Request" icon="arrow-up-right" url="{{ url('/dashboard/hrms/claim/travel') }}" />
-                        <x-action  label="Purpose of Travel" icon="arrow-up-right" url="{{ url('/dashboard/hrms/claim/purpose_travel') }}" />
+                        
                         <x-action  label="Expense Claim Type" icon="arrow-up-right" url="{{ url('/dashboard/hrms/claim/type') }}" />
-                        <x-action  label="Expense Claim Summary" icon="arrow-up-right" url="{{ url('/dashboard/hrms/claim/summary') }}" />
-                        <x-action  label="Employee Travel List" icon="arrow-up-right" url="{{ url('/dashboard/hrms/claim/travel_list') }}" />
-                        <x-action  label="Add Travel Request" icon="arrow-up-right" url="{{ url('/dashboard/hrms/claim/travel_request') }}" />
+                        <!-- <x-action  label="Expense Claim Summary" icon="arrow-up-right" url="{{ url('/dashboard/hrms/claim/summary') }}" /> -->
+                        
+                        <x-action  label="Travel Request" icon="arrow-up-right" status="comming_soon" url="{{ url('/dashboard/hrms/claim/travel') }}" />
+                        <x-action  label="Purpose of Travel" icon="arrow-up-right" status="comming_soon" url="{{ url('/dashboard/hrms/claim/purpose_travel') }}" />
                     </div>
                 </div>    
         </div>

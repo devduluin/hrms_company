@@ -27,13 +27,13 @@
                         @include('components._asside_company')
                     </div>
                 </div> -->
-                <div class="col-span-12 flex flex-col gap-y-7 sm:col-span-12 xl:col-span-12">
+                <div class="col-span-8 flex flex-col gap-y-7 sm:col-span-12 xl:col-span-6">
                     <form id="form-submit" method="post" action="{{ $apiUrl }}">
                         <div class="box box--stacked flex flex-col p-5">
-                        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4">
+                            
                             <div class="gap-x-6 gap-y-10 mb-5">
                                 <div>
-                                    <x-form.input id="claim_type_name" label="Expense Claim Type" name="claim_type_name" value="{{request()->get('item')}}" required />
+                                    <x-form.input id="purpose_travel" label="Purpose Travel Name" name="purpose_travel" value="{{request()->get('item')}}" required />
                                 </div>
                                 <div class="mt-3 flex-row xl:items-center">
                                     <div class="mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-64">
@@ -57,14 +57,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="gap-x-6 gap-y-10 mb-5">
-                                <div>
-                                    <x-form.textarea id="description" label="Description" name="description"  />
-                                </div>
-                                
-                            </div>
                              
-                        </div>
                         </div>
                     </form>
                 </div>

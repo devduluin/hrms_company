@@ -25,7 +25,7 @@
                         <x-datatable id="designationTable" :url="$apiUrl.'/datatables'" method="POST" class="display">
                             <x-slot:thead>
                                 <th data-value="no" width="80px">No.</th>
-                                <th data-value="company_id_rel" data-render="getCompany">Company</th>
+                                 
                                 <th data-value="designation_name">Designation name</th>
                                 <th data-value="createdAt" data-render="dateFormat">Created at</th>
                                 <th data-value="null" data-render="getActionBtn" width="10%">Action</th>
@@ -51,9 +51,57 @@
         </div>
     </div>
 </div>
+
+<!-- BEGIN: Modal Content -->
+<div data-tw-backdrop="" aria-hidden="true" tabindex="-1" id="modal-create" class="modal group bg-gradient-to-b from-theme-1/50 via-theme-2/50 to-black/50 transition-[visibility,opacity] w-screen h-screen fixed left-0 top-0 [&:not(.show)]:duration-[0s,0.2s] [&:not(.show)]:delay-[0.2s,0s] [&:not(.show)]:invisible [&:not(.show)]:opacity-0 [&.show]:visible [&.show]:opacity-100 [&.show]:duration-[0s,0.4s]">
+    <div data-tw-merge class="w-[90%] mx-auto bg-white relative rounded-md shadow-md transition-[margin-top,transform] duration-[0.4s,0.3s] -mt-16 group-[.show]:mt-16 group-[.modal-static]:scale-[1.05] dark:bg-darkmode-600 sm:w-[600px] ">
+        <div class="flex items-center px-5 py-3 border-b border-slate-200/60 dark:border-darkmode-400">
+            <h2 id="titleForm" class="mr-auto text-base font-medium">
+                ...
+            </h2>
+            <a class="absolute right-0 top-0 mr-3 mt-3" data-tw-dismiss="modal" href="#">
+                <i data-tw-merge data-lucide="x" class="stroke-[1] w-5 h-5 h-8 w-8 text-slate-400 h-8 w-8 text-slate-400"></i>
+            </a>
+             
+        </div>
+        <form id="form-create" method="post" action="{{ $apiUrl }}">
+        <div data-tw-merge class="p-5 grid grid-cols-12 gap-4 gap-y-3">
+            <div class="col-span-12 sm:col-span-12">
+            
+            <div>
+                 
+                <div class="gap-x-6 gap-y-10 mb-5">
+                    <x-form.input id="designation_name" label="Designation Name" name="designation_name" value="{{request()->get('item')}}" required />
+                </div>
+            </div>
+            
+            
+            </div>
+            
+        </div>
+        <div class="grid grid-cols-2 gap-2 items-stretch">
+        <div class="px-5 py-3 text-left border-t border-slate-200/60 dark:border-darkmode-400">
+            <a href="{{ route('hrms.designation.create') }}" data-tw-merge data-tw-dismiss="modal" type="button" class="transition duration-200 shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed border-secondary text-slate-500 dark:border-darkmode-100/40 dark:text-slate-300 [&:hover:not(:disabled)]:bg-secondary/20 [&:hover:not(:disabled)]:dark:bg-darkmode-100/10 mr-1">
+            Full Form</a>
+            
+        </div>
+        <div class="px-5 py-3 text-right border-t border-slate-200/60 dark:border-darkmode-400">
+            <button id="submitBtn" data-tw-merge type="submit" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-blue-theme border-blue-theme text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200">
+            <i data-tw-merge="" data-lucide="save" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Save Changes</button>
+        </div>
+        </div>
+        </form>
+    </div>
+</div>
+<!-- END: Modal Content -->
 @endsection
 @push('js')
     <script>
+        let company_id = localStorage.getItem('company');
+        let headers = {
+                        'Authorization': `Bearer ${appToken}`,
+                        'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
+                    };
          function getStatus(data, type, row, meta) {
             
             if (data === 'enable') {
@@ -134,10 +182,7 @@
                     url: path,
                     type: method,
                     contentType: 'application/json',
-                    headers: {
-                        'Authorization': `Bearer ${appToken}`,
-                        'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
-                    },
+                    headers: headers,
                     dataType: 'json'
                 });
 
@@ -157,6 +202,41 @@
                 // activateTab(formId);
             }
         }
+
+        //MODAL
+        let modal = document.querySelector("#modal-create");
+        let modalInstance = tailwind.Modal.getOrCreateInstance(modal);
+        
+        $('#new_designation').on('click', function (e) {
+            e.preventDefault();
+            modalInstance.show(onShow());
+        });
+
+        function onShow() {
+            $('#titleForm').html('New Designation')
+        };
+
+        $('#form-create').submit(async function (e) {
+            e.preventDefault();
+            let data = $(this).serialize();
+            data += '&company_id=' + encodeURIComponent(company_id);
+            
+            $.ajax({
+                url: $(this).attr('action'),  
+                type: $(this).attr('method'),
+                headers: headers,
+                data: data,
+                success: function (response) {
+
+                    modalInstance.hide();
+                    showSuccessNotification(response.message, "The operation was completed successfully.");
+                    designationTable.ajax.reload();
+                },
+                error: function (xhr, status, error) {
+                    modalInstance.hide();
+                }
+            });
+        });
     </script>
 @endpush
 @include('vendor-common.sweetalert')

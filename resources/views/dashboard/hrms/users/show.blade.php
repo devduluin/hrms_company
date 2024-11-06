@@ -325,9 +325,7 @@
     });
     
     function onShow() {
-        //$('#titleBanned').html('Activate User')
-        //reserve = true;
-        //$('#banned').attr("checked", false)
+        
     };
     $('#banned').on('change', function () {
        if(reserve == true){

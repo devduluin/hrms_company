@@ -236,7 +236,7 @@
                 $('input[name=latlong]').val(data.latlong);
                 initialize();
                 initializeTomSelect();
-                showSuccessNotification(result.message, "The operation was completed successfully.");
+                //showSuccessNotification(result.message, "The operation was completed successfully.");
             }).catch((error) => {
                 console.log(error);
             });
