@@ -1,7 +1,6 @@
 @extends('layouts.dashboard.app')
 @section('content')
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/{{ asset('dist') }}/tailwind.min.css" rel="stylesheet">
-    <style>
+     <style>
         .show {
             display: block;
         }
@@ -287,10 +286,12 @@
                             <div class="text-m font-medium">
                                 More Action
                             </div>
-                                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mt-4">
-                                    <x-action  label="Attendance Summary" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/summary') }}" />
-                                    <x-action  label="New Shift Assignment" icon="arrow-up-right" url="{{ route('hrms.shift-assignment') }}" />
-                                    {{-- <x-action  label="Employee Shift List" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/shift_list') }}" /> --}}
+                                <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-5 mt-4">
+                                    <x-action  label="Attendance" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/summary') }}" />
+                                    <x-action  label="Employee Checkin" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/shift_list') }}" />
+                                    <x-action  label="Shift Assignment" icon="arrow-up-right" url="{{ route('hrms.shift-assignment') }}" />
+                                    <x-action  label="Shift Assignment Schedule" icon="arrow-up-right" url="{{ route('hrms.shift-assignment') }}" />
+                                   
                                     <x-action  label="Attendance Report" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/report') }}" />
                                     <x-action  label="Shift Type" icon="door-open" url="{{ url('/dashboard/hrms/attendance/shift_type') }}" />
                                     {{-- <x-action  label="Shift Requester Approver" icon="git-pull-request-create" url="{{ route('hrms.attendance.shiftrequest') }}" /> --}}

@@ -1,6 +1,6 @@
 @extends('layouts.dashboard.app')
 @section('content')
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
 <style>.show{display:block;}</style>
 <div class="hurricane before:content-[''] before:z-[-1] before:w-screen before:bg-slate-50 before:top-0 before:h-screen before:fixed before:bg-texture-black before:bg-contain before:bg-fixed before:bg-[center_-20rem] before:bg-no-repeat">
         @include('layouts.dashboard.menu')
@@ -125,7 +125,7 @@
                     <div class="text-m font-medium">
                         More Action
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mt-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-5 mt-4">
                         <x-action  label="Employee Expense" icon="arrow-up-right" url="{{ url('/dashboard/hrms/claim/expense') }}" />
                         <x-action  label="Employee Advance" icon="arrow-up-right" url="{{ url('/dashboard/hrms/claim/advance') }}" />
                         
