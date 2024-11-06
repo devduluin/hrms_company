@@ -8,16 +8,6 @@ use App\Http\Controllers\Payroll\PayrollPeriodeController;
 use App\Http\Controllers\Payroll\PayrollSettingController;
 use App\Http\Controllers\Payroll\SalaryComponentController;
 
-// claim modules
-Route::prefix('/claim')->group(function () {
-    Route::controller(ClaimController::class)->group(function () {
-        Route::get('/', 'index')->name('claim');
-        Route::get('/summary', 'summary')->name('summary');
-        Route::get('/travel_request', 'travel_request')->name('travel_request');
-        Route::get('/travel_list', 'travel_list')->name('travel_list');
-    });
-});
-
 Route::prefix('/payout')->group(function () {
     Route::controller(PayoutController::class)->group(function () {
         Route::get('/', 'index')->name('payout');

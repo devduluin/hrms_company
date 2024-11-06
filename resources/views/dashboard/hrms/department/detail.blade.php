@@ -65,7 +65,7 @@
                                         <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3"></div>
                                     </div>
                                     <div class="mt-3 w-96 flex-1 xl:mt-0">
-                                        <select required name="status" data-title="Language" data-placeholder="Select your language" class="tom-select w-full" sclass="tom-select disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10"">
+                                        <select required name="status" data-title="Language" data-placeholder="Select your language" class="tom-select w-full" sclass="tom-select disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10">
                                             
                                             <option value="enable">
                                                 Enable
@@ -96,7 +96,7 @@
                                 </div>
                                 <div class="mt-2 flex flex-col gap-3.5 px-5 py-5">
                                     <div class="preview relative">
-                                        <div class="overflow-x-auto">
+                                        <div class="overflow-x-autos">
                                             <table class="w-full text-left table-earning-editable table-edits">
                                                 <thead class="bg-slate-200/60 dark:bg-slate-200">
                                                     <tr>
@@ -137,7 +137,7 @@
                                 </div>
                                 <div class="mt-2 flex flex-col gap-3.5 px-5 py-5">
                                     <div class="preview relative">
-                                        <div class="overflow-x-auto">
+                                        <div class="overflow-x-autos">
                                             <table class="w-full text-left table-earning-editable table-edits">
                                                 <thead class="bg-slate-200/60 dark:bg-slate-200">
                                                     <tr>
@@ -177,7 +177,7 @@
                                 </div>
                                 <div class="mt-2 flex flex-col gap-3.5 px-5 py-5">
                                     <div class="preview relative">
-                                        <div class="overflow-x-auto">
+                                        <div class="overflow-x-autos">
                                             <table class="w-full text-left table-earning-editable table-edits">
                                                 <thead class="bg-slate-200/60 dark:bg-slate-200">
                                                     <tr>
@@ -421,9 +421,7 @@
                             });
                         }
                     }
-                });
-               
-                
+                });  
              
         }
         
@@ -447,11 +445,11 @@
            
              
            //handleGetComponent(rowNumber, tableId, data);
-            return `<tr id="${rowId}" data-id="${rowDataId}">
+            return `<tr id="${rowId}" data-id="${rowDataId}" data-val="${employee_id}">
                     <td width="60px" data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t">${rowNumber} <input name="type" value="${componentType}" type="hidden"></td>
                     <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t">
-                        <select name="employee_id" class="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1" id="getComponent-${tableId}-${rowNumber}" onClick="handleGetComponent('${rowNumber}', '${tableId}', '${employee_id}')" onChange="handleGetElement('${rowNumber}', '${tableId}')">
-                            <option value="${employee_id}">${fullName}</option>
+                        <select name="employee_id" class="tom-select disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10" id="getComponent-${tableId}-${rowNumber}" onmouseover="handleGetComponent('${rowNumber}', '${tableId}', '${data}')" onChange="handleGetElement('${rowNumber}', '${tableId}')">
+                            <option value="${employee_id}" data-email="${email}">${fullName}</option>
                         </select>
                         <!-- Preloader (initially hidden) -->
                         <div class="col-span-6 flex flex-col items-center justify-end sm:col-span-3 xl:col-span-2">
@@ -491,60 +489,172 @@
             const componentType = tableId === 'editable-shift-table' ? 'editable-leave-table' : 'editable-expense-table';
             const $selectElement = $(`#getComponent-${tableId}-${rowId}`);
             const $col_2_Element = $(`#getCol-2-${tableId}-${rowId}`);
-           // const $preloader = $('#preloader-' + tableId + '-' + rowId);
+            
             if ($selectElement.find('option').length > 1) {
                 return;
             }
-
-            //$preloader.show();
-            $selectElement.html('<option>Please wait...</option>');
-            $.ajax({
-                url: '{{ $apiUrlEmployee }}/datatables',
-                method: 'POST',
-                data: JSON.stringify({
-                    company_id: localStorage.getItem("company"),
-                    "type": componentType,
-                    "draw": 0,
-                    "start": 0,
-                    "length": 10,
-                }),
-                contentType: 'application/json',
-                dataType: 'json',
-                headers: headers,
-                success: function(response) {
-                    const rowComponents = response.data;
-                    const $selectElement = $('#getComponent-' + tableId + '-' + rowId);
-                    $selectElement.html('');
-                    var selectOption = '<option>Select Approver</option>';
-                    $.each(rowComponents, function(index, component) {
-                        var employee_id = (data) === null ? null : data;
-                        
-                        if(employee_id == component.id){
-                             
-                            var selected = 'selected="true"';
-                        }else{
-                            var selected = '';
-                        }
-                        selectOption +='<option value="'+component.id+'" '+selected+' data-email="'+component.addressContact.personal_email+'" data-designation="">'+component.first_name+' '+component.last_name+'</option>'
-                        
-                    });
-
-                    $selectElement.html(selectOption);
-                     
-                },
-                error: function(xhr, status, error) {
-                    console.error("Error fetching salary components:", error);
-                     
-                }
-            });
+           
+           //$selectElement.html('<option>Please wait...</option>');
+            initializeTomSelects($selectElement, data)
         }
 
-        function handleGetElement(rowId, tableId){
-            const $selectedOption = $(`#getComponent-${tableId}-${rowId} option:selected`);
-            $(`#getCol-2-${tableId}-${rowId}`).text($selectedOption.data('email'));
+        function initializeTomSelects($selectElement, data= null) {
+            let title = 'Employee';
+            let url = '';
+            let method = $selectElement.data("method") ?? 'POST';
+            let api = '{{ $apiUrlEmployee }}/datatables';
+            let company_id = localStorage.getItem("company");
+            let selectType = '["first_name", "last_name"]';
+            let selectedId = data.employee_id;
+            let selectedEmail = data.email;
+            
+            const appToken = localStorage.getItem("app_token");
+            
+            try {
+                selectType = JSON.parse(selectType);
+            } catch (e) {
+                selectType = null;
+            }
 
-            postRow(rowId, tableId, $selectedOption);
-                    
+            let config = {
+                valueField: "id",
+                labelField: "name",
+                searchField: "name",
+                selectOnTab: true,
+                plugins: {
+                    dropdown_input: {},
+                },
+                create: true,
+                load: function (query, callback) {
+                    if (api) {
+                        const payload = {
+                            draw: 0,
+                            start: 0,
+                            length: 25,
+                            search: query || "", // query is optional now
+                            order: [
+                                {
+                                    column: 0,
+                                    dir: "desc",
+                                },
+                            ],
+                            company_id: company_id
+                        };
+
+                        $.ajax({
+                            url: api,
+                            type: method,
+                            contentType: "application/json",
+                            headers: {
+                                Authorization: `Bearer ${appToken}`,
+                                "X-Forwarded-Host": `${window.location.protocol}//${window.location.hostname}`,
+                            },
+                            data: JSON.stringify(payload),
+                            success: function (response) {
+                                 
+                                const options = response.data.map((item) => {
+                                    let name = selectType
+                                        .map((field) => item[field] || "")
+                                        .join(" ");
+                                    return {
+                                        id: item.id,
+                                        name: name,
+                                        email: item.addressContact.personal_email, 
+                                        
+                                    };
+                                });
+                                
+                                callback(options);
+                                options.forEach((option) => {
+                                     
+                                    const optionHtml = `<option value="${option.id}" data-email="${option.email}">
+                                                            ${option.name}
+                                                        </option>`;
+                                     
+                                    $selectElement.append(optionHtml);
+                                });
+                                
+                            },
+                            error: function (xhr, status, error) {
+                                console.error("Error fetching data:", error);
+                                callback();
+                            },
+                        });
+                    }
+                },
+                onLoad: function () {
+                     
+                },
+                render: {
+                    option: function(data, escape) {
+                         
+                        return '<div class="option" data-email="'+ escape(data.email)+'">' +
+                                '<div class="title">' + escape(data.name) + '</div>' +
+                                '<span class="text-xs">' + escape(data.email) + '</span>' +
+                            '</div>';
+                    },
+                    item: function(data, escape) {
+                        return '<div class="item" data-email="'+ escape(data.email)+'">' + escape(data.name) + '</div>';
+                    },
+                    option_create: function (data, escape) {
+                        if (url) {
+                            return (
+                                '<div class="create" onclick="window.location.href=\'' +
+                                url +
+                                "?item=" +
+                                encodeURIComponent(data.input) +
+                                "'\"> + Add " +
+                                title +
+                                " <strong>" +
+                                escape(data.input) +
+                                "</strong> </div>"
+                            );
+                        }
+                    },
+                    no_results: function (data, escape) {
+                        if (url) {
+                            return (
+                                '<div class="no-results">No results found. <a href="' +
+                                url +
+                                "?item=" +
+                                encodeURIComponent(data.input) +
+                                '">Click here to add ' +
+                                title +
+                                "</a></div>"
+                            );
+                        }
+                    },
+                    loading:function(data,escape){
+                        return '';
+                    },
+                },
+            };
+
+
+            const tomSelectInstance = new TomSelect($selectElement, config);
+
+            // Load options on page load without typing
+            tomSelectInstance.load("");       
+        }
+
+        function handleGetElement(rowId, tableId) {
+            // Get the selected option using plain JavaScript
+            const selectedOption = document.querySelector(`#getComponent-${tableId}-${rowId} option:checked`);
+            const divOption = document.querySelector(`#getComponent-${tableId}-${rowId}-ts-control .item`);
+            
+            // Get the email from the 'data-email' attribute of the selected option
+            if (divOption) {
+                const email = divOption.getAttribute('data-email');
+                
+                // Set the text content of the column with the selected email
+                const colElement = document.getElementById(`getCol-2-${tableId}-${rowId}`);
+                if (email) {
+                    colElement.textContent = email;
+                }
+
+                // Pass the selected option to the postRow function
+                postRow(rowId, tableId, selectedOption);
+            }
         }
 
         async function postRow(rowId, tableId, data = null) {
@@ -553,22 +663,30 @@
             }else{
                 approve_type = tableId.split('-')[1];
             }
-            //console.log(`${tableId}-row-${rowId}`);
+             
             const $rowId = $(`#${tableId}-row-${rowId}`).data('id');
-
-            //console.log($rowId);
-            if($rowId){
-            var url = '{{ $apiUrlApprover }}/'+$rowId;
-            var method = 'PATCH'
-            }else{
-            var url = '{{ $apiUrlApprover }}';
-            var method = 'POST';
+            const $rowVal = $(`#${tableId}-row-${rowId}`).data('val');
+            
+            if(data.value == $rowVal){
+                return false;
             }
+            const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+            if(!uuidPattern.test(data.value)){
+                return false;
+            }
+            if($rowId){
+                var url = '{{ $apiUrlApprover }}/'+$rowId;
+                var method = 'PATCH'
+                }else{
+                var url = '{{ $apiUrlApprover }}';
+                var method = 'POST';
+            }
+            
             var datas = {
                 company_id: company_id, 
                 department_id: id, 
                 approve_type: approve_type, 
-                employee_id: data.val(),  
+                employee_id: data.value,  
                 status: 'enable'  
             };
 
@@ -581,9 +699,12 @@
                     dataType: 'json',
                     success: function(response) {
                         if(response){
+                            //getResponseApprovers();
+                            $('#'+tableId+'-row-'+rowId).attr('data-id', response.data.id);
                             showSuccessNotification(response.message, "The operation was completed successfully.");
-                            updateRowNumbers(tableId);
+                            //updateRowNumbers(tableId);
                         }
+                        updateRowNumbers(tableId);
                     }
                 });
             
@@ -601,7 +722,9 @@
         }
 
         function deleteRow(rowId, tableId, id = null) {
-            if (id != null) {
+            //update delete row
+            id = document.getElementById(rowId).getAttribute('data-id');
+            if (id != 'null') {
                 $.ajax({
                     url: `{{ $apiUrlApprover }}/${id}`,
                     method: 'DELETE',

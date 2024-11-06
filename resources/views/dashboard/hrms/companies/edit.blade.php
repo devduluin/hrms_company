@@ -84,7 +84,7 @@
                 $('#parent_company').val(data.parent_company);
                 $('#status').val(data.status);
                 $('#default_currency').val(data.default_currency);
-                showSuccessNotification(result.message, "The operation was completed successfully.");
+                //showSuccessNotification(result.message, "The operation was completed successfully.");
             }).catch((error) => {
                 console.log(error);
             });
@@ -123,46 +123,7 @@
         });
 
 
-        // document.getElementById('form-submit').addEventListener('submit', async function(event) {
-        //     event.preventDefault();
-
-        //     const formData = new FormData(this);
-
-        //     const data = {
-        //         company_name: formData.get('company_name'),
-        //         domain: formData.get('domain'),
-        //         date_of_establishment: formData.get('date_of_establishment'),
-        //         // parent_company: formData.get('parent_company'),
-        //         parent_company: '54601ab0-cd67-46a3-864b-b30a4771ebc9',
-        //         status: formData.get('status'),
-        //         default_currency: formData.get('default_currency'),
-        //         default_holiday_list: formData.get('default_holiday_list')
-        //     };
-
-        //     try {
-        //         const response = await fetch(
-        //             'http://apidev.duluin.com/api/v1/company/54601ab0-cd67-46a3-864b-b30a4771ebc9', {
-        //                 method: 'POST',
-        //                 headers: {
-        //                     'Content-Type': 'application/json',
-        //                     'Authorization': 'Bearer xN9P6a8sL2bV3iR4fC5J6Q7kT8yU9wZ0'
-        //                 },
-        //                 body: JSON.stringify(data)
-        //             });
-
-        //         const responseData = await response.json();
-
-        //         if (!response.ok) {
-        //             throw new Error('Network response was not ok');
-        //         }
-
-        //         showSuccessNotification(responseData.message, "The operation was completed successfully.");
-
-        //     } catch (error) {
-        //         console.error('Error:', error);
-        //         alert('An error occurred while submitting the data');
-        //     }
-        // });
+        
 
         function showSuccessNotification(title, message) {
             var notificationContent = document.getElementById("success-notification-content");

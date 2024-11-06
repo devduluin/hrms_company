@@ -23,7 +23,6 @@ use App\Http\Controllers\RecruitmentController;
 use App\Http\Controllers\ShiftRequestController;
 use App\Http\Controllers\Response\AuthResponseController;
 use App\Http\Controllers\AttendanceController;
-use App\Http\Controllers\ClaimController;
 use App\Http\Controllers\PayoutController;
 use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\SingleAssignmentController;
@@ -125,7 +124,8 @@ Route::controller(DashboardController::class)->group(function () {
                     //payroll modules
                     require __DIR__ . '/payroll.php';
                     
-                   
+                   //claim modules
+                   require __DIR__ . '/claim.php';
 
                     //dynamic content
                     //Route::get('/{any}', 'index');

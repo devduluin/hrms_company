@@ -7,14 +7,14 @@
         <div class="container mt-[65px]">
             <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center">
                 <div class="text-lg font-medium group-[.mode--light]:text-white">
-                    {{ $title ?? '' }}
+                    {{ $page_title ?? '' }}
                 </div>
                 <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
                     <button onclick="history.go(-1)"
                         class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md w-24">
                         <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
                     </button>
-                <x-form.button id="new_branch" label="Add New Branch" style="primary" icon="plus" url="{{ route('hrms.branch.create') }}" ></x-button>
+                <x-form.button id="new_type_claim" label="Add New Type Claim" style="primary" icon="plus" url="{{ url('/dashboard/hrms/claim/type/create') }}" ></x-button>
                 </div>
             </div>
             <div class="mt-3.5  gap-x-6 gap-y-10">
@@ -25,11 +25,11 @@
                 </div> -->
                 <div class="col-span-12 flex flex-col gap-y-7 xl:col-span-9">
                     <div class="box box--stacked flex flex-col p-5">
-                        <x-datatable id="branchTable" :url="$apiUrl.'/datatable'" method="POST" class="display small">
+                        <x-datatable id="claimTypeTable" :url="$apiUrl.'/datatable'" method="POST" class="display small">
                             <x-slot:thead>
                                 <th data-value="no" width="60px">No.</th>
-                                <th data-value="branch_name">Branch name</th>
-                                <th data-value="createdAt" data-render="dateFormat">Created at</th>
+                                <th data-value="id">ID</th>
+                                <th data-value="expense_claim_type">Expense Claim Type</th>
                                 <th data-value="null" data-render="getActionBtn" width="10%">Action</th>
                             </x-slot:thead>
                         </x-datatable>
@@ -73,7 +73,31 @@
             <div>
                  
                 <div class="gap-x-6 gap-y-10 mb-5">
-                    <x-form.input id="branch_name" label="Branch Name" name="branch_name" value="{{request()->get('item')}}" required />
+                    <x-form.input id="claim_type_name" label="Claim Type Name" name="claim_type_name" value="{{request()->get('item')}}" required />
+                </div>
+                <div class="mt-3 flex-row xl:items-center">
+                    <div class="mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-64">
+                        <div class="text-left">
+                            <div class="flex items-center">
+                                <div class="font-medium">Status</div>
+                            </div>
+                        </div>
+                        <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3"></div>
+                    </div>
+                    <div class="mt-3 w-96 flex-1 xl:mt-0">
+                        <select required name="status" data-title="Language" data-placeholder="Select your language" class="tom-select w-full" sclass="tom-select disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10"">
+                            
+                            <option value="enable">
+                                Enable
+                            </option>
+                            <option value="disable">
+                                Disable
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="gap-x-6 gap-y-10 mb-5">
+                    <x-form.textarea id="description" label="Description" name="description"  />
                 </div>
             </div>
             
@@ -83,7 +107,7 @@
         </div>
         <div class="grid grid-cols-2 gap-2 items-stretch">
         <div class="px-5 py-3 text-left border-t border-slate-200/60 dark:border-darkmode-400">
-            <a href="{{ route('hrms.branch.create') }}" data-tw-merge data-tw-dismiss="modal" type="button" class="transition duration-200 shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed border-secondary text-slate-500 dark:border-darkmode-100/40 dark:text-slate-300 [&:hover:not(:disabled)]:bg-secondary/20 [&:hover:not(:disabled)]:dark:bg-darkmode-100/10 mr-1">
+            <a href="{{ url('/dashboard/hrms/claim/type/create') }}" data-tw-merge data-tw-dismiss="modal" type="button" class="transition duration-200 shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed border-secondary text-slate-500 dark:border-darkmode-100/40 dark:text-slate-300 [&:hover:not(:disabled)]:bg-secondary/20 [&:hover:not(:disabled)]:dark:bg-darkmode-100/10 mr-1">
             Full Form</a>
             
         </div>
@@ -99,13 +123,18 @@
 @endsection
 
 @push('js')
+@include('vendor-common.tomselect')
+<script>
+    $(document).ready(function() {
+        initializeTomSelect();
+    });
+</script>
     <script>
         let company_id = localStorage.getItem('company');
         let headers = {
                         'Authorization': `Bearer ${appToken}`,
                         'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
                     };
-
         function getStatus(data, type, row, meta) {
 
             if (data === 'active') {
@@ -174,7 +203,7 @@
                     if (result.isConfirmed) {
                         destroy(action, path)
                     }else{
-                        branchTable.ajax.reload();
+                        claimTypeTable.ajax.reload();
                     }
                 });
             }else{
@@ -197,7 +226,7 @@
                     //text: response.message,
                     icon: "success"
                 });
-                branchTable.ajax.reload();
+                claimTypeTable.ajax.reload();
             } catch (xhr) {
                 console.log(xhr);
                 if (xhr.status === 422) {
@@ -210,17 +239,18 @@
             }
         }
 
+        
         //MODAL
         let modal = document.querySelector("#modal-create");
         let modalInstance = tailwind.Modal.getOrCreateInstance(modal);
         
-        $('#new_branch').on('click', function (e) {
+        $('#new_type_claim').on('click', function (e) {
             e.preventDefault();
             modalInstance.show(onShow());
         });
 
         function onShow() {
-            $('#titleForm').html('New Branch')
+            $('#titleForm').html('New Claim Type')
         };
 
         $('#form-create').submit(async function (e) {
@@ -237,7 +267,7 @@
 
                     modalInstance.hide();
                     showSuccessNotification(response.message, "The operation was completed successfully.");
-                    branchTable.ajax.reload();
+                    claimTypeTable.ajax.reload();
                 },
                 error: function (xhr, status, error) {
                     modalInstance.hide();

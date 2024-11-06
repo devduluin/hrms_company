@@ -30,17 +30,9 @@
                 <div class="col-span-8 flex flex-col gap-y-7 sm:col-span-12 xl:col-span-6">
                     <form id="form-submit" method="post" action="{{ $apiUrl }}">
                         <div class="box box--stacked flex flex-col p-5">
-                            
+                            <input type="hidden" name="company_id" value="{{ $company }}"/>
                             <div class="gap-x-6 gap-y-10 mb-5">
-                            <x-form.select id="company_id" name="company_id" data-method="POST" label="Company Name" url="{{ url('dashboard/hrms/company/new_company') }}"
-                                apiUrl="{{ $apiCompanyUrl }}" columns='["company_name"]' :selected="$company"
-                                :keys="[
-                                    'company_id' => $company,
-                                ]" required>
-                                <option value="">Select Company</option>
-                            </x-form.select>
-                            </div>
-                            <div>
+                             
                                 <x-form.input id="designation_name" label="Designation Name" name="designation_name" value="{{request()->get('item')}}" required />
                             </div>
                              

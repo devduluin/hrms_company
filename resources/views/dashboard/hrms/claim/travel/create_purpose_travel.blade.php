@@ -7,7 +7,7 @@
         <div class="container mt-[65px]">
             <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center">
                 <div class="text-base font-medium group-[.mode--light]:text-white">
-                    {{ $title ?? '' }}
+                    {{ $page_title ?? '' }}
                 </div>
                 <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
                     <button onclick="history.go(-1)"
@@ -27,79 +27,39 @@
                         @include('components._asside_company')
                     </div>
                 </div> -->
-                <div class="col-span-12 flex flex-col gap-y-7 sm:col-span-12 xl:col-span-12">
+                <div class="col-span-8 flex flex-col gap-y-7 sm:col-span-12 xl:col-span-6">
                     <form id="form-submit" method="post" action="{{ $apiUrl }}">
                         <div class="box box--stacked flex flex-col p-5">
-                            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4">
-                                
-                                <div class="gap-x-6 gap-y-10 ">
-                                <input type="hidden" name="company_id" value="{{ $company }}"/>
-                                    <div class="py-2">
-                                        <x-form.input type="text" id="leave_type_name" name="leave_type_name" label="Leave Type Name" required="true" placholder="" value="{{request()->get('item')}}"/>
-                                    </div>
-                                    <div class="py-2">
-                                        <x-form.input type="number" id="maximum_leave_allocation_allowed" name="maximum_leave_allocation_allowed" label="Max Leave" required="true" placholder="" />
-                                    </div>
-                                    <div class="py-2">
-                                        <x-form.input type="number" id="applicable_after_working_days" name="applicable_after_working_days" label="Applicable After" required="true" placholder=""/>
-                                    </div>
-                                    <div class="py-2">
-                                        <x-form.input type="number" id="maximum_consecutive_leaves_allowed" name="maximum_consecutive_leaves_allowed" label="Max Consecutive" placholder=""/>
-                                    </div>
-                                </div>
-
-                                <div class="gap-x-6 gap-y-10">
-                                    
-                                    <div class="py-2">
-                                        <div class="mt-3 flex-row xl:items-center">
-                                        <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4">
-                                            <div class="text-left">
-                                                <div class="flex items-center">
-                                                    <div class="font-medium">Status</div>
-                                                </div>
-                                            </div>
-                                            <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3"></div>
-                                        </div>
-                                        <div class="flex-1 sm:w-full w-96 mt-3 xl:mt-0">
-                                            <select required name="status" data-title="Language" data-placeholder="Select your language" class="tom-select w-full" sclass="tom-select disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10"">
-                                                
-                                                <option value="enable">
-                                                    Enable
-                                                </option>
-                                                <option value="disable">
-                                                    Disable
-                                                </option>
-                                            </select>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    <div class="py-2">
-                                    <x-checkbox id="include_holidays_within_leaves_as_leaves"
-                                        label="Include Holidays Within Leaves as Leaves"
-                                        name="include_holidays_within_leaves_as_leaves"
-                                        guidelines="If checked, leave will include in holidays" />
-                                    </div>
-                                    <div class="py-2">
-                                    <x-checkbox id="is_compensatory"
-                                        label="Is Compensation"
-                                        name="is_compensatory"
-                                        guidelines="If checked, leave will count as a compensation" />
-                                    </div>
-                                    <div class="py-2">
-                                    <x-checkbox id="is_leave_without_pay"
-                                        label="Is Leave without Pay"
-                                        name="is_leave_without_pay"
-                                        guidelines="If checked, leave will not pay" />
-                                    </div>
-                                </div>
-                               
-                                 
                             
-                            </div>
-                                
+                            <div class="gap-x-6 gap-y-10 mb-5">
+                                <div>
+                                    <x-form.input id="purpose_travel" label="Purpose Travel Name" name="purpose_travel" value="{{request()->get('item')}}" required />
+                                </div>
+                                <div class="mt-3 flex-row xl:items-center">
+                                    <div class="mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-64">
+                                        <div class="text-left">
+                                            <div class="flex items-center">
+                                                <div class="font-medium">Status</div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3"></div>
+                                    </div>
+                                    <div class="mt-3 w-96 flex-1 xl:mt-0">
+                                        <select required name="status" data-title="Language" data-placeholder="Select your language" class="tom-select w-full" sclass="tom-select disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10"">
+                                            
+                                            <option value="enable">
+                                                Enable
+                                            </option>
+                                            <option value="disable">
+                                                Disable
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                              
-                        </form>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -129,12 +89,12 @@
 <script type="text/javascript">
     
     let currentForm = $("#form-submit");
-    let id   = '{{$id ?? ''}}';
+    let branch_id   = '{{$id ?? ''}}';
     let method      = 'POST';
     let path        = currentForm.attr('action');
-
-    async function handleGetData(id, currentForm) {
-        path    = `{{ $apiUrl }}/`+id;
+        
+    async function handleGetData(branch_id, currentForm) {
+        path    = `{{ $apiUrl }}/`+branch_id;
         $.ajax({
             url: path,
             type: 'GET',
@@ -145,31 +105,12 @@
             dataType: 'json',
             success: await
             function(response) {   
-                if (response.success == true) {                    
+                if (response.success == true) {     
+                    method  = 'PATCH';               
+                    $("#branch_name").val(response.data.branch_name);
+                    $("select[name=company_id]").attr('data-selected',response.data.company_id).change();
                      
-                    method  = 'PATCH';
-                    
-                    $("select[name=company_id]").val(response.data.company_id).change();
-                    $("select[name=status]").val(response.data.status).change();
-                    $("input[name=leave_type_name]").val(response.data.leave_type_name)
-                    $("input[name=maximum_leave_allocation_allowed]").val(response.data.maximum_leave_allocation_allowed)
-                    $("input[name=applicable_after_working_days]").val(response.data.applicable_after_working_days)
-                    $("input[name=maximum_consecutive_leaves_allowed]").val(response.data.maximum_consecutive_leaves_allowed)
-                    if (response.data.is_leave_without_pay) {
-                        $("#is_leave_without_pay").attr("checked", true);
-                    } else {
-                        $("#is_leave_without_pay").attr("checked", false);
-                    } 
-                    if (response.data.include_holidays_within_leaves_as_leaves) {
-                        $("#include_holidays_within_leaves_as_leaves").attr("checked", true);
-                    } else {
-                        $("#include_holidays_within_leaves_as_leaves").attr("checked", false);
-                    } 
-                    if (response.data.is_compensatory) {
-                        $("#is_compensatory").attr("checked", true);
-                    } else {
-                        $("#is_compensatory").attr("checked", false);
-                    } 
+                    //initializeTomSelect();
                 } else {
                     showErrorNotification('error', response.message);
                 }
@@ -186,22 +127,7 @@
         e.preventDefault();
         
         const data = serializeFormData(currentForm);
-        if ($("#include_holidays_within_leaves_as_leaves").is(":checked")) {
-            data.include_holidays_within_leaves_as_leaves = true;
-        } else {
-            data.include_holidays_within_leaves_as_leaves = false;
-        }
-        if ($("#is_compensatory").is(":checked")) {
-            data.is_compensatory = true;
-        } else {
-            data.is_compensatory = false;
-        }
-        if ($("#is_leave_without_pay").is(":checked")) {
-            data.is_leave_without_pay = true;
-        } else {
-            data.is_leave_without_pay = false;
-        }
-
+        
         try {
             const response = await $.ajax({
                 url: path,
@@ -242,6 +168,7 @@
 
     function handleResponse(response) {
         if (response.success == true) {
+            showSuccessNotification(response.message, "The operation was completed successfully.");
             window.location=document.referrer;
         } else {
             showErrorNotification('error', response.message);
@@ -279,11 +206,10 @@
             }, 500);
         }
     }
-
-    if(id){
-        handleGetData(id, currentForm);
+     
+    if(branch_id){
+        handleGetData(branch_id, currentForm);
     }
-
     $('#submitBtn').on('click', function (e) {
         e.preventDefault();
         $(this).attr('disable', true);
@@ -291,6 +217,5 @@
         
         $("#form-submit").submit();
     });
-    
     </script>
 @endpush
