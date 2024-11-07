@@ -19,8 +19,15 @@ class PayrollSettingController extends Controller
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = __('message.salary_payout_setting_title');
         $data['apiUrl'] = $this->apiGatewayUrl . '/v1/payroll';
+        $allSessions = session()->all();
+        $data['id'] = $allSessions['company_id'];
+        $data['company'] = $allSessions['company_id'];
+        $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
+        $allSessions = session()->all();
+        $data['apiPayrollUrl'] = $this->apiGatewayUrl . '/v1/salary_components';
 
-        return view('dashboard.payroll.payout.payroll_setting.index', $data);
+        // return view('dashboard.payroll.payout.payroll_setting.index', $data);
+        return view('dashboard.payroll.payout.payroll_setting.edit', $data);
     }
 
     public function create(Request $request)
