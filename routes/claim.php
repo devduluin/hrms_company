@@ -33,7 +33,7 @@ Route::prefix('/claim')->group(function () {
             Route::prefix('type')->group(function () {
                 Route::get('/', 'index');
                 Route::get('/create', 'create');
-                Route::get('/edit/{id}', 'edit');
+                Route::get('/edit/{id}', 'update');
                 Route::get('/detail/{id}', 'show');
             });
         });
@@ -56,4 +56,3 @@ Route::prefix('/claim')->group(function () {
         Route::get('/travel_list', 'travel_list')->name('travel_list');
     });
 });
- 
