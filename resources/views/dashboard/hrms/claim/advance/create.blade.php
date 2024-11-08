@@ -32,24 +32,8 @@
                         <div class="box box--stacked flex flex-col p-5">
                             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4">
                                 <input type="hidden" name="is_group" value="true">
-                                <div class="gap-x-6 gap-y-10 ">
-                                <x-form.select id="company_id" name="company_id" data-method="POST" label="Company Name" url="{{ url('dashboard/hrms/company/new_company') }}" required="true" 
-                                    apiUrl="{{ $apiCompanyUrl }}" columns='["company_name"]' :selected="$company"
-                                    :keys="[
-                                        'company_id' => $company,
-                                    ]">
-                                    <option value="">Select Company</option>
-                                </x-form.select>
-                                </div>
-                                <div class="gap-x-6 gap-y-10 ">
-                                <x-form.select id="parent_department_id" name="parent_department_id" data-method="POST" label="Parent Department" url="{{ url('dashboard/hrms/department/create') }}"
-                                    apiUrl="{{ $apiDepartmentUrl }}" columns='["department_name"]'  
-                                    :keys="[
-                                        'company_id' => $company,
-                                    ]">
-                                    <option value="">Select Department</option>
-                                </x-form.select>
-                                </div>
+                                
+                                
                                 <div class="gap-x-6 gap-y-10 ">
                                     <x-form.input id="department_name" name="department_name" label="Department Name" required="true" placholder="" value="{{request()->get('item')}}"/>
                                 </div>

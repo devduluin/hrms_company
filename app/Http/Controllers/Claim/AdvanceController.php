@@ -24,6 +24,7 @@ class AdvanceController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Create Employee Advance';
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/companies/branch";
         
         return view('dashboard.hrms.claim.advance.create', $data);
     }
@@ -32,6 +33,7 @@ class AdvanceController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Update Employee Advance';
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/companies/branch";
         
         return view('dashboard.hrms.claim.advance.update', $data);
     }

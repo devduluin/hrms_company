@@ -288,7 +288,7 @@
                             </div>
                                 <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-5 mt-4">
                                     <x-action  label="Attendance" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/summary') }}" />
-                                    <x-action  label="Employee Checkin" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/shift_list') }}" />
+                                    <!-- <x-action  label="Employee Checkin" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/shift_list') }}" /> -->
                                     <x-action  label="Shift Assignment" icon="arrow-up-right" url="{{ route('hrms.shift-assignment') }}" />
                                     <x-action  label="Shift Assignment Schedule" icon="arrow-up-right" url="{{ route('hrms.shift-assignment') }}" />
                                    
@@ -399,11 +399,12 @@
         async function getDataChart()
         {
             var param = {
-                url: " http://localhost:4444/api/v1/attendance/report/chart?company_id=c8f745e0-aa6e-458b-bb70-4dda3e2accea",
+                url: "{{ $apiChartAttendance }}",
+                //url: " http://localhost:4446/api/v1/attendance/report/chart?company_id=c8f745e0-aa6e-458b-bb70-4dda3e2accea",
                 method: "GET",
             }
 
-            await transAjaxx(param).then((result) => {
+            await transAjax(param).then((result) => {
                 const chart = result.data;
                 console.log(chart);
 
