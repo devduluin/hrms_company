@@ -1,303 +1,279 @@
-@extends('layouts.dashboard.app') 
+@extends('layouts.dashboard.app')
 @section('content')
+
 <div class="hurricane before:content-[''] before:z-[-1] before:w-screen before:bg-slate-50 before:top-0 before:h-screen before:fixed before:bg-texture-black before:bg-contain before:bg-fixed before:bg-[center_-20rem] before:bg-no-repeat">
-    @include('layouts.dashboard.menu')
-    <div id="contents-page" class="content transition-[margin,width] duration-100 px-5 xl:mr-2.5 mt-[75px] pt-[31px] pb-16 content--compact xl:ml-[275px] [&.content--compact]:xl:ml-[100px]">
-        <div class="container">
-            <div class="flex col-2 md:h-10 md:flex-row md:items-center">
-                    <!-- <div class="text-base font-medium group-[.mode--light]:text-white">
-                    {{ $page_title }}
-                    </div> -->
-            </div>
-            <div class="box box--stacked flex flex-col">
-                <div class="flex flex-col gap-y-2 p-5 sm:flex-row sm:items-center">
+@include('layouts.dashboard.menu')
+    <div class="content transition-[margin,width] duration-100 px-5 pt-[56px] pb-16 relative z-20 content--compact xl:ml-[275px] [&amp;.content--compact]:xl:ml-[91px]">
+        <form id="form-submit">
+            <div class="container mt-[65px]">
+                <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center">
                     <div class="text-base font-medium group-[.mode--light]:text-white">
-                        {{ $page_title }}
+                        {{ $page_title ?? '' }}
                     </div>
-                    <div class="flex flex-col gap-x-1 sm:flex-row md:ml-auto" id="assignShiftContainer">
-                        <a href="{{ route("hrms.shift-assignment") }}"
-                        class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md w-24">
-                        <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
-                        </a>
-                        <div data-tw-merge="" data-tw-placement="bottom-end" class="dropdown relative inline-block"><button data-tw-merge="" data-tw-toggle="dropdown" aria-expanded="false" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-blue-theme border-blue-theme text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200">
-                            <svg class="mr-2 h-4 w-4 stroke-[1.3]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-                                Add Shift Assignment</button>
-                            <div data-transition="" data-selector=".show" data-enter="transition-all ease-linear duration-150" data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1" data-enter-to="!mt-1 visible opacity-100 translate-y-0" data-leave="transition-all ease-linear duration-150" data-leave-from="!mt-1 visible opacity-100 translate-y-0" data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1" class="dropdown-menu absolute z-[9999] hidden">
-                                <div data-tw-merge="" class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600">
-                                    <div class="p-2">
-                                        <div>
-                                            <div class="text-left text-slate-500">
-                                                Select Shift
+                    <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
+                        <button onclick="history.go(-1)"
+                            class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md w-24">
+                            <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
+                        </button>
+                        <button id="submitBtn" data-tw-merge="" type="submit"
+                                class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-blue-theme border-blue-theme text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"><i
+                                    data-tw-merge="" data-lucide="save" class="mr-3 h-4 w-4 stroke-[1.3]"></i>
+                                <span id="loadingText">Save Changes</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-3.5 grid grid-cols-12 gap-x-6 gap-y-10">
+                    <div class="col-span-12 flex flex-col gap-y-7 sm:col-span-12 xl:col-span-12">
+                        <div class="box box--stacked flex flex-col p-5">
+                        <div class="relative mb-4 mt-4 rounded-[0.6rem] border border-slate-200/80 dark:border-darkmode-400 mr-5">
+                                <div class="absolute left-0 -mt-2 ml-4 bg-white px-3 text-xs uppercase text-slate-500">
+                                    <div class="-mt-px">Employee</div>
+                                </div>
+                                <div class="mt-2 flex flex-col gap-3.5 px-5 pb-5">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5">
+                                            <div class="gap-x-6 gap-y-10 ">
+                                                <div class="py-2">
+                                                <x-form.select id="employee_id" name="employee_id" data-method="POST" required label="Employee Name" url="{{ url('dashboard/hrms/employee/create') }}"
+                                                    apiUrl="{{ $apiUrlEmployee }}/datatables" columns='["first_name", "last_name"]'  
+                                                    :keys="[
+                                                        'company_id' => $company_id,
+                                                    ]">
+                                                    <option value="">Select Employee</option>
+                                                </x-form.select>
+                                                </div>
+                                                <div class="py-2">
+                                                    <div class="mt-3 flex-row xl:items-center" placholder="">
+                                                        <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4">
+                                                            <div class="text-left">
+                                                                <div class="flex items-center">
+                                                                    <div class="font-medium" for="start_time">Department</div>
+                                                                                        
+                                                                </div>
+                                                                <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flex-1 sm:w-full  w-96  gap-1 mt-3 xl:mt-0">
+                                                            <input id="department" readonly type="text" name="department" value="" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 ">
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <select data-tw-merge="" id="shift" onchange="getShiftId(this.value)" name="shift" class="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1 mt-2 flex-1">
+                                            <div class="gap-x-6 gap-y-10 ">
+                                            <div class="py-2">
+                                                <div class="mt-3 flex-row xl:items-center" placholder="">
+                                                    <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4">
+                                                        <div class="text-left">
+                                                            <div class="flex items-center">
+                                                                <div class="font-medium" for="start_time">Company</div>
+                                                                                  
+                                                            </div>
+                                                            <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-1 sm:w-full  w-96  gap-1 mt-3 xl:mt-0">
+                                                        <input id="company" type="text" name="company" value="" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 ">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         
-                                            </select>
-            <div class="grid grid-cols-12 gap-x-6 gap-y-10">
-                <div class="col-span-12">
-                    <div class="mt-1.5 flex flex-col">
-                        <div class="box flex flex-col p-5">
-                            <div class="flex flex-col mb-4 gap-y-3 md:h-10 md:flex-row md:items-center">
-                                <div class="text-base font-medium group-[.mode--light]:text-white">
-                                    {{ $page_title }}
-                                </div>
-                                <div class="flex flex-col gap-x-1 sm:flex-row md:ml-auto" id="assignShiftContainer">
-                                    <a href="{{ route('hrms.shift-assignment') }}" type="button" class="btn btn-primary transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary shadow-md w-100">
-                                        <svg class="mr-2 h-4 w-4 stroke-[1.3]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
-                                        Back</a>
-                                    <x-create_shift></x-create_shift>
-                                </div>
-                            </div>
-                            <x-datatable id="employeeTable"
-                                url="$apiUrl"
-                                method="POST" class="display">
-                                <x-slot:thead>
-                                    <th data-value="id" data-render="getCheckBox" orderable="false">
-                                        <input type="checkbox" id="select-all" />
-                                    </th>
-                                    <th data-value="employee_id_rel" data-render="getEmployee">Employee Name</th>
-                                    <th data-value="salaryStructureAssignment.salaryStructure.name">Company</th>
-                                    <th data-value="salaryStructureAssignment.salaryStructure.is_active"
-                                        data-render="getStatus">Department
-                                    </th>
-                                    <th data-value="status" data-render="status">Designation</th>
-                                </x-slot:thead>
-                            </x-datatable>
-                        </div>
-                        <div class=" fixed z-10 flex items-center justify-center " id="modalOverlay" >
-                            <div class="modal fade box p-4 inset-0 z-50 hidden" id="assignShiftModal"  tabindex="-1" aria-labelledby="assignShiftModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered bg-white rounded-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="assignShiftModalLabel">Assign Shift</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="mt-4 flex items-center">
-                                            <button type="button" data-tw-merge="" 
-                                                class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 ml-auto w-32">
-                                                Close
-                                            </button>
-                                            <form id="shiftAssignment">
-                                                <button id="submitButton" type="submit" data-tw-merge="" 
-                                                    class="mt-3 transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary ml-2 w-32">
-                                                    Apply
-                                                </button>
-                                            </form>
-                                        </div>
+                                        
                                     </div>
                                 </div>
-                            </div>
+                        </div>
+                        <div class="relative mb-4 mt-4 rounded-[0.6rem] border border-slate-200/80 dark:border-darkmode-400 mr-5">
+                                <div class="absolute left-0 -mt-2 ml-4 bg-white px-3 text-xs uppercase text-slate-500">
+                                    <div class="-mt-px">Shift Details</div>
+                                </div>
+                                <div class="mt-2 flex flex-col gap-3.5 px-5 pb-5">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5">
+                                            <div class="gap-x-6 gap-y-10 ">
+                                                <div class="py-2">
+                                                <x-form.select id="shift_type_id" name="shift_type_id" data-method="POST" required label="Shift Type Name" url="{{ url('dashboard/hrms/attendance/shift_type/create') }}"
+                                                    apiUrl="{{ $apiUrlShiftType }}/datatable" columns='["shift_type_name"]'  
+                                                    :keys="[
+                                                        'company_id' => $company_id,
+                                                    ]">
+                                                    <option value="">Select Shift Type</option>
+                                                </x-form.select>
+                                                </div>
+                                                <div class="py-2">
+                                                    <div class="mt-3 flex-row xl:items-center">
+                                                        <div class="mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-64">
+                                                            <div class="text-left">
+                                                                <div class="flex items-center">
+                                                                    <div class="font-medium">Status</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3"></div>
+                                                        </div>
+                                                        <div class="mt-3 w-96 flex-1 xl:mt-0">
+                                                            <select required name="status" id="status" data-title="Language" data-placeholder="Select your language" class="tom-select w-full" sclass="tom-select disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10"">
+                                                                <option value="active">
+                                                                    Active
+                                                                </option>
+                                                                <option value="inactive">
+                                                                    Inactive
+                                                                </option>
+                                                                
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="gap-x-6 gap-y-10 ">
+                                            <div class="py-2">
+                                                <div class="mt-3 flex-row xl:items-center" placholder="">
+                                                    <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4">
+                                                        <div class="text-left">
+                                                            <div class="flex items-center">
+                                                                <div class="font-medium" for="start_time">Start Date</div>
+                                                                        <div class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                                                        Required
+                                                                    </div>                
+                                                            </div>
+                                                            <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-1 sm:w-full  w-96  gap-1 mt-3 xl:mt-0">
+                                                        <input id="start_date" type="text" name="start_date" data-single-mode="true" value=""  required="" class="datepicker disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 ">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="py-2">
+                                                <div class="mt-3 flex-row xl:items-center" placholder="">
+                                                    <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4">
+                                                        <div class="text-left">
+                                                            <div class="flex items-center">
+                                                                <div class="font-medium" for="start_time">End Date</div>
+                                                                        <div class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                                                        Required
+                                                                    </div>                
+                                                            </div>
+                                                            <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-1 sm:w-full  w-96  gap-1 mt-3 xl:mt-0">
+                                                        <input id="end_date" type="text" name="end_date" data-single-mode="true" value="" required="" class="datepicker disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 ">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="gap-x-6 gap-y-10 ">
+                                            
+                                        
+                                        
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                        </div>
+                            
                         </div>
                     </div>
                 </div>
-                <div class="box box--stacked flex flex-col">
-                    <div class="table gap-y-2 p-5 sm:flex-row sm:items-center">
-                        <div class="overflow-auto xl:overflow-visible">
-                            <x-datatable id="shiftAssignmentTable" :url="$apiAddShiftAssignment" method="POST" class="display">
-                                <x-slot:thead>
-                                    <th data-value="id" data-render="getCheckBox" orderable="false">
-                                        <input type="checkbox" name="employee_id" id="select-all" />
-                                    </th>
-                                    <th data-render="getFullName">Employee Name</th>
-                                    <th data-value="company_id_rel" data-render="getCompany">Company</th>
-                                    <th data-value="department_id_rel" data-render="getDepartment">Department</th>
-                                    <th style="text-align: center" data-value="department_id_rel" data-render="getDesignation">Designantion</th>
-                                </x-slot:thead>
-                            </x-datatable>
-                        </div>
-                    </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="preview relative [&.hide]:overflow-hidden [&.hide]:h-0">
+    <div class="text-center">
+        <div id="success-notification-content" class="py-5 pl-5 pr-14 bg-white border border-slate-200/60 rounded-lg shadow-xl dark:bg-darkmode-600 dark:text-slate-300 dark:border-darkmode-600 hidden flex">
+            <i data-tw-merge="" data-lucide="check-circle" class="stroke-[1] w-5 h-5 text-success"></i>
+            <div class="ml-4 mr-4">
+                <div class="font-medium" id="success-title">...</div>
+                <div class="mt-1 text-slate-500" id="success-message">
+                   ...
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endsection
 @push('js')
-    <script type="text/javascript">
-        $(document).ready(function() {
-            getShiftType();
-        });
-
-        function getCheckBox(data, type, row, meta) {
-            return `<input type="checkbox" name="employee_id" value="${data}">`;
-        }
-
-        function getFullName(data, type, row, meta) {
-            if (data !== null) {
-                return row.first_name + ' ' + row.last_name;
-            }
-            return 'N/A';
-        }
-
-        function getCompany(data, type, row, meta) {
-           return data.company_name;
-        }
-
-        function getDepartment(data, type, row, meta) {
-            return data?.department_name ? department_name : 'N/A';
-        }
-
-        function getDesignation(data, type, row, meta) {
-            return data?.designation_name ? designation_name : 'N/A';
-        }
-
-        $('#select-all').on('click', function() {
-            var isChecked = $(this).is(':checked');
-            $('#shiftAssignmentTable tbody input[type="checkbox"]').prop('checked', isChecked);
-
-<script src="{{ asset('dist/js/vendors/tab.js') }}"></script> 
-<script src="{{ asset('dist/js/vendors/tom-select.js') }}"></script>
-<script src="{{ asset('dist/js/components/base/tom-select.js') }}"></script> 
+<script src="{{ asset('dist') }}/js/vendors/litepicker.js"></script>
+<script src="{{ asset('dist') }}/js/components/base/litepicker.js"></script>
+<script type="text/javascript">
 
 
-<script>
-    $(document).ready(function() {
-        $('#select-all').on('click', function() {
-            var isChecked = $(this).is(':checked');
-            $('#employeeTable tbody input[type="checkbox"]').prop('checked', isChecked);
-            toggleCustomButton();
-        });
+    //simpan payload data attendance dari data detail employee
+    let employee_id = '';
+    let company_id = '';
+    //tampilkan employee berdasarkan employee_id
+    async function getDetailEmployee(value) 
+    {
+       var param = {
+        url: "{{ $apiUrlEmployee }}/" + value,
+        method: "GET",
+       }
 
-        $('#employeeTable').on('change', 'tbody input[type="checkbox"]', function() {
-            if (!this.checked) {
-                $('#select-all').prop('checked', false);
-            }
-            toggleCustomButton();
-        });
-
-        function toggleCustomButton() {
-            var anyChecked = $('#employeeTable tbody input[type="checkbox"]:checked').length > 0;
-            if (anyChecked) {
-                employeeTable.buttons('.custom-btn').enable();
-                $('.custom-btn').removeClass('d-none');
-            } else {
-                employeeTable.buttons('.custom-btn').disable();
-                $('.custom-btn').addClass('d-none');
-            }
-        }
-
-        employeeTable.buttons('.custom-btn').disable();
-
-        $(".custom-btn").click(function() {
-            var checkedValues = [];
-            $('#employeeTable tbody input[type="checkbox"]:checked').each(function() {
-                var rowData = JSON.parse($(this).val());
-                checkedValues.push({
-                    'employee_id': rowData.id,
-                    'first_name': rowData.first_name,
-                    'last_name': rowData.last_name,
-                    'personal_email': rowData.addressContact.personal_email,
-                    'company': rowData.company_id_rel.company_name,
-                    'company_id': rowData.company_id,
-                    'domain': rowData.company_id_rel.domain
-                });
-            });
-            var jsonCheckedValues = JSON.stringify(checkedValues);
-            handleNotification(checkedValues);
-        });
-    });
+       await transAjax(param).then((result) => {
+        const employee = result.data
+        employee_id = employee.id;
+        company_id =  employee.company_id
+         
+        $('#department').val(employee.department_id_rel.department_name)
+        $('#company').val(employee.company_id_rel.company_name)
+       }).catch((error) => {
+        console.log(error);
+       });
+    }
     
-      $('#selectAll').on('click', function() {
-            $('tbody input[type="checkbox"]').prop('checked', this.checked);
-        });
+    $('#employee_id').change(function() {
+        const selectedValue = $(this).val();
 
-        async function getShiftType()
-        {
-            let companyId = localStorage.getItem('company');
-            var param = {
-                url: "http://apidev.duluin.com/api/v1/companies/shift-type",
-                method: "GET",
-                data: {
-                    company_id: localStorage.getItem('company'),
-                }
-            }
+        getDetailEmployee(selectedValue);
+    });
 
-            await transAjax(param).then((result) => {
-                let shift = result.data;
-
-                var html  = "";
-                shift.forEach((shift) => {
-                html += `
-                    <option value="${shift.id}">
-                        ${shift.shift_type_name}
-                    </option>
-                `  
-                });
-                $("#shift").html(html);
-
-            }).catch((error) => {
-                console.log(error);
-            });
-        }
-
-    //shift assignment
-    $('#shiftAssignment').submit(async function(e) {
+    $("#form-submit").submit(async function(e) {
         e.preventDefault();
 
-        const checkedEmployeeIds = [];
-        document.querySelectorAll('input[name="employee_id"]:checked').forEach(checkbox => {
-            checkedEmployeeIds.push(checkbox.value);
-        });
-        
-        const checkedEmployeeIdsFilter = checkedEmployeeIds.filter(item => item !== 'on');
-        if(checkedEmployeeIds.length <= 0) {
-            return alert('Employee cannot be null');
+        var dataAttendance = {
+            employee_id: employee_id,
+            company_id: company_id,
+            start_date: $('#start_date').val(),
+            end_date: $('#end_date').val(),
+            shift_type_id: $('#shift_type_id option:selected').val(),
+            status: $('#status option:selected').val()
         }
-        
-        var shiftId = $("#shift").val();
+        var data = JSON.stringify(dataAttendance);
+         
+
+        $('#loadingText').html('Saving...');
+        $(this).attr('disable', true);
+
         var param = {
-            url: "http://apidev.duluin.com/api/v1/attendance/shift-assignment",
+            url: "{{ $apiShiftAssignment }}",
             method: "POST",
-            data: JSON.stringify({ 
-                employee_ids: checkedEmployeeIdsFilter,
-                shift_type_id: shiftId,
-                company_id: localStorage.getItem('company'),
-            }),
+            data: data,
             processData: false,
             contentType: false,
             cache: false,
+            dataType: 'json'
         }
-
-        sudmitButton(true);
+        
         await transAjax(param).then((result) => {
-            console.log(result);
-            sudmitButton(false);
-            showSuccessNotification("Shift Assignment", "This shift was successfully implemented.");
+            showSuccessNotification(result.message, "The operation was completed successfully.");
+            $('#loadingText').html('Save Changes');
+            $(this).attr('disable', false);
             setTimeout(() => {
-                window.location.href = "/dashboard/hrms/attendance/shift-assignment";
+                window.location.href = "/dashboard/hrms/attendance/summary";
             }, 3000);
-        }).catch((err) => {
-            sudmitButton(false);
-            console.log(err);
-        })
+        }).catch((error) => {
+            $('#loadingText').html('Save Changes');
+            $(this).attr('disable', false);
+            console.log(error.error);
+            showErrorNotification('error', error.responseJSON.error);
+        });
     });
-
-    function sudmitButton(state) {
-        if(state) {
-            $("#submitButton").html('Apply...');
-            $("#submitButton").attr('disabled', 'disabled');
-        }else {
-            $("#submitButton").html('Apply');
-            $("#submitButton").removeAttr('disabled');
-        }
-    }
-    // function showSuccessNotification(title, message) {
-    //     var notificationContent = document.getElementById("success-notification-content");
-    //     document.getElementById("success-title").textContent = title;
-    //     document.getElementById("success-message").textContent = message;
-
-    //     Toastify({
-    //         node: $("#success-notification-content")
-    //             .clone()
-    //             .removeClass("hidden")[0],
-    //         duration: 3000,
-    //         newWindow: true,
-    //         close: true,
-    //         gravity: "top",
-    //         position: "right",
-    //         stopOnFocus: true,
-    //     }).showToast();
-    //     setTimeout(() => {
-    //         window.location.href = "/dashboard/hrms/attendance/shift-assignment";
-    //     }, 3000);
-    // }
     </script>
 @endpush

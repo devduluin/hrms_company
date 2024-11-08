@@ -128,7 +128,7 @@
                     }
                 });
             }else{
-                location.href = '{{ url("/dashboard/hrms/shift-type") }}/'+action+'/'+id;
+                location.href = '{{ url("/dashboard/hrms/attendance/shift_type") }}/'+action+'/'+id;
             }
         }
 

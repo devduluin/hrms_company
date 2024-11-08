@@ -36,7 +36,7 @@ Route::prefix('/attendance')->group(function () {
     //route for shift assignment
     Route::controller(Attendance\ShfitAssigmentController::class)->group(function() {
         Route::get('shift-assignment', 'index')->name('hrms.shift-assignment');
-        Route::get('shift-assignment/cretae', 'create')->name('hrms.shift-assignment.create');
+        Route::get('shift-assignment/create', 'create')->name('hrms.shift-assignment.create');
     });
     //end route for shift assignment
 });

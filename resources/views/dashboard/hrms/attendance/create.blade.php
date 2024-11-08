@@ -25,55 +25,140 @@
                 <div class="mt-3.5 grid grid-cols-12 gap-x-6 gap-y-10">
                     <div class="col-span-12 flex flex-col gap-y-7 sm:col-span-12 xl:col-span-12">
                         <div class="box box--stacked flex flex-col p-5">
-                            <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-2 gap-5 mt-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4">
                                 <div class="gap-x-6 gap-y-10 ">
-                                    <div class="inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
-                                        <div class="text-left">
-                                            <div class="flex items-center">
-                                                <div class="font-medium">Select Employee</div>
+                                    <div class="py-2">
+                                    <x-form.select id="employee_id" name="employee_id" data-method="POST" required label="Employee Name" url="{{ url('dashboard/hrms/employee/create') }}"
+                                        apiUrl="{{ $apiUrlEmployee }}/datatables" columns='["first_name", "last_name"]'  
+                                        :keys="[
+                                            'company_id' => $company_id,
+                                        ]">
+                                        <option value="">Select Employee</option>
+                                    </x-form.select>
+                                    </div>
+                                    <div class="py-2">
+                                        <div class="mt-3 flex-row xl:items-center" placholder="">
+                                            <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4">
+                                                <div class="text-left">
+                                                    <div class="flex items-center">
+                                                        <div class="font-medium" for="start_time">Start Date</div>
+                                                                <div class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                                                Required
+                                                            </div>                
+                                                    </div>
+                                                    <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex-1 sm:w-full  w-96  gap-1 mt-3 xl:mt-0">
+                                                <input id="start_date" type="text" name="start_date" data-single-mode="true" value=""  required="" class="datepicker disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 ">
                                             </div>
                                         </div>
                                     </div>
-                                    <select name="employee" id="employee_id" onchange="getDetailEmployee(this.value)" class="disabled:bg-slate-100 mt-1 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1">
-                                        
-                                    </select>
-                                </div>
-                                <div class="gap-x-6 gap-y-10 ">
-                                    <div class="inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
-                                        <div class="text-left">
-                                            <div class="flex items-center">
-                                                <div class="font-medium">Select Employee</div>
+                                    <div class="py-2">
+                                        <div class="mt-3 flex-row xl:items-center" placholder="">
+                                            <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4">
+                                                <div class="text-left">
+                                                    <div class="flex items-center">
+                                                        <div class="font-medium" for="start_time">End Date</div>
+                                                                <div class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                                                Required
+                                                            </div>                
+                                                    </div>
+                                                    <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex-1 sm:w-full  w-96  gap-1 mt-3 xl:mt-0">
+                                                <input id="end_date" type="text" name="end_date" data-single-mode="true" value="" required="" class="datepicker disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 ">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="relative mt-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="calendar" class="lucide lucide-calendar absolute inset-y-0 left-0 z-10 my-auto ml-3 h-4 w-4 stroke-[1.3]"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
-                                        <input type="text" name="attendance_date" id="attendance_date" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 datepicker rounded-[0.3rem] pl-9">
-                                    </div>
                                 </div>
                                 <div class="gap-x-6 gap-y-10 ">
-                                    <div class="inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
-                                        <div class="text-left">
-                                            <div class="flex items-center">
-                                                <div class="font-medium">Status</div>
+                                    <div class="py-2">
+                                        <div class="mt-3 flex-row xl:items-center" placholder="">
+                                            <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4">
+                                                <div class="text-left">
+                                                    <div class="flex items-center">
+                                                        <div class="font-medium" for="time_in">Checkin Time</div>
+                                                                <div class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                                                Required
+                                                            </div>                
+                                                    </div>
+                                                    <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex-1 sm:w-full  w-96  gap-1 mt-3 xl:mt-0">
+                                                <input id="time_in" type="time" name="time_in" data-single-mode="true" value="" placeholder="Start Time" required="true" class="datepicker disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 ">
                                             </div>
                                         </div>
                                     </div>
-                                    <select id="status" name="status" class="disabled:bg-slate-100 mt-1 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1">
-                                        <option value="present">
-                                            Present
-                                        </option>
-                                        <option value="absent">
-                                            Absent
-                                        </option>
-                                        <option value="wfo">
-                                            WFO
-                                        </option>
-                                        <option value="wfh">
-                                            WFH
-                                        </option>
-                                    </select>
-                                </div>
+                                    <div class="py-2">
+                                        <div class="mt-3 flex-row xl:items-center" placholder="">
+                                            <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4">
+                                                <div class="text-left">
+                                                    <div class="flex items-center">
+                                                        <div class="font-medium" for="time_out">Checkout Time</div>
+                                                                          
+                                                    </div>
+                                                    <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex-1 sm:w-full  w-96  gap-1 mt-3 xl:mt-0">
+                                                <input id="time_out" type="time" name="time_out" data-single-mode="true" value="" placeholder="Start Time" class="datepicker disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 ">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="py-2">
+                                        <div class="mt-3 flex-row xl:items-center">
+                                            <div class="mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-64">
+                                                <div class="text-left">
+                                                    <div class="flex items-center">
+                                                        <div class="font-medium">Status</div>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3"></div>
+                                            </div>
+                                            <div class="mt-3 w-96 flex-1 xl:mt-0">
+                                                <select required name="status" id="status" data-title="Language" data-placeholder="Select your language" class="tom-select w-full" sclass="tom-select disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10"">
+                                                    <option value="present">
+                                                        Present
+                                                    </option>
+                                                    <option value="absent">
+                                                        Absent
+                                                    </option>
+                                                    <option value="leave">
+                                                        Leave
+                                                    </option>
+                                                    <option value="wfo">
+                                                        WFO
+                                                    </option>
+                                                    <option value="wfh">
+                                                        WFH
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    
+                                    <div id="leave" class="py-2" hidden>
+                                    <x-form.select id="leave_type_id" name="leave_type_id" data-method="POST" label="Leave Type Name" url="{{ url('dashboard/hrms/employee/create') }}"
+                                        apiUrl="{{ $apiUrlLeaveType }}" columns='["leave_type_name"]'  
+                                        :keys="[
+                                            'company_id' => $company_id,
+                                        ]">
+                                        <option value="">Select Leave Type</option>
+                                    </x-form.select>
+                                    </div>
+                                    </div>
+                                
                             </div>
                             <div class="gap-x-6 gap-y-10">
                                 <x-form.textarea id="reason" name="reason" label="Reason"/>
@@ -104,39 +189,26 @@
 <script src="{{ asset('dist') }}/js/components/base/litepicker.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        loadEmployee();
+        setCurrentTime();
     });
 
-    //ambil semua employee berdasarkan company_id
-    async function loadEmployee()
-    {
-        var param = {
-            url: "{{ $apiEmployeeUrl }}",
-            method: "POST",
-            data: JSON.stringify({
-                company_id: "{{ $company_id }}"
-            }),
-        }
+    const timeInInput = document.getElementById('time_in');
+    const timeOutInput = document.getElementById('time_out');
 
-        await transAjax(param).then((result) => {
-            let response = result.data;
-
-            var html = "";
-            response.forEach(employee => {
-               html += `
-                <option value="${employee.id}">
-                   ${employee.first_name + ' ' + employee.last_name}
-                </option>
-                `
-            });
-
-            $("#employee_id").html(html);
-            //setelah employee ditampilkan, jalankan fungsi getDetailEmployee untuk mendapatkan data employee yang pertama
-            getDetailEmployee($('#employee_id').val());
-        }).catch((error) => {
-            console.log(error);
-        });
+    // Function to format time to 'HH:MM'
+    function setCurrentTime() {
+        const now = new Date();
+        
+        const options = { timeZone: 'Asia/Jakarta', hour12: false, hour: '2-digit', minute: '2-digit' };
+        const jakartaTime = now.toLocaleTimeString('en-GB', options); // 'en-GB' is used for 24-hour format
+        
+        // Set the value of the time inputs to the Jakarta time
+        timeInInput.value = jakartaTime;
+        //timeOutInput.value = jakartaTime;
     }
+
+    // Call the function to set the current time
+    setCurrentTime();
 
     //simpan payload data attendance dari data detail employee
     var employee_id = '';
@@ -146,7 +218,7 @@
     async function getDetailEmployee(value) 
     {
        var param = {
-        url: "{{ $apiDetailEmployee }}" + value,
+        url: "{{ $apiUrlEmployee }}" + value,
         method: "GET",
        }
 
@@ -160,6 +232,22 @@
         console.log(error);
        });
     }
+    
+    $('#employee_id').change(function() {
+        const selectedValue = $(this).val();
+
+        getDetailEmployee(selectedValue);
+    });
+
+    $('#status').change(function() {
+        const selectedValue = $(this).val();
+
+        if(selectedValue == 'leave'){
+            $('#leave').show();
+        }else{
+            $('#leave').hide();
+        }
+    });
 
     $("#form-submit").submit(async function(e) {
         e.preventDefault();
@@ -168,19 +256,24 @@
             employee_id: employee_id,
             company_id: company_id,
             latlong: latlong,
-            attendance_date: $('#attendance_date').val(),
-            status: $('#status').val(),
+            start_date: $('#start_date').val(),
+            end_date: $('#end_date').val(),
+            time_in: $('#time_in').val(),
+            time_out: $('#time_out').val(),
+            status: $('#status option:selected').val(),
+            leave_type_id: $('#leave_type_id option:selected').val(),
             reason: $('#reason').val()
         }
+        var data = JSON.stringify(dataAttendance);
+        console.log(data);
 
         $('#loadingText').html('Saving...');
         $(this).attr('disable', true);
 
         var param = {
             url: "{{ $apiAttendance }}",
-            // url: "http://localhost:4444/api/v1/attendance/operator/store",
             method: "POST",
-            data: JSON.stringify(dataAttendance),
+            data: data,
             processData: false,
             contentType: false,
             cache: false,

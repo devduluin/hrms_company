@@ -7,12 +7,13 @@
         <div class="container gap-y-5">
             <div class="flex flex-col gap-y-5 md:h-10 md:flex-row md:items-center">
                 <div class="text-base font-medium">
-                    Attendance
+                {{ $page_title ?? '' }}
                 </div>
                 <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
-                    <a href="{{ route('hrms.attendance.summary') }}" type="button" class="btn btn-primary transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary shadow-md w-100">
-                        <svg class="mr-2 h-4 w-4 stroke-[1.3]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
-                        Back</a>
+                <button onclick="history.go(-1)"
+                            class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md w-24">
+                            <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
+                        </button>
                 </div>
             </div>
             <div class="mt-3.5 grid grid-cols-10 gap-5">
@@ -33,59 +34,62 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-span-12 flex flex-col gap-7 xl:col-span-7">
-                    <div class="box flex flex-col p-5">
+                    <div class="box flex flex-col p-5 mt-5">
                         <div class="relative mt-3 rounded-[0.6rem] border border-slate-200/80 dark:border-darkmode-400">
                             <div class="absolute left-0 -mt-2 ml-4 bg-white px-3 text-xs uppercase text-slate-500">
                                 <div class="-mt-px">Employee Details</div>
                             </div>
                             <div class="mt-2.5 flex flex-col gap-5 p-5">
                                 <div class="overflow-auto xl:overflow-visible">
-                                    <table class="w-full text-left border-b border-dashed border-slate-200/80">
-                                        <tbody>
-                                            <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
-                                                <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
-                                                    <div class="flex items-center">
-                                                        <p class="whitespace-nowrap font-medium" href="#">
-                                                           <span class="font-bold">ID:</span> <span id="employeeId">-</span>
-                                                        </p>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
-                                                <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
-                                                    <div class="flex items-center">
-                                                        <p class="whitespace-nowrap font-medium" href="#">
-                                                           <span class="font-bold">Name:</span> <span id="name">-</span>
-                                                        </p>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
-                                                <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
-                                                    <div class="flex items-center">
-                                                        <p class="whitespace-nowrap font-medium" href="#">
-                                                           <span class="font-bold">Email:</span> <span id="email">-</span>
-                                                        </p>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
-                                                <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
-                                                    <div class="flex items-center">
-                                                        <p class="whitespace-nowrap font-medium" href="#">
-                                                           <span class="font-bold">Mobile Phone:</span> <span id="phone">-</span>
-                                                        </p>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
+                                <table class="w-full text-left border-b border-dashed border-slate-200/80">
+                                    <tbody>
+                                        <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
+                                            <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                <p class="whitespace-nowrap font-bold">ID</p>
+                                            </td>
+                                            <td class="px-1 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">:</td>
+                                            <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                <p id="employeeId">-</p>
+                                            </td>
+                                        </tr>
+                                        <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
+                                            <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                <p class="whitespace-nowrap font-bold">Name</p>
+                                            </td>
+                                            <td class="px-1 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">:</td>
+                                            <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                <p id="name">-</p>
+                                            </td>
+                                        </tr>
+                                        <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
+                                            <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                <p class="whitespace-nowrap font-bold">Email</p>
+                                            </td>
+                                            <td class="px-1 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">:</td>
+                                            <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                <p id="email">-</p>
+                                            </td>
+                                        </tr>
+                                        <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
+                                            <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                <p class="whitespace-nowrap font-bold">Mobile Phone</p>
+                                            </td>
+                                            <td class="px-1 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">:</td>
+                                            <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                <p id="phone">-</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
                                     </table>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="col-span-12 flex flex-col gap-7 xl:col-span-7">
+                    
                     <div class="box flex flex-col p-5">
                         <div class="relative rounded-[0.6rem] border border-slate-200/80 dark:border-darkmode-400">
                             <div class="absolute left-0 -mt-2 ml-4 bg-white px-3 text-xs uppercase text-slate-500">
@@ -93,62 +97,72 @@
                             </div>
                             <div class="mt-2.5 flex flex-col gap-5 p-5">
                                 <div class="overflow-auto xl:overflow-visible">
-                                    <table class="w-full text-left border-b border-dashed border-slate-200/80">
-                                        <tbody>
-                                            <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
-                                                <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
-                                                    <div class="flex items-center">
-                                                        <p class="whitespace-nowrap font-medium" href="#">
-                                                           <span class="font-bold">Attendance Date:</span> <span id="attendance_date">-</span>
-                                                        </p>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
-                                                <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
-                                                    <div class="flex items-center">
-                                                        <p class="whitespace-nowrap font-medium" href="#">
-                                                           <span class="font-bold">Attendance Status:</span> <span id="attendance_status">-</span>
-                                                        </p>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
-                                                <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
-                                                    <div class="flex items-center">
-                                                        <p class="whitespace-nowrap font-medium" href="#">
-                                                           <span class="font-bold">Checkin Time:</span> <span id="check_in">-</span>
-                                                        </p>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
-                                                <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
-                                                    <div class="flex items-center">
-                                                        <p class="whitespace-nowrap font-medium" href="#">
-                                                           <span class="font-bold">Check in status:</span> <span id="check_in_status">-</span>
-                                                        </p>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
-                                                <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
-                                                    <div class="flex items-center">
-                                                        <p class="whitespace-nowrap font-medium" href="#">
-                                                           <span class="font-bold">Lat long:</span> <span id="latlong">-</span>
-                                                        </p>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
-                                                <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
-                                                    <div class="flex items-center">
-                                                        <div id="map" style="height: 400px; width: 100%;"></div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <table class="w-full text-left border-b border-dashed border-slate-200/80">
+                                    <tbody>
+                                        <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
+                                            <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                <p class="whitespace-nowrap font-bold">Attendance Date</p>
+                                            </td>
+                                            <td class="px-1 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">:</td>
+                                            <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                <p id="attendance_date">-</p>
+                                            </td>
+                                        </tr>
+                                        <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
+                                            <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                <p class="whitespace-nowrap font-bold">Attendance Status</p>
+                                            </td>
+                                            <td class="px-1 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">:</td>
+                                            <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                <p id="attendance_status">-</p>
+                                            </td>
+                                        </tr>
+                                        <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
+                                            <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                <p class="whitespace-nowrap font-bold">Checkin Time</p>
+                                            </td>
+                                            <td class="px-1 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">:</td>
+                                            <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                <p id="check_in">-</p>
+                                            </td>
+                                        </tr>
+                                        <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
+                                            <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                <p class="whitespace-nowrap font-bold">Checkout Time</p>
+                                            </td>
+                                            <td class="px-1 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">:</td>
+                                            <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                <p id="check_out">-</p>
+                                            </td>
+                                        </tr>
+                                        <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
+                                            <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                <p class="whitespace-nowrap font-bold">Check-in Status</p>
+                                            </td>
+                                            <td class="px-1 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">:</td>
+                                            <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                <p id="check_in_status">-</p>
+                                            </td>
+                                        </tr>
+                                        <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
+                                            <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                <p class="whitespace-nowrap font-bold">Lat long</p>
+                                            </td>
+                                            <td class="px-1 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">:</td>
+                                            <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                <p id="latlong">-</p>
+                                            </td>
+                                        </tr>
+                                        <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
+                                            <td colspan="3" class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                <div class="flex items-center">
+                                                    <div id="map" style="height: 400px; width: 100%;"></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
                                 </div>
                             </div>
                         </div>
@@ -192,6 +206,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7T5886HCdj0jMOWhW_aliRYP
 
                 $("#attendance_date").html(attendance.attendance_date);
                 $("#check_in").html(attendance.time_in);
+                $("#check_out").html(attendance.time_out);
                 $("#attendance_status").html(attendance.attendance_status);
                 $("#check_in_status").html(attendance.checkin_status);
                 $("#latlong").html(attendance.latlong_in);
