@@ -29,7 +29,7 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4">
                                     <input type="hidden" id="parent_company" name="parent_company" />
                                     <x-form.select id="company_id" name="company_id" label="Company"
-                                        url="{{ url('dashboard/hrms/designation') }}"
+                                        url="{{ url('dashboard/hrms/company') }}"
                                         apiUrl="{{ $apiCompanyUrl }}/company/datatables" columns='["company_name"]'
                                         :keys="[
                                             'company_id' => $company,
@@ -115,8 +115,9 @@
 
             async function handleGetData() {
                 let tabId = "";
+                let companyId = localStorage.getItem("company");
                 $.ajax({
-                    url: `http://apidev.duluin.com/api/v1/payroll/payroll_setting/${id}`,
+                    url: `http://apidev.duluin.com/api/v1/payroll/payroll_setting/getByCompany/${id}`,
                     type: 'GET',
                     headers: {
                         'Authorization': `Bearer ${appToken}`,
@@ -287,7 +288,7 @@
                 try {
                     const response = await $.ajax({
                         url: currentForm.attr('action') +
-                            '/' + id,
+                            '/updateByCompany/' + id,
                         type: 'PUT',
                         contentType: 'application/json',
                         crossDomain: true,
