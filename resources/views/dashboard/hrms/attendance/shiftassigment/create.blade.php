@@ -340,12 +340,7 @@
 
     function handleResponse(response) {
         if (response.success == true) {
-            if(method == 'PATCH'){
-                window.location.href = "/dashboard/hrms/attendance/request";
-            }else{
-                window.location.href = "/dashboard/hrms/attendance/request/update/"+response.data.id;
-            }
-            
+            window.location=document.referrer;
         } else {
             showErrorNotification('error', response.message);
         }
