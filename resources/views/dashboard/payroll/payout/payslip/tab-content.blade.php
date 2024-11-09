@@ -1,5 +1,5 @@
 <div class="tab-content mt-5">
-    @foreach (['details', 'payment', 'earning', 'bank'] as $tab)
+    @foreach (['details', 'payment', 'earning'] as $tab)
         <div data-transition data-selector=".active" data-enter="transition-[visibility,opacity] ease-linear duration-150"
             data-enter-from="!p-0 !h-0 overflow-hidden invisible opacity-0" data-enter-to="visible opacity-100"
             data-leave="transition-[visibility,opacity] ease-linear duration-150" data-leave-from="visible opacity-100"

@@ -81,23 +81,21 @@
                     dataType: 'json',
                     success: function(response) {
                         if (response.success) {
-                            const structureSelect = $('#salary_stucture')[0].tomselect;
-                            const structureValue = response.data.salaryStructureAssignment
-                                .salary_structure_id;
-                            if (!structureSelect.options[structureValue]) {
-                                structureSelect.addOption({
-                                    value: structureValue,
-                                    text: structureValue
-                                });
-                            }
-                            structureSelect.setValue(structureValue);
-
+                            const structureId = response.data?.salaryStructureAssignment
+                                ?.salaryStructure?.id;
+                            const structureName = response.data?.salaryStructureAssignment
+                                ?.salaryStructure?.name;
+                            $(".salary_stucture_box").removeClass("hidden");
+                            $("#salary_stucture").html(
+                                `<option value="${structureId}" selected>${structureName}</option>`
+                            );
                             calculateDays(startDate, endDate, employeeId);
 
                             getEarning();
                             getDeduction();
 
                         } else {
+                            console.log("error occured");
                             showErrorNotification('error', response.message);
                         }
                     },
@@ -109,10 +107,45 @@
                             const response = JSON.parse(xhr.responseText);
                             showErrorNotification('error', response.message +
                                 ". Please assign current employee to salary structures");
-                            calculateDays(startDate, endDate, employeeId);
+                            $(".salary_stucture_box").addClass("hidden");
+                            // calculateDays(startDate, endDate, employeeId);
                         }
                     }
                 });
+            });
+
+            $("#payroll_frequency").on("change", async function() {
+                const payrollFrequency = $(this).val();
+                const currentDate = new Date();
+                let startDate, endDate;
+
+                if (payrollFrequency === "monthly") {
+                    const year = currentDate.getFullYear();
+                    const month = currentDate.getMonth();
+                    startDate = new Date(year, month, 1 + 1);
+                    endDate = new Date(year, month + 1);
+                } else if (payrollFrequency === "weekly") {
+                    const dayOfWeek = currentDate.getDay();
+                    const diffToMonday = currentDate.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 :
+                        1);
+                    startDate = new Date(currentDate.setDate(diffToMonday));
+                    endDate = new Date(currentDate.setDate(startDate.getDate() + 6));
+                } else {
+                    startDate = new Date();
+                    endDate = new Date();
+                }
+                $("#start_date").val(startDate.toISOString().split('T')[0]);
+                $("#end_date").val(endDate.toISOString().split('T')[0]);
+
+                // check if employee, salary structure are not empty
+                if (($("#employee_id").val() !== "") && ($("#salary_stucture").val() !== "")) {
+                    console.log("employee id " + $("#employee_id").val());
+                    calculateDays(startDate, endDate, $("#employee_id").val());
+                    getEarning();
+                    getDeduction();
+                } else {
+                    showErrorNotification('error', 'Please select employee and salary structure');
+                }
             });
 
             $("#start_date").on("change", async function() {
@@ -134,6 +167,11 @@
             function getEarning() {
                 // get earning and deduction
                 let structureValue = $('#salary_stucture').val();
+                if (structureValue == "") {
+                    showErrorNotification('error', 'Please select a salary structure');
+                    preventDefault();
+                }
+
                 $.ajax({
                     url: `http://apidev.duluin.com/api/v1/structure_earning_deductions/structure_earning_deduction/all`, // Ubah URL sesuai endpoint yang diinginkan
                     type: 'POST',
@@ -181,6 +219,8 @@
                 if (type === 'earning') {
                     data.forEach((item, index) => {
                         const row = document.createElement("tr");
+                        const rowId = `editable-${type}-table-row-${index + 1}`;
+                        row.setAttribute("id", rowId);
                         row.setAttribute("data-id", index + 1);
 
                         let amountFormatted = new Intl.NumberFormat('id-ID', {
@@ -335,6 +375,11 @@
 
             function getDeduction() {
                 let structureValue = $('#salary_stucture').val();
+                if (structureValue == "") {
+                    showErrorNotification('error', 'Please select a salary structure');
+                    preventDefault();
+                }
+
                 $.ajax({
                     url: `http://apidev.duluin.com/api/v1/structure_earning_deductions/structure_earning_deduction/all`, // Ubah URL sesuai endpoint yang diinginkan
                     type: 'POST',
@@ -414,16 +459,22 @@ http://apidev.duluin.com/api/v1/attendance/attendance/total-attendance/${employe
                             getEarning();
                             getDeduction();
                         } else {
+                            console.log("Data tidak tersedia");
                             showErrorNotification('error', response.message);
+                            $("#absent_days").val(0);
+                            $("#present_days").val(0);
                         }
                     },
                     error: function(xhr) {
+                        $("#absent_days").val(0);
+                        $("#present_days").val(0);
                         if (xhr.status === 422) {
                             const response = JSON.parse(xhr.responseText);
                             handleErrorResponse(response, formId);
                         } else {
+                            const response = JSON.parse(xhr.responseText);
                             showErrorNotification('error',
-                                'An error occurred while processing your request.');
+                                "Payment day not found");
                         }
                     }
                 });

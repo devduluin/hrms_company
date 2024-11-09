@@ -12,14 +12,13 @@
             url="{{ url('dashboard/hrms/employee/new_employee') }}" :apiUrl="$apiEmployeeUrl . '/employee/datatables'"
             columns='["first_name","last_name"]' :keys="[
                 'company_id' => $company,
-            ]" :data="['company_id' => '#company_id']">
+            ]" :data="['company_id' => '#company_id']" required>
         </x-form.select>
         <input type="hidden" id="employee" name="employee" />
         <x-form.datepicker id="posting_date" label="Posting Date" name="posting_date" required />
         <x-form.select name="currency" id="currency" label="Currency" class="tom-select w-full"
             data-placeholder="Select Currency" url="{{ url('dashboard/hrms/designation') }}" required>
-            <option value="">Select Currency</option>
-            <option value="IDR">Indonesian Rupiah</option>
+            <option value="IDR">IDR</option>
         </x-form.select>
     </div>
     <div class="grid grid-cols-2 gap-5 mt-4">
@@ -30,16 +29,25 @@
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4">
         <x-form.select name="payroll_frequency" id="payroll_frequency" label="Payroll Frequency"
-            class="tom-select w-full" data-placeholder="Select Currency" url="#" required>
+            class="tom-select w-full" data-placeholder="Select Frequency" url="#" required>
+            <option value="">Select Payroll Frequency</option>
             <option value="monthly">Monthly</option>
             <option value="weekly">Weekly</option>
             <option value="daily">Daily</option>
         </x-form.select>
-        <x-form.select id="salary_stucture" name="salary_stucture" label="Salary Structure" url="#"
+        {{-- <x-form.select id="salary_stucture" name="salary_stucture" label="Salary Structure" url="#"
             apiUrl="{{ $apiPayrollUrl }}/salary_structure/datatables" columns='["name"]' :keys="[
                 'company_id' => $company,
             ]" required>
-        </x-form.select>
+        </x-form.select> --}}
+        <div class="salary_stucture_box mt-2 hidden">
+            <x-form._select id="salary_stucture" name="salary_stucture" label="Salary Structure"
+                dataPlaceholder="Select Salary Structure" required>
+                <option value="">Select Salary Structure</option>
+            </x-form._select>
+        </div>
+
+        </select>
         <x-form.datepicker id="start_date" label="Start Date" name="start_date" required />
         <x-form.datepicker id="end_date" label="End Date" name="end_date" required />
     </div>
