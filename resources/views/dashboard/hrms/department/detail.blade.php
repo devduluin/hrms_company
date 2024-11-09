@@ -54,7 +54,7 @@
                                 <div class="gap-x-6 gap-y-10 ">
                                     <x-form.input id="department_name" name="department_name" label="Department Name" required="true" placholder="" value="{{request()->get('item')}}"/>
                                 </div>
-                               
+                                <div class="mt-3 flex-row xl:items-center">
                                 <div class="gap-x-6 gap-y-10 ">
                                     <div class="mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-64">
                                         <div class="text-left">
@@ -65,7 +65,7 @@
                                         <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3"></div>
                                     </div>
                                     <div class="mt-3 w-96 flex-1 xl:mt-0">
-                                        <select required name="status" data-title="Language" data-placeholder="Select your language" class="tom-select w-full" sclass="tom-select disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10">
+                                        <select required name="status" id="status" data-title="Language" data-placeholder="Select your language" class="tom-select w-full" sclass="tom-select disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10">
                                             
                                             <option value="enable">
                                                 Enable
@@ -75,6 +75,7 @@
                                             </option>
                                         </select>
                                     </div>
+                                </div>
                                 </div>
                             
                             </div>
@@ -267,16 +268,10 @@
                     $("select[name=company_id]").val(response.data.company_id).change();
                     $("input[name=department_name]").val(response.data.department_name);
                     $("select[name=parent_department_id]").val(response.data.parent_department_id);
-                    
-                    const parent_department_id = $('#parent_department_id')[0].tomselect;
-                    const parent_department_idValue = response.data.parent_department_id;
-                    if (!parent_department_id.options[parent_department_idValue]) {
-                        parent_department_id.addOption({
-                            value: parent_department_idValue,
-                            text: parent_department_idValue
-                        });
-                    }
-                    parent_department_id.setValue(parent_department_idValue);
+
+                    addOptionIfNotExist('parent_department_id', response.data.parent_department_id);
+                    addOptionIfNotExist('status', response.data.status);
+
                     getResponseApprovers();
                 } else {
                     showErrorNotification('error', response.message);
@@ -288,6 +283,15 @@
             }
         });
         return false;
+    }
+
+    function addOptionIfNotExist(selectElementId, optionValue) {
+        const selectElement = $(`#${selectElementId}`)[0].tomselect;
+        if (selectElement.options) {
+            setTimeout(() => {
+                selectElement.setValue(optionValue);
+            }, 1000);
+        } 
     }
 
     $("#form-submit").submit(async function (e) {
