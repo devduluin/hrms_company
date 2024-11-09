@@ -602,43 +602,68 @@
 
 <script>
     function updateBreadcrumb() {
-        // Get the breadcrumb element
-        const breadcrumb = document.getElementById('breadcrumb');
+    // Get the breadcrumb element
+    const breadcrumb = document.getElementById('breadcrumb');
 
-        // Clear existing breadcrumb items (except the first one)
-        while (breadcrumb.children.length > 1) {
-            breadcrumb.removeChild(breadcrumb.lastChild);
+    // Clear existing breadcrumb items (except the first one)
+    while (breadcrumb.children.length > 1) {
+        breadcrumb.removeChild(breadcrumb.lastChild);
+    }
+
+    // Get the current URL path
+    const path = window.location.pathname;
+
+    // Split the path into segments
+    const segments = path.split('/').filter(segment => segment);
+
+    // Initialize the URL for the breadcrumb links
+    let url = '';
+
+    // Regular expression to match UUID (8-4-4-4-12 format)
+    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+    // If there are more than 4 segments, limit them
+    const MAX_SEGMENTS = 4;
+    const segmentsLength = segments.length;
+
+    let displayedSegments = segments;
+
+    if (segmentsLength > MAX_SEGMENTS) {
+        // Show the first 3 segments, then add the ellipsis, and the last segment
+        displayedSegments = [
+            segments[0],
+            segments[1],
+            segments[2],
+            segments[3],
+            '...', // Ellipsis for middle segments
+            //segments[segmentsLength - 1]
+        ];
+    }
+
+    // Loop through the segments and create breadcrumb items
+    displayedSegments.forEach((segment, index) => {
+        // Skip if the segment matches a UUID pattern
+        if (uuidRegex.test(segment)) {
+            return;
         }
 
-        // Get the current URL path
-        const path = window.location.pathname;
+        // Create a list item for the breadcrumb
+        const li = document.createElement('li');
+        li.className =
+            'relative ml-5 pl-0.5 before:content-[""] before:w-[14px] before:h-[14px] before:bg-chevron-white before:transform before:rotate-[-90deg] before:bg-[length:100%] before:-ml-[1.125rem] before:absolute before:my-auto before:inset-y-0 dark:before:bg-chevron-white';
 
-        // Split the path into segments
-        const segments = path.split('/').filter(segment => segment);
+        if (index === displayedSegments.length - 1) {
+            li.classList.add('text-white/70');
+        }
 
-        // Initialize the URL for the breadcrumb links
-        let url = '';
-
-        // Regular expression to match UUID (8-4-4-4-12 format)
-        const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-
-        // Loop through the segments and create breadcrumb items
-        segments.forEach((segment, index) => {
-            // Skip if the segment matches a UUID pattern
-            if (uuidRegex.test(segment)) {
-                return;
-            }
-
+        if (segment === '...') {
+            // Create ellipsis for the middle segments
+            const span = document.createElement('span');
+            span.textContent = '...';
+            li.appendChild(span);
+        } else {
+            // Add actual segments
             url += '/' + segment;
-
-            // Create a list item for the breadcrumb
-            const li = document.createElement('li');
-            li.className =
-                'relative ml-5 pl-0.5 before:content-[""] before:w-[14px] before:h-[14px] before:bg-chevron-white before:transform before:rotate-[-90deg] before:bg-[length:100%] before:-ml-[1.125rem] before:absolute before:my-auto before:inset-y-0 dark:before:bg-chevron-white';
-
-            if (index === segments.length - 1) {
-                li.classList.add('text-white/70');
-            }
 
             // Format the segment text
             const formattedSegment = segment
@@ -652,12 +677,14 @@
 
             // Append the anchor to the list item
             li.appendChild(a);
+        }
 
-            // Append the list item to the breadcrumb
-            breadcrumb.appendChild(li);
-        });
-    }
+        // Append the list item to the breadcrumb
+        breadcrumb.appendChild(li);
+    });
+}
 
-    // Update the breadcrumb on initial load
-    updateBreadcrumb();
+// Update the breadcrumb on initial load
+updateBreadcrumb();
+
 </script>

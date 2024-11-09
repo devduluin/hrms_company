@@ -58,7 +58,7 @@ class LeaveController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Leave Application';
-        $data['apiUrl'] = $this->apiGatewayUrl . '/v1/employees';
+        $data['apiUrl'] = $this->apiGatewayUrl . '/v1/attendance/leave';
 
         return view('dashboard.hrms.leave.leave_application.index', $data);
     }

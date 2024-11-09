@@ -2,6 +2,7 @@
     'label',
     'name',
     'tags' => false,
+    'class' => '',
     'filter' => false,
     'url',
     'guidelines',
@@ -30,9 +31,9 @@
 
         </div>
     </div>
-    <div class="flex-1 sm:w-full w-96 mt-3 xl:mt-0">
-        <select id="{{ $name }}" name="{{ $name }}"
-            {{ $attributes->merge(['class' => 'mt-3 tom-select w-full'])->except(['id', 'name', 'tags', 'filter']) }}
+    <div class="flex-1 sm:w-[full] w-[90%] mt-3 xl:mt-0">
+        <select id="{{ $name }}" name="{{ $name }}" 
+            {{ $attributes->merge(['class' => $class .' mt-3 tom-select w-full'])->except(['id', 'name', 'tags', 'filter']) }}
             data-placeholder="{{ $label }}" data-title="{{ $label }}"
             @if (isset($url)) data-url="{{ $url }}" @endif
             @if (isset($method)) data-method="{{ $method }}" @endif
@@ -58,8 +59,7 @@
 
 @pushOnce('js')
     <script>
-        $(document).ready(function() {
-            initializeTomSelect();
-        });
+        initializeTomSelect();
+       
     </script>
 @endpushOnce

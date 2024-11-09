@@ -14,7 +14,7 @@
                         class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md w-24">
                         <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
                     </button>
-                    <x-form.button id="new_attendance" label="Add New Attendance" style="primary" icon="plus" url="{{ route('hrms.attendance.create') }}" ></x-button>
+                    <x-form.button id="new_attendance_request" label="Add Attendance Request" style="primary" icon="plus" url="{{ route('hrms.attendance.create') }}" ></x-button>
                 </div>
             </div>
             <div class="mt-3.5  gap-x-6 gap-y-10">
@@ -25,14 +25,15 @@
                 </div> -->
                 <div class="col-span-12 flex flex-col gap-y-7 xl:col-span-9">
                     <div class="box box--stacked flex flex-col p-5">
-                        <x-datatable id="departmentTable" :url="$apiUrl" method="POST" class="display small">
+                        <x-datatable id="attendanceRequestTable" :url="$apiUrl" method="POST" class="display small">
                             <x-slot:thead>
                             <th data-value="no" width="80px">No.</th>
                                     <th data-value="employee_id_rel"  data-render="getEmployeeName">Employee Name</th>
-                                    <th data-value="attendance_date">Date</th>
-                                    <th data-value="time_in">Checkin time</th>
-                                    <th data-value="time_out">Checkout time</th>
-                                    <th data-value="attendance_status" data-render="getStatus">Status</th>
+                                    <th data-value="shift_type_id" data-render="getShiftName">Shift Type</th>
+                                    <th data-value="from_date" data-render="dateFormat">From Date</th>
+                                    <th data-value="to_date" data-render="dateFormat">To Date</th>
+                                    <th data-value="reason">Reason</th>
+                                    <th data-value="status" data-render="getStatus">Status</th>
                                     <th data-value="id" data-render="getActionBtn">Action</th>
                             </x-slot:thead>
                         </x-datatable>
@@ -68,6 +69,26 @@
             }
         }
 
+        function getShiftName(data, type, row, meta) {
+            if (data !== null) {
+                return data.shift_type_name;
+            }
+            return 'N/A';
+        }
+
+        function dateFormat(utcDateStr) {
+            const utcDate = new Date(utcDateStr);
+
+            const options = {
+                timeZone: 'Asia/Jakarta',
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+             
+            };
+
+            return utcDate.toLocaleString('en-GB', options); // Combined date and time
+        }
         function getEmployeeName(data, type, row, meta) {
             if (data !== null) {
                 return data.first_name + ' ' + data.last_name;
@@ -109,7 +130,7 @@
                     if (result.isConfirmed) {
                         destroy(action, path)
                     }else{
-                        departmentTable.ajax.reload();
+                        attendanceRequestTable.ajax.reload();
                     }
                 });
             }else{
@@ -135,7 +156,7 @@
                     title: "Deleted!",
                     icon: "success"
                 });
-                departmentTable.ajax.reload();
+                attendanceRequestTable.ajax.reload();
             } catch (xhr) {
                 console.log(xhr);
                 if (xhr.status === 422) {

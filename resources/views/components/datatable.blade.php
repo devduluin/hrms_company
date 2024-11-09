@@ -61,8 +61,6 @@
             }
         ];
 
-        console.log(`{{ $customButtonFunction }}`)
-
         if ({{ $customButton }}) {
             buttonsConfig.unshift({
                 text: `{{ $customButtonText }}`,
@@ -114,7 +112,16 @@
                 var visible = $(item).attr('visible') !== 'false' || $(item).attr('visible') === undefined;
                 var render = $(item).data('render');
                 let tmp = {};
-                if ($(item).data('value') == 'no') {
+                if ($(item).data('value') == 'id') {
+                    tmp = {
+                        data: null, // Data is null as we want to auto-generate the index
+                        orderable: false, // Set to false if you don't want this column to be orderable
+                        searchable: false, // Set to false as it does not need to be searchable
+                        render: function(data, type, row, meta) {
+                            return `<input type="checkbox" name="selected_employees[]" value='${JSON.stringify(row)}'>`;
+                        }
+                    }
+                } else if ($(item).data('value') == 'no') {
                     tmp = {
                         data: null, // Data is null as we want to auto-generate the index
                         orderable: false, // Set to false if you don't want this column to be orderable
@@ -154,13 +161,27 @@
                     'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
                 },
                 data: function(d) {
+                    var filterData = {};
+                    $('.filter').each(function() {
+                    var id = this.id;
+                    var value = $(this).val();
+                    
+                    filterData[id] = value;
+                    });
+
+                    
                     let filters = {};
                     @if (count($filter) > 0)
                         @foreach ($filter as $name => $elem)
-                            filters.{{ $name }} = $('{{ $elem }}').val();
+                            if($('{{ $elem }}').val() != ''){
+                                 
+                                if($('{{ $elem }} option:selected').text() != 'All Department'){
+                                    filters.{{ $name }} = $('{{ $elem }}').val();
+                                }
+                            }
                         @endforeach
                     @endif
-
+                     
                     let searchableColumns = {{ $id }}TableColumns
                     .filter(col => col.searchable === true && col.data)  // Ensure `searchable: true` and `data` is not empty
                     .map(function(col, index) {

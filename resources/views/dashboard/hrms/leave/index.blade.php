@@ -5,7 +5,7 @@
 <div class="hurricane before:content-[''] before:z-[-1] before:w-screen before:bg-slate-50 before:top-0 before:h-screen before:fixed before:bg-texture-black before:bg-contain before:bg-fixed before:bg-[center_-20rem] before:bg-no-repeat">
         @include('layouts.dashboard.menu')
         <div id="contents-page" class="content transition-[margin,width] duration-100 px-5 xl:mr-2.5 mt-[75px] pt-[31px] pb-16 content--compact xl:ml-[275px] [&.content--compact]:xl:ml-[100px]">
-                <div class="grid grid-cols-12 gap-x-6 gap-y-10">
+                <!-- <div class="grid grid-cols-12 gap-x-6 gap-y-10">
                     <div class="col-span-12">
                     <div class=" gap-8">
                            
@@ -85,17 +85,17 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                  
                 <div class="box p-4 mt-4">
                     <div class="text-m font-medium">
                         More Action
                     </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mt-4">
-                            <x-action  label="Holidays List" icon="calendar-x-2" url="{{ url('/dashboard/hrms/leave/holiday') }}" />
+                            <!-- <x-action  label="Holidays List" icon="calendar-x-2" url="{{ url('/dashboard/hrms/leave/holiday') }}" /> -->
                             <x-action  label="Leave Type" icon="arrow-up-right" url="{{ route('hrms.leave-type') }}" />
-                            <x-action  label="Leave Allocation" icon="arrow-up-right" url="{{ url('/dashboard/hrms/leave/allocation') }}" />
                             <x-action  label="Leave Application" icon="arrow-up-right" url="{{ url('/dashboard/hrms/leave/application') }}" />
+                            <x-action  label="Leave Allocation" status="comming_soon" icon="arrow-up-right" url="{{ url('/dashboard/hrms/leave/allocation') }}" />
                         </div>
                 </div>  
         </div>

@@ -49,8 +49,9 @@
                                     <x-action  label="Designation" icon="clipboard" url="{{ route('hrms.designation') }}" />                                   
                                     <x-action  label="Department" icon="layout-template" url="{{ route('hrms.department') }}" />                                   
                                                                        
+                                    <x-action  label="Employee Grade" icon="album" url="{{ route('hrms.grade') }}" />
                                     <!-- <x-action  label="Job" icon="briefcase" url="{{ route('hrms.jobs') }}" /> -->
-                                    <x-action  label="Leave Type" icon="arrow-up-right" url="{{ route('hrms.leave-type') }}" />
+                                    <x-action  label="Leave Type" icon="git-branch" url="{{ route('hrms.leave-type') }}" />
                                     
                                     <x-action  label="Shift Type" icon="door-open" url="{{ route('hrms.attendance.shifttype') }}" />
                                 </div>

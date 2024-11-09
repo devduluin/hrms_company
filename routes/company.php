@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Controllers\BranchController;
+use App\Http\Controllers\GradeController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +33,14 @@ Route::prefix('/branch')->group(function () {
         Route::get('/', 'index')->name('hrms.branch');
         Route::get('/create', 'create')->name('hrms.branch.create');
         Route::get('/update/{id}', 'update')->name('hrms.branch.update');
+    });
+});
+
+Route::prefix('/grade')->group(function () {
+    Route::controller(GradeController::class)->group(function () {
+        Route::get('/', 'index')->name('hrms.grade');
+        Route::get('/create', 'create')->name('hrms.grade.create');
+        Route::get('/update/{id}', 'update')->name('hrms.grade.update');
     });
 });
 
