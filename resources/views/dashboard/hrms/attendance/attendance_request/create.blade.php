@@ -250,7 +250,7 @@
         employee_id = employee.id;
         company_id =  employee.company_id
          
-        $('#department').val(employee.department_id_rel.department_name)
+         
         $('#company').val(employee.company_id_rel.company_name)
         $('#company_id').val(employee.company_id)
        }).catch((error) => {
