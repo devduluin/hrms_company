@@ -14,7 +14,7 @@
                         class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md w-24">
                         <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
                     </button>
-                    <x-form.button id="new_attendance_request" label="Add Attendance Request" style="primary" icon="plus" url="{{ route('hrms.attendance.create') }}" ></x-button>
+                    <x-form.button id="new_attendance_request" label="Add Attendance Request" style="primary" icon="plus" url="{{ route('hrms.attendance.request.create') }}" ></x-button>
                 </div>
             </div>
             <div class="mt-3.5  gap-x-6 gap-y-10">
@@ -29,7 +29,7 @@
                             <x-slot:thead>
                             <th data-value="no" width="80px">No.</th>
                                     <th data-value="employee_id_rel"  data-render="getEmployeeName">Employee Name</th>
-                                    <th data-value="shift_type_id" data-render="getShiftName">Shift Type</th>
+                                    <th data-value="shift_type_id_rel" data-render="getShiftName">Shift Type</th>
                                     <th data-value="from_date" data-render="dateFormat">From Date</th>
                                     <th data-value="to_date" data-render="dateFormat">To Date</th>
                                     <th data-value="reason">Reason</th>
@@ -134,7 +134,7 @@
                     }
                 });
             }else{
-                location.href = '{{ url("/dashboard/hrms/attendance") }}/'+action+'/'+id;
+                location.href = '{{ url("/dashboard/hrms/attendance/request") }}/'+action+'/'+id;
             }
             
         }

@@ -24,14 +24,27 @@ class AttendanceRequestController extends Controller
     public function create(Request $request)
     {
         $data['title']   = 'Duluin HRMS';
-        $data['page_title']   = 'Add New Request';
-        $allSessions = session()->all();
-        $data['company_id'] = $allSessions['company_id'];
-        $data['apiEmployeeUrl'] = $this->apiGatewayUrl . '/v1/employees/employee/all';
+        $data['page_title']   = 'Add New Attendance Request';
+        $data['company_id'] = session()->get('company_id');
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/attendance/attendance-request";
         $data['apiUrlEmployee'] = $this->apiGatewayUrl . '/v1/employees/employee';
         $data['apiUrlLeaveType'] = $this->apiGatewayUrl . "/v1/companies/leave-type/datatable";
+        $data['apiUrlShiftType'] = $this->apiGatewayUrl . '/v1/companies/shift-type';
         
-        $data['apiAttendance'] = $this->apiGatewayUrl . '/v1/attendance/attendance/operator/store';
+        return view('dashboard.hrms.attendance.attendance_request.create', $data);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $data['title']   = 'Duluin HRMS';
+        $data['page_title']   = 'Add New Attendance Request';
+        $data['id'] = $id;
+        $data['company_id'] = session()->get('company_id');
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/attendance/attendance-request";
+        $data['apiUrlEmployee'] = $this->apiGatewayUrl . '/v1/employees/employee';
+        $data['apiUrlLeaveType'] = $this->apiGatewayUrl . "/v1/companies/leave-type/datatable";
+        $data['apiUrlShiftType'] = $this->apiGatewayUrl . '/v1/companies/shift-type';
+        
         return view('dashboard.hrms.attendance.attendance_request.create', $data);
     }
 

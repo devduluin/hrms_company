@@ -4,7 +4,7 @@
 <div class="hurricane before:content-[''] before:z-[-1] before:w-screen before:bg-slate-50 before:top-0 before:h-screen before:fixed before:bg-texture-black before:bg-contain before:bg-fixed before:bg-[center_-20rem] before:bg-no-repeat">
 @include('layouts.dashboard.menu')
     <div class="content transition-[margin,width] duration-100 px-5 pt-[56px] pb-16 relative z-20 content--compact xl:ml-[275px] [&amp;.content--compact]:xl:ml-[91px]">
-        <form id="form-submit">
+        <form id="form-submit" method="post" action="{{ $apiUrl }}">
             <div class="container mt-[65px]">
                 <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center">
                     <div class="text-base font-medium group-[.mode--light]:text-white">
@@ -55,7 +55,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="flex-1 sm:w-full  w-96  gap-1 mt-3 xl:mt-0">
-                                                            <input id="department" readonly type="text" name="department" value="" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 ">
+                                                            <input id="department" readonly type="text" name="" value="" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 ">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -75,7 +75,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="flex-1 sm:w-full  w-96  gap-1 mt-3 xl:mt-0">
-                                                        <input id="company" type="text" name="company" value="" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 ">
+                                                        <input id="company" type="text" name="" readonly value="" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 ">
+                                                        <input id="company_id" label="Company" name="company_id" type="hidden" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -203,12 +204,66 @@
 <script src="{{ asset('dist') }}/js/vendors/litepicker.js"></script>
 <script src="{{ asset('dist') }}/js/components/base/litepicker.js"></script>
 <script type="text/javascript">
-
-
-    //simpan payload data attendance dari data detail employee
+    let currentForm = $("#form-submit");
+    let id   = '{{$id ?? ''}}';
+    let method      = 'POST';
+    let path        = currentForm.attr('action');
     let employee_id = '';
     let company_id = '';
-    //tampilkan employee berdasarkan employee_id
+    
+    async function handleGetData(id, currentForm) {
+        path    = `{{ $apiUrl }}/`+id;
+        $.ajax({
+            url: path,
+            type: 'GET',
+            headers: {
+                'Authorization': `Bearer ${appToken}`,
+                'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
+            },
+            dataType: 'json',
+            success: await
+            function(response) {   
+                if (response.success == true) {                    
+                     
+                    method  = 'PATCH';
+                    //$("#employee_id").val(response.data.employee_id)
+                    if (response.data.department_id_rel?.department_name) {
+                        $("#department").val(response.data.department_id_rel.department_name);
+                    }
+
+                    if (response.data.company_id_rel?.company_name) {
+                        $("#company").val(response.data.company_id_rel.company_name);
+                    }
+                    $("#company_id").val(response.data.company_id);
+                    $("#from_date").val(response.data.from_date);
+                    $("#to_date").val(response.data.to_date);
+                     
+                    
+                    //$("select[name=status]").val(response.data.status).change();
+                    addOptionIfNotExist('employee_id', response.data.employee_id);
+                     
+                    addOptionIfNotExist('shift_type_id', response.data.shift_type_id);
+                    addOptionIfNotExist('status', response.data.status);
+                     
+                } else {
+                    showErrorNotification('error', response.message);
+                }
+            },
+            error: function(xhr) {
+                const response = JSON.parse(xhr.responseText);
+                handleErrorResponse(response, currentForm);
+            }
+        });
+        return false;
+    }
+    function addOptionIfNotExist(selectElementId, optionValue) {
+        const selectElement = $(`#${selectElementId}`)[0].tomselect;
+        if (selectElement.options) {
+            setTimeout(() => {
+                selectElement.setValue(optionValue);
+            }, 1000);
+        } 
+    }
     async function getDetailEmployee(value) 
     {
        var param = {
@@ -221,8 +276,14 @@
         employee_id = employee.id;
         company_id =  employee.company_id
          
-        $('#department').val(employee.department_id_rel.department_name)
-        $('#company').val(employee.company_id_rel.company_name)
+        if (employee.department_id_rel?.department_name) {
+            $('#department').val(employee.department_id_rel.department_name);
+        }
+
+        if (employee.company_id_rel?.company_name) {
+            $('#company').val(employee.company_id_rel.company_name);
+        }
+        $("#company_id").val(employee.company_id);
        }).catch((error) => {
         console.log(error);
        });
@@ -234,51 +295,61 @@
         getDetailEmployee(selectedValue);
     });
 
-    $("#form-submit").submit(async function(e) {
+    $("#form-submit").submit(async function (e) {
         e.preventDefault();
-
-        var dataAttendance = {
-            //employee_id: employee_id,
-            company_id: company_id,
-            start_date: $('#start_date').val(),
-            end_date: $('#end_date').val(),
-            shift_type_id: $('#shift_type_id option:selected').val(),
-            status: $('#status option:selected').val()
-        }
-        var data = JSON.stringify(dataAttendance);
-         
-
-        $('#loadingText').html('Saving...');
-        $(this).attr('disable', true);
-
-        var param = {
-            url: "{{ $apiShiftAssignment }}",
-            method: "POST",
-            data: data,
-            contentType: 'application/json',
-            cache: false,
-            dataType: 'json'
-        }
         
-        await transAjax(param).then((result) => {
-            showSuccessNotification(result.message, "The operation was completed successfully.");
-            $('#loadingText').html('Save Changes');
-            $(this).attr('disable', false);
-            setTimeout(() => {
-                window.location=document.referrer;
-            }, 500);
-        }).catch((xhr) => {
-            $('#loadingText').html('Save Changes');
-            $(this).attr('disable', false);
+        const data = serializeFormData(currentForm);
+        
+        try {
+            const response = await $.ajax({
+                url: path,
+                type: method,
+                contentType: 'application/json',
+                headers: {
+                    'Authorization': `Bearer ${appToken}`,
+                    'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
+                },
+                data: JSON.stringify(data),
+                dataType: 'json'
+            });
+
+            handleResponse(response);
+        } catch (xhr) {
             const response = JSON.parse(xhr.responseText);
-            handleErrorResponse(response);
+            if (xhr.status === 422) {
+                
+                handleErrorResponse(response, currentForm);
+            } else {
+                
+                showErrorNotification('error', response.error);
+            }
             
-            //showErrorNotification('error', response.error);
-        });
+        }
+        $('#submitBtn').attr('disable', false);
+        $('#loadingText').html('Save Changes');
     });
 
-    function handleErrorResponse(result) {
+    function serializeFormData(form) {
+        const formData = form.serializeArray();
+        const data = {};
+        formData.forEach(field => {
+            data[field.name] = field.value;
+        });
+        return data;
+    }
+
+    function handleResponse(response) {
+        if (response.success == true) {
+            window.location=document.referrer;
+        } else {
+            showErrorNotification('error', response.message);
+        }
+    }
+
+    function handleErrorResponse(result, tabId) {
         const errorString = result.error || 'An error occurred.';
+        showErrorNotification('error',
+            `There were validation errors on tab ${tabId}. Message : ${result.message}`, errorString);
         const errorMessages = errorString.split(', ');
 
         $('.error-message').remove();
@@ -289,10 +360,9 @@
         while ((match = errorPattern.exec(errorMessages)) !== null) {
             const field = match[1];
             if (field !== 'company_id') {
-                
                 let fieldName = field.replace(/_/g, " ").replace(/\b\w/g, char => char.toUpperCase());
                 const input = $(`[name="${field}"]`);
-                 
+
                 input.addClass('is-invalid');
                 input.before(
                     `<div class="error-message text-danger mt-1 text-xs sm:ml-auto sm:mt-0 mb-2">${fieldName} is not allowed to be empty</div>`
@@ -307,5 +377,17 @@
             }, 500);
         }
     }
+
+    if(id){
+        handleGetData(id, currentForm);
+    }
+
+    $('#submitBtn').on('click', function (e) {
+        e.preventDefault();
+        $(this).attr('disable', true);
+        $('#loadingText').html('Saving...');
+        
+        $("#form-submit").submit();
+    });
     </script>
 @endpush

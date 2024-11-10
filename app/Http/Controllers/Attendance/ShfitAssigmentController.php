@@ -27,6 +27,20 @@ class ShfitAssigmentController extends Controller
         $data['title'] = 'Duluin HRMS' ;
         $data['page_title'] = "Add New Shift Assignment";
         $data['company_id'] = session()->get('company_id');
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/attendance/shift-assignment";
+        $data['apiUrlEmployee'] = $this->apiGatewayUrl . '/v1/employees/employee';
+        $data['apiUrlShiftType'] = $this->apiGatewayUrl . '/v1/companies/shift-type';
+        $data['apiShiftAssignment'] = $this->apiGatewayUrl . '/v1/attendance/shift-assignment';
+        return view('dashboard.hrms.attendance.shiftassigment.create', $data);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $data['title'] = 'Duluin HRMS' ;
+        $data['page_title'] = "Update Shift Assignment";
+        $data['id'] = $id;
+        $data['company_id'] = session()->get('company_id');
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/attendance/shift-assignment";
         $data['apiUrlEmployee'] = $this->apiGatewayUrl . '/v1/employees/employee';
         $data['apiUrlShiftType'] = $this->apiGatewayUrl . '/v1/companies/shift-type';
         $data['apiShiftAssignment'] = $this->apiGatewayUrl . '/v1/attendance/shift-assignment';

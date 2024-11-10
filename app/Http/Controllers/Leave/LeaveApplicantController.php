@@ -28,8 +28,9 @@ class LeaveApplicantController extends Controller
         $data['page_title']   = 'Add Leave Application';
         $data['company_id'] = session()->get('company_id');
         $data['apiUrl'] = $this->apiGatewayUrl . '/v1/attendance/leave';
-        $data['apiUrlLeaveType'] = $this->apiGatewayUrl . '/v1/companies/leave-type/datatable';
-        $data['apiUrlEmployee'] = $this->apiGatewayUrl . "/v1/employees/employee";
+         
+        $data['apiUrlEmployee'] = $this->apiGatewayUrl . '/v1/employees/employee';
+        $data['apiUrlLeaveType'] = $this->apiGatewayUrl . "/v1/companies/leave-type/datatable";
         
         return view('dashboard.hrms.leave.leave_application.create', $data);
     }
