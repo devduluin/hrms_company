@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Claim;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class ExpenseController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Employee Expense';
-        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/payrool/expense";
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/payroll/expense_claim";
 
         return view('dashboard.hrms.claim.expense.index', $data);
     }
@@ -27,7 +28,7 @@ class ExpenseController extends Controller
         $data['apiUrl'] = $this->apiGatewayUrl . "/v1/payrool/expense";
         $data['apiUrlEmployee'] = $this->apiGatewayUrl . "/v1/employees/employee";
         $data['company'] = session()->get('company_id');
-        
+
         return view('dashboard.hrms.claim.expense.create', $data);
     }
 
@@ -35,7 +36,7 @@ class ExpenseController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Update Employee Expense';
-        
+
         return view('dashboard.hrms.claim.expense.travel_request', $data);
     }
 }

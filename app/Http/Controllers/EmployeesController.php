@@ -124,7 +124,7 @@ class EmployeesController extends Controller
         // ]);
 
         // Store the file in MinIO
-        $fileName = 'employees/text3.txt';
+        $fileName = 'employees/text5.txt';
         $filePath = Storage::disk('minio')->put($fileName, 'test lagi');
         // $path = Storage::disk('minio')->putFileAs('employees', 'testeuy.txt');
         $fileUrl = 'https://apis3.hrms.duluin.com/hrms/' . $fileName;
