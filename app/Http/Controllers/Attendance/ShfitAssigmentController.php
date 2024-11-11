@@ -17,7 +17,7 @@ class ShfitAssigmentController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'New Shift Assignment';
-        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/attendance/shift-assignment/datatable";
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/attendance/shift-assignment";
         $data['apiUpdateBulkShift'] =  $this->apiGatewayUrl . "/v1/attendance/shift-assignment/bulkupdate";
         return view('dashboard.hrms.attendance.shiftassigment.index', $data);
     }
@@ -29,7 +29,7 @@ class ShfitAssigmentController extends Controller
         $data['company_id'] = session()->get('company_id');
         $data['apiUrl'] = $this->apiGatewayUrl . "/v1/attendance/shift-assignment";
         $data['apiUrlEmployee'] = $this->apiGatewayUrl . '/v1/employees/employee';
-        $data['apiUrlShiftType'] = $this->apiGatewayUrl . '/v1/companies/shift-type';
+        $data['apiUrlShiftType'] = $this->apiGatewayUrl . '/v1/attendance/shift-type';
         $data['apiShiftAssignment'] = $this->apiGatewayUrl . '/v1/attendance/shift-assignment';
         return view('dashboard.hrms.attendance.shiftassigment.create', $data);
     }
@@ -42,7 +42,7 @@ class ShfitAssigmentController extends Controller
         $data['company_id'] = session()->get('company_id');
         $data['apiUrl'] = $this->apiGatewayUrl . "/v1/attendance/shift-assignment";
         $data['apiUrlEmployee'] = $this->apiGatewayUrl . '/v1/employees/employee';
-        $data['apiUrlShiftType'] = $this->apiGatewayUrl . '/v1/companies/shift-type';
+        $data['apiUrlShiftType'] = $this->apiGatewayUrl . '/v1/attendance/shift-type';
         $data['apiShiftAssignment'] = $this->apiGatewayUrl . '/v1/attendance/shift-assignment';
         return view('dashboard.hrms.attendance.shiftassigment.create', $data);
     }
@@ -53,7 +53,7 @@ class ShfitAssigmentController extends Controller
         $data['page_title'] = "Add Bulk Shift Assignment";
         $data['company_id'] = session()->get('company_id');
         $data['apiUrlEmployee'] = $this->apiGatewayUrl . '/v1/employees/employee';
-        $data['apiUrlShiftType'] = $this->apiGatewayUrl . '/v1/companies/shift-type';
+        $data['apiUrlShiftType'] = $this->apiGatewayUrl . '/v1/attendance/shift-type';
         $data['apiShiftAssignment'] = $this->apiGatewayUrl . '/v1/attendance/shift-assignment';
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies/company/datatables';
         $data['apiDepartmentUrl'] = $this->apiGatewayUrl . "/v1/companies/department/datatables";

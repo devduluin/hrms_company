@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Attendance;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
@@ -29,7 +30,7 @@ class AttendanceRequestController extends Controller
         $data['apiUrl'] = $this->apiGatewayUrl . "/v1/attendance/attendance-request";
         $data['apiUrlEmployee'] = $this->apiGatewayUrl . '/v1/employees/employee';
         $data['apiUrlLeaveType'] = $this->apiGatewayUrl . "/v1/companies/leave-type/datatable";
-        $data['apiUrlShiftType'] = $this->apiGatewayUrl . '/v1/companies/shift-type';
+        $data['apiUrlShiftType'] = $this->apiGatewayUrl . '/v1/attendance/shift-type';
         
         return view('dashboard.hrms.attendance.attendance_request.create', $data);
     }
@@ -43,7 +44,7 @@ class AttendanceRequestController extends Controller
         $data['apiUrl'] = $this->apiGatewayUrl . "/v1/attendance/attendance-request";
         $data['apiUrlEmployee'] = $this->apiGatewayUrl . '/v1/employees/employee';
         $data['apiUrlLeaveType'] = $this->apiGatewayUrl . "/v1/companies/leave-type/datatable";
-        $data['apiUrlShiftType'] = $this->apiGatewayUrl . '/v1/companies/shift-type';
+        $data['apiUrlShiftType'] = $this->apiGatewayUrl . '/v1/attendance/shift-type';
         
         return view('dashboard.hrms.attendance.attendance_request.create', $data);
     }

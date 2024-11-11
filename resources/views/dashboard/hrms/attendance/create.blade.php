@@ -5,6 +5,7 @@
 @include('layouts.dashboard.menu')
     <div class="content transition-[margin,width] duration-100 px-5 pt-[56px] pb-16 relative z-20 content--compact xl:ml-[275px] [&amp;.content--compact]:xl:ml-[91px]">
         <form id="form-submit">
+            <input type="hidden" name="latlong" />
             <div class="container mt-[65px]">
                 <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center">
                     <div class="text-base font-medium group-[.mode--light]:text-white">
@@ -28,13 +29,55 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4">
                                 <div class="gap-x-6 gap-y-10 ">
                                     <div class="py-2">
-                                    <x-form.select id="employee_id" name="employee_id" data-method="POST" required label="Employee Name" url="{{ url('dashboard/hrms/employee/create') }}"
-                                        apiUrl="{{ $apiUrlEmployee }}/datatables" columns='["first_name", "last_name"]'  
-                                        :keys="[
-                                            'company_id' => $company_id,
-                                        ]">
-                                        <option value="">Select Employee</option>
-                                    </x-form.select>
+                                        <x-form.select id="employee_id" name="employee_id" data-method="POST" required label="Employee Name" url="{{ url('dashboard/hrms/employee/create') }}"
+                                            apiUrl="{{ $apiUrlEmployee }}/datatables" columns='["first_name", "last_name"]'  
+                                            :keys="[
+                                                'company_id' => $company_id,
+                                            ]">
+                                            <option value="">Select Employee</option>
+                                        </x-form.select>
+                                    </div>
+                                    <div class="py-2">
+                                        <div class="mt-3 flex-row xl:items-center" placholder="">
+                                            <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4">
+                                                <div class="text-left">
+                                                    <div class="flex items-center">
+                                                        <div class="font-medium" for="start_time">Department</div>
+                                                                            
+                                                    </div>
+                                                    <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex-1 sm:w-full  w-96  gap-1 mt-3 xl:mt-0">
+                                                <input id="department" readonly type="text" name="" value="" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 ">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="py-2">
+                                    <x-form.input id="company" label="Company" name="" readonly />
+                                    </div>
+                                </div>
+                                <div class="gap-x-6 gap-y-10 "></div>
+                                <div class="gap-x-6 gap-y-10 ">
+                                    <div class="py-2">
+                                        <div class="mt-3 flex-row xl:items-center" placholder="">
+                                            <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4">
+                                                <div class="text-left">
+                                                    <div class="flex items-center">
+                                                        <div class="font-medium" for="start_time">Shift Name</div>
+                                                                            
+                                                    </div>
+                                                    <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex-1 sm:w-full  w-96  gap-1 mt-3 xl:mt-0">
+                                                <input id="shift_type_name" readonly type="text" name="" value="" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 ">
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="py-2">
                                         <div class="mt-3 flex-row xl:items-center" placholder="">
@@ -94,7 +137,7 @@
                                                 </div>
                                             </div>
                                             <div class="flex-1 sm:w-full  w-96  gap-1 mt-3 xl:mt-0">
-                                                <input id="time_in" type="time" name="time_in" data-single-mode="true" value="" placeholder="Start Time" required="true" class="datepicker disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 ">
+                                                <input id="time_in" type="time" name="time_in" data-single-mode="true" value="" placeholder="Start Time" required="true" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 ">
                                             </div>
                                         </div>
                                     </div>
@@ -112,7 +155,7 @@
                                                 </div>
                                             </div>
                                             <div class="flex-1 sm:w-full  w-96  gap-1 mt-3 xl:mt-0">
-                                                <input id="time_out" type="time" name="time_out" data-single-mode="true" value="" placeholder="Start Time" class="datepicker disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 ">
+                                                <input id="time_out" type="time" name="time_out" data-single-mode="true" value="" placeholder="Start Time" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 ">
                                             </div>
                                         </div>
                                     </div>
@@ -218,15 +261,41 @@
     async function getDetailEmployee(value) 
     {
        var param = {
-        url: "{{ $apiUrlEmployee }}" + value,
+        url: "{{ $apiUrlEmployee }}/" + value,
         method: "GET",
        }
 
        await transAjax(param).then((result) => {
         const employee = result.data
         employee_id = employee.id;
+        getDetailShift(employee_id);
         company_id =  employee.company_id
         latlong = employee.company_id_rel.latlong;
+        if (employee.department_id_rel?.department_name) {
+            $('#department').val(employee.department_id_rel.department_name);
+        }
+
+        if (employee.company_id_rel?.company_name) {
+            $('#company').val(employee.company_id_rel.company_name);
+        }
+       }).catch((error) => {
+        console.log(error);
+       });
+    }
+
+    async function getDetailShift(value) 
+    {
+       var param = {
+        url: "{{ $apiUrlShiftEmployee }}/" + value,
+        method: "GET",
+       }
+
+       await transAjax(param).then((result) => {
+        const shift = result.data
+        if (shift.shift_type_id_rel?.shift_type_name) {
+            $('#shift_type_name').val(shift.shift_type_id_rel.shift_type_name);
+        }
+        shift_type_name
 
        }).catch((error) => {
         console.log(error);
@@ -237,6 +306,7 @@
         const selectedValue = $(this).val();
 
         getDetailEmployee(selectedValue);
+        
     });
 
     $('#status').change(function() {

@@ -31,8 +31,8 @@
                                 <th data-value="no" width="60px">No.</th>
                                 
                                 <th data-value="shift_type_name">Shift type name</th>
-                                <th data-value="start_time" data-render="convertToTimezone">Start time</th>
-                                <th data-value="end_time" data-render="convertToTimezone">End time</th>
+                                <th data-value="start_time" >Start time</th>
+                                <th data-value="end_time" >End time</th>
                                 <th data-value="null" data-render="getActionBtn" width="10%">Action</th>
                             </x-slot:thead>
                         </x-datatable>
@@ -79,7 +79,7 @@
 
             const time = utcDate.toLocaleTimeString('en-US', options);
             
-            return time;
+            return utcDateStr;
         }
 
         function getCompany(data, type, row, meta) {

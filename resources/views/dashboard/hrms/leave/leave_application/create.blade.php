@@ -43,6 +43,24 @@
                                                     </x-form.select>
                                                 </div>
                                                 <div class="py-2">
+                                                    <div class="mt-3 flex-row xl:items-center" placholder="">
+                                                        <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4">
+                                                            <div class="text-left">
+                                                                <div class="flex items-center">
+                                                                    <div class="font-medium" for="start_time">Department</div>
+                                                                                        
+                                                                </div>
+                                                                <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flex-1 sm:w-full  w-96  gap-1 mt-3 xl:mt-0">
+                                                            <input id="department" readonly type="text" name="" value="" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 ">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="py-2">
                                                 <x-form.input id="company" label="Company" name="" readonly />
                                                 <input id="company_id" label="Company" name="company_id" type="hidden" />
                                                 </div>
@@ -217,6 +235,13 @@
                      
                     method  = 'PATCH';
                     //$("#employee_id").val(response.data.employee_id)
+                    if (response.data.department_id_rel?.department_name) {
+                        $("#department").val(response.data.department_id_rel.department_name);
+                    }
+
+                    if (response.data.company_id_rel?.company_name) {
+                        $("#company").val(response.data.company_id_rel.company_name);
+                    }
                     $("#company_id").val(response.data.company_id);
                     $("#from_date").val(response.data.from_date);
                     $("#to_date").val(response.data.to_date);
@@ -265,8 +290,13 @@
         employee_id = employee.id;
         company_id =  employee.company_id
          
-        $('#department').val(employee.department_id_rel.department_name)
-        $('#company').val(employee.company_id_rel.company_name)
+        if (employee.department_id_rel?.department_name) {
+            $('#department').val(employee.department_id_rel.department_name);
+        }
+
+        if (employee.company_id_rel?.company_name) {
+            $('#company').val(employee.company_id_rel.company_name);
+        }
         $('#company_id').val(employee.company_id)
        }).catch((error) => {
         console.log(error);

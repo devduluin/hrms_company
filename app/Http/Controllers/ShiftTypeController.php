@@ -16,7 +16,7 @@ class ShiftTypeController extends Controller
     {
         $data['title'] = "Data Shift Type";
         $data['page_title'] = "Data Shift Type";
-        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/companies/shift-type";
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/attendance/shift-type";
         return view('dashboard.hrms.shifttype.index', $data);
     }
 
@@ -26,7 +26,7 @@ class ShiftTypeController extends Controller
         $data['page_title'] = "Add Shift Type";
         $allSessions = session()->all();
         $data['company'] = $allSessions['company_id'];
-        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/companies/shift-type";
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/attendance/shift-type";
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies/company/datatables';
         return view('dashboard.hrms.shifttype.create', $data);
 
@@ -39,7 +39,7 @@ class ShiftTypeController extends Controller
         $allSessions = session()->all();
         $data['id'] = $id;
         $data['company'] = $allSessions['company_id'];
-        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/companies/shift-type";
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/attendance/shift-type";
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies/company/datatables';
         return view('dashboard.hrms.shifttype.create', $data);
 

@@ -42,19 +42,19 @@
                                                 <x-form.input type="text" id="shift_type_name" name="shift_type_name" label="Shift Type Name" required="true" placholder="" value="{{request()->get('item')}}"/>
                                             </div>
                                             <div class="py-2">
-                                            <x-form.input type="datetime-local" id="start_time" name="start_time" label="Start Time" required="true" placholder=""/>
+                                            <x-form.input type="time" id="start_time" name="start_time" label="Start Time" required="true" placholder=""/>
                                             <input type="hidden" name="" value=""/>
                                             </div>
                                             <div class="py-2">
-                                            <x-form.input type="datetime-local" id="end_time" name="end_time" label="End Time" required="true" placholder=""/>
+                                            <x-form.input type="time" id="end_time" name="end_time" label="End Time" required="true" placholder=""/>
                                             <input type="hidden" name="" value=""/>    
                                             </div>
                                         </div>
 
                                         <div class="gap-x-6 gap-y-10">
                                             <div class="py-2">
-                                            <x-form.input type="datetime-local" id="time_tolerance" name="time_tolerance" label="Time Torelance" placholder=""/>
-                                            <input type="hidden" name="time_tolerance" value=""/>
+                                            <x-form.input type="number" value="0" id="time_tolerance" name="time_tolerance" label="Time Torelance" placholder="Number in Minutes"/>
+                                             
                                             </div>
                                             <div class="py-2">
                                                 <div class="mt-3 flex-row xl:items-center">
@@ -273,17 +273,8 @@
 
     function formatDate(input) {
         if (input) {
-            let date = new Date(input);
-
-            let year = date.getFullYear();
-            let month = String(date.getMonth() + 1).padStart(2, '0');
-            let day = String(date.getDate()).padStart(2, '0');
-            let hours = String(date.getHours()).padStart(2, '0');
-            let minutes = String(date.getMinutes()).padStart(2, '0');
-            let seconds = String(date.getSeconds()).padStart(2, '0');
-
-            let formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-            return formattedDate;
+            
+            return input;
         } else {
             return "Invalid Date";
         }
