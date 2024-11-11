@@ -288,8 +288,7 @@
                             More Action
                             </div>
                         <div class="box p-4 mt-6">
-                        <div class="box p-4">
-                             
+                         
                                 <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-5 mt-4">
                                     <x-action  label="Attendance" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/summary') }}" />
                                     <x-action  label="Attendance Request" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/request') }}" />
