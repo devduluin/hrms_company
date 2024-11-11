@@ -54,7 +54,7 @@ class AuthMiddleware
     {
         $cacheKey = 'company_settings_' . $company_id;
 
-        $cachedSettings = Cache::remember($cacheKey, now()->addMinutes(10), function () use ($company_id, $appToken) {
+        $cachedSettings = Cache::remember($cacheKey, now()->addMinutes(20), function () use ($company_id, $appToken) {
             $headers = [
                 'accept' => 'application/json',
                 'Authorization' => 'Bearer ' . $appToken,
@@ -89,7 +89,7 @@ class AuthMiddleware
         $cacheKey = 'user_auth_' . md5($appToken);
 
         // Try to retrieve user data from cache
-        return Cache::remember($cacheKey, now()->addMinutes(10), function () use ($appToken) {
+        return Cache::remember($cacheKey, now()->addMinutes(20), function () use ($appToken) {
             $headers = [
                 'accept' => 'application/json',
                 'Authorization' => 'Bearer ' . $appToken,
