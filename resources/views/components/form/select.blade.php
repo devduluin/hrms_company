@@ -8,10 +8,12 @@
     'guidelines',
     'required' => '' ?? false,
     'apiUrl',
+    'detailApiUrl',
     'columns',
     'selected' => '',
     'keys' => [],
     'data' => [],
+    'detailApiColumns',
 ])
 
 <div class="mt-3 flex-row xl:items-center">
@@ -32,15 +34,17 @@
         </div>
     </div>
     <div class="flex-1 sm:w-[full] w-[90%] mt-3 xl:mt-0">
-        <select id="{{ $name }}" name="{{ $name }}" 
-            {{ $attributes->merge(['class' => $class .' mt-3 tom-select w-full'])->except(['id', 'name', 'tags', 'filter']) }}
+        <select id="{{ $name }}" name="{{ $name }}"
+            {{ $attributes->merge(['class' => $class . ' mt-3 tom-select w-full'])->except(['id', 'name', 'tags', 'filter']) }}
             data-placeholder="{{ $label }}" data-title="{{ $label }}"
             @if (isset($url)) data-url="{{ $url }}" @endif
             @if (isset($method)) data-method="{{ $method }}" @endif
             @if (isset($apiUrl)) data-api="{{ $apiUrl }}" @endif
+            @if (isset($detailApiUrl)) data-detail-api="{{ $detailApiUrl }}" @endif
             @if (isset($columns)) data-selectType="{{ $columns }}" @endif
             @if (isset($selected)) data-selected="{{ $selected }}" @endif
             @if (!empty($keys)) data-attributes="{{ json_encode($keys) }}" @endif
+            @if (!empty($detailApiColumns)) data-detail-attributes="{{ $detailApiColumns }}" @endif
             @if (!empty($data)) data-dependant="{{ json_encode($data) }}" @endif
             data-placeholder="{{ $label }}" data-title="{{ $label }}"
             @error($name) border-danger @enderror">
@@ -60,6 +64,5 @@
 @pushOnce('js')
     <script>
         initializeTomSelect();
-       
     </script>
 @endpushOnce

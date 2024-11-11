@@ -2,16 +2,21 @@ function initializeTomSelect() {
     (function () {
         "use strict";
         $(".tom-select").each(function () {
-            let title = $(this).data("title");
-            let url = $(this).data("url");
-            let method = $(this).data("method") ?? "POST";
-            let api = $(this).data("api") ?? "";
+            let element = $(this);
+            let title = element.data("title");
+            let url = element.data("url");
+            let method = element.data("method") || "POST";
+            let api = element.data("api") || "";
+            let detail_api = element.data("detail-api") || "";
+            let detailKeys = element.data("detail-attributes") || "";
             let company_id = localStorage.getItem("company");
-            let selectType = $(this).attr("data-selectType");
-            let selectedId = $(this).data("selected");
-            const keysData = $(this).attr("data-attributes");
-            const appToken = localStorage.getItem("app_token");
-            let data = $(this).data("dependant");
+            let selectType = element.attr("data-selectType");
+            let selectedId = element.data("selected");
+            let keysData = element.attr("data-attributes");
+            let appToken = localStorage.getItem("app_token");
+            let dependant = element.data("dependant");
+            let parent = element.data("parent");
+            console.log(parent);
 
             try {
                 selectType = JSON.parse(selectType);
@@ -24,23 +29,16 @@ function initializeTomSelect() {
                 labelField: "name",
                 searchField: "name",
                 selectOnTab: true,
-                plugins: {
-                    dropdown_input: {},
-                },
+                plugins: { dropdown_input: {} },
                 create: true,
                 load: function (query, callback) {
                     if (api && selectType.length > 0) {
-                        var payload = {
+                        let payload = {
                             draw: 0,
                             start: 0,
                             length: 25,
-                            search: query || "", // query is optional now
-                            order: [
-                                {
-                                    column: 0,
-                                    dir: "desc",
-                                },
-                            ],
+                            search: query || "",
+                            order: [{ column: 0, dir: "desc" }],
                         };
 
                         if (keysData) {
@@ -54,15 +52,6 @@ function initializeTomSelect() {
                             } catch (e) {
                                 console.error("Error parsing JSON:", e);
                             }
-                        }
-
-                        // TODO : check dependant form specific element by id
-                        if (typeof data !== "undefined") {
-                            Object.entries(data).forEach(([key, selector]) => {
-                                payload[key] =
-                                    $(selector).val() ||
-                                    $(selector).data("selected");
-                            });
                         }
 
                         $.ajax({
@@ -79,41 +68,9 @@ function initializeTomSelect() {
                                     let name = selectType
                                         .map((field) => item[field] || "")
                                         .join(" ");
-                                    return {
-                                        id: item.id,
-                                        name: name,
-                                    };
+                                    return { id: item.id, name: name };
                                 });
-
-                                // Check if selectedId exists in options, otherwise add it manually
-                                if (
-                                    selectedId &&
-                                    !options.some(
-                                        (option) => option.id === selectedId
-                                    )
-                                ) {
-                                    // Add the selected option if it does not exist in the loaded options
-                                    options.push({
-                                        id: selectedId,
-                                        name: options.name, // You can customize the name as needed
-                                    });
-                                }
-
                                 callback(options);
-
-                                /* const tomSelectInstance = $(this)[0].tomselect;
-
-                                // Set selected value if selectedId exists
-                                if (tomSelectInstance && selectedId) {
-                                    tomSelectInstance.addOption({
-                                        value: selectedId,
-                                        text: `Selected Option (${selectedId})`, // Customize this label as necessary
-                                    });
-
-                                    tomSelectInstance.setValue(selectedId);
-                                    tomSelectInstance.settings.placeholder = `Selected Option (${selectedId})`;
-                                    tomSelectInstance.input.placeholder = `Selected Option (${selectedId})`;
-                                } */
                             },
                             error: function (xhr, status, error) {
                                 console.error("Error fetching data:", error);
@@ -123,150 +80,135 @@ function initializeTomSelect() {
                     }
                 },
                 onChange: function (value) {
-                    // console.log(`#company_id changed to: ${value}`);
-                    // console.log("Dependant data onchange :", data);
+                    if (dependant) {
+                        // Fetch employee details based on selected employee_id
+                        $.ajax({
+                            url: `${detail_api}/${value}`, // Adjust the URL to your employee detail endpoint
+                            type: "GET",
+                            headers: {
+                                Authorization: `Bearer ${appToken}`,
+                                "X-Forwarded-Host": `${window.location.protocol}//${window.location.hostname}`,
+                            },
+                            success: function (jsonData) {
+                                const approverId = eval(
+                                    `jsonData.data.${detailKeys}`
+                                );
+                                $(dependant).each(function () {
+                                    const dependantElement =
+                                        $(this)[0].tomselect;
+                                    if (dependantElement) {
+                                        console.log("dependant");
+                                        console.log(dependantElement);
+                                        // dependantElement.clearOptions();
+                                        dependantElement.load((callback) => {
+                                            console.log(callback);
+                                            $.ajax({
+                                                url: $(this).data("api"),
+                                                type: method,
+                                                contentType: "application/json",
+                                                headers: {
+                                                    Authorization: `Bearer ${appToken}`,
+                                                    "X-Forwarded-Host": `${window.location.protocol}//${window.location.hostname}`,
+                                                },
+                                                data: JSON.stringify({
+                                                    company_id: value,
+                                                }),
+                                                success: function (response) {
+                                                    console.log(response);
+                                                    const options =
+                                                        response.data.map(
+                                                            (item) => {
+                                                                let name =
+                                                                    selectType
+                                                                        .map(
+                                                                            (
+                                                                                field
+                                                                            ) =>
+                                                                                item[
+                                                                                    field
+                                                                                ] ||
+                                                                                ""
+                                                                        )
+                                                                        .join(
+                                                                            " "
+                                                                        );
+                                                                return {
+                                                                    id: item.id,
+                                                                    name: name,
+                                                                };
+                                                            }
+                                                        );
+                                                    callback(options);
 
-                    // TODO : update dependant form specific element by id
-                    if (typeof data !== "undefined") {
-                        Object.entries(data).forEach(([key, selector]) => {
-                            // console.log("Selector", selector);
-                            // console.log("value", value);
-                            $(selector).val(value);
-                            const keysData = $(this).attr("data-attributes");
-
-                            // TODO: call ajax to get the value
-                            var payload = {
-                                draw: 0,
-                                start: 0,
-                                length: 25,
-                                search: "", // query is optional now
-                                order: [
-                                    {
-                                        column: 0,
-                                        dir: "desc",
-                                    },
-                                ],
-                            };
-
-                            if (keysData) {
-                                try {
-                                    const jsonObject = JSON.parse(keysData);
-                                    for (const [key, value] of Object.entries(
-                                        jsonObject
-                                    )) {
-                                        payload[key] = value;
+                                                    // Set selected value if approverId matches
+                                                    if (
+                                                        approverId &&
+                                                        options.some(
+                                                            (option) =>
+                                                                option.id ===
+                                                                approverId
+                                                        )
+                                                    ) {
+                                                        setTimeout(() => {
+                                                            dependantElement.setValue(
+                                                                approverId
+                                                            );
+                                                        }, 200); // Adjust delay as needed
+                                                    }
+                                                },
+                                                error: function (
+                                                    xhr,
+                                                    status,
+                                                    error
+                                                ) {
+                                                    console.error(
+                                                        "Error fetching data:",
+                                                        error
+                                                    );
+                                                    callback();
+                                                },
+                                            });
+                                        });
                                     }
-                                } catch (e) {
-                                    console.error("Error parsing JSON:", e);
-                                }
-                            }
-
-                            payload = {
-                                ...payload,
-                                company_id: value,
-                            };
-
-                            console.log(
-                                "API Endpoint : ",
-                                $(`${selector}`).attr("data-api")
-                            );
-
-                            // $.ajax({
-                            //     url: $(selector).data("api"),
-                            //     type: $(selector).data("method"),
-                            //     contentType: "application/json",
-                            //     headers: {
-                            //         Authorization: `Bearer ${appToken}`,
-                            //         "X-Forwarded-Host": `${window.location.protocol}//${window.location.hostname}`,
-                            //     },
-                            //     data: JSON.stringify(payload),
-                            //     success: function (response) {
-                            //         const options = response.data.map(
-                            //             (item) => {
-                            //                 let name = selectType
-                            //                     .map(
-                            //                         (field) => item[field] || ""
-                            //                     )
-                            //                     .join(" ");
-                            //                 return {
-                            //                     id: item.id,
-                            //                     name: name,
-                            //                 };
-                            //             }
-                            //         );
-
-                            //         // Check if selectedId exists in options, otherwise add it manually
-                            //         if (
-                            //             selectedId &&
-                            //             !options.some(
-                            //                 (option) => option.id === selectedId
-                            //             )
-                            //         ) {
-                            //             // Add the selected option if it does not exist in the loaded options
-                            //             options.push({
-                            //                 id: selectedId,
-                            //                 name: options.name, // You can customize the name as needed
-                            //             });
-                            //         }
-
-                            //         // callback(options);
-                            //     },
-                            //     error: function (xhr, status, error) {
-                            //         console.error(
-                            //             "Error fetching data:",
-                            //             error
-                            //         );
-                            //         callback();
-                            //     },
-                            // });
+                                });
+                            },
+                            error: function (xhr, status, error) {
+                                console.error(
+                                    "Error fetching employee details:",
+                                    error
+                                );
+                            },
                         });
                     }
                 },
                 onLoad: function () {
                     const tomSelectInstance = this;
-
-                    // Pre-select the option when TomSelect is initialized
-                    if (selectedId) {
-                        if (!tomSelectInstance.options[selectedId]) {
-                            tomSelectInstance.addOption({
-                                value: selectedId,
-                                text: selectedId,
-                            });
-                        }
-
-                        tomSelectInstance.setValue(selectedId);
+                    if (selectedId && !tomSelectInstance.options[selectedId]) {
+                        tomSelectInstance.addOption({
+                            value: selectedId,
+                            text: selectedId,
+                        });
                     }
+                    tomSelectInstance.setValue(selectedId);
                 },
                 render: {
                     option_create: function (data, escape) {
                         if (url) {
-                            return (
-                                '<div class="create" onclick="window.location.href=\'' +
-                                url +
-                                "?item=" +
-                                encodeURIComponent(data.input) +
-                                "'\"> + Add " +
-                                title +
-                                " <strong>" +
-                                escape(data.input) +
-                                "</strong> </div>"
-                            );
+                            return `<div class="create" onclick="window.location.href='${url}?item=${encodeURIComponent(
+                                data.input
+                            )}'> + Add ${title} <strong>${escape(
+                                data.input
+                            )}</strong> </div>`;
                         }
                     },
                     no_results: function (data, escape) {
                         if (url) {
-                            return (
-                                '<div class="no-results">No results found. <a href="' +
-                                url +
-                                "?item=" +
-                                encodeURIComponent(data.input) +
-                                '">Click here to add ' +
-                                title +
-                                "</a></div>"
-                            );
+                            return `<div class="no-results">No results found. <a href="${url}?item=${encodeURIComponent(
+                                data.input
+                            )}">Click here to add ${title}</a></div>`;
                         }
                     },
-                    loading: function (data, escape) {
+                    loading: function () {
                         return "";
                     },
                 },
@@ -279,39 +221,30 @@ function initializeTomSelect() {
                     ...config,
                     plugins: {
                         ...config.plugins,
-                        remove_button: {
-                            title: "Remove this item",
-                        },
+                        remove_button: { title: "Remove this item" },
                     },
                     persist: false,
                     create: true,
-                    onDelete: function (t) {
-                        return confirm(
-                            t.length > 1
-                                ? "Are you sure you want to remove these " +
-                                      t.length +
-                                      " items?"
-                                : 'Are you sure you want to remove "' +
-                                      t[0] +
-                                      '"?'
-                        );
-                    },
+                    onDelete: (values) =>
+                        confirm(
+                            values.length > 1
+                                ? `Are you sure you want to remove these ${values.length} items?`
+                                : `Are you sure you want to remove "${values[0]}"?`
+                        ),
                 });
             $(this).data("header") &&
                 (config = {
                     ...config,
                     plugins: {
                         ...config.plugins,
-                        dropdown_header: {
-                            title: $(this).data("header"),
-                        },
+                        dropdown_header: { title: $(this).data("header") },
                     },
                 });
 
             const tomSelectInstance = new TomSelect(this, config);
-
-            // Load options on page load without typing
-            tomSelectInstance.load("");
+            if (!parent) {
+                tomSelectInstance.load("");
+            }
         });
     })();
 }
