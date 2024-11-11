@@ -28,19 +28,34 @@
                             <div class="box box--stacked flex flex-col p-5">
                                 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4">
                                     <div class="gap-x-6 gap-y-10 ">
-                                        <x-form.input id="expense_title" name="expense_title" label="Expense Title"
-                                            required="true" placholder="" value="{{ request()->get('item') }}" />
+                                        <x-form.input id="title" name="title" label="Expense Title" required="true"
+                                            placholder="" value="{{ request()->get('item') }}" />
                                     </div>
                                     <div class="gap-x-6 gap-y-10 ">
-                                        <x-form.select id="employee_id" name="employee_id" data-method="POST"
+                                        <!-- Parent Select -->
+                                        <x-form.select id="employee" name="employee" data-method="POST"
                                             label="Employee Name" url="{{ url('dashboard/hrms/employee/create') }}"
-                                            apiUrl="{{ $apiUrlEmployee }}/datatables" columns='["first_name", "last_name"]'
+                                            apiUrl="{{ $apiUrlEmployee }}/datatables" detailApiUrl="{{ $apiUrlEmployee }}"
+                                            detailApiColumns="attendanceLeave.expense_approver"
+                                            columns='["first_name", "last_name"]' data-dependant="#expense_approver"
                                             :keys="[
                                                 'company_id' => $company,
                                             ]">
                                             <option value="">Select Employee</option>
                                         </x-form.select>
                                     </div>
+
+                                    {{-- <div class="gap-x-6 gap-y-10">
+                                        <!-- Child Select -->
+                                        <x-form.select id="expense_approver" name="expense_approver"
+                                            label="Expense Approver" url="{{ url('dashboard/hrms/designation') }}"
+                                            apiUrl="{{ $apiUrlEmployee }}/datatables" columns='["first_name","last_name"]'
+                                            data-parent="#employee_id" :keys="[
+                                                'company_id' => $company,
+                                            ]">
+                                            <option value="">Select Approver</option>
+                                        </x-form.select>
+                                    </div> --}}
 
                                     <div class="gap-x-6 gap-y-10 ">
                                         <x-form.input id="description" name="description" label="Description" placholder=""
@@ -113,6 +128,9 @@
                                                                         Amount</th>
                                                                     <th
                                                                         class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
+                                                                        Attachment</th>
+                                                                    <th
+                                                                        class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
                                                                         <i data-lucide="settings"
                                                                             class="inline-block h-5 w-5 mr-2"></i>
                                                                     </th>
@@ -180,19 +198,19 @@
 
         function createTableRow(rowId, tableId, data = null) {
             let rowNumber = document.querySelectorAll('#' + tableId + ' tr').length + 1;
-            const componentType = tableId === 'editable-earning-table' ? 'earning' : 'deduction';
+            const claimType = 'expense';
             let amountData = (data) === null ? 0 : data.amount;
-            let earningDeductionId = (data) === null ? null : data.id;
+            let expenseDetailId = (data) === null ? null : data.id;
             // handleGetComponent(rowNumber, tableId, data);
 
             return `<tr id="${rowId}">
-                    <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t">${rowNumber} <input name="type" value="${componentType}" type="hidden"></td>
+                    <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t">${rowNumber}</td>
                     <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t">
                         <input type="date" id="expenseDate-${tableId}-${rowNumber}" name="expense_date" data-tw-merge="" placeholder="Expense Date" data-single-mode="true"
             class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 datepicker w-25">
                     </td>
-                    <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t"><select name="salary_component_id" class="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1" id="getClaimType-${tableId}-${rowNumber}" onclick="handleGetClaimType('${rowNumber}', '${tableId}', '${data?.salaryComponent?.id || ''}')">
-                            <option value="${data?.salaryComponent?.id || ''}">${data?.salaryComponent?.name || 'Select Claim Type'}</option>
+                    <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t"><select name="claim_type_id" class="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1" id="getClaimType-${tableId}-${rowNumber}" onclick="handleGetClaimType('${rowNumber}', '${tableId}', '${data?.expenseClaimDetail?.id || ''}')">
+                            <option value="${data?.expenseClaimDetail?.id || ''}">${data?.expenseClaimDetail?.name || 'Select Claim Type'}</option>
                         </select>
                         <!-- Preloader (initially hidden) -->
                         <div class="col-span-6 flex flex-col items-center justify-end sm:col-span-3 xl:col-span-2">
@@ -209,16 +227,95 @@
                             </svg>
                         </span>
                         </div></td>
-                    <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t"><input id="description-${componentType}-${rowNumber}" name="description" type="text" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10" placeholder="Description"></td>
-                    <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t"><input id="amount-${componentType}-${rowNumber}" name="amount" type="number" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10" placeholder="0"></td>
+                    <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t"><input id="description-${claimType}-${rowNumber}" name="description" type="text" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10" placeholder="Description"></td>
+                    <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t"><input id="amount-${claimType}-${rowNumber}" name="amount" type="number" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10" placeholder="0"></td>
+                    <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t"><input type="hidden" name="attachment" id="attachment_url-${claimType}-${rowNumber}"></input><input id="attachment-${claimType}-${rowNumber}" name="attachment" onChange="handleUpload('${rowNumber}', '${claimType}', '${data?.expenseClaimDetail?.id || ''}')" data-tw-merge type="file" placeholder="Input file" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10"></td>
                     <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t">
-                        <button type="button" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed text-xs py-1.5 px-2 bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 w-24 w-24" onclick="deleteRow('${rowId}', '${tableId}', '${earningDeductionId}')">Delete</button>
+                        <button type="button" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed text-xs py-1.5 px-2 bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 w-24 w-24" onclick="deleteRow('${rowId}', '${tableId}', '${expenseDetailId}')">Delete</button>
                     </td>
                 </tr>`;
             // $('#' + tableId).append(rowHtml);
             if (data && typeof data.amount !== 'undefined') {
-                $('#getInputComponent-' + componentType + '-' + rowNumber).val(data.amount);
+                $('#amount-' + claimType + '-' + rowNumber).val(data.amount);
             }
+        }
+
+        function handleUpload(rowId, type, selectedId = null, data = null) {
+            const fileInput = $("#attachment-" + type + "-" + rowId)[0];
+
+            if (fileInput.files && fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                console.log(file);
+
+                const formData = new FormData();
+                formData.append('file', file); // Append the file to formData with the key 'file'
+
+                $.ajax({
+                    url: 'http://apidev.duluin.com/api/users/file_uploader', // Your API endpoint
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        $("#attachment_url-" + type + "-" + rowId).val(response.file);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error uploading file:', error);
+                    }
+                });
+            }
+        }
+
+        function deleteRow(rowId, tableId, data = null) {
+            if (data !== 'null') {
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: "transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 w-48 mr-1",
+                        cancelButton: "transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-blue-theme border-blue-theme text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"
+                    },
+                    buttonsStyling: false
+                });
+                swalWithBootstrapButtons.fire({
+                    title: "Are you sure?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: `http://apidev.duluin.com/api/v1/structure_earning_deductions/structure_earning_deduction/${data}`,
+                            method: 'DELETE',
+                            headers: {
+                                Authorization: `Bearer ${localStorage.getItem("app_token")}`,
+                                "X-Forwarded-Host": `${window.location.protocol}//${window.location.hostname}`,
+                            },
+                            success: function(response) {
+                                // toastr.success("Earning Deduction deleted successfully");
+                                showSuccessNotification('success',
+                                    "Earning Deduction deleted successfully");
+                                document.getElementById(rowId).remove();
+                                updateRowNumbers(tableId);
+                            },
+                            error: function(xhr, status, error) {
+                                console.error("Error deleting salary component:", error);
+                            }
+                        });
+                    }
+                });
+            } else {
+                document.getElementById(rowId).remove();
+                updateRowNumbers(tableId);
+            }
+        }
+
+        function updateRowNumbers(tableId) {
+            console.log(tableId);
+            const rows = document.querySelectorAll(`#editable-expense-table tr`);
+            rows.forEach((row, index) => {
+                row.querySelector('td:first-child').innerText = index + 1;
+            });
         }
 
         function handleGetClaimType(rowId, tableId, selectedId = null, data = null) {
@@ -299,11 +396,37 @@
             return false;
         }
 
+        function getTableData() {
+            let expenses = [];
+            $('#editable-expense-table tr').each(function() {
+                let expense = {
+                    expense_date: $(this).find('input[name="expense_date"]').val(),
+                    claim_type_id: $(this).find('select[name="claim_type_id"]').val(),
+                    description: $(this).find('input[name="description"]').val(),
+                    amount: $(this).find('input[name="amount"]').val(),
+                    attachment_url: $(this).find('input[name="attachment_url"]').val()
+                };
+                expenses.push(expense);
+            });
+            return expenses;
+        }
+
         $("#form-submit").submit(async function(e) {
             e.preventDefault();
 
-            const data = serializeFormData(currentForm);
 
+            const data = serializeFormData(currentForm);
+            delete data.expense_date; // Remove expense_date if present
+            delete data.claim_type_id; // Remove claim_type_id if present
+            delete data.attachment; // Remove attachment if present
+
+            data.company = localStorage.getItem('company');
+            data.expenseDetails = getTableData();
+            data.claim_category = "expense";
+            data.amount = data.expenseDetails.reduce((total, expense) => total + parseFloat(expense.amount ||
+                0), 0); // Calculate total amount
+
+            console.log(JSON.stringify(data));
             try {
                 const response = await $.ajax({
                     url: path,

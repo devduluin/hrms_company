@@ -25,7 +25,7 @@ class ExpenseController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Create Employee Expense';
-        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/payrool/expense";
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/payroll/expense_claim";
         $data['apiUrlEmployee'] = $this->apiGatewayUrl . "/v1/employees/employee";
         $data['company'] = session()->get('company_id');
 
