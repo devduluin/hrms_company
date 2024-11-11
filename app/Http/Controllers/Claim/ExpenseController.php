@@ -32,11 +32,15 @@ class ExpenseController extends Controller
         return view('dashboard.hrms.claim.expense.create', $data);
     }
 
-    public function update()
+    public function edit($id)
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Update Employee Expense';
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/payroll/expense_claim";
+        $data['apiUrlEmployee'] = $this->apiGatewayUrl . "/v1/employees/employee";
+        $data['company'] = session()->get('company_id');
+        $data['id'] = $id;
 
-        return view('dashboard.hrms.claim.expense.travel_request', $data);
+        return view('dashboard.hrms.claim.expense.edit', $data);
     }
 }
