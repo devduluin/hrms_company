@@ -250,7 +250,10 @@
 
     function handleResponse(response) {
         if (response.success == true) {
-            window.location=document.referrer;
+            showSuccessNotification(response.message, "The operation was completed successfully.");
+            setTimeout(() => {
+                window.location=document.referrer;
+            }, 800);
         } else {
             showErrorNotification('error', response.message);
         }

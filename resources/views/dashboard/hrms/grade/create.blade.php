@@ -142,7 +142,9 @@
     function handleResponse(response) {
         if (response.success == true) {
             showSuccessNotification(response.message, "The operation was completed successfully.");
-            window.location=document.referrer;
+            setTimeout(() => {
+                window.location=document.referrer;
+            }, 800);
         } else {
             showErrorNotification('error', response.message);
         }
