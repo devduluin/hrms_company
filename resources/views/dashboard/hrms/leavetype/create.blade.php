@@ -38,13 +38,13 @@
                                         <x-form.input type="text" id="leave_type_name" name="leave_type_name" label="Leave Type Name" required="true" placholder="" value="{{request()->get('item')}}"/>
                                     </div>
                                     <div class="py-2">
-                                        <x-form.input type="number" id="maximum_leave_allocation_allowed" name="maximum_leave_allocation_allowed" label="Max Leave" required="true" placholder="" />
+                                        <x-form.input type="number" value="0" id="maximum_leave_allocation_allowed" name="maximum_leave_allocation_allowed" label="Max Leave" required="true" placholder="" />
                                     </div>
                                     <div class="py-2">
-                                        <x-form.input type="number" id="applicable_after_working_days" name="applicable_after_working_days" label="Applicable After" required="true" placholder=""/>
+                                        <x-form.input type="number" value="1"  id="applicable_after_working_days" name="applicable_after_working_days" label="Applicable After" required="true" placholder=""/>
                                     </div>
                                     <div class="py-2">
-                                        <x-form.input type="number" id="maximum_consecutive_leaves_allowed" name="maximum_consecutive_leaves_allowed" label="Max Consecutive" placholder=""/>
+                                        <x-form.input type="number" value="0"  id="maximum_consecutive_leaves_allowed" name="maximum_consecutive_leaves_allowed" label="Max Consecutive" placholder=""/>
                                     </div>
                                 </div>
 
@@ -250,7 +250,10 @@
 
     function handleResponse(response) {
         if (response.success == true) {
-            window.location=document.referrer;
+            showSuccessNotification(response.message, "The operation was completed successfully.");
+            setTimeout(() => {
+                window.location=document.referrer;
+            }, 800);
         } else {
             showErrorNotification('error', response.message);
         }

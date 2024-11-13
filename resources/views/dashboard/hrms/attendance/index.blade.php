@@ -19,13 +19,15 @@
                                         <div class="relative">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="calendar-check2" class="lucide lucide-calendar-check2 absolute inset-y-0 left-0 z-10 my-auto ml-3 h-4 w-4 stroke-[1.3]"><path d="M21 14V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8"></path><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line><path d="m16 20 2 2 4-4"></path></svg>
                                             <select onchange="filterAttendance(this.value)" name="filter_date" class="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1 pl-9 sm:w-44">
-                                                <option value="custom-date">Custom Date</option>
+                                                
+                                                <option value="daily">Today</option>
                                                 <option value="weekly">Weekly</option>
                                                 <option value="monthly">Monthly</option>
                                                 <option value="yearly">Yearly</option>
+                                                <option value="custom-date">Custom Date</option>
                                             </select>
                                         </div>
-                                        <div class="relative">
+                                        <div class="relative" id="custom-date" hidden>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="calendar" class="lucide lucide-calendar absolute inset-y-0 left-0 z-10 my-auto ml-3 h-4 w-4 stroke-[1.3]"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
                                             <input id="litepicker" type="text" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 datepicker rounded-[0.3rem] pl-9 sm:w-64">
                                         </div>
@@ -75,7 +77,7 @@
                                         </div>
                                 </div>
                             </div>
-                            <div class="box box--stacked p-5">
+                            {{-- <div class="box box--stacked p-5">
                                 <div class="flex flex-col gap-y-5 lg:flex-row lg:items-center">
                                     <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row sm:items-center">
                                         <div class="relative">
@@ -101,7 +103,7 @@
                                         Total Absent
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             {{-- <div class="box box--stacked p-5">
                                 <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
                                     <div
@@ -282,19 +284,22 @@
                                 </div> --}}
                             </div>
                         </div>
-                        <div class="box p-4">
-                            <div class="text-m font-medium">
-                                More Action
+                        <div class="mt-5 ml-2 text-lg font-medium group-[.mode--light]:text-white">
+                            More Action
                             </div>
+                        <div class="box p-4 mt-6">
+                         
                                 <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-5 mt-4">
                                     <x-action  label="Attendance" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/summary') }}" />
                                     <x-action  label="Attendance Request" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/request') }}" />
+                                    <x-action  label="Attendance Report" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/report') }}" />
                                     <x-action  label="Shift Assignment" icon="arrow-up-right" url="{{ route('hrms.shift-assignment') }}" />
                                     <x-action  label="Shift Assignment Bulk" icon="arrow-up-right" url="{{ route('hrms.shift-assignment.create_bulk') }}" />
-                                    <x-action  label="Shift Assignment Schedule" icon="arrow-up-right" status="comming_soon" url="{{ route('hrms.shift-assignment') }}" />
+                                    
                                    
-                                    <x-action  label="Attendance Report" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/report') }}" />
+                                    
                                     <x-action  label="Shift Type" icon="door-open" url="{{ url('/dashboard/hrms/attendance/shift_type') }}" />
+                                    <x-action  label="Shift Assignment Schedule" icon="arrow-up-right" status="comming_soon" url="{{ route('hrms.shift-assignment') }}" />
                                     {{-- <x-action  label="Shift Requester Approver" icon="git-pull-request-create" url="{{ route('hrms.attendance.shiftrequest') }}" /> --}}
                                 </div>
                         </div>
@@ -311,9 +316,9 @@
     <script type="text/javascript">
         var filterData = {};
         $(document).ready(function() {
-           countAttendance();
+           countAttendance('daily');
            countEmployee();
-           getDataChart();
+           //getDataChart();
         });
 
         //user bisa menampilkan data berdasarkan range tanggal yang dipilih
@@ -333,6 +338,9 @@
 
             //filter data berdasarkan tanggal yang dipilih
             switch (value) {
+                case "daily":
+                    filterData = "daily=daily";
+                    break;
                 case "weekly":
                     filterData = "weekly=weekly";
                     break;
@@ -343,7 +351,8 @@
                     filterData = "yearly=yearly";
                     break;
                 default:
-                    filterData = "custom_date="+value;
+                $('#custom-date').attr('hidden', false);
+                filterData = "custom_date="+value;
             }
 
             //kirim permintaan data ke server dengan membawa param

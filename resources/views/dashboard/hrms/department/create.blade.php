@@ -55,6 +55,7 @@
                                 </div>
                                
                                 <div class="gap-x-6 gap-y-10 ">
+                                 <div class="mt-3 flex-row xl:items-center">
                                     <div class="mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-64">
                                         <div class="text-left">
                                             <div class="flex items-center">
@@ -75,6 +76,7 @@
                                         </select>
                                     </div>
                                 </div>
+                               </div>
                             
                             </div>
                                 
@@ -185,7 +187,10 @@
 
     function handleResponse(response) {
         if (response.success == true) {
-            window.location=document.referrer;
+            showSuccessNotification(response.message, "The operation was completed successfully.");
+            setTimeout(() => {
+                window.location=document.referrer;
+            }, 800);
         } else {
             showErrorNotification('error', response.message);
         }

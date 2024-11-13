@@ -11,6 +11,7 @@ Route::prefix('/attendance')->group(function () {
     Route::controller(Attendance\AttendanceController::class)->group(function () {
         Route::get('/', 'index')->name('hrms.attendance');
         Route::get('/create', 'create')->name('hrms.attendance.create');
+        Route::get('/update/{id}', 'update')->name('hrms.attendance.update');
         Route::get('/summary', 'summary')->name('hrms.attendance.summary');
         Route::get('/detail/{id}', 'detail')->name('detail'); 
 

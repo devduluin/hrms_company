@@ -339,10 +339,17 @@
 
     function handleResponse(response) {
         if (response.success == true) {
+            showSuccessNotification(response.message, "The operation was completed successfully.");
             if(method == 'PATCH'){
-                window.location.href = "/dashboard/hrms/attendance/request";
+                setTimeout(() => {
+                    window.location.href = "/dashboard/hrms/attendance/request";
+                }, 800);
+                
             }else{
-                window.location.href = "/dashboard/hrms/attendance/request/update/"+response.data.id;
+                setTimeout(() => {
+                    window.location.href = "/dashboard/hrms/attendance/request/update/"+response.data.id;
+                }, 800);
+                
             }
             
         } else {
