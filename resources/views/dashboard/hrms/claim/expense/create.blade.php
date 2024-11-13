@@ -36,8 +36,9 @@
                                         <x-form.select id="employee" name="employee" data-method="POST"
                                             label="Employee Name" url="{{ url('dashboard/hrms/employee/create') }}"
                                             apiUrl="{{ $apiUrlEmployee }}/datatables" detailApiUrl="{{ $apiUrlEmployee }}"
+                                            customfunction="addOptionIfNotExist"
                                             detailApiColumns="attendanceLeave.expense_approver"
-                                            columns='["first_name", "last_name"]' data-dependant="#expense_approver"
+                                            columns='["first_name", "last_name"]' data-dependant="expense_approver"
                                             :keys="[
                                                 'company_id' => $company,
                                             ]">
@@ -45,17 +46,17 @@
                                         </x-form.select>
                                     </div>
 
-                                    {{-- <div class="gap-x-6 gap-y-10">
+                                    <div class="gap-x-6 gap-y-10">
                                         <!-- Child Select -->
                                         <x-form.select id="expense_approver" name="expense_approver"
                                             label="Expense Approver" url="{{ url('dashboard/hrms/designation') }}"
                                             apiUrl="{{ $apiUrlEmployee }}/datatables" columns='["first_name","last_name"]'
-                                            data-parent="#employee_id" :keys="[
+                                            data-parent="employee_id" :keys="[
                                                 'company_id' => $company,
                                             ]">
                                             <option value="">Select Approver</option>
                                         </x-form.select>
-                                    </div> --}}
+                                    </div>
 
                                     <div class="gap-x-6 gap-y-10 ">
                                         <x-form.input id="description" name="description" label="Description" placholder=""
@@ -316,6 +317,16 @@
             rows.forEach((row, index) => {
                 row.querySelector('td:first-child').innerText = index + 1;
             });
+        }
+
+        function addOptionIfNotExist(selectElementId, optionValue) {
+            const selectElement = $(`#${selectElementId}`)[0].tomselect;
+            if (selectElement.options) {
+                setTimeout(() => {
+                    console.log(optionValue);
+                    selectElement.setValue(optionValue);
+                }, 1000);
+            }
         }
 
         function handleGetClaimType(rowId, tableId, selectedId = null, data = null) {

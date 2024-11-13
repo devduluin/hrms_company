@@ -14,6 +14,7 @@
     'keys' => [],
     'data' => [],
     'detailApiColumns',
+    'customfunction',
 ])
 
 <div class="mt-3 flex-row xl:items-center">
@@ -43,6 +44,7 @@
             @if (isset($detailApiUrl)) data-detail-api="{{ $detailApiUrl }}" @endif
             @if (isset($columns)) data-selectType="{{ $columns }}" @endif
             @if (isset($selected)) data-selected="{{ $selected }}" @endif
+            @if (isset($customfunction)) data-function="{{ $customfunction }}" @endif
             @if (!empty($keys)) data-attributes="{{ json_encode($keys) }}" @endif
             @if (!empty($detailApiColumns)) data-detail-attributes="{{ $detailApiColumns }}" @endif
             @if (!empty($data)) data-dependant="{{ json_encode($data) }}" @endif

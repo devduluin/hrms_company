@@ -15,6 +15,7 @@ function initializeTomSelect() {
             let keysData = element.attr("data-attributes");
             let appToken = localStorage.getItem("app_token");
             let dependant = element.data("dependant");
+            let customFunction = element.data("function");
             let parent = element.data("parent");
             console.log(parent);
 
@@ -153,7 +154,7 @@ function initializeTomSelect() {
                                                             dependantElement.setValue(
                                                                 approverId
                                                             );
-                                                        }, 200); // Adjust delay as needed
+                                                        }, 2000); // Adjust delay as needed
                                                     }
                                                 },
                                                 error: function (
@@ -171,6 +172,21 @@ function initializeTomSelect() {
                                         });
                                     }
                                 });
+                                // console.log(customFunction);
+                                // Check if the custom function exists on the window object and is a function
+                                if (
+                                    typeof window[customFunction] === "function"
+                                ) {
+                                    // Call the function dynamically with the necessary arguments
+                                    window[customFunction](
+                                        dependant,
+                                        approverId
+                                    );
+                                } else {
+                                    console.error(
+                                        `Function "${customFunction}" is not defined or is not a function.`
+                                    );
+                                }
                             },
                             error: function (xhr, status, error) {
                                 console.error(
@@ -242,9 +258,9 @@ function initializeTomSelect() {
                 });
 
             const tomSelectInstance = new TomSelect(this, config);
-            if (!parent) {
-                tomSelectInstance.load("");
-            }
+            // if (!parent) {
+            tomSelectInstance.load("");
+            // }
         });
     })();
 }
