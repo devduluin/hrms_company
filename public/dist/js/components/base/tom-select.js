@@ -55,6 +55,14 @@ function initializeTomSelect() {
                             }
                         }
 
+                        if (typeof data !== "undefined") {
+                            Object.entries(data).forEach(([key, selector]) => {
+                                payload[key] =
+                                    $(selector).val() ||
+                                    $(selector).data("selected");
+                            });
+                        }
+
                         $.ajax({
                             url: api,
                             type: method,
@@ -71,6 +79,20 @@ function initializeTomSelect() {
                                         .join(" ");
                                     return { id: item.id, name: name };
                                 });
+
+                                if (
+                                    selectedId &&
+                                    !options.some(
+                                        (option) => option.id === selectedId
+                                    )
+                                ) {
+                                    // Add the selected option if it does not exist in the loaded options
+                                    options.push({
+                                        id: selectedId,
+                                        name: options.name, // You can customize the name as needed
+                                    });
+                                }
+
                                 callback(options);
                             },
                             error: function (xhr, status, error) {
