@@ -64,6 +64,7 @@
             }
 
             $("[name='employee_id']").on("change", async function() {
+                console.log("ada perubahan disini : ", $(this).val());
                 $("#employee").val($(this).val());
                 let employeeId = $(this).val();
                 let startDate = $("#start_date").val();
@@ -138,12 +139,13 @@
                 $("#end_date").val(endDate.toISOString().split('T')[0]);
 
                 // check if employee, salary structure are not empty
-                if (($("#employee_id").val() !== "") && ($("#salary_stucture").val() !== "")) {
+                if (($("#employee").val() !== "") && ($("#salary_stucture").val() !== "")) {
                     console.log("employee id " + $("#employee_id").val());
                     calculateDays(startDate, endDate, $("#employee_id").val());
                     getEarning();
                     getDeduction();
                 } else {
+                    console.log("employee id value : ", $("#employee_id").val());
                     showErrorNotification('error', 'Please select employee and salary structure');
                 }
             });

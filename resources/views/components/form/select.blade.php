@@ -8,15 +8,14 @@
     'guidelines',
     'required' => '' ?? false,
     'apiUrl',
-    'detailApiUrl',
+    'detailApiUrl' => null,
     'columns',
     'selected' => '',
     'keys' => [],
     'data' => [],
-    'detailApiColumns',
-    'customfunction',
+    'detailApiColumns' => null,
+    'customfunction' => null,
 ])
-
 <div class="mt-3 flex-row xl:items-center">
     <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4">
         <div class="text-left">
