@@ -4,8 +4,9 @@
 <div class="hurricane before:content-[''] before:z-[-1] before:w-screen before:bg-slate-50 before:top-0 before:h-screen before:fixed before:bg-texture-black before:bg-contain before:bg-fixed before:bg-[center_-20rem] before:bg-no-repeat">
 @include('layouts.dashboard.menu')
     <div class="content transition-[margin,width] duration-100 px-5 pt-[56px] pb-16 relative z-20 content--compact xl:ml-[275px] [&amp;.content--compact]:xl:ml-[91px]">
-        <form id="form-submit"  method="post" action="{{ $apiUrl }}">
+        <form id="form-submit"  method="POST" action="{{ $apiUrl }}">
             <input type="hidden" id="latlong" name="latlong" />
+            <input type="hidden" id="shift_assigment_id" name="shift_assigment_id" />
             <div class="container mt-[65px]">
                 <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center">
                     <div class="text-base font-medium group-[.mode--light]:text-white">
@@ -165,28 +166,29 @@
                                             <div class="mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-64">
                                                 <div class="text-left">
                                                     <div class="flex items-center">
-                                                        <div class="font-medium">Status</div>
+                                                        <div class="font-medium">Attendance Status</div>
                                                     </div>
                                                 </div>
                                                 <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3"></div>
                                             </div>
                                             <div class="mt-3 w-96 flex-1 xl:mt-0">
-                                                <select required name="status" id="status" data-title="Status" data-placeholder="Select your status" class="tom-select w-full" sclass="tom-select disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10"">
+                                                <select required name="attendance_status" id="status" data-title="Status" data-placeholder="Select your status" class="tom-select w-full" sclass="tom-select disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10"">
                                                     <option value="present">
                                                         Present
                                                     </option>
                                                     <option value="absent">
                                                         Absent
                                                     </option>
+                                                    <option value="halfday">
+                                                        Half Day
+                                                    </option>
+                                                    <option value="wfh">
+                                                        Work From Home
+                                                    </option>
                                                     <option value="leave">
                                                         Leave
                                                     </option>
-                                                    <option value="wfo">
-                                                        WFO
-                                                    </option>
-                                                    <option value="wfh">
-                                                        WFH
-                                                    </option>
+                                                    
                                                 </select>
                                             </div>
                                         </div>
@@ -297,7 +299,7 @@
                     //$("select[name=status]").val(response.data.status).change();
                     addOptionIfNotExist('employee_id', response.data.employee_id);
                      
-                    addOptionIfNotExist('status', response.data.attendance_status);
+                    addOptionIfNotExist('attendance_status', response.data.attendance_status);
                      
                 } else {
                     showErrorNotification('error', response.message);
@@ -329,7 +331,7 @@
 
        await transAjax(param).then((result) => {
         const employee = result.data
-         
+        $("#company_id").val(employee.company_id);
         getDetailShift(result.data.id);
          
         if (employee.department_id_rel?.department_name) {
@@ -338,6 +340,9 @@
 
         if (employee.company_id_rel?.company_name) {
             $('#company').val(employee.company_id_rel.company_name);
+        }
+        if (employee.company_id_rel?.latlong) {
+            $('#latlong').val(employee.company_id_rel.latlong);
         }
        }).catch((error) => {
         console.log(error);
@@ -355,6 +360,7 @@
         const shift = result.data
         if (shift.shift_type_id_rel?.shift_type_name) {
             $('#shift_type_name').val(shift.shift_type_id_rel.shift_type_name);
+            $('#shift_assigment_id').val(shift.id);
         }
         shift_type_name
 
@@ -365,8 +371,10 @@
     
     $('#employee_id').change(function() {
         const selectedValue = $(this).val();
-
-        getDetailEmployee(selectedValue);
+        if(selectedValue){
+            getDetailEmployee(selectedValue);
+        }
+        
         
     });
 
@@ -384,7 +392,10 @@
         e.preventDefault();
         
         const data = serializeFormData(currentForm);
-        
+        if(method == 'POST'){
+            path        = currentForm.attr('action');
+            path = path+'/operator/store';
+        }
         try {
             const response = await $.ajax({
                 url: path,

@@ -235,8 +235,8 @@
                         $("#company").val(response.data.company_id_rel.company_name);
                     }
                     $("#company_id").val(response.data.company_id);
-                    $("#from_date").val(response.data.from_date);
-                    $("#to_date").val(response.data.to_date);
+                    $("#start_date").val(response.data.start_date);
+                    $("#end_date").val(response.data.end_date);
                      
                     
                     //$("select[name=status]").val(response.data.status).change();
