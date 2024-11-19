@@ -295,7 +295,6 @@
                 $(this).attr('disable', false);
                 const response = JSON.parse(xhr.responseText);
                 handleErrorResponse(response);
-
             });
         });
 
