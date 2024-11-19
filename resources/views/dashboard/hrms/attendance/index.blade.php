@@ -12,8 +12,11 @@
             class="content transition-[margin,width] duration-100 px-5 xl:mr-2.5 mt-[75px] pt-[31px] pb-16 content--compact xl:ml-[275px] [&.content--compact]:xl:ml-[100px]">
                 <div class="grid  grid-cols-1 md:grid-cols-12 gap-x-6 gap-y-10">
                     <div class= "col-span-12 w-full">
-                        <div class="mt-3.5 flex flex-col gap-8">
-                            <div class="box box--stacked mt-3.5 p-5">
+                        <div class="mt-5 ml-2 text-lg font-medium group-[.mode--light]:text-white">
+                            Shift & Attendance
+                        </div>
+                        <div class="mt-5 flex flex-col gap-8">
+                            <div class="box box--stacked p-5">
                                 <div class="flex flex-col gap-y-5 lg:flex-row lg:items-center">
                                     <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row sm:items-center">
                                         <div class="relative">
@@ -47,29 +50,29 @@
                                 </div>
                                 <div class="mt-5">
                                         <div class="box--stacke">
-                                            <div class="flex justify-between">
+                                            <div class="grid grid-cols-4 gap-5">
                                                 <div
-                                                    class="flex-1 mx-1 box col-span-5 border-dashed p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                                    class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
                                                     <div class="text-base text-slate-500">Total Attendance</div>
                                                     <div class="mt-1.5 text-2xl font-medium" id="totalAttendance">0</div>
                                                 </div>
                                                 <div
-                                                    class="flex-1 mx-1 box col-span-4 border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                                    class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
                                                     <div class="text-base text-slate-500">Total Present</div>
                                                     <div class="mt-1.5 text-2xl font-medium" id="totalPresent">0</div>
                                                 </div>
                                                 <div
-                                                    class="flex-1 mx-1 box col-span-4 border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                                    class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
                                                     <div class="text-base text-slate-500">Total Absent</div>
                                                     <div class="font-mediumm mt-1.5 text-2xl" id="totalAbsent">0</div>
                                                 </div>
                                                 <div
-                                                    class="flex-1 mx-1 box col-span-4 border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                                    class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
                                                     <div class="text-base text-slate-500">Late Entry</div>
                                                     <div class="font-mediumm mt-1.5 text-2xl" id="lateEntry">0</div>
                                                 </div>
                                                 <div
-                                                    class="flex-1 mx-1 box col-span-4 border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                                    class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
                                                     <div class="text-base text-slate-500">Early Exit</div>
                                                     <div class="font-mediumm mt-1.5 text-2xl" id="earlyExit">0</div>
                                                 </div>
@@ -287,10 +290,10 @@
                         <div class="mt-5 ml-2 text-lg font-medium group-[.mode--light]:text-white">
                             More Action
                             </div>
-                        <div class="box p-4 mt-6">
+                        <div class="box p-4 mt-5">
                          
                                 <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-5 mt-4">
-                                    <x-action  label="Attendance" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/summary') }}" />
+                                    <x-action  label="Attendance" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/attendance') }}" />
                                     <x-action  label="Attendance Request" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/request') }}" />
                                     <x-action  label="Attendance Report" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/report') }}" />
                                     <x-action  label="Shift Assignment" icon="arrow-up-right" url="{{ route('hrms.shift-assignment') }}" />

@@ -25,14 +25,15 @@
                 </div> -->
                 <div class="col-span-12 flex flex-col gap-y-7 xl:col-span-9">
                     <div class="box box--stacked flex flex-col p-5">
-                        <x-datatable id="departmentTable" :url="$apiUrl.'/datatable'" method="POST" class="display small">
+                        <x-datatable id="departmentTable" :url="$apiUrl.'/datatable'" method="POST" class="display small" order="[11 => 'DESC']">
                             <x-slot:thead>
                             <th data-value="no" width="80px">No.</th>
                                     <th data-value="employee_id_rel"  data-render="getEmployeeName">Employee Name</th>
                                     <th data-value="attendance_date">Date</th>
                                     <th data-value="time_in">Checkin time</th>
                                     <th data-value="time_out">Checkout time</th>
-                                    <th data-value="attendance_status" data-render="getStatus">Status</th>
+                                    <th data-value="attendance_status" data-render="getAttendanceStatus">Attendance</th>
+                                    <th data-value="status" data-render="getStatus">Status</th>
                                     <th data-value="id" data-render="getActionBtn">Action</th>
                             </x-slot:thead>
                         </x-datatable>
@@ -59,11 +60,23 @@
 @endsection
 @push('js')
     <script>
-        function getStatus(data, type, row, meta) {
+        function getStatus(data, type, row, meta) {         
+            if (data === 'approved') {
+                return `<div class="flex capitalize text-success"><div class="whitespace-nowrap"><i data-tw-merge data-lucide="check" class="text-success"></i> ${data}</div></div>`;
+            } else  if (data === 'submit') {
+                return `<div class="flex capitalize text-warning"><div class="whitespace-nowrap"><i data-tw-merge data-lucide="check" class="text-success"></i> ${data}</div></div>`;
+            }else{
+                return `<div class="flex capitalize text-danger"><div class="whitespace-nowrap">${data}</div></div>`;
+            }
+        }
+
+        function getAttendanceStatus(data, type, row, meta) {
             
             if (data === 'present') {
                 return `<div class="flex capitalize text-success"><div class="whitespace-nowrap"><i data-tw-merge data-lucide="check" class="text-success"></i> ${data}</div></div>`;
-            } else {
+            } else  if (data === 'wfh' || data === 'leave') {
+                return `<div class="flex capitalize text-warning"><div class="whitespace-nowrap"><i data-tw-merge data-lucide="check" class="text-success"></i> ${data}</div></div>`;
+            }else{
                 return `<div class="flex capitalize text-danger"><div class="whitespace-nowrap">${data}</div></div>`;
             }
         }

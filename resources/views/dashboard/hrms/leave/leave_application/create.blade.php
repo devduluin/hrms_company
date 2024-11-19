@@ -356,7 +356,7 @@
         if (response.success == true) {
             showSuccessNotification(response.message, "The operation was completed successfully.");
             setTimeout(() => {
-                window.location=document.referrer;
+                //window.location=document.referrer;
             }, 800);
         } else {
             showErrorNotification('error', response.message);

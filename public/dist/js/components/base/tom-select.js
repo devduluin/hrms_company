@@ -25,6 +25,7 @@ function initializeTomSelect() {
             }
 
             let config = {
+                allowEmptyOption: true,
                 valueField: "id",
                 labelField: "name",
                 searchField: "name",
@@ -70,7 +71,11 @@ function initializeTomSelect() {
                                         .join(" ");
                                     return { id: item.id, name: name };
                                 });
-                                callback(options);
+                                console.log(options);
+                                if(options){
+                                    callback(options);
+                                }
+                                
                             },
                             error: function (xhr, status, error) {
                                 console.error("Error fetching data:", error);
@@ -183,13 +188,10 @@ function initializeTomSelect() {
                 },
                 onLoad: function () {
                     const tomSelectInstance = this;
-                    if (selectedId && !tomSelectInstance.options[selectedId]) {
-                        tomSelectInstance.addOption({
-                            value: selectedId,
-                            text: selectedId,
-                        });
+                    if (selectedId) {
+                        tomSelectInstance.setValue(selectedId);
                     }
-                    tomSelectInstance.setValue(selectedId);
+                    
                 },
                 render: {
                     option_create: function (data, escape) {
