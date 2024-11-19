@@ -36,7 +36,7 @@
                                         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5">
                                             <div class="gap-x-6 gap-y-10 ">
                                                 <div class="py-2">
-                                                    <x-form.select id="salary_stucture_id" name="salary_stucture_id"
+                                                    <x-form.select id="salary_structure_id" name="salary_structure_id"
                                                         data-method="POST" required label="Salary Structure Name"
                                                         url="{{ url('dashboard/hrms/attendance/shift_type/create') }}"
                                                         apiUrl="{{ $salaryStructureUrl }}" columns='["name"]'
@@ -246,7 +246,9 @@
             var employee_ids = [];
             $('#employeeTable tbody input[type="checkbox"]:checked').each(function() {
                 var rowData = JSON.parse($(this).val());
-                employee_ids.push(rowData.id)
+                employee_ids.push({
+                    id: rowData.id
+                })
             })
             const company_id_selected = $('#company_id option:selected').val();
             if (company_id_selected != '') {
@@ -259,8 +261,11 @@
                 employees: employee_ids,
                 company_id: company_id,
                 start_date: $('#start_date').val(),
-                salary_stucture_id: $('#salary_stucture_id option:selected').val(),
-                status: $('#status option:selected').val()
+                salary_structure_id: $('#salary_structure_id option:selected').val(),
+                currency_id: 'idr',
+                payment_method: 'bank',
+                account_id: 'test',
+                // status: $('#status option:selected').val()
             }
             var data = JSON.stringify(dataAssignment);
 
@@ -283,7 +288,7 @@
                 $(this).attr('disable', false);
                 setTimeout(() => {
                     //window.location=document.referrer;
-                    window.location.href = "/dashboard/hrms/attendance/shift-assignment";
+                    window.location.href = "/dashboard/hrms/payout/salary_structure_assignment";
                 }, 500);
             }).catch((xhr) => {
                 $('#loadingText').html('Save Changes');
