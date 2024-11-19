@@ -5,14 +5,14 @@
         <x-form.select id="company_id" name="company_id" label="Company" url="{{ url('dashboard/hrms/designation') }}"
             :apiUrl="$apiCompanyUrl . '/company/datatables'" columns='["company_name"]' :selected="$company" :keys="[
                 'company_id' => $company,
-            ]" :data="['employee_id' => '#employee_id']">
+            ]">
             <option value="">Select Company</option>
         </x-form.select>
         <x-form.select id="employee_id" name="employee_id" label="Employee"
             url="{{ url('dashboard/hrms/employee/new_employee') }}" :apiUrl="$apiEmployeeUrl . '/employee/datatables'"
             columns='["first_name","last_name"]' :keys="[
                 'company_id' => $company,
-            ]" :data="['company_id' => '#company_id']" required>
+            ]" required>
         </x-form.select>
         <input type="hidden" id="employee" name="employee" />
         <x-form.datepicker id="posting_date" label="Posting Date" name="posting_date" required />

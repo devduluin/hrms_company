@@ -8,14 +8,14 @@
     'guidelines',
     'required' => '' ?? false,
     'apiUrl',
-    'detailApiUrl',
+    'detailApiUrl' => null,
     'columns',
     'selected' => '',
     'keys' => [],
     'data' => [],
-    'detailApiColumns',
+    'detailApiColumns' => null,
+    'customfunction' => null,
 ])
-
 <div class="mt-3 flex-row xl:items-center">
     <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4">
         <div class="text-left">
@@ -43,6 +43,7 @@
             @if (isset($detailApiUrl)) data-detail-api="{{ $detailApiUrl }}" @endif
             @if (isset($columns)) data-selectType="{{ $columns }}" @endif
             @if (isset($selected)) data-selected="{{ $selected }}" @endif
+            @if (isset($customfunction)) data-function="{{ $customfunction }}" @endif
             @if (!empty($keys)) data-attributes="{{ json_encode($keys) }}" @endif
             @if (!empty($detailApiColumns)) data-detail-attributes="{{ $detailApiColumns }}" @endif
             @if (!empty($data)) data-dependant="{{ json_encode($data) }}" @endif
