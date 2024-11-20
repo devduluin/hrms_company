@@ -197,7 +197,7 @@
                         draw: d.draw,
                         start: d.start,
                         length: d.length,
-                        order: [{{ $order }}] || d.order,
+                        order: d.order,
                         columns: searchableColumns,
                         search: d.search ? d.search.value : '',
                         company_id: localStorage.getItem("company"),
