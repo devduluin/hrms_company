@@ -27,7 +27,7 @@ class BulkAssignmentController extends Controller
         $data['apiDepartmentUrl'] = $this->apiGatewayUrl . "/v1/companies/department/datatables";
         $data['apiUrlEmployee'] = $this->apiGatewayUrl . "/v1/employees/employee";
         $data['apiDesignationUrl'] = $this->apiGatewayUrl . '/v1/companies/designation/datatables';
-        $data['apiSalaryStructureAssignment'] = $this->apiGatewayUrl . '/v1/salary_structure_assignments/salary_structure_assignment';
+        $data['apiSalaryStructureAssignment'] = $this->apiGatewayUrl . '/v1/salary_structure_assignments/salary_structure_assignment/bulk';
 
         return view('dashboard.payroll.payout.structure_assignment.bulk', $data);
     }

@@ -111,14 +111,15 @@
                     return false;
                 }
                 currentForm.data('submitted', true);
-                var selectedEmployee = $('#employee_id').val();
+                /* var selectedEmployee = $('#employee_id').val();
                 data.employees = [{
                     "id": selectedEmployee
-                }];
+                }]; */
 
                 data.currency_id = "";
                 data.payment_method = "";
                 data.account_id = "";
+                data.employee_id = $('#employee_id').val();
 
                 try {
                     const response = await $.ajax({

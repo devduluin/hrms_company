@@ -7,7 +7,7 @@
     'filter' => [],
     'url',
     'trigger',
-    'order' => '' ?? [[0, 'ASC']],
+    'order' => [[0, 'ASC']],
     'downloadOptions' => false,
     'dtcomponent' => 'true',
     'dtheight' => '400',
@@ -16,7 +16,7 @@
     'customButtonText' => '',
     'customButtonFunction' => '',
 ])
-
+@dump($order)
 
 <div class="relative overflow-x-auto sm:rounded-lg">
     <table id="{{ $id }}" style="width:100%"
@@ -74,7 +74,7 @@
         $.extend($.fn.dataTable.defaults, {
             deferRender: true,
             scroller: true,
-            stateSave: true,
+            // stateSave: true,
             responsive: true,
             autoWidth: true,
             selected: true,
@@ -163,35 +163,36 @@
                 data: function(d) {
                     var filterData = {};
                     $('.filter').each(function() {
-                    var id = this.id;
-                    var value = $(this).val();
-                    
-                    filterData[id] = value;
+                        var id = this.id;
+                        var value = $(this).val();
+
+                        filterData[id] = value;
                     });
 
-                    
+
                     let filters = {};
                     @if (count($filter) > 0)
                         @foreach ($filter as $name => $elem)
-                            if($('{{ $elem }}').val() != ''){
-                                 
-                                if($('{{ $elem }} option:selected').text() != 'All Department'){
+                            if ($('{{ $elem }}').val() != '') {
+
+                                if ($('{{ $elem }} option:selected').text() != 'All Department') {
                                     filters.{{ $name }} = $('{{ $elem }}').val();
                                 }
                             }
                         @endforeach
                     @endif
-                     
+
                     let searchableColumns = {{ $id }}TableColumns
-                    .filter(col => col.searchable === true && col.data)  // Ensure `searchable: true` and `data` is not empty
-                    .map(function(col, index) {
-                        return {
-                            data: col.data,
-                            searchable: col.searchable,
-                            orderable: col.orderable
-                        };
-                    });
-                  
+                        .filter(col => col.searchable === true && col
+                            .data) // Ensure `searchable: true` and `data` is not empty
+                        .map(function(col, index) {
+                            return {
+                                data: col.data,
+                                searchable: col.searchable,
+                                orderable: col.orderable
+                            };
+                        });
+
                     return {
                         draw: d.draw,
                         start: d.start,
@@ -234,16 +235,19 @@
             if ($.fn.DataTable.isDataTable('#{{ $id }}')) {
                 $('#{{ $id }}').DataTable().destroy();
             }
-            
+
+            console.log("Disini : ", @json($order));
+
             {{ $id }} = $({{ $id }}).DataTable({
-                order: [
-                    [0, "desc"]
-                ],
+                // order: [
+                //     [0, "desc"]
+                // ],
+                order: @json($order),
                 processing: true,
                 serverSide: true,
                 ajax: ajax,
                 columns: {{ $id }}TableColumns,
-                
+
 
                 @if ($downloadOptions)
                     dom: 'Bfrtip',
@@ -258,7 +262,7 @@
                     //$('td', row).eq(-1).addClass('text-center');
                 },
                 initComplete: function() {
-                    
+
                 },
             });
 

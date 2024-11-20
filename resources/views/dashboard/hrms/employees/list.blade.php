@@ -90,7 +90,8 @@
                                             customButtonFunction="sendEmailVerification()" :filter="[
                                                 'first_name' => '#name',
                                                 'designation_id' => '#designation_id',
-                                            ]">
+                                            ]"
+                                            :order="[[0, 'DESC']]">
                                             <x-slot:thead>
                                                 <th data-value="id" data-render="getCheckBox" orderable="false">
                                                     <input type="checkbox" id="select-all" />
