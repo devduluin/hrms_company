@@ -161,6 +161,7 @@
                     'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
                 },
                 data: function(d) {
+                    console.log(d);
                     var filterData = {};
                     $('.filter').each(function() {
                     var id = this.id;
@@ -196,7 +197,7 @@
                         draw: d.draw,
                         start: d.start,
                         length: d.length,
-                        order: d.order,
+                        order: [{{ $order }}],
                         columns: searchableColumns,
                         search: d.search ? d.search.value : '',
                         company_id: localStorage.getItem("company"),
@@ -236,9 +237,8 @@
             }
             
             {{ $id }} = $({{ $id }}).DataTable({
-                order: [
-                    [0, "desc"]
-                ],
+                //order: [{{ $order }}],
+               // order: [[1, `DESC`]],
                 processing: true,
                 serverSide: true,
                 ajax: ajax,

@@ -76,6 +76,21 @@
                                                     <div class="text-base text-slate-500">Early Exit</div>
                                                     <div class="font-mediumm mt-1.5 text-2xl" id="earlyExit">0</div>
                                                 </div>
+                                                <div
+                                                    class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                                    <div class="text-base text-slate-500">Leave</div>
+                                                    <div class="font-mediumm mt-1.5 text-2xl" id="earlyExit">0</div>
+                                                </div>
+                                                <div
+                                                    class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                                    <div class="text-base text-slate-500">WFH</div>
+                                                    <div class="font-mediumm mt-1.5 text-2xl" id="earlyExit">0</div>
+                                                </div>
+                                                <div
+                                                    class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 bg-warning bg-opacity-20 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                                    <div class="text-base text-pending">Request Approve</div>
+                                                    <div class="font-mediumm mt-1.5 text-2xl" id="earlyExit">0</div>
+                                                </div>
                                             </div>
                                         </div>
                                 </div>
