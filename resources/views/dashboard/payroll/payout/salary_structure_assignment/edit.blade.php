@@ -146,7 +146,7 @@
                 const data = serializeFormData(currentForm);
                 data._token = $('meta[name="csrf-token"]').attr('content');
                 data.company_id = localStorage.getItem('company');
-                data.structureAssignmentEmployeeId = `{{ $salaryStructureEmployeeAssignmentId }}`;
+                // data.structureAssignmentEmployeeId = `{{ $salaryStructureEmployeeAssignmentId }}`;
                 $('.error-message').hide();
 
                 // Add a flag to prevent form submission
@@ -154,11 +154,12 @@
                     return false;
                 }
                 currentForm.data('submitted', true);
-                var selectedEmployee = $('#employee_id').val();
+                /* var selectedEmployee = $('#employee_id').val();
                 data.employees = [{
                     "id": selectedEmployee
-                }];
+                }]; */
 
+                data.employee_id = $('#employee_id').val();
                 data.currency_id = "";
                 data.payment_method = "";
                 data.account_id = "";

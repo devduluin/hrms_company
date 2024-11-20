@@ -163,40 +163,41 @@
                 data: function(d) {
                     var filterData = {};
                     $('.filter').each(function() {
-                    var id = this.id;
-                    var value = $(this).val();
-                    
-                    filterData[id] = value;
+                        var id = this.id;
+                        var value = $(this).val();
+
+                        filterData[id] = value;
                     });
 
-                    
+
                     let filters = {};
                     @if (count($filter) > 0)
                         @foreach ($filter as $name => $elem)
-                            if($('{{ $elem }}').val() != ''){
-                                 
-                                if($('{{ $elem }} option:selected').text() != 'All Department'){
+                            if ($('{{ $elem }}').val() != '') {
+
+                                if ($('{{ $elem }} option:selected').text() != 'All Department') {
                                     filters.{{ $name }} = $('{{ $elem }}').val();
                                 }
                             }
                         @endforeach
                     @endif
-                     
+
                     let searchableColumns = {{ $id }}TableColumns
-                    .filter(col => col.searchable === true && col.data)  // Ensure `searchable: true` and `data` is not empty
-                    .map(function(col, index) {
-                        return {
-                            data: col.data,
-                            searchable: col.searchable,
-                            orderable: col.orderable
-                        };
-                    });
-                  
+                        .filter(col => col.searchable === true && col
+                            .data) // Ensure `searchable: true` and `data` is not empty
+                        .map(function(col, index) {
+                            return {
+                                data: col.data,
+                                searchable: col.searchable,
+                                orderable: col.orderable
+                            };
+                        });
+
                     return {
                         draw: d.draw,
                         start: d.start,
                         length: d.length,
-                        order: d.order,
+                        order: [{{ $order }}] || d.order,
                         columns: searchableColumns,
                         search: d.search ? d.search.value : '',
                         company_id: localStorage.getItem("company"),
@@ -234,7 +235,7 @@
             if ($.fn.DataTable.isDataTable('#{{ $id }}')) {
                 $('#{{ $id }}').DataTable().destroy();
             }
-            
+
             {{ $id }} = $({{ $id }}).DataTable({
                 order: [
                     [0, "desc"]
@@ -243,7 +244,7 @@
                 serverSide: true,
                 ajax: ajax,
                 columns: {{ $id }}TableColumns,
-                
+
 
                 @if ($downloadOptions)
                     dom: 'Bfrtip',
@@ -258,7 +259,7 @@
                     //$('td', row).eq(-1).addClass('text-center');
                 },
                 initComplete: function() {
-                    
+
                 },
             });
 
