@@ -90,7 +90,7 @@
                 </div> -->
                 <div class="col-span-12 flex flex-col gap-y-7 xl:col-span-9">
                     <div class="box box--stacked flex flex-col p-5">
-                        <x-datatable id="departmentTable" :url="$apiUrl.'/datatable'" method="POST" class="display small" order="{column : 1, dir : `DESC`}">
+                        <x-datatable id="departmentTable" :url="$apiUrl.'/datatable'" method="POST" class="display small" order="[[ 1, `DESC`]]">
                             <x-slot:thead>
                             <th data-value="no" width="80px">No.</th>
                                     <th data-value="employee_id_rel"  data-render="getEmployeeName">Employee Name</th>
