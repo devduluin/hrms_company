@@ -85,13 +85,15 @@
                             <div class="box box--stacked flex flex-col">
                                 <div class="table gap-y-2 p-5 sm:flex-row sm:items-center">
                                     <div>
-                                        <x-datatable id="employeeTable" :url="$apiUrl . '/employee/datatables'" method="POST" class="display"
-                                            customButton="true" customButtonText="Send Verification Email"
+                                        <x-datatable id="employeeTable"
+                                            url="http://localhost:4444/api/v1/employee/datatables" {{-- :url="$apiUrl . '/employee/datatables'" --}}
+                                            method="POST" class="display" customButton="true"
+                                            customButtonText="Send Verification Email"
                                             customButtonFunction="sendEmailVerification()" :filter="[
                                                 'first_name' => '#name',
                                                 'designation_id' => '#designation_id',
                                             ]"
-                                            order="{column: 2, dir : `ASC`}">
+                                            :order="[[0, 'DESC']]">
                                             <x-slot:thead>
                                                 <th data-value="id" data-render="getCheckBox" orderable="false">
                                                     <input type="checkbox" id="select-all" />

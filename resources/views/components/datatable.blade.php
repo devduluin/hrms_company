@@ -7,7 +7,7 @@
     'filter' => [],
     'url',
     'trigger',
-    'order' => '' ?? [[0, 'ASC']],
+    'order' => [[0, 'ASC']],
     'downloadOptions' => false,
     'dtcomponent' => 'true',
     'dtheight' => '400',
@@ -16,7 +16,7 @@
     'customButtonText' => '',
     'customButtonFunction' => '',
 ])
-
+@dump($order)
 
 <div class="relative overflow-x-auto sm:rounded-lg">
     <table id="{{ $id }}" style="width:100%"
@@ -74,7 +74,7 @@
         $.extend($.fn.dataTable.defaults, {
             deferRender: true,
             scroller: true,
-            stateSave: true,
+            // stateSave: true,
             responsive: true,
             autoWidth: true,
             selected: true,
@@ -236,10 +236,13 @@
                 $('#{{ $id }}').DataTable().destroy();
             }
 
+            console.log("Disini : ", @json($order));
+
             {{ $id }} = $({{ $id }}).DataTable({
-                order: [
-                    [0, "desc"]
-                ],
+                // order: [
+                //     [0, "desc"]
+                // ],
+                order: @json($order),
                 processing: true,
                 serverSide: true,
                 ajax: ajax,
