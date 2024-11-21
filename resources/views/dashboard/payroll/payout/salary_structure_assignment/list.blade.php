@@ -35,11 +35,8 @@
                                             <x-slot:thead>
                                                 <th data-value="id" data-render="getId">#</th>
                                                 <th data-value="employee_id_rel" data-render="getEmployee">Name</th>
-                                                <th data-value="salaryStructureAssignment.salaryStructure.name">Salary
+                                                <th data-value="salaryStructure.name">Salary
                                                     Structure</th>
-                                                <th data-value="salaryStructureAssignment.salaryStructure.is_active"
-                                                    data-render="getStatus">Status
-                                                </th>
                                                 <th data-value="id" data-render="getActionBtn">Action</th>
                                             </x-slot:thead>
                                         </x-datatable>
@@ -73,7 +70,8 @@
 
         function action(action, id) {
             if (action === 'delete') {
-                const path = `{{ url('dashboard/hrms/payout/salary_structure_assignment') }}/` + id;
+                const path =
+                    `http://apidev.duluin.com/api/v1/salary_structure_assignments/salary_structure_assignment/` + id;
                 Swal.fire({
                     title: "Are you sure?",
                     //text: "You won't be able to revert this!",
@@ -108,6 +106,7 @@
         }
 
         function getEmployee(data, type, row, meta) {
+            console.log("Name : ", data);
             if (data && typeof data !== undefined) {
                 return data.first_name + ' ' + data.last_name;
             }
@@ -129,6 +128,36 @@
         async function initializeContent() {
             // await fetchLatestEmployees();
             // await ApexCharts();
+        }
+
+        async function destroy(method, path) {
+            try {
+                const response = await $.ajax({
+                    url: path,
+                    type: method,
+                    contentType: 'application/json',
+                    headers: {
+                        'Authorization': `Bearer ${appToken}`,
+                        'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
+                    },
+                    dataType: 'json'
+                });
+
+                Swal.fire({
+                    title: "Deleted!",
+                    icon: "success"
+                });
+                attendanceRequestTable.ajax.reload();
+            } catch (xhr) {
+                console.log(xhr);
+                if (xhr.status === 422) {
+                    const errorString = result.error || 'An error occurred.';
+                    showErrorNotification('error', `There were errors. Message : ${result.message}`, errorString);
+                } else {
+                    showErrorNotification('error', 'An error occurred while processing your request.');
+                }
+                // activateTab(formId);
+            }
         }
 
         initializeContent();

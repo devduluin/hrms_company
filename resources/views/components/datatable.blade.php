@@ -16,7 +16,6 @@
     'customButtonText' => '',
     'customButtonFunction' => '',
 ])
-@dump($order)
 
 <div class="relative overflow-x-auto sm:rounded-lg">
     <table id="{{ $id }}" style="width:100%"
