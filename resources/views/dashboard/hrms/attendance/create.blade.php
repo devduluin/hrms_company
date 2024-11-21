@@ -361,11 +361,31 @@
         if (shift.shift_type_id_rel?.shift_type_name) {
             $('#shift_type_name').val(shift.shift_type_id_rel.shift_type_name);
             $('#shift_assigment_id').val(shift.id);
+        }else{
+                Swal.fire({
+                    text: "Shift for employee not found, please assign Shift before create attendance!",
+                    icon: "warning"
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    $(`#employee_id`)[0].tomselect.clear();
+                    $('#shift_type_name').val('');
+                    $('#shift_assigment_id').val('');
+                }
+                });
         }
-        shift_type_name
 
        }).catch((error) => {
-        console.log(error);
+         
+                Swal.fire({
+                    text: "Shift for employee not found, please assign Shift before create attendance!",
+                    icon: "warning"
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    $(`#employee_id`)[0].tomselect.clear()
+                    $('#shift_type_name').val('');
+                    $('#shift_assigment_id').val('');
+                }
+                });
        });
     }
     
@@ -493,3 +513,4 @@
     });
     </script>
 @endpush
+@include('vendor-common.sweetalert')

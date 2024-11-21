@@ -17,24 +17,8 @@
                 </div>
             </div>
             <div class="mt-3.5 grid grid-cols-10 gap-5">
-                <div class="col-span-12 xl:col-span-3">
-                    <div class="box flex flex-col p-5">
-                        <div class="flex flex-col gap-5">
-                            <div class="relative mt-3 rounded-[0.6rem] border border-slate-200/80 dark:border-darkmode-400">
-                                <div class="absolute left-0 -mt-2 ml-4 bg-white px-3 text-xs uppercase text-slate-500">
-                                    <div class="-mt-px">Photo chekin</div>
-                                </div>
-                                <div class="mt-2.5 flex flex-col p-4">
-                                    <div class="flex items-center">
-                                        <div class="flex" id="photo_in">
-                                            <img src="" alt=" Foto Absensi" class="rounded-md shadow-md" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box flex flex-col p-5 mt-5">
+                <div class="col-span-12 xl:col-span-4">
+                <div class="box flex flex-col p-5">
                         <div class="relative mt-3 rounded-[0.6rem] border border-slate-200/80 dark:border-darkmode-400">
                             <div class="absolute left-0 -mt-2 ml-4 bg-white px-3 text-xs uppercase text-slate-500">
                                 <div class="-mt-px">Employee Details</div>
@@ -87,8 +71,66 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="box flex flex-col mt-5 p-5">
+                        <div class="flex flex-col gap-5">
+                            <div class="relative mt-3 rounded-[0.6rem] border border-slate-200/80 dark:border-darkmode-400">
+                                <div class="absolute left-0 -mt-2 ml-4 bg-white px-3 text-xs uppercase text-slate-500">
+                                    <div class="-mt-px">Photo check-in</div>
+                                </div>
+                                <div class="mt-2.5 flex flex-col p-4">
+                                    <div class="flex items-center">
+                                        <div class="flex" id="photo_in">
+                                             
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-5 mt-5">
+                            <div class="relative mt-3 rounded-[0.6rem] border border-slate-200/80 dark:border-darkmode-400">
+                                <div class="absolute left-0 -mt-2 ml-4 bg-white px-3 text-xs uppercase text-slate-500">
+                                    <div class="-mt-px">Photo check-out</div>
+                                </div>
+                                <div class="mt-2.5 flex flex-col p-4">
+                                    <div class="flex items-center">
+                                        <div class="flex" id="photo_out">
+                                             
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box flex flex-col p-5 mt-5">
+                        <div class="flex flex-col gap-5">
+                            <div class="relative mt-3 rounded-[0.6rem] border border-slate-200/80 dark:border-darkmode-400">
+                                <div class="absolute left-0 -mt-2 ml-4 bg-white px-3 text-xs uppercase text-slate-500">
+                                    <div class="-mt-px">Location check-in</div>
+                                </div>
+                                <div class="mt-2.5 flex flex-col p-4">
+                                    <div class="flex items-center">
+                                      <div id="map-in" style="height: 200px; width: 100%;"></div>        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-5 mt-5">
+                            <div class="relative mt-3 rounded-[0.6rem] border border-slate-200/80 dark:border-darkmode-400">
+                                <div class="absolute left-0 -mt-2 ml-4 bg-white px-3 text-xs uppercase text-slate-500">
+                                    <div class="-mt-px">Location check-out</div>
+                                </div>
+                                <div class="mt-2.5 flex flex-col p-4">
+                                    <div class="flex items-center">
+                                      <div id="map-out" style="height: 200px; width: 100%;"></div>        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
-                <div class="col-span-12 flex flex-col gap-7 xl:col-span-7">
+                <div class="col-span-12 flex flex-col gap-7 xl:col-span-6">
                     
                     <div class="box flex flex-col p-5">
                         <div class="relative rounded-[0.6rem] border border-slate-200/80 dark:border-darkmode-400">
@@ -99,6 +141,15 @@
                                 <div class="overflow-auto xl:overflow-visible">
                                 <table class="w-full text-left border-b border-dashed border-slate-200/80">
                                     <tbody>
+                                        <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
+                                            <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                <p class="whitespace-nowrap font-bold">Shift Name</p>
+                                            </td>
+                                            <td class="px-1 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">:</td>
+                                            <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                <p id="shift_type_name">-</p>
+                                            </td>
+                                        </tr>
                                         <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
                                             <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
                                                 <p class="whitespace-nowrap font-bold">Attendance Date</p>
@@ -146,18 +197,34 @@
                                         </tr>
                                         <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
                                             <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
-                                                <p class="whitespace-nowrap font-bold">Lat long</p>
+                                                <p class="whitespace-nowrap font-bold">Check-out Status</p>
                                             </td>
                                             <td class="px-1 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">:</td>
                                             <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
-                                                <p id="latlong">-</p>
+                                                <p id="check_out_status">-</p>
+                                            </td>
+                                        </tr>
+                                        <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
+                                            <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                <p class="whitespace-nowrap font-bold">Note</p>
+                                            </td>
+                                            <td class="px-1 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">:</td>
+                                            <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                <p id="reason">-</p>
+                                            </td>
+                                        </tr>
+                                        <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
+                                            <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                <p class="whitespace-nowrap font-bold">Status</p>
+                                            </td>
+                                            <td class="px-1 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">:</td>
+                                            <td class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
+                                                <p id="status">-</p>
                                             </td>
                                         </tr>
                                         <tr class="[&amp;_td]:first:pt-5 [&amp;_td]:last:border-b-0 [&amp;_td]:last:pb-5">
                                             <td colspan="3" class="px-2 border-b dark:border-darkmode-300 border-dashed py-3.5 dark:bg-darkmode-600">
-                                                <div class="flex items-center">
-                                                    <div id="map" style="height: 400px; width: 100%;"></div>
-                                                </div>
+                                                
                                             </td>
                                         </tr>
                                     </tbody>
@@ -197,27 +264,66 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7T5886HCdj0jMOWhW_aliRYP
                 let employee = result.data.employee_id_rel;
                 let attendance = result.data;
 
-                console.log(attendance);
+                getDetailShift(employee.id);
 
                 $('#employeeId').html(employee.employee_id);
-                $('#name').html(employee.first_name + ' ' + employee.last_name);
+                $('#name').html('<a class="text-info" href="{{ url('/dashboard/hrms/employee/edit_employee') }}/'+employee.id+'">'+employee.first_name + ' ' + employee.last_name+'</a>');
                 $('#email').html(employee.addressContact.personal_email);
                 $('#phone').html(employee.addressContact.mobile_phone);
 
                 $("#attendance_date").html(attendance.attendance_date);
                 $("#check_in").html(attendance.time_in);
                 $("#check_out").html(attendance.time_out);
-                $("#attendance_status").html(attendance.attendance_status);
+                $("#attendance_status").html(getAttendanceStatus(attendance.attendance_status));
                 $("#check_in_status").html(attendance.checkin_status);
-                $("#latlong").html(attendance.latlong_in);
-                $('#photo_in').html(`<img src="${attendance.photo_in}" alt="photo" style="width: 100%; hegight:50%;" class="rounded-md shadow-md" />`)
-                initMap(attendance.latlong_in);
+                $("#check_out_status").html(attendance.checkout_status);
+                $("#status").html(attendance.status);
+                $("#reason").html(attendance.reason);
+                if(attendance.photo_in){
+                    $('#photo_in').html(`<img src="${attendance.photo_in}" alt="photo-in" style="width: 100%; hegight:50%;" class="rounded-md shadow-md" />`);
+                }
+                if(attendance.photo_out){
+                    $('#photo_out').html(`<img src="${attendance.photo_out}" alt="photo-out" style="width: 100%; hegight:50%;" class="rounded-md shadow-md" />`);
+                }
+               
+                initMap(attendance.latlong_in, 'map-in');
+                initMap(attendance.latlong_out, 'map-out');
             }).catch((err) => {
                 console.log(err);
             });
         }
 
-        function initMap(value) {
+        function getAttendanceStatus(data) {
+            
+            if (data === 'present') {
+                return `<div class="flex capitalize text-success"><div class="whitespace-nowrap"><i data-tw-merge data-lucide="check" class="text-success"></i> ${data}</div></div>`;
+            } else  if (data === 'wfh' || data === 'leave') {
+                return `<div class="flex capitalize text-warning"><div class="whitespace-nowrap"><i data-tw-merge data-lucide="check" class="text-success"></i> ${data}</div></div>`;
+            }else{
+                return `<div class="flex capitalize text-danger"><div class="whitespace-nowrap">${data}</div></div>`;
+            }
+        }
+
+        async function getDetailShift(value){
+        var param = {
+            url: "{{ $apiUrlShiftEmployee }}/" + value,
+            method: "GET",
+        }
+
+        await transAjax(param).then((result) => {
+            const shift = result.data
+             
+            if (shift.shift_type_id_rel?.shift_type_name) {
+            $('#shift_type_name').html('<a class="text-info" href="{{ url('/dashboard/hrms/attendance/shift_type/update') }}/'+shift.shift_type_id+'">'+shift.shift_type_id_rel.shift_type_name+'</a>');
+      
+        }
+
+        }).catch((error) => {
+            console.log(error);
+        });
+        }
+
+        function initMap(value, target) {
 
             let coordinates = value.split(',');
             let lat = coordinates[0];
@@ -231,7 +337,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7T5886HCdj0jMOWhW_aliRYP
                 draggable: false
             };
 
-            const map = new google.maps.Map(document.getElementById('map'), mapOptions);
+            const map = new google.maps.Map(document.getElementById(target), mapOptions);
 
             const marker = new google.maps.Marker({
                 position: mapOptions.center,

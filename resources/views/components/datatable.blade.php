@@ -16,7 +16,6 @@
     'customButtonText' => '',
     'customButtonFunction' => '',
 ])
-@dump($order)
 
 <div class="relative overflow-x-auto sm:rounded-lg">
     <table id="{{ $id }}" style="width:100%"
@@ -107,7 +106,7 @@
             const appToken = localStorage.getItem('app_token');
 
             $.each({{ $id }}Columns, function(idx, item) {
-                var orderable = $(item).attr('orderable') !== 'false' || $(item).attr('orderable') === undefined;
+                var orderable = $(item).attr('orderable') || 'false';
                 var searchable = $(item).attr('searchable') !== 'false' || $(item).attr('searchable') === undefined;
                 var visible = $(item).attr('visible') !== 'false' || $(item).attr('visible') === undefined;
                 var render = $(item).data('render');
@@ -161,14 +160,6 @@
                     'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
                 },
                 data: function(d) {
-                    var filterData = {};
-                    $('.filter').each(function() {
-                        var id = this.id;
-                        var value = $(this).val();
-
-                        filterData[id] = value;
-                    });
-
 
                     let filters = {};
                     @if (count($filter) > 0)
@@ -181,6 +172,12 @@
                             }
                         @endforeach
                     @endif
+
+                     // Add query parameters from URL
+                    const urlParams = new URLSearchParams(window.location.search);
+                    urlParams.forEach((value, key) => {
+                        filters[key] = value;
+                    });
 
                     let searchableColumns = {{ $id }}TableColumns
                         .filter(col => col.searchable === true && col
