@@ -21,57 +21,74 @@
                                     class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 w-48"><i
                                         data-tw-merge="" data-lucide="upload" class="mr-2 h-4 w-4 stroke-[1.3]"></i>
                                     Import Data</a>
-                                
-                                    <div data-tw-merge="" data-tw-placement="bottom-end" class="dropdown relative inline-block"><button data-tw-merge="" data-tw-toggle="dropdown" aria-expanded="false" class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md  w-full sm:w-auto"><i data-tw-merge="" data-lucide="arrow-down-wide-narrow" class="mr-2 h-4 w-4 stroke-[1.3]"></i>
+
+                                <div data-tw-merge="" data-tw-placement="bottom-end" class="dropdown relative inline-block">
+                                    <button data-tw-merge="" data-tw-toggle="dropdown" aria-expanded="false"
+                                        class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md  w-full sm:w-auto"><i
+                                            data-tw-merge="" data-lucide="arrow-down-wide-narrow"
+                                            class="mr-2 h-4 w-4 stroke-[1.3]"></i>
                                         Filter
-                                        <span id="countFilter" class="ml-2 flex h-5 items-center justify-center rounded-full border bg-slate-100 px-1.5 text-xs font-medium">
-                                            
+                                        <span id="countFilter"
+                                            class="ml-2 flex h-5 items-center justify-center rounded-full border bg-slate-100 px-1.5 text-xs font-medium">
+
                                         </span></button>
-                                    <div data-transition="" data-selector=".show" data-enter="transition-all ease-linear duration-150" data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1" data-enter-to="!mt-1 visible opacity-100 translate-y-0" data-leave="transition-all ease-linear duration-150" data-leave-from="!mt-1 visible opacity-100 translate-y-0" data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1" class="dropdown-menu absolute z-[9999] hidden">
-                                        <div data-tw-merge="" class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600">
+                                    <div data-transition="" data-selector=".show"
+                                        data-enter="transition-all ease-linear duration-150"
+                                        data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1"
+                                        data-enter-to="!mt-1 visible opacity-100 translate-y-0"
+                                        data-leave="transition-all ease-linear duration-150"
+                                        data-leave-from="!mt-1 visible opacity-100 translate-y-0"
+                                        data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1"
+                                        class="dropdown-menu absolute z-[9999] hidden">
+                                        <div data-tw-merge=""
+                                            class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600">
                                             <div class="p-2">
-                                            <form method="GET" id="filterTable">
-                                                <div>
-                                                    <x-form.select id="company_id" name="company_id" label="Company"
-                                                        url="{{ url('dashboard/hrms/designation') }}"
-                                                        apiUrl="{{ $apiCompanyUrl }}/company/datatables" columns='["company_name"]'
-                                                        :selected="$company" :keys="[
-                                                            'company_id' => $company,
-                                                        ]">
-                                                        <option value="">Select Company</option>
-                                                    </x-form.select>
-                                                </div>
-                                                <div class="mt-3">
-                                                    <x-form.select id="department_id" name="department_id" label="Department"
-                                                        url="{{ url('dashboard/hrms/designation') }}"
-                                                        apiUrl="{{ $apiCompanyUrl }}/department/datatables"
-                                                        columns='["department_name"]' :keys="[
-                                                            'company_id' => $company,
-                                                            'search',
-                                                        ]">
-                                                    </x-form.select>
-                                                </div>
-                                                <div class="mt-3">
-                                                    <x-form.select id="designation_id" name="designation_id" label="Designation"
-                                                        url="{{ url('dashboard/hrms/designation') }}"
-                                                        apiUrl="{{ $apiCompanyUrl }}/designation/datatables"
-                                                        columns='["designation_name"]' :keys="[
-                                                            'company_id' => $company,
-                                                            'search',
-                                                        ]">
-                                                    </x-form.select>
-                                                </div>
-                                                <div class="mt-4 flex items-center">
-                                                    <button type="button" onClick="resetForm()" data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 ml-auto w-32">Reset</button>
-                                                    <button type="submit" data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary ml-2 w-32">Apply</button>
-                                                </div>
-                                            </form>
+                                                <form method="GET" id="filterTable">
+                                                    <div>
+                                                        <x-form.select id="company_id" name="company_id" label="Company"
+                                                            url="{{ url('dashboard/hrms/designation') }}"
+                                                            apiUrl="{{ $apiCompanyUrl }}/company/datatables"
+                                                            columns='["company_name"]' :selected="$company" :keys="[
+                                                                'company_id' => $company,
+                                                            ]">
+                                                            <option value="">Select Company</option>
+                                                        </x-form.select>
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <x-form.select id="department_id" name="department_id"
+                                                            label="Department" url="{{ url('dashboard/hrms/designation') }}"
+                                                            apiUrl="{{ $apiCompanyUrl }}/department/datatables"
+                                                            columns='["department_name"]' :keys="[
+                                                                'company_id' => $company,
+                                                                'search',
+                                                            ]">
+                                                        </x-form.select>
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <x-form.select id="designation_id" name="designation_id"
+                                                            label="Designation"
+                                                            url="{{ url('dashboard/hrms/designation') }}"
+                                                            apiUrl="{{ $apiCompanyUrl }}/designation/datatables"
+                                                            columns='["designation_name"]' :keys="[
+                                                                'company_id' => $company,
+                                                                'search',
+                                                            ]">
+                                                        </x-form.select>
+                                                    </div>
+                                                    <div class="mt-4 flex items-center">
+                                                        <button type="button" onClick="resetForm()" data-tw-merge=""
+                                                            class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 ml-auto w-32">Reset</button>
+                                                        <button type="submit" data-tw-merge=""
+                                                            class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary ml-2 w-32">Apply</button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <x-form.button id="new_attendance" label="Add New Employee" style="primary" icon="plus" url="{{ url('dashboard/hrms/employee/new_employee') }}" ></x-button>
-                                 
+                                <x-form.button id="new_attendance" label="Add New Employee" style="primary" icon="plus"
+                                    url="{{ url('dashboard/hrms/employee/new_employee') }}"></x-button>
+
                             </div>
                         </div>
                         <div class="mt-3.5 flex flex-col gap-8">
@@ -99,7 +116,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="box box--stacked flex flex-col">
                                 <div class="table gap-y-2 p-5 sm:flex-row sm:items-center">
                                     <div>
@@ -115,12 +132,15 @@
                                                     <input type="checkbox" id="select-all" />
                                                 </th>
                                                 <th data-value="id" data-render="getId" orderable="true">No.</th>
+                                                <th data-value="employee_id" searchable="true" orderable="true">Employee
+                                                    ID</th>
                                                 <th data-value="first_name" searchable="true" orderable="true"
                                                     searchable="true">First Name
                                                 </th>
                                                 <th data-value="last_name" searchable="true" orderable="true">Last Name
                                                 </th>
-                                                <th data-value="company_id_rel" data-render="getCompany" orderable="false">
+                                                <th data-value="company_id_rel" data-render="getCompany"
+                                                    orderable="false">
                                                     Company
                                                 </th>
                                                 {{-- <th data-value="grade_id_rel" data-render="getGrade" orderable="false">
@@ -294,22 +314,22 @@
             <i class="fa-solid fa-list text-base"></i></button>
                 <div data-transition data-selector=".show" data-enter="transition-all ease-linear duration-150" data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1" data-enter-to="!mt-1 visible opacity-100 translate-y-0" data-leave="transition-all ease-linear duration-150" data-leave-from="!mt-1 visible opacity-100 translate-y-0" data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1" class="dropdown-menu absolute z-[9999] hidden">
                     <div data-tw-merge class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 w-40">
-                       
-                        <a onClick="action('detail', '`+data['id']+`')" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="external-link" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
+
+                        <a onClick="action('detail', '` + data['id'] + `')" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="external-link" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
                             Open</a>
-                        <a onClick="action('edit_employee', '`+data['id']+`')" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="external-link" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
+                        <a onClick="action('edit_employee', '` + data['id'] + `')" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="external-link" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
                             Update</a>
-                        <a onClick="action('delete', '`+data['id']+`')" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="file-text" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
+                        <a onClick="action('delete', '` + data['id'] + `')" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="file-text" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
                             Delete</a>
-                        
+
                     </div>
                 </div>
             </div>`;
         }
 
-        function action(action, id){
-            if(action === 'delete'){
-                const path    = `{{ $apiUrl }}/`+id;
+        function action(action, id) {
+            if (action === 'delete') {
+                const path = `{{ $apiUrl }}/` + id;
                 Swal.fire({
                     title: "Are you sure?",
                     icon: "warning",
@@ -317,17 +337,17 @@
                     confirmButtonColor: "#3085d6",
                     cancelButtonColor: "#d33",
                     confirmButtonText: "Yes, delete it!"
-                    }).then((result) => {
+                }).then((result) => {
                     if (result.isConfirmed) {
                         destroy(action, path)
-                    }else{
+                    } else {
                         employeeTable.ajax.reload();
                     }
                 });
-            }else{
-                location.href = '{{ url("/dashboard/hrms/employee") }}/'+action+'/'+id;
+            } else {
+                location.href = '{{ url('/dashboard/hrms/employee') }}/' + action + '/' + id;
             }
-            
+
         }
 
         async function initializeContent() {
@@ -361,7 +381,7 @@
                 $("#totalEmployeesActive").html(employeeData.employees_active);
                 $("#totalEmployeesLeave").html(employeeData.employees_leave);
                 $("#totalNewEmployee").html(employeeData.new_employees);
-                 
+
             } catch (error) {
                 console.error('Error fetching employees:', error);
             }
@@ -369,7 +389,7 @@
 
         initializeContent();
 
-        
+
         const urlParams = new URLSearchParams(window.location.search);
         let activeFilterCount = 0;
 
@@ -394,7 +414,7 @@
         if ($countFilter.length > 0) {
             $countFilter.text(activeFilterCount);
         }
-    
+
 
         function addOptionIfNotExist(selectElementId, optionValue) {
             console.log(selectElementId);
@@ -403,10 +423,10 @@
                 setTimeout(() => {
                     selectElement.setValue(optionValue);
                 }, 2000);
-            } 
+            }
         }
-        
-        function resetForm(){
+
+        function resetForm() {
             //$(`#company_id`)[0].tomselect.clear();
             $(`#department_id`)[0].tomselect.clear();
             $(`#designation_id`)[0].tomselect.clear();
