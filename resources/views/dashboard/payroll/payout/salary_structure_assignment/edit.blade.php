@@ -102,7 +102,7 @@
                             });
 
                             const salaryStructureSelect = $('#salary_structure_id')[0].tomselect;
-                            const salaryStructureValue = response.data.salaryStructureAssignment
+                            const salaryStructureValue = response.data
                                 .salary_structure_id;
 
                             salaryStructureSelect.on('load', function() {
@@ -128,7 +128,7 @@
                                 companySelect.setValue(companyValue);
                             });
 
-                            $("#start_date").val(response.data.salaryStructureAssignment.start_date);
+                            $("#start_date").val(response.data.start_date);
                         } else {
                             showErrorNotification('error', response.message);
                         }
