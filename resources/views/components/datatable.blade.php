@@ -21,7 +21,7 @@
     <table id="{{ $id }}" style="width:100%"
         {{ $attributes->merge(['class' => 'min-w-full divide-y divide-gray-200 text-sm text-left text-gray-500 ' . $class])->except(['id', 'trigger']) }}>
         <!-- Tailwind styled thead -->
-        <thead class="bg-[#e6e6e6] text-xs text-gray-700 uppercase tracking-wider border border-[#aaa]">
+        <thead class="bg-[#e6e6e6] text-xs text-gray-700 tracking-wider border border-[#aaa]">
             <tr class="text-left text-sm leading-4 font-medium">
                 <!-- Apply additional styles for header cells -->
                 {{ $thead }}
