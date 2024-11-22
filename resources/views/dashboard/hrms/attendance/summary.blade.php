@@ -2,7 +2,7 @@
 @section('content')
 <style>
     table.dataTable tbody th, table.dataTable tbody td {
-    padding: 16px 10px; /* e.g. change 8x to 4px here */
+    padding: 15px 10px; /* e.g. change 8x to 4px here */
 }
 </style>
 <div class="hurricane before:content-[''] before:z-[-1] before:w-screen before:bg-slate-50 before:top-0 before:h-screen before:fixed before:bg-texture-black before:bg-contain before:bg-fixed before:bg-[center_-20rem] before:bg-no-repeat">
@@ -99,8 +99,8 @@
                                     <th data-value="total_absent" orderable="false" data-render="getUrlAbsent">Absent</th>
                                     <th data-value="total_present" orderable="false" data-render="getUrlPresent">Preset</th>
                                     <th data-value="total_leave" orderable="false" data-render="getUrlLeave">Leave</th>
-                                    <th data-value="total_wfh" orderable="false">WFH</th>
-                                    <th data-value="total_halfday" orderable="false">Halfday</th>
+                                    <th data-value="total_wfh" orderable="false" data-render="getUrlWfh">WFH</th>
+                                    <th data-value="total_halfday" orderable="false" data-render="getUrlHalfday">Halfday</th>
                                     <th data-value="total_late_entry" orderable="false">Late Entry</th>
                                     <th data-value="total_early_exit" orderable="false">Early Exit</th>
                             </x-slot:thead>
@@ -131,13 +131,19 @@
 <script src="{{ asset('dist') }}/js/components/base/litepicker.js"></script>
     <script>
         function getUrlAbsent(data, type, row, meta) {     
-            return '<a href="{{ url('dashboard/hrms/attendance/attendance') }}?employee_id='+row.id+'&attendance_status=absent" data-placement="top" title="Click to see detail!"><div class="py-1 px-1.5 w-full [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">'+data+'</div></a>';
+            return '<a href="{{ url('dashboard/hrms/attendance/attendance') }}?employee_id='+row.id+'&attendance_status=absent" data-placement="top" title="Click to see detail!"><div class=" px-1.5 w-full [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">'+data+'</div></a>';
         }
         function getUrlPresent(data, type, row, meta) {     
-            return '<a href="{{ url('dashboard/hrms/attendance/attendance') }}?employee_id='+row.id+'&attendance_status=present" data-placement="top" title="Click to see detail!"><div class="py-1 px-1.5 w-full [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">'+data+'</div></a>';
+            return '<a href="{{ url('dashboard/hrms/attendance/attendance') }}?employee_id='+row.id+'&attendance_status=present" data-placement="top" title="Click to see detail!"><div class=" px-1.5 w-full [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">'+data+'</div></a>';
         }
         function getUrlLeave(data, type, row, meta) {     
-            return '<a href="{{ url('dashboard/hrms/attendance/attendance') }}?employee_id='+row.id+'&attendance_status=leave" data-placement="top" title="Click to see detail!"><div class="py-1 px-1.5 w-full [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">'+data+'</div></a>';
+            return '<a href="{{ url('dashboard/hrms/attendance/attendance') }}?employee_id='+row.id+'&attendance_status=leave" data-placement="top" title="Click to see detail!"><div class=" px-1.5 w-full [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">'+data+'</div></a>';
+        }
+        function getUrlWfh(data, type, row, meta) {     
+            return '<a href="{{ url('dashboard/hrms/attendance/attendance') }}?employee_id='+row.id+'&attendance_status=wfh" data-placement="top" title="Click to see detail!"><div class=" px-1.5 w-full [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">'+data+'</div></a>';
+        }
+        function getUrlHalfday(data, type, row, meta) {     
+            return '<a href="{{ url('dashboard/hrms/attendance/attendance') }}?employee_id='+row.id+'&attendance_status=halfday" data-placement="top" title="Click to see detail!"><div class=" px-1.5 w-full [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">'+data+'</div></a>';
         }
 
         function getFullName(data, type, row, meta) {
