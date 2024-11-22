@@ -473,7 +473,9 @@
                 const employeeId = $("#employee_id").val();
                 data._token = $('meta[name="csrf-token"]').attr('content');
                 data.company_id = $("#company_id").val();
-                data.parent_company = $("#parent_company").val();
+                if (currentForm == '#overview-form') {
+                    data.parent_company = $("#parent_company").val();
+                }
                 data.employee_id = employeeId;
                 $('.error-message').hide();
                 const submitMethod = employeeId !== '' ? 'PUT' : 'POST';
