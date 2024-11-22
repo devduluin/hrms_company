@@ -236,9 +236,6 @@
             console.log("Disini : ", @json($order));
 
             {{ $id }} = $({{ $id }}).DataTable({
-                // order: [
-                //     [0, "desc"]
-                // ],
                 order: @json($order),
                 processing: true,
                 serverSide: true,

@@ -17,6 +17,7 @@ Route::prefix('/attendance')->group(function () {
         Route::get('/detail/{id}', 'detail')->name('detail'); 
 
         Route::get('/report', 'report')->name('report');
+        Route::get('/summary', 'summary')->name('summary');
         Route::get('/report/print', 'print')->name('hrms.attendance.print');
 
         Route::prefix('/request')->group(function () {

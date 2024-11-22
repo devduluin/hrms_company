@@ -122,6 +122,16 @@ class AttendanceController extends Controller
         return view('dashboard.hrms.attendance.report', $data);
     }
 
+    public function summary()
+    {
+        $data['title']   = 'Duluin HRMS';
+        $data['page_title']   = 'Attendance Summary';
+        $data['company'] = session()->get('company_id');
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/attendance/attendance/report/summary";
+        $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
+        return view('dashboard.hrms.attendance.summary', $data);
+    }
+
     public function print()
     {
         $data['title']   = 'Duluin HRMS';
