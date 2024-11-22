@@ -96,9 +96,9 @@
                                     <th data-value="employee_id">Employee ID</th>
                                     <th data-value="first_name" orderable="true" data-render="getFullName">Name</th>
                                     <th data-value="department_id_rel" data-render="getDepartment" orderable="false">Department</th>
-                                    <th data-value="total_absent" orderable="false">Absent</th>
-                                    <th data-value="total_present" orderable="false">Preset</th>
-                                    <th data-value="total_leave" orderable="false">Leave</th>
+                                    <th data-value="total_absent" orderable="false" data-render="getUrlAbsent">Absent</th>
+                                    <th data-value="total_present" orderable="false" data-render="getUrlPresent">Preset</th>
+                                    <th data-value="total_leave" orderable="false" data-render="getUrlLeave">Leave</th>
                                     <th data-value="total_wfh" orderable="false">WFH</th>
                                     <th data-value="total_halfday" orderable="false">Halfday</th>
                                     <th data-value="total_late_entry" orderable="false">Late Entry</th>
@@ -130,6 +130,16 @@
 <script src="{{ asset('dist') }}/js/vendors/litepicker.js"></script>
 <script src="{{ asset('dist') }}/js/components/base/litepicker.js"></script>
     <script>
+        function getUrlAbsent(data, type, row, meta) {     
+            return '<a href="{{ url('dashboard/hrms/attendance/attendance') }}?employee_id='+row.id+'&attendance_status=absent" data-placement="top" title="Click to see detail!"><div class="py-1 px-1.5 w-full [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">'+data+'</div></a>';
+        }
+        function getUrlPresent(data, type, row, meta) {     
+            return '<a href="{{ url('dashboard/hrms/attendance/attendance') }}?employee_id='+row.id+'&attendance_status=present" data-placement="top" title="Click to see detail!"><div class="py-1 px-1.5 w-full [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">'+data+'</div></a>';
+        }
+        function getUrlLeave(data, type, row, meta) {     
+            return '<a href="{{ url('dashboard/hrms/attendance/attendance') }}?employee_id='+row.id+'&attendance_status=leave" data-placement="top" title="Click to see detail!"><div class="py-1 px-1.5 w-full [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">'+data+'</div></a>';
+        }
+
         function getFullName(data, type, row, meta) {
             if (row.fullname == null) {
                 return row?.first_name + ' ' + row?.last_name;
