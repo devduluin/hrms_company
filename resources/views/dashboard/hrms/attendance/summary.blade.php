@@ -80,7 +80,7 @@
                             <x-slot:thead>
                             <th data-value="no" width="60px">No.</th>
                                     <th data-value="employee_id">Employee ID</th>
-                                    <th data-value="fullname" orderable="true">Name</th>
+                                    <th data-value="first_name" orderable="true" data-render="getFullName">Name</th>
                                     <th data-value="department_id_rel" data-render="getDepartment" orderable="false">Department</th>
                                     <th data-value="total_absent" orderable="false">Absent</th>
                                     <th data-value="total_present" orderable="false">Preset</th>
@@ -116,6 +116,13 @@
 <script src="{{ asset('dist') }}/js/vendors/litepicker.js"></script>
 <script src="{{ asset('dist') }}/js/components/base/litepicker.js"></script>
     <script>
+        function getFullName(data, type, row, meta) {
+            if (row.fullname == null) {
+                return row?.first_name + ' ' + row?.last_name;
+            }
+            return row?.fullname;
+        }
+        
         function getDepartment(data, type, row, meta) {
             if (data !== null) {
                 return data?.department_name ?? 'N/A';
