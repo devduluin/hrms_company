@@ -311,6 +311,7 @@
                                     <x-action  label="Attendance" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/attendance') }}" />
                                     <x-action  label="Attendance Request" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/request') }}" />
                                     <x-action  label="Attendance Report" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/report') }}" />
+                                    <x-action  label="Employee Summary" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/summary') }}" />
                                     <x-action  label="Shift Assignment" icon="arrow-up-right" url="{{ route('hrms.shift-assignment') }}" />
                                     <x-action  label="Shift Assignment Bulk" icon="arrow-up-right" url="{{ route('hrms.shift-assignment.create_bulk') }}" />
                                     
@@ -372,7 +373,7 @@
                 $('#custom-date').attr('hidden', false);
                 filterData = "custom_date="+value;
             }
-
+             
             //kirim permintaan data ke server dengan membawa param
            var param = {
                 url: "{{ $apiTotalAttendance }}",
