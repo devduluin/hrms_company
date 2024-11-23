@@ -95,14 +95,16 @@
                                 </div>
 
                                 <x-datatable id="attendanceTable" :url="$apiReportAttendance" method="POST" class="display nowrap"
-                                    :order="[[1, 'DESC']]">
-                                    <x-slot:thead id="dynamic-thead">
+                                    :order="[[1, 'DESC']]" :filter="[
+                                        'filter_date' => '#filter_date',
+                                    ]" :order="[[0, 'DESC']]">
+                                    <x-slot:thead>
+                                        {{-- <x-slot:thead id="dynamic-thead"> --}}
                                         <th data-value="no" orderable="true">No</th>
-                                        <th data-value="employee_id">Employee ID</th>
+                                        <th data-value="employee_id" data-render="getEmployee">Employee ID</th>
                                         <th data-value="name" orderable="true">Name</th>
                                     </x-slot:thead>
                                 </x-datatable>
-
                             </div>
                         </div>
                     </div>
@@ -110,6 +112,8 @@
             </div>
         </div>
         </div>
+
+
         <div class="preview relative [&.hide]:overflow-hidden [&.hide]:h-0">
             <div class="text-center">
                 <div id="success-notification-content"
@@ -125,11 +129,10 @@
             </div>
         </div>
 
-
         @push('js')
             <script src="{{ asset('dist') }}/js/vendors/litepicker.js"></script>
             <script src="{{ asset('dist') }}/js/components/base/litepicker.js"></script>
-            <script type="text/javascript">
+            {{-- <script type="text/javascript">
                 document.addEventListener("DOMContentLoaded", () => {
                     const $apiReportAttendance = @json($apiReportAttendance);
 
@@ -155,7 +158,6 @@
                             };
                         }
                     };
-
                     fetchAttendanceReport().then((result) => {
                         const daysInMonth = Object.keys(result.data[0]?.attendance || {});
                         const tableHead = document.getElementById("dynamic-thead");
@@ -180,9 +182,9 @@
                                     },
                                 },
                                 columns: [{
-                                        data: "no"
-                                    },
-                                    {
+                                        //     data: "no"
+                                        // },
+                                        // {
                                         data: "employee_id"
                                     },
                                     {
@@ -207,6 +209,12 @@
                         $('#attendanceTable').DataTable().ajax.reload();
                     });
                 });
+            </script> --}}
+
+            <script>
+                function getEmployee(data, type, row, meta) {
+                    console.log(data);
+                };
             </script>
         @endpush
     @endsection
