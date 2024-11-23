@@ -35,11 +35,6 @@
             <option value="weekly">Weekly</option>
             <option value="daily">Daily</option>
         </x-form.select>
-        {{-- <x-form.select id="salary_stucture" name="salary_stucture" label="Salary Structure" url="#"
-            apiUrl="{{ $apiPayrollUrl }}/salary_structure/datatables" columns='["name"]' :keys="[
-                'company_id' => $company,
-            ]" required>
-        </x-form.select> --}}
         <div class="salary_stucture_box mt-2 hidden">
             <x-form._select id="salary_stucture" name="salary_stucture" label="Salary Structure"
                 dataPlaceholder="Select Salary Structure" required>

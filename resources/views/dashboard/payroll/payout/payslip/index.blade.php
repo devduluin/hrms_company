@@ -27,13 +27,14 @@
                             <div class="box box--stacked flex flex-col">
                                 <div class="table gap-y-2 p-5 sm:flex-row sm:items-center">
                                     <div>
-                                        <x-datatable id="payslipTable" :url="$apiUrl . '/payroll_entry/datatables'" method="POST" class="display">
+                                        <x-datatable id="payslipTable" :url="$apiUrl . '/payroll_entry/datatables'" method="POST" class="display"
+                                            :order="[[2, 'DESC']]">
                                             <x-slot:thead>
                                                 <th data-value="id" data-render="getId" orderable="true">#</th>
                                                 <th data-value="company_id" data-render="getCompany" orderable="true">
                                                     Company</th>
                                                 <th data-value="employee_id" data-render="getEmployee">Employee</th>
-                                                <th data-value="posting_date">Posting Date</th>
+                                                <th data-value="posting_date" orderable="true">Posting Date</th>
                                                 <th data-value="status" data-render="getStatus">Status</th>
                                                 <th data-value="id" data-render="getActionBtn" orderable="false">Action</th>
                                             </x-slot:thead>

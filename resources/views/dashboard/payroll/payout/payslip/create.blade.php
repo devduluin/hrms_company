@@ -64,7 +64,7 @@
             }
 
             $("[name='employee_id']").on("change", async function() {
-                console.log("ada perubahan disini : ", $(this).val());
+                // console.log("ada perubahan disini : ", $(this).val());
                 $("#employee").val($(this).val());
                 let employeeId = $(this).val();
                 let startDate = $("#start_date").val();
@@ -82,10 +82,8 @@
                     dataType: 'json',
                     success: function(response) {
                         if (response.success) {
-                            const structureId = response.data?.salaryStructureAssignment
-                                ?.salaryStructure?.id;
-                            const structureName = response.data?.salaryStructureAssignment
-                                ?.salaryStructure?.name;
+                            const structureId = response.data?.salaryStructure?.id;
+                            const structureName = response.data?.salaryStructure?.name;
                             $(".salary_stucture_box").removeClass("hidden");
                             $("#salary_stucture").html(
                                 `<option value="${structureId}" selected>${structureName}</option>`
@@ -96,7 +94,7 @@
                             getDeduction();
 
                         } else {
-                            console.log("error occured");
+                            // console.log("error occured");
                             showErrorNotification('error', response.message);
                         }
                     },
@@ -140,12 +138,12 @@
 
                 // check if employee, salary structure are not empty
                 if (($("#employee").val() !== "") && ($("#salary_stucture").val() !== "")) {
-                    console.log("employee id " + $("#employee_id").val());
+                    // console.log("employee id " + $("#employee_id").val());
                     calculateDays(startDate, endDate, $("#employee_id").val());
                     getEarning();
                     getDeduction();
                 } else {
-                    console.log("employee id value : ", $("#employee_id").val());
+                    // console.log("employee id value : ", $("#employee_id").val());
                     showErrorNotification('error', 'Please select employee and salary structure');
                 }
             });
@@ -196,7 +194,7 @@
                     }),
                     success: function(secondResponse) {
                         if (secondResponse.success) {
-                            console.log(secondResponse.data);
+                            // // console.log(secondResponse.data);
                             // render table
                             renderTable(secondResponse.data, 'earning');
                         } else {
@@ -218,6 +216,9 @@
                 const tableBody = document.getElementById(`editable-${type}-table`);
                 tableBody.innerHTML = ""; // Clear existing rows
 
+                // console.log("type : ", type);
+                // console.log("sum of data : ", data);
+
                 if (type === 'earning') {
                     data.forEach((item, index) => {
                         const row = document.createElement("tr");
@@ -230,71 +231,68 @@
                             currency: 'IDR'
                         }).format(item.amount);
 
-                        // sum
-                        let totalEarningAmount = 0;
-                        $('.editable-input').each(function() {
-                            let value = parseFloat($(this).val()) || 0;
-                            totalEarningAmount += value;
-                        });
-
-                        $("#gross_pay_hidden").val(totalEarningAmount);
-                        // Display the total sum somewhere on the page
-                        $('#gross_pay').val(new Intl.NumberFormat('id-ID', {
-                            style: 'currency',
-                            currency: 'IDR'
-                        }).format(totalEarningAmount));
-
-                        $('#net_pay').val(new Intl.NumberFormat('id-ID', {
-                            style: 'currency',
-                            currency: 'IDR'
-                        }).format(totalEarningAmount));
-                        $("#net_pay_hidden").val(totalEarningAmount);
-
-                        countTotalNetPay(totalEarningAmount, $("#total_deduction_hidden").val());
-
                         row.innerHTML = `
-                    <td class="border-b-2 dark:border-darkmode-300 border-l border-r border-t px-4 py-2"
-                        data-field="name" width="35%">
-                        <span>${item.salaryComponent.name}</span>
-                        <input type="hidden" name="salary_component_id" value="${item.salaryComponent.id}" />
-                    </td>
-                    <td class="border-b-2 dark:border-darkmode-300 border-l border-r border-t px-4 py-2"
-                        data-field="amount">
-                        <span class="editable-text">${amountFormatted}</span>
-                        <input type="text"
-                            class="editable-input hidden disabled:bg-slate-100
-                            disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50
-                            dark:disabled:border-transparent [&[readonly]]:bg-slate-100
-                            [&[readonly]]:cursor-not-allowed
-                            [&[readonly]]:dark:bg-darkmode-800/50
-                            [&[readonly]]:dark:border-transparent transition duration-200
-                            ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md
-                            placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary
-                            focus:ring-opacity-20 focus:border-primary focus:border-opacity-40
-                            dark:bg-darkmode-800 dark:border-transparent
-                            dark:focus:ring-slate-700 dark:focus:ring-opacity-50
-                            dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4
-                            file:py-2 file:px-4 file:rounded-l-md file:border-0
-                            file:border-r-[1px] file:border-slate-100/10 file:text-sm
-                            file:font-semibold file:bg-slate-100 file:text-slate-500/70
-                            hover:file:bg-200 group-[.form-inline]:flex-1
-                            group-[.input-group]:rounded-none
-                            group-[.input-group]:[&:not(:first-child)]:border-l-transparent
-                            group-[.input-group]:first:rounded-l
-                            group-[.input-group]:last:rounded-r group-[.input-group]:z-10"
-                            name="salary_component_amount" value="${item.amount}" />
-                    </td>
-                    <td
-                        class="border-b-2 dark:border-darkmode-300 border-l border-r border-t px-4 py-2" width="20%">
-                        <button type="button" data-tw-merge
-                            class="save hidden transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">Save</button>
-                        <button type="button" data-tw-merge
-                            class="edit transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">Edit</button>
-                    </td>
-                    `;
+                <td class="border-b-2 dark:border-darkmode-300 border-l border-r border-t px-4 py-2"
+                    data-field="name" width="35%">
+                    <span>${item.salaryComponent.name}</span>
+                    <input type="hidden" name="salary_component_id" value="${item.salaryComponent.id}" />
+                </td>
+                <td class="border-b-2 dark:border-darkmode-300 border-l border-r border-t px-4 py-2"
+                    data-field="amount">
+                    <span class="editable-text">${amountFormatted}</span>
+                    <input type="text"
+                        class="editable-input hidden disabled:bg-slate-100
+                disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50
+                dark:disabled:border-transparent [&[readonly]]:bg-slate-100
+                [&[readonly]]:cursor-not-allowed
+                [&[readonly]]:dark:bg-darkmode-800/50
+                [&[readonly]]:dark:border-transparent transition duration-200
+                ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md
+                placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary
+                focus:ring-opacity-20 focus:border-primary focus:border-opacity-40
+                dark:bg-darkmode-800 dark:border-transparent
+                dark:focus:ring-slate-700 dark:focus:ring-opacity-50
+                dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4
+                file:py-2 file:px-4 file:rounded-l-md file:border-0
+                file:border-r-[1px] file:border-slate-100/10 file:text-sm
+                file:font-semibold file:bg-slate-100 file:text-slate-500/70
+                hover:file:bg-200 group-[.form-inline]:flex-1
+                group-[.input-group]:rounded-none
+                group-[.input-group]:[&:not(:first-child)]:border-l-transparent
+                group-[.input-group]:first:rounded-l
+                group-[.input-group]:last:rounded-r group-[.input-group]:z-10"
+                        name="salary_component_amount" value="${item.amount}" />
+                </td>
+                <td class="border-b-2 dark:border-darkmode-300 border-l border-r border-t px-4 py-2" width="20%">
+                    <button type="button" class="save hidden transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">Save</button>
+                    <button type="button" class="edit transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">Edit</button>
+                </td>
+            `;
                         tableBody.appendChild(row);
                     });
+
+                    // Calculate the sum of all earning amounts
+                    let totalEarningAmount = 0;
+                    $('.editable-input').each(function() {
+                        let value = parseFloat($(this).val()) || 0;
+                        totalEarningAmount += value;
+                    });
+
+                    $("#gross_pay_hidden").val(totalEarningAmount);
+                    $('#gross_pay').val(new Intl.NumberFormat('id-ID', {
+                        style: 'currency',
+                        currency: 'IDR'
+                    }).format(totalEarningAmount));
+
+                    $('#net_pay').val(new Intl.NumberFormat('id-ID', {
+                        style: 'currency',
+                        currency: 'IDR'
+                    }).format(totalEarningAmount));
+                    $("#net_pay_hidden").val(totalEarningAmount);
+
+                    countTotalNetPay(totalEarningAmount, $("#total_deduction_hidden").val());
                 } else {
+                    // Similar logic for deductions
                     data.forEach((item, index) => {
                         const row = document.createElement("tr");
                         row.setAttribute("data-id", index + 1);
@@ -304,64 +302,60 @@
                             currency: 'IDR'
                         }).format(item.amount);
 
-                        // sum
-                        let totalDeductionAmount = 0;
-                        $('.editable-deduction-input').each(function() {
-                            let value = parseFloat($(this).val()) || 0;
-                            totalDeductionAmount += value;
-                        });
-
-                        $("#total_deduction_hidden").val(totalDeductionAmount);
-                        // Display the total sum somewhere on the page
-                        $('#total_deduction').val(new Intl.NumberFormat('id-ID', {
-                            style: 'currency',
-                            currency: 'IDR'
-                        }).format(totalDeductionAmount));
-
-                        countTotalNetPay($("#gross_pay_hidden").val(), totalDeductionAmount);
-
                         row.innerHTML = `
-                    <td class="border-b-2 dark:border-darkmode-300 border-l border-r border-t px-4 py-2"
-                        data-field="name" width="35%">
-                        <span>${item.salaryComponent.name}</span>
-                        <input type="hidden" name="salary_component_id" value="${item.salaryComponent.id}" />
-                    </td>
-                    <td class="border-b-2 dark:border-darkmode-300 border-l border-r border-t px-4 py-2"
-                        data-field="amount">
-                        <span class="editable-deduction-text">${amountFormatted}</span>
-                        <input type="text"
-                            class="editable-deduction-input hidden disabled:bg-slate-100
-                            disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50
-                            dark:disabled:border-transparent [&[readonly]]:bg-slate-100
-                            [&[readonly]]:cursor-not-allowed
-                            [&[readonly]]:dark:bg-darkmode-800/50
-                            [&[readonly]]:dark:border-transparent transition duration-200
-                            ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md
-                            placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary
-                            focus:ring-opacity-20 focus:border-primary focus:border-opacity-40
-                            dark:bg-darkmode-800 dark:border-transparent
-                            dark:focus:ring-slate-700 dark:focus:ring-opacity-50
-                            dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4
-                            file:py-2 file:px-4 file:rounded-l-md file:border-0
-                            file:border-r-[1px] file:border-slate-100/10 file:text-sm
-                            file:font-semibold file:bg-slate-100 file:text-slate-500/70
-                            hover:file:bg-200 group-[.form-inline]:flex-1
-                            group-[.input-group]:rounded-none
-                            group-[.input-group]:[&:not(:first-child)]:border-l-transparent
-                            group-[.input-group]:first:rounded-l
-                            group-[.input-group]:last:rounded-r group-[.input-group]:z-10"
-                            name="salary_component_amount" value="${item.amount}" />
-                    </td>
-                    <td
-                        class="border-b-2 dark:border-darkmode-300 border-l border-r border-t px-4 py-2" width="20%">
-                        <button type="button" data-tw-merge
-                            class="save-deduction hidden transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">Save</button>
-                        <button type="button" data-tw-merge
-                            class="edit-deduction transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">Edit</button>
-                    </td>
-                    `;
+                <td class="border-b-2 dark:border-darkmode-300 border-l border-r border-t px-4 py-2"
+                    data-field="name" width="35%">
+                    <span>${item.salaryComponent.name}</span>
+                    <input type="hidden" name="salary_component_id" value="${item.salaryComponent.id}" />
+                </td>
+                <td class="border-b-2 dark:border-darkmode-300 border-l border-r border-t px-4 py-2"
+                    data-field="amount">
+                    <span class="editable-deduction-text">${amountFormatted}</span>
+                    <input type="text"
+                        class="editable-deduction-input hidden disabled:bg-slate-100
+                disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50
+                dark:disabled:border-transparent [&[readonly]]:bg-slate-100
+                [&[readonly]]:cursor-not-allowed
+                [&[readonly]]:dark:bg-darkmode-800/50
+                [&[readonly]]:dark:border-transparent transition duration-200
+                ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md
+                placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary
+                focus:ring-opacity-20 focus:border-primary focus:border-opacity-40
+                dark:bg-darkmode-800 dark:border-transparent
+                dark:focus:ring-slate-700 dark:focus:ring-opacity-50
+                dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4
+                file:py-2 file:px-4 file:rounded-l-md file:border-0
+                file:border-r-[1px] file:border-slate-100/10 file:text-sm
+                file:font-semibold file:bg-slate-100 file:text-slate-500/70
+                hover:file:bg-200 group-[.form-inline]:flex-1
+                group-[.input-group]:rounded-none
+                group-[.input-group]:[&:not(:first-child)]:border-l-transparent
+                group-[.input-group]:first:rounded-l
+                group-[.input-group]:last:rounded-r group-[.input-group]:z-10"
+                        name="salary_component_amount" value="${item.amount}" />
+                </td>
+                <td class="border-b-2 dark:border-darkmode-300 border-l border-r border-t px-4 py-2" width="20%">
+                    <button type="button" class="save-deduction hidden transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">Save</button>
+                    <button type="button" class="edit-deduction transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">Edit</button>
+                </td>
+            `;
                         tableBody.appendChild(row);
                     });
+
+                    // Calculate the sum of all deduction amounts
+                    let totalDeductionAmount = 0;
+                    $('.editable-deduction-input').each(function() {
+                        let value = parseFloat($(this).val()) || 0;
+                        totalDeductionAmount += value;
+                    });
+
+                    $("#total_deduction_hidden").val(totalDeductionAmount);
+                    $('#total_deduction').val(new Intl.NumberFormat('id-ID', {
+                        style: 'currency',
+                        currency: 'IDR'
+                    }).format(totalDeductionAmount));
+
+                    countTotalNetPay($("#gross_pay_hidden").val(), totalDeductionAmount);
                 }
             }
 
@@ -404,7 +398,7 @@
                     }),
                     success: function(secondResponse) {
                         if (secondResponse.success) {
-                            console.log(secondResponse.data);
+                            // // console.log(secondResponse.data);
                             renderTable(secondResponse.data, 'deduction');
                         } else {
                             showErrorNotification('error',
@@ -438,7 +432,7 @@
 
                 $.ajax({
                     url: `
-http://apidev.duluin.com/api/v1/attendance/attendance/total-attendance/${employeeId}?start_date=${startDate}&end_date=${endDate}`,
+http://apidev.duluin.com/api/v1/attendance/attendance/total-attendance/by?employee_id=${employeeId}&start_date=${startDate}&end_date=${endDate}`,
                     type: 'GET',
                     contentType: 'application/json',
                     headers: {
@@ -461,7 +455,7 @@ http://apidev.duluin.com/api/v1/attendance/attendance/total-attendance/${employe
                             getEarning();
                             getDeduction();
                         } else {
-                            console.log("Data tidak tersedia");
+                            // console.log("Data tidak tersedia");
                             showErrorNotification('error', response.message);
                             $("#absent_days").val(0);
                             $("#present_days").val(0);
@@ -493,9 +487,11 @@ http://apidev.duluin.com/api/v1/attendance/attendance/total-attendance/${employe
                 const appToken = localStorage.getItem('app_token');
 
                 // Get salary_component_id values
-                let salaryComponentIds = $("input[name='salary_component_id']").map(function() {
-                    return $(this).val();
-                }).get();
+                let salaryComponentIds = $(
+                    "input[name='salary_component_id'], select[name='salary_component_id']").map(
+                    function() {
+                        return $(this).val();
+                    }).get();
 
                 // Get salary_component_amount values
                 let salaryComponentAmounts = $("input[name='salary_component_amount']").map(function() {
@@ -507,11 +503,14 @@ http://apidev.duluin.com/api/v1/attendance/attendance/total-attendance/${employe
                 data.salary_component_amount = salaryComponentAmounts;
 
                 // Log the updated data object
-                console.log("Form Data:", data);
+                // console.log("Form Data:", data);
 
                 data._token = $('meta[name="csrf-token"]').attr('content');
                 data.company_id = localStorage.getItem('company');
                 $('.error-message').hide();
+
+                console.log("payload data : ");
+                console.log(JSON.stringify(data));
 
                 try {
                     const response = await $.ajax({
@@ -529,7 +528,7 @@ http://apidev.duluin.com/api/v1/attendance/attendance/total-attendance/${employe
                     handleResponse(response);
                 } catch (xhr) {
                     if (xhr.status === 422) {
-                        console.log(xhr.responseText);
+                        // console.log(xhr.responseText);
                         const response = JSON.parse(xhr.responseText);
                         handleErrorResponse(response, currentForm);
                     } else {

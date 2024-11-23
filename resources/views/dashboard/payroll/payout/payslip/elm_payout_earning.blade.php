@@ -110,26 +110,53 @@
                 console.log("row number: " + rowNumber);
                 const rowId = `editable-${type}-table-row-${rowNumber}`;
 
-                const rowHtml = `
+                if (type == 'earning') {
+                    const rowHtml = `
                 <tr id="${rowId}" data-id="${rowNumber}">
                     <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t">
-                        <span class="editable-text"></span>
-                        <select name="salary_component_id" class="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1" id="getComponent-editable-${type}-table-${rowNumber}" onclick="handleGetComponent('${rowNumber}', '${type}')">
+                        <span class="editable-component-text"></span>
+                        <select name="salary_component_id" class="editable-select disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1" id="getComponent-editable-${type}-table-${rowNumber}" onclick="handleGetComponent('${rowNumber}', '${type}')">
                             <option value="">Select Salary Component</option>
                         </select>
                     </td>
                     <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t">
                         <span class="editable-text"></span>
-                        <input id="amount" name="amount" type="number" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10" name="amount" placeholder="0">
+                        <input id="amount" name="salary_component_amount" type="number" class="editable-input disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10" placeholder="0">
                     </td>
                     <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t">
                         <button type="button" data-tw-merge
                             class="save transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">Save</button>
                         <button type="button" data-tw-merge
                             class="edit transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 hidden">Edit</button>
+                            <button type="button" data-tw-merge
+                            class="delete transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 hidden">delete</button>
                     </td>
                 </tr>`;
-                $(tableBody).append(rowHtml);
+                    $(tableBody).append(rowHtml);
+                } else {
+                    const rowHtml = `
+                <tr id="${rowId}" data-id="${rowNumber}">
+                    <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t">
+                        <span class="editable-component-text"></span>
+                        <select name="salary_component_id" class="editable-select disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1" id="getComponent-editable-${type}-table-${rowNumber}" onclick="handleGetComponent('${rowNumber}', '${type}')">
+                            <option value="">Select Salary Component</option>
+                        </select>
+                    </td>
+                    <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t">
+                        <span class="editable-deduction-text"></span>
+                        <input id="amount" name="salary_component_amount" type="number" class="editable-deduction-input disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10" placeholder="0">
+                    </td>
+                    <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t">
+                        <button type="button" data-tw-merge
+                            class="save transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">Save</button>
+                        <button type="button" data-tw-merge
+                            class="edit transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 hidden">Edit</button>
+                            <button type="button" data-tw-merge
+                            class="delete transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 hidden">delete</button>
+                    </td>
+                </tr>`;
+                    $(tableBody).append(rowHtml);
+                }
             }
 
             // Handle click to add earning or deduction rows
@@ -142,10 +169,34 @@
 
             // Toggle edit mode
             function toggleEditMode($row, editMode) {
-                $row.find('.editable-text').toggleClass('hidden', editMode);
-                $row.find('.editable-input, .editable-select').toggleClass('hidden', !editMode);
+                $row.find('.editable-text, .editable-deduction-text').toggleClass('hidden', editMode);
+                $row.find('.editable-input, .editable-deduction-input, .editable-select').toggleClass('hidden', !
+                    editMode);
+                // console.log("selected value : ", $row.find('.editable-select').val());
+                if ($row.find('.editable-select').val() == '') {
+                    showErrorNotification('error', 'Please select salary component');
+                } else {
+                    $row.find('.editable-component-text').toggleClass('hidden', editMode);
+                    $row.find('.editable-component-text').text($row.find('.editable-select option:selected')
+                        .text());
+                }
+
+                if ($row.find('.editable-input').val() == '') {
+                    showErrorNotification('error', 'Please enter value');
+                } else {
+                    $row.find('.editable-text').text(formatCurrency($row.find('.editable-input').val()));
+                }
+
+                if ($row.find('.editable-deduction-input').val() == '') {
+                    showErrorNotification('error', 'Please enter value');
+                } else {
+                    $row.find('.editable-deduction-text').text(formatCurrency($row.find('.editable-deduction-input')
+                        .val()));
+                }
+
                 $row.find('.edit').toggleClass('hidden', editMode);
                 $row.find('.save').toggleClass('hidden', !editMode);
+                $row.find('.delete').toggleClass('hidden', editMode);
             }
 
             // Format currency in IDR
@@ -159,12 +210,22 @@
             // Save and update totals on Save button click
             $(document).on('click', '.save', function() {
                 const $row = $(this).closest('tr');
-                const inputValue = parseFloat($row.find('.editable-input').val()) || 0;
+                let inputValue = parseFloat($row.find('.editable-input').val()) || 0;
 
                 $row.find('.editable-text').text(formatCurrency(inputValue));
                 toggleEditMode($row, false);
                 calculateTotals();
             });
+
+            // delete row and adjust calculation
+            // Event: Delete row and recalculate totals
+            $(document).on('click', '.delete', function() {
+                const $row = $(this).closest('tr');
+                $row.remove(); // Remove row from DOM
+                calculateTotals(); // Adjust totals
+            });
+
+            // Add new row
 
             // Calculate totals for earnings and deductions
             function calculateTotals() {
@@ -174,7 +235,7 @@
                 $('#editable-earning-table .editable-input').each(function() {
                     grossPay += parseFloat($(this).val()) || 0;
                 });
-                $('#editable-deduction-table .editable-input').each(function() {
+                $('#editable-deduction-table .editable-deduction-input').each(function() {
                     totalDeduction += parseFloat($(this).val()) || 0;
                 });
 
@@ -221,7 +282,8 @@
                 },
                 success: function(response) {
                     const salaryComponents = response.data;
-                    const $selectElement = $('#getComponent-editable-' + componentType + '-table-' + rowId);
+                    const $selectElement = $('#getComponent-editable-' + componentType + '-table-' +
+                        rowId);
                     $selectElement.html('<option value="">Select Salary Component</option>');
                     $.each(salaryComponents, function(index, component) {
                         $selectElement.append($('<option>', {
