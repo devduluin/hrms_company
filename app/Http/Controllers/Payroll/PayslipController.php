@@ -70,6 +70,7 @@ class PayslipController extends Controller
         $data['apiGateway'] = $this->apiGatewayUrl . '/users';
         $data['apiUrl'] = $this->apiGatewayUrl . '/v1/payslip';
         $data['apiAttendanceUrl'] = $this->apiGatewayUrl . '/v1/attendance';
+        $data['id'] = $id;
 
         return view('dashboard.payroll.payout.payslip.edit', $data);
     }

@@ -25,10 +25,10 @@
                             </div>
                         </div>
                         <form id="payslip-form" method="post"
-                            action="http://apidev.duluin.com/api/v1/payslip/payroll_entry">
+                            action="http://apidev.duluin.com/api/v1/payslip/payroll_entry/{{ $id }}">
                             @csrf
                             <div class="mt-1.5 flex flex-col">
-                                <input type="hidden" name="employee_id" id="employee_id" value="" />
+                                {{-- <input type="hidden" name="employee_id" id="employee_id" value="" /> --}}
                                 @include('dashboard.payroll.payout.payslip.tabs')
                                 <div class="box box--stacked flex flex-col p-5">
                                     @include('dashboard.payroll.payout.payslip.tab-content')
@@ -49,6 +49,7 @@
     <script>
         $(document).ready(function() {
             const company = localStorage.getItem('company');
+            let id = `{{ $id }}`;
             if (company !== null) {
                 const companySelect = $('#company_id')[0].tomselect;
 
@@ -61,6 +62,66 @@
                     }
                     companySelect.setValue(company);
                 });
+            }
+
+            handleGetData();
+
+            async function handleGetData() {
+                $.ajax({
+                    url: `http://apidev.duluin.com/api/v1/payslip/payroll_entry/${id}`,
+                    type: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${appToken}`,
+                        'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
+                    },
+                    crossDomain: true,
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.success) {
+                            const salutationSelect = $('#payroll_frequency')[0].tomselect;
+                            const salutationValue = response.data.payroll_frequency;
+                            if (!salutationSelect.options[salutationValue]) {
+                                salutationSelect.addOption({
+                                    value: salutationValue,
+                                    text: salutationValue
+                                });
+                            }
+                            salutationSelect.setValue(salutationValue);
+
+                            const employeeSelect = $('#employee_id')[0].tomselect;
+                            const employeeValue = response.data.employee_id;
+                            employeeSelect.on('load', function() {
+                                if (!employeeSelect.options[employeeValue]) {
+                                    employeeSelect.addOption({
+                                        value: employeeValue,
+                                        text: employeeValue
+                                    });
+                                }
+                                employeeSelect.setValue(employeeValue);
+                            });
+                            $('#posting_date').val(response.data.posting_date);
+                            $('#employee').val(response.data.employee_id);
+                            $('#payroll_frequency').val(response.data.payroll_frequency);
+
+                            const payrollData = response.data.payrollEntryEmployee;
+                            filterAndRender(payrollData, 'earning');
+                            filterAndRender(payrollData, 'deduction');
+
+                        } else {
+                            console.log("Data tidak tersedia");
+                            showErrorNotification('error', response.message);
+                        }
+                    },
+                });
+            }
+
+            function filterAndRender(data, type) {
+                const filteredData = data.filter(item => item.salaryComponent.type === type);
+                const transformedData = filteredData.map(item => ({
+                    salaryComponent: item.salaryComponent,
+                    amount: parseFloat(item.salary_component_amount) // Convert amount to a number
+                }));
+                renderTable(transformedData, type);
             }
 
             $("[name='employee_id']").on("change", async function() {
@@ -90,8 +151,8 @@
                             );
                             calculateDays(startDate, endDate, employeeId);
 
-                            getEarning();
-                            getDeduction();
+                            // getEarning();
+                            // getDeduction();
 
                         } else {
                             // console.log("error occured");
@@ -140,8 +201,8 @@
                 if (($("#employee").val() !== "") && ($("#salary_stucture").val() !== "")) {
                     // console.log("employee id " + $("#employee_id").val());
                     calculateDays(startDate, endDate, $("#employee_id").val());
-                    getEarning();
-                    getDeduction();
+                    // getEarning();
+                    // getDeduction();
                 } else {
                     // console.log("employee id value : ", $("#employee_id").val());
                     showErrorNotification('error', 'Please select employee and salary structure');
@@ -452,8 +513,8 @@ http://apidev.duluin.com/api/v1/attendance/attendance/total-attendance/by?employ
 
                             $("#absent_days").val(totalAbsentDay);
 
-                            getEarning();
-                            getDeduction();
+                            // getEarning();
+                            // getDeduction();
                         } else {
                             // console.log("Data tidak tersedia");
                             showErrorNotification('error', response.message);
@@ -515,7 +576,7 @@ http://apidev.duluin.com/api/v1/attendance/attendance/total-attendance/by?employ
                 try {
                     const response = await $.ajax({
                         url: currentForm.attr('action'),
-                        type: 'POST',
+                        type: 'PUT',
                         contentType: 'application/json',
                         headers: {
                             'Authorization': `Bearer ${appToken}`,
