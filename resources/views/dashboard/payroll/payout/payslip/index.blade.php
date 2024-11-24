@@ -27,13 +27,14 @@
                             <div class="box box--stacked flex flex-col">
                                 <div class="table gap-y-2 p-5 sm:flex-row sm:items-center">
                                     <div>
-                                        <x-datatable id="payslipTable" :url="$apiUrl . '/payroll_entry/datatables'" method="POST" class="display">
+                                        <x-datatable id="payslipTable" :url="$apiUrl . '/payroll_entry/datatables'" method="POST" class="display"
+                                            :order="[[3, 'DESC']]">
                                             <x-slot:thead>
                                                 <th data-value="id" data-render="getId" orderable="true">#</th>
                                                 <th data-value="company_id" data-render="getCompany" orderable="true">
                                                     Company</th>
                                                 <th data-value="employee_id" data-render="getEmployee">Employee</th>
-                                                <th data-value="posting_date">Posting Date</th>
+                                                <th data-value="posting_date" orderable="true">Posting Date</th>
                                                 <th data-value="status" data-render="getStatus">Status</th>
                                                 <th data-value="id" data-render="getActionBtn" orderable="false">Action</th>
                                             </x-slot:thead>
@@ -80,7 +81,7 @@
         }
 
         function getActionBtn(data, type, row, meta) {
-            const url = `{{ url('dashboard/hrms/payout/settings') }}/edit/${data}`;
+            const url = `{{ url('dashboard/hrms/payout/salary_slip') }}/edit/${data.id}`;
             return `<div data-tw-merge data-tw-placement="bottom-end" class="dropdown relative"><button data-tw-merge data-tw-toggle="dropdown" aria-expanded="false" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary">Action</button>
                 <div data-transition data-selector=".show" data-enter="transition-all ease-linear duration-150" data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1" data-enter-to="!mt-1 visible opacity-100 translate-y-0" data-leave="transition-all ease-linear duration-150" data-leave-from="!mt-1 visible opacity-100 translate-y-0" data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1" class="dropdown-menu absolute z-[9999] hidden">
                     <div data-tw-merge class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 w-40">

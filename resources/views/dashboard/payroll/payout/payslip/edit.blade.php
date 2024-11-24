@@ -20,15 +20,20 @@
                                     href="{{ $url ?? '' }}">
                                     <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
                                 </button>
+                                <button
+                                    class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 w-100"
+                                    id="submit-approval-btn"><i data-tw-merge="" data-lucide="save"
+                                        class="mr-3 h-4 w-4 stroke-[1.3]"></i> Submit
+                                    Approval</button>
                                 <x-form.button label="Save changes" id="save-payslip-btn" style="primary" type="button"
                                     icon="save" />
                             </div>
                         </div>
                         <form id="payslip-form" method="post"
-                            action="http://apidev.duluin.com/api/v1/payslip/payroll_entry">
+                            action="http://apidev.duluin.com/api/v1/payslip/payroll_entry/{{ $id }}">
                             @csrf
                             <div class="mt-1.5 flex flex-col">
-                                <input type="hidden" name="employee_id" id="employee_id" value="" />
+                                {{-- <input type="hidden" name="employee_id" id="employee_id" value="" /> --}}
                                 @include('dashboard.payroll.payout.payslip.tabs')
                                 <div class="box box--stacked flex flex-col p-5">
                                     @include('dashboard.payroll.payout.payslip.tab-content')
@@ -49,6 +54,7 @@
     <script>
         $(document).ready(function() {
             const company = localStorage.getItem('company');
+            let id = `{{ $id }}`;
             if (company !== null) {
                 const companySelect = $('#company_id')[0].tomselect;
 
@@ -61,6 +67,67 @@
                     }
                     companySelect.setValue(company);
                 });
+            }
+
+            handleGetData();
+
+            async function handleGetData() {
+                $.ajax({
+                    url: `http://apidev.duluin.com/api/v1/payslip/payroll_entry/${id}`,
+                    type: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${appToken}`,
+                        'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
+                    },
+                    crossDomain: true,
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.success) {
+                            const salutationSelect = $('#payroll_frequency')[0].tomselect;
+                            const salutationValue = response.data.payroll_frequency;
+                            if (!salutationSelect.options[salutationValue]) {
+                                salutationSelect.addOption({
+                                    value: salutationValue,
+                                    text: salutationValue
+                                });
+                            }
+                            salutationSelect.setValue(salutationValue);
+
+                            const employeeSelect = $('#employee_id')[0].tomselect;
+                            const employeeValue = response.data.employee_id;
+                            employeeSelect.on('load', function() {
+                                if (!employeeSelect.options[employeeValue]) {
+                                    employeeSelect.addOption({
+                                        value: employeeValue,
+                                        text: employeeValue
+                                    });
+                                }
+                                employeeSelect.setValue(employeeValue);
+                            });
+                            $('#posting_date').val(response.data.posting_date);
+                            $('#employee').val(response.data.employee_id);
+                            $('#payroll_frequency').val(response.data.payroll_frequency);
+
+                            const payrollData = response.data.payrollEntryEmployee;
+                            filterAndRender(payrollData, 'earning');
+                            filterAndRender(payrollData, 'deduction');
+
+                        } else {
+                            console.log("Data tidak tersedia");
+                            showErrorNotification('error', response.message);
+                        }
+                    },
+                });
+            }
+
+            function filterAndRender(data, type) {
+                const filteredData = data.filter(item => item.salaryComponent.type === type);
+                const transformedData = filteredData.map(item => ({
+                    payrollEntryEmployeeId: item.id,
+                    salaryComponent: item.salaryComponent,
+                    amount: parseFloat(item.salary_component_amount) // Convert amount to a number
+                }));
+                renderTable(transformedData, type);
             }
 
             $("[name='employee_id']").on("change", async function() {
@@ -90,8 +157,8 @@
                             );
                             calculateDays(startDate, endDate, employeeId);
 
-                            getEarning();
-                            getDeduction();
+                            // getEarning();
+                            // getDeduction();
 
                         } else {
                             // console.log("error occured");
@@ -140,11 +207,11 @@
                 if (($("#employee").val() !== "") && ($("#salary_stucture").val() !== "")) {
                     // console.log("employee id " + $("#employee_id").val());
                     calculateDays(startDate, endDate, $("#employee_id").val());
-                    getEarning();
-                    getDeduction();
+                    // getEarning();
+                    // getDeduction();
                 } else {
-                    // console.log("employee id value : ", $("#employee_id").val());
-                    showErrorNotification('error', 'Please select employee and salary structure');
+                    console.log("employee id value : ", $("#employee_id").val());
+                    // showErrorNotification('error', 'Please select employee and salary structure');
                 }
             });
 
@@ -212,6 +279,8 @@
             }
 
             function renderTable(data, type) {
+                console.log("Datanya");
+                console.log(data);
                 // Function to render the table
                 const tableBody = document.getElementById(`editable-${type}-table`);
                 tableBody.innerHTML = ""; // Clear existing rows
@@ -266,6 +335,7 @@
                 <td class="border-b-2 dark:border-darkmode-300 border-l border-r border-t px-4 py-2" width="20%">
                     <button type="button" class="save hidden transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">Save</button>
                     <button type="button" class="edit transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">Edit</button>
+                    <button type="button" class="delete transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80" data-id="${item.payrollEntryEmployeeId}">Delete</button>
                 </td>
             `;
                         tableBody.appendChild(row);
@@ -337,6 +407,7 @@
                 <td class="border-b-2 dark:border-darkmode-300 border-l border-r border-t px-4 py-2" width="20%">
                     <button type="button" class="save-deduction hidden transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">Save</button>
                     <button type="button" class="edit-deduction transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">Edit</button>
+                    <button type="button" class="delete transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80" data-id="${item.payrollEntryEmployeeId}">Delete</button>
                 </td>
             `;
                         tableBody.appendChild(row);
@@ -373,7 +444,6 @@
                 let structureValue = $('#salary_stucture').val();
                 if (structureValue == "") {
                     showErrorNotification('error', 'Please select a salary structure');
-                    preventDefault();
                 }
 
                 $.ajax({
@@ -452,8 +522,8 @@ http://apidev.duluin.com/api/v1/attendance/attendance/total-attendance/by?employ
 
                             $("#absent_days").val(totalAbsentDay);
 
-                            getEarning();
-                            getDeduction();
+                            // getEarning();
+                            // getDeduction();
                         } else {
                             // console.log("Data tidak tersedia");
                             showErrorNotification('error', response.message);
@@ -480,6 +550,42 @@ http://apidev.duluin.com/api/v1/attendance/attendance/total-attendance/by?employ
                 e.preventDefault();
                 await handleFormSubmission();
             });
+
+            $("#submit-approval-btn").click(async function(e) {
+                e.preventDefault();
+                await handleSubmitApprovalPayslip();
+            });
+
+            async function handleSubmitApprovalPayslip() {
+                const id = `{{ $id }}`;
+                $.ajax({
+                    url: `http://apidev.duluin.com/api/v1/payslip/payroll_entry/${id}/submitted`,
+                    type: 'PUT',
+                    contentType: 'application/json',
+                    headers: {
+                        'Authorization': `Bearer ${appToken}`,
+                        'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
+                    },
+                    crossDomain: true,
+                    dataType: 'json',
+                    data: JSON.stringify({
+                        "status": "submitted"
+                    }),
+                    success: function(response) {
+                        if (response.success) {
+                            showSuccessNotification('success',
+                                response.message);
+                            setTimeout(() => {
+                                window.location.href =
+                                    `http://${window.location.hostname}/dashboard/hrms/payout/salary_slip`;
+                            }, 300);
+                        } else {
+                            showErrorNotification('error',
+                                response.message);
+                        }
+                    },
+                });
+            }
 
             async function handleFormSubmission() {
                 const currentForm = $("#payslip-form");
@@ -515,7 +621,7 @@ http://apidev.duluin.com/api/v1/attendance/attendance/total-attendance/by?employ
                 try {
                     const response = await $.ajax({
                         url: currentForm.attr('action'),
-                        type: 'POST',
+                        type: 'PUT',
                         contentType: 'application/json',
                         headers: {
                             'Authorization': `Bearer ${appToken}`,
@@ -549,11 +655,8 @@ http://apidev.duluin.com/api/v1/attendance/attendance/total-attendance/by?employ
 
             function handleResponse(response) {
                 if (response.success) {
-                    showSuccessNotification('success', response.message);
-                    setTimeout(() => {
-                        location.href =
-                            `{{ url('dashboard/hrms/payout/salary_slip') }}/edit/${response.data.id}`;
-                    }, 300);
+                    location.href =
+                        `{{ url('dashboard/hrms/payout') }}`;
                 } else {
                     showErrorNotification('error', response.message);
                 }
