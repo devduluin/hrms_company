@@ -549,8 +549,11 @@ http://apidev.duluin.com/api/v1/attendance/attendance/total-attendance/by?employ
 
             function handleResponse(response) {
                 if (response.success) {
-                    location.href =
-                        `{{ url('dashboard/hrms/payout') }}`;
+                    showSuccessNotification('success', response.message);
+                    setTimeout(() => {
+                        location.href =
+                            `{{ url('dashboard/hrms/payout/salary_slip') }}/edit/${response.data.id}`;
+                    }, 300);
                 } else {
                     showErrorNotification('error', response.message);
                 }

@@ -20,6 +20,11 @@
                                     href="{{ $url ?? '' }}">
                                     <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
                                 </button>
+                                <button
+                                    class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 w-100"
+                                    id="submit-approval-btn"><i data-tw-merge="" data-lucide="save"
+                                        class="mr-3 h-4 w-4 stroke-[1.3]"></i> Submit
+                                    Approval</button>
                                 <x-form.button label="Save changes" id="save-payslip-btn" style="primary" type="button"
                                     icon="save" />
                             </div>
@@ -545,6 +550,42 @@ http://apidev.duluin.com/api/v1/attendance/attendance/total-attendance/by?employ
                 e.preventDefault();
                 await handleFormSubmission();
             });
+
+            $("#submit-approval-btn").click(async function(e) {
+                e.preventDefault();
+                await handleSubmitApprovalPayslip();
+            });
+
+            async function handleSubmitApprovalPayslip() {
+                const id = `{{ $id }}`;
+                $.ajax({
+                    url: `http://apidev.duluin.com/api/v1/payslip/payroll_entry/${id}/submitted`,
+                    type: 'PUT',
+                    contentType: 'application/json',
+                    headers: {
+                        'Authorization': `Bearer ${appToken}`,
+                        'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
+                    },
+                    crossDomain: true,
+                    dataType: 'json',
+                    data: JSON.stringify({
+                        "status": "submitted"
+                    }),
+                    success: function(response) {
+                        if (response.success) {
+                            showSuccessNotification('success',
+                                response.message);
+                            setTimeout(() => {
+                                window.location.href =
+                                    `http://${window.location.hostname}/dashboard/hrms/payout/salary_slip`;
+                            }, 300);
+                        } else {
+                            showErrorNotification('error',
+                                response.message);
+                        }
+                    },
+                });
+            }
 
             async function handleFormSubmission() {
                 const currentForm = $("#payslip-form");
