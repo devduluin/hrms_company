@@ -98,6 +98,7 @@
     <x-form.input id="net_pay" label="Net Pay" name="net_pay" readonly />
     <input type="hidden" id="net_pay_hidden" name="net_pay_hidden" required />
 </div>
+@include('vendor-common.sweetalert')
 @push('js')
     <script>
         $(document).ready(function() {
@@ -218,14 +219,17 @@
             });
 
             // delete row and adjust calculation
-            // Event: Delete row and recalculate totals
             $(document).on('click', '.delete', function() {
                 const $row = $(this).closest('tr');
-                $row.remove(); // Remove row from DOM
-                calculateTotals(); // Adjust totals
+                // get data id value from deleted button
+                const dataId = $(this).data('id');
+                if (dataId !== '' || dataId !== null) {
+                    deleteEarningDeduction(dataId, $row);
+                } else {
+                    $row.remove();
+                    calculateTotals();
+                }
             });
-
-            // Add new row
 
             // Calculate totals for earnings and deductions
             function calculateTotals() {
@@ -242,6 +246,46 @@
                 $('#gross_pay').val(formatCurrency(grossPay));
                 $('#total_deduction').val(formatCurrency(totalDeduction));
                 $('#net_pay').val(formatCurrency(grossPay - totalDeduction));
+            }
+
+            function deleteEarningDeduction(data, row) {
+                if (data !== 'null') {
+                    const swalWithBootstrapButtons = Swal.mixin({
+                        customClass: {
+                            confirmButton: "transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 w-48 mr-1",
+                            cancelButton: "transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-blue-theme border-blue-theme text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"
+                        },
+                        buttonsStyling: false
+                    });
+                    swalWithBootstrapButtons.fire({
+                        title: "Are you sure?",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: `http://apidev.duluin.com/api/v1/payslip/payroll_entry/delete_detail_payroll/${data}`,
+                                method: 'DELETE',
+                                headers: {
+                                    Authorization: `Bearer ${localStorage.getItem("app_token")}`,
+                                    "X-Forwarded-Host": `${window.location.protocol}//${window.location.hostname}`,
+                                },
+                                success: function(response) {
+                                    showSuccessNotification('success',
+                                        "Payroll Detail successfully deleted");
+                                    row.remove();
+                                    calculateTotals();
+                                },
+                                error: function(xhr, status, error) {
+                                    console.error("Error deleting claim detail:", error);
+                                }
+                            });
+                        }
+                    });
+                }
             }
 
             // Switch to edit mode on Edit button click
