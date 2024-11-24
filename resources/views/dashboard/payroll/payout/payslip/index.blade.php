@@ -31,10 +31,11 @@
                                             :order="[[3, 'DESC']]">
                                             <x-slot:thead>
                                                 <th data-value="id" data-render="getId" orderable="true">#</th>
-                                                <th data-value="company_id" data-render="getCompany" orderable="true">
-                                                    Company</th>
+                                                <th data-value="employee_id" data-render="getEmployeeId">Employee ID</th>
                                                 <th data-value="employee_id" data-render="getEmployee">Employee</th>
                                                 <th data-value="posting_date" orderable="true">Posting Date</th>
+                                                <th data-value="net_pay" data-render="getNetPay" orderable="true">Net Pay
+                                                </th>
                                                 <th data-value="status" data-render="getStatus">Status</th>
                                                 <th data-value="id" data-render="getActionBtn" orderable="false">Action</th>
                                             </x-slot:thead>
@@ -49,6 +50,7 @@
         </div>
     </div>
 @endsection
+@include('vendor-common.sweetalert')
 @push('js')
     <script>
         function getId(data, type, row, meta) {
@@ -56,7 +58,6 @@
         }
 
         function getCompany(data, type, row, meta) {
-            console.log(row.company_id_rel);
             if (row.company_id_rel) {
                 return row.company_id_rel?.company_name ?? 'N/A';
             }
@@ -68,6 +69,20 @@
                 return row.employee_id_rel?.first_name ?? 'N/A';
             }
             return 'N/A';
+        }
+
+        function getEmployeeId(data, type, row, meta) {
+            if (row.employee_id_rel) {
+                return row.employee_id_rel?.employee_id;
+            }
+            return 'N/A';
+        }
+
+        function getNetPay(data, type, row, meta) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR'
+            }).format(row.net_pay);
         }
 
         function getStatus(data, type, row, meta) {
@@ -89,11 +104,61 @@
                             Detail</a>
                         <a href="` + url + `" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="external-link" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
                             Edit</a>
-                        <a class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="file-text" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
-                            Hapus</a>
+                        <a onClick="action('delete', '`+data.id+`')" class="cursor-pointer flex items-center p-2
+                        transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="file-text" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
+                            Delete</a>
                     </div>
                 </div>
             </div>`;
+        }
+
+        function action(action, id){
+            if(action === 'delete'){
+                const path    = `{{ $apiPayrollUrl }}/`+id;
+                Swal.fire({
+                    title: "Are you sure?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        destroy(action, path)
+                    }else{
+                        payslipTable.ajax.reload();
+                    }
+                });
+            }
+        }
+
+        async function destroy(method, path){
+            try {
+                const response = await $.ajax({
+                    url: path,
+                    type: method,
+                    contentType: 'application/json',
+                    headers: {
+                        'Authorization': `Bearer ${appToken}`,
+                        'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
+                    },
+                    dataType: 'json'
+                });
+                Swal.fire({
+                    title: "Deleted!",
+                    icon: "success"
+                });
+                payslipTable.ajax.reload();
+            } catch (xhr) {
+                console.log(xhr);
+                if (xhr.status === 422) {
+                    const errorString = result.error || 'An error occurred.';
+                    showErrorNotification('error', `There were errors. Message : ${result.message}`, errorString);
+                } else {
+                    showErrorNotification('error', 'An error occurred while processing your request.');
+                }
+                // activateTab(formId);
+            }
         }
     </script>
 @endpush
