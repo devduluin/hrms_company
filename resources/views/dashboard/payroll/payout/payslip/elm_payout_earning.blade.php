@@ -223,7 +223,8 @@
                 const $row = $(this).closest('tr');
                 // get data id value from deleted button
                 const dataId = $(this).data('id');
-                if (dataId !== '' || dataId !== null) {
+                // console.log(dataId);
+                if (typeof dataId !== 'undefined') {
                     deleteEarningDeduction(dataId, $row);
                 } else {
                     $row.remove();
@@ -249,7 +250,7 @@
             }
 
             function deleteEarningDeduction(data, row) {
-                if (data !== 'null') {
+                if (data !== 'null' || typeof data !== 'undefined') {
                     const swalWithBootstrapButtons = Swal.mixin({
                         customClass: {
                             confirmButton: "transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 w-48 mr-1",
