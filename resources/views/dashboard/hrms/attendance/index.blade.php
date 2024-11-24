@@ -311,7 +311,8 @@
                                     <x-action  label="Attendance" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/attendance') }}" />
                                     <x-action  label="Attendance Request" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/request') }}" />
                                     <x-action  label="Attendance Report" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/report') }}" />
-                                    <x-action  label="Employee Summary" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/summary') }}" />
+                                    <x-action  label="Attendance Summary" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/summary') }}" />
+                                    <x-action  label="Employee Activities" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/activity') }}" />
                                     <x-action  label="Shift Assignment" icon="arrow-up-right" url="{{ route('hrms.shift-assignment') }}" />
                                     <x-action  label="Shift Assignment Bulk" icon="arrow-up-right" url="{{ route('hrms.shift-assignment.create_bulk') }}" />
                                     

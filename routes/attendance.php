@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Leave\LeaveApplicantController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\Attendance\AttendanceRequestController;
+use App\Http\Controllers\Attendance\AttendanceActivityController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,15 @@ Route::prefix('/attendance')->group(function () {
         Route::get('/summary', 'summary')->name('summary');
         Route::get('/report/print', 'print')->name('hrms.attendance.print');
 
+        Route::prefix('/activity')->group(function () {
+            Route::controller(AttendanceActivityController::class)->group(function () {
+                Route::get('/', 'index')->name('hrms.attendance.activity');
+                Route::get('/create', 'create')->name('hrms.attendance.activity.create');
+                Route::get('/update/{id}', 'update')->name('hrms.attendance.activity.update');
+                Route::get('/detail/{id}', 'detail')->name('hrms.attendance.activity.detail');
+            });;
+        });
+
         Route::prefix('/request')->group(function () {
             Route::controller(AttendanceRequestController::class)->group(function () {
                 Route::get('/', 'index')->name('hrms.attendance.request');
@@ -27,6 +37,7 @@ Route::prefix('/attendance')->group(function () {
                 Route::get('/update/{id}', 'update')->name('hrms.attendance.request.update');
             });;
         });
+        
         Route::prefix('/shift_type')->group(function () {
             Route::controller(ShiftTypeController::class)->group(function () {
                 Route::get('/', 'index')->name('hrms.attendance.shifttype');

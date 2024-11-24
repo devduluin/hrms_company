@@ -14,7 +14,7 @@
                         class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md w-24">
                         <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
                     </button>
-                    <x-form.button id="new_shift_assigment" label="Add Shift Assigment" style="primary" icon="plus" url="{{ route('hrms.shift-assignment.create') }}" ></x-button>
+                    {{-- <x-form.button id="new_activity" label="Add Employee Activity" style="primary" icon="plus" url="{{ route('hrms.shift-assignment.create') }}" ></x-button> --}}
                 </div>
             </div>
             <div class="mt-3.5  gap-x-6 gap-y-10">
@@ -25,16 +25,14 @@
                 </div> -->
                 <div class="col-span-12 flex flex-col gap-y-7 xl:col-span-9">
                     <div class="box box--stacked flex flex-col p-5">
-                        <x-datatable id="shiftAssigmentTable" :url="$apiUrl.'/datatable'" method="POST" class="display small">
+                        <x-datatable id="activityTable" :url="$apiUrl.'/datatable'" method="POST" class="display small">
                             <x-slot:thead>
                             <th data-value="no" width="80px">No.</th>
                                     <th data-value="employee_id_rel"  data-render="getEmployeeName">Employee Name</th>
-                                    <th data-value="shift_type_id_rel" data-render="getShiftName">Shift Type Name</th>
-                                    <th data-value="start_date" data-render="dateFormat">Start Date</th>
-                                    <th data-value="end_date" data-render="dateFormat">End Date</th>
-                                    <th data-value="shift_type_id_rel" data-render="getShiftTimeIn">Time In</th>
-                                    <th data-value="shift_type_id_rel" data-render="getShiftTimeOut">Time Out</th>
-                                    <th data-value="status" data-render="getStatus">Status</th>
+                                    <th data-value="activity_title">Activity Title</th>
+                                    <th data-value="from_time">From Time</th>
+                                    <th data-value="to_time">To Time</th>
+                                    <th data-value="attachment">Attachment</th>
                                     <th data-value="id" data-render="getActionBtn">Action</th>
                             </x-slot:thead>
                         </x-datatable>
@@ -76,23 +74,11 @@
             }
             return 'N/A';
         }
-        function getShiftName(data, type, row, meta) {  
-            if (data) {   
-                return '<a href="{{ url('dashboard/hrms/attendance/shift_type/update/') }}/'+data.id+'" data-placement="top" title="Click to see detail!"><div class=" px-1.5 w-full [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">'+data.shift_type_name+'</div></a>';
-            }
-            return 'N/A';
-        }
- 
-        function getShiftTimeIn(data, type, row, meta) {
-            if (row) {
-                return data.start_time;
-            }
-            return 'N/A';
-        }
 
-        function getShiftTimeOut(data, type, row, meta) {
-            if (row) {
-                return data.end_time;
+        function getShiftName(data, type, row, meta) {
+            if (data) {
+               
+                return data.shift_type_name;
             }
             return 'N/A';
         }
@@ -144,7 +130,7 @@
                     if (result.isConfirmed) {
                         destroy(action, path)
                     }else{
-                        shiftAssigmentTable.ajax.reload();
+                        activityTable.ajax.reload();
                     }
                 });
             }else{
@@ -170,7 +156,7 @@
                     title: "Deleted!",
                     icon: "success"
                 });
-                shiftAssigmentTable.ajax.reload();
+                activityTable.ajax.reload();
             } catch (xhr) {
                 console.log(xhr);
                 if (xhr.status === 422) {

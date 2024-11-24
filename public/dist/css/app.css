@@ -2052,11 +2052,11 @@
   }
   html body {
     letter-spacing: 0.025em;
-    font-size: 0.875rem;
+    font-size: 0.800rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: Public Sans;
-    color: #475569;
+    color: #324052;
     line-height: 1.25rem;
   }
   *,
@@ -4878,7 +4878,7 @@
     border-color: rgb(71 85 105 / var(--tw-border-opacity));
   }
   .border-slate-600\/40 {
-    border-color: #47556966;
+    border-color: #32405266;
   }
   .border-success {
     --tw-border-opacity: 1;
@@ -6067,7 +6067,7 @@
     line-height: 1.75rem;
   }
   .text-sm {
-    font-size: 0.875rem;
+    font-size: 0.800rem;
     line-height: 1.25rem;
   }
   .text-xl {
@@ -6236,10 +6236,10 @@
     color: rgb(71 85 105 / var(--tw-text-opacity));
   }
   .text-slate-600\/80 {
-    color: #475569cc;
+    color: #324052cc;
   }
   .text-slate-600\/90 {
-    color: #475569e6;
+    color: #324052e6;
   }
   .text-slate-700 {
     --tw-text-opacity: 1;
@@ -6616,7 +6616,7 @@
     padding-bottom: 0.5rem;
   }
   .file\:text-sm::file-selector-button {
-    font-size: 0.875rem;
+    font-size: 0.800rem;
     line-height: 1.25rem;
   }
   .file\:font-semibold::file-selector-button {
@@ -8027,7 +8027,7 @@
     background-color: #f8fafccc;
   }
   .hover\:bg-slate-600\/5:hover {
-    background-color: #4755690d;
+    background-color: #3240520d;
   }
   .hover\:bg-white\/10:hover {
     background-color: #ffffff1a;
@@ -8295,7 +8295,7 @@
     color: rgb(71 85 105 / var(--tw-text-opacity));
   }
   .group.background--hidden .group-\[\.background--hidden\]\:text-slate-600\/70 {
-    color: #475569b3;
+    color: #324052b3;
   }
   .group.mode--light .group-\[\.mode--light\]\:\!text-slate-200 {
     --tw-text-opacity: 1 !important;
@@ -8983,7 +8983,7 @@
       line-height: 1.75rem;
     }
     .sm\:text-sm {
-      font-size: 0.875rem;
+      font-size: 0.800rem;
       line-height: 1.25rem;
     }
     .group.form-inline .group-\[\.form-inline\]\:sm\:mb-0 {
