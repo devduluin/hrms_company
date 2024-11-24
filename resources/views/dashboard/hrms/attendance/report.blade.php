@@ -95,14 +95,16 @@
                                 </div>
 
                                 <x-datatable id="attendanceTable" :url="$apiReportAttendance" method="POST" class="display nowrap"
-                                    :order="[[1, 'DESC']]">
-                                    <x-slot:thead id="dynamic-thead">
+                                    :order="[[1, 'DESC']]" :filter="[
+                                        'filter_date' => '#filter_date',
+                                    ]" :order="[[0, 'DESC']]">
+                                    <x-slot:thead>
+                                        {{-- <x-slot:thead id="dynamic-thead"> --}}
                                         <th data-value="no" orderable="true">No</th>
                                         <th data-value="employee_id">Employee ID</th>
-                                        <th data-value="name" orderable="true">Name</th>
+                                        <th data-value="name" orderable="true" data-render="getFullName">Name</th>
                                     </x-slot:thead>
                                 </x-datatable>
-
                             </div>
                         </div>
                     </div>
@@ -110,6 +112,8 @@
             </div>
         </div>
         </div>
+
+
         <div class="preview relative [&.hide]:overflow-hidden [&.hide]:h-0">
             <div class="text-center">
                 <div id="success-notification-content"
@@ -125,88 +129,30 @@
             </div>
         </div>
 
-
         @push('js')
             <script src="{{ asset('dist') }}/js/vendors/litepicker.js"></script>
             <script src="{{ asset('dist') }}/js/components/base/litepicker.js"></script>
-            <script type="text/javascript">
-                document.addEventListener("DOMContentLoaded", () => {
-                    const $apiReportAttendance = @json($apiReportAttendance);
+            <script>
+                function getEmployeeName(data, type, row, meta) {
+                    if (data !== null) {
+                        return data.first_name + ' ' + data.last_name;
+                    }
+                    return 'N/A';
+                }
 
-                    const fetchAttendanceReport = async () => {
-                        try {
-                            const response = await fetch($apiReportAttendance, {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                },
-                                body: JSON.stringify({
-                                    draw: 1,
-                                    start: 0,
-                                    length: 10,
-                                }),
-                            });
-                            const data = await response.json();
-                            return data;
-                        } catch (error) {
-                            console.error("Error fetching attendance report:", error);
-                            return {
-                                data: []
-                            };
-                        }
-                    };
+                function getFullName(data, type, row, meta) {
+                    if (row.fullname == null) {
+                        return row?.first_name + ' ' + row?.last_name;
+                    }
+                    return row?.fullname;
+                }
+            </script>
 
-                    fetchAttendanceReport().then((result) => {
-                        const daysInMonth = Object.keys(result.data[0]?.attendance || {});
-                        const tableHead = document.getElementById("dynamic-thead");
 
-                        tableHead.innerHTML = "";
-                        daysInMonth.forEach((day) => {
-                            const th = document.createElement("th");
-                            th.innerText = day;
-                            th.dataset.value = `attendance.${day}`;
-                            tableHead.appendChild(th);
-                        });
-
-                        if ($.fn.DataTable.isDataTable('#attendanceTable')) {
-                            $('#attendanceTable').DataTable().ajax.reload();
-                        } else {
-                            $('#attendanceTable').DataTable({
-                                ajax: {
-                                    url: $apiReportAttendance,
-                                    type: 'POST',
-                                    data: function(d) {
-                                        return d;
-                                    },
-                                },
-                                columns: [{
-                                        data: "no"
-                                    },
-                                    {
-                                        data: "employee_id"
-                                    },
-                                    {
-                                        data: "name"
-                                    },
-                                    ...daysInMonth.map((day) => ({
-                                        data: `attendance.${day}`,
-                                        title: day,
-                                        orderable: false,
-                                    })),
-                                ],
-                                order: [
-                                    [0, "DESC"]
-                                ],
-                            });
-                        }
-                    });
-
-                    // Event Listener untuk tombol filter
-                    document.getElementById('filterTable').addEventListener('submit', function(e) {
-                        e.preventDefault();
-                        $('#attendanceTable').DataTable().ajax.reload();
-                    });
-                });
+            <script>
+                function getEmployee(data, type, row, meta) {
+                    console.log(data);
+                };
             </script>
         @endpush
     @endsection
