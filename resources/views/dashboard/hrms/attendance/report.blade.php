@@ -7,6 +7,14 @@
                 /* e.g. change 8x to 4px here */
             }
         </style>
+        @php
+            use Carbon\Carbon;
+
+            $currentMonth = Carbon::now()->month;
+            $currentYear = Carbon::now()->year;
+            $startDate = Carbon::create($currentYear, $currentMonth, 1);
+            $endDate = $startDate->copy()->endOfMonth();
+        @endphp
         <div
             class="hurricane before:content-[''] before:z-[-1] before:w-screen before:bg-slate-50 before:top-0 before:h-screen before:fixed before:bg-texture-black before:bg-contain before:bg-fixed before:bg-[center_-20rem] before:bg-no-repeat">
             @include('layouts.dashboard.menu')
@@ -40,7 +48,7 @@
                                             <div class="relative">
                                                 <x-form.selectFilter id="company_id" name="company_id" data-method="POST"
                                                     label="" url="{{ url('dashboard/hrms/company/create') }}"
-                                                    apiReportAttendance="{{ $apiCompanyUrl }}/company/datatables"
+                                                    apiUrl="{{ $apiCompanyUrl }}/company/datatables"
                                                     columns='["company_name"]' :keys="[
                                                         'company_id' => $company,
                                                     ]"
@@ -52,7 +60,7 @@
                                                 <x-form.selectFilter id="department_id" name="department_id"
                                                     data-method="POST" label=""
                                                     url="{{ url('dashboard/hrms/department/create') }}"
-                                                    apiReportAttendance="{{ $apiCompanyUrl }}/department/datatables"
+                                                    apiUrl="{{ $apiCompanyUrl }}/department/datatables"
                                                     columns='["department_name"]' :keys="[
                                                         'company_id' => $company,
                                                     ]"
@@ -63,7 +71,7 @@
                                             <div class="relative">
                                                 <x-form.selectFilter id="designation_id" name="designation_id"
                                                     label="Designation" url="{{ url('dashboard/hrms/designation') }}"
-                                                    apiReportAttendance="{{ $apiCompanyUrl }}/designation/datatables"
+                                                    apiUrl="{{ $apiCompanyUrl }}/designation/datatables"
                                                     columns='["designation_name"]' :keys="[
                                                         'company_id' => $company,
                                                         'search',
@@ -94,17 +102,29 @@
 
                                 </div>
 
-                                <x-datatable id="attendanceTable" :url="$apiReportAttendance" method="POST" class="display nowrap"
-                                    :order="[[1, 'DESC']]" :filter="[
+                                <x-dynamic_header_datatable id="attendanceTable" :url="$apiReportAttendance" method="POST"
+                                    class="display nowrap" :order="[[1, 'DESC']]" :filter="[
                                         'filter_date' => '#filter_date',
                                     ]" :order="[[0, 'DESC']]">
                                     <x-slot:thead>
-                                        {{-- <x-slot:thead id="dynamic-thead"> --}}
                                         <th data-value="no" orderable="true">No</th>
                                         <th data-value="employee_id">Employee ID</th>
                                         <th data-value="name" orderable="true" data-render="getFullName">Name</th>
+                                        @foreach (range(1, $endDate->day) as $day)
+                                            @php
+                                                $currentDate = $startDate->copy()->day($day);
+                                                $dayName = $currentDate->format('D');
+                                                $isWeekend = $currentDate->isWeekend();
+                                            @endphp
+                                            <th data-value="attendances.{{ $day }}" class="attendance-header"
+                                                style="background-color: {{ $isWeekend ? '#faa5a5' : 'transparent' }};">
+                                                {{ $day }} </br> {{ $dayName }}
+                                            </th>
+                                        @endforeach
+
                                     </x-slot:thead>
-                                </x-datatable>
+                                </x-dynamic_header_datatable>
+
                             </div>
                         </div>
                     </div>
@@ -132,6 +152,8 @@
         @push('js')
             <script src="{{ asset('dist') }}/js/vendors/litepicker.js"></script>
             <script src="{{ asset('dist') }}/js/components/base/litepicker.js"></script>
+
+
             <script>
                 function getEmployeeName(data, type, row, meta) {
                     if (data !== null) {
@@ -146,10 +168,7 @@
                     }
                     return row?.fullname;
                 }
-            </script>
 
-
-            <script>
                 function getEmployee(data, type, row, meta) {
                     console.log(data);
                 };
