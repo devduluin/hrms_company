@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Leave\LeaveApplicantController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\Attendance\AttendanceRequestController;
+use App\Http\Controllers\Attendance\HolidayListController;
 use App\Http\Controllers\Attendance\AttendanceActivityController;
 
 use Illuminate\Support\Facades\Route;
@@ -71,6 +72,15 @@ Route::prefix('/leave')->group(function () {
     Route::controller(LeaveController::class)->group(function () {
         Route::get('/', 'index')->name('payout');
 
+        Route::prefix('/holiday_list')->group(function () {
+            Route::controller(HolidayListController::class)->group(function () {
+                Route::get('/', 'index')->name('hrms.attendance.holiday_list');
+                Route::get('/create', 'create')->name('hrms.attendance.holiday_list.create');
+                Route::get('/update/{id}', 'update')->name('hrms.attendance.holiday_list.update');
+                Route::get('/detail/{id}', 'detail')->name('hrms.attendance.holiday_list.detail');
+            });;
+        });
+        
         Route::prefix('/application')->group(function () {
             Route::controller(LeaveApplicantController::class)->group(function () {
                 Route::get('/', 'index')->name('hrms.leave.application');

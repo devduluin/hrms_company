@@ -84,137 +84,137 @@
                              
                     </form>
                  
-                    <form id="approver-form" method="post"
-                        action="#">
-                        @csrf
-                        <div class="box box--stacked flex flex-col p-5">
-                        <div class=" gap-5 mt-2">
-                            
-                            <div class="card-body">
-                                <div class="relative mb-4 mt-2 rounded-[0.6rem] border border-slate-200/80 dark:border-darkmode-400 mr-5">
-                                    <div class="absolute left-0 -mt-2 ml-4 bg-white px-3 text-xs uppercase text-slate-500">
-                                        <div class="-mt-px">Shift Approver</div>
+                <form id="approver-form" method="post"
+                    action="#">
+                    @csrf
+                    <div class="box box--stacked flex flex-col p-5">
+                    <div class=" gap-5 mt-2">
+                        
+                        <div class="card-body">
+                            <div class="relative mb-4 mt-2 rounded-[0.6rem] border border-slate-200/80 dark:border-darkmode-400 mr-5">
+                                <div class="absolute left-0 -mt-2 ml-4 bg-white px-3 text-xs uppercase text-slate-500">
+                                    <div class="-mt-px">Shift Approver</div>
+                                </div>
+                                <div class="mt-2 flex flex-col gap-3.5 px-5 py-5">
+                                    <div class="preview relative">
+                                        <div class="overflow-x-autos">
+                                            <table class="w-full text-left table-earning-editable table-edits">
+                                                <thead class="bg-slate-200/60 dark:bg-slate-200">
+                                                    <tr>
+                                                        <th width="60px"
+                                                            class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
+                                                            No</th>
+                                                        <th width="35%"
+                                                            class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
+                                                            Name</th>
+                                                        <th
+                                                            class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
+                                                            Email</th>
+                                                        
+                                                        <th
+                                                            class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
+                                                            <i data-lucide="settings" class="inline-block h-5 w-5 mr-2"></i>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="editable-shift-table"></tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                                    <div class="mt-2 flex flex-col gap-3.5 px-5 py-5">
-                                        <div class="preview relative">
-                                            <div class="overflow-x-autos">
-                                                <table class="w-full text-left table-earning-editable table-edits">
-                                                    <thead class="bg-slate-200/60 dark:bg-slate-200">
-                                                        <tr>
-                                                            <th width="60px"
-                                                                class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
-                                                                No</th>
-                                                            <th width="35%"
-                                                                class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
-                                                                Name</th>
-                                                            <th
-                                                                class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
-                                                                Email</th>
-                                                            
-                                                            <th
-                                                                class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
-                                                                <i data-lucide="settings" class="inline-block h-5 w-5 mr-2"></i>
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="editable-shift-table"></tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div class="mb-7">
-                                        <button type="button" id="add-shift-row"
-                                                class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium text-xs cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-slate-200 text-slate-700 dark:border-danger shadow-md w-100">Add
-                                                New Shift Approver</button>
-                                        </div>
+                                    <div class="mb-7">
+                                      <button type="button" id="add-shift-row"
+                                            class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium text-xs cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-slate-200 text-slate-700 dark:border-danger shadow-md w-100">Add
+                                            New Shift Approver</button>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            
-                            <div class="card-body">
-                                <div class="relative mb-4 mt-4 rounded-[0.6rem] border border-slate-200/80 dark:border-darkmode-400 mr-5">
-                                    <div class="absolute left-0 -mt-2 ml-4 bg-white px-3 text-xs uppercase text-slate-500">
-                                        <div class="-mt-px">Leave Approver</div>
-                                    </div>
-                                    <div class="mt-2 flex flex-col gap-3.5 px-5 py-5">
-                                        <div class="preview relative">
-                                            <div class="overflow-x-autos">
-                                                <table class="w-full text-left table-earning-editable table-edits">
-                                                    <thead class="bg-slate-200/60 dark:bg-slate-200">
-                                                        <tr>
-                                                        <th width="60px"
-                                                                class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
-                                                                No</th>
-                                                            <th width="35%"
-                                                                class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
-                                                                Name</th>
-                                                            <th 
-                                                                class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
-                                                                Email</th>
-                                                            
-                                                            <th
-                                                                class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
-                                                                <i data-lucide="settings" class="inline-block h-5 w-5 mr-2"></i>
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="editable-leave-table"></tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div class="mb-7">
-                                            <button type="button" id="add-leave-row"
-                                                class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium text-xs cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-slate-200 text-slate-700 dark:border-danger shadow-md w-100">Add
-                                                New Leave Approver</button>
-                                        </div>
-                                    </div>
+                        
+                        <div class="card-body">
+                            <div class="relative mb-4 mt-4 rounded-[0.6rem] border border-slate-200/80 dark:border-darkmode-400 mr-5">
+                                <div class="absolute left-0 -mt-2 ml-4 bg-white px-3 text-xs uppercase text-slate-500">
+                                    <div class="-mt-px">Leave Approver</div>
                                 </div>
-                            </div>
-                            
-                            <div class="card-body">
-                                <div class="relative mb-4 mt-4 rounded-[0.6rem] border border-slate-200/80 dark:border-darkmode-400 mr-5">
-                                    <div class="absolute left-0 -mt-2 ml-4 bg-white px-3 text-xs uppercase text-slate-500">
-                                        <div class="-mt-px">Expense Approver</div>
+                                <div class="mt-2 flex flex-col gap-3.5 px-5 py-5">
+                                    <div class="preview relative">
+                                        <div class="overflow-x-autos">
+                                            <table class="w-full text-left table-earning-editable table-edits">
+                                                <thead class="bg-slate-200/60 dark:bg-slate-200">
+                                                    <tr>
+                                                    <th width="60px"
+                                                            class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
+                                                            No</th>
+                                                        <th width="35%"
+                                                            class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
+                                                            Name</th>
+                                                        <th 
+                                                            class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
+                                                            Email</th>
+                                                         
+                                                        <th
+                                                            class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
+                                                            <i data-lucide="settings" class="inline-block h-5 w-5 mr-2"></i>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="editable-leave-table"></tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                                    <div class="mt-2 flex flex-col gap-3.5 px-5 py-5">
-                                        <div class="preview relative">
-                                            <div class="overflow-x-autos">
-                                                <table class="w-full text-left table-earning-editable table-edits">
-                                                    <thead class="bg-slate-200/60 dark:bg-slate-200">
-                                                        <tr>
-                                                        <th width="60px"
-                                                                class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
-                                                                No</th>
-                                                            <th width="35%"
-                                                                class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
-                                                                Name</th>
-                                                            <th
-                                                                class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
-                                                                Email</th>
-                                                            
-                                                            <th
-                                                                class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
-                                                                <i data-lucide="settings" class="inline-block h-5 w-5 mr-2"></i>
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="editable-expense-table"></tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div class="mb-7">
-                                            <button type="button" id="add-expense-row"
-                                                class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium text-xs cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-slate-200 text-slate-700 dark:border-danger shadow-md w-100">Add
-                                                New Expense Approver</button>
-                                        </div>
+                                    <div class="mb-7">
+                                        <button type="button" id="add-leave-row"
+                                            class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium text-xs cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-slate-200 text-slate-700 dark:border-danger shadow-md w-100">Add
+                                            New Leave Approver</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
+                        <div class="card-body">
+                            <div class="relative mb-4 mt-4 rounded-[0.6rem] border border-slate-200/80 dark:border-darkmode-400 mr-5">
+                                <div class="absolute left-0 -mt-2 ml-4 bg-white px-3 text-xs uppercase text-slate-500">
+                                    <div class="-mt-px">Expense Approver</div>
+                                </div>
+                                <div class="mt-2 flex flex-col gap-3.5 px-5 py-5">
+                                    <div class="preview relative">
+                                        <div class="overflow-x-autos">
+                                            <table class="w-full text-left table-earning-editable table-edits">
+                                                <thead class="bg-slate-200/60 dark:bg-slate-200">
+                                                    <tr>
+                                                    <th width="60px"
+                                                            class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
+                                                            No</th>
+                                                        <th width="35%"
+                                                            class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
+                                                            Name</th>
+                                                        <th
+                                                            class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
+                                                            Email</th>
+                                                         
+                                                        <th
+                                                            class="font-medium border-b-2 dark:border-darkmode-300 border-l border-r border-t whitespace-nowrap px-4 py-2">
+                                                            <i data-lucide="settings" class="inline-block h-5 w-5 mr-2"></i>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="editable-expense-table"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="mb-7">
+                                        <button type="button" id="add-expense-row"
+                                            class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium text-xs cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-slate-200 text-slate-700 dark:border-danger shadow-md w-100">Add
+                                            New Expense Approver</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        
-                    </form>
+                      </div>
+                       
+                    </div>
+                    
+                </form>
                 </div>
             </div>
         </div>
@@ -714,7 +714,7 @@
             
         }
 
-        function addRowToTable(tableId, rowCountVar, data = null) {
+         function addRowToTable(tableId, rowCountVar, data = null) {
             const tableBody = document.getElementById(tableId);
                 //rowCounts[rowCountVar] = (rowCounts[rowCountVar] || 0) + 1; // Ensure it's initialized and increment it
                 const index = document.querySelectorAll('#' + tableId + ' tr').length + 1;
