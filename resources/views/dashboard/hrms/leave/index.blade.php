@@ -87,6 +87,8 @@
                         <div class="box p-4 mt-5">
                          
                                 <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-5 mt-4">
+                                    <x-action  label="Holiday List" icon="arrow-up-right" url="{{ url('/dashboard/hrms/leave/holiday_list') }}" />
+                                    
                                     <x-action  label="Leave Type" icon="arrow-up-right" url="{{ route('hrms.leave-type') }}" />
                                     <x-action  label="Leave Application" icon="arrow-up-right" url="{{ url('/dashboard/hrms/leave/application') }}" />
                                     <x-action  label="Leave Allocation" status="comming_soon" icon="arrow-up-right" url="{{ url('/dashboard/hrms/leave/allocation') }}" />
