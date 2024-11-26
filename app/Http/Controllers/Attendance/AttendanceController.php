@@ -27,13 +27,13 @@ class AttendanceController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Add New Attendance';
-        
+
         $data['company_id'] = session()->get('company_id');
         $data['apiUrl'] = $this->apiGatewayUrl . '/v1/attendance/attendance';
         $data['apiUrlEmployee'] = $this->apiGatewayUrl . '/v1/employees/employee';
         $data['apiUrlLeaveType'] = $this->apiGatewayUrl . "/v1/companies/leave-type/datatable";
         $data['apiUrlShiftEmployee'] = $this->apiGatewayUrl . "/v1/attendance/shift-assignment/employee_id";
-        
+
         $data['apiAttendance'] = $this->apiGatewayUrl . '/v1/attendance/attendance/operator/store';
         return view('dashboard.hrms.attendance.create', $data);
     }
@@ -42,7 +42,7 @@ class AttendanceController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Add New Attendance';
-        
+
         $data['id'] = $id;
         $data['company_id'] = session()->get('company_id');
         $data['apiUrl'] = $this->apiGatewayUrl . '/v1/attendance/attendance';
@@ -50,7 +50,7 @@ class AttendanceController extends Controller
         $data['apiUrlEmployee'] = $this->apiGatewayUrl . '/v1/employees/employee';
         $data['apiUrlLeaveType'] = $this->apiGatewayUrl . "/v1/companies/leave-type/datatable";
         $data['apiUrlShiftEmployee'] = $this->apiGatewayUrl . "/v1/attendance/shift-assignment/employee_id";
-        
+
         $data['apiAttendance'] = $this->apiGatewayUrl . '/v1/attendance/attendance/operator/store';
         return view('dashboard.hrms.attendance.create', $data);
     }
@@ -119,7 +119,20 @@ class AttendanceController extends Controller
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Attendance Report';
         $data['apiReportAttendance'] = $this->apiGatewayUrl . "/v1/attendance/attendance/report/by";
+        $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
+        $data['company'] = session()->get('company_id');
+
         return view('dashboard.hrms.attendance.report', $data);
+    }
+
+    public function summary()
+    {
+        $data['title']   = 'Duluin HRMS';
+        $data['page_title']   = 'Attendance Summary';
+        $data['company'] = session()->get('company_id');
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/attendance/attendance/report/summary";
+        $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
+        return view('dashboard.hrms.attendance.summary', $data);
     }
 
     public function print()

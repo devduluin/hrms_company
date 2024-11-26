@@ -160,7 +160,7 @@
                     'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
                 },
                 data: function(d) {
-
+                    // console.log(d);
                     let filters = {};
                     @if (count($filter) > 0)
                         @foreach ($filter as $name => $elem)
@@ -173,7 +173,7 @@
                         @endforeach
                     @endif
 
-                     // Add query parameters from URL
+                    // Add query parameters from URL
                     const urlParams = new URLSearchParams(window.location.search);
                     urlParams.forEach((value, key) => {
                         filters[key] = value;
@@ -233,12 +233,9 @@
                 $('#{{ $id }}').DataTable().destroy();
             }
 
-            console.log("Disini : ", @json($order));
+            // console.log("Disini : ", @json($order));
 
             {{ $id }} = $({{ $id }}).DataTable({
-                // order: [
-                //     [0, "desc"]
-                // ],
                 order: @json($order),
                 processing: true,
                 serverSide: true,

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Leave\LeaveApplicantController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\Attendance\AttendanceRequestController;
+use App\Http\Controllers\Attendance\HolidayListController;
+use App\Http\Controllers\Attendance\AttendanceActivityController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +19,17 @@ Route::prefix('/attendance')->group(function () {
         Route::get('/detail/{id}', 'detail')->name('detail'); 
 
         Route::get('/report', 'report')->name('report');
+        Route::get('/summary', 'summary')->name('summary');
         Route::get('/report/print', 'print')->name('hrms.attendance.print');
+
+        Route::prefix('/activity')->group(function () {
+            Route::controller(AttendanceActivityController::class)->group(function () {
+                Route::get('/', 'index')->name('hrms.attendance.activity');
+                Route::get('/create', 'create')->name('hrms.attendance.activity.create');
+                Route::get('/update/{id}', 'update')->name('hrms.attendance.activity.update');
+                Route::get('/detail/{id}', 'detail')->name('hrms.attendance.activity.detail');
+            });;
+        });
 
         Route::prefix('/request')->group(function () {
             Route::controller(AttendanceRequestController::class)->group(function () {
@@ -26,6 +38,7 @@ Route::prefix('/attendance')->group(function () {
                 Route::get('/update/{id}', 'update')->name('hrms.attendance.request.update');
             });;
         });
+        
         Route::prefix('/shift_type')->group(function () {
             Route::controller(ShiftTypeController::class)->group(function () {
                 Route::get('/', 'index')->name('hrms.attendance.shifttype');
@@ -59,6 +72,15 @@ Route::prefix('/leave')->group(function () {
     Route::controller(LeaveController::class)->group(function () {
         Route::get('/', 'index')->name('payout');
 
+        Route::prefix('/holiday_list')->group(function () {
+            Route::controller(HolidayListController::class)->group(function () {
+                Route::get('/', 'index')->name('hrms.attendance.holiday_list');
+                Route::get('/create', 'create')->name('hrms.attendance.holiday_list.create');
+                Route::get('/update/{id}', 'update')->name('hrms.attendance.holiday_list.update');
+                Route::get('/detail/{id}', 'detail')->name('hrms.attendance.holiday_list.detail');
+            });;
+        });
+        
         Route::prefix('/application')->group(function () {
             Route::controller(LeaveApplicantController::class)->group(function () {
                 Route::get('/', 'index')->name('hrms.leave.application');

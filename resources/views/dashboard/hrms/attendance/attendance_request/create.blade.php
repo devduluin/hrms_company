@@ -84,104 +84,104 @@
                                     <div class="absolute left-0 -mt-2 ml-4 bg-white px-3 text-xs uppercase text-slate-500">
                                         <div class="-mt-px">Dates & Reason</div>
                                     </div>
-                                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 p-4">
-                                        <div>
-                                            <div class="py-2">
-                                                <div class="mt-3 flex-row xl:items-center" placholder="">
-                                                    <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4">
-                                                        <div class="text-left">
-                                                            <div class="flex items-center">
-                                                                <div class="font-medium" for="start_time">From Date</div>
-                                                                        <div class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
-                                                                        Required
-                                                                    </div>                
-                                                            </div>
-                                                            <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+                                        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 p-4">
+                                            <div>
+                                                <div class="py-2">
+                                                    <div class="mt-3 flex-row xl:items-center" placholder="">
+                                                        <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4">
+                                                            <div class="text-left">
+                                                                <div class="flex items-center">
+                                                                    <div class="font-medium" for="start_time">From Date</div>
+                                                                            <div class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                                                            Required
+                                                                        </div>                
+                                                                </div>
+                                                                <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
 
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="flex-1 sm:w-full  w-96  gap-1 mt-3 xl:mt-0">
-                                                        <input id="from_date" type="text" name="from_date" data-single-mode="true" value=""  required="" class="datepicker disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 ">
+                                                        <div class="flex-1 sm:w-full  w-96  gap-1 mt-3 xl:mt-0">
+                                                            <input id="from_date" type="text" name="from_date" data-single-mode="true" value=""  required="" class="datepicker disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 ">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="py-2">
-                                                <div class="mt-3 flex-row xl:items-center" placholder="">
-                                                    <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4">
-                                                        <div class="text-left">
-                                                            <div class="flex items-center">
-                                                                <div class="font-medium" for="start_time">To Date</div>
-                                                                        <div class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
-                                                                        Required
-                                                                    </div>                
-                                                            </div>
-                                                            <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+                                                <div class="py-2">
+                                                    <div class="mt-3 flex-row xl:items-center" placholder="">
+                                                        <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4">
+                                                            <div class="text-left">
+                                                                <div class="flex items-center">
+                                                                    <div class="font-medium" for="start_time">To Date</div>
+                                                                            <div class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                                                            Required
+                                                                        </div>                
+                                                                </div>
+                                                                <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
 
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="flex-1 sm:w-full  w-96  gap-1 mt-3 xl:mt-0">
-                                                        <input id="to_date" type="text" name="to_date" data-single-mode="true" value=""  required="" class="datepicker disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 ">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-                                        <div>
-                                        <div class="py-2">
-                                        <div class="mt-3 flex-row xl:items-center">
-                                                <div class="mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-64">
-                                                    <div class="text-left">
-                                                        <div class="flex items-center">
-                                                            <div class="font-medium">Reason</div>
+                                                        <div class="flex-1 sm:w-full  w-96  gap-1 mt-3 xl:mt-0">
+                                                            <input id="to_date" type="text" name="to_date" data-single-mode="true" value=""  required="" class="datepicker disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 ">
                                                         </div>
                                                     </div>
-                                                    <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3"></div>
                                                 </div>
-                                                <div class="mt-3 w-96 flex-1 xl:mt-0">
-                                                    <select required name="reason" id="reason" data-title="Reason" data-placeholder="Select your reason" class="tom-select w-full" sclass="tom-select disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10"">
-                                                        <option value="">
-                                                            Select Reason
-                                                        </option>
-                                                        <option value="Work from home">
-                                                            Work From Home
-                                                        </option>
-                                                        <option value="On Duty">
-                                                            On Duty
-                                                        </option>
-                                                       
-                                                    </select>
-                                                </div>
+                                                
                                             </div>
-                                            </div>
-                                            <x-form.textarea id="explanation" label="Explanation" name="explanation" /> 
+                                            <div>
+                                            <div class="py-2">
                                             <div class="mt-3 flex-row xl:items-center">
-                                                <div class="mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-64">
-                                                    <div class="text-left">
-                                                        <div class="flex items-center">
-                                                            <div class="font-medium">Status</div>
+                                                    <div class="mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-64">
+                                                        <div class="text-left">
+                                                            <div class="flex items-center">
+                                                                <div class="font-medium">Reason</div>
+                                                            </div>
                                                         </div>
+                                                        <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3"></div>
                                                     </div>
-                                                    <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3"></div>
+                                                    <div class="mt-3 w-96 flex-1 xl:mt-0">
+                                                        <select required name="reason" id="reason" data-title="Reason" data-placeholder="Select your reason" class="tom-select w-full" sclass="tom-select disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10"">
+                                                            <option value="">
+                                                                Select Reason
+                                                            </option>
+                                                            <option value="Work from home">
+                                                                Work From Home
+                                                            </option>
+                                                            <option value="On Duty">
+                                                                On Duty
+                                                            </option>
+                                                        
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                                <div class="mt-3 w-96 flex-1 xl:mt-0">
-                                                    <select required name="status" id="status" data-title="Language" data-placeholder="Select your language" class="tom-select w-full" sclass="tom-select disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10"">
-                                                        <option value="pending">
-                                                            Pending
-                                                        </option>
-                                                        <option value="approved">
-                                                            Approved
-                                                        </option>
-                                                        <option value="rejected">
-                                                            Rejected
-                                                        </option>
-                                                         
-                                                    </select>
                                                 </div>
-                                            </div>  
+                                                <x-form.textarea id="explanation" label="Explanation" name="explanation" /> 
+                                                <div class="mt-3 flex-row xl:items-center">
+                                                    <div class="mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-64">
+                                                        <div class="text-left">
+                                                            <div class="flex items-center">
+                                                                <div class="font-medium">Status</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3"></div>
+                                                    </div>
+                                                    <div class="mt-3 w-96 flex-1 xl:mt-0">
+                                                        <select required name="status" id="status" data-title="Language" data-placeholder="Select your language" class="tom-select w-full" sclass="tom-select disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10"">
+                                                            <option value="pending">
+                                                                Pending
+                                                            </option>
+                                                            <option value="approved">
+                                                                Approved
+                                                            </option>
+                                                            <option value="rejected">
+                                                                Rejected
+                                                            </option>
+                                                            
+                                                        </select>
+                                                    </div>
+                                                </div>  
+                                            </div>
                                         </div>
-                                    </div>
                                     </div>
 
                                      

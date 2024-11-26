@@ -85,13 +85,15 @@
                                 'status' => '#status',
                             ]">
                             <x-slot:thead>
-                                <th data-value="no" width="80px">No.</th>
-                                <th data-value="employee_id_rel"  data-render="getEmployeeName">Employee Name</th>
-                                <th data-value="shift_type_id_rel" data-render="getShiftName">Shift Type Name</th>
-                                <th data-value="start_date" data-render="dateFormat">Start Date</th>
-                                <th data-value="end_date" data-render="dateFormat">End Date</th>
-                                <th data-value="status" data-render="getStatus">Status</th>
-                                <th data-value="id" data-render="getActionBtn">Action</th>
+                            <th data-value="no" width="80px">No.</th>
+                                    <th data-value="employee_id_rel"  data-render="getEmployeeName">Employee Name</th>
+                                    <th data-value="shift_type_id_rel" data-render="getShiftName">Shift Type Name</th>
+                                    <th data-value="start_date" data-render="dateFormat">Start Date</th>
+                                    <th data-value="end_date" data-render="dateFormat">End Date</th>
+                                    <th data-value="shift_type_id_rel" data-render="getShiftTimeIn">Time In</th>
+                                    <th data-value="shift_type_id_rel" data-render="getShiftTimeOut">Time Out</th>
+                                    <th data-value="status" data-render="getStatus">Status</th>
+                                    <th data-value="id" data-render="getActionBtn">Action</th>
                             </x-slot:thead>
                         </x-datatable>
                         </div>
@@ -132,11 +134,23 @@
             }
             return 'N/A';
         }
+        function getShiftName(data, type, row, meta) {  
+            if (data) {   
+                return '<a href="{{ url('dashboard/hrms/attendance/shift_type/update/') }}/'+data.id+'" data-placement="top" title="Click to see detail!"><div class=" px-1.5 w-full [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">'+data.shift_type_name+'</div></a>';
+            }
+            return 'N/A';
+        }
+ 
+        function getShiftTimeIn(data, type, row, meta) {
+            if (row) {
+                return data.start_time;
+            }
+            return 'N/A';
+        }
 
-        function getShiftName(data, type, row, meta) {
-            if (data) {
-               
-                return data.shift_type_name;
+        function getShiftTimeOut(data, type, row, meta) {
+            if (row) {
+                return data.end_time;
             }
             return 'N/A';
         }
