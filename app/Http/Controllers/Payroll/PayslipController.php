@@ -21,9 +21,11 @@ class PayslipController extends Controller
         $data['company'] = $allSessions['company_id'];
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
         $data['apiEmployeeUrl'] = $this->apiGatewayUrl . '/v1/employees';
+        $data['apiUrlEmployee'] = $this->apiGatewayUrl . '/v1/employees/employee';
         $data['apiGateway'] = $this->apiGatewayUrl . '/users';
         $data['apiUrl'] = $this->apiGatewayUrl . '/v1/payslip';
         $data['apiAttendanceUrl'] = $this->apiGatewayUrl . '/v1/attendance';
+        $data['company_id'] = $allSessions['company_id'];
 
         return view('dashboard.payroll.payout.payslip.index', $data);
     }

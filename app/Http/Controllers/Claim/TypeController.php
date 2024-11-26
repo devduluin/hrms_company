@@ -17,6 +17,9 @@ class TypeController extends Controller
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Expense Type';
         $data['apiUrl'] = $this->apiGatewayUrl . "/v1/payroll";
+        $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies/company/datatables';
+        $data['company'] = session()->get('company_id');
+        
         return view('dashboard.hrms.claim.type.index', $data);
     }
 

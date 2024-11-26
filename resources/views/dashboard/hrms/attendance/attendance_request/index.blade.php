@@ -14,6 +14,82 @@
                         class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md w-24">
                         <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
                     </button>
+                    <div data-tw-merge="" data-tw-placement="bottom-end" class="dropdown relative inline-block"><button data-tw-merge="" data-tw-toggle="dropdown" aria-expanded="false" class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md  w-full sm:w-auto"><i data-tw-merge="" data-lucide="arrow-down-wide-narrow" class="mr-2 h-4 w-4 stroke-[1.3]"></i>
+                        Filter
+                        <span id="countFilter" class="ml-2 flex h-5 items-center justify-center rounded-full border bg-slate-100 px-1.5 text-xs font-medium">
+                            
+                        </span></button>
+                        <div data-transition="" data-selector=".show" data-enter="transition-all ease-linear duration-150" data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1" data-enter-to="!mt-1 visible opacity-100 translate-y-0" data-leave="transition-all ease-linear duration-150" data-leave-from="!mt-1 visible opacity-100 translate-y-0" data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1" class="dropdown-menu absolute z-[9999] hidden">
+                            <div data-tw-merge="" class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600">
+                                <div class="p-2">
+                                  <form method="GET" id="filterTable">
+                                    <div class="mt-3">
+                                        <x-form.select id="employee_id" name="employee_id" data-method="POST"
+                                            label="Employee" url="{{ url('dashboard/hrms/employee/create') }}"
+                                            apiUrl="{{ $apiUrlEmployee }}/datatables" detailApiUrl="{{ $apiUrlEmployee }}"
+                                            customfunction="addOptionIfNotExist"
+                                            detailApiColumns="attendanceLeave.expense_approver"
+                                            columns='["first_name", "last_name"]' data-dependant="expense_approver"
+                                            :keys="[
+                                                'company_id' => $company,
+                                            ]">
+                                            <option value="">Select Employee</option>
+                                        </x-form.select>
+                                    </div>
+                                    <div class="mt-3">
+                                        <x-form.select id="shift_assigment_id" name="shift_assigment_id" data-method="POST" label="Shift Type Name" url="{{ url('dashboard/hrms/attendance/shift_type/create') }}"
+                                                    apiUrl="{{ $apiUrlShiftType }}/datatable" columns='["shift_type_name"]'  
+                                                    :keys="[
+                                                'company_id' => $company,
+                                                ]">
+                                            <option value="">Select Shift Type</option>
+                                        </x-form.select>
+                                    </div>
+                                    <div class="mt-3">
+                                        <div class="text-left text-slate-500">
+                                            Status
+                                        </div>
+                                        <select id="status" name="status" data-tw-merge="" label="Status" class="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1 mt-2 flex-1">
+                                            <option value="">
+                                                Select Status
+                                            </option>
+                                            <option value="pending">
+                                                Pending
+                                            </option>
+                                            <option value="approved">
+                                                Approved
+                                            </option>
+                                            <option value="rejected">
+                                                Rejected
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="mt-3">
+                                        <div class="text-left text-slate-500">
+                                            Reason
+                                        </div>
+                                        <select required name="reason" id="reason" data-title="Reason" data-placeholder="Select your reason" class="tom-select w-full" sclass="tom-select disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10"">
+                                                            <option value="">
+                                                                Select Reason
+                                                            </option>
+                                                            <option value="Work from home">
+                                                                Work From Home
+                                                            </option>
+                                                            <option value="On Duty">
+                                                                On Duty
+                                                            </option>
+                                                           
+                                                        </select>
+                                        </div>
+                                        <div class="mt-4 flex items-center">
+                                        <button type="reset" data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 ml-auto w-32">Reset</button>
+                                        <button type="submit" data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary ml-2 w-32">Apply</button>
+                                    </div>
+                                  </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <x-form.button id="new_attendance_request" label="Add Attendance Request" style="primary" icon="plus" url="{{ route('hrms.attendance.request.create') }}" ></x-button>
                 </div>
             </div>
@@ -25,7 +101,11 @@
                 </div> -->
                 <div class="col-span-12 flex flex-col gap-y-7 xl:col-span-9">
                     <div class="box box--stacked flex flex-col p-5">
-                        <x-datatable id="attendanceRequestTable" :url="$apiUrl.'/datatables'" method="POST" class="display small">
+                        <x-datatable id="attendanceRequestTable" :url="$apiUrl.'/datatables'" method="POST" class="display small"
+                        :filter="[
+                                'employee_id' => '#employee_id',
+                                'status' => '#status'
+                            ]">
                             <x-slot:thead>
                             <th data-value="no" width="80px">No.</th>
                                     <th data-value="employee_id_rel"  data-render="getEmployeeName">Employee Name</th>
@@ -70,10 +150,12 @@
         }
 
         function getShiftName(data, type, row, meta) {
-            if (data) {
-                return data.shift_type_name;
-            }
-            return 'N/A';
+                console.log(data);
+
+            // if (data) {
+            //     return data.shift_type_name;
+            // }
+            // return 'N/A';
         }
 
         function dateFormat(utcDateStr) {
@@ -168,6 +250,31 @@
                 // activateTab(formId);
             }
         }
+
+        $(document).ready(function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            let activeFilterCount = 0;
+
+            const handleFilter = (paramName, selectorId) => {
+                if (urlParams.has(paramName)) {
+                    const paramValue = urlParams.get(paramName);
+                    const $selectElement = $(`#${selectorId}`);
+                    if ($selectElement.length > 0) {
+                        $selectElement.val(paramValue).change();
+                        if (paramValue) activeFilterCount++;
+                    }
+                }
+            };
+
+            // Call the function for each filter
+            handleFilter("status", "status");
+            handleFilter("attendance_status", "attendanceStatus");
+
+            const $countFilter = $("#countFilter");
+            if ($countFilter.length > 0) {
+                $countFilter.text(activeFilterCount);
+            }
+        });
     </script>
 @endpush
 @include('vendor-common.sweetalert')

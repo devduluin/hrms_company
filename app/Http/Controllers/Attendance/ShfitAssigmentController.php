@@ -19,6 +19,10 @@ class ShfitAssigmentController extends Controller
         $data['page_title']   = 'New Shift Assignment';
         $data['apiUrl'] = $this->apiGatewayUrl . "/v1/attendance/shift-assignment";
         $data['apiUpdateBulkShift'] =  $this->apiGatewayUrl . "/v1/attendance/shift-assignment/bulkupdate";
+        $data['apiUrlEmployee'] = $this->apiGatewayUrl . '/v1/employees/employee';
+        $data['company_id'] = session()->get('company_id');
+        $data['apiUrlShiftType'] = $this->apiGatewayUrl . '/v1/attendance/shift-type';
+
         return view('dashboard.hrms.attendance.shiftassigment.index', $data);
     }
 

@@ -231,6 +231,7 @@
             const handleFilter = (paramName, selectorId) => {
                 if (urlParams.has(paramName)) {
                     const paramValue = urlParams.get(paramName);
+                    console.log(paramValue);
                     const $selectElement = $(`#${selectorId}`);
                     if ($selectElement.length > 0) {
                         $selectElement.val(paramValue).change();
@@ -247,6 +248,11 @@
             if ($countFilter.length > 0) {
                 $countFilter.text(activeFilterCount);
             }
+
+            const table = $('#attendanceTable').DataTable();
+            table.on('xhr', function (e, settings, json) {
+                console.log(json); // Log the fetched data
+            });
         });
     </script>
 @endpush
