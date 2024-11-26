@@ -98,10 +98,12 @@
                     'previous': document.dir == "rtl" ? '&rarr;' : '&larr;'
                 }
             }
+
         });
 
         if ({{ $id }}) {
             let {{ $id }}Columns = $({{ $id }}).find('thead tr th');
+            console.log({{ $id }});
             let {{ $id }}TableColumns = [];
             const appToken = localStorage.getItem('app_token');
 
@@ -119,7 +121,6 @@
                         render: function(data, type, row, meta) {
                             return `<input type="checkbox" name="selected_employees[]" value='${JSON.stringify(row)}'>`;
                         }
-
                     }
                 } else if ($(item).data('value') == 'no') {
                     tmp = {
@@ -227,13 +228,31 @@
                     console.error('AJAX request failed:', error);
                 },
                 complete: function(response) {
+                    const dates = response.responseJSON.data[0].attendances;
+                    console.log(dates);
+                    const datesArray = Object.values(dates);
+                    console.log(datesArray);
+
+
+                    datesArray.forEach((value, key) => {
+                        console.log(key);
+                        tmp = {
+                            data: key,
+                            name: key,
+                            orderable: false,
+                            searchable: false,
+                        };
+                        {{ $id }}TableColumns.push(tmp);
+                    });
+
+
+
                     $('#{{ $id }}_processing').hide();
+
                     if (response.responseJSON.message === "Data not found") {
                         $('#{{ $id }} tbody').html(
                             '<tr><td colspan="10" class="text-center">No data found</td></tr>'
                         );
-
-
                     }
                 }
             }
@@ -242,6 +261,7 @@
                 $('#{{ $id }}').DataTable().destroy();
             }
 
+            console.log({{ $id }}TableColumns);
             // console.log("Disini : ", @json($order));
 
             {{ $id }} = $({{ $id }}).DataTable({
