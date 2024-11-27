@@ -76,36 +76,7 @@
                         data-tw-target="#notifications-panel" href="javascript:;">
                         <i data-tw-merge="" data-lucide="bell" class="stroke-[1] h-[18px] w-[18px] text-white"></i>
                     </a>
-                    <div>
-                        <div data-tw-merge data-tw-placement="bottom-end" class="dropdown relative">
-                            <button data-tw-merge data-tw-toggle="dropdown" aria-expanded="false"
-                                class="rounded-full p-2 hover:bg-white/5"><i data-tw-merge="" data-lucide="flag"
-                                    class="stroke-[1] h-[18px] w-[18px] text-white"></i></button>
-                            <div data-transition data-selector=".show"
-                                data-enter="transition-all ease-linear duration-150"
-                                data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1"
-                                data-enter-to="!mt-1 visible opacity-100 translate-y-0"
-                                data-leave="transition-all ease-linear duration-150"
-                                data-leave-from="!mt-1 visible opacity-100 translate-y-0"
-                                data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1"
-                                class="dropdown-menu absolute z-[9999] hidden">
-                                <div data-tw-merge
-                                    class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 w-40">
-                                    <div class="p-2 font-medium">
-                                        Select Language
-                                    </div>
-                                    <div class="h-px my-2 -mx-2 bg-slate-200/60 dark:bg-darkmode-400">
-                                    </div>
-                                    <a href="{{ url('lang/en') }}"
-                                        class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item">
-                                        English</a>
-                                    <a href="{{ url('lang/id') }}"
-                                        class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item">
-                                        Indonesia</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
                 <div data-tw-merge="" data-tw-placement="bottom-end" class="dropdown relative ml-5">
                     <button data-tw-toggle="dropdown" aria-expanded="false"

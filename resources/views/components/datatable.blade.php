@@ -218,6 +218,7 @@
                     console.error('AJAX request failed:', error);
                 },
                 complete: function(response) {
+                    
                     $('#{{ $id }}_processing').hide();
                     if (response.responseJSON.message === "Data not found") {
                         $('#{{ $id }} tbody').html(

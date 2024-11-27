@@ -23,7 +23,7 @@
     @include('vendor-common.fontawesome')
 
     <script src="{{ asset('dist/js/vendors/dom.js') }}"></script>
-     
+    <script> let apiUrl = "{{ config('apiendpoints.gateway') }}"; </script>
 </head>
 <!-- END: Head -->
 
