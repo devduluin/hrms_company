@@ -19,7 +19,8 @@ class SalaryComponentController extends Controller
         $data['title']  = 'Duluin HRMS';
         $data['page_title'] = 'Salary Components';
         $data['apiPayrollUrl'] = $this->apiGatewayUrl . '/v1/salary_components';
-        $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
+        $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies/company/datatables';
+        $data['company_id'] = session()->get('company_id');
 
         return view('dashboard.payroll.payout.salary_component.list', $data);
     }

@@ -285,8 +285,8 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4  text-blue-900">
                         <x-action label="Salary Slip" icon="arrow-up-right"
                             url="{{ url('/dashboard/hrms/payout/salary_slip') }}" />
-                        <x-action label="Payroll Setting" icon="arrow-up-right"
-                            url="{{ url('/dashboard/hrms/payout/settings/list') }}" />
+                        <x-action label="Payroll Entry" icon="arrow-up-right"
+                            url="{{ url('/dashboard/hrms/payout/payroll_entry/create') }}" />
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4  text-blue-900">
                         <x-action label="Income Tax Slab List" icon="arrow-up-right"
@@ -311,6 +311,10 @@
                             url="{{ url('/dashboard/hrms/payout/salary_structure') }}" />
                         <x-action label="Salary Structure Assignment" icon="arrow-up-right"
                             url="{{ url('/dashboard/hrms/payout/salary_structure_assignment') }}" />
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4  text-blue-900">
+                        <x-action label="Payroll Setting" icon="arrow-up-right"
+                            url="{{ url('/dashboard/hrms/payout/settings/list') }}" />
                     </div>
                 </div>
             </div>
