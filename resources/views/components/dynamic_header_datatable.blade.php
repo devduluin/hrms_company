@@ -20,11 +20,12 @@
 <div class="relative overflow-x-auto sm:rounded-lg">
     <table id="{{ $id }}" style="width:100%"
         {{ $attributes->merge(['class' => 'min-w-full divide-y divide-gray-200 text-sm text-left text-gray-500 ' . $class])->except(['id', 'trigger']) }}>
-        <!-- Tailwind styled thead -->
+        <!-- Tailwind styled thead -->x
         <thead class="bg-[#e6e6e6] text-xs text-gray-700 tracking-wider border border-[#aaa]">
             <tr class="text-left text-sm leading-4 font-medium">
                 <!-- Apply additional styles for header cells -->
                 {{ $thead }}
+
             </tr>
         </thead>
     </table>
@@ -103,7 +104,7 @@
 
         if ({{ $id }}) {
             let {{ $id }}Columns = $({{ $id }}).find('thead tr th');
-            console.log({{ $id }});
+            // console.log({{ $id }});
             let {{ $id }}TableColumns = [];
             const appToken = localStorage.getItem('app_token');
 
@@ -134,10 +135,6 @@
                     }
                     // console.log(tmp);
                 } else {
-                    if ($(item).data('value') == 'attendances') {
-
-                        // console.log(JSON.stringify(item));
-                    }
                     tmp = {
                         data: $(item).data('value'),
                         orderable: orderable,
@@ -145,7 +142,7 @@
                         visible: visible,
 
                     };
-                    // console.log(tmp.data);
+
                 }
 
                 if (typeof render !== 'undefined') {
@@ -169,7 +166,6 @@
                     'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
                 },
                 data: function(d) {
-                    // console.log(d);
                     let filters = {};
                     @if (count($filter) > 0)
                         @foreach ($filter as $name => $elem)
@@ -228,13 +224,14 @@
                     console.error('AJAX request failed:', error);
                 },
                 complete: function(response) {
+
                     const dates = response.responseJSON.data[0].attendances;
-                    console.log(dates);
+                    // console.log(dates);
                     const datesArray = Object.values(dates);
-                    console.log(datesArray);
+                    // console.log(datesArray);
+
 
                     datesArray.forEach((value, key) => {
-                        console.log(key);
                         tmp = {
                             data: key,
                             name: key,
@@ -243,7 +240,6 @@
                         };
                         {{ $id }}TableColumns.push(tmp);
                     });
-
 
                     $('#{{ $id }}_processing').hide();
 
@@ -259,7 +255,7 @@
                 $('#{{ $id }}').DataTable().destroy();
             }
 
-            console.log({{ $id }}TableColumns);
+            // console.log({{ $id }}TableColumns);
             // console.log("Disini : ", @json($order));
 
             {{ $id }} = $({{ $id }}).DataTable({
@@ -277,14 +273,47 @@
                 @endif
                 render: function(data, type, row, meta) {
 
+
                 },
                 createdRow: function(row, data, index) {
-                    //$('td', row).eq(-1).addClass('text-center');
-
+                    let attendances = data.attendances;
+                    // const firstKey = Object.keys(attendances)[0];
+                    // let myKey = Number(firstKey) - 1;
+                    for (let key in attendances) {
+                        if (attendances.hasOwnProperty(key)) {
+                            let day = (Number(key) + 2);
+                            if (attendances[key] === " ") {
+                                $('td', row).eq(day)
+                                    .addClass('attendances')
+                                    .css('background-color', '#faa5a5');
+                            } else if (attendances[key] === "P") {
+                                $('td', row).eq(day)
+                                    .addClass('text-success')
+                                    .css('font-weight', 'bold');
+                            } else if (attendances[key] === "A") {
+                                $('td', row).eq(day)
+                                    .addClass('text-danger')
+                                    .css('font-weight', 'bold');
+                            } else if (attendances[key] === "L") {
+                                $('td', row).eq(day)
+                                    .addClass('text-warning')
+                                    .css('font-weight', 'bold');
+                            } else if (attendances[key] === "H") {
+                                $('td', row).eq(day)
+                                    .addClass('text-info')
+                                    .css('font-weight', 'bold');
+                            } else if (attendances[key] === "W") {
+                                $('td', row).eq(day)
+                                    .addClass('text-primary')
+                                    .css('font-weight', 'bold');
+                            }
+                        }
+                    }
                 },
                 initComplete: function() {
 
-                },
+                }
+
             });
 
             @if (isset($trigger))
