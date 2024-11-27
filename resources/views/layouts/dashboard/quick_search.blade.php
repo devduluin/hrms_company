@@ -183,7 +183,7 @@
             $(".global-search__keyword").first().html(`"${query}"`);
 
             // If input is empty, reset the results and UI
-            if (query.length < 2) {
+            if (query.length < 1) {
                 resultsContainer.addClass("global-search--show-result");
                 resultsContainer.empty();
                 $(".global-search__results").first().empty();
@@ -201,7 +201,7 @@
                 let filteredMenuHTML = renderMenu(filteredMenuData);
                 resultsContainer.empty().append(filteredMenuHTML);
                 
-                if (query.length > 2) {
+                if (query.length > 0) {
                     resultsContainer.removeClass("global-search--show-result");
                     const defaultBody = {
                         draw: 1,
