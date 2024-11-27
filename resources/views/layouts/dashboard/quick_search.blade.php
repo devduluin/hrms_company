@@ -36,29 +36,28 @@
                             <i data-tw-merge="" data-lucide="users2" class="h-4 w-4 stroke-[1.3]"></i>
                             Employees
                         </a>
-                        <a class="flex items-center gap-x-1.5 rounded-full border border-slate-300/70 px-3 py-0.5 hover:bg-slate-50" href="#">
-                            <i data-tw-merge="" data-lucide="building2" class="h-4 w-4 stroke-[1.3]"></i>
-                            Departments
+                        <a href="{{ url('/dashboard/hrms/payout') }}" class="flex items-center gap-x-1.5 rounded-full border border-slate-300/70 px-3 py-0.5 hover:bg-slate-50" href="#">
+                            <i data-tw-merge="" data-lucide="coins" class="h-4 w-4 stroke-[1.3]"></i>
+                            Salary Payout
                         </a>
-                        <a class="flex items-center gap-x-1.5 rounded-full border border-slate-300/70 px-3 py-0.5 hover:bg-slate-50" href="#">
-                            <i data-tw-merge="" data-lucide="kanban-square" class="h-4 w-4 stroke-[1.3]"></i>
-                            Products
+                        <a href="{{ url('/dashboard/hrms/attendance') }}" class="flex items-center gap-x-1.5 rounded-full border border-slate-300/70 px-3 py-0.5 hover:bg-slate-50" href="#">
+                            <i data-tw-merge="" data-lucide="calendar" class="h-4 w-4 stroke-[1.3]"></i>
+                            Shift & Attendance
                         </a>
-                        <a class="flex items-center gap-x-1.5 rounded-full border border-slate-300/70 px-3 py-0.5 hover:bg-slate-50" href="#">
-                            <i data-tw-merge="" data-lucide="mail-check" class="h-4 w-4 stroke-[1.3]"></i>
-                            Mails
+                        <a href="{{ url('/dashboard/hrms/leave') }}"  class="flex items-center gap-x-1.5 rounded-full border border-slate-300/70 px-3 py-0.5 hover:bg-slate-50" href="#">
+                            <i data-tw-merge="" data-lucide="briefcase" class="h-4 w-4 stroke-[1.3]"></i>
+                            Leave
                         </a>
                         <div data-tw-merge="" data-tw-placement="bottom-end" class="dropdown relative"><a data-tw-toggle="dropdown" aria-expanded="false" href="javascript:;" class="cursor-pointer flex items-center gap-x-1.5 rounded-full border border-slate-300/70 px-3 py-0.5 hover:bg-slate-50">More
                                 <i data-tw-merge="" data-lucide="chevron-down" class="-ml-0.5 h-4 w-4 stroke-[1.3]"></i>
                             </a>
                             <div data-transition="" data-selector=".show" data-enter="transition-all ease-linear duration-150" data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1" data-enter-to="!mt-1 visible opacity-100 translate-y-0" data-leave="transition-all ease-linear duration-150" data-leave-from="!mt-1 visible opacity-100 translate-y-0" data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1" class="dropdown-menu absolute z-[9999] hidden">
                                 <div data-tw-merge="" class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 w-40">
-                                    <a class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge="" data-lucide="map" class="stroke-[1] mr-2 h-4 w-4"></i>
-                                        Locations</a>
-                                    <a class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge="" data-lucide="file-check" class="stroke-[1] mr-2 h-4 w-4"></i>
-                                        Projects</a>
-                                    <a class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge="" data-lucide="printer" class="stroke-[1] mr-2 h-4 w-4"></i>
-                                        Devices</a>
+                                    <a href="{{ route('hrms.company') }}"  class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge="" data-lucide="app-window" class="stroke-[1] mr-2 h-4 w-4"></i>
+                                    Companies</a>
+                                    <a href="{{ route('hrms.hr_setting') }}" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge="" data-lucide="settings" class="stroke-[1] mr-2 h-4 w-4"></i>
+                                    Settings</a>
+                                     
                                 </div>
                             </div>
                         </div>
@@ -118,13 +117,13 @@
                     const { label, title, description, url } = menuItem;
                     
                     menuHTML += `
-                        <a href="${url}" class="gap-x-1.5 truncate border-slate-300/70 hover:bg-slate-50">
-                        <div class="mt-3.5 flex flex-col gap-1 text-sm font-semibold ">
-                            ${title}
-                            
-                        </div>
-                        <p class="hidden text-slate-500 sm:block">${description}</p>
+                        <div class="mt-3.5 flex flex-col gap-1">
+                        <a href="${url}" class="flex items-center gap-2.5 rounded-md border border-transparent p-1 hover:border-slate-100 hover:bg-slate-50/80 hover:bg-slate-50">
+                        <div class="truncate font-medium">${title}</div>
+                        <div class="hidden text-slate-500 sm:block">${description}</div>
+                           
                         </a>
+                        </div>
                     `;
                     
                 });
