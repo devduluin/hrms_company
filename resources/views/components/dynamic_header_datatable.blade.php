@@ -53,12 +53,12 @@
                     orthogonal: 'export'
                 }
             },
-            {
-                extend: 'pdfHtml5',
-                exportOptions: {
-                    orthogonal: 'export'
-                }
-            }
+            // {
+            //     extend: 'pdfHtml5',
+            //     exportOptions: {
+            //         orthogonal: 'export'
+            //     }
+            // }
         ];
 
         if ({{ $customButton }}) {
@@ -268,7 +268,7 @@
                 @if ($downloadOptions)
                     dom: 'Bfrtip',
                     buttons: [
-                        'copy', 'csv', 'excel', 'pdf', 'print'
+                        'copy', 'csv', 'excel', 'print'
                     ],
                 @endif
                 render: function(data, type, row, meta) {
