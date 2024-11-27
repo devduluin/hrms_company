@@ -19,6 +19,10 @@ Route::prefix('/payout')->group(function () {
                 Route::get('/edit/{id}', 'edit');
                 Route::get('/detail/{id}', 'show');
             });
+            Route::prefix('payroll_entry')->group(function () {
+                Route::get('/', 'index');
+                Route::get('/create', 'bulk_create');
+            });
         });
         Route::controller(PayrollSettingController::class)->group(function () {
             Route::prefix('settings')->group(function () {
