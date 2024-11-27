@@ -52,7 +52,7 @@
                                                 apiUrl="{{ $apiCompanyUrl }}/company/datatables" columns='["company_name"]'
                                                 :keys="[
                                                     'company_id' => $company,
-                                                ]"
+                                                ]" :selected="$company"
                                                 class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 sm:w-56">
                                                 <option value="">Company</option>
                                             </x-form.selectFilter>
@@ -83,7 +83,7 @@
                                             <i data-tw-merge="" data-lucide="calendar"
                                                 class="absolute inset-y-0 left-0 z-10 my-auto ml-3 h-4 w-4 stroke-[1.3]"></i>
                                             <input id="filter_date" name="filter_date" type="text"
-                                                class="datepicker disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 datepicker rounded-[0.3rem] pl-9 sm:w-64">
+                                                class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 datepicker rounded-[0.3rem] pl-9 sm:w-64">
                                         </div>
                                         <div class="relative">
                                             <button id="submitBtn" data-tw-merge="" type="submit"
@@ -103,6 +103,8 @@
                             </div>
                             <x-dynamic_header_datatable id="attendanceTable" :url="$apiReportAttendance" method="POST"
                                 class="display nowrap" :order="[[1, 'DESC']]" :filter="[
+                                    'designation_id' => '#designation_id',
+                                    'department_id' => '#department_id',
                                     'filter_date' => '#filter_date',
                                 ]" :order="[[0, 'DESC']]">
                                 <x-slot:thead>
@@ -152,6 +154,19 @@
 
 
         <script>
+            // $(document).ready(function() {
+            //     $('.datepicker').datepicker({
+            //         format: 'yyyy-mm-dd',
+            //         autoclose: true,
+            //     });
+            // });
+
+            // $('#filterTable').on('submit', function(e) {
+            //     e.preventDefault();
+            //     $('#attendanceTable').DataTable().ajax.reload();
+            // });
+
+
             function getEmployeeName(data, type, row, meta) {
                 if (data !== null) {
                     return data.first_name + ' ' + data.last_name;
@@ -166,9 +181,113 @@
                 return row?.fullname;
             }
 
-            function getEmployee(data, type, row, meta) {
-                console.log(data);
+            function getEmployeeName(data, type, row, meta) {
+                if (data !== null) {
+                    return data.first_name + ' ' + data.last_name;
+                }
+                return 'N/A';
+            }
+
+            function getActionBtn(data, type, row, meta) {
+                const url = `{{ url('dashboard/hrms/attendance/detail/${data}') }}`;
+                return `<div data-tw-merge data-tw-placement="bottom-end" class="dropdown relative"><button data-tw-merge data-tw-toggle="dropdown" aria-expanded="false" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none  [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed text-xs py-1.5 px-2 w-20">
+            <i class="fa-solid fa-list text-base"></i></button>
+                <div data-transition data-selector=".show" data-enter="transition-all ease-linear duration-150" data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1" data-enter-to="!mt-1 visible opacity-100 translate-y-0" data-leave="transition-all ease-linear duration-150" data-leave-from="!mt-1 visible opacity-100 translate-y-0" data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1" class="dropdown-menu absolute z-[9999] hidden">
+                    <div data-tw-merge class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 w-40">
+
+                        <a onClick="action('detail', '` + data['id'] + `')" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="external-link" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
+                            Open</a>
+                        <a onClick="action('update', '` + data['id'] + `')" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="external-link" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
+                            Update</a>
+                        <a onClick="action('delete', '` + data['id'] + `')" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="file-text" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
+                            Delete</a>
+
+                    </div>
+                </div>
+            </div>`;
+            }
+
+            function action(action, id) {
+                if (action === 'delete') {
+                    const path = `{{ $apiReportAttendance }}/` + id;
+                    Swal.fire({
+                        title: "Are you sure?",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            destroy(action, path)
+                        } else {
+                            attendanceTable.ajax.reload();
+                        }
+                    });
+                } else {
+                    location.href = '{{ url('/dashboard/hrms/attendance') }}/' + action + '/' + id;
+                }
+
+            }
+
+            async function destroy(method, path) {
+                try {
+                    const response = await $.ajax({
+                        url: path,
+                        type: method,
+                        contentType: 'application/json',
+                        headers: {
+                            'Authorization': `Bearer ${appToken}`,
+                            'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
+                        },
+                        dataType: 'json'
+                    });
+
+                    Swal.fire({
+                        title: "Deleted!",
+                        icon: "success"
+                    });
+                    attendanceTable.ajax.reload();
+                } catch (xhr) {
+                    console.log(xhr);
+                    if (xhr.status === 422) {
+                        const errorString = result.error || 'An error occurred.';
+                        showErrorNotification('error', `There were errors. Message : ${result.message}`, errorString);
+                    } else {
+                        showErrorNotification('error', 'An error occurred while processing your request.');
+                    }
+                    // activateTab(formId);
+                }
+            }
+
+            const urlParams = new URLSearchParams(window.location.search);
+            let activeFilterCount = 0;
+
+            const handleFilter = (paramName, selectorId) => {
+                if (urlParams.has(paramName)) {
+                    const paramValue = urlParams.get(paramName);
+                    const $selectElement = $(`#${selectorId}`);
+                    if ($selectElement.length > 0) {
+                        $selectElement.val(paramValue).change();
+                        addOptionIfNotExist(selectorId, paramValue)
+                        if (paramValue) activeFilterCount++;
+                    }
+                }
             };
+
+            // Call the function for each filter
+            function addOptionIfNotExist(selectElementId, optionValue) {
+                console.log(selectElementId);
+                const selectElement = $(`#${selectElementId}`)[0].tomselect;
+                if (selectElement.options) {
+                    setTimeout(() => {
+                        selectElement.setValue(optionValue);
+                    }, 1500);
+                }
+            }
+            handleFilter("company_id", "company_id");
+            handleFilter("department_id", "department_id");
+            handleFilter("designation_id", "designation_id");
         </script>
     @endpush
 @endsection

@@ -233,7 +233,6 @@
                     const datesArray = Object.values(dates);
                     console.log(datesArray);
 
-
                     datesArray.forEach((value, key) => {
                         console.log(key);
                         tmp = {
@@ -244,7 +243,6 @@
                         };
                         {{ $id }}TableColumns.push(tmp);
                     });
-
 
 
                     $('#{{ $id }}_processing').hide();
