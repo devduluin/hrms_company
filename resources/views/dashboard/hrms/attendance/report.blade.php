@@ -111,13 +111,17 @@
                                     <th data-value="name" orderable="true" data-render="getFullName">Name</th>
                                     @foreach (Carbon::parse($startDate)->toPeriod($endDate) as $date)
                                         @php
+                                            $i = 1;
                                             $dayName = $date->format('D');
                                             $isWeekend = $date->isWeekend();
                                         @endphp
-                                        <th data-value="attendances.{{ $date->day }}" class="attendance-header"
+                                        <th data-value="attendances.{{ $i }}" class="attendance-header"
                                             style="background-color: {{ $isWeekend ? '#faa5a5' : 'transparent' }};">
                                             {{ $date->day }} </br> {{ $dayName }}
                                         </th>
+                                        @php
+                                            $i++;
+                                        @endphp
                                     @endforeach
                                 </x-slot:thead>
                             </x-dynamic_header_datatable>
