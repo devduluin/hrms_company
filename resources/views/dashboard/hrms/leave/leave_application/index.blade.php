@@ -24,12 +24,10 @@
                                 <div class="p-2">
                                   <form method="GET" id="filterTable">
                                   <div class="mt-3">
-                                        <x-form.select id="employee_id" name="employee_id" data-method="POST"
+                                        <x-form.select style="width: 111%;" id="employee_id" name="employee_id" data-method="POST"
                                             label="Employee" url="{{ url('dashboard/hrms/employee/create') }}"
-                                            apiUrl="{{ $apiUrlEmployee }}/datatables" detailApiUrl="{{ $apiUrlEmployee }}"
-                                            customfunction="addOptionIfNotExist"
-                                            detailApiColumns="attendanceLeave.expense_approver"
-                                            columns='["first_name", "last_name"]' data-dependant="expense_approver"
+                                            apiUrl="{{ $apiUrlEmployee }}/datatables"
+                                            columns='["first_name", "last_name"]' :selected='$selectedEmployee'
                                             :keys="[
                                                 'company_id' => $company_id,
                                             ]">
@@ -37,8 +35,9 @@
                                         </x-form.select>
                                     </div>
                                     <div class="mt-3">
-                                        <x-form.select id="leave_type_id" name="leave_type_id" data-method="POST" label="Leave Type Name" url="{{ url('dashboard/hrms/employee/create') }}"
+                                        <x-form.select id="leave_type_id" name="leave_type_id" data-method="POST" style="width: 111%;" label="Leave Type Name" url="{{ url('dashboard/hrms/employee/create') }}"
                                             apiUrl="{{ $apiUrlLeaveType }}" columns='["leave_type_name"]'  
+                                            :selected='$selectedLeaveType'
                                             :keys="[
                                                 'company_id' => $company_id,
                                             ]">
@@ -46,10 +45,7 @@
                                         </x-form.select>
                                     </div>
                                     <div class="mt-3">
-                                        <div class="text-left text-slate-500">
-                                            Status
-                                        </div>
-                                        <select name="status" id="status" data-title="Language" data-placeholder="Select Status" class="tom-select w-full" sclass="tom-select disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10"">
+                                        <x-form.select id="status" name="status" data-tw-merge="" data-method="" style="width: 111%;" label="Select Status">
                                             <option value="">Select Status</option>
                                             <option value="open">
                                                 Open
@@ -63,10 +59,10 @@
                                             <option value="canceled">
                                                 Canceled
                                             </option>
-                                    </select>
+                                        </x-form.select>
                                     </div>
                                     <div class="mt-4 flex items-center">
-                                        <button type="reset" data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 ml-auto w-32">Reset</button>
+                                        <button type="reset" data-tw-merge="" onclick="resetForm()" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 ml-auto w-32">Reset</button>
                                         <button type="submit" data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary ml-2 w-32">Apply</button>
                                     </div>
                                   </form>
@@ -241,6 +237,11 @@
             }
         }
 
+        function resetForm() {
+            $(`#employee_id`)[0].tomselect.clear();
+            $(`#status`)[0].tomselect.clear();
+        }
+
         $(document).ready(function () {
             const urlParams = new URLSearchParams(window.location.search);
             let activeFilterCount = 0;
@@ -249,6 +250,11 @@
                 if (urlParams.has(paramName)) {
                     const paramValue = urlParams.get(paramName);
                     const $selectElement = $(`#${selectorId}`);
+
+                    if(paramName === "status"){
+                        $(`#status`)[0].tomselect.setValue(paramValue);
+                    }
+
                     if ($selectElement.length > 0) {
                         $selectElement.val(paramValue).change();
                         if (paramValue) activeFilterCount++;
@@ -257,8 +263,8 @@
             };
 
             // Call the function for each filter
-            handleFilter("employee_id_rel", "employee_id");
-            handleFilter("leave_type_id_rel", "leave_type_id");
+            handleFilter("employee_id", "employee_id");
+            handleFilter("leave_type_id", "leave_type_id");
             handleFilter("status", "status");
 
             const $countFilter = $("#countFilter");

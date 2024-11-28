@@ -24,12 +24,10 @@
                                 <div class="p-2">
                                   <form method="GET" id="filterTable">
                                     <div class="mt-3">
-                                        <x-form.select id="employee_id" name="employee_id" data-method="POST"
+                                        <x-form.select id="employee_id" name="employee_id" data-method="POST" style="width: 110%;"
                                             label="Employee" url="{{ url('dashboard/hrms/employee/create') }}"
-                                            apiUrl="{{ $apiUrlEmployee }}/datatables" detailApiUrl="{{ $apiUrlEmployee }}"
-                                            customfunction="addOptionIfNotExist"
-                                            detailApiColumns="attendanceLeave.expense_approver"
-                                            columns='["first_name", "last_name"]' data-dependant="expense_approver"
+                                            apiUrl="{{ $apiUrlEmployee }}/datatables"
+                                            columns='["first_name", "last_name"]' :selected='$selectedEmployee'
                                             :keys="[
                                                 'company_id' => $company_id,
                                             ]">
@@ -37,8 +35,8 @@
                                         </x-form.select>
                                     </div>
                                     <div class="mt-3">
-                                        <x-form.select id="shift_type_id" name="shift_type_id" data-method="POST" label="Shift Type Name" url="{{ url('dashboard/hrms/attendance/shift_type/create') }}"
-                                            apiUrl="{{ $apiUrlShiftType }}/datatable" columns='["shift_type_name"]'  
+                                        <x-form.select id="shift_type_id" name="shift_type_id" data-method="POST" style="width: 110%;" label="Shift Type Name" url="{{ url('dashboard/hrms/attendance/shift_type/create') }}"
+                                            apiUrl="{{ $apiUrlShiftType }}/datatable" columns='["shift_type_name"]' :selected='$selectedShiftType'
                                             :keys="[
                                                 'company_id' => $company_id,
                                             ]">
@@ -46,21 +44,14 @@
                                         </x-form.select>
                                     </div>
                                     <div class="mt-3">
-                                        <div class="text-left text-slate-500">
-                                            Status
-                                        </div>
-                                        <select id="status" name="status" data-tw-merge="" class="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1 mt-2 flex-1">
+                                        <x-form.select style="width: 111%;" id="is_active" name="is_active" label="Status" data-method="POST">
                                             <option value="">Select Status</option>
-                                            <option value="active">
-                                                Active
-                                            </option>
-                                            <option value="inactive">
-                                                Inactive
-                                            </option>
-                                        </select>
-                                        </div>
-                                        <div class="mt-4 flex items-center">
-                                        <button type="reset" data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 ml-auto w-32">Reset</button>
+                                            <option value="active">Active</option>
+                                            <option value="inactive">Inactive</option>
+                                        </x-form.select>
+                                    </div>
+                                    <div class="mt-4 flex items-center">
+                                        <button type="reset" data-tw-merge="" onclick="resetForm()" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 ml-auto w-32">Reset</button>
                                         <button type="submit" data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary ml-2 w-32">Apply</button>
                                     </div>
                                   </form>
@@ -241,6 +232,13 @@
             }
         }
 
+        function resetForm() {
+            //$(`#company_id`)[0].tomselect.clear();
+            $(`#employee_id`)[0].tomselect.clear();
+            $(`#shift_type_id`)[0].tomselect.clear();
+            $(`#is_active`)[0].tomselect.clear();
+        }
+
         $(document).ready(function () {
             const urlParams = new URLSearchParams(window.location.search);
             let activeFilterCount = 0;
@@ -248,8 +246,12 @@
             const handleFilter = (paramName, selectorId) => {
                 if (urlParams.has(paramName)) {
                     const paramValue = urlParams.get(paramName);
-                    console.log(paramValue);
                     const $selectElement = $(`#${selectorId}`);
+
+                    if(paramName === "is_active"){
+                        $(`#is_active`)[0].tomselect.setValue(paramValue);
+                    }
+
                     if ($selectElement.length > 0) {
                         $selectElement.val(paramValue).change();
                         if (paramValue) activeFilterCount++;
@@ -260,7 +262,7 @@
             // Call the function for each filter
             handleFilter("employee_id", "employee_id");
             handleFilter("shift_type_id", "shift_type_id");
-            handleFilter("status", "status");
+            handleFilter("is_active", "is_active");
 
             const $countFilter = $("#countFilter");
             if ($countFilter.length > 0) {

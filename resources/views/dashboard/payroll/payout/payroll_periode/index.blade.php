@@ -32,19 +32,19 @@
                                         <div class="p-2">
                                             <form method="GET" id="filterTable">
                                                 <div class="mt-3">
-                                                    <x-form.select id="company_id" name="company_id" label="Company"
-                                            url="{{ url('dashboard/hrms/designation') }}"
-                                            apiUrl="{{ $apiCompanyUrl }}/company/datatables" columns='["company_name"]'
-                                            :selected="$company" :keys="[
-                                                'company_id' => $company,
-                                            ]">
-                                            <option value="">Select Company</option>
-                                        </x-form.select>
+                                                    <x-form.select style="width: 111%;" id="company_id" name="company_id" label="Company"
+                                                        url="{{ url('dashboard/hrms/designation') }}"
+                                                        apiUrl="{{ $apiCompanyUrl }}/company/datatables" columns='["company_name"]'
+                                                        :selected="$company" :keys="[
+                                                            'company_id' => $company,
+                                                        ]">
+                                                        <option value="">Select Company</option>
+                                                    </x-form.select>
                                                 </div>
                                                 <div class="mt-3">
                                                 </div>
                                                 <div class="mt-3">
-                                                    <x-form.datepicker id="pay_date" label="Payment Date" name="pay_date" />
+                                                    <x-form.datepicker style="width: 111%;" id="pay_date" label="Payment Date" name="pay_date" />
                                                 </div>
                                                 <div class="mt-4 flex items-center">
                                                     <button type="reset" data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 ml-auto w-32">Reset</button>
@@ -137,8 +137,10 @@
             const handleFilter = (paramName, selectorId) => {
                 if (urlParams.has(paramName)) {
                     const paramValue = urlParams.get(paramName);
-                    
                     const $selectElement = $(`#${selectorId}`);
+
+
+
                     if ($selectElement.length > 0) {
                         $selectElement.val(paramValue).change();
                         if (paramValue) activeFilterCount++;

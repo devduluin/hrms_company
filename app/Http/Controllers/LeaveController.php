@@ -61,6 +61,8 @@ class LeaveController extends Controller
         $data['apiUrl'] = $this->apiGatewayUrl . '/v1/attendance/leave';
         $data['company_id'] = session()->get('company_id');
 
+        $data['selectedEmployee'] = request()->query('employee_id');
+        $data['selectedLeaveType'] = request()->query('leave_type_id');
         $data['apiUrlEmployee'] = $this->apiGatewayUrl . '/v1/employees/employee';
         $data['apiUrlLeaveType'] = $this->apiGatewayUrl . "/v1/companies/leave-type/datatable";
 

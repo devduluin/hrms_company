@@ -28,17 +28,14 @@
                                         <div class="p-2">
                                             <form method="GET" id="filterTable">
                                                 <div class="mt-3">
-                                                    <x-form.select id="salary_structure_id" name="salary_structure_id"
-                                                    label="Salary Structure" url="{{ url('dashboard/hrms/payout/salary_structure') }}"
-                                                    apiUrl="http://apidev.duluin.com/api/v1/salary_structures/salary_structure/datatables"
-                                                    columns='["name"]' :keys="[
-                                                        'company_id' => $company,
-                                                    ]">
+                                                    <x-form.select style="width: 111%;" id="salary_structure_id" name="salary_structure_id" label="Salary Structure" url="{{ url('dashboard/hrms/payout/salary_structure') }}" apiUrl="http://apidev.duluin.com/api/v1/salary_structures/salary_structure/datatables" columns='["name"]' :keys="[
+                                                            'company_id' => $company,
+                                                        ]" :selected='$selectedStructure'>
                                                         <option value="">Select Structure</option>
                                                     </x-form.select>
                                                 </div>
                                                 <div class="mt-4 flex items-center">
-                                                    <button type="reset" data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 ml-auto w-32">Reset</button>
+                                                    <button type="reset" onclick="resetForm()" data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 ml-auto w-32">Reset</button>
                                                     <button type="submit" data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary ml-2 w-32">Apply</button>
                                                 </div>
                                             </form>
@@ -63,7 +60,7 @@
                             <div class="box box--stacked flex flex-col">
                                 <div class="table gap-y-2 p-5 sm:flex-row sm:items-center">
                                     <div>
-                                        <x-datatable id="salaryStructureAssignment"
+                                        <x-datatable id="salary_structure_assignment" name="salary_structure_assignment"
                                             url="http://apidev.duluin.com/api/v1/salary_structure_assignments/salary_structure_assignment/employeeDatatables"
                                             method="POST" class="display" :filter="[
                                                 'salaryStructure' => '#salary_structure_id',
@@ -198,6 +195,10 @@
 
         initializeContent();
 
+        function resetForm() {
+            $(`#salary_structure_id`)[0].tomselect.clear();
+        }
+
         $(document).ready(function () {
             const urlParams = new URLSearchParams(window.location.search);
             let activeFilterCount = 0;
@@ -206,6 +207,11 @@
                 if (urlParams.has(paramName)) {
                     const paramValue = urlParams.get(paramName);
                     const $selectElement = $(`#${selectorId}`);
+
+                    if(paramName === "salary_structure_id"){
+                        $(`#salary_structure_id`)[0].tomselect.setValue(paramValue);
+                    }
+
                     if ($selectElement.length > 0) {
                         $selectElement.val(paramValue).change();
                         if (paramValue) activeFilterCount++;
@@ -214,7 +220,7 @@
             };
 
             // Call the function for each filter
-            handleFilter("salaryStructure", "salary_structure_id");
+            handleFilter("salary_structure_id", "salary_structure_id");
 
             const $countFilter = $("#countFilter");
             if ($countFilter.length > 0) {

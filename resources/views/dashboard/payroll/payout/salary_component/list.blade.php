@@ -31,8 +31,8 @@
                                         <div class="p-2">
                                             <form method="GET" id="filterTable">
                                                 <div class="mt-3">
-                                                    <x-form.select id="company_id" name="company_id" class="filter" data-method="POST" label="Company" url="{{ url('dashboard/hrms/company/create') }}"
-                                                        apiUrl="{{ $apiCompanyUrl }}" columns='["company_name"]'  
+                                                    <x-form.select id="company_id" name="company_id" class="filter" style="width: 111%" data-method="POST" label="Company" url="{{ url('dashboard/hrms/company/create') }}" 
+                                                        apiUrl="{{ $apiCompanyUrl }}" columns='["company_name"]' :selected='$company_id'
                                                         :keys="[
                                                             'company_id' => $company_id,
                                                         ]">
@@ -42,14 +42,11 @@
                                                 <div class="mt-3">
                                                 </div>
                                                 <div class="mt-3">
-                                                    <div class="text-left text-slate-500">
-                                                        Type
-                                                    </div>
-                                                    <select required name="type" id="type" data-title="Language" data-placeholder="Select Type" class="tom-select w-full" sclass="tom-select disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10"">
+                                                    <x-form.select style="width: 111%;" name="type" id="type" label="Type" data-method="POST">
                                                         <option value="">Select Type</option>
                                                         <option value="deduction"> Deduction </option>
                                                         <option value="earning"> Earning </option>
-                                                    </select>
+                                                    </x-form.select>
                                                 </div>
                                                 <div class="mt-4 flex items-center">
                                                     <button type="reset" data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 ml-auto w-32">Reset</button>
@@ -161,6 +158,11 @@
                 if (urlParams.has(paramName)) {
                     const paramValue = urlParams.get(paramName);
                     const $selectElement = $(`#${selectorId}`);
+
+                    if(paramName === "type"){
+                        $(`#type`)[0].tomselect.setValue(paramValue);
+                    }
+
                     if ($selectElement.length > 0) {
                         $selectElement.val(paramValue).change();
                         if (paramValue) activeFilterCount++;

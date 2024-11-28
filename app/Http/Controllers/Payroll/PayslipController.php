@@ -27,6 +27,7 @@ class PayslipController extends Controller
         $data['apiAttendanceUrl'] = $this->apiGatewayUrl . '/v1/attendance';
         $data['company_id'] = $allSessions['company_id'];
         $data['apiPayrollUrl'] = $this->apiGatewayUrl . '/v1/payslip/payroll_entry';
+        $data['selectedEmployee'] = request()->query('employee_id');
 
         return view('dashboard.payroll.payout.payslip.index', $data);
     }
