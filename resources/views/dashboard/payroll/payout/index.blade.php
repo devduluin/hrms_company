@@ -288,18 +288,18 @@
                         <x-action label="Payroll Entry" icon="arrow-up-right"
                             url="{{ url('/dashboard/hrms/payout/payroll_entry/create') }}" />
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4  text-blue-900">
+                    {{--<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4  text-blue-900">
                         <x-action label="Income Tax Slab List" icon="arrow-up-right"
                             url="{{ url('/dashboard/hrms/payout/tax_slab_list') }}" status="comming_soon" />
                         <x-action label="New Income Tax Slab" icon="arrow-up-right"
                             url="{{ url('/dashboard/hrms/payout/income_tax') }}" status="comming_soon" />
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4  text-blue-900">
+                    </div>--}}
+                    {{--<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4  text-blue-900">
                         <x-action label="Employee Benefit Claim List" icon="arrow-up-right"
                             url="{{ url('/dashboard/hrms/payout/benefit_list') }}" status="comming_soon" />
                         <x-action label="New Employee Benefit Claim" icon="arrow-up-right"
                             url="{{ url('/dashboard/hrms/payout/benefit_claim') }}" status="comming_soon" />
-                    </div>
+                    </div>--}}
                     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4  text-blue-900">
                         <x-action label="Salary Component" icon="arrow-up-right"
                             url="{{ url('/dashboard/hrms/payout/salary_component/list_component') }}" />

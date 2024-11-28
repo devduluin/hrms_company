@@ -75,10 +75,10 @@
         </div>
     @endsection
     @include('vendor-common.toastr')
-    @push('js')
+    @pushonce('js')
         <script src="{{ asset('dist/js/vendors/dropzone.js') }}"></script>
-    @endPush
-    @push('js')
+    @endpushonce
+    @pushonce('js')
         <script type="text/javascript">
             console.log("initial dropzone");
             (() => {
@@ -199,4 +199,4 @@
                     });
             }
         </script>
-    @endpush
+    @endpushonce

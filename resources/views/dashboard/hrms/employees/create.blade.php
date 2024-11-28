@@ -48,26 +48,58 @@
             let lastActiveTabId = initialTab.data('tw-target');
             const appToken = localStorage.getItem('app_token');
 
-            $('ul[role="tablist"] li button[role="tab"]').on('click', async function(e) {
+            $('ul[role="tablist"] li button[role="tab"]').on('click', function (e) {
                 const newTabId = $(this).data('tw-target');
 
                 if (lastActiveTabId !== newTabId) {
                     e.preventDefault();
-                    await handleFormSubmission(lastActiveTabId);
                     lastActiveTabId = newTabId;
 
-                    $(lastActiveTabId + "-btn").click(async function(e) {
-                        console.log(lastActiveTabId + "-form");
+                    // Unbind previous click event to avoid duplicate bindings
+                    $(`${lastActiveTabId}-btn`).off('click').on('click', async function (e) {
                         e.preventDefault();
-                        await handleFormSubmission(lastActiveTabId);
+
+                        // Check for required fields
+                        const requiredFields = [
+                            '#employee_card_id', '#first_name', '#last_name', '#phone_number',
+                            '#personal_email', '#gender', '#date_of_joining', '#date_of_birth',
+                            '#place_of_birth', '#salutation', '#status'
+                        ];
+
+                        const emptyFields = $(requiredFields.join(',')).filter(function () {
+                            return $(this).val() === '';
+                        });
+
+                        if (emptyFields.length > 0) {
+                            showErrorNotification('error', 'Please fill all required input in overview form');
+                        } else {
+                            await handleFormSubmission(lastActiveTabId);
+                        }
                     });
                 }
             });
 
-            $(lastActiveTabId + "-btn").click(async function(e) {
+            // Initial click event binding for the first tab
+            $(`${lastActiveTabId}-btn`).off('click').on('click', async function (e) {
                 e.preventDefault();
-                await handleFormSubmission(lastActiveTabId);
+
+                const requiredFields = [
+                    '#employee_card_id', '#first_name', '#last_name', '#phone_number',
+                    '#personal_email', '#gender', '#date_of_joining', '#date_of_birth',
+                    '#place_of_birth', '#salutation', '#status'
+                ];
+
+                const emptyFields = $(requiredFields.join(',')).filter(function () {
+                    return $(this).val() === '';
+                });
+
+                if (emptyFields.length > 0) {
+                    showErrorNotification('error', 'Please fill all required input in overview form');
+                } else {
+                    await handleFormSubmission(lastActiveTabId);
+                }
             });
+
 
             async function handleFormSubmission(formId) {
                 const currentForm = $(formId + "-form");
