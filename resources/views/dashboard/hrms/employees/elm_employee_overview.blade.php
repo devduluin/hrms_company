@@ -70,7 +70,7 @@
         </x-form.select>
 
         <x-form.select id="branch_id" name="branch_id" label="Branch" url="{{ url('dashboard/hrms/branch') }}"
-            apiUrl="http://apidev.duluin.com/api/v1/branch/branch/datatable" columns='["branch_name"]'
+            apiUrl="http://apidev.duluin.com/api/v1/companies/branch/datatable" columns='["branch_name"]'
             :keys="[
                 'company_id' => $company,
             ]">
@@ -94,7 +94,7 @@
         </x-form.select>
 
         <x-form.select id="grade_id" name="grade_id" label="Grade" url="{{ url('dashboard/hrms/designation') }}"
-            apiUrl="{{ $apiCompanyUrl }}/employee-grade/datatables" columns='["employee_grade_name"]'
+            apiUrl="http://apidev.duluin.com/api/v1/companies/employee-grade/datatables" columns='["employee_grade_name"]'
             :keys="[
                 'company_id' => $company,
             ]">
@@ -102,7 +102,7 @@
         </x-form.select>
 
         <x-form.select id="employee_type_id" name="employee_type_id" label="Employment Type"
-            url="{{ url('dashboard/hrms/designation') }}" apiUrl="{{ $apiCompanyUrl }}/employment-type/datatables"
+            url="{{ url('dashboard/hrms/designation') }}" apiUrl="http://apidev.duluin.com/api/v1/companies/employment-type/datatables"
             columns='["employment_type_name"]' :keys="[
                 'company_id' => $company,
             ]">

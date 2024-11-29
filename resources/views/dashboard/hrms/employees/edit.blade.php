@@ -51,7 +51,7 @@
             const appToken = localStorage.getItem('app_token');
             const employee_id = $("#employee_id").val();
 
-            $('ul[role="tablist"] li button[role="tab"]').on('click', async function(e) {
+            $('ul[role="tablist"] li button[role="tab"]').off('click').on('click', async function(e) {
                 const newTabId = $(this).data('tw-target');
 
                 if (lastActiveTabId !== newTabId) {
@@ -67,7 +67,7 @@
 
             handleGetData(employee_id, lastActiveTabId);
 
-            $(lastActiveTabId + "-btn").click(async function(e) {
+            $(lastActiveTabId + "-btn").off('click').on('click', async function(e) {
                 console.log("oke");
                 e.preventDefault();
                 await handleFormSubmission(lastActiveTabId);

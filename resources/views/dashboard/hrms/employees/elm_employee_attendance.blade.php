@@ -12,14 +12,14 @@
 <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-2 gap-5 mt-4">
     <x-form.input id="attendance_device_id" label="Attendance Device ID" name="attendance_device_id" required />
     <x-form.select id="holiday_list" name="holiday_list" label="Holiday List"
-        url="{{ url('dashboard/hrms/designation') }}" apiUrl="{{ $apiCompanyUrl }}/holiday-list/datatables"
+        url="{{ url('dashboard/hrms/designation') }}" apiUrl="http://apidev.duluin.com/api/v1/attendance/holiday-list/datatable"
         columns='["holiday_list_name"]' :keys="[
             'company_id' => $company,
         ]">
         <option value="">Select Holiday List</option>
     </x-form.select>
     <x-form.select id="default_ship" name="default_ship" label="Default Ship"
-        url="{{ url('dashboard/hrms/designation') }}" apiUrl="{{ $apiCompanyUrl }}/shift-type/datatable"
+        url="{{ url('dashboard/hrms/designation') }}" apiUrl="http://apidev.duluin.com/api/v1/attendance/shift-type/datatable"
         columns='["shift_type_name"]' :keys="[
             'company_id' => $company,
         ]">
