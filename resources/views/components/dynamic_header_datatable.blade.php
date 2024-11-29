@@ -277,15 +277,15 @@
                 },
                 createdRow: function(row, data, index) {
                     let attendances = data.attendances;
-                    // const firstKey = Object.keys(attendances)[0];
-                    // let myKey = Number(firstKey) - 1;
+                    const firstKey = Object.keys(attendances)[0];
+                    let myKey = Number(firstKey) - 1;
                     for (let key in attendances) {
                         if (attendances.hasOwnProperty(key)) {
                             let day = (Number(key) + 2);
                             if (attendances[key] === " ") {
                                 $('td', row).eq(day)
                                     .addClass('attendances')
-                                    .css('background-color', '#faa5a5');
+                                    .css('background-color', '#ffd9d9');
                             } else if (attendances[key] === "P") {
                                 $('td', row).eq(day)
                                     .addClass('text-success')
