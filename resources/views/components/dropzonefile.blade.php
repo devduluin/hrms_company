@@ -44,7 +44,7 @@
         </div>
     </div>
 </form>
-@push('js')
+@pushonce('js')
     <script type="text/javascript">
         console.log("initial dropzone");
         (() => {
@@ -120,4 +120,4 @@
             })();
         })();
     </script>
-@endpush
+@endpushonce

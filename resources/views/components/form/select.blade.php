@@ -62,8 +62,8 @@
 </div>
 @include('vendor-common.tomselect')
 
-@pushOnce('js')
+{{--@pushOnce('js')
     <script>
         initializeTomSelect();
     </script>
-@endpushOnce
+@endpushOnce--}}
