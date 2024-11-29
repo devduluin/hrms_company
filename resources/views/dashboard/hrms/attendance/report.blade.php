@@ -157,7 +157,6 @@
         <script src="{{ asset('dist') }}/js/vendors/litepicker.js"></script>
         <script src="{{ asset('dist') }}/js/components/base/litepicker.js"></script>
 
-
         <script>
             document.getElementById('filterTable').addEventListener('submit', function(e) {
                 const filterDateInput = document.getElementById('filter_date').value;
@@ -166,6 +165,13 @@
                     const [startDateStr, endDateStr] = filterDateInput.split(' - ');
                     const startDate = new Date(startDateStr);
                     const endDate = new Date(endDateStr);
+                    const today = new Date();
+
+                    if (endDate > today) {
+                        e.preventDefault();
+                        showErrorNotification('error', 'End date cannot exceed today\'s date.');
+                        return;
+                    }
 
                     const diffTime = Math.abs(endDate - startDate);
                     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
@@ -176,6 +182,7 @@
                     }
                 }
             });
+
 
             function getEmployeeName(data, type, row, meta) {
                 if (data !== null) {
