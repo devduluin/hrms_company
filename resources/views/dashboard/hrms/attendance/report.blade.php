@@ -165,11 +165,16 @@
                     const [startDateStr, endDateStr] = filterDateInput.split(' - ');
                     const startDate = new Date(startDateStr);
                     const endDate = new Date(endDateStr);
-                    const today = new Date();
 
-                    if (endDate > today) {
+                    const today = new Date();
+                    const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+
+                    endDate.setHours(0, 0, 0, 0);
+                    lastDayOfMonth.setHours(0, 0, 0, 0);
+
+                    if (endDate > lastDayOfMonth) {
                         e.preventDefault();
-                        showErrorNotification('error', 'End date cannot exceed today\'s date.');
+                        showErrorNotification('error', 'End date cannot exceed the last day of this month.');
                         return;
                     }
 
@@ -182,6 +187,8 @@
                     }
                 }
             });
+
+
 
 
             function getEmployeeName(data, type, row, meta) {
