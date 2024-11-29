@@ -22,6 +22,8 @@ class ShfitAssigmentController extends Controller
         $data['apiUrlEmployee'] = $this->apiGatewayUrl . '/v1/employees/employee';
         $data['company_id'] = session()->get('company_id');
         $data['apiUrlShiftType'] = $this->apiGatewayUrl . '/v1/attendance/shift-type';
+        $data['selectedEmployee'] = request()->query('employee_id');
+        $data['selectedShiftType'] = request()->query('shift_type_id');
 
         return view('dashboard.hrms.attendance.shiftassigment.index', $data);
     }

@@ -33,7 +33,7 @@
 
         </div>
     </div>
-    <div class="flex-1 sm:w-[full] w-[100%] mt-3 xl:mt-0">
+    <div class="flex-1 sm:w-[full] w-[90%] mt-3 xl:mt-0">
         <select id="{{ $name }}" name="{{ $name }}"
             {{ $attributes->merge(['class' => $class . ' mt-3 tom-select w-full'])->except(['id', 'name', 'tags', 'filter']) }}
             data-placeholder="{{ $label }}" data-title="{{ $label }}"
