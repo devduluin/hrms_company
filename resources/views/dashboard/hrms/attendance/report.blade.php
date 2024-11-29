@@ -152,7 +152,7 @@
             </div>
         </div>
     </div>
-
+    @include('vendor-common.sweetalert')
     @push('js')
         <script src="{{ asset('dist') }}/js/vendors/litepicker.js"></script>
         <script src="{{ asset('dist') }}/js/components/base/litepicker.js"></script>
@@ -174,7 +174,12 @@
 
                     if (endDate > lastDayOfMonth) {
                         e.preventDefault();
-                        showErrorNotification('error', 'End date cannot exceed the last day of this month.');
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Invalid Date',
+                            text: 'End date cannot exceed the last day of this month.',
+                            confirmButtonText: 'OK'
+                        });
                         return;
                     }
 
@@ -183,13 +188,15 @@
 
                     if (diffDays > 31) {
                         e.preventDefault();
-                        showErrorNotification('error', 'Date range cannot exceed 31 days.');
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Invalid Date Range',
+                            text: 'Date range cannot exceed 31 days.',
+                            confirmButtonText: 'OK'
+                        });
                     }
                 }
             });
-
-
-
 
             function getEmployeeName(data, type, row, meta) {
                 if (data !== null) {
