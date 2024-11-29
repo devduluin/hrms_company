@@ -358,6 +358,11 @@
             if ($countFilter.length > 0) {
                 $countFilter.text(activeFilterCount);
             }
+
+            const table = $('#claimTypeTable').DataTable();
+            table.on('xhr', function (e, settings, json) {
+                console.log(json); // Log the fetched data
+            });
         });
     </script>
 @endpush

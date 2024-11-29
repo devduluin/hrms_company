@@ -25,50 +25,31 @@
                                 <div class="p-2">
                                   <form method="GET" id="filterTable">
                                     <div>
-                                        <div class="text-left font-medium">
-                                            Attendance
-                                        </div>
-                                        <select id="attendanceStatus" name="attendance_status" data-tw-merge="" class="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1 mt-2 flex-1">
-                                            <option value="">
-                                                Select All
-                                            </option>
-                                            <option value="present">
-                                                Present
-                                            </option>
-                                            <option value="absent">
-                                                Absent
-                                            </option>
-                                            <option value="halfday">
-                                                Half Day
-                                            </option>
-                                            <option value="leave">
-                                                Leave
-                                            </option>
-                                            <option value="wfh">
-                                                WFH
-                                            </option>
-                                            
-                                        </select>
+                                        <x-form.select style="width: 111%;" id="employee_id" name="employee_id" data-method="POST" label="Employee Name" url="{{ url('dashboard/hrms/employee/create') }}"
+                                            apiUrl="{{ $apiUrlEmployee }}/datatables" columns='["first_name", "last_name"]' :selected='$selectedEmployee'
+                                            :keys="[
+                                                'company_id' => $company_id,
+                                            ]">
+                                            <option value="">Select Employee</option>
+                                        </x-form.select>
+                                    </div>
+                                    <div>
+                                        <x-form.select style="width: 111%;" id="attendanceStatus" name="attendance_status" label="Attendance">
+                                            <option value="">Select All</option>
+                                            <option value="present">Present</option>
+                                            <option value="absent">Absent</option>
+                                            <option value="halfday">Half Day</option>
+                                            <option value="leave">Leave</option>
+                                            <option value="wfh">WFH</option>
+                                        </x-form.select>
                                     </div>
                                     <div class="mt-3">
-                                        <div class="text-left font-medium">
-                                            Status
-                                        </div>
-                                        <select id="status" name="status" data-tw-merge="" class="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1 mt-2 flex-1">
-                                            <option value="">
-                                                Select All
-                                            </option>
-                                            <option value="submit">
-                                                Submit
-                                            </option>
-                                            <option value="approved">
-                                                Approved
-                                            </option>
-                                            <option value="rejected">
-                                                Rejected
-                                            </option>
-                                            
-                                        </select>
+                                        <x-form.select style="width: 111%;" id="status" name="status" label="Status">
+                                            <option value="">Select All</option>
+                                            <option value="submit">Submit</option>
+                                            <option value="approved">Approved</option>
+                                            <option value="rejected">Rejected</option>
+                                        </x-form.select>
                                     </div>
                                     <div class="mt-3">
                                         <div class="text-left font-medium">
@@ -77,7 +58,7 @@
                                          <input id="attendance_date" name="attendance_date" type="date" value="{{ date('Y-m-d')}}" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 "/>
                                     </div>
                                     <div class="mt-4 flex items-center">
-                                        <button type="reset" data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 ml-auto w-32">Reset</button>
+                                        <button type="reset" onclick="resetForm()" data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 ml-auto w-32">Reset</button>
                                         <button type="submit" data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary ml-2 w-32">Apply</button>
                                     </div>
                                   </form>
@@ -229,6 +210,13 @@
                 // activateTab(formId);
             }
         }
+
+        function resetForm() {
+            $(`#status`)[0].tomselect.clear();
+            $(`#attendance_status`)[0].tomselect.clear();
+            $(`#employee_id`)[0].tomselect.clear();
+            $(`#attendance_date`).val("");
+        }
         
         $(document).ready(function () {
             const urlParams = new URLSearchParams(window.location.search);
@@ -237,8 +225,20 @@
             const handleFilter = (paramName, selectorId) => {
                 if (urlParams.has(paramName)) {
                     const paramValue = urlParams.get(paramName);
-                    console.log(paramValue);
                     const $selectElement = $(`#${selectorId}`);
+
+                    if(paramName === "status"){
+                        $(`#status`)[0].tomselect.setValue(paramValue);
+                    }
+
+                    if(paramName === "attendance_status"){
+                        $(`#attendance_status`)[0].tomselect.setValue(paramValue);
+                    }
+
+                    if(paramName === "attendance_date"){
+                        $(`#attendance_date`).val(paramValue);
+                    }
+
                     if ($selectElement.length > 0) {
                         $selectElement.val(paramValue).change();
                         if (paramValue) activeFilterCount++;
@@ -250,6 +250,7 @@
             handleFilter("attendance_date", "attendance_date");
             handleFilter("status", "status");
             handleFilter("attendance_status", "attendanceStatus");
+            handleFilter("employee_id", "employee_id");
 
             const $countFilter = $("#countFilter");
             if ($countFilter.length > 0) {

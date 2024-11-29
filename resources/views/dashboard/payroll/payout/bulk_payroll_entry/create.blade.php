@@ -419,5 +419,12 @@
         $('#designation_id').change(function() {
             employeeTable.ajax.reload();
         });
+
+        $(document).ready(function () {
+            const table = $('#employeeTable').DataTable();
+            table.on('xhr', function (e, settings, json) {
+                console.log(json); // Log the fetched data
+            });
+        });
     </script>
 @endpush
