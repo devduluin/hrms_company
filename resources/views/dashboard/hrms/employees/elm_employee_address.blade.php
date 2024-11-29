@@ -32,13 +32,13 @@
 </div>
 <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-2 gap-5 mt-4">
     <x-form.select name="current_address_status" id="current_address_status" label="Current Address Status"
-        class="tom-select w-full" data-placeholder="Select Status" url="{{ url('dashboard/hrms/designation') }}">
+        class="tom-select w-full" data-placeholder="Select Status">
         <option value="">Select Status</option>
         <option value="rented">Rented</option>
         <option value="owned">Owned</option>
     </x-form.select>
     <x-form.select name="permanent_address_status" id="permanent_address_status" label="Permanent Address Status"
-        class="tom-select w-full" data-placeholder="Select Status" url="{{ url('dashboard/hrms/designation') }}">
+        class="tom-select w-full" data-placeholder="Select Status">
         <option value="">Select Status</option>
         <option value="rented">Rented</option>
         <option value="owned">Owned</option>
