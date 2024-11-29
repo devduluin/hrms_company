@@ -167,6 +167,15 @@
                     const startDate = new Date(startDateStr);
                     const endDate = new Date(endDateStr);
 
+                    const currentDate = new Date();
+                    const lastDayOfCurrentMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+
+                    if (endDate > lastDayOfCurrentMonth) {
+                        e.preventDefault();
+                        showErrorNotification('error', 'The date filter cannot exceed the current month.');
+                        return;
+                    }
+
                     const diffTime = Math.abs(endDate - startDate);
                     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
@@ -176,6 +185,7 @@
                     }
                 }
             });
+
 
             function getEmployeeName(data, type, row, meta) {
                 if (data !== null) {
