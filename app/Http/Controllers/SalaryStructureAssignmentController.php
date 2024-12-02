@@ -22,7 +22,8 @@ class SalaryStructureAssignmentController extends Controller
         $allSessions = session()->all();
         $data['company'] = $allSessions['company_id'];
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
-        $data['apiPayrollUrl'] = $this->apiGatewayUrl . '/v1/salary_structures';
+        $data['apiPayrollUrl'] = $this->apiGatewayUrl . '/v1/salary_structure_assignment';
+        $data['selectedStructure'] = request()->query('salary_structure_id');
         $allSessions = session()->all();
 
         return view('dashboard.payroll.payout.salary_structure_assignment.list', $data);

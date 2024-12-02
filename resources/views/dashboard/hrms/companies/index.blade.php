@@ -14,6 +14,7 @@
                             <div class="ml-2 text-lg font-medium group-[.mode--light]:text-white">
                                 {{ $title }}
                             </div>
+
                             <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
                             <x-form.button id="new_company" label="Add New Company" style="primary" icon="plus" url="{{ route('hrms.company.create') }}" ></x-button>
                 
@@ -23,7 +24,7 @@
                         <div class="mt-3.5 mb-5 ">
                             
                             <div class="box box--stacked flex flex-col p-5">
-                                <x-datatable id="companiesTable" :url="$apiUrl.'/datatables'" method="POST" class="display border-b border-slate-200/60" dtcomponent="false" dtheight="250">
+                                <x-datatable id="companiesTable" :url="$apiUrl.'/datatables'" method="POST" class="display border-b border-slate-200/60" dtheight="250">
                                     <x-slot:thead>
                                         <th data-value="no" width="80px">No.</th>
                                         <th data-value="company_name" data-render="getCompany">Company Name</th>
@@ -118,5 +119,12 @@
                 location.href = '{{ url("/dashboard/hrms/company") }}/'+action+'/'+id;
             }
         }
+
+        $(document).ready(function () {
+            const table = $('#companiesTable').DataTable();
+            table.on('xhr', function (e, settings, json) {
+                console.log(json); // Log the fetched data
+            });
+        });
     </script>
 @endpush

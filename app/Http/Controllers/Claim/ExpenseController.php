@@ -19,6 +19,7 @@ class ExpenseController extends Controller
         $data['apiUrl'] = $this->apiGatewayUrl . "/v1/payroll/expense_claim";
         $data['apiUrlEmployee'] = $this->apiGatewayUrl . "/v1/employees/employee";
         $data['company'] = session()->get('company_id');
+        $data['selectedEmployee'] = request()->query('employee_id');
 
         return view('dashboard.hrms.claim.expense.index', $data);
     }

@@ -224,6 +224,11 @@
             $('#applyFilter').click(function() {
                 employeeTable.ajax.reload();
             });
+
+            const table = $('#employeeTable').DataTable();
+            table.on('xhr', function (e, settings, json) {
+                console.log(json); // Log the fetched data
+            });
         });
 
         function handleNotification(checkedValues) {
@@ -431,6 +436,8 @@
             $(`#department_id`)[0].tomselect.clear();
             $(`#designation_id`)[0].tomselect.clear();
         }
+
+
     </script>
 @endpush
 @include('vendor-common.sweetalert')
