@@ -95,7 +95,7 @@
                             <x-slot:thead>
                             <th data-value="no" width="60px">No.</th>
                                     <th data-value="employee_id">Employee ID</th>
-                                    <th data-value="first_name" orderable="true" data-render="getFullName">Name</th>
+                                    <th data-value="fullname" orderable="true" data-render="getFullName">Name</th>
                                     <th data-value="department_id_rel" data-render="getDepartment" orderable="false">Department</th>
                                     <th data-value="total_absent" orderable="false" data-render="getUrlAbsent">Absent</th>
                                     <th data-value="total_present" orderable="false" data-render="getUrlPresent">Preset</th>

@@ -7,12 +7,22 @@
             /* e.g. change 8x to 4px here */
         }
     </style>
-    @php
-        use Carbon\Carbon;
-        $filterDate = request('filter_date');
-        $startDate = $filterDate ? Carbon::parse(explode(' - ', $filterDate)[0]) : Carbon::now()->startOfMonth();
-        $endDate = $filterDate ? Carbon::parse(explode(' - ', $filterDate)[1]) : Carbon::now()->endOfMonth();
-    @endphp
+    <?php
+    $i = 1;
+    $filterDate = request('filter_date');
+
+        if ($filterDate) {
+            $dates = explode(' - ', $filterDate);
+            $startDate = new DateTime(trim($dates[0])); // Parse the start date
+            $endDate = new DateTime(trim($dates[1]));   // Parse the end date
+        } else {
+            $now = new DateTime(); // Current date
+            $startDate = (clone $now)->modify('first day of this month')->setTime(0, 0, 0);
+            $endDate = (clone $now)->modify('last day of this month')->setTime(23, 59, 59);
+        }
+        $interval = new DateInterval('P1D');
+        $datePeriod = new DatePeriod($startDate, $interval, $endDate);
+    ?>
 
     <div
         class="hurricane before:content-[''] before:z-[-1] before:w-screen before:bg-slate-50 before:top-0 before:h-screen before:fixed before:bg-texture-black before:bg-contain before:bg-fixed before:bg-[center_-20rem] before:bg-no-repeat">
@@ -112,23 +122,21 @@
                                     <th data-value="fullname" orderable="true" data-render="getFullName">Name</th>
                                     <th data-value="department_id_rel" data-render="getDepartment" orderable="false">Department</th>
                                     
-                                    @php
-                                        $i = 1;
-                                    @endphp
-                                    @foreach (Carbon::parse($startDate)->toPeriod($endDate) as $date)
-                                        @php
-                                            $dayName = $date->format('D');
-                                            $isWeekend = $date->isWeekend();
-                                        @endphp
-                                        <th data-value="attendances.{{ $i }}" class="dt-center" 
-                                            style="background-color: {{ $isWeekend ? '#faa5a5' : 'transparent' }};" data-render="getAttendanceReport">
-                                            {{ $date->day }} <br> {{ $dayName }}
+                                    <?php
+                                    foreach ($datePeriod as $date) {
+                                        $dayName = $date->format('D'); // Day of the week
+                                        $day = $date->format('j'); // Day of the month
+                                        $isWeekend = ($dayName === 'Sat' || $dayName === 'Sun'); // Check if it's a weekend
+                                        $backgroundColor = $isWeekend ? '#faa5a5' : 'transparent'; // Determine background color
+                                        ?>
+                                        <th data-value="attendances.<?= $i ?>" class="dt-center" orderable="false"
+                                            style="background-color: <?= $backgroundColor ?>;" data-render="getAttendanceReport">
+                                            <?= $day ?> <br> <?= $dayName ?>
                                         </th>
-                                        @php
-
-                                            $i++;
-                                        @endphp
-                                    @endforeach
+                                        <?php
+                                        $i++;
+                                    }
+                                    ?>
                                 </x-slot:thead>
                             </x-dynamic_header_datatable>
                         </div>

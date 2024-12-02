@@ -106,7 +106,7 @@
             const appToken = localStorage.getItem('app_token');
 
             $.each({{ $id }}Columns, function(idx, item) {
-                var orderable = $(item).attr('orderable') || 'false';
+                var orderable = $(item).attr('orderable') === 'false' ? false : true;
                 var searchable = $(item).attr('searchable') !== 'false' || $(item).attr('searchable') === undefined;
                 var visible = $(item).attr('visible') !== 'false' || $(item).attr('visible') === undefined;
                 var render = $(item).data('render');
