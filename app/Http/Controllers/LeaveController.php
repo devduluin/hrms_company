@@ -12,10 +12,12 @@ class LeaveController extends Controller
         $this->apiGatewayUrl = config('apiendpoints.gateway');
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Leave Overview';
+        $data['apiTotalLeave'] = $this->apiGatewayUrl . "/v1/attendance/leave/total-leave/by?company_id=" . $request->session()->get('company_id');
+
         $data['apiUrl'] = $this->apiGatewayUrl . '/v1/employees';
 
         return view('dashboard.hrms.leave.index', $data);

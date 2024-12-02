@@ -15,7 +15,7 @@ class LeaveTypeController extends Controller
     {
         $data['title'] = "Data Leave Types";
         $data['page_title'] = "Data Leave Types";
-        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/companies/leave-type";
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/attendance/leave-type";
         return view('dashboard.hrms.leavetype.index', $data);
     }
     public function create()
@@ -25,7 +25,7 @@ class LeaveTypeController extends Controller
         $allSessions = session()->all();
         $data['company'] = $allSessions['company_id'];
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies/company/datatables';
-        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/companies/leave-type";
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/attendance/leave-type";
         return view('dashboard.hrms.leavetype.create', $data);
     }
 
@@ -36,7 +36,7 @@ class LeaveTypeController extends Controller
         $allSessions = session()->all();
         $data['id'] = $id;
         $data['company'] = $allSessions['company_id'];
-        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/companies/leave-type";
+        $data['apiUrl'] = $this->apiGatewayUrl . "/v1/attendance/leave-type";
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies/company/datatables';
         
 

@@ -46,32 +46,9 @@
                                 </div>
                                 <div class="mt-5">
                                         <div class="box--stacke">
-                                            <div class="grid grid-cols-4 gap-5">
-                                                <div
-                                                    class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                                    <div class="text-base text-slate-500">Total Attendance</div>
-                                                    <div class="mt-1.5 text-2xl font-medium" id="totalAttendance">0</div>
-                                                </div>
-                                                <div
-                                                    class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                                    <div class="text-base text-slate-500">Total Present</div>
-                                                    <div class="mt-1.5 text-2xl font-medium" id="totalPresent">0</div>
-                                                </div>
-                                                <div
-                                                    class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                                    <div class="text-base text-slate-500">Total Absent</div>
-                                                    <div class="font-mediumm mt-1.5 text-2xl" id="totalAbsent">0</div>
-                                                </div>
-                                                <div
-                                                    class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                                    <div class="text-base text-slate-500">Late Entry</div>
-                                                    <div class="font-mediumm mt-1.5 text-2xl" id="lateEntry">0</div>
-                                                </div>
-                                                <div
-                                                    class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                                    <div class="text-base text-slate-500">Early Exit</div>
-                                                    <div class="font-mediumm mt-1.5 text-2xl" id="earlyExit">0</div>
-                                                </div>
+                                            <div class="grid grid-cols-4 gap-5" id="leaveContainer">
+                                                
+                                                 
                                             </div>
                                         </div>
                                 </div>
@@ -103,17 +80,85 @@
 
 @push('js')
 <script src="{{ asset('dist') }}/js/vendors/litepicker.js"></script>
-<script src="{{ asset('dist') }}/js/vendors/lodash.js"></script>
 <script src="{{ asset('dist') }}/js/vendors/chartjs.js"></script>
-<script src="{{ asset('dist') }}/js/components/report-donut-chart-4.js"></script>
-<script src="{{ asset('dist') }}/js/components/base/litepicker.js"></script>
-<script src="{{ asset('dist') }}/js/components/report-line-chart-1.js"></script>
 
-    <script type="text/javascript">
+<script type="text/javascript">
+        var filterData = {};
         $(document).ready(function() {
-           countAttendanceThisMonth();
-           countEmployee();
+           countAttendance('daily');
+           //countEmployee();
+           //getDataChart();
         });
 
+        //user bisa menampilkan data berdasarkan range tanggal yang dipilih
+        $(".litepicker").on("click", ".button-apply", function() {
+            $("#loading").removeAttr('style', 'display: none');
+           countAttendance($('#litepicker').val());
+        });
+
+        //filter attendane, weekly, mothly atau yearly
+        function filterAttendance(value) {
+            $("#loading").removeAttr('style', 'display: none');
+           countAttendance(value);
+        }
+
+        //fungsi untuk menghitung total attendance
+        async function countAttendance(value = "") {
+
+            //filter data berdasarkan tanggal yang dipilih
+            switch (value) {
+                case "daily":
+                    filterData = "daily=daily";
+                    break;
+                case "weekly":
+                    filterData = "weekly=weekly";
+                    break;
+                case "monthly":
+                    filterData = "monthly=monthly";
+                    break;
+                case "yearly":
+                    filterData = "yearly=yearly";
+                    break;
+                default:
+                $('#custom-date').attr('hidden', false);
+                filterData = "custom_date="+value;
+            }
+             
+            //kirim permintaan data ke server dengan membawa param
+           var param = {
+                url: "{{ $apiTotalLeave }}",
+                method: "GET",
+                data: filterData,
+           }
+
+           await transAjax(param).then((result) => {
+            const dataLeave = result.data;
+                    
+            // Find the parent container where the elements will be appended
+                const $parentContainer = $("#leaveContainer"); // Replace with your container's ID
+
+            // Clear existing content (optional)
+            $parentContainer.empty();
+
+            // Loop through `dataLeave` and create HTML for each item
+            dataLeave.forEach((leave) => {
+            const leaveBox = `
+                <a href="{{ url('dashboard/hrms/attendance/attendance') }}?leave_type_id=${leave.leaveTypeId}" class="block">
+                <div class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                    <div class="text-base text-slate-500">${leave.leaveTypeName}</div>
+                    <div class="mt-1.5 text-2xl font-medium" id="totalLeave">${leave.totalLeave}</div>
+                </div>
+                </a>
+            `;
+
+            // Append the created element to the parent container
+            $parentContainer.append(leaveBox);
+            });
+            $("#loading").attr('style', 'display: none');
+           }).catch((err) => {
+                showErrorNotification("Internal server error", err.message);
+           });
+        }
+        
     </script>
 @endpush

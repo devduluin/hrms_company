@@ -51,46 +51,62 @@
                                 <div class="mt-5">
                                         <div class="box--stacke">
                                             <div class="grid grid-cols-4 gap-5">
-                                                <div
-                                                    class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                                    <div class="text-base text-slate-500">Total Attendance</div>
-                                                    <div class="mt-1.5 text-2xl font-medium" id="totalAttendance">0</div>
-                                                </div>
-                                                <div
-                                                    class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                                    <div class="text-base text-slate-500">Total Present</div>
-                                                    <div class="mt-1.5 text-2xl font-medium" id="totalPresent">0</div>
-                                                </div>
-                                                <div
-                                                    class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                                    <div class="text-base text-slate-500">Total Absent</div>
-                                                    <div class="font-mediumm mt-1.5 text-2xl" id="totalAbsent">0</div>
-                                                </div>
-                                                <div
-                                                    class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                                    <div class="text-base text-slate-500">Late Entry</div>
-                                                    <div class="font-mediumm mt-1.5 text-2xl" id="lateEntry">0</div>
-                                                </div>
-                                                <div
-                                                    class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                                    <div class="text-base text-slate-500">Early Exit</div>
-                                                    <div class="font-mediumm mt-1.5 text-2xl" id="earlyExit">0</div>
-                                                </div>
-                                                <div
-                                                    class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                                    <div class="text-base text-slate-500">Leave</div>
-                                                    <div class="font-mediumm mt-1.5 text-2xl" id="totalLeave">0</div>
-                                                </div>
-                                                <div
-                                                    class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                                    <div class="text-base text-slate-500">WFH</div>
-                                                    <div class="font-mediumm mt-1.5 text-2xl" id="totalWfh">0</div>
-                                                </div>
-                                                <div
-                                                    class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 bg-warning bg-opacity-20 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                                    <div class="text-base text-pending">Request Approve</div>
-                                                    <div class="font-mediumm mt-1.5 text-2xl" id="totalReq">0</div>
-                                                </div>
+                                                <a href="{{ url('dashboard/hrms/attendance/attendance') }}" class="block">
+                                                    <div
+                                                        class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                                        <div class="text-base text-slate-500">Total Attendance</div>
+                                                        <div class="mt-1.5 text-2xl font-medium" id="totalAttendance">0</div>
+                                                    </div>
+                                                </a>
+                                                <a href="{{ url('dashboard/hrms/attendance/attendance') }}?attendance_status=present" class="block">
+                                                    <div
+                                                        class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                                        <div class="text-base text-slate-500">Total Present</div>
+                                                        <div class="mt-1.5 text-2xl font-medium" id="totalPresent">0</div>
+                                                    </div>
+                                                </a>
+                                                <a href="{{ url('dashboard/hrms/attendance/attendance') }}?attendance_status=absent" class="block">
+                                                    <div
+                                                        class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                                        <div class="text-base text-slate-500">Total Absent</div>
+                                                        <div class="font-mediumm mt-1.5 text-2xl" id="totalAbsent">0</div>
+                                                    </div>
+                                                </a>
+                                                <a href="{{ url('dashboard/hrms/attendance/attendance') }}?late_entry=true" class="block">
+                                                    <div
+                                                        class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                                        <div class="text-base text-slate-500">Late Entry</div>
+                                                        <div class="font-mediumm mt-1.5 text-2xl" id="lateEntry">0</div>
+                                                    </div>
+                                                </a>
+                                                <a href="{{ url('dashboard/hrms/attendance/attendance') }}?early_exit=true" class="block">
+                                                    <div
+                                                        class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                                        <div class="text-base text-slate-500">Early Exit</div>
+                                                        <div class="font-mediumm mt-1.5 text-2xl" id="earlyExit">0</div>
+                                                    </div>
+                                                </a>
+                                                <a href="{{ url('dashboard/hrms/attendance/attendance') }}?attendance_status=leave" class="block">
+                                                    <div
+                                                        class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                                        <div class="text-base text-slate-500">Leave</div>
+                                                        <div class="font-mediumm mt-1.5 text-2xl" id="totalLeave">0</div>
+                                                    </div>
+                                                </a>
+                                                <a href="{{ url('dashboard/hrms/attendance/attendance') }}?attendance_status=wfh" class="block">
+                                                    <div
+                                                        class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                                        <div class="text-base text-slate-500">WFH</div>
+                                                        <div class="font-mediumm mt-1.5 text-2xl" id="totalWfh">0</div>
+                                                    </div>
+                                                </a>
+                                                <a href="{{ url('dashboard/hrms/attendance/request') }}?status=pending" class="block">
+                                                    <div
+                                                        class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 bg-warning bg-opacity-20 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                                        <div class="text-base text-pending">Request Approve</div>
+                                                        <div class="font-mediumm mt-1.5 text-2xl" id="totalReq">0</div>
+                                                    </div>
+                                                </a>
                                             </div>
                                         </div>
                                 </div>
