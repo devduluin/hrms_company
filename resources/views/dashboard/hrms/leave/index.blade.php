@@ -141,8 +141,19 @@
             $parentContainer.empty();
 
             // Loop through `dataLeave` and create HTML for each item
+            let leaveBox = '';
             dataLeave.forEach((leave) => {
-            const leaveBox = `
+            if(leave.leaveTypeId == 'leave_application'){
+                leaveBox = `
+                <a href="{{ url('dashboard/hrms/leave/application') }}?status=open" class="block">
+                <div class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 bg-warning bg-opacity-20 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                    <div class="text-base text-pending">${leave.leaveTypeName}</div>
+                    <div class="mt-1.5 text-2xl font-medium" id="totalLeave">${leave.totalLeave}</div>
+                </div>
+                </a>
+                `;
+            }else{
+                leaveBox = `
                 <a href="{{ url('dashboard/hrms/attendance/attendance') }}?leave_type_id=${leave.leaveTypeId}" class="block">
                 <div class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
                     <div class="text-base text-slate-500">${leave.leaveTypeName}</div>
@@ -150,6 +161,7 @@
                 </div>
                 </a>
             `;
+            }
 
             // Append the created element to the parent container
             $parentContainer.append(leaveBox);

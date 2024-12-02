@@ -101,15 +101,17 @@
 
                             </div>
                             <x-dynamic_header_datatable id="attendanceTable" :url="$apiReportAttendance" method="POST"
-                                class="display nowrap" :order="[[1, 'DESC']]" :filter="[
+                                class="display nowrap cell-border row-border" :order="[[1, 'DESC']]" :filter="[
                                     'designation_id' => '#designation_id',
                                     'department_id' => '#department_id',
                                     'filter_date' => '#filter_date',
                                 ]" :order="[[0, 'DESC']]">
                                 <x-slot:thead>
-                                    <th data-value="no" orderable="true">No</th>
-                                    <th data-value="employee_id">Employee ID</th>
-                                    <th data-value="name" orderable="true" data-render="getFullName">Name</th>
+                                    <th data-value="no">No</th>
+                                    <th data-value="employee_id" orderable="true">Employee ID</th>
+                                    <th data-value="fullname" orderable="true" data-render="getFullName">Name</th>
+                                    <th data-value="department_id_rel" data-render="getDepartment" orderable="false">Department</th>
+                                    
                                     @php
                                         $i = 1;
                                     @endphp
@@ -118,9 +120,9 @@
                                             $dayName = $date->format('D');
                                             $isWeekend = $date->isWeekend();
                                         @endphp
-                                        <th data-value="attendances.{{ $i }}" class="attendance-header"
-                                            style="background-color: {{ $isWeekend ? '#faa5a5' : 'transparent' }};">
-                                            {{ $date->day }} </br> {{ $dayName }}
+                                        <th data-value="attendances.{{ $i }}" class="dt-center" 
+                                            style="background-color: {{ $isWeekend ? '#faa5a5' : 'transparent' }};" data-render="getAttendanceReport">
+                                            {{ $date->day }} <br> {{ $dayName }}
                                         </th>
                                         @php
 
@@ -198,9 +200,11 @@
                 }
             });
 
-            function getEmployeeName(data, type, row, meta) {
+            function getAttendanceReport(data, type, row, meta) {
                 if (data !== null) {
-                    return data.first_name + ' ' + data.last_name;
+                    const status = data.status && data.status.trim() !== '' ? data.status : '&nbsp';
+                    return `<a href="{{ url('dashboard/hrms/attendance/attendance') }}?employee_id=${row.id}&attendance_date=${data.date}" data-placement="top" title="${data.label}"><div class=" px-1.5 w-10 [&:hover:not(:disabled)]:bg-primary/10 [&:hover:not(:disabled)]:border-primary/10 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">${status}</div></a>`;
+                     
                 }
                 return 'N/A';
             }
@@ -212,99 +216,11 @@
                 return row?.fullname;
             }
 
-            function getEmployeeName(data, type, row, meta) {
+            function getDepartment(data, type, row, meta) {
                 if (data !== null) {
-                    return data.first_name + ' ' + data.last_name;
+                    return data?.department_name ?? 'N/A';
                 }
                 return 'N/A';
-            }
-
-            function getActionBtn(data, type, row, meta) {
-                const url = `{{ url('dashboard/hrms/attendance/detail/${data}') }}`;
-                return `<div data-tw-merge data-tw-placement="bottom-end" class="dropdown relative"><button data-tw-merge
-                data-tw-toggle="dropdown" aria-expanded="false"
-                class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none  [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed text-xs py-1.5 px-2 w-20">
-                <i class="fa-solid fa-list text-base"></i></button>
-            <div data-transition data-selector=".show" data-enter="transition-all ease-linear duration-150"
-                data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1"
-                data-enter-to="!mt-1 visible opacity-100 translate-y-0" data-leave="transition-all ease-linear duration-150"
-                data-leave-from="!mt-1 visible opacity-100 translate-y-0"
-                data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1"
-                class="dropdown-menu absolute z-[9999] hidden">
-                <div data-tw-merge
-                    class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 w-40">
-
-                    <a onClick="action('detail', '` + data['id'] + `')"
-                        class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i
-                            data-tw-merge data-lucide="external-link"
-                            class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
-                        Open</a>
-                    <a onClick="action('update', '` + data['id'] + `')"
-                        class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i
-                            data-tw-merge data-lucide="external-link"
-                            class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
-                        Update</a>
-                    <a onClick="action('delete', '` + data['id'] + `')"
-                        class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i
-                            data-tw-merge data-lucide="file-text" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
-                        Delete</a>
-
-                </div>
-            </div>
-        </div>`;
-            }
-
-            function action(action, id) {
-                if (action === 'delete') {
-                    const path = `{{ $apiReportAttendance }}/` + id;
-                    Swal.fire({
-                        title: "Are you sure?",
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#3085d6",
-                        cancelButtonColor: "#d33",
-                        confirmButtonText: "Yes, delete it!"
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            destroy(action, path)
-                        } else {
-                            attendanceTable.ajax.reload();
-                        }
-                    });
-                } else {
-                    location.href = '{{ url('/dashboard/hrms/attendance') }}/' + action + '/' + id;
-                }
-
-            }
-
-            async function destroy(method, path) {
-                try {
-                    const response = await $.ajax({
-                        url: path,
-                        type: method,
-                        contentType: 'application/json',
-                        headers: {
-                            'Authorization': `Bearer ${appToken}`,
-                            'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
-                        },
-                        dataType: 'json'
-                    });
-
-                    Swal.fire({
-                        title: "Deleted!",
-                        icon: "success"
-                    });
-                    attendanceTable.ajax.reload();
-                } catch (xhr) {
-                    console.log(xhr);
-                    if (xhr.status === 422) {
-                        const errorString = result.error || 'An error occurred.';
-                        showErrorNotification('error', `There were errors. Message : ${result.message}`, errorString);
-                    } else {
-                        showErrorNotification('error', 'An error occurred while processing your request.');
-                    }
-                    // activateTab(formId);
-                }
             }
 
             const urlParams = new URLSearchParams(window.location.search);

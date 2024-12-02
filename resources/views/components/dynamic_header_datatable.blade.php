@@ -73,8 +73,9 @@
 
         $.extend($.fn.dataTable.defaults, {
             deferRender: true,
+            
             scroller: true,
-            // stateSave: true,
+            stateSave: true,
             responsive: true,
             autoWidth: true,
             selected: true,
@@ -109,7 +110,9 @@
             const appToken = localStorage.getItem('app_token');
 
             $.each({{ $id }}Columns, function(idx, item) {
-                var orderable = $(item).attr('orderable') || 'false';
+                var orderable = !!($(item).attr('orderable') && $(item).attr('orderable') === "true");
+
+                 
                 var searchable = $(item).attr('searchable') !== 'false' || $(item).attr('searchable') === undefined;
                 var visible = $(item).attr('visible') !== 'false' || $(item).attr('visible') === undefined;
                 var render = $(item).data('render');
@@ -135,6 +138,7 @@
                     }
                     // console.log(tmp);
                 } else {
+                     
                     tmp = {
                         data: $(item).data('value'),
                         orderable: orderable,
@@ -224,25 +228,7 @@
                     console.error('AJAX request failed:', error);
                 },
                 complete: function(response) {
-
-                    const dates = response.responseJSON.data[0].attendances;
-                    // console.log(dates);
-                    const datesArray = Object.values(dates);
-                    // console.log(datesArray);
-
-
-                    datesArray.forEach((value, key) => {
-                        tmp = {
-                            data: key,
-                            name: key,
-                            orderable: false,
-                            searchable: false,
-                        };
-                        {{ $id }}TableColumns.push(tmp);
-                    });
-
                     $('#{{ $id }}_processing').hide();
-
                     if (response.responseJSON.message === "Data not found") {
                         $('#{{ $id }} tbody').html(
                             '<tr><td colspan="10" class="text-center">No data found</td></tr>'
@@ -281,28 +267,28 @@
                     let myKey = Number(firstKey) - 1;
                     for (let key in attendances) {
                         if (attendances.hasOwnProperty(key)) {
-                            let day = (Number(key) + 2);
-                            if (attendances[key] === " ") {
+                            let day = (Number(key) + 3);
+                            if (attendances[key].status === " ") {
                                 $('td', row).eq(day)
                                     .addClass('attendances')
                                     .css('background-color', '#ffd9d9');
-                            } else if (attendances[key] === "P") {
+                            } else if (attendances[key].status === "P") {
                                 $('td', row).eq(day)
                                     .addClass('text-success')
                                     .css('font-weight', 'bold');
-                            } else if (attendances[key] === "A") {
+                            } else if (attendances[key].status === "A") {
                                 $('td', row).eq(day)
                                     .addClass('text-danger')
                                     .css('font-weight', 'bold');
-                            } else if (attendances[key] === "L") {
+                            } else if (attendances[key].status === "L") {
                                 $('td', row).eq(day)
                                     .addClass('text-warning')
                                     .css('font-weight', 'bold');
-                            } else if (attendances[key] === "H") {
+                            } else if (attendances[key].status === "H") {
                                 $('td', row).eq(day)
                                     .addClass('text-info')
                                     .css('font-weight', 'bold');
-                            } else if (attendances[key] === "W") {
+                            } else if (attendances[key].status === "WFH") {
                                 $('td', row).eq(day)
                                     .addClass('text-primary')
                                     .css('font-weight', 'bold');

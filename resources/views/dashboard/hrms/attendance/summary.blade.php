@@ -86,7 +86,7 @@
                              
                         </div>
                                      
-                        <x-datatable id="attendanceTable" :url="$apiUrl" method="POST" class="display nowrap" :order="[[ 1, 'DESC']]"
+                        <x-datatable id="attendanceTable" :url="$apiUrl" method="POST" class="display nowrap cell-border row-border" :order="[[ 1, 'DESC']]"
                         :filter="[
                                 'designation_id' => '#designation_id',
                                 'department_id' => '#department_id',
@@ -132,19 +132,19 @@
 <script src="{{ asset('dist') }}/js/components/base/litepicker.js"></script>
     <script>
         function getUrlAbsent(data, type, row, meta) {     
-            return '<a href="{{ url('dashboard/hrms/attendance/attendance') }}?employee_id='+row.id+'&attendance_status=absent" data-placement="top" title="Click to see detail!"><div class=" px-1.5 w-full [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">'+data+'</div></a>';
+            return '<a href="{{ url('dashboard/hrms/attendance/attendance') }}?employee_id='+row.id+'&attendance_status=absent" data-placement="top" title="Click to see detail!"><div class=" px-1.5 w-full [&:hover:not(:disabled)]:bg-primary/10 [&:hover:not(:disabled)]:border-primary/10 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">'+data+'</div></a>';
         }
         function getUrlPresent(data, type, row, meta) {     
-            return '<a href="{{ url('dashboard/hrms/attendance/attendance') }}?employee_id='+row.id+'&attendance_status=present" data-placement="top" title="Click to see detail!"><div class=" px-1.5 w-full [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">'+data+'</div></a>';
+            return '<a href="{{ url('dashboard/hrms/attendance/attendance') }}?employee_id='+row.id+'&attendance_status=present" data-placement="top" title="Click to see detail!"><div class=" px-1.5 w-full [&:hover:not(:disabled)]:bg-primary/10 [&:hover:not(:disabled)]:border-primary/10 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">'+data+'</div></a>';
         }
         function getUrlLeave(data, type, row, meta) {     
-            return '<a href="{{ url('dashboard/hrms/attendance/attendance') }}?employee_id='+row.id+'&attendance_status=leave" data-placement="top" title="Click to see detail!"><div class=" px-1.5 w-full [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">'+data+'</div></a>';
+            return '<a href="{{ url('dashboard/hrms/attendance/attendance') }}?employee_id='+row.id+'&attendance_status=leave" data-placement="top" title="Click to see detail!"><div class=" px-1.5 w-full [&:hover:not(:disabled)]:bg-primary/10 [&:hover:not(:disabled)]:border-primary/10 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">'+data+'</div></a>';
         }
         function getUrlWfh(data, type, row, meta) {     
-            return '<a href="{{ url('dashboard/hrms/attendance/attendance') }}?employee_id='+row.id+'&attendance_status=wfh" data-placement="top" title="Click to see detail!"><div class=" px-1.5 w-full [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">'+data+'</div></a>';
+            return '<a href="{{ url('dashboard/hrms/attendance/attendance') }}?employee_id='+row.id+'&attendance_status=wfh" data-placement="top" title="Click to see detail!"><div class=" px-1.5 w-full [&:hover:not(:disabled)]:bg-primary/10 [&:hover:not(:disabled)]:border-primary/10 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">'+data+'</div></a>';
         }
         function getUrlHalfday(data, type, row, meta) {     
-            return '<a href="{{ url('dashboard/hrms/attendance/attendance') }}?employee_id='+row.id+'&attendance_status=halfday" data-placement="top" title="Click to see detail!"><div class=" px-1.5 w-full [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">'+data+'</div></a>';
+            return '<a href="{{ url('dashboard/hrms/attendance/attendance') }}?employee_id='+row.id+'&attendance_status=halfday" data-placement="top" title="Click to see detail!"><div class=" px-1.5 w-full [&:hover:not(:disabled)]:bg-primary/10 [&:hover:not(:disabled)]:border-primary/10 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">'+data+'</div></a>';
         }
 
         function getFullName(data, type, row, meta) {

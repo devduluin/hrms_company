@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="{{ asset('dist/css/vendors/toastify.css') }}">
     @stack('css')
     @include('vendor-common.fontawesome')
-    @include('vendor-common.tomselect')
+     
     <script src="{{ asset('dist/js/vendors/dom.js') }}"></script>
     <script> let apiUrl = "{{ config('apiendpoints.gateway') }}"; </script>
 </head>

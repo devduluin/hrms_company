@@ -21,7 +21,7 @@ class LeaveApplicantController extends Controller
         $data['company_id'] = session()->get('company_id');
 
         $data['apiUrlEmployee'] = $this->apiGatewayUrl . '/v1/employees/employee';
-        $data['apiUrlLeaveType'] = $this->apiGatewayUrl . "/v1/companies/leave-type/datatable";
+        $data['apiUrlLeaveType'] = $this->apiGatewayUrl . "/v1/attendance/leave-type/datatable";
 
         return view('dashboard.hrms.leave.leave_application.index', $data);
     }
@@ -34,7 +34,7 @@ class LeaveApplicantController extends Controller
         $data['apiUrl'] = $this->apiGatewayUrl . '/v1/attendance/leave';
          
         $data['apiUrlEmployee'] = $this->apiGatewayUrl . '/v1/employees/employee';
-        $data['apiUrlLeaveType'] = $this->apiGatewayUrl . "/v1/companies/leave-type/datatable";
+        $data['apiUrlLeaveType'] = $this->apiGatewayUrl . "/v1/attendance/leave-type/datatable";
         
         return view('dashboard.hrms.leave.leave_application.create', $data);
     }
@@ -46,7 +46,7 @@ class LeaveApplicantController extends Controller
         $data['id'] = $id;
         $data['company_id'] = session()->get('company_id');
         $data['apiUrl'] = $this->apiGatewayUrl . '/v1/attendance/leave';
-        $data['apiUrlLeaveType'] = $this->apiGatewayUrl . '/v1/companies/leave-type/datatable';
+        $data['apiUrlLeaveType'] = $this->apiGatewayUrl . '/v1/attendance/leave-type/datatable';
         $data['apiUrlEmployee'] = $this->apiGatewayUrl . "/v1/employees/employee";
         
         return view('dashboard.hrms.leave.leave_application.create', $data);

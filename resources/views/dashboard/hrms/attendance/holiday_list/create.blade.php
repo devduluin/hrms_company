@@ -200,6 +200,7 @@
     </div>
 </div>
 @endsection
+
 @push('js')
 <script src="
 https://cdn.jsdelivr.net/npm/moment@2.30.1/moment.min.js
@@ -531,6 +532,8 @@ https://cdn.jsdelivr.net/npm/moment@2.30.1/moment.min.js
         if (row) row.remove();
     }
     
+    initializeTomSelect();
     </script>
 @endpush
 @include('vendor-common.sweetalert')
+@include('vendor-common.tomselect')

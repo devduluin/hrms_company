@@ -43,9 +43,4 @@
         @endif
      
 @include('vendor-common.tomselect')
-
-@pushOnce('js')
-    <script>
-        initializeTomSelect();
-    </script>
-@endpushOnce
+ 

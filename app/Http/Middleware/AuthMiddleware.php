@@ -54,7 +54,7 @@ class AuthMiddleware
     {
         $cacheKey = 'company_settings_' . $company_id;
 
-        $cachedSettings = Cache::remember($cacheKey, now()->addMinutes(20), function () use ($company_id, $appToken) {
+        $cachedSettings = Cache::remember($cacheKey, now()->addMinutes(30), function () use ($company_id, $appToken) {
             $headers = [
                 'accept' => 'application/json',
                 'Authorization' => 'Bearer ' . $appToken,

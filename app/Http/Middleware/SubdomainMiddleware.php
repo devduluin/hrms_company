@@ -43,7 +43,7 @@ class SubdomainMiddleware
             ],
         ];
 
-        $apiResponse = Cache::remember($cacheKey, 600, function () use ($request, $gateway, $options) {
+        $apiResponse = Cache::remember($cacheKey, now()->addMinutes(30), function () use ($request, $gateway, $options) {
             try {
                 $response = $this->client->request('GET', $gateway, $options);
                 $apiResponse = json_decode($response->getBody(), true);
