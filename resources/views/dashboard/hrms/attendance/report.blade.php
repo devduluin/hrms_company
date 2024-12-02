@@ -19,7 +19,7 @@
         @include('layouts.dashboard.menu')
         <div
             class="content transition-[margin,width] duration-100 px-5 pt-[56px] pb-16 relative z-20 content--compact xl:ml-[275px] [&amp;.content--compact]:xl:ml-[91px]">
-            <div class="container mt-[65px]">
+            <div class="mt-[65px] col-span-12 w-full">
                 <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center">
                     <div class="text-lg font-medium group-[.mode--light]:text-white">
                         {{ $page_title ?? '' }}

@@ -38,7 +38,7 @@
         if (a.length) {
             a.each(function() {
                 let r = $(this)[0].getContext("2d"),
-                    e = [20, 10, 70],
+                    e = [50, 10, 40], //ngambil count data di sini
                     t = () => ['#FF9C66', '#00E396', '#008FFB', '#FEB019'],
                     o = new Chart(r, { 
                         type: "bar", // Ubah tipe menjadi bar

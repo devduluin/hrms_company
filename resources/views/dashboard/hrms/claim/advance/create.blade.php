@@ -4,7 +4,7 @@
 <div class="hurricane before:content-[''] before:z-[-1] before:w-screen before:bg-slate-50 before:top-0 before:h-screen before:fixed before:bg-texture-black before:bg-contain before:bg-fixed before:bg-[center_-20rem] before:bg-no-repeat">
 @include('layouts.dashboard.menu')
     <div class="content transition-[margin,width] duration-100 px-5 pt-[56px] pb-16 relative z-20 content--compact xl:ml-[275px] [&amp;.content--compact]:xl:ml-[91px]">
-        <div class="container mt-[65px]">
+        <div class="mt-[65px] col-span-12 w-full">
             <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center">
                 <div class="text-base font-medium group-[.mode--light]:text-white">
                     {{ $title ?? '' }}
@@ -39,24 +39,12 @@
                                 </div>
                                
                                 <div class="gap-x-6 gap-y-10 ">
-                                    <div class="mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-64">
-                                        <div class="text-left">
-                                            <div class="flex items-center">
-                                                <div class="font-medium">Status</div>
-                                            </div>
-                                        </div>
-                                        <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3"></div>
-                                    </div>
                                     <div class="mt-3 w-96 flex-1 xl:mt-0">
-                                        <select required name="status" data-title="Language" data-placeholder="Select your language" class="tom-select w-full" sclass="tom-select disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10"">
-                                            
-                                            <option value="enable">
-                                                Enable
-                                            </option>
-                                            <option value="disable">
-                                                Disable
-                                            </option>
-                                        </select>
+                                        <x-form.select required style="width: 111%;" id="status" name="status" label="Status" data-title="Language">
+                                            <option value="">Select Status</option>
+                                            <option value="enable">Enable</option>
+                                            <option value="disable">Disable</option>
+                                        </x-form.select>
                                     </div>
                                 </div>
                             
