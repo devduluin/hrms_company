@@ -57,7 +57,7 @@
                 if (lastActiveTabId !== newTabId) {
                     e.preventDefault();
                     lastActiveTabId = newTabId;
-                    $(lastActiveTabId + "-btn").click(async function(e) {
+                    $(lastActiveTabId + "-btn").off('click').on('click', async function(e) {
                         // console.log(lastActiveTabId + "-form");
                         e.preventDefault();
                         await handleFormSubmission(lastActiveTabId);
