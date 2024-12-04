@@ -100,7 +100,7 @@
                                                         <div class="font-mediumm mt-1.5 text-2xl" id="totalWfh">0</div>
                                                     </div>
                                                 </a>
-                                                <a href="{{ url('dashboard/hrms/attendance/request') }}?status=pending" class="block">
+                                                <a href="{{ url('dashboard/hrms/attendance/request') }}?status=submit" class="block">
                                                     <div
                                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 bg-warning bg-opacity-20 p-5 shadow-sm md:col-span-2 xl:col-span-1">
                                                         <div class="text-base text-pending">Request Approve</div>

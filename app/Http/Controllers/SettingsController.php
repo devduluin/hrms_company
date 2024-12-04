@@ -63,6 +63,7 @@ class SettingsController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Security Settings';
+        $data['apiUrlChangePassword'] = $this->apiGatewayUrl.'/users/change_password';
 
         return view('dashboard.settings.elm_security', $data);
     }

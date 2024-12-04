@@ -125,11 +125,11 @@
                         'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
                     }
                 });
-
+                const result = await response.json();
                 if (response.ok) {
                     //console.log('Form submitted successfully');
                     await populateFormInputs();
-                    showSuccessNotification(response.message, "The operation was completed successfully.");
+                    showSuccessNotification(result.message, "The operation was completed successfully.");
                     if(form.id == 'settingForm'){
                         const apiUrl = '{{ $apiUrl }}/users/user';
                         await populateFormInputs(apiUrl);
@@ -137,7 +137,10 @@
                         location.reload();
                     }
                 } else {
-                    console.error('Error submitting form');
+                    //console.error('Error submitting form');
+                    
+                     
+                    showErrorNotification('error', result.message);
                 }
             } catch (error) {
                 console.error('Error submitting form', error);
@@ -346,5 +349,95 @@
                     console.error('Error fetching user data:', error);
                 }
             }
+        
+        function checkPasswordStrength() {
+            const password = document.getElementById('password').value;
+            
+            let strength = 0;
+
+            // Criteria for password strength
+            if (password.length >= 8) strength++;  // Length check
+            if (/[A-Z]/.test(password)) strength++;  // Uppercase check
+            if (/[a-z]/.test(password)) strength++;  // Lowercase check
+            if (/[0-9]/.test(password)) strength++;  // Numbers check
+            if (/[\W]/.test(password)) strength++;   // Special character check
+
+            // Reset all strength levels
+            resetStrengthLevels();
+
+            // Activate levels based on strength
+            activateStrengthLevels(strength);
+
+            const confirmPassword = document.getElementById('confirm-password').value;
+            if(confirmPassword.length >= 1){
+            validatePasswordMatch(); // Check password match when the main password changes
+            }
+        }
+
+        function resetStrengthLevels() {
+            // Remove 'active' class from all levels
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById(`strength-level-${i}`).classList.remove('active');
+            }
+        }
+
+        function activateStrengthLevels(strength) {
+            // Activate the levels based on the strength
+            for (let i = 1; i <= strength && i <= 4; i++) {
+                document.getElementById(`strength-level-${i}`).classList.add('active');
+            }
+                const confirmPassword = document.getElementById('confirm-password')
+                if(strength >= 3){
+                
+                    confirmPassword.removeAttribute('disabled');
+                } else {
+                    confirmPassword.setAttribute('disabled', 'disabled');
+                }
+
+        }
+
+
+        function validatePasswordMatch(strength) {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const matchMessage = document.getElementById('password-match-message');
+
+            if (password === confirmPassword) {
+                matchMessage.textContent = "";
+                
+                
+                //if(strength >= 3){
+                     
+                //} else {
+                    //btnSignup.setAttribute('disabled', 'disabled');
+                //}
+            } else {
+                matchMessage.textContent = "Passwords do not match!";
+                matchMessage.className = "text-orange-800 sm:text-sm";
+            }
+        }
+
+        function setIconAtributte(iconPath, passwordFieldId) {
+            if (passwordFieldId.type === "password") {
+                passwordFieldId.type = "text";
+                iconPath.setAttribute("d", "M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z");
+            } else {
+                passwordFieldId.type = "password";
+                iconPath.setAttribute("d", "M320 400c-75.85 0-137.25-58.71-142.9-133.11L72.2 185.82c-13.79 17.3-26.48 35.59-36.72 55.59a32.35 32.35 0 0 0 0 29.19C89.71 376.41 197.07 448 320 448c26.91 0 52.87-4 77.89-10.46L346 397.39a144.13 144.13 0 0 1-26 2.61zm313.82 58.1l-110.55-85.44a331.25 331.25 0 0 0 81.25-102.07 32.35 32.35 0 0 0 0-29.19C550.29 135.59 442.93 64 320 64a308.15 308.15 0 0 0-147.32 37.7L45.46 3.37A16 16 0 0 0 23 6.18L3.37 31.45A16 16 0 0 0 6.18 53.9l588.36 454.73a16 16 0 0 0 22.46-2.81l19.64-25.27a16 16 0 0 0-2.82-22.45zm-183.72-142l-39.3-30.38A94.75 94.75 0 0 0 416 256a94.76 94.76 0 0 0-121.31-92.21A47.65 47.65 0 0 1 304 192a46.64 46.64 0 0 1-1.54 10l-73.61-56.89A142.31 142.31 0 0 1 320 112a143.92 143.92 0 0 1 144 144c0 21.63-5.29 41.79-13.9 60.11z");
+            }
+        }
+
+        function togglePassword(passwordFieldType) {
+            const passwordField = document.getElementById(passwordFieldType);
+            const eyeIconPath = document.getElementById("eyeIcon");
+            const eyeIconConfirmPath = document.getElementById("eyeIconConfirm");
+
+            if (passwordFieldType === 'confirm-password'){
+                setIconAtributte(eyeIconConfirmPath, passwordField);
+                console.log(passwordField.type);
+            } else {
+                setIconAtributte(eyeIconPath, passwordField);            
+            }
+        }
     </script>
 @endsection

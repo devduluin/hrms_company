@@ -122,7 +122,11 @@ class AuthResponseController extends Controller
             'latlong'   => $request->latlong,
             'address'    => $request->address,
         ];
- 
+
+        if($request->secondary_id){
+            $data['secondary_id'] = $request->secondary_id;
+        }
+
         $response = $this->postRequest($this->apiGatewayUrl . '/v1/companies/company', $data, $headers);
         $responseBody = json_decode($response->getBody(), true);
          
@@ -132,18 +136,20 @@ class AuthResponseController extends Controller
                     'message' => $responseBody['message'],
                 ], 400);
             }
-			//$responseBody   = $responseBody['data'];
+			$responseBody   = $responseBody['data'];
             
-            $userAccount['user_id'] 		= $responseBody['data']['user_id'];
-            $userAccount['secondary_id'] 	= $responseBody['data']['id'];
+            $userAccount['user_id'] 		= $responseBody['user_id'];
+            $userAccount['secondary_id'] 	= $responseBody['id'];
 			$response2 = $this->postRequest($this->apiGatewayUrl . '/users/register/set_secondary_id', $userAccount, $headers);
 			$responseUser = json_decode($response2->getBody(), true); 
+            
             if (isset($responseUser)) {
                 $request->session()->forget('company_id');
                 $request->session()->put('company_id', $userAccount['secondary_id']);
-                
+                 
                 $redirect   = url('dashboard/hrms/setup_initialize');
 				return response()->json([
+					'company_id' => $userAccount['secondary_id'],
 					'url' => $redirect
 				], 200);
 			}
