@@ -6,7 +6,7 @@
        
         
         <div id="contents-page" class="content transition-[margin,width] duration-100 px-5 xl:mr-2.5 mt-[75px] pt-[31px] pb-16 content--compact xl:ml-[275px] [&.content--compact]:xl:ml-[100px]">
-            <div class="container">
+            <div class="mt-[45px] col-span-12 w-full">
             <div class="grid grid-cols-12 gap-x-6 gap-y-10">
                 <div class="col-span-12">
                     <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center">

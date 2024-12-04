@@ -7,163 +7,165 @@
 
         <div id="contents-page"
             class="content transition-[margin,width] duration-100 px-5 xl:mr-2.5 mt-[75px] pt-[31px] pb-16 content--compact xl:ml-[275px] [&.content--compact]:xl:ml-[100px]">
-            <div class="container">
+            <div class="grid  grid-cols-1 md:grid-cols-12 gap-x-6 gap-y-10">
+                <div class="col-span-12 w-full">
 
 
-                <div class="grid grid-cols-12 gap-x-6 gap-y-10">
-                    <div class="col-span-12">
-                        <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center">
-                            <div class="text-base font-medium group-[.mode--light]:text-white">
-                                {{ $page_title }}
-                            </div>
-                            <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
-                                <a href="{{ url('dashboard/hrms/employee/import_employee') }}" data-tw-merge=""
-                                    class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 w-48"><i
-                                        data-tw-merge="" data-lucide="upload" class="mr-2 h-4 w-4 stroke-[1.3]"></i>
-                                    Import Data</a>
+                    <div class="grid grid-cols-12 gap-x-6 gap-y-10">
+                        <div class="col-span-12">
+                            <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center">
+                                <div class="text-base font-medium group-[.mode--light]:text-white">
+                                    {{ $page_title }}
+                                </div>
+                                <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
+                                    <a href="{{ url('dashboard/hrms/employee/import_employee') }}" data-tw-merge=""
+                                        class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 w-48"><i
+                                            data-tw-merge="" data-lucide="upload" class="mr-2 h-4 w-4 stroke-[1.3]"></i>
+                                        Import Data</a>
 
-                                <div data-tw-merge="" data-tw-placement="bottom-end" class="dropdown relative inline-block">
-                                    <button data-tw-merge="" data-tw-toggle="dropdown" aria-expanded="false"
-                                        class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md  w-full sm:w-auto"><i
-                                            data-tw-merge="" data-lucide="arrow-down-wide-narrow"
-                                            class="mr-2 h-4 w-4 stroke-[1.3]"></i>
-                                        Filter
-                                        <span id="countFilter"
-                                            class="ml-2 flex h-5 items-center justify-center rounded-full border bg-slate-100 px-1.5 text-xs font-medium">
+                                    <div data-tw-merge="" data-tw-placement="bottom-end" class="dropdown relative inline-block">
+                                        <button data-tw-merge="" data-tw-toggle="dropdown" aria-expanded="false"
+                                            class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md  w-full sm:w-auto"><i
+                                                data-tw-merge="" data-lucide="arrow-down-wide-narrow"
+                                                class="mr-2 h-4 w-4 stroke-[1.3]"></i>
+                                            Filter
+                                            <span id="countFilter"
+                                                class="ml-2 flex h-5 items-center justify-center rounded-full border bg-slate-100 px-1.5 text-xs font-medium">
 
-                                        </span></button>
-                                    <div data-transition="" data-selector=".show"
-                                        data-enter="transition-all ease-linear duration-150"
-                                        data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1"
-                                        data-enter-to="!mt-1 visible opacity-100 translate-y-0"
-                                        data-leave="transition-all ease-linear duration-150"
-                                        data-leave-from="!mt-1 visible opacity-100 translate-y-0"
-                                        data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1"
-                                        class="dropdown-menu absolute z-[9999] hidden">
-                                        <div data-tw-merge=""
-                                            class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600">
-                                            <div class="p-2">
-                                                <form method="GET" id="filterTable">
-                                                    <div>
-                                                        <x-form.select id="company_id" name="company_id" label="Company"
-                                                            url="{{ url('dashboard/hrms/designation') }}"
-                                                            apiUrl="{{ $apiCompanyUrl }}/company/datatables"
-                                                            columns='["company_name"]' :selected="$company" :keys="[
-                                                                'company_id' => $company,
-                                                            ]">
-                                                            <option value="">Select Company</option>
-                                                        </x-form.select>
-                                                    </div>
-                                                    <div class="mt-3">
-                                                        <x-form.select id="department_id" name="department_id"
-                                                            label="Department" url="{{ url('dashboard/hrms/designation') }}"
-                                                            apiUrl="{{ $apiCompanyUrl }}/department/datatables"
-                                                            columns='["department_name"]' :keys="[
-                                                                'company_id' => $company,
-                                                                'search',
-                                                            ]">
-                                                        </x-form.select>
-                                                    </div>
-                                                    <div class="mt-3">
-                                                        <x-form.select id="designation_id" name="designation_id"
-                                                            label="Designation"
-                                                            url="{{ url('dashboard/hrms/designation') }}"
-                                                            apiUrl="{{ $apiCompanyUrl }}/designation/datatables"
-                                                            columns='["designation_name"]' :keys="[
-                                                                'company_id' => $company,
-                                                                'search',
-                                                            ]">
-                                                        </x-form.select>
-                                                    </div>
-                                                    <div class="mt-4 flex items-center">
-                                                        <button type="button" onClick="resetForm()" data-tw-merge=""
-                                                            class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 ml-auto w-32">Reset</button>
-                                                        <button type="submit" data-tw-merge=""
-                                                            class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary ml-2 w-32">Apply</button>
-                                                    </div>
-                                                </form>
+                                            </span></button>
+                                        <div data-transition="" data-selector=".show"
+                                            data-enter="transition-all ease-linear duration-150"
+                                            data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1"
+                                            data-enter-to="!mt-1 visible opacity-100 translate-y-0"
+                                            data-leave="transition-all ease-linear duration-150"
+                                            data-leave-from="!mt-1 visible opacity-100 translate-y-0"
+                                            data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1"
+                                            class="dropdown-menu absolute z-[9999] hidden">
+                                            <div data-tw-merge=""
+                                                class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600">
+                                                <div class="p-2">
+                                                    <form method="GET" id="filterTable">
+                                                        <div>
+                                                            <x-form.select id="company_id" name="company_id" label="Company"
+                                                                url="{{ url('dashboard/hrms/designation') }}"
+                                                                apiUrl="{{ $apiCompanyUrl }}/company/datatables"
+                                                                columns='["company_name"]' :selected="$company" :keys="[
+                                                                    'company_id' => $company,
+                                                                ]">
+                                                                <option value="">Select Company</option>
+                                                            </x-form.select>
+                                                        </div>
+                                                        <div class="mt-3">
+                                                            <x-form.select id="department_id" name="department_id"
+                                                                label="Department" url="{{ url('dashboard/hrms/designation') }}"
+                                                                apiUrl="{{ $apiCompanyUrl }}/department/datatables"
+                                                                columns='["department_name"]' :keys="[
+                                                                    'company_id' => $company,
+                                                                    'search',
+                                                                ]">
+                                                            </x-form.select>
+                                                        </div>
+                                                        <div class="mt-3">
+                                                            <x-form.select id="designation_id" name="designation_id"
+                                                                label="Designation"
+                                                                url="{{ url('dashboard/hrms/designation') }}"
+                                                                apiUrl="{{ $apiCompanyUrl }}/designation/datatables"
+                                                                columns='["designation_name"]' :keys="[
+                                                                    'company_id' => $company,
+                                                                    'search',
+                                                                ]">
+                                                            </x-form.select>
+                                                        </div>
+                                                        <div class="mt-4 flex items-center">
+                                                            <button type="button" onClick="resetForm()" data-tw-merge=""
+                                                                class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 ml-auto w-32">Reset</button>
+                                                            <button type="submit" data-tw-merge=""
+                                                                class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary ml-2 w-32">Apply</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <x-form.button id="new_attendance" label="Add New Employee" style="primary" icon="plus"
-                                    url="{{ url('dashboard/hrms/employee/new_employee') }}"></x-button>
+                                    <x-form.button id="new_attendance" label="Add New Employee" style="primary" icon="plus"
+                                        url="{{ url('dashboard/hrms/employee/new_employee') }}"></x-button>
 
-                            </div>
-                        </div>
-                        <div class="mt-3.5 flex flex-col gap-8">
-                            <div class="box box--stacked flex flex-col p-5">
-                                <div class="grid grid-cols-4 gap-5">
-                                    <div
-                                        class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                        <div class="text-base text-slate-500">Total Employees</div>
-                                        <div class="mt-1.5 text-2xl font-medium" id="totalEmployeesCount">0</div>
-                                    </div>
-                                    <div
-                                        class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                        <div class="text-base text-slate-500">Employees Active</div>
-                                        <div class="mt-1.5 text-2xl font-medium" id="totalEmployeesActive">0</div>
-                                    </div>
-                                    <div
-                                        class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                        <div class="text-base text-slate-500">Employee Leave</div>
-                                        <div class="font-mediumm mt-1.5 text-2xl" id="totalEmployeesLeave">0</div>
-                                    </div>
-                                    <div
-                                        class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                        <div class="text-base text-slate-500">New Employee</div>
-                                        <div class="font-mediumm mt-1.5 text-2xl" id="totalNewEmployee">0</div>
-                                    </div>
                                 </div>
                             </div>
+                            <div class="mt-3.5 flex flex-col gap-8">
+                                <div class="box box--stacked flex flex-col p-5">
+                                    <div class="grid grid-cols-4 gap-5">
+                                        <div
+                                            class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                            <div class="text-base text-slate-500">Total Employees</div>
+                                            <div class="mt-1.5 text-2xl font-medium" id="totalEmployeesCount">0</div>
+                                        </div>
+                                        <div
+                                            class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                            <div class="text-base text-slate-500">Employees Active</div>
+                                            <div class="mt-1.5 text-2xl font-medium" id="totalEmployeesActive">0</div>
+                                        </div>
+                                        <div
+                                            class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                            <div class="text-base text-slate-500">Employee Leave</div>
+                                            <div class="font-mediumm mt-1.5 text-2xl" id="totalEmployeesLeave">0</div>
+                                        </div>
+                                        <div
+                                            class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                            <div class="text-base text-slate-500">New Employee</div>
+                                            <div class="font-mediumm mt-1.5 text-2xl" id="totalNewEmployee">0</div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                            <div class="box box--stacked flex flex-col">
-                                <div class="table gap-y-2 p-5 sm:flex-row sm:items-center">
-                                    <div>
-                                        <x-datatable id="employeeTable" :url="$apiUrl . '/employee/datatables'" method="POST" class="display"
-                                            customButton="true" customButtonText="Send Verification Email"
-                                            customButtonFunction="sendEmailVerification()" :filter="[
-                                                'first_name' => '#name',
-                                                'designation_id' => '#designation_id',
-                                            ]"
-                                            :order="[[1, 'DESC']]">
-                                            <x-slot:thead>
-                                                <th data-value="id" data-render="getCheckBox" orderable="false">
-                                                    <input type="checkbox" id="select-all" />
-                                                </th>
-                                                <th data-value="id" data-render="getId" orderable="true">No.</th>
-                                                <th data-value="employee_id" searchable="true" orderable="true">Employee
-                                                    ID</th>
-                                                <th data-value="first_name" searchable="true" orderable="true"
-                                                    searchable="true">First Name
-                                                </th>
-                                                <th data-value="last_name" searchable="true" orderable="true">Last Name
-                                                </th>
-                                                <th data-value="company_id_rel" data-render="getCompany"
-                                                    orderable="false">
-                                                    Company
-                                                </th>
-                                                {{-- <th data-value="grade_id_rel" data-render="getGrade" orderable="false">
-                                                    Grade
-                                                </th> --}}
-                                                <th data-value="designation_id_rel" data-render="getDesignation"
-                                                    orderable="false">
-                                                    Designation
-                                                </th>
-                                                <th data-value="department_id_rel" data-render="getDepartment"
-                                                    orderable="false">Department
-                                                </th>
-                                                {{-- <th data-value="branch_id_rel" data-render="getBranch" orderable="false">
-                                                    Branch
-                                                </th> --}}
-                                                <th data-value="status" data-render="getStatus" orderable="false">Status
-                                                </th>
-                                                <th data-value="is_verified" data-render="getMobileStatus"
-                                                    orderable="false">Mobile</th>
-                                                <th data-value="id" data-render="getActionBtn" orderable="false">Action
-                                                </th>
-                                            </x-slot:thead>
-                                        </x-datatable>
+                                <div class="box box--stacked flex flex-col">
+                                    <div class="table gap-y-2 p-5 sm:flex-row sm:items-center">
+                                        <div>
+                                            <x-datatable id="employeeTable" :url="$apiUrl . '/employee/datatables'" method="POST" class="display"
+                                                customButton="true" customButtonText="Send Verification Email"
+                                                customButtonFunction="sendEmailVerification()" :filter="[
+                                                    'first_name' => '#name',
+                                                    'designation_id' => '#designation_id',
+                                                ]"
+                                                :order="[[1, 'DESC']]">
+                                                <x-slot:thead>
+                                                    <th data-value="id" data-render="getCheckBox" orderable="false">
+                                                        <input type="checkbox" id="select-all" />
+                                                    </th>
+                                                    <th data-value="id" data-render="getId" orderable="true">No.</th>
+                                                    <th data-value="employee_id" searchable="true" orderable="true">Employee
+                                                        ID</th>
+                                                    <th data-value="first_name" searchable="true" orderable="true"
+                                                        searchable="true">First Name
+                                                    </th>
+                                                    <th data-value="last_name" searchable="true" orderable="true">Last Name
+                                                    </th>
+                                                    <th data-value="company_id_rel" data-render="getCompany"
+                                                        orderable="false">
+                                                        Company
+                                                    </th>
+                                                    {{-- <th data-value="grade_id_rel" data-render="getGrade" orderable="false">
+                                                        Grade
+                                                    </th> --}}
+                                                    <th data-value="designation_id_rel" data-render="getDesignation"
+                                                        orderable="false">
+                                                        Designation
+                                                    </th>
+                                                    <th data-value="department_id_rel" data-render="getDepartment"
+                                                        orderable="false">Department
+                                                    </th>
+                                                    {{-- <th data-value="branch_id_rel" data-render="getBranch" orderable="false">
+                                                        Branch
+                                                    </th> --}}
+                                                    <th data-value="status" data-render="getStatus" orderable="false">Status
+                                                    </th>
+                                                    <th data-value="is_verified" data-render="getMobileStatus"
+                                                        orderable="false">Mobile</th>
+                                                    <th data-value="id" data-render="getActionBtn" orderable="false">Action
+                                                    </th>
+                                                </x-slot:thead>
+                                            </x-datatable>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
