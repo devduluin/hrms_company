@@ -7,7 +7,7 @@
         <form id="form-submit"  method="POST" action="{{ $apiUrl }}">
             <input type="hidden" id="latlong" name="latlong" />
             <input type="hidden" id="shift_assigment_id" name="shift_assigment_id" />
-            <div class="container mt-[65px]">
+            <div class="mt-[65px] col-span-12 w-full">
                 <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center">
                     <div class="text-base font-medium group-[.mode--light]:text-white">
                         {{ $page_title ?? '' }}
