@@ -349,6 +349,7 @@
                     console.error('Error fetching user data:', error);
                 }
             }
+<<<<<<< HEAD
         
         function checkPasswordStrength() {
             const password = document.getElementById('password').value;
@@ -417,6 +418,10 @@
             }
         }
 
+=======
+
+        //function untuk ganti icon mata
+>>>>>>> 049213451d5eb5a639eca77b30b36c50412800fb
         function setIconAtributte(iconPath, passwordFieldId) {
             if (passwordFieldId.type === "password") {
                 passwordFieldId.type = "text";
@@ -430,11 +435,22 @@
         function togglePassword(passwordFieldType) {
             const passwordField = document.getElementById(passwordFieldType);
             const eyeIconPath = document.getElementById("eyeIcon");
+<<<<<<< HEAD
             const eyeIconConfirmPath = document.getElementById("eyeIconConfirm");
 
             if (passwordFieldType === 'confirm-password'){
                 setIconAtributte(eyeIconConfirmPath, passwordField);
                 console.log(passwordField.type);
+=======
+            const eyeIconNewPasswordPath = document.getElementById("newPasswordEyeIcon");
+            const eyeIconConfirmPasswordPath = document.getElementById("confimPasswordEyeIcon");
+
+            if (passwordFieldType === 'newPassword'){
+                setIconAtributte(eyeIconNewPasswordPath, passwordField);
+            } else
+            if (passwordFieldType === 'confimPassword'){
+                setIconAtributte(eyeIconConfirmPasswordPath, passwordField);
+>>>>>>> 049213451d5eb5a639eca77b30b36c50412800fb
             } else {
                 setIconAtributte(eyeIconPath, passwordField);            
             }
