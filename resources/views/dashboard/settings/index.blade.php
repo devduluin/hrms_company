@@ -125,11 +125,11 @@
                         'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
                     }
                 });
-
+                const result = await response.json();
                 if (response.ok) {
                     //console.log('Form submitted successfully');
                     await populateFormInputs();
-                    showSuccessNotification(response.message, "The operation was completed successfully.");
+                    showSuccessNotification(result.message, "The operation was completed successfully.");
                     if(form.id == 'settingForm'){
                         const apiUrl = '{{ $apiUrl }}/users/user';
                         await populateFormInputs(apiUrl);
@@ -137,7 +137,10 @@
                         location.reload();
                     }
                 } else {
-                    console.error('Error submitting form');
+                    //console.error('Error submitting form');
+                    
+                     
+                    showErrorNotification('error', result.message);
                 }
             } catch (error) {
                 console.error('Error submitting form', error);
@@ -346,8 +349,74 @@
                     console.error('Error fetching user data:', error);
                 }
             }
+        
+        function checkPasswordStrength() {
+            const password = document.getElementById('newPassword').value;
+            
+            let strength = 0;
 
-        //function untuk ganti icon mata
+            // Criteria for password strength
+            if (password.length >= 8) strength++;  // Length check
+            if (/[A-Z]/.test(password)) strength++;  // Uppercase check
+            if (/[a-z]/.test(password)) strength++;  // Lowercase check
+            if (/[0-9]/.test(password)) strength++;  // Numbers check
+            if (/[\W]/.test(password)) strength++;   // Special character check
+
+            // Reset all strength levels
+            resetStrengthLevels();
+
+            // Activate levels based on strength
+            activateStrengthLevels(strength);
+
+            const confirmPassword = document.getElementById('confimPassword').value;
+            if(confirmPassword.length >= 1){
+            validatePasswordMatch(); // Check password match when the main password changes
+            }
+        }
+
+        function resetStrengthLevels() {
+            // Remove 'active' class from all levels
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById(`strength-level-${i}`).classList.remove('active');
+            }
+        }
+
+        function activateStrengthLevels(strength) {
+            // Activate the levels based on the strength
+            for (let i = 1; i <= strength && i <= 4; i++) {
+                document.getElementById(`strength-level-${i}`).classList.add('active');
+            }
+                const confirmPassword = document.getElementById('confimPassword')
+                if(strength >= 3){
+                
+                    confirmPassword.removeAttribute('disabled');
+                } else {
+                    confirmPassword.setAttribute('disabled', 'disabled');
+                }
+
+        }
+
+
+        function validatePasswordMatch(strength) {
+            const password = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confimPassword').value;
+            const matchMessage = document.getElementById('password-match-message');
+
+            if (password === confirmPassword) {
+                matchMessage.textContent = "";
+                
+                
+                //if(strength >= 3){
+                     
+                //} else {
+                    //btnSignup.setAttribute('disabled', 'disabled');
+                //}
+            } else {
+                matchMessage.textContent = "Passwords do not match!";
+                matchMessage.className = "text-orange-800 sm:text-sm";
+            }
+        }
+
         function setIconAtributte(iconPath, passwordFieldId) {
             if (passwordFieldId.type === "password") {
                 passwordFieldId.type = "text";

@@ -10,6 +10,7 @@
     'order' => [[0, 'ASC']],
     'downloadOptions' => false,
     'dtcomponent' => 'true',
+    'search' => '',
     'dtheight' => '400',
     'company_id' => '',
     'customButton' => 'false',
@@ -86,7 +87,7 @@
             pageLength: 25,
             buttons: buttonsConfig,
 
-            dom: '@if ($dtcomponent == 'true') <"grid grid-cols-2 gap-4 mb-4"Bf> @endif<"grid grid-cols-1 gap-4 mb-4"t>@if ($dtcomponent == 'true')<"grid grid-cols-3 gap-4 mb-4"lip>@endif',
+            dom: '@if ($dtcomponent == 'true') <"grid grid-cols-2 gap-4 mb-4"B @if ($search == 'true') f @endif> @endif<"grid grid-cols-1 gap-4 mb-4"t>@if ($dtcomponent == 'true')<"grid grid-cols-3 gap-4 mb-4"lip>@endif',
             language: {
                 search: 'Search: ',
                 searchPlaceholder: 'keywoard...',

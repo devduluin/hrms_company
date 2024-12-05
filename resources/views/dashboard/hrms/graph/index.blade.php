@@ -13,7 +13,7 @@
                 <div class="grid  grid-cols-1 md:grid-cols-12 gap-x-6 gap-y-10">
                     <div class= "col-span-12 w-full">
                         <div class="mt-5 ml-2 text-lg font-medium group-[.mode--light]:text-white">
-                            Shift & Attendance
+                            Graph
                         </div>
                         <div class="mt-5 flex flex-col gap-8">
                             <div class="box box--stacked p-5">
@@ -51,67 +51,51 @@
                                 <div class="mt-5">
                                         <div class="box--stacke">
                                             <div class="grid grid-cols-4 gap-5">
-                                                <a href="{{ url('dashboard/hrms/attendance/attendance') }}" class="block">
-                                                    <div
-                                                        class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                                        <div class="text-base text-slate-500">Total Attendance</div>
-                                                        <div class="mt-1.5 text-2xl font-medium" id="totalAttendance">0</div>
-                                                    </div>
-                                                </a>
-                                                <a href="{{ url('dashboard/hrms/attendance/attendance') }}?attendance_status=present" class="block">
-                                                    <div
-                                                        class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                                        <div class="text-base text-slate-500">Total Present</div>
-                                                        <div class="mt-1.5 text-2xl font-medium" id="totalPresent">0</div>
-                                                    </div>
-                                                </a>
-                                                <a href="{{ url('dashboard/hrms/attendance/attendance') }}?attendance_status=absent" class="block">
-                                                    <div
-                                                        class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                                        <div class="text-base text-slate-500">Total Absent</div>
-                                                        <div class="font-mediumm mt-1.5 text-2xl" id="totalAbsent">0</div>
-                                                    </div>
-                                                </a>
-                                                <a href="{{ url('dashboard/hrms/attendance/attendance') }}?late_entry=true" class="block">
-                                                    <div
-                                                        class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                                        <div class="text-base text-slate-500">Late Entry</div>
-                                                        <div class="font-mediumm mt-1.5 text-2xl" id="lateEntry">0</div>
-                                                    </div>
-                                                </a>
-                                                <a href="{{ url('dashboard/hrms/attendance/attendance') }}?early_exit=true" class="block">
-                                                    <div
-                                                        class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                                        <div class="text-base text-slate-500">Early Exit</div>
-                                                        <div class="font-mediumm mt-1.5 text-2xl" id="earlyExit">0</div>
-                                                    </div>
-                                                </a>
-                                                <a href="{{ url('dashboard/hrms/attendance/attendance') }}?attendance_status=leave" class="block">
-                                                    <div
-                                                        class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                                        <div class="text-base text-slate-500">Leave</div>
-                                                        <div class="font-mediumm mt-1.5 text-2xl" id="totalLeave">0</div>
-                                                    </div>
-                                                </a>
-                                                <a href="{{ url('dashboard/hrms/attendance/attendance') }}?attendance_status=wfh" class="block">
-                                                    <div
-                                                        class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                                        <div class="text-base text-slate-500">WFH</div>
-                                                        <div class="font-mediumm mt-1.5 text-2xl" id="totalWfh">0</div>
-                                                    </div>
-                                                </a>
-                                                <a href="{{ url('dashboard/hrms/attendance/request') }}?status=submit" class="block">
-                                                    <div
-                                                        class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 bg-warning bg-opacity-20 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                                        <div class="text-base text-pending">Request Approve</div>
-                                                        <div class="font-mediumm mt-1.5 text-2xl" id="totalReq">0</div>
-                                                    </div>
-                                                </a>
+                                                <div
+                                                    class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                                    <div class="text-base text-slate-500">Total Attendance</div>
+                                                    <div class="mt-1.5 text-2xl font-medium" id="totalAttendance">0</div>
+                                                </div>
+                                                <div
+                                                    class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                                    <div class="text-base text-slate-500">Total Present</div>
+                                                    <div class="mt-1.5 text-2xl font-medium" id="totalPresent">0</div>
+                                                </div>
+                                                <div
+                                                    class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                                    <div class="text-base text-slate-500">Total Absent</div>
+                                                    <div class="font-mediumm mt-1.5 text-2xl" id="totalAbsent">0</div>
+                                                </div>
+                                                <div
+                                                    class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                                    <div class="text-base text-slate-500">Late Entry</div>
+                                                    <div class="font-mediumm mt-1.5 text-2xl" id="lateEntry">0</div>
+                                                </div>
+                                                <div
+                                                    class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                                    <div class="text-base text-slate-500">Early Exit</div>
+                                                    <div class="font-mediumm mt-1.5 text-2xl" id="earlyExit">0</div>
+                                                </div>
+                                                <div
+                                                    class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                                    <div class="text-base text-slate-500">Leave</div>
+                                                    <div class="font-mediumm mt-1.5 text-2xl" id="totalLeave">0</div>
+                                                </div>
+                                                <div
+                                                    class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                                    <div class="text-base text-slate-500">WFH</div>
+                                                    <div class="font-mediumm mt-1.5 text-2xl" id="totalWfh">0</div>
+                                                </div>
+                                                <div
+                                                    class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 bg-warning bg-opacity-20 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                                    <div class="text-base text-pending">Request Approve</div>
+                                                    <div class="font-mediumm mt-1.5 text-2xl" id="totalReq">0</div>
+                                                </div>
                                             </div>
                                         </div>
                                 </div>
                             </div>
-                            {{-- <div class="box box--stacked p-5">
+                            <div class="box box--stacked p-5">
                                 <div class="flex flex-col gap-y-5 lg:flex-row lg:items-center">
                                     <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row sm:items-center">
                                         <div class="relative">
@@ -129,16 +113,31 @@
                                 </div>
                                 <div class="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-3">
                                     <div class="flex items-center text-slate-500">
-                                        <div class="mr-2 h-2 w-2 rounded-full border border-primary/60 bg-primary/60"></div>
+                                        <div class="mr-2 h-2 w-2 rounded-full border border-primary/60 bg-primary/60" style="background: rgba(37 99 235);"></div>
                                         Total Present
                                     </div>
                                     <div class="flex items-center text-slate-500">
-                                        <div class="mr-2 h-2 w-2 rounded-full border border-slate-500/60 bg-slate-500/60"></div>
+                                        <div class="mr-2 h-2 w-2 rounded-full border border-slate-500/60 bg-slate-500/60" style="background: rgba(239 68 68);"></div>
                                         Total Absent
                                     </div>
                                 </div>
-                            </div> --}}
-                            {{-- <div class="box box--stacked p-5">
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                                <x-chart.donut 
+                                    id="genderChart"
+                                    label="Gender Distribution"
+                                    apiUrl="http://apidev.duluin.com/api/v1/employees/employee/report/gender-chart?company_id=c8f745e0-aa6e-458b-bb70-4dda3e2accea"
+                                    itemData="gender"
+                                />
+                            
+                                <x-chart.donut 
+                                    id="genderChart"
+                                    label="Staff per Division"
+                                    apiUrl="http://apidev.duluin.com/api/v1/employees/employee/report/department-chart?company_id=c8f745e0-aa6e-458b-bb70-4dda3e2accea"
+                                    itemData="department_id"
+                                />
+                            </div>
+                            <!-- <div class="box box--stacked p-5">
                                 <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
                                     <div
                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
@@ -213,12 +212,12 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div> -->
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                                {{-- <div class="box col-span-2  rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm ">
-                                    <x-chart.stackbar label="Attendance Overview" option1="This Month" />
-                                </div> --}}
-                                {{-- <div class="grid grid-rows-2 gap-4 col col-span-1">
+                                <div class="box col-span-2  rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm ">
+                                    <x-chart.stackbar label="Attendance Overview" option1="This Month" option2="Last Month"/>
+                                </div>
+                                <div class="grid grid-rows-2 gap-4 col col-span-1">
                                     <div
                                         class=" box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
                                         <div class="flex items-center justify-between">
@@ -315,29 +314,125 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div> --}}
-                            </div>
-                        </div>
-                        <div class="mt-5 ml-2 text-lg font-medium group-[.mode--light]:text-white">
-                            More Action
-                            </div>
-                        <div class="box p-4 mt-5">
-                         
-                                <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-5 mt-4">
-                                    <x-action  label="Attendance" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/attendance') }}" />
-                                    <x-action  label="Attendance Request" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/request') }}" />
-                                    <x-action  label="Attendance Report" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/report') }}" />
-                                    <x-action  label="Attendance Summary" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/summary') }}" />
-                                    <x-action  label="Employee Activities" icon="arrow-up-right" url="{{ url('/dashboard/hrms/attendance/activity') }}" />
-                                    <x-action  label="Shift Assignment" icon="arrow-up-right" url="{{ route('hrms.shift-assignment') }}" />
-                                    <x-action  label="Shift Assignment Bulk" icon="arrow-up-right" url="{{ route('hrms.shift-assignment.create_bulk') }}" />
-                                    
-                                   
-                                    
-                                    <x-action  label="Shift Type" icon="door-open" url="{{ url('/dashboard/hrms/attendance/shift_type') }}" />
-                                    <x-action  label="Shift Assignment Schedule" icon="arrow-up-right" status="comming_soon" url="{{ route('hrms.shift-assignment') }}" />
-                                    {{-- <x-action  label="Shift Requester Approver" icon="git-pull-request-create" url="{{ route('hrms.attendance.shiftrequest') }}" /> --}}
                                 </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                            <x-chart.spedo label="Attendance Overview" option1="This Month" option2="Last Month"/>
+                            <x-chart.line label="Attendance Overview" option1="This Month" option2="Last Month"/>
+
+                                <div class="box flex col-span-2  rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm ">
+                                    <x-chart.donut 
+                                        id="genderChart"
+                                        label="Gender Distribution"
+                                        apiUrl="http://apidev.duluin.com/api/v1/employees/employee/report/gender-chart?company_id=c8f745e0-aa6e-458b-bb70-4dda3e2accea"
+                                        itemData="gender"
+                                    />
+                                    <x-chart.donut 
+                                        id="genderChart"
+                                        label="Staff per Division"
+                                        apiUrl="http://apidev.duluin.com/api/v1/employees/employee/report/department-chart?company_id=c8f745e0-aa6e-458b-bb70-4dda3e2accea"
+                                        itemData="department_id"
+                                    />
+                                </div>
+                                <div class="grid grid-rows-2 gap-4 col col-span-1">
+                                    <div
+                                        class=" box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                        <div class="flex items-center justify-between">
+                                            <div class="text-xl font-medium text-gray-500">
+                                                Total Employee
+                                            </div>
+                                            <div class="select-with-icon">
+                                                <select data-tw-merge=""
+                                                    class="align-self-stretch ml-auto  flex flex-col gap-x-3 gap-y-2 sm:ml-auto sm:flex-row disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1 mt-2 flex-1">
+                                                    <option value="This Month">
+                                                        This Month
+                                                    </option>
+                                                    <option value="Last Month">
+                                                        Last Month
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-2 mt-4">
+                                            <div class="text-3xl font-semibold text-gray-800" id="totalEmployee">
+                                                0
+                                            </div>
+                                        </div>
+                                        <div class="flex justify-between mt-4">
+                                            <div class="flex items-center">
+                                                <div class="w-2 h-2 bg-red-500 mr-2"></div>
+                                                <span class="text-sm text-gray-500">No Overtime</span>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <div class="w-2 h-2 bg-blue-500 mr-2"></div>
+                                                <span class="text-sm text-gray-500">Overtime</span>
+                                            </div>
+                                        </div>
+                                        <div class="mt-4 flex justify-between text-sm">
+                                            <div class="">
+                                                <span class="block text-xl text-black">100%</span>
+                                                <span class="block text-slate-500">17 employee</span>
+                                            </div>
+                                            <div class="text-slate-500">
+                                                vs
+                                            </div>
+                                            <div class="text-black">
+                                                <span class="block text-xl text-right text-black">0%</span>
+                                                <span class="block text-slate-500">0 employee</span>
+                                            </div>
+                                        </div>
+                                        <div class="mt-4 h-2 w-full bg-blue-600 rounded-full overflow-hidden">
+                                            <div class="h-full bg-red-500" style="width: 60%"></div>
+                                            <div class="h-full" style="width: 40%"></div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class=" box col-span-4 h-fit rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                        <div class="flex col-2">
+                                            <div class="g-col-6 font-medium mt-1.5 text-xl">
+                                                Latest Overtime Application
+                                            </div>
+                                        </div>
+                                        <div class=" w-full font-medium mt-1.5 text-l">
+                                            <a class="whitespace-nowrap font-medium" href="#">
+                                                Meryl Streep
+                                            </a>
+                                            <div class="col-2">
+                                                <div class="flex items-center gap-2 justify-content-between">
+                                                    <div class="mt-0.5 whitespace-nowrap text-xs text-slate-500">
+                                                        Duluin
+                                                    </div>
+                                                    <div class="mt-0.5 whitespace-nowrap text-xs text-slate-500">
+                                                        |
+                                                    </div>
+                                                    <div class="mt-0.5 whitespace-nowrap text-xs text-slate-500">
+                                                        Business & Finance
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="flex items-center gap-2 justify-content-between">
+                                                    <div
+                                                        class="flex col-2 mt-0.5 whitespace-nowrap text-xs text-slate-500 ">
+                                                        <i data-tw-merge="" data-lucide="calendar"
+                                                            class="ml-px mr-2 h-4 w-4 stroke-[1.5] side-menu__link_icon"></i>
+                                                        22/12/2024
+                                                    </div>
+                                                    <div
+                                                        class="flex col-2 mt-0.5 whitespace-nowrap text-xs text-slate-500 ">
+                                                        <i data-tw-merge="" data-lucide="timer"
+                                                            class="ml-px mr-2 h-4 w-4 stroke-[1.5] side-menu__link_icon"></i>
+                                                        3 jam
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-blue-500">
+                                                Approval Ihsanudin Pradana Putra
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -354,7 +449,7 @@
         $(document).ready(function() {
            countAttendance('daily');
            countEmployee();
-           //getDataChart();
+           getDataChart();
         });
 
         //user bisa menampilkan data berdasarkan range tanggal yang dipilih
@@ -433,6 +528,7 @@
             data.headers = {
                 'Authorization': `Bearer xN9P6a8sL2bV3iR4fC5J6Q7kT8yU9wZ0`,
                 'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`,
+                // 'X-Forwarded-Host': `http://dev.hrms.duluin.com`,
                 'Content-Type': 'application/json',
             }
             await $.ajax(data).done(function(res) {
@@ -449,7 +545,7 @@
         {
             var param = {
                 url: "{{ $apiChartAttendance }}",
-                //url: " http://localhost:4446/api/v1/attendance/report/chart?company_id=c8f745e0-aa6e-458b-bb70-4dda3e2accea",
+                // url: "http://localhost:4446/api/v1/attendance/report/chart?company_id=c8f745e0-aa6e-458b-bb70-4dda3e2accea",
                 method: "GET",
             }
 
@@ -478,7 +574,7 @@
                                         },
                                         y: {
                                             ticks: {
-                                                autoSkipPadding: 15,
+                                                autoSkipPadding: 30,
                                                 color: getColor("slate.500", 0.9),
                                                 beginAtZero: !0,
                                             },
@@ -486,6 +582,21 @@
                                             border: { display: !1 },
                                         },
                                     },
+                                    onClick: function (e, elements) {
+                                        if (elements.length > 0) {
+                                            const firstElement = elements[0]; 
+                                            const datasetIndex = firstElement.datasetIndex;
+                                            const index = firstElement.index;
+
+                                            const label = r.data.labels[index];
+                                            const dataValue = r.data.datasets[datasetIndex].data[index];
+
+                                            // clickable
+                                            const baseUrl = '{{ url('dashboard/hrms/attendance/attendance') }}';
+                                            window.location.href = `${baseUrl}?attendance_status=${r.data.datasets[datasetIndex].label.toLowerCase()}&attendance_date=${label}`;
+                                            // console.log(`You clicked on ${label}: ${dataValue} ${r.data.datasets[datasetIndex].label}`);
+                                        }
+                                    }
                                 },
                             });
                     });

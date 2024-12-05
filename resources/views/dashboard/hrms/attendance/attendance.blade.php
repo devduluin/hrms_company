@@ -72,7 +72,7 @@
             <div class="mt-3.5  gap-x-6 gap-y-10">
                 <div class="col-span-12 flex flex-col gap-y-7 xl:col-span-9">
                     <div class="box box--stacked flex flex-col p-5">
-                        <x-datatable id="attendanceTable" :url="$apiUrl.'/datatable'" method="POST" class="display small" :order="[[ 1, 'DESC']]"
+                        <x-datatable id="attendanceTable" :url="$apiUrl.'/datatable'" method="POST" search="false" class="display small" :order="[[ 1, 'DESC']]"
                         :filter="[
                                 'attendance_status' => '#attendanceStatus',
                                 'status' => '#status',
