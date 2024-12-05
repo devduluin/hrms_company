@@ -20,7 +20,7 @@
                                     <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
                                 </a>
                                 <x-form.button label="Send Verification Email" id="verification-btn" style="primary"
-                                    type="mailIcon" icon="save" />
+                                    type="mailIcon" icon="mail" />
                             </div>
                         </div>
                         <div class="mt-1.5 flex flex-col">
@@ -53,6 +53,7 @@
 
             $('ul[role="tablist"] li button[role="tab"]').off('click').on('click', async function(e) {
                 const newTabId = $(this).data('tw-target');
+                console.log("this tab : ", newTabId);
 
                 if (lastActiveTabId !== newTabId) {
                     e.preventDefault();
@@ -76,6 +77,7 @@
             console.log("current tab is " + lastActiveTabId);
 
             async function handleGetData(employee_id, tabId) {
+                console.log("Tab ID : ", tabId);
                 $.ajax({
                     url: `{{ $apiEmployeeUrl }}/employee/${employee_id}`,
                     type: 'GET',
@@ -536,6 +538,7 @@
 
             // click on verification-btn
             $("#verification-btn").click(function() {
+                console.log("handle notif");
                 handleNotification();
             });
 

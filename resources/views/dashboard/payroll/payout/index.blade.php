@@ -11,7 +11,7 @@
         <div id="contents-page"
             class="content transition-[margin,width] duration-100 px-5 xl:mr-2.5 mt-[75px] pt-[31px] pb-16 content--compact xl:ml-[275px] [&.content--compact]:xl:ml-[100px]">
             <div class="col-span-12 w-full">
-                <div class="grid grid-cols-12 gap-x-6 gap-y-10">
+                {{--<div class="grid grid-cols-12 gap-x-6 gap-y-10">
                     <div class="col-span-12">
                         <div class="mt-3.5 flex flex-col gap-8">
                             <div class="box box--stacked mt-3.5 p-5">
@@ -275,7 +275,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>--}}
                 <div class="gap-5 mt-6 p-4 box">
                     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5  ">
                         <div class="text-left text-lg font-medium mt-2">
@@ -315,6 +315,9 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-4  text-blue-900">
                         <x-action label="Payroll Setting" icon="arrow-up-right"
                             url="{{ url('/dashboard/hrms/payout/settings/list') }}" />
+                        <x-action label="Bulk Salary Structure Assignment" icon="arrow-up-right"
+                                  url="{{ url('/dashboard/hrms/payout/salary_structure_assignment/bulk_assignment/create')
+                                  }}" />
                     </div>
                 </div>
             </div>
