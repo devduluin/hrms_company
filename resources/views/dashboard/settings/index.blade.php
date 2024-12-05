@@ -349,10 +349,9 @@
                     console.error('Error fetching user data:', error);
                 }
             }
-<<<<<<< HEAD
         
         function checkPasswordStrength() {
-            const password = document.getElementById('password').value;
+            const password = document.getElementById('newPassword').value;
             
             let strength = 0;
 
@@ -369,7 +368,7 @@
             // Activate levels based on strength
             activateStrengthLevels(strength);
 
-            const confirmPassword = document.getElementById('confirm-password').value;
+            const confirmPassword = document.getElementById('confimPassword').value;
             if(confirmPassword.length >= 1){
             validatePasswordMatch(); // Check password match when the main password changes
             }
@@ -387,7 +386,7 @@
             for (let i = 1; i <= strength && i <= 4; i++) {
                 document.getElementById(`strength-level-${i}`).classList.add('active');
             }
-                const confirmPassword = document.getElementById('confirm-password')
+                const confirmPassword = document.getElementById('confimPassword')
                 if(strength >= 3){
                 
                     confirmPassword.removeAttribute('disabled');
@@ -399,8 +398,8 @@
 
 
         function validatePasswordMatch(strength) {
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirm-password').value;
+            const password = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confimPassword').value;
             const matchMessage = document.getElementById('password-match-message');
 
             if (password === confirmPassword) {
@@ -418,10 +417,6 @@
             }
         }
 
-=======
-
-        //function untuk ganti icon mata
->>>>>>> 049213451d5eb5a639eca77b30b36c50412800fb
         function setIconAtributte(iconPath, passwordFieldId) {
             if (passwordFieldId.type === "password") {
                 passwordFieldId.type = "text";
@@ -435,13 +430,6 @@
         function togglePassword(passwordFieldType) {
             const passwordField = document.getElementById(passwordFieldType);
             const eyeIconPath = document.getElementById("eyeIcon");
-<<<<<<< HEAD
-            const eyeIconConfirmPath = document.getElementById("eyeIconConfirm");
-
-            if (passwordFieldType === 'confirm-password'){
-                setIconAtributte(eyeIconConfirmPath, passwordField);
-                console.log(passwordField.type);
-=======
             const eyeIconNewPasswordPath = document.getElementById("newPasswordEyeIcon");
             const eyeIconConfirmPasswordPath = document.getElementById("confimPasswordEyeIcon");
 
@@ -450,7 +438,6 @@
             } else
             if (passwordFieldType === 'confimPassword'){
                 setIconAtributte(eyeIconConfirmPasswordPath, passwordField);
->>>>>>> 049213451d5eb5a639eca77b30b36c50412800fb
             } else {
                 setIconAtributte(eyeIconPath, passwordField);            
             }
