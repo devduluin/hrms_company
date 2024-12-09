@@ -8,7 +8,7 @@
             class="content transition-[margin,width] duration-100 px-5 xl:mr-2.5 mt-[75px] pt-[31px] pb-16 content--compact xl:ml-[275px] [&.content--compact]:xl:ml-[100px]">
                 <div class="grid  grid-cols-1 md:grid-cols-12 gap-x-6 gap-y-10">
                     <div class= "col-span-12 w-full">
-                        <div class="mt-5 ml-2 text-lg font-medium group-[.mode--light]:text-white">
+                        <div class="mt-2 ml-2 text-lg font-medium group-[.mode--light]:text-white">
                             Employee Leaves
                         </div>
                         <div class="mt-5 flex flex-col gap-8">

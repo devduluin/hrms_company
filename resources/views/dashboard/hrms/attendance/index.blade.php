@@ -8,11 +8,10 @@
     <div
         class="hurricane before:content-[''] before:z-[-1] before:w-screen before:bg-slate-50 before:top-0 before:h-screen before:fixed before:bg-texture-black before:bg-contain before:bg-fixed before:bg-[center_-20rem] before:bg-no-repeat">
         @include('layouts.dashboard.menu')
-        <div id="contents-page"
-            class="content transition-[margin,width] duration-100 px-5 xl:mr-2.5 mt-[75px] pt-[31px] pb-16 content--compact xl:ml-[275px] [&.content--compact]:xl:ml-[100px]">
+        <div id="contents-page" class="content transition-[margin,width] duration-100 px-5 xl:mr-2.5 mt-[75px] pt-[31px] pb-16 content--compact xl:ml-[275px] [&.content--compact]:xl:ml-[100px]">
                 <div class="grid  grid-cols-1 md:grid-cols-12 gap-x-6 gap-y-10">
                     <div class= "col-span-12 w-full">
-                        <div class="mt-5 ml-2 text-lg font-medium group-[.mode--light]:text-white">
+                        <div class="mt-2 ml-2 text-lg font-medium group-[.mode--light]:text-white">
                             Shift & Attendance
                         </div>
                         <div class="mt-5 flex flex-col gap-8">
@@ -61,15 +60,22 @@
                                                 <a href="{{ url('dashboard/hrms/attendance/attendance') }}?attendance_status=present" class="block">
                                                     <div
                                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                                        <div class="text-base text-slate-500">Total Present</div>
+                                                        <div class="text-base text-success">Total Present</div>
                                                         <div class="mt-1.5 text-2xl font-medium" id="totalPresent">0</div>
                                                     </div>
                                                 </a>
                                                 <a href="{{ url('dashboard/hrms/attendance/attendance') }}?attendance_status=absent" class="block">
                                                     <div
                                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                                        <div class="text-base text-slate-500">Total Absent</div>
+                                                        <div class="text-base text-danger">Total Absent</div>
                                                         <div class="font-mediumm mt-1.5 text-2xl" id="totalAbsent">0</div>
+                                                    </div>
+                                                </a>
+                                                <a href="{{ url('dashboard/hrms/attendance/attendance') }}?attendance_status=leave" class="block">
+                                                    <div
+                                                        class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                                                        <div class="text-base text-warning">Leave</div>
+                                                        <div class="font-mediumm mt-1.5 text-2xl" id="totalLeave">0</div>
                                                     </div>
                                                 </a>
                                                 <a href="{{ url('dashboard/hrms/attendance/attendance') }}?late_entry=true" class="block">
@@ -86,13 +92,7 @@
                                                         <div class="font-mediumm mt-1.5 text-2xl" id="earlyExit">0</div>
                                                     </div>
                                                 </a>
-                                                <a href="{{ url('dashboard/hrms/attendance/attendance') }}?attendance_status=leave" class="block">
-                                                    <div
-                                                        class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                                        <div class="text-base text-slate-500">Leave</div>
-                                                        <div class="font-mediumm mt-1.5 text-2xl" id="totalLeave">0</div>
-                                                    </div>
-                                                </a>
+                                               
                                                 <a href="{{ url('dashboard/hrms/attendance/attendance') }}?attendance_status=wfh" class="block">
                                                     <div
                                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
