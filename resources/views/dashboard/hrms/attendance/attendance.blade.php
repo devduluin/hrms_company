@@ -72,14 +72,15 @@
             <div class="mt-3.5  gap-x-6 gap-y-10">
                 <div class="col-span-12 flex flex-col gap-y-7 xl:col-span-9">
                     <div class="box box--stacked flex flex-col p-5">
-                        <x-datatable id="attendanceTable" :url="$apiUrl.'/datatable'" method="POST" search="false" class="display small" :order="[[ 1, 'DESC']]"
+                        <x-datatable id="attendanceTable" :url="$apiUrl.'/datatable'" method="POST" search="false" class="display small" :order="[[ 2, 'DESC']]"
                         :filter="[
                                 'attendance_status' => '#attendanceStatus',
                                 'status' => '#status',
                             ]">
                             <x-slot:thead>
                             <th data-value="no" width="80px">No.</th>
-                                    <th data-value="employee_id_rel"  data-render="getEmployeeName">Employee Name</th>
+                                    <th data-value="employee_id_rel"  data-render="getEmployeeName" orderable="false">Employee Name</th>
+                                    <th data-value="shift_assigment_id_rel" data-render="getShiftAssignment" orderable="false">Shift</th>
                                     <th data-value="attendance_date" orderable="true">Date</th>
                                     <th data-value="time_in" orderable="true">Checkin time</th>
                                     <th data-value="time_out" orderable="true">Checkout time</th>
@@ -139,6 +140,13 @@
             return 'N/A';
         }
 
+        function getShiftAssignment(data, type, row, meta) {
+            if (data !== null) {
+                return data.shift_type_id_rel?.shift_type_name;
+            }
+            return 'N/A';
+        }
+
         function getActionBtn(data, type, row, meta) {
             const url = `{{ url('dashboard/hrms/attendance/detail/${data}') }}`;
             return `<div data-tw-merge data-tw-placement="bottom-end" class="dropdown relative"><button data-tw-merge data-tw-toggle="dropdown" aria-expanded="false" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none  [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed text-xs py-1.5 px-2 w-20">
@@ -147,7 +155,7 @@
                     <div data-tw-merge class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 w-40">
                        
                         <a onClick="action('detail', '`+data['id']+`')" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="external-link" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
-                            Open</a>
+                            Detail</a>
                         <a onClick="action('update', '`+data['id']+`')" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="external-link" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
                             Update</a>
                         <a onClick="action('delete', '`+data['id']+`')" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="file-text" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>

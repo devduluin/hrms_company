@@ -23,12 +23,12 @@ class AttendanceActivityController extends Controller
         return view('dashboard.hrms.attendance.activity.index', $data);
     }
 
-    public function detail(Request $request)
+    public function detail($id)
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Attendance Activity';
         $data['company_id'] = session()->get('company_id');
-        $data['apiUrl'] = $this->apiGatewayUrl . '/v1/attendance/activity';
+        $data['apiUrl'] = $this->apiGatewayUrl . '/v1/attendance/activity/'.$id;
 
         return view('dashboard.hrms.attendance.activity.detail', $data);
     }

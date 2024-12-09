@@ -51,6 +51,15 @@ class LeaveApplicantController extends Controller
         
         return view('dashboard.hrms.leave.leave_application.create', $data);
     }
+
+    public function detail($id)
+    {
+        $data['title']   = 'Duluin HRMS';
+        $data['page_title']   = 'Detail Leave Application';
+        $data['apiUrl'] = $this->apiGatewayUrl . '/v1/attendance/leave/'. $id;
+        $data['apiUrlApproval'] = $this->apiGatewayUrl . "/v1/attendance/leave/approve/".$id;
+        return view('dashboard.hrms.leave.leave_application.detail', $data);
+    }
    
    
 }

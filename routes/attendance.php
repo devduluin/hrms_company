@@ -86,6 +86,7 @@ Route::prefix('/leave')->group(function () {
                 Route::get('/', 'index')->name('hrms.leave.application');
                 Route::get('/create', 'create')->name('hrms.leave.application.create');
                 Route::get('/update/{id}', 'update')->name('hrms.leave.application.update');
+                Route::get('/detail/{id}', 'detail')->name('hrms.leave.application.detail');
             });
         });
         

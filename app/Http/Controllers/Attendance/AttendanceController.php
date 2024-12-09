@@ -71,7 +71,10 @@ class AttendanceController extends Controller
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Attendance Overview';
+
+        $data['id'] = $id;
         $data['apiUrl'] = $this->apiGatewayUrl . "/v1/attendance/attendance/".$id;
+        $data['apiUrlApproval'] = $this->apiGatewayUrl . "/v1/attendance/attendance/approval/".$id;
         $data['apiUrlShiftEmployee'] = $this->apiGatewayUrl . "/v1/attendance/shift-assignment/employee_id";
         return view('dashboard.hrms.attendance.detail', $data);
     }

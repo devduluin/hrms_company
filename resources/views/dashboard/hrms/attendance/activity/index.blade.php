@@ -32,7 +32,7 @@
                                     <th data-value="activity_title">Activity Title</th>
                                     <th data-value="from_time">From Time</th>
                                     <th data-value="to_time">To Time</th>
-                                    <th data-value="attachment">Attachment</th>
+                                    <th data-value="attachment" data-render="getAttachment">Attachment</th>
                                     <th data-value="id" data-render="getActionBtn">Action</th>
                             </x-slot:thead>
                         </x-datatable>
@@ -59,26 +59,19 @@
 @endsection
 @push('js')
     <script>
-        function getStatus(data, type, row, meta) {
-            
-            if (data === 'active') {
-                return `<div class="flex capitalize text-success"><div class="whitespace-nowrap"><i data-tw-merge data-lucide="check" class="text-success"></i> ${data}</div></div>`;
-            } else {
-                return `<div class="flex capitalize text-danger"><div class="whitespace-nowrap">${data}</div></div>`;
-            }
-        }
-
         function getEmployeeName(data, type, row, meta) {
             if (data !== null) {
-                return data.first_name + ' ' + data.last_name;
+                const name = data.first_name + ' ' + data.last_name;
+                return `<a class="text-primary font-medium" href="{{ url("dashboard/hrms/attendance/activity/employee") }}/${row.id}">${name}</a>`;
+                 
             }
             return 'N/A';
         }
 
-        function getShiftName(data, type, row, meta) {
+        function getAttachment(data, type, row, meta) {
             if (data) {
                
-                return data.shift_type_name;
+                return `<a target="_blank" class="text-primary font-medium" href="${data}">Download</a>`;
             }
             return 'N/A';
         }
@@ -105,11 +98,9 @@
                     <div data-tw-merge class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 w-40">
                        
                          
-                        <a onClick="action('update', '`+data['id']+`')" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="external-link" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
-                            Update</a>
-                        <a onClick="action('delete', '`+data['id']+`')" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="file-text" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
-                            Delete</a>
-                        
+                        <a onClick="action('detail', '`+data['id']+`')" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="external-link" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
+                            Detail</a>
+                       
                     </div>
                 </div>
             </div>`;
@@ -134,7 +125,7 @@
                     }
                 });
             }else{
-                location.href = '{{ url("/dashboard/hrms/attendance/shift-assignment") }}/'+action+'/'+id;
+                location.href = '{{ url("/dashboard/hrms/attendance/activity") }}/'+action+'/'+id;
             }
             
         }

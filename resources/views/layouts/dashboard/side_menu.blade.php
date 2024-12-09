@@ -69,7 +69,7 @@
                     <i data-tw-merge="" data-lucide="coins" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
                     <div class="side-menu__link__title">Salary Payout</div>
                 </a>
-                <a href="{{ url('/dashboard/hrms/payout') }}" class="side-menu__link ">
+                <a href="https://partner.duluin.com" target="_blank" class="side-menu__link ">
                     <i data-tw-merge="" data-lucide="percent-square" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
                     <div class="side-menu__link__title">Duluin Gajian</div>
                 </a>
@@ -78,6 +78,16 @@
             </li>
             <li class="side-menu__divider">
                 COMPANY
+            </li>
+            <li>
+                <a href="#" class="side-menu__link ">
+                    <i data-tw-merge="" data-lucide="rss" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
+                    <div class="side-menu__link__title">Publication</div>
+                    <div class="ml-2.5 rounded-md border bg-blue-young bg-blue-theme px-2 py-0.5 text-xs text-white dark:bg-darkmode-300 dark:text-slate-400 items-end">
+                        Soon
+                    </div>
+                </a>
+                <!-- BEGIN: Second Child -->
             </li>
             <li>
                 <a href="{{ route('hrms.company') }}" class="side-menu__link ">
