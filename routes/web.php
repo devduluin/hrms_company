@@ -25,6 +25,7 @@ use App\Http\Controllers\PayoutController;
 use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\SingleAssignmentController;
 use App\Http\Controllers\Users\UsersController;
+use App\Http\Controllers\EmailVerificationController;
 
 Route::get('lang/{locale}', function ($locale) {
     if (in_array($locale, ['en', 'id'])) {
@@ -125,6 +126,9 @@ Route::controller(DashboardController::class)->group(function () {
                    //claim modules
                    require __DIR__ . '/claim.php';
 
+                   //graph modules
+                   require __DIR__ . '/graph.php';
+
                     //dynamic content
                     //Route::get('/{any}', 'index');
                     Route::middleware('isAjax')->group(function () {
@@ -139,3 +143,5 @@ Route::controller(DashboardController::class)->group(function () {
         });
     });
 });
+
+Route::get('/email-verification', [EmailVerificationController::class, 'index']);
