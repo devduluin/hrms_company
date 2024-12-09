@@ -141,7 +141,7 @@
         }
 
         function getShiftAssignment(data, type, row, meta) {
-            if (data !== null) {
+            if (data?.shift_type_id_rel) {
                 return data.shift_type_id_rel?.shift_type_name;
             }
             return 'N/A';
