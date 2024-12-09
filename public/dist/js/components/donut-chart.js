@@ -77,6 +77,7 @@
                             success: function (response) {
                                 if (response && response.data) {
                                     const groupData = response.data;
+                                    console.log(groupData);
 
                                     const capitalizeWords = (str) => {
                                         if (!str) return "N/A"; 

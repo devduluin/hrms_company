@@ -107,6 +107,13 @@
                 </a>
                 <!-- BEGIN: Second Child -->
             </li>
+            <li>
+                <a href="{{ url('/dashboard/hrms/graph') }}" class="side-menu__link ">
+                    <i data-tw-merge="" data-lucide="user-plus" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
+                    <div class="side-menu__link__title">Graph</div>
+                </a>
+                <!-- BEGIN: Second Child -->
+            </li>
         </ul>
     </div>
 </div>
