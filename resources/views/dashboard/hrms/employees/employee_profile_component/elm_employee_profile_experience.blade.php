@@ -34,7 +34,7 @@
 </div>
 
 <div class="mb-7 mt-4">
-    <x-form.button type="button" id="add-experience-row" label="Add New Row" style="tertiary"></x-form.button>
+    <x-form.button type="button" id="add-experience-row" url="#" label="Add New Row" style="tertiary"></x-form.button>
 </div>
 @push('js')
     <script>
