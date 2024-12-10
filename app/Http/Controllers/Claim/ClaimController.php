@@ -18,6 +18,7 @@ class ClaimController extends Controller
         $data['page_title']   = 'Claim Dashbaord';
         $data['apiTotalAttendance'] = $this->apiGatewayUrl . "/v1/attendance/attendance/total-attendance/by?company_id=" . $request->session()->get('company_id');
         $data['url_count_employee'] = $this->apiGatewayUrl . "/v1/employees/employee/employees_summary/" . $request->session()->get('company_id');
+        $data['url_count_expense'] = $this->apiGatewayUrl . "/v1/payroll/expense_claim/total-expense/by?company_id=" . $request->session()->get('company_id');
         $data['apiChartAttendance'] = $this->apiGatewayUrl . "/v1/attendance/attendance/report/chart?company_id=" . $request->session()->get('company_id');
 
         return view('dashboard.hrms.claim.index', $data);

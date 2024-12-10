@@ -58,35 +58,35 @@
                                                 <a href="{{ url('dashboard/hrms/claim/expense') }}?status=draft" class="block">
                                                     <div
                                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                                        <div class="text-base text-success">Total Draft</div>
+                                                        <div class="text-base text-pending">Total Draft</div>
                                                         <div class="mt-1.5 text-2xl font-medium" id="totalDraft">0</div>
                                                     </div>
                                                 </a>
                                                 <a href="{{ url('dashboard/hrms/claim/expense') }}?status=submitted" class="block">
                                                     <div
                                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                                        <div class="text-base text-danger">Total Submitted</div>
+                                                        <div class="text-base text-warning">Total Submitted</div>
                                                         <div class="font-mediumm mt-1.5 text-2xl" id="totalSubmitted">0</div>
                                                     </div>
                                                 </a>
                                                 <a href="{{ url('dashboard/hrms/claim/expense') }}?status=approved" class="block">
                                                     <div
                                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                                        <div class="text-base text-warning">Total Approved</div>
+                                                        <div class="text-base text-green-800">Total Approved</div>
                                                         <div class="font-mediumm mt-1.5 text-2xl" id="totalApproved">0</div>
                                                     </div>
                                                 </a>
                                                 <a href="{{ url('dashboard/hrms/claim/expense') }}?status=paid" class="block">
                                                     <div
                                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                                        <div class="text-base text-slate-500">Total Paid</div>
+                                                        <div class="text-base text-success">Total Paid</div>
                                                         <div class="font-mediumm mt-1.5 text-2xl" id="totalPaid">0</div>
                                                     </div>
                                                 </a>
                                                 <a href="{{ url('dashboard/hrms/claim/expense') }}?status=rejected" class="block">
                                                     <div
                                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                                        <div class="text-base text-slate-500">Total Rejected</div>
+                                                        <div class="text-base text-danger">Total Rejected</div>
                                                         <div class="font-mediumm mt-1.5 text-2xl" id="totalRejected">0</div>
                                                     </div>
                                                 </a>
@@ -94,15 +94,15 @@
                                                 <a href="{{ url('dashboard/hrms/claim/type') }}?is_active=1" class="block">
                                                     <div
                                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                                                        <div class="text-base text-slate-500">Total Claim Type Active</div>
-                                                        <div class="font-mediumm mt-1.5 text-2xl" id="totalActive">0</div>
+                                                        <div class="text-base text-blue-500">Total Claim Type Active</div>
+                                                        <div class="font-mediumm mt-1.5 text-2xl" id="totalClaimTypeActive">0</div>
                                                     </div>
                                                 </a>
                                                 <a href="{{ url('dashboard/hrms/claim/type') }}?is_active=0" class="block">
                                                     <div
                                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 bg-warning bg-opacity-20 p-5 shadow-sm md:col-span-2 xl:col-span-1">
                                                         <div class="text-base text-pending">Total Claim Type Inactive</div>
-                                                        <div class="font-mediumm mt-1.5 text-2xl" id="totalReq">0</div>
+                                                        <div class="font-mediumm mt-1.5 text-2xl" id="totalClaimTypeInctive">0</div>
                                                     </div>
                                                 </a>
                                             </div>
@@ -392,9 +392,9 @@
 
         var filterData = {};
         $(document).ready(function() {
-            countAttendanceThisMonth();
-           countAttendance('daily');
-           countEmployee();
+            // countAttendanceThisMonth();
+            countAttendance('daily');
+            countEmployee();
            //getDataChart();
         });
 
@@ -434,20 +434,20 @@
              
             //kirim permintaan data ke server dengan membawa param
            var param = {
-                url: "{{ $apiTotalAttendance }}",
+                url: "{{ $url_count_expense }}",
                 method: "GET",
                 data: filterData,
            }
 
            await transAjax(param).then((result) => {
-               $('#totalAttendance').html(result.data.totalAttendan)
-               $('#totalPresent').html(result.data.totalPresent)
-               $('#totalAbsent').html(result.data.totalAbsent)
-               $('#lateEntry').html(result.data.lateEntry)
-               $('#earlyExit').html(result.data.earlyExit);
-               $('#totalWfh').html(result.data.totalWfh);
-               $('#totalReq').html(result.data.totalReq);
-               $('#totalLeave').html(result.data.totalLeave);
+               $('#totalExpense').html(result.data.totalExpense)
+               $('#totalDraft').html(result.data.totalDraft);
+               $('#totalSubmitted').html(result.data.totalSubmitted);
+               $('#totalApproved').html(result.data.totalApproved);
+               $('#totalPaid').html(result.data.totalPaid);
+               $('#totalRejected').html(result.data.totalRejected);
+               $('#totalClaimTypeActive').html(result.data.totalClaimTypeActive);
+               $('#totalClaimTypeInctive').html(result.data.totalClaimTypeInctive);
                $("#loading").attr('style', 'display: none');
            }).catch((err) => {
                 showErrorNotification("Internal server error", err.message);
@@ -456,7 +456,7 @@
 
         async function countEmployee() {
             var param = {
-                url: "{{ $url_count_employee }}",
+                url: "{{ $url_count_expense }}",
                 method: "GET",
             }
 
@@ -489,7 +489,7 @@
         async function getDataChart()
         {
             var param = {
-                url: "{{ $apiChartAttendance }}",
+                url: "{{ $url_count_expense }}",
                 //url: " http://localhost:4446/api/v1/attendance/report/chart?company_id=c8f745e0-aa6e-458b-bb70-4dda3e2accea",
                 method: "GET",
             }
