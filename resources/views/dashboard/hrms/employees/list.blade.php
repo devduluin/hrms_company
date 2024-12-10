@@ -421,7 +421,7 @@
                 const $selectElement = $(`#${selectorId}`);
                 if ($selectElement.length > 0) {
                     $selectElement.val(paramValue).change();
-                    addOptionIfNotExist(selectorId, paramValue)
+                    addOptionIfNotExist(selectorId, paramValue);
                     if (paramValue) activeFilterCount++;
                 }
             }
@@ -431,6 +431,8 @@
         handleFilter("company_id", "company_id");
         handleFilter("department_id", "department_id");
         handleFilter("designation_id", "designation_id");
+        handleFilter("is_verified", "is_verified");
+        handleFilter("status", "status");
 
         const $countFilter = $("#countFilter");
         if ($countFilter.length > 0) {
@@ -452,6 +454,8 @@
             //$(`#company_id`)[0].tomselect.clear();
             $(`#department_id`)[0].tomselect.clear();
             $(`#designation_id`)[0].tomselect.clear();
+            $(`#is_verified`)[0].tomselect.clear();
+            $(`#status`)[0].tomselect.clear();
         }
 
 
