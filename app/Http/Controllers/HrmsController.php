@@ -13,10 +13,11 @@ class HrmsController extends Controller
         $this->apiGatewayUrl = config('apiendpoints.gateway');
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'HRMS Index';
+        $data['apiChartAttendance'] = $this->apiGatewayUrl . "/v1/attendance/attendance/report/chart?company_id=" . $request->session()->get('company_id');
         
         return view('dashboard.hrms.index', $data);
     }
