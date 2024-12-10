@@ -7,6 +7,7 @@
     'guidelines',
     'action',
     'folder',
+    'employee'
 ])
 <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4">
     <div class="text-left">
@@ -26,7 +27,7 @@
         </div>
     </div>
 </div>
-<form data-single="true" action="{{ $action }}" data-folder="{{ $folder }}"
+<form data-single="true" action="{{ $action }}" data-folder="{{ $folder }}" data-employee="{{ $employee }}"
     class="[&.dropzone]:border-2 [&.dropzone]:border-dashed dropzone [&.dropzone]:border-slate-300/70 [&.dropzone]:bg-slate-50 [&.dropzone]:cursor-pointer [&.dropzone]:dark:bg-darkmode-600 [&.dropzone]:dark:border-white/5 dropzone dropzone">
     @csrf
     <div class="fallback">
@@ -71,11 +72,17 @@
                             done();
                         },
                         maxFilesize: 5, // 5MB limit for files
+                        clickable: true,
+                        autoProcessQueue: true,
                         init: function() {
                             this.on("sending", (file, xhr, formData) => {
                                 const folder = dropzoneElement.attr("data-folder") ||
                                     "employees";
+                                const employee = dropzoneElement.attr("data-employee") || null;
                                 formData.append("folder", folder);
+                                if(employee != null) {
+                                    formData.append("employee_id", employee);
+                                }
                                 console.log("Folder added to request:", folder);
                             });
 
