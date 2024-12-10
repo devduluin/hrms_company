@@ -1,8 +1,8 @@
 <div class="mb-6 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
     Personal
 </div>
-<x-dropzonefile folder="employees" action="http://apidev.duluin.com/api/users/file_uploader" label="Employee Picture"
-    id="employee_picture" />
+<x-dropzonefile folder="employees" employee="{{ isset($employee_id) ? $employee_id : null }}" action="http://apidev.duluin.com/api/users/file_uploader"
+                label="Employee Picture" id="employee_picture" />
 @if (isset($employee_id))
     <form id="personal-form" method="post" action="{{ $apiEmployeeUrl }}/employee_personal_data/{{ $employee_id }}"
         autocomplete="off" novalidate class="personal-form">
