@@ -3,6 +3,17 @@
 </div>
 <x-dropzonefile folder="employees" employee="{{ isset($employee_id) ? $employee_id : null }}" action="http://apidev.duluin.com/api/users/file_uploader"
                 label="Employee Picture" id="employee_picture" />
+<div id="employee_picture_box" class="hidden"></div>
+<div class="border border-dashed rounded-md border-slate-300/80 hidden" id="avatar_box_container">
+    <div class="grid grid-cols-9 gap-5 px-5 pt-5 sm:grid-cols-10">
+        <div class="relative h-48 w-48 col-span-3 cursor-pointer image-fit zoom-in md:col-span-2">
+            <img class="rounded-lg" id="avatar_box" alt="Tailwise - Admin Dashboard Template">
+            <span data-placement="top" class="tooltip cursor-pointer absolute top-0 right-0 w-5 h-5 -mt-2 -mr-2 bg-white rounded-full" id="deleteImage"><span class="flex items-center justify-center w-full h-full text-white border rounded-full border-danger/50 bg-danger/80">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" class="lucide lucide-x h-4 w-4 stroke-[1.3]"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+                </span></span>
+        </div>
+    </div>
+</div>
 @if (isset($employee_id))
     <form id="personal-form" method="post" action="{{ $apiEmployeeUrl }}/employee_personal_data/{{ $employee_id }}"
         autocomplete="off" novalidate class="personal-form">

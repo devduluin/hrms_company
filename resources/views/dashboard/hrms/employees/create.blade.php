@@ -48,7 +48,7 @@
             let lastActiveTabId = initialTab.data('tw-target');
             const appToken = localStorage.getItem('app_token');
 
-            $('ul[role="tablist"] li button[role="tab"]').on('click', function (e) {
+            $('ul[role="tablist"] li button[role="tab"]').on('click', function(e) {
                 const newTabId = $(this).data('tw-target');
 
                 if (lastActiveTabId !== newTabId) {
@@ -56,22 +56,25 @@
                     lastActiveTabId = newTabId;
 
                     // Unbind previous click event to avoid duplicate bindings
-                    $(`${lastActiveTabId}-btn`).off('click').on('click', async function (e) {
+                    $(`${lastActiveTabId}-btn`).off('click').on('click', async function(e) {
                         e.preventDefault();
 
                         // Check for required fields
                         const requiredFields = [
-                            '#employee_card_id', '#first_name', '#last_name', '#phone_number',
-                            '#personal_email', '#gender', '#date_of_joining', '#date_of_birth',
+                            '#employee_card_id', '#first_name', '#last_name',
+                            '#phone_number',
+                            '#personal_email', '#gender', '#date_of_joining',
+                            '#date_of_birth',
                             '#place_of_birth', '#salutation', '#status'
                         ];
 
-                        const emptyFields = $(requiredFields.join(',')).filter(function () {
+                        const emptyFields = $(requiredFields.join(',')).filter(function() {
                             return $(this).val() === '';
                         });
 
                         if (emptyFields.length > 0) {
-                            showErrorNotification('error', 'Please fill all required input in overview form');
+                            showErrorNotification('error',
+                                'Please fill all required input in overview form');
                         } else {
                             await handleFormSubmission(lastActiveTabId);
                         }
@@ -80,7 +83,7 @@
             });
 
             // Initial click event binding for the first tab
-            $(`${lastActiveTabId}-btn`).off('click').on('click', async function (e) {
+            $(`${lastActiveTabId}-btn`).off('click').on('click', async function(e) {
                 e.preventDefault();
 
                 const requiredFields = [
@@ -89,7 +92,7 @@
                     '#place_of_birth', '#salutation', '#status'
                 ];
 
-                const emptyFields = $(requiredFields.join(',')).filter(function () {
+                const emptyFields = $(requiredFields.join(',')).filter(function() {
                     return $(this).val() === '';
                 });
 
@@ -226,6 +229,20 @@
                     }, 500);
                 }
             }
+
+            // get parent company id
+            $("#company_id").change(async function() {
+                await getParentCompany($(this).val());
+            });
+
+            $(".bank_transfer_box").addClass("hidden");
+            $("#salary_mode").on('change', function() {
+                if ($(this).val() === 'bank') {
+                    $(".bank_transfer_box").removeClass("hidden");
+                } else {
+                    $(".bank_transfer_box").addClass("hidden");
+                }
+            });
 
             // get parent company id
             $("#company_id").change(async function() {

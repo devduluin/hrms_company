@@ -249,7 +249,7 @@
                             $("#offer_date").val(response.data.joinHistory.offer_date);
                             $("#contract_end_date").val(response.data.joinHistory.contract_end_date);
                             $("#date_of_retirement").val(response.data.joinHistory.date_of_retirement);
-                            const jobApplicantSelect = $('#applicant_id')[0].tomselect;
+                            /* const jobApplicantSelect = $('#applicant_id')[0].tomselect;
                             const jobApplicantValue = response.data.joinHistory
                                 .job_applicant_id;
 
@@ -261,7 +261,7 @@
                                     });
                                 }
                                 jobApplicantSelect.setValue(jobApplicantValue);
-                            });
+                            }); */
 
                             // address contact
                             $("#company_email").val(response.data.addressContact.company_email);
@@ -421,6 +421,37 @@
                             // profile
                             $("#bio_cover_letter").val(response.data.profile.bio_cover_letter);
 
+                            // salary
+                            const salaryModeSelect = $('#salary_mode')[0]
+                                .tomselect;
+                            const salaryModeValue = response.data.employeeSalary.salary_mode;
+                            console.log(salaryModeValue);
+                            if (!salaryModeSelect.options[salaryModeValue]) {
+                                salaryModeSelect.addOption({
+                                    value: salaryModeValue,
+                                    text: salaryModeValue
+                                });
+                            }
+                            salaryModeSelect.setValue(salaryModeValue);
+                            const currencySelect = $('#salary_currency')[0]
+                                .tomselect;
+                            const currencyValue = response.data.employeeSalary.salary_currency;
+                            console.log(currencyValue);
+                            if (!currencySelect.options[currencyValue]) {
+                                currencySelect.addOption({
+                                    value: currencyValue,
+                                    text: currencyValue
+                                });
+                            }
+                            currencySelect.setValue(currencyValue);
+
+                            $("#cost_to_company").val(response.data.employeeSalary.cost_to_company);
+                            $("#bank_name").val(response.data.employeeSalary.bank_name);
+                            $("#bank_account_number").val(response.data.employeeSalary
+                                .bank_account_number);
+                            $("#bank_account_holder").val(response.data.employeeSalary
+                                .bank_account_holder);
+
                             // exit
                             $("#resignation_letter_date").val(response.data.exitHistory
                                 .resignation_letter_date);
@@ -446,7 +477,19 @@
                             }
                             leaveEncashedSelect.setValue(leaveEncashedValue);
 
-                            const costCenterSelect = $('#payroll_cost_center')[0]
+                            if(response.data.avatar !== null) {
+                                $(".dropzone").hide();
+                                $("#avatar_box_container").show();
+                                $("#avatar_box").attr("src", response.data.avatar);
+                                $("#avatar").val(response.data.avatar);
+                            } else {
+                                $(".dropzone").show();
+                                $("#avatar_box_container").hide();
+                                // $("#avatar_box").attr("src", response.data.avatar);
+                                // $("#avatar").val(response.data.avatar);
+                            }
+
+                            /* const costCenterSelect = $('#payroll_cost_center')[0]
                                 .tomselect;
                             const costCenterValue = response.data.exitHistory
                                 .leave_encashed;
@@ -456,7 +499,7 @@
                                     text: costCenterValue
                                 });
                             }
-                            costCenterSelect.setValue(costCenterValue);
+                            costCenterSelect.setValue(costCenterValue); */
                         } else {
                             showErrorNotification('error', response.message);
                         }
@@ -468,6 +511,11 @@
                 });
                 return false;
             }
+
+            $("#avatar").on("change", function() {
+                console.log("Image URL : ");
+                console.log($(this).val());
+            });
 
             async function handleFormSubmission(formId) {
                 const currentForm = $(formId + "-form");
@@ -512,6 +560,38 @@
                 return false;
             }
 
+            $("#deleteImage").click(function () {
+                const bearerToken = localStorage.getItem("app_token");
+                $.ajax({
+                    url: "http://apidev.duluin.com/api/users/file_delete",
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${bearerToken}`,
+                        "Content-Type": "application/json"
+                    },
+                    data: JSON.stringify({
+                        "filename": $("#avatar").val()
+                    }),
+                    success: function(response) {
+                        if (response.success) {
+                            console.log("File deleted successfully:", response.message);
+                            $("#avatar").val("");
+                            showSuccessNotification('success', 'File deleted successfully');
+                            $("#avatar_box_container").hide();
+                            $(".dropzone").show();
+                            handleFormSubmission("#personal");
+                        } else {
+                            console.error("Error deleting file:", response.message);
+                            showErrorNotification('error', "Failed to delete the file. " + response.message);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("AJAX error:", status, error);
+                        alert("An error occurred while deleting the file.");
+                    }
+                });
+            });
+
             function serializeFormData(form) {
                 const formData = form.serializeArray();
                 const data = {};
@@ -528,6 +608,11 @@
                         // send email notification
                         handleNotification(response);
                     } else {
+                        console.log(response);
+                        $(".dropzone").hide();
+                        const avatar = $("#avatar").val();
+                        $("#avatar_box_container").show();
+                        $("#avatar_box").attr("src", avatar);
                         showSuccessNotification('success', "Data has been updated successfully");
                     }
                     $("#employee_id").val(response.data.employee.id);
@@ -607,6 +692,15 @@
             // get parent company id
             $("#company_id").change(async function() {
                 await getParentCompany($(this).val());
+            });
+
+            $(".bank_transfer_box").addClass("hidden");
+            $("#salary_mode").on('change', function() {
+                if ($(this).val() === 'bank') {
+                    $(".bank_transfer_box").removeClass("hidden");
+                } else {
+                    $(".bank_transfer_box").addClass("hidden");
+                }
             });
 
             async function getParentCompany(company) {
