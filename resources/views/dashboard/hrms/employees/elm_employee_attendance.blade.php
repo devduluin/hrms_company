@@ -18,7 +18,7 @@
         ]">
         <option value="">Select Holiday List</option>
     </x-form.select>
-    <x-form.select id="default_ship" name="default_ship" label="Default Ship"
+    <x-form.select id="default_ship" name="default_ship" label="Default Shift"
         url="{{ url('dashboard/hrms/designation') }}" apiUrl="http://apidev.duluin.com/api/v1/attendance/shift-type/datatable"
         columns='["shift_type_name"]' :keys="[
             'company_id' => $company,

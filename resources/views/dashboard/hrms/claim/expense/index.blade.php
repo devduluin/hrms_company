@@ -45,6 +45,13 @@
                                             <option value="rejected">Rejected</option>
                                         </x-form.select>
                                     </div>
+                                    <div class="mt-3">
+                                        <div class="my-2">Date</div> 
+                                        <div class="relative">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="calendar" class="lucide lucide-calendar absolute inset-y-0 left-0 z-10 my-auto ml-3 h-4 w-4 stroke-[1.3]"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
+                                            <input id="litepicker-chart" name="filter_date" type="text" class="disabled:bg-slate-100 litepicker-chart disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 datepicker rounded-[0.3rem] pl-9 sm:w-64">
+                                        </div>
+                                    </div>
                                     <div class="mt-4 flex items-center">
                                         <button type="reset" onclick="resetForm()" data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 ml-auto w-32">Reset</button>
                                         <button type="submit" data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary ml-2 w-32">Apply</button>
@@ -64,6 +71,7 @@
                             <x-datatable id="departmentTable" :url="$apiUrl.'/datatables'" method="POST" class="display small" :order="[[ 1, 'DESC']]" :filter="[
                                 'employee_id' => '#employee_id',
                                 'status' => '#status',
+                                'filter_date' => '#litepicker-chart',
                             ]">
                                 <x-slot:thead>
                                     <th data-value="id" data-render="getId">No</th>
@@ -98,6 +106,8 @@
     </div>
 @endsection
 @push('js')
+    <script src="{{ asset('dist') }}/js/vendors/litepicker.js"></script>
+    <script src="{{ asset('dist') }}/js/components/base/litepicker.js"></script>
     <script>
         function getId(data, type, row, meta) {
             return meta.row + 1;
@@ -236,6 +246,21 @@
                         $(`#status`)[0].tomselect.setValue(paramValue);
                     }
 
+                    if (paramName === "filter_date") {
+                        const litepickerInput = document.getElementById(selectorId);
+                        if (litepickerInput) {
+                            litepickerInput.value = paramValue;
+
+                            if (litepickerInput.litePicker) {
+                                litepickerInput.litePicker.setDateRange(
+                                    ...paramValue.split("+-+")
+                                );
+                            }
+                            if (paramValue) activeFilterCount++;
+                        }
+                        return;
+                    }
+
                     if ($selectElement.length > 0) {
                         $selectElement.val(paramValue).change();
                         if (paramValue) activeFilterCount++;
@@ -246,6 +271,7 @@
             // Call the function for each filter
             handleFilter("status", "status");
             handleFilter("employee_id", "employee_id");
+            handleFilter("filter_date", "litepicker-chart");
 
             const $countFilter = $("#countFilter");
             if ($countFilter.length > 0) {

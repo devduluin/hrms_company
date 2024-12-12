@@ -53,7 +53,7 @@
                     <x-chart.donut 
                         id="amountChart"
                         label="Expense Claim Amount"
-                        apiUrl="http://localhost:4444/api/v1/expense_claim/report/chart?company_id=c8f745e0-aa6e-458b-bb70-4dda3e2accea"
+                        apiUrl="https://apidev.duluin.com/api/v1/payroll/expense_claim/report/chart?company_id=c8f745e0-aa6e-458b-bb70-4dda3e2accea"
                         itemData="status"
                     />
                 </div>
