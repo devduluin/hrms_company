@@ -8,11 +8,11 @@
         Overview
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-2 gap-5 mt-4">
-        <x-form.input id="employee_card_id" label="Employee ID Number" name="employee_card_id" readonly required />
+        <x-form.input id="employee_card_id" label="Employee ID Number" name="employee_card_id" required />
         <x-form.input id="first_name" label="First Name" name="first_name" required />
         <x-form.input id="last_name" label="Last Name" name="last_name" required />
-        <x-form.input id="phone_number" label="Phone Number" name="phone_number" readonly required />
-        <x-form.input id="personal_email" label="Personal Email" name="personal_email" readonly required />
+        <x-form.input id="phone_number" label="Phone Number" name="phone_number" required />
+        <x-form.input id="personal_email" label="Personal Email" name="personal_email" required />
         <x-form.select name="gender" id="gender" label="Gender" class="tom-select w-full"
             data-placeholder="Select Gender" url="{{ url('dashboard/hrms/designation') }}" required>
             <option value="">Select Gender</option>
