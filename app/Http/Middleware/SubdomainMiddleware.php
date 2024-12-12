@@ -29,6 +29,10 @@ class SubdomainMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $protocol     = $request->secure() ? 'https://' : 'http://';
+		if (config('app.env') === 'production') {
+			$protocol = 'https://';
+		}
+		
         $host         = $protocol . $request->getHost();
         // $host         = "http://127.0.0.1:8000";
         $gateway      = config('apiendpoints.gateway') . '/v1/needvalidatemyhost';
