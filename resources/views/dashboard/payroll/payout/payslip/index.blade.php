@@ -42,8 +42,6 @@
                                                 </x-form.select>
                                             </div>
                                             <div class="mt-3">
-                                            </div>
-                                            <div class="mt-3">
                                                 <x-form.select id="status" name="status" data-tw-merge="" data-method="" style="width: 111%;" label="Select Status">
                                                     <option value="">Select Status</option>
                                                     <option value="draft"> draft </option>
@@ -51,6 +49,23 @@
                                                     <option value="submitted"> submitted </option>
                                                     <option value="paid"> paid </option>
                                                     <option value="approved"> approved </option>
+                                                </x-form.select>
+                                            </div>
+                                            <div class="mt-3">
+                                                <x-form.select id="month" name="month" data-tw-merge="" data-method="" style="width: 111%;" label="Select Slip Month">
+                                                    <option value="">Select Month</option>
+                                                    <option value="january"> january </option>
+                                                    <option value="february"> february </option>
+                                                    <option value="march"> march </option>
+                                                    <option value="april"> april </option>
+                                                    <option value="mei"> mei </option>
+                                                    <option value="approved"> june </option>
+                                                    <option value="approved"> july </option>
+                                                    <option value="approved"> august </option>
+                                                    <option value="approved"> september </option>
+                                                    <option value="approved"> oktober </option>
+                                                    <option value="approved"> november </option>
+                                                    <option value="approved"> desember </option>
                                                 </x-form.select>
                                             </div>
                                             <div class="mt-4 flex items-center">

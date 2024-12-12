@@ -18,7 +18,7 @@
                                     <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row sm:items-center">
                                         <div class="relative">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="calendar-check2" class="lucide lucide-calendar-check2 absolute inset-y-0 left-0 z-10 my-auto ml-3 h-4 w-4 stroke-[1.3]"><path d="M21 14V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8"></path><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line><path d="m16 20 2 2 4-4"></path></svg>
-                                            <select onchange="filterAttendance(this.value)" name="filter_date" class="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1 pl-9 sm:w-44">
+                                            <select onchange="filterExpense(this.value)" id="filterSelector" name="filter_date" class="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1 pl-9 sm:w-44">
                                                 
                                                 <option value="daily">Today</option>
                                                 <option value="weekly">Weekly</option>
@@ -48,42 +48,42 @@
                                 <div class="mt-5">
                                         <div class="box--stacke">
                                             <div class="grid grid-cols-4 gap-5">
-                                                <a href="{{ url('dashboard/hrms/claim/expense') }}" class="block">
+                                                <a id="totalExpenseLink" href="{{ url('dashboard/hrms/claim/expense') }}" class="block">
                                                     <div
                                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
                                                         <div class="text-base text-slate-500">Total Expense</div>
                                                         <div class="mt-1.5 text-2xl font-medium" id="totalExpense">0</div>
                                                     </div>
                                                 </a>
-                                                <a href="{{ url('dashboard/hrms/claim/expense') }}?status=draft" class="block">
+                                                <a id="totalDraftLink" href="{{ url('dashboard/hrms/claim/expense') }}?status=draft" class="block">
                                                     <div
                                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
                                                         <div class="text-base text-pending">Total Draft</div>
                                                         <div class="mt-1.5 text-2xl font-medium" id="totalDraft">0</div>
                                                     </div>
                                                 </a>
-                                                <a href="{{ url('dashboard/hrms/claim/expense') }}?status=submitted" class="block">
+                                                <a id="totalSubmittedLink" href="{{ url('dashboard/hrms/claim/expense') }}?status=submitted" class="block">
                                                     <div
                                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
                                                         <div class="text-base text-warning">Total Submitted</div>
                                                         <div class="font-mediumm mt-1.5 text-2xl" id="totalSubmitted">0</div>
                                                     </div>
                                                 </a>
-                                                <a href="{{ url('dashboard/hrms/claim/expense') }}?status=approved" class="block">
+                                                <a id="totalApprovedLink" href="{{ url('dashboard/hrms/claim/expense') }}?status=approved" class="block">
                                                     <div
                                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
                                                         <div class="text-base text-green-800">Total Approved</div>
                                                         <div class="font-mediumm mt-1.5 text-2xl" id="totalApproved">0</div>
                                                     </div>
                                                 </a>
-                                                <a href="{{ url('dashboard/hrms/claim/expense') }}?status=paid" class="block">
+                                                <a id="totalPaidLink" href="{{ url('dashboard/hrms/claim/expense') }}?status=paid" class="block">
                                                     <div
                                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
                                                         <div class="text-base text-success">Total Paid</div>
                                                         <div class="font-mediumm mt-1.5 text-2xl" id="totalPaid">0</div>
                                                     </div>
                                                 </a>
-                                                <a href="{{ url('dashboard/hrms/claim/expense') }}?status=rejected" class="block">
+                                                <a id="totalRejectedLink" href="{{ url('dashboard/hrms/claim/expense') }}?status=rejected" class="block">
                                                     <div
                                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
                                                         <div class="text-base text-danger">Total Rejected</div>
@@ -91,14 +91,14 @@
                                                     </div>
                                                 </a>
                                                
-                                                <a href="{{ url('dashboard/hrms/claim/type') }}?is_active=1" class="block">
+                                                <a id="totalClaimTypeActiveLink" href="{{ url('dashboard/hrms/claim/type') }}?is_active=1" class="block">
                                                     <div
                                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
                                                         <div class="text-base text-blue-500">Total Claim Type Active</div>
                                                         <div class="font-mediumm mt-1.5 text-2xl" id="totalClaimTypeActive">0</div>
                                                     </div>
                                                 </a>
-                                                <a href="{{ url('dashboard/hrms/claim/type') }}?is_active=0" class="block">
+                                                <a id="totalClaimTypeInactiveLink" href="{{ url('dashboard/hrms/claim/type') }}?is_active=0" class="block">
                                                     <div
                                                         class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 bg-warning bg-opacity-20 p-5 shadow-sm md:col-span-2 xl:col-span-1">
                                                         <div class="text-base text-pending">Total Claim Type Inactive</div>
@@ -386,14 +386,14 @@
 
     <script type="text/javascript">
         // $(document).ready(function() {
-        //    countAttendanceThisMonth();
+        //    countExpenseThisMonth();
         //    countEmployee();
         // });
 
         var filterData = {};
         $(document).ready(function() {
-            // countAttendanceThisMonth();
-            countAttendance('daily');
+            // countExpenseThisMonth();
+            countExpense('daily');
             countEmployee();
            //getDataChart();
         });
@@ -401,35 +401,72 @@
         //user bisa menampilkan data berdasarkan range tanggal yang dipilih
         $(".litepicker").on("click", ".button-apply", function() {
             $("#loading").removeAttr('style', 'display: none');
-           countAttendance($('#litepicker').val());
+           countExpense($('#litepicker').val());
         });
 
         //filter attendane, weekly, mothly atau yearly
-        function filterAttendance(value) {
+        function filterExpense(value) {
             $("#loading").removeAttr('style', 'display: none');
-           countAttendance(value);
+           countExpense(value);
         }
 
-        //fungsi untuk menghitung total attendance
-        async function countAttendance(value = "") {
+        //fungsi untuk menghitung total expense
+        async function countExpense(value = "") {
+            let date;
+
+            const currentDate = new Date();
+            const lastWeekDate = new Date();
+            const formattedToday = currentDate.toISOString().split("T")[0];
+            const formattedLastWeek = lastWeekDate.toISOString().split("T")[0];            
 
             //filter data berdasarkan tanggal yang dipilih
             switch (value) {
                 case "daily":
                     filterData = "daily=daily";
+                    const today = new Date().toISOString().split("T")[0];
+                    date = `${today}+-+${today}`;
                     break;
                 case "weekly":
                     filterData = "weekly=weekly";
+                    lastWeekDate.setDate(currentDate.getDate() - 7);
+                    date = `${formattedLastWeek}+-+${formattedToday}`;
                     break;
                 case "monthly":
                     filterData = "monthly=monthly";
+                    const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+                    date = `${firstDayOfMonth.toISOString().split("T")[0]}+-+${formattedToday}`;
                     break;
                 case "yearly":
                     filterData = "yearly=yearly";
+                    const firstDayOfYear = new Date(currentDate.getFullYear(), 0, 1); 
+                    date = `${firstDayOfYear.toISOString().split("T")[0]}+-+${formattedToday}`;
                     break;
                 default:
                 $('#custom-date').attr('hidden', false);
                 filterData = "custom_date="+value;
+            }
+
+            const baseUrl = "{{ url('dashboard/hrms/claim/expense') }}";
+
+            if (value.includes(" - ")) {
+                const [startDate, endDate] = value.split(" - ");
+                date = `${startDate}+-+${endDate}`;
+            }
+
+            //mengubah link sesuai dengan select onchange
+            links = {
+                totalExpenseLink : `${baseUrl}${date ? '?filter_date=' + date : ''}`,
+                totalDraftLink : `${baseUrl}?status=draft${date ? '&filter_date=' + date : ''}`,
+                totalSubmittedLink : `${baseUrl}?status=submitted${date ? '&filter_date=' + date : ''}`,
+                totalApprovedLink : `${baseUrl}?status=approved${date ? '&filter_date=' + date : ''}`,
+                totalPaidLink : `${baseUrl}?status=paid${date ? '&filter_date=' + date : ''}`,
+                totalRejectedLink : `${baseUrl}?status=rejected${date ? '&filter_date=' + date : ''}`,
+                totalClaimTypeActiveLink : `${baseUrl}?is_active=1${date ? '&filter_date=' + date : ''}`,
+                totalClaimTypeInactiveLink : `${baseUrl}?is_active=0${date ? '&filter_date=' + date : ''}`,
+            }
+
+            for (const [id, url] of Object.entries(links)) {
+                document.getElementById(id).setAttribute("href", url);
             }
              
             //kirim permintaan data ke server dengan membawa param
@@ -485,7 +522,7 @@
             return html
         }
 
-        //ambil data chart attendance dari server
+        //ambil data chart expense dari server
         async function getDataChart()
         {
             var param = {

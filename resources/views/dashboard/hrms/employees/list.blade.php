@@ -304,8 +304,9 @@
                         document.getElementById("alert-contract").classList = "visible flex flex-col mt-8";
                         document.getElementById("alert-message").innerHTML =
                             `Warning : <b>${dataFound.count}</b> employees have contracts ending in less than 30 days`;
-                    } else {
-                        console.log("harusnya ga muncul");
+                    } else
+                    if (dataFound.count === 1) {
+                        document.getElementById("alert-contract").classList = "visible flex flex-col mt-8";
                         document.getElementById("alert-message").innerHTML =
                             `Warning : <b>${dataFound.count}</b> employee have contracts ending in less than 30 days`;
                     }
