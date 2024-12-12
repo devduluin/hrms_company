@@ -320,8 +320,8 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7T5886HCdj0jMOWhW_aliRYP
 
                 $('#employeeId').html(employee.employee_id);
                 $('#name').html('<a class="text-info" href="{{ url('/dashboard/hrms/employee/edit_employee') }}/'+employee.id+'">'+employee.first_name + ' ' + employee.last_name+' <i class="fa-solid fa-arrow-up-right-from-square ml-2"></i></a>');
-                $('#email').html(employee.addressContact.personal_email);
-                $('#phone').html(employee.addressContact.mobile_phone);
+                $('#email').html(employee.addressContact?.personal_email);
+                $('#phone').html(employee.addressContact?.mobile_phone);
 
                 $("#attendance_date").html(formatDateToReadable(attendance.attendance_date));
                 $("#check_in").html(attendance.time_in);

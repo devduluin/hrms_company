@@ -157,7 +157,16 @@
                         event.preventDefault();
                         const formData = new FormData(form);
                         const action = form.action;
+                        const btnSignin = document.getElementById("btnSignin");
+                        const btnSignup = document.getElementById("btnSignup");
+                        const btnLoading = document.getElementsByClassName("btnLoading");
 
+                        if (btnSignin) btnSignin.classList.add('hidden');
+                        if (btnSignup) btnSignup.classList.add('hidden');
+
+                        if (btnLoading.length > 0) {
+                            Array.from(btnLoading).forEach(btn => btn.classList.remove('hidden'));
+                        }
                         try {
                             const response = await fetch(action, {
                                 method: 'POST',
@@ -206,7 +215,17 @@
                             // toastr.error('An unexpected error occurred.');
                             showErrorNotification('error',
                                 'An unexpected error occurred.');
-                        }
+                        } finally {
+                            // Remove hidden class from submit button and add hidden class to loading indicator
+                            
+                            if (btnLoading.length > 0) {
+                                setTimeout(() => {
+                                    if (btnSignin) btnSignin.classList.remove('hidden');
+                                    if (btnSignup) btnSignup.classList.remove('hidden');
+                                    Array.from(btnLoading).forEach(btn => btn.classList.add('hidden'));
+                                }, 1000);
+                            }
+                        };
                     });
                 });
             }
