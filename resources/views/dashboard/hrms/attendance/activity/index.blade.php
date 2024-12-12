@@ -14,6 +14,39 @@
                         class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md w-24">
                         <i data-tw-merge="" data-lucide="arrow-left" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Back
                     </button>
+                    <div data-tw-merge="" data-tw-placement="bottom-end" class="dropdown relative inline-block"><button data-tw-merge="" data-tw-toggle="dropdown" aria-expanded="false" class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md  w-full sm:w-auto"><i data-tw-merge="" data-lucide="arrow-down-wide-narrow" class="mr-2 h-4 w-4 stroke-[1.3]"></i>
+                        Filter
+                        <span id="countFilter" class="ml-2 flex h-5 items-center justify-center rounded-full border bg-slate-100 px-1.5 text-xs font-medium">
+                            
+                        </span></button>
+                        <div data-transition="" data-selector=".show" data-enter="transition-all ease-linear duration-150" data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1" data-enter-to="!mt-1 visible opacity-100 translate-y-0" data-leave="transition-all ease-linear duration-150" data-leave-from="!mt-1 visible opacity-100 translate-y-0" data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1" class="dropdown-menu absolute z-[9999] hidden">
+                            <div data-tw-merge="" class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600">
+                                <div class="p-2">
+                                  <form method="GET" id="filterTable">
+                                    <div>
+                                        <x-form.select style="width: 111%;" id="employee_id" name="employee_id" data-method="POST" label="Employee Name" url="{{ url('dashboard/hrms/employee/create') }}"
+                                            apiUrl="{{ $apiUrlEmployee }}/datatables" columns='["first_name", "last_name"]' :selected='$selectedEmployee'
+                                            :keys="[
+                                                'company_id' => $company_id,
+                                            ]">
+                                            <option value="">Select Employee</option>
+                                        </x-form.select>
+                                    </div>
+                                    <div class="mt-3">
+                                        <div class="text-left font-medium">
+                                            Date
+                                        </div>
+                                         <input id="attendance_date" name="attendance_date" type="date" value="{{ date('Y-m-d')}}" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 "/>
+                                    </div>
+                                    <div class="mt-4 flex items-center">
+                                        <button type="reset" onclick="resetForm()" data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 ml-auto w-32">Reset</button>
+                                        <button type="submit" data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary ml-2 w-32">Apply</button>
+                                    </div>
+                                  </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     {{-- <x-form.button id="new_activity" label="Add Employee Activity" style="primary" icon="plus" url="{{ route('hrms.shift-assignment.create') }}" ></x-button> --}}
                 </div>
             </div>
@@ -159,6 +192,48 @@
                 // activateTab(formId);
             }
         }
+
+        function resetForm() {
+            $(`#employee_id`)[0].tomselect.clear();
+            $(`#attendance_date`).val("");
+        }
+        
+        $(document).ready(function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            let activeFilterCount = 0;
+
+            const handleFilter = (paramName, selectorId) => {
+                if (urlParams.has(paramName)) {
+                    const paramValue = urlParams.get(paramName);
+                    const $selectElement = $(`#${selectorId}`);
+
+                    if(paramName === "attendance_date"){
+                        $(`#attendance_date`).val(paramValue);
+                    }
+
+                    if ($selectElement.length > 0) {
+                        $selectElement.val(paramValue).change();
+                        if (paramValue) activeFilterCount++;
+                    }
+                }
+            };
+
+            // Call the function for each filter
+            handleFilter("attendance_date", "attendance_date");
+            handleFilter("status", "status");
+            handleFilter("attendance_status", "attendanceStatus");
+            handleFilter("employee_id", "employee_id");
+
+            const $countFilter = $("#countFilter");
+            if ($countFilter.length > 0) {
+                $countFilter.text(activeFilterCount);
+            }
+
+            const table = $('#attendanceTable').DataTable();
+            table.on('xhr', function (e, settings, json) {
+                console.log(json); // Log the fetched data
+            });
+        });
     </script>
 @endpush
 @include('vendor-common.sweetalert')

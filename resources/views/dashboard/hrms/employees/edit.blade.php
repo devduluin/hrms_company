@@ -315,6 +315,20 @@
                                 $("#attendance_device_id").val(response.data.attendanceLeave
                                     .attendance_device_id);
 
+                                const holidayListSelect = $('#holiday_list')[0].tomselect;
+                                const holidayListValue = response.data.attendanceLeave
+                                    .holiday_list;
+
+                                holidayListSelect.on('load', function() {
+                                    if (!holidayListSelect.options[holidayListValue]) {
+                                        holidayListSelect.addOption({
+                                            value: holidayListValue,
+                                            text: holidayListValue
+                                        });
+                                    }
+                                    holidayListSelect.setValue(holidayListValue);
+                                });
+
                                 const defaultShiftSelect = $('#default_ship')[0].tomselect;
                                 const defaultShiftValue = response.data.attendanceLeave
                                     .default_ship;
@@ -401,7 +415,7 @@
                             bloodGroupSelect.setValue(bloodGroupValue);
                             $("#family_background").val(response.data.personalData.family_background);
                             $("#health_detail").val(response.data.personalData.health_details);
-                            const healthInsuranceSelect = $('#health_insurance')[0]
+                            /* const healthInsuranceSelect = $('#health_insurance')[0]
                                 .tomselect;
                             const healthInsuranceValue = response.data.personalData
                                 .health_insurance;
@@ -411,7 +425,7 @@
                                     text: healthInsuranceValue
                                 });
                             }
-                            healthInsuranceSelect.setValue(healthInsuranceValue);
+                            healthInsuranceSelect.setValue(healthInsuranceValue); */
                             $("#passport_number").val(response.data.personalData.passport_number);
                             $("#identity_card_number").val(response.data.identity_card_number);
                             $("#date_of_issued").val(response.data.personalData.date_of_issued);
@@ -477,7 +491,9 @@
                             }
                             leaveEncashedSelect.setValue(leaveEncashedValue);
 
-                            if(response.data.avatar !== null) {
+                            console.log("Avatar");
+                            console.log(response.data.avatar);
+                            if (response.data.avatar !== null) {
                                 $(".dropzone").hide();
                                 $("#avatar_box_container").show();
                                 $("#avatar_box").attr("src", response.data.avatar);
@@ -560,7 +576,7 @@
                 return false;
             }
 
-            $("#deleteImage").click(function () {
+            $("#deleteImage").click(function() {
                 const bearerToken = localStorage.getItem("app_token");
                 $.ajax({
                     url: "http://apidev.duluin.com/api/users/file_delete",
@@ -582,7 +598,8 @@
                             handleFormSubmission("#personal");
                         } else {
                             console.error("Error deleting file:", response.message);
-                            showErrorNotification('error', "Failed to delete the file. " + response.message);
+                            showErrorNotification('error', "Failed to delete the file. " +
+                                response.message);
                         }
                     },
                     error: function(xhr, status, error) {

@@ -25,7 +25,7 @@ class EmployeesController extends Controller
         return view('dashboard.hrms.employees.index', $data);
     }
 
-    public function list()
+    public function list(Request $request)
     {
         $data['title']   = 'Duluin HRMS';
         $allSessions = session()->all();
@@ -34,6 +34,7 @@ class EmployeesController extends Controller
         $data['apiGateway'] = $this->apiGatewayUrl . '/users';
         $data['apiCompanyUrl'] = $this->apiGatewayUrl . '/v1/companies';
         $data['company'] = $allSessions['company_id'];
+        // $data['apiGetExpiredSoonContract'] = $this->apiGatewayUrl . "v1/employees/employee/alert/employee-contract/company_id=" . $request->session()->get('company_id');
 
         return view('dashboard.hrms.employees.list', $data);
     }
