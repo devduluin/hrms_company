@@ -46,7 +46,7 @@
                                                 <div class="p-2">
                                                     <form method="GET" id="filterTable">
                                                         <div>
-                                                            <x-form.select id="company_id" name="company_id" label="Company"
+                                                            <x-form.select style="width: 111%;" id="company_id" name="company_id" label="Company"
                                                                 url="{{ url('dashboard/hrms/designation') }}"
                                                                 apiUrl="{{ $apiCompanyUrl }}/company/datatables"
                                                                 columns='["company_name"]' :selected="$company" :keys="[
@@ -56,7 +56,7 @@
                                                             </x-form.select>
                                                         </div>
                                                         <div class="mt-3">
-                                                            <x-form.select id="department_id" name="department_id"
+                                                            <x-form.select style="width: 111%;" id="department_id" name="department_id"
                                                                 label="Department" url="{{ url('dashboard/hrms/designation') }}"
                                                                 apiUrl="{{ $apiCompanyUrl }}/department/datatables"
                                                                 columns='["department_name"]' :keys="[
@@ -66,7 +66,7 @@
                                                             </x-form.select>
                                                         </div>
                                                         <div class="mt-3">
-                                                            <x-form.select id="designation_id" name="designation_id"
+                                                            <x-form.select style="width: 111%;" id="designation_id" name="designation_id"
                                                                 label="Designation"
                                                                 url="{{ url('dashboard/hrms/designation') }}"
                                                                 apiUrl="{{ $apiCompanyUrl }}/designation/datatables"
@@ -90,6 +90,13 @@
                                                                 <option value="inactive">Inactive</option>
                                                             </x-form.select>
                                                         </div>
+                                                        <div class="mt-3">
+                                                            <x-form.select style="width: 111%;" id="contract_status" name="contract_status" label="Contract Status">
+                                                                <option value="">Select All</option>
+                                                                <option value="true">Less than 30 days</option>
+                                                                <option value="false">More than 30 days</option>
+                                                            </x-form.select>
+                                                        </div>
                                                         <div class="mt-4 flex items-center">
                                                             <button type="button" onClick="resetForm()" data-tw-merge=""
                                                                 class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 ml-auto w-32">Reset</button>
@@ -106,7 +113,7 @@
 
                                 </div>
                             </div>
-                            <div class="mt-3.5 flex flex-col gap-8">
+                            <div class="mt-3.5 flex flex-col">
                                 <div class="box box--stacked flex flex-col p-5">
                                     <div class="grid grid-cols-4 gap-5">
                                         <div
@@ -131,8 +138,16 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="box box--stacked flex flex-col">
+                                <div id="alert-contract" class="hidden">
+                                    <div style="background-color: rgb(252 165 165); justify-content: space-between;" class="flex items-center bg-red-300 box col-span-4 rounded-[0.6rem] border border-red-300/80 p-4 shadow-sm md:col-span-2 xl:col-span-1">
+                                        <div id="alert-message" class="text-base text-red-500"></div>
+                                        <a href="{{ url('dashboard/hrms/employee?contract_status=true') }}" data-tw-merge=""
+                                            class="transition border shadow-sm bg-red-500 inline-flex items-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 w-18">
+                                        More
+                                        <i data-tw-merge="" data-lucide="chevron-right" class=" h-4 w-4 stroke-[1.3]"></i></a>
+                                    </div>
+                                </div>
+                                <div class="box box--stacked flex flex-col mt-8">
                                     <div class="table gap-y-2 p-5 sm:flex-row sm:items-center">
                                         <div>
                                             <x-datatable id="employeeTable" :url="$apiUrl . '/employee/datatables'" method="POST" class="display"
@@ -245,7 +260,47 @@
             table.on('xhr', function (e, settings, json) {
                 console.log(json); // Log the fetched data
             });
+
+            getAlertContract();
         });
+
+        function getAlertContract() {
+            const company_id = localStorage.getItem('company');
+
+            $.ajax({
+                // url: `http://localhost:5555/api/v1/employee/alert/employee-contract?company_id=92af08f7-8a0e-47e5-af34-d3ba84e130e8`,
+                url: `http://apidev.duluin.com/api/v1/employees/employee/alert/employee-contract?company_id=${company_id}`,
+                method: 'GET',
+                contentType: 'application/json',
+                headers: {
+                    'Authorization': `Bearer ${appToken}`,
+                    'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`,
+                    'credentials': 'same-origin',
+                },
+                crossDomain: true,
+                // data: JSON.stringify(data),
+                dataType: 'json',
+                success: function(data) {
+                    console.log("ini data :",data.data);
+                    const dataFound = data.data;
+                    if (dataFound.count > 1) {
+                        document.getElementById("alert-contract").classList = "visible flex flex-col mt-8";
+                        document.getElementById("alert-message").innerHTML = `Warning : <b>${dataFound.count}</b> employees have contracts ending in less than 30 days`;
+                    } else 
+                    if (dataFound.count === 1){
+                        document.getElementById("alert-contract").classList = "visible flex flex-col mt-8";
+                        document.getElementById("alert-message").innerHTML = `Warning : <b>${dataFound.count}</b> employee have contracts ending in less than 30 days`;
+                    }
+                    // document.getElementById("success").textContent = "Verification Success";
+                    // document.getElementById("success-icon").innerHTML = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' class='w-16'><path fill='green' fill-rule='evenodd' d='M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z' clip-rule='evenodd' /></svg>";
+                    // document.getElementById("message").textContent = "You have successfully verified your account";
+                    // alert-contract
+                },
+                error: function(error) {
+                    showErrorNotification('error', 'Failed to get Employees Contract.');
+                }
+            });
+        }
 
         function handleNotification(checkedValues) {
             $.ajax({
@@ -421,7 +476,7 @@
                 const $selectElement = $(`#${selectorId}`);
                 if ($selectElement.length > 0) {
                     $selectElement.val(paramValue).change();
-                    addOptionIfNotExist(selectorId, paramValue)
+                    addOptionIfNotExist(selectorId, paramValue);
                     if (paramValue) activeFilterCount++;
                 }
             }
@@ -431,6 +486,9 @@
         handleFilter("company_id", "company_id");
         handleFilter("department_id", "department_id");
         handleFilter("designation_id", "designation_id");
+        handleFilter("is_verified", "is_verified");
+        handleFilter("status", "status");
+        handleFilter("contract_status", "contract_status");
 
         const $countFilter = $("#countFilter");
         if ($countFilter.length > 0) {
@@ -452,6 +510,8 @@
             //$(`#company_id`)[0].tomselect.clear();
             $(`#department_id`)[0].tomselect.clear();
             $(`#designation_id`)[0].tomselect.clear();
+            $(`#is_verified`)[0].tomselect.clear();
+            $(`#status`)[0].tomselect.clear();
         }
 
 

@@ -8,11 +8,11 @@
         Overview
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-2 gap-5 mt-4">
-        <x-form.input id="employee_card_id" label="Employee ID Number" name="employee_card_id" required />
+        <x-form.input id="employee_card_id" label="Employee ID Number" name="employee_card_id" readonly required />
         <x-form.input id="first_name" label="First Name" name="first_name" required />
         <x-form.input id="last_name" label="Last Name" name="last_name" required />
-        <x-form.input id="phone_number" label="Phone Number" name="phone_number" required />
-        <x-form.input id="personal_email" label="Personal Email" name="personal_email" required />
+        <x-form.input id="phone_number" label="Phone Number" name="phone_number" readonly required />
+        <x-form.input id="personal_email" label="Personal Email" name="personal_email" readonly required />
         <x-form.select name="gender" id="gender" label="Gender" class="tom-select w-full"
             data-placeholder="Select Gender" url="{{ url('dashboard/hrms/designation') }}" required>
             <option value="">Select Gender</option>
@@ -40,9 +40,7 @@
             data-placeholder="Select Status" url="{{ url('dashboard/hrms/status') }}" required>
             <option value="">Select Status</option>
             <option value="active">Active</option>
-            <option value="inactive">Inactive</option>
-            <option value="suspended">Suspended</option>
-            <option value="left">Left</option>
+            <option value="inactive">Exit</option>
         </x-form.select>
     </div>
     <div class="grid grid-cols-2 gap-5 mt-4">
@@ -85,24 +83,25 @@
             <option value="">Select Department</option>
         </x-form.select>
 
-        <x-form.select id="report_to" name="report_to" label="Reports to"
-            url="{{ url('dashboard/hrms/designation') }}" apiUrl="{{ $apiEmployeeUrl }}/employee/datatables"
-            columns='["first_name","last_name"]' :keys="[
+        <x-form.select id="report_to" name="report_to" label="Reports to" url="{{ url('dashboard/hrms/designation') }}"
+            apiUrl="{{ $apiEmployeeUrl }}/employee/datatables" columns='["first_name","last_name"]'
+            :keys="[
                 'company_id' => $company,
             ]">
             <option value="">Select Employee</option>
         </x-form.select>
 
         <x-form.select id="grade_id" name="grade_id" label="Grade" url="{{ url('dashboard/hrms/designation') }}"
-            apiUrl="http://apidev.duluin.com/api/v1/companies/employee-grade/datatables" columns='["employee_grade_name"]'
-            :keys="[
+            apiUrl="http://apidev.duluin.com/api/v1/companies/employee-grade/datatables"
+            columns='["employee_grade_name"]' :keys="[
                 'company_id' => $company,
             ]">
             <option value="">Select Grade</option>
         </x-form.select>
 
         <x-form.select id="employee_type_id" name="employee_type_id" label="Employment Type"
-            url="{{ url('dashboard/hrms/designation') }}" apiUrl="http://apidev.duluin.com/api/v1/companies/employment-type/datatables"
+            url="{{ url('dashboard/hrms/designation') }}"
+            apiUrl="http://apidev.duluin.com/api/v1/companies/employment-type/datatables"
             columns='["employment_type_name"]' :keys="[
                 'company_id' => $company,
             ]">

@@ -6,7 +6,7 @@
        
         
         <div id="contents-page" class="content transition-[margin,width] duration-100 px-5 xl:mr-2.5 mt-[75px] pt-[31px] pb-16 content--compact xl:ml-[275px] [&.content--compact]:xl:ml-[100px]">
-            <div class="container">
+            <!-- <div class="container"> -->
             @if (request()->get('initialize') == 'success')
             <div class="flex flex-col gap-2 mb-5">
                 <div role="alert" class="alert relative border rounded-md px-5 py-4 bg-primary border-primary text-white dark:border-primary">
@@ -28,7 +28,7 @@
             @include('dashboard.hrms.elm_hrms')
                 <div id="loading-indicator" class="items-center" style="display: none;"></div>
                     
-            </div>
+            <!-- </div> -->
         </div>
         
     
@@ -39,6 +39,78 @@ document.addEventListener('DOMContentLoaded', async function() {
     const content = document.getElementById("contents-page");
     const loadingIndicator = document.getElementById("loading-indicator");
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    
+    getDataChart();
+
+    async function getDataChart()
+        {
+            var param = {
+                url: "{{ $apiChartAttendance }}",
+                // url: "http://localhost:4446/api/v1/attendance/report/chart?company_id=c8f745e0-aa6e-458b-bb70-4dda3e2accea",
+                method: "GET",
+            }
+
+            await transAjax(param).then((result) => {
+                const chart = result.data;
+                console.log(chart);
+
+                //chart
+                let e = $(".report-bar-chart-5");
+                e.length &&
+                    e.each(function () {
+                        let a = $(this)[0].getContext("2d"),
+                            r = new Chart(a, {
+                                type: "bar",
+                                data: chart,
+                                options: {
+                                    maintainAspectRatio: !1,
+                                    plugins: { legend: { display: !1 } },
+                                    scales: {
+                                        x: {
+                                            ticks: {
+                                                color: getColor("slate.500", 0.7),
+                                            },
+                                            grid: { display: !1 },
+                                            border: { display: !1 },
+                                        },
+                                        y: {
+                                            ticks: {
+                                                autoSkipPadding: 30,
+                                                color: getColor("slate.500", 0.9),
+                                                beginAtZero: !0,
+                                            },
+                                            grid: { color: getColor("slate.200", 0.7) },
+                                            border: { display: !1 },
+                                        },
+                                    },
+                                    onClick: function (e, elements) {
+                                        if (elements.length > 0) {
+                                            const firstElement = elements[0]; 
+                                            const datasetIndex = firstElement.datasetIndex;
+                                            const index = firstElement.index;
+
+                                            const label = r.data.labels[index];
+                                            const dataValue = r.data.datasets[datasetIndex].data[index];
+
+                                            // clickable
+                                            const baseUrl = '{{ url('dashboard/hrms/attendance/attendance') }}';
+                                            window.location.href = `${baseUrl}?attendance_status=${r.data.datasets[datasetIndex].label.toLowerCase()}&attendance_date=${label}`;
+                                            // console.log(`You clicked on ${label}: ${dataValue} ${r.data.datasets[datasetIndex].label}`);
+                                        }
+                                    }
+                                },
+                            });
+                    });
+                
+            }).catch((error) => {
+                console.log(error);
+            });
+
+            //user bisa menampilkan data berdasarkan range tanggal yang dipilih
+            // $(".litepicker").on("click", ".button-apply", function() {
+            //     $("#loading").removeAttr('style', 'display: none');
+            // });
+        }
     
     const routes = {
       

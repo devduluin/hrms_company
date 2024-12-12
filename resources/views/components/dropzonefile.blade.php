@@ -7,6 +7,7 @@
     'guidelines',
     'action',
     'folder',
+    'employee'
 ])
 <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4">
     <div class="text-left">
@@ -26,7 +27,7 @@
         </div>
     </div>
 </div>
-<form data-single="true" action="{{ $action }}" data-folder="{{ $folder }}"
+<form data-single="true" action="{{ $action }}" data-folder="{{ $folder }}" data-employee="{{ $employee }}"
     class="[&.dropzone]:border-2 [&.dropzone]:border-dashed dropzone [&.dropzone]:border-slate-300/70 [&.dropzone]:bg-slate-50 [&.dropzone]:cursor-pointer [&.dropzone]:dark:bg-darkmode-600 [&.dropzone]:dark:border-white/5 dropzone dropzone">
     @csrf
     <div class="fallback">
@@ -71,21 +72,28 @@
                             done();
                         },
                         maxFilesize: 5, // 5MB limit for files
+                        clickable: true,
+                        autoProcessQueue: true,
+                        addRemoveLinks: true,
                         init: function() {
                             this.on("sending", (file, xhr, formData) => {
                                 const folder = dropzoneElement.attr("data-folder") ||
                                     "employees";
+                                const employee = dropzoneElement.attr("data-employee") || null;
                                 formData.append("folder", folder);
-                                console.log("Folder added to request:", folder);
+                                if(employee != null) {
+                                    formData.append("employee_id", employee);
+                                }
+                                // console.log("Folder added to request:", folder);
                             });
 
                             this.on("success", (file, response) => {
                                 console.log("File successfully uploaded");
                                 console.log("Response from server:", response);
                                 if (response.success) {
-                                    console.log("Message:", response.message);
-                                    console.log("File URL:", response.file);
-                                    $("#avatar").val(response.file);
+                                    // console.log("Message:", response.message);
+                                    // console.log("File URL:", response.file);
+                                    $("input[name=avatar]").val(response.file);
                                     // alert(`File uploaded successfully: ${response.file}`);
                                 } else {
                                     console.error("Upload failed:", response.message);
@@ -104,6 +112,38 @@
                             this.on("maxfilesexceeded", (file) => {
                                 alert("No more files please!");
                                 this.removeFile(file);
+                            });
+
+                            this.on("removedfile", function (file) {
+                                // console.log("delete file");
+                                // console.log(file);
+                                // console.log($("#avatar").val());
+                                const bearerToken = localStorage.getItem("app_token");
+                                $.ajax({
+                                    url: "http://apidev.duluin.com/api/users/file_delete",
+                                    method: "POST",
+                                    headers: {
+                                        "Authorization": `Bearer ${bearerToken}`,
+                                        "Content-Type": "application/json"
+                                    },
+                                    data: JSON.stringify({
+                                        "filename": $("#avatar").val()
+                                    }),
+                                    success: function(response) {
+                                        if (response.success) {
+                                            console.log("File deleted successfully:", response.message);
+                                            $("#avatar").val("");
+                                            showSuccessNotification('success', 'File deleted successfully');
+                                        } else {
+                                            console.error("Error deleting file:", response.message);
+                                            showErrorNotification('error', "Failed to delete the file. " + response.message);
+                                        }
+                                    },
+                                    error: function(xhr, status, error) {
+                                        console.error("AJAX error:", status, error);
+                                        alert("An error occurred while deleting the file.");
+                                    }
+                                });
                             });
                         }
                     };
