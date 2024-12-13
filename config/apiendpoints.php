@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'gateway' => env('GATEWAY_API_URL', 'http://apidev.duluin.com/api'),
+    'gateway' => env('GATEWAY_API_URL', 'https://apidev.duluin.com/api'),
 
 ];

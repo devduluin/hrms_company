@@ -1,19 +1,19 @@
 
 <div class="grid grid-cols-12 gap-x-6 gap-y-10">
     <div class="col-span-12 flex flex-col gap-y-12 2xl:col-span-12">
-        <div>
-            <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center" style="justify-content: space-between;">
+         
+            <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center mb-3" style="justify-content: space-between;">
                 <div class="text-base font-medium 2xl:group-[.mode--light]:text-white">
                     Attendance Statistics
                 </div>
                 <div class="">
                     <a href="{{ url('dashboard/hrms/graph') }}" data-tw-merge=""
                         class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 w-18">
-                    More
+                    Show More
                     <i data-tw-merge="" data-lucide="chevron-right" class=" h-4 w-4 stroke-[1.3]"></i></a>
                 </div>
             </div>
-            <div class="box box--stacked mt-3.5">
+            <div class="box box--stacked mt-3.5 mb-5">
                 <div class="box box--stacked p-5">
                     <div class="mb-1 mt-2">
                         <div class="mb-1 mt-2">
@@ -34,7 +34,7 @@
                     </div>
                 </div>  
             </div>
-            <div class="mt-6">
+            {{-- <div class="mt-6">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                     <x-chart.donut 
                         id="genderChart"
@@ -43,7 +43,7 @@
                         itemData="gender"
                     />
                 
-                    <x-chart.donut 
+                     <x-chart.donut 
                         id="genderChart"
                         label="Staff per Department"
                         apiUrl="http://apidev.duluin.com/api/v1/employees/employee/report/department-chart?company_id=c8f745e0-aa6e-458b-bb70-4dda3e2accea"
@@ -55,12 +55,22 @@
                         label="Expense Claim Amount"
                         apiUrl="https://apidev.duluin.com/api/v1/payroll/expense_claim/report/chart?company_id=c8f745e0-aa6e-458b-bb70-4dda3e2accea"
                         itemData="status"
-                    />
+                    /> 
                 </div>
-            </div>
-            <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center mt-4">
-                <div class="mt-5 ml-2 text-lg font-medium 2xl:group-[.mode--light]:text-white">
+            </div>--}}
+            <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center mt-5 mb-3">
+                <div class="mt-5 ml-2 text-lg text-base font-medium 2xl:group-[.mode--light]:text-white">
                     Main Quick Features
+                    <div class="text-sm font-medium pt-2 mr-5">
+                    Here, you can swiftly manage your tasks with just a few clicks. Whether you need to manage employees. Dive in and streamline your workday!
+                    </div>
+                </div>
+                <div class="mt-5 flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
+                    <a a onClick="redirectTo($(this))" href="javascript:void(0);" data-title="Duluin HRMS Documentation" data-href="https://docs.hrms.duluin.com" data-target="_blank"
+                        class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md w-52">
+                        <i data-tw-merge="" data-lucide="book-open" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Read Documentation
+                    </a>
+                    
                 </div>
             </div>
             <div class="box box--stacked p-4 mt-5 mb-5">
@@ -128,16 +138,16 @@
                     </a>
                 </div>
             </div>
-        </div>
+         
         <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center mt-5 mb-3">
             <div class="mt-5 ml-2 text-lg text-base font-medium 2xl:group-[.mode--light]:text-white">
                 Other Quick Action
-                <div class="text-sm font-medium pt-2">
-                    Easily add new items, tasks, or details with just a few clicks. With each addition, or details with just a few clicks. With each addition, you're enhancing your experience and creating a more tailored environment that suits your needs
+                <div class="text-sm font-medium pt-2 mr-5">
+                Here, you can swiftly manage your tasks with just a few clicks. Whether you need to manage employees. Dive in and streamline your workday!
                 </div>
             </div>
             <div class="mt-5 flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
-                <a a onClick="redirectTo($(this))" href="javascript:void(0);" data-title="Duluin HRMS Documentation" data-href="https://doc.hrms.duluin.com" data-target="_blank"
+                <a a onClick="redirectTo($(this))" href="javascript:void(0);" data-title="Duluin HRMS Documentation" data-href="https://docs.hrms.duluin.com" data-target="_blank"
                     class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md w-52">
                     <i data-tw-merge="" data-lucide="book-open" class="mr-3 h-4 w-4 stroke-[1.3]"></i> Read Documentation
                 </a>

@@ -410,13 +410,14 @@
                                 data: JSON.stringify(data),
                                 dataType: 'json',
                                 success: function (response) {
-                                    Swal.fire({
-                                        title: 'Success',
-                                        icon: "success"
-                                    });
-                                    setTimeout(() => {
-                                        window.location = "{{ url('dashboard/hrms/leave/application') }}";
-                                    }, 500);
+                                    if (response.success == true) {
+                                        showSuccessNotification(response.message, "The operation was completed successfully.");
+                                        setTimeout(() => {
+                                            window.location= "{{ url('dashboard/hrms/leave/application') }}";
+                                        }, 800);
+                                    } else {
+                                        showErrorNotification('error', response.message);
+                                    }
                                 },
                             });
                             
