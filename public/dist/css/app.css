@@ -9686,7 +9686,7 @@
       .group-\[\.side-menu--collapsed\.side-menu--on-hover\]\:xl\:before\:bg-white:before {
       content: var(--tw-content);
       --tw-bg-opacity: 1;
-      background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+       
     }
     .group.side-menu--collapsed.side-menu--on-hover
       .before\:group-\[\.side-menu--collapsed\.side-menu--on-hover\]\:xl\:shadow-\[6px_0_12px_-4px_\#0000000f\]:before {
