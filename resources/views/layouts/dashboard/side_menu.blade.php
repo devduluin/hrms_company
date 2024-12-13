@@ -29,7 +29,7 @@
             <!-- </li> -->
             
             <li>
-                <a href="{{ url('/dashboard/hrms/employee') }}" class="side-menu__link ">
+                <a href="{{ url('/dashboard/hrms/employee') }}" class="side-menu__link">
                     <i data-tw-merge="" data-lucide="users" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
                     <div class="side-menu__link__title">Employee</div>
                 </a>
@@ -128,3 +128,24 @@
     </div>
 </div>
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const menuLinks = document.querySelectorAll(".side-menu__link");
+    const currentPath = window.location.pathname;
+
+    menuLinks.forEach((link) => {
+        const linkPath = new URL(link.href).pathname;
+         
+        if (link.getAttribute("href") === "#") {
+            return;
+        }
+        // Check if the link path matches
+        if (linkPath === currentPath) {
+            link.classList.add("side-menu__link--active");
+        } else {
+            link.classList.remove("side-menu__link--active");
+        }
+    });
+});
+
+</script>
