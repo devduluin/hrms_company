@@ -16,6 +16,8 @@
     'customButton' => 'false',
     'customButtonText' => '',
     'customButtonFunction' => '',
+    'showFooter' => false,
+    'setTotal',
 ])
 
 <div class="relative overflow-x-auto sm:rounded-lg">
@@ -28,6 +30,13 @@
                 {{ $thead }}
             </tr>
         </thead>
+        @if (isset($showFooter) && $showFooter && isset($setTotal) && $setTotal)
+        <tfoot class="border-b-4">
+            <tr id="tfoot-row">
+                <!-- Your footer content here -->
+            </tr>
+        </tfoot>
+        @endif
     </table>
 </div>
 @include('vendor-common.datatables')
@@ -104,6 +113,7 @@
         if ({{ $id }}) {
             let {{ $id }}Columns = $({{ $id }}).find('thead tr th');
             let {{ $id }}TableColumns = [];
+            $totalAmount = 0;
             const appToken = localStorage.getItem('app_token');
 
             $.each({{ $id }}Columns, function(idx, item) {
@@ -211,6 +221,7 @@
                     if (response.message === "Data not found") {
                         return [];
                     } else {
+                        console.log(response.data);
                         return response.data;
                     }
                 },
@@ -228,6 +239,11 @@
 
 
                     }
+                // $totalAmount = response.responseJSON.data.length;
+                    // console.log("ini response : ",response.responseJSON.data.length);
+                    // $('#totalAmount').html(
+                    //     response.responseJSON.data.length
+                    // );
                 }
             }
 
@@ -268,6 +284,30 @@
                         window['{{ $func }}'](e, $(this));
                     });
                 @endforeach
+            @endif
+
+            @if ($showFooter && isset($setTotal))
+                let totalColumns = {{ $id }}Columns.length;
+
+                // Create an empty row for the tfoot
+                const footerRow = $('#tfoot-row');
+
+                // Add the same number of <td> as there are columns in the header
+                for (let i = 0; i < totalColumns; i++) {
+                    const cell = $('<td>').addClass('border-b-4');
+                    footerRow.append(cell);
+                }
+
+                // Add the "halo" content to the last cell in the tfoot row
+                // You can also adjust which cell to place the "halo" based on your needs
+                // const lastCell = footerRow.find('td:last');
+                // lastCell.html('<div>halo</div>');
+
+
+                
+                const setTotal = @json($setTotal);
+                const cell = footerRow.find('td').eq(setTotal); // Index is 0-based, so 2 = 3rd column
+                cell.html('<div id="totalAmount">3</div>');
             @endif
         }
     </script>

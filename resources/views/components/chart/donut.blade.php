@@ -34,8 +34,8 @@
         ></canvas>
     </div>
 </div>
-@push('js')
+@pushOnce('js')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="{{ asset('dist/js/components/donut-chart.js') }}"></script>
-@endpush
+@endPushOnce

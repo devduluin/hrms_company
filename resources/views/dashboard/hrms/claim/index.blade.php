@@ -417,7 +417,6 @@
             const currentDate = new Date();
             const lastWeekDate = new Date();
             const formattedToday = currentDate.toISOString().split("T")[0];
-            const formattedLastWeek = lastWeekDate.toISOString().split("T")[0];            
 
             //filter data berdasarkan tanggal yang dipilih
             switch (value) {
@@ -429,6 +428,7 @@
                 case "weekly":
                     filterData = "weekly=weekly";
                     lastWeekDate.setDate(currentDate.getDate() - 7);
+                    const formattedLastWeek = lastWeekDate.toISOString().split("T")[0];            
                     date = `${formattedLastWeek}+-+${formattedToday}`;
                     break;
                 case "monthly":
