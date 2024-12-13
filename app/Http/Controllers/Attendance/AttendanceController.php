@@ -31,7 +31,7 @@ class AttendanceController extends Controller
         $data['company_id'] = session()->get('company_id');
         $data['apiUrl'] = $this->apiGatewayUrl . '/v1/attendance/attendance';
         $data['apiUrlEmployee'] = $this->apiGatewayUrl . '/v1/employees/employee';
-        $data['apiUrlLeaveType'] = $this->apiGatewayUrl . "/v1/companies/leave-type/datatable";
+        $data['apiUrlLeaveType'] = $this->apiGatewayUrl . "/v1/attendance/leave-type/datatable";
         $data['apiUrlShiftEmployee'] = $this->apiGatewayUrl . "/v1/attendance/shift-assignment/employee_id";
 
         $data['apiAttendance'] = $this->apiGatewayUrl . '/v1/attendance/attendance/operator/store';
@@ -48,7 +48,7 @@ class AttendanceController extends Controller
         $data['apiUrl'] = $this->apiGatewayUrl . '/v1/attendance/attendance';
         $data['apiEmployeeUrl'] = $this->apiGatewayUrl . '/v1/employees/employee/all';
         $data['apiUrlEmployee'] = $this->apiGatewayUrl . '/v1/employees/employee';
-        $data['apiUrlLeaveType'] = $this->apiGatewayUrl . "/v1/companies/leave-type/datatable";
+        $data['apiUrlLeaveType'] = $this->apiGatewayUrl . "/v1/attendance/leave-type/datatable";
         $data['apiUrlShiftEmployee'] = $this->apiGatewayUrl . "/v1/attendance/shift-assignment/employee_id";
 
         $data['apiAttendance'] = $this->apiGatewayUrl . '/v1/attendance/attendance/operator/store';

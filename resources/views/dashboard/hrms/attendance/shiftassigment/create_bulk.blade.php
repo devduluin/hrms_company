@@ -168,7 +168,7 @@
                                     <div class="grid grid-cols-1 md:grid-cols-1 xl:grid-cols-1 gap-5">
                                         <div class="table gap-y-2 p-5 sm:flex-row sm:items-center">
                                             <div>
-                                                <x-datatable id="employeeTable" dtcomponent="true" :url="$apiUrlEmployee . '/datatables'" method="POST" class="display"
+                                                <x-datatable id="employeeTable" dtcomponent="true" :url="$apiUrlEmployee . '/datatables'" method="POST" class="display" search="true"
                                                      
                                                      :filter="[
                                                         'designation_id' => '#designation_id',
