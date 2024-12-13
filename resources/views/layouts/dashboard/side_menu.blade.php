@@ -39,7 +39,7 @@
             
             <li>
                 <a href="{{ url('/dashboard/hrms/claim') }}" class="side-menu__link ">
-                    <i data-tw-merge="" data-lucide="refresh-ccw-dot" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
+                    <i data-tw-merge="" data-lucide="wallet-cards" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
                     <div class="side-menu__link__title">Expense Claim</div>
                 </a>
                 <!-- BEGIN: Second Child -->

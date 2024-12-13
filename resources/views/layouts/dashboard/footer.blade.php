@@ -36,6 +36,7 @@
     <script src="{{ asset('dist/js/vendors/tailwind-merge.js') }}"></script>
     <script src="{{ asset('dist/js/vendors/lucide.js') }}"></script>
     <script src="{{ asset('dist/js/vendors/dayjs.js') }}"></script>
+    <script src="{{ asset('dist/js/vendors/tab.js') }}"></script>
     <script src="{{ asset('dist/js/vendors/tiny-slider.js') }}"></script>
     <script src="{{ asset('dist/js/vendors/popper.js') }}"></script>
     <script src="{{ asset('dist/js/vendors/dropdown.js') }}"></script>
