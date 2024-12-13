@@ -69,7 +69,7 @@
                     <i data-tw-merge="" data-lucide="coins" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
                     <div class="side-menu__link__title">Salary Payout</div>
                 </a>
-                <a href="https://partner.duluin.com" target="_blank" class="side-menu__link ">
+                <a onClick="redirectTo($(this))" href="javascript:void(0);" data-title="Duluin Gajian Partner" data-href="https://partner.duluin.com" data-target="_blank" class="side-menu__link ">
                     <i data-tw-merge="" data-lucide="percent-square" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
                     <div class="side-menu__link__title">Duluin Gajian</div>
                 </a>
@@ -127,3 +127,22 @@
         </ul>
     </div>
 </div>
+
+<!-- END: Modal Content -->
+@push('js')
+<script>
+let modal = document.querySelector("#modal-redirect");
+let modalInstance = tailwind.Modal.getOrCreateInstance(modal);
+
+ function redirectTo(data) {
+    
+    modalInstance.show(onShow(data));
+};
+
+function onShow(data) {
+    $('#href-title-span').after('<i></i>').html(data.data('title'));
+    $('#href-title').attr('href', data.data('href'));
+    $('#href-title').attr('target', data.data('target'));
+};
+</script>
+@endpush
