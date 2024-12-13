@@ -52,20 +52,20 @@
                                                 </x-form.select>
                                             </div>
                                             <div class="mt-3">
-                                                <x-form.select id="month" name="month" data-tw-merge="" data-method="" style="width: 111%;" label="Select Slip Month">
+                                                <x-form.select id="month" name="filter_month" data-tw-merge="" data-method="" style="width: 111%;" label="Select Slip Month">
                                                     <option value="">Select Month</option>
-                                                    <option value="january"> january </option>
-                                                    <option value="february"> february </option>
-                                                    <option value="march"> march </option>
-                                                    <option value="april"> april </option>
-                                                    <option value="mei"> mei </option>
-                                                    <option value="approved"> june </option>
-                                                    <option value="approved"> july </option>
-                                                    <option value="approved"> august </option>
-                                                    <option value="approved"> september </option>
-                                                    <option value="approved"> oktober </option>
-                                                    <option value="approved"> november </option>
-                                                    <option value="approved"> desember </option>
+                                                    <option value="01"> January </option>
+                                                    <option value="02"> February </option>
+                                                    <option value="03"> March </option>
+                                                    <option value="04"> April </option>
+                                                    <option value="05"> Mei </option>
+                                                    <option value="06"> June </option>
+                                                    <option value="07"> July </option>
+                                                    <option value="08"> August </option>
+                                                    <option value="08"> September </option>
+                                                    <option value="10"> Oktober </option>
+                                                    <option value="11"> November </option>
+                                                    <option value="12"> Desember </option>
                                                 </x-form.select>
                                             </div>
                                             <div class="mt-4 flex items-center">
@@ -89,11 +89,14 @@
                             <div class="box box--stacked flex flex-col">
                                 <div class="table gap-y-2 p-5 sm:flex-row sm:items-center">
                                     <div>
-                                        <x-datatable id="payslipTable" :url="$apiUrl . '/payroll_entry/datatables'" method="POST" class="display"
+                                        <x-datatable id="payslipTable" 
+                                        :url="$apiUrl . '/payroll_entry/datatables'" 
+                                        method="POST" class="display"
                                             :order="[[3, 'DESC']]" :filter="[
                                                 'employee_id' => '#employee_id',
                                                 'status' => '#status',
-                                            ]">
+                                            ]" :showFooter="true" 
+                                            >
                                             <x-slot:thead>
                                                 <th data-value="id" data-render="getId" orderable="true">#</th>
                                                 <th data-value="employee_id" data-render="getEmployeeId">Employee ID</th>
@@ -180,6 +183,7 @@
         function resetForm() {
             $(`#employee_id`)[0].tomselect.clear();
             $(`#status`)[0].tomselect.clear();
+            $(`#filter_month`)[0].tomselect.clear();
         }
 
 
@@ -196,6 +200,10 @@
                         $(`#status`)[0].tomselect.setValue(paramValue);
                     }
 
+                    if(paramName === "filter_month"){
+                        $(`#filter_month`)[0].tomselect.setValue(paramValue);
+                    }
+
                     if ($selectElement.length > 0) {
                         $selectElement.val(paramValue).change();
                         if (paramValue) activeFilterCount++;
@@ -206,6 +214,7 @@
             // Call the function for each filter
             handleFilter("employee_id", "employee_id");
             handleFilter("status", "status");
+            handleFilter("filter_month", "filter_month");
 
             const $countFilter = $("#countFilter");
             if ($countFilter.length > 0) {
