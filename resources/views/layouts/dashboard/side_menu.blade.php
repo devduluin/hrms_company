@@ -128,21 +128,3 @@
     </div>
 </div>
 
-<!-- END: Modal Content -->
-@push('js')
-<script>
-let modal = document.querySelector("#modal-redirect");
-let modalInstance = tailwind.Modal.getOrCreateInstance(modal);
-
- function redirectTo(data) {
-    
-    modalInstance.show(onShow(data));
-};
-
-function onShow(data) {
-    $('#href-title-span').after('<i></i>').html(data.data('title'));
-    $('#href-title').attr('href', data.data('href'));
-    $('#href-title').attr('target', data.data('target'));
-};
-</script>
-@endpush

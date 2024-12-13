@@ -5,7 +5,7 @@
                 <h2 id="titleForm" class="mr-auto text-base font-medium">
                     Redirect to external url
                 </h2>
-                <a class="absolute right-0 top-0 mr-3 mt-3" data-tw-dismiss="modal" href="#">
+                <a class="absolute right-0 top-0 mr-3 mt-3" data-tw-dismiss="modal" href="javascript:void(0);">
                     <i data-tw-merge data-lucide="x" class="stroke-[1] w-5 h-5 h-8 w-8 text-slate-400 h-8 w-8 text-slate-400"></i>
                 </a>
                 
@@ -26,7 +26,7 @@
             </div>
             <div class="px-5 py-3 text-right border-t border-slate-200/60 dark:border-darkmode-400">
                 <a id="href-title" href="#" target="#" data-tw-merge class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-blue-theme border-blue-theme text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200">
-                <span id="href-title-span"></span> <i data-tw-merge="" data-lucide="chevron-right" class="ml-3 h-4 w-4 stroke-[1.3]"></i></a>
+                <span id="href-title-span"></span><i data-tw-merge="" data-lucide="chevron-right" class="ml-1 h-4 w-4 stroke-[1.3]"></i></a>
             </div>
             </div>
 
@@ -57,7 +57,23 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="{{ asset('dist/js/vendors/toastify.js') }}"></script>
    
- 
+    @push('js')
+    <script>
+    let modal = document.querySelector("#modal-redirect");
+    let modalInstance = tailwind.Modal.getOrCreateInstance(modal);
+
+    function redirectTo(data) {
+        
+        modalInstance.show(onShow(data));
+    };
+
+    function onShow(data) {
+        $('#href-title-span').after('<i></i>').html(data.data('title'));
+        $('#href-title').attr('href', data.data('href'));
+        $('#href-title').attr('target', data.data('target'));
+    };
+    </script>
+    @endpush
     <script>
         initializeDropdown();
     </script>
