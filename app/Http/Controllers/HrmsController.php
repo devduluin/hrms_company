@@ -18,6 +18,9 @@ class HrmsController extends Controller
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'HRMS Index';
         $data['apiChartAttendance'] = $this->apiGatewayUrl . "/v1/attendance/attendance/report/chart?company_id=" . $request->session()->get('company_id');
+        $data['apiGenderChartUrl'] = $this->apiGatewayUrl . '/v1/employees/employee/report/gender-chart?company_id='. $request->session()->get('company_id');
+        $data['apiDepartmentChartrUrl'] = $this->apiGatewayUrl . '/v1/employees/employee/report/department-chart?company_id='. $request->session()->get('company_id');
+        $data['apiClaimAmountUrl'] = $this->apiGatewayUrl . '/v1/payroll/expense_claim/report/chart?company_id='. $request->session()->get('company_id');
         
         return view('dashboard.hrms.index', $data);
     }
@@ -33,10 +36,11 @@ class HrmsController extends Controller
         return view('dashboard.hrms.setup_initialize', $data);
     }
 
-    public function elm_hrms()
+    public function elm_hrms(Request $request)
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'HRMS Dashboard';
+        $data['apiEmployeeUrl'] = $this->apiGatewayUrl . '/v1/employees/employee/report'. $request->session()->get('company_id');
         
         return view('dashboard.hrms.elm_hrms', $data);
     }
