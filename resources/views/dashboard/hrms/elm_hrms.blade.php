@@ -3,7 +3,7 @@
     <div class="col-span-12 flex flex-col gap-y-12 2xl:col-span-12">
          
             <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center mb-3" style="justify-content: space-between;">
-                <div class="text-base font-medium 2xl:group-[.mode--light]:text-white">
+                <div class="text-lg text-base font-medium 2xl:group-[.mode--light]:text-white">
                     Attendance Statistics
                 </div>
                 <ul data-tw-merge="" role="tablist" class=" p-0.5 border dark:border-darkmode-400 flex box w-auto rounded-[0.6rem] border-slate-200 bg-white group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] md:ml-auto">
@@ -24,7 +24,7 @@
                     <i data-tw-merge="" data-lucide="chevron-right" class=" h-4 w-4 stroke-[1.3]"></i></a>
                 </div>
             </div>
-            <div class="box box--stacked mt-3.5 mb-5">
+            <div class="box box--stacked mt-3.5 mb-2">
                 <div class="box box--stacked p-5">
                     <div class="mb-1 mt-2">
                         <div class="mb-1 mt-2">
@@ -45,7 +45,7 @@
                     </div>
                 </div>  
             </div>
-            {{-- <div class="mt-6">
+            <div class="mt-6">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                     <x-chart.donut 
                         id="genderChart"
@@ -56,7 +56,7 @@
                 
                      <x-chart.donut 
                         id="genderChart"
-                        label="Staff per Department"
+                        label="Employees Department"
                         apiUrl="{{ $apiDepartmentChartrUrl }}"
                         itemData="department_id"
                     />
@@ -68,7 +68,7 @@
                         itemData="status"
                     /> 
                 </div>
-            </div>--}}
+            </div>
             <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center mt-5 mb-3">
                 <div class="mt-5 ml-2 text-lg text-base font-medium 2xl:group-[.mode--light]:text-white">
                     Main Quick Features
