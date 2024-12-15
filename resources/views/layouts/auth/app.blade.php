@@ -9,6 +9,9 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="">
+    <link rel="icon" href="{{ asset('img/logo/duluin.png') }}" sizes="32x32" type="image/png">
+    <link rel="icon" href="{{ asset('img/logo/duluin.png') }}" sizes="16x16" type="image/png">
+    
     <title>{{ $data['title'] }} - {{ $data['page_title'] }}</title>
     <!-- BEGIN: CSS Assets-->
     <link rel="stylesheet" href="{{ asset('dist/css/vendors/tippy.css') }}">

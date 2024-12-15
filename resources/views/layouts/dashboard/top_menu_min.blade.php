@@ -6,12 +6,8 @@
             href="#">
             <div
                 class="transition-transform ease-in-out group-[.side-menu--collapsed.side-menu--on-hover]:xl:-rotate-180">
-                <div class="relative h-[18px] w-[18px] -rotate-45 [&_div]:bg-white">
-                    <div class="absolute inset-y-0 left-0 my-auto h-[75%] w-[21%] rounded-full opacity-50">
-                    </div>
-                    <div class="absolute inset-0 m-auto h-[120%] w-[21%] rounded-full"></div>
-                    <div class="absolute inset-y-0 right-0 my-auto h-[75%] w-[21%] rounded-full opacity-50">
-                    </div>
+                <div class="relative h-[18px] w-[18px]   [&_div]:bg-white">
+                    <img src="{{ asset('img/logo/duluin.png') }}" />
                 </div>
             </div>
             <div
