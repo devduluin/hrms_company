@@ -96,6 +96,7 @@
                                                 'employee_id' => '#employee_id',
                                                 'status' => '#status',
                                             ]" :showFooter="true" 
+                                            :setTotal="4"
                                             >
                                             <x-slot:thead>
                                                 <th data-value="id" data-render="getId" orderable="true">#</th>
