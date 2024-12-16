@@ -444,25 +444,42 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7T5886HCdj0jMOWhW_aliRYP
                     }).then((result) => {
                     if (result.isConfirmed) {
                         //alert(val);
-                        var param = {
-                            url: "{{ $apiUrlApproval }}",
-                            method: "PATCH",
-                            data: JSON.stringify({ "status": val })
-                        }
-
-                        transAjax(param).then((result) => {
-                            const data = result.data
-                            Swal.fire({
-                                title: val,
-                                icon: "success"
+                        const data = {status : val };
+                        try {
+                            $.ajax({
+                                url: "{{ $apiUrlApproval }}",
+                                type: "PATCH",
+                                contentType: 'application/json',
+                                headers: {
+                                    'Authorization': `Bearer ${appToken}`,
+                                    'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
+                                },
+                                data: JSON.stringify(data),
+                                dataType: 'json',
+                                success: function(response) {  
+                                    if (response.success == true) {
+                                        showSuccessNotification(response.message, "The operation was completed successfully.");
+                                        setTimeout(() => {
+                                            window.location= "{{ url('dashboard/hrms/attendance/attendance') }}";
+                                        }, 800);
+                                    } else {
+                                        showErrorNotification('error', response.message);
+                                    }
+                                }
                             });
-                            window.location= "{{ url('dashboard/hrms/attendance/attendance') }}";
-                        });
+
+                             
+                        } catch (xhr) {
+                            showErrorNotification('error', xhr.responseText);
+                        }
+                         
                     }else{
                         
                     }
                 });
         }
+
+         
     </script>
 @endpush
 @include('vendor-common.sweetalert')

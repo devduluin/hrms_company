@@ -10,6 +10,9 @@
     <meta name="keywords" content="">
     <meta name="author" content="">
     <title>{{ $title }} - {{ $page_title }}</title>
+
+    <link rel="icon" href="{{ asset('img/logo/duluin.png') }}" sizes="32x32" type="image/png">
+    <link rel="icon" href="{{ asset('img/logo/duluin.png') }}" sizes="16x16" type="image/png">
     <!-- BEGIN: CSS Assets-->
 
     <link rel="stylesheet" href="{{ asset('dist/css/vendors/litepicker.css') }}">

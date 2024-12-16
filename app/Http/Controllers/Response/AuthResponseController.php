@@ -44,7 +44,7 @@ class AuthResponseController extends Controller
                     'name' => $responseBody['result']['name'],
                     'account' => $responseBody['result']['account'],
                     'company_id' => $responseBody['result']['secondary_id'] ?? null,
-                    'redirect' => url('dashboard/hrms')
+                    'redirect' => url('dashboard/hrms?initialize=success')
                 ], 200);
             }else{
                 return $this->responseFactory->make(

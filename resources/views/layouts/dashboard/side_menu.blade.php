@@ -4,7 +4,7 @@
             <i data-tw-merge="" data-lucide="x" class="stroke-[1] h-8 w-8 text-white"></i>
         </a>
     </div>
-    <div class="scrollable-ref w-full h-full z-20 px-5 mt-3.5 overflow-y-auto overflow-x-hidden bg-white pb-10 [-webkit-mask-image:-webkit-linear-gradient(top,rgba(10,0,0,0),black_30px)] [&:-webkit-scrollbar]:w-0 [&:-webkit-scrollbar]:bg-transparent [&_.simplebar-content]:p-0 [&_.simplebar-track.simplebar-vertical]:w-[10px] [&_.simplebar-track.simplebar-vertical]:mr-0.5 [&_.simplebar-track.simplebar-vertical_.simplebar-scrollbar]:before:bg-slate-400/30">
+    <div class="scrollable-ref w-full h-full z-20 px-5 mt-3.5 overflow-y-auto overflow-x-hidden bg-white/[0.95] pb-10 [-webkit-mask-image:-webkit-linear-gradient(top,rgba(10,0,0,0),black_30px)] [&:-webkit-scrollbar]:w-0 [&:-webkit-scrollbar]:bg-transparent [&_.simplebar-content]:p-0 [&_.simplebar-track.simplebar-vertical]:w-[10px] [&_.simplebar-track.simplebar-vertical]:mr-0.5 [&_.simplebar-track.simplebar-vertical_.simplebar-scrollbar]:before:bg-slate-400/30">
         <ul class="scrollable">
             <li class="mt-4">
                 <a href="{{ url('/dashboard/hrms/') }}" class="side-menu__link ">
@@ -29,7 +29,7 @@
             <!-- </li> -->
             
             <li>
-                <a href="{{ url('/dashboard/hrms/employee') }}" class="side-menu__link ">
+                <a href="{{ url('/dashboard/hrms/employee') }}" class="side-menu__link">
                     <i data-tw-merge="" data-lucide="users" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
                     <div class="side-menu__link__title">Employee</div>
                 </a>
@@ -39,7 +39,7 @@
             
             <li>
                 <a href="{{ url('/dashboard/hrms/claim') }}" class="side-menu__link ">
-                    <i data-tw-merge="" data-lucide="refresh-ccw-dot" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
+                    <i data-tw-merge="" data-lucide="wallet-cards" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
                     <div class="side-menu__link__title">Expense Claim</div>
                 </a>
                 <!-- BEGIN: Second Child -->
@@ -66,10 +66,10 @@
             </li>
             <li>
                 <a href="{{ url('/dashboard/hrms/payout') }}" class="side-menu__link ">
-                    <i data-tw-merge="" data-lucide="coins" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
+                    <i data-tw-merge="" data-lucide="circle-dollar-sign" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
                     <div class="side-menu__link__title">Salary Payout</div>
                 </a>
-                <a href="https://partner.duluin.com" target="_blank" class="side-menu__link ">
+                <a onClick="redirectTo($(this))" href="javascript:void(0);" data-title="Duluin Gajian Partner" data-href="https://partner.duluin.com" data-target="_blank" class="side-menu__link ">
                     <i data-tw-merge="" data-lucide="percent-square" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
                     <div class="side-menu__link__title">Duluin Gajian</div>
                 </a>
@@ -127,3 +127,30 @@
         </ul>
     </div>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const menuLinks = document.querySelectorAll(".side-menu__link");
+    const currentPath = window.location.pathname;
+
+    menuLinks.forEach((link) => {
+        const linkHref = link.getAttribute("href");
+
+        if (linkHref === "#") {
+            return;
+        }
+
+        const linkPath = new URL(link.href).pathname;
+
+        // Exact match for root paths
+        if (currentPath === linkPath) {
+            link.classList.add("side-menu__link--active");
+        } else if (currentPath.startsWith(linkPath) && linkPath !== '/dashboard/hrms') {
+            link.classList.add("side-menu__link--active");
+        } else {
+            link.classList.remove("side-menu__link--active");
+        }
+    });
+});
+
+</script>
