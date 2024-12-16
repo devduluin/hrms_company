@@ -38,9 +38,10 @@ Route::get('lang/{locale}', function ($locale) {
 Route::controller(AuthController::class)->group(function () {
     Route::prefix('/')->group(function () {
         Route::get('/', function (Request $request) {
-            return redirect()->route('signin');
+            return redirect()->route('index');
         })->name('index');
         Route::middleware('isActivated')->group(function () {
+            Route::get('/', 'index')->name('index');
             Route::get('/signin', 'index')->name('signin');
             Route::get('/signup', 'index')->name('signup');
             Route::get('/signup/activate_account', 'index')->name('activate_account');

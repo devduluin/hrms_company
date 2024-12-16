@@ -24,8 +24,8 @@
                         <img data-placement="top" title="Julia Roberts" src="" alt="Tailwise - Admin Dashboard Template" class="tooltip cursor-pointer rounded-full border-[3px] border-white/50">
                     </div>
                 </div> -->
-                <div class="text-base text-white/70 xl:ml-2 2xl:ml-3">
-                    Over 7k+ strong and growing! Your journey begins here.
+                <div class="text-base text-white/70 xl:ml-0 2xl:ml-0">
+                    Powered by duluin.com
                 </div>
             </div>
         </div>
