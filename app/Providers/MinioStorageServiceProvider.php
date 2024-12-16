@@ -29,23 +29,24 @@ class MinioStorageServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Storage::extend('minio', function ($app, $config) {
-		$client = new S3Client([
-			'credentials' => [
-				'key'    => $config["key"],
-				'secret' => $config["secret"]
-			],
-			'region'      => $config["region"],
-			'version'     => "latest",
-			'bucket_endpoint' => false,
-			'use_path_style_endpoint' => true,
-			'endpoint'    => $config["endpoint"],
-		]);
-		
-		$visibility = new PortableVisibilityConverter(
-			$config['visibility'] ?? 'public', // Default to 'public' if not set
-			$config['directory_visibility'] ?? 'public'
-		);
+        $s3 = $this->app->environment('production') ? 'minio' : 'minio_dev';
+        Storage::extend($s3, function ($app, $config) {
+            $client = new S3Client([
+                'credentials' => [
+                    'key'    => $config["key"],
+                    'secret' => $config["secret"]
+                ],
+                'region'      => $config["region"],
+                'version'     => "latest",
+                'bucket_endpoint' => false,
+                'use_path_style_endpoint' => true,
+                'endpoint'    => $config["endpoint"],
+            ]);
+
+            $visibility = new PortableVisibilityConverter(
+                $config['visibility'] ?? 'public', // Default to 'public' if not set
+                $config['directory_visibility'] ?? 'public'
+            );
 
             return new Filesystem(new AwsS3V3Adapter($client, $config["bucket"], '', $visibility));
         });
