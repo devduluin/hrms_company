@@ -111,12 +111,12 @@
 
                 const route = routes[initialPath];
 
-                if (route) {
-                    // Default to signup if no matching route is found
-                    const defaultRoute = routes.signup;
-                    window.history.replaceState('signup', '', defaultRoute.path);
-                    await loadContent(defaultRoute.element);
-                }
+                 
+                // Default to signup if no matching route is found
+                const defaultRoute = routes.signup;
+                window.history.replaceState('signup', '', defaultRoute.path);
+                await loadContent(defaultRoute.element);
+                 
             }
 
             authContent.addEventListener('click', async function(event) {
