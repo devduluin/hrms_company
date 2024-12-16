@@ -23,7 +23,8 @@
                                             data-tw-merge="" data-lucide="upload" class="mr-2 h-4 w-4 stroke-[1.3]"></i>
                                         Import Data</a>
 
-                                    <div data-tw-merge="" data-tw-placement="bottom-end" class="dropdown relative inline-block">
+                                    <div data-tw-merge="" data-tw-placement="bottom-end"
+                                        class="dropdown relative inline-block">
                                         <button data-tw-merge="" data-tw-toggle="dropdown" aria-expanded="false"
                                             class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-slate-100 [&amp;:hover:not(:disabled)]:border-slate-100 [&amp;:hover:not(:disabled)]:dark:border-darkmode-300/80 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-300/80 shadow-md  w-full sm:w-auto"><i
                                                 data-tw-merge="" data-lucide="arrow-down-wide-narrow"
@@ -46,18 +47,21 @@
                                                 <div class="p-2">
                                                     <form method="GET" id="filterTable">
                                                         <div>
-                                                            <x-form.select style="width: 111%;" id="company_id" name="company_id" label="Company"
+                                                            <x-form.select style="width: 111%;" id="company_id"
+                                                                name="company_id" label="Company"
                                                                 url="{{ url('dashboard/hrms/designation') }}"
                                                                 apiUrl="{{ $apiCompanyUrl }}/company/datatables"
-                                                                columns='["company_name"]' :selected="$company" :keys="[
+                                                                columns='["company_name"]' :selected="$company"
+                                                                :keys="[
                                                                     'company_id' => $company,
                                                                 ]">
                                                                 <option value="">Select Company</option>
                                                             </x-form.select>
                                                         </div>
                                                         <div class="mt-3">
-                                                            <x-form.select style="width: 111%;" id="department_id" name="department_id"
-                                                                label="Department" url="{{ url('dashboard/hrms/designation') }}"
+                                                            <x-form.select style="width: 111%;" id="department_id"
+                                                                name="department_id" label="Department"
+                                                                url="{{ url('dashboard/hrms/designation') }}"
                                                                 apiUrl="{{ $apiCompanyUrl }}/department/datatables"
                                                                 columns='["department_name"]' :keys="[
                                                                     'company_id' => $company,
@@ -66,8 +70,8 @@
                                                             </x-form.select>
                                                         </div>
                                                         <div class="mt-3">
-                                                            <x-form.select style="width: 111%;" id="designation_id" name="designation_id"
-                                                                label="Designation"
+                                                            <x-form.select style="width: 111%;" id="designation_id"
+                                                                name="designation_id" label="Designation"
                                                                 url="{{ url('dashboard/hrms/designation') }}"
                                                                 apiUrl="{{ $apiCompanyUrl }}/designation/datatables"
                                                                 columns='["designation_name"]' :keys="[
@@ -77,21 +81,24 @@
                                                             </x-form.select>
                                                         </div>
                                                         <div class="mt-3">
-                                                            <x-form.select style="width: 111%;" id="status" name="status" label="Employee Status">
+                                                            <x-form.select style="width: 111%;" id="status"
+                                                                name="status" label="Employee Status">
                                                                 <option value="">Select All</option>
                                                                 <option value="active" selected>Active</option>
                                                                 <option value="inactive">Exit</option>
                                                             </x-form.select>
                                                         </div>
                                                         <div class="mt-3">
-                                                            <x-form.select style="width: 111%;" id="is_verified" name="is_verified" label="Mobile Status">
+                                                            <x-form.select style="width: 111%;" id="is_verified"
+                                                                name="is_verified" label="Mobile Status">
                                                                 <option value="">Select All</option>
                                                                 <option value="active" selected>Active</option>
                                                                 <option value="inactive">Inactive</option>
                                                             </x-form.select>
                                                         </div>
                                                         <div class="mt-3">
-                                                            <x-form.select style="width: 111%;" id="contract_status" name="contract_status" label="Contract Status">
+                                                            <x-form.select style="width: 111%;" id="contract_status"
+                                                                name="contract_status" label="Contract Status">
                                                                 <option value="">Select All</option>
                                                                 <option value="true">Less than 30 days</option>
                                                                 <option value="false">More than 30 days</option>
@@ -108,8 +115,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <x-form.button id="new_attendance" label="Add New Employee" style="primary" icon="plus"
-                                        url="{{ url('dashboard/hrms/employee/new_employee') }}"></x-button>
+                                    <x-form.button id="new_attendance" label="Add New Employee" style="primary"
+                                        icon="plus" url="{{ url('dashboard/hrms/employee/new_employee') }}"></x-button>
 
                                 </div>
                             </div>
@@ -139,19 +146,23 @@
                                     </div>
                                 </div>
                                 <div id="alert-contract" class="hidden">
-                                    <div style="background-color: rgb(252 165 165); justify-content: space-between;" class="flex items-center bg-red-300 box col-span-4 rounded-[0.6rem] border border-red-300/80 p-4 shadow-sm md:col-span-2 xl:col-span-1">
+                                    <div style="background-color: rgb(252 165 165); justify-content: space-between;"
+                                        class="flex items-center bg-red-300 box col-span-4 rounded-[0.6rem] border border-red-300/80 p-4 shadow-sm md:col-span-2 xl:col-span-1">
                                         <div id="alert-message" class="text-base text-red-500"></div>
-                                        <a href="{{ url('dashboard/hrms/employee?contract_status=true') }}" data-tw-merge=""
+                                        <a href="{{ url('dashboard/hrms/employee?contract_status=true') }}"
+                                            data-tw-merge=""
                                             class="transition border shadow-sm bg-red-500 inline-flex items-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 w-18">
-                                        More
-                                        <i data-tw-merge="" data-lucide="chevron-right" class=" h-4 w-4 stroke-[1.3]"></i></a>
+                                            More
+                                            <i data-tw-merge="" data-lucide="chevron-right"
+                                                class=" h-4 w-4 stroke-[1.3]"></i></a>
                                     </div>
                                 </div>
                                 <div class="box box--stacked flex flex-col mt-8">
                                     <div class="table gap-y-2 p-5 sm:flex-row sm:items-center">
                                         <div>
-                                            <x-datatable id="employeeTable" :url="$apiUrl . '/employee/datatables'" method="POST" class="display"
-                                                customButton="true" customButtonText="Send Verification Email"
+                                            <x-datatable id="employeeTable" :url="$apiUrl . '/employee/datatables'" method="POST"
+                                                class="display" customButton="true"
+                                                customButtonText="Send Verification Email"
                                                 customButtonFunction="sendEmailVerification()" :filter="[
                                                     'first_name' => '#name',
                                                     'designation_id' => '#designation_id',
@@ -159,15 +170,19 @@
                                                 :order="[[1, 'DESC']]">
                                                 <x-slot:thead>
                                                     <th data-value="id" data-render="getCheckBox" orderable="false">
-                                                        <input type="checkbox" class="transition-all duration-100 ease-in-out shadow-sm border-slate-200 cursor-pointer rounded focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;[type='radio']]:checked:bg-primary [&amp;[type='radio']]:checked:border-primary [&amp;[type='radio']]:checked:border-opacity-10 [&amp;[type='checkbox']]:checked:bg-primary [&amp;[type='checkbox']]:checked:border-primary [&amp;[type='checkbox']]:checked:border-opacity-10 [&amp;:disabled:not(:checked)]:bg-slate-100 [&amp;:disabled:not(:checked)]:cursor-not-allowed [&amp;:disabled:not(:checked)]:dark:bg-darkmode-800/50 [&amp;:disabled:checked]:opacity-70 [&amp;:disabled:checked]:cursor-not-allowed [&amp;:disabled:checked]:dark:bg-darkmode-800/50" id="select-all" />
+                                                        <input type="checkbox"
+                                                            class="transition-all duration-100 ease-in-out shadow-sm border-slate-200 cursor-pointer rounded focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;[type='radio']]:checked:bg-primary [&amp;[type='radio']]:checked:border-primary [&amp;[type='radio']]:checked:border-opacity-10 [&amp;[type='checkbox']]:checked:bg-primary [&amp;[type='checkbox']]:checked:border-primary [&amp;[type='checkbox']]:checked:border-opacity-10 [&amp;:disabled:not(:checked)]:bg-slate-100 [&amp;:disabled:not(:checked)]:cursor-not-allowed [&amp;:disabled:not(:checked)]:dark:bg-darkmode-800/50 [&amp;:disabled:checked]:opacity-70 [&amp;:disabled:checked]:cursor-not-allowed [&amp;:disabled:checked]:dark:bg-darkmode-800/50"
+                                                            id="select-all" />
                                                     </th>
                                                     <th data-value="id" data-render="getId" orderable="true">No.</th>
-                                                    <th data-value="employee_id" searchable="true" orderable="true">Employee
+                                                    <th data-value="employee_id" searchable="true" orderable="true">
+                                                        Employee
                                                         ID</th>
                                                     <th data-value="first_name" searchable="true" orderable="true"
                                                         searchable="true">First Name
                                                     </th>
-                                                    <th data-value="last_name" searchable="true" orderable="true">Last Name
+                                                    <th data-value="last_name" searchable="true" orderable="true">Last
+                                                        Name
                                                     </th>
                                                     <th data-value="company_id_rel" data-render="getCompany"
                                                         orderable="false">
@@ -186,11 +201,13 @@
                                                     {{-- <th data-value="branch_id_rel" data-render="getBranch" orderable="false">
                                                         Branch
                                                     </th> --}}
-                                                    <th data-value="status" data-render="getStatus" orderable="false">Status
+                                                    <th data-value="status" data-render="getStatus" orderable="false">
+                                                        Status
                                                     </th>
                                                     <th data-value="is_verified" data-render="getMobileStatus"
                                                         orderable="false">Mobile</th>
-                                                    <th data-value="id" data-render="getActionBtn" orderable="false">Action
+                                                    <th data-value="id" data-render="getActionBtn" orderable="false">
+                                                        Action
                                                     </th>
                                                 </x-slot:thead>
                                             </x-datatable>
@@ -257,7 +274,7 @@
             });
 
             const table = $('#employeeTable').DataTable();
-            table.on('xhr', function (e, settings, json) {
+            table.on('xhr', function(e, settings, json) {
                 console.log(json); // Log the fetched data
             });
 
@@ -281,15 +298,17 @@
                 // data: JSON.stringify(data),
                 dataType: 'json',
                 success: function(data) {
-                    console.log("ini data :",data.data);
+                    console.log("ini data :", data.data);
                     const dataFound = data.data;
                     if (dataFound.count > 1) {
                         document.getElementById("alert-contract").classList = "visible flex flex-col mt-8";
-                        document.getElementById("alert-message").innerHTML = `Warning : <b>${dataFound.count}</b> employees have contracts ending in less than 30 days`;
-                    } else 
-                    if (dataFound.count === 1){
+                        document.getElementById("alert-message").innerHTML =
+                            `Warning : <b>${dataFound.count}</b> employees have contracts ending in less than 30 days`;
+                    } else
+                    if (dataFound.count === 1) {
                         document.getElementById("alert-contract").classList = "visible flex flex-col mt-8";
-                        document.getElementById("alert-message").innerHTML = `Warning : <b>${dataFound.count}</b> employee have contracts ending in less than 30 days`;
+                        document.getElementById("alert-message").innerHTML =
+                            `Warning : <b>${dataFound.count}</b> employee have contracts ending in less than 30 days`;
                     }
                     // document.getElementById("success").textContent = "Verification Success";
                     // document.getElementById("success-icon").innerHTML = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' class='w-16'><path fill='green' fill-rule='evenodd' d='M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z' clip-rule='evenodd' /></svg>";
@@ -326,7 +345,7 @@
 
         // Updated getCheckBox function
         function getCheckBox(data, type, row, meta) {
-            if(!data.is_verified) {
+            if (!data.is_verified) {
                 return `<input type="checkbox" class="transition-all duration-100 ease-in-out shadow-sm border-slate-200 cursor-pointer rounded focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;[type='radio']]:checked:bg-primary [&amp;[type='radio']]:checked:border-primary [&amp;[type='radio']]:checked:border-opacity-10 [&amp;[type='checkbox']]:checked:bg-primary [&amp;[type='checkbox']]:checked:border-primary [&amp;[type='checkbox']]:checked:border-opacity-10 [&amp;:disabled:not(:checked)]:bg-slate-100 [&amp;:disabled:not(:checked)]:cursor-not-allowed [&amp;:disabled:not(:checked)]:dark:bg-darkmode-800/50 [&amp;:disabled:checked]:opacity-70 [&amp;:disabled:checked]:cursor-not-allowed [&amp;:disabled:checked]:dark:bg-darkmode-800/50" name="selected_employees[]" value='${JSON.stringify(row)}'>`;
             }
             return '-';
@@ -341,7 +360,7 @@
             if (data === 'active') {
                 return `<div class="flex items-center justify-center text-success"><div class="ml-1.5 whitespace-nowrap"><i data-tw-merge data-lucide="check" class="text-success"></i> Active</div></div>`;
             } else {
-                return `<div class="flex items-center justify-center text-danger"><div class="ml-1.5 whitespace-nowrap">Inactive</div></div>`;
+                return `<div class="flex items-center justify-center text-danger"><div class="ml-1.5 whitespace-nowrap">Exit</div></div>`;
             }
         }
 
@@ -513,8 +532,6 @@
             $(`#is_verified`)[0].tomselect.clear();
             $(`#status`)[0].tomselect.clear();
         }
-
-
     </script>
 @endpush
 @include('vendor-common.sweetalert')

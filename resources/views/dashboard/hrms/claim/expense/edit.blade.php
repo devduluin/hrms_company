@@ -36,9 +36,7 @@
                                         <x-form.select id="employee" name="employee" data-method="POST"
                                             label="Employee Name" url="{{ url('dashboard/hrms/employee/create') }}"
                                             apiUrl="{{ $apiUrlEmployee }}/datatables" detailApiUrl="{{ $apiUrlEmployee }}"
-                                            detailApiColumns="attendanceLeave.expense_approver"
-                                            columns='["first_name", "last_name"]' data-dependant="#expense_approver"
-                                            :keys="[
+                                            columns='["first_name", "last_name"]' :keys="[
                                                 'company_id' => $company,
                                             ]">
                                             <option value="">Select Employee</option>
