@@ -13,7 +13,7 @@ class AuthController extends Controller
         $data['page_title']   = 'Masuk Akun Hris';
 
         $host = $request->getHost();
-        if($host == 'hris.test'){
+        if($host == 'launch.hrms.duluin.com'){
             //dd($host);
             return view('auth.index_lunch', compact('data'));
         }else{
