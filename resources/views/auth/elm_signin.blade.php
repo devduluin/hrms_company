@@ -10,11 +10,11 @@
             </div>
             <div class="mt-10">
                 <div class="text-2xl font-medium">Sign In</div>
-                <div class="mt-2.5 text-slate-600">
+                {{-- <div class="mt-2.5 text-slate-600">
                     Don't have an account?
                     <a class="font-medium text-primary" href="#" id="signup">
                         Sign Up
-                    </a>
+                    </a> --}}
                 </div>
                 <form id="login-form" method="post" action="{{ url('auth/signin') }}" autocomplete="off" novalidate class="login-form"> 
                 @csrf

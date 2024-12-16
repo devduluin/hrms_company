@@ -111,15 +111,12 @@
 
                 const route = routes[initialPath];
 
-                if (route) {
-                    // Load the content for the matched route
-                    await loadContent(route.element);
-                } else {
-                    // Default to signin if no matching route is found
-                    const defaultRoute = routes.signin;
-                    window.history.replaceState('signin', '', defaultRoute.path);
-                    await loadContent(defaultRoute.element);
-                }
+                 
+                // Default to signup if no matching route is found
+                const defaultRoute = routes.signup;
+                window.history.replaceState('signup', '', defaultRoute.path);
+                await loadContent(defaultRoute.element);
+                 
             }
 
             authContent.addEventListener('click', async function(event) {
@@ -145,9 +142,9 @@
                 const initialPath = window.location.pathname.split('/').pop();
                 if (initialPath == 'unactivated') {
                     //activate.style.display = 'block';
-                    const route = routes['signin'];
+                    const route = routes['signup'];
 
-                    window.history.pushState('signin', '', route.path);
+                    window.history.pushState('signup', '', route.path);
                     await loadContent(route.element);
                 } else {
                     await initializeContent();

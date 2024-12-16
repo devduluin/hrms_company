@@ -7,12 +7,19 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
     //
-    public function index($page = null)
+    public function index(Request $request, $page = null)
     {
         $data['title']   = 'Duluin HRMS';
         $data['page_title']   = 'Masuk Akun Hris';
+
+        $host = $request->getHost();
+        if($host == 'launch.hrms.duluin.com'){
+            //dd($host);
+            return view('auth.index_lunch', compact('data'));
+        }else{
+            return view('auth.index', compact('data'));
+        }
         
-        return view('auth.index', compact('data'));
     }
 	
 	public function unactivated()
