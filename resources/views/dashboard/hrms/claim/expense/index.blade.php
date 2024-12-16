@@ -72,7 +72,8 @@
                                 'employee_id' => '#employee_id',
                                 'status' => '#status',
                                 'filter_date' => '#litepicker-chart',
-                            ]">
+                            ]"
+                            :showFooter="true" :setTotal="4">
                                 <x-slot:thead>
                                     <th data-value="id" data-render="getId">No</th>
                                     <th data-value="code">Claim ID</th>
