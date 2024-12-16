@@ -530,5 +530,37 @@
 
             $("#form-submit").submit();
         });
+
+        $("#employee").change(function() {
+            console.log("test");
+            const selectedValue = $(this).val();
+            getDetailEmployee(selectedValue);
+        });
+
+        async function getDetailEmployee(value) {
+            var param = {
+                url: "{{ $apiUrlEmployee }}/" + value,
+                method: "GET",
+            }
+
+            await transAjax(param).then((result) => {
+                console.log(result);
+                const employee = result.data
+                const expense_approver = employee.attendanceLeave.expense_approver;
+                console.log("expense approver ", expense_approver);
+
+                const approverSelect = $('#expense_approver')[0].tomselect;
+                const approverValue = expense_approver;
+                if (!approverSelect.options[approverValue]) {
+                    approverSelect.addOption({
+                        value: approverValue,
+                        text: approverValue
+                    });
+                }
+                approverSelect.setValue(approverValue);
+            }).catch((error) => {
+                console.log(error);
+            });
+        }
     </script>
 @endpush

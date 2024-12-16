@@ -39,7 +39,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
             'throw' => false,
         ],
@@ -55,15 +55,24 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => false,
         ],
-		
-		'minio' => [
-			'driver' => 'minio',
-			'key' => env('MINIO_KEY'),
-			'secret' => env('MINIO_SECRET'),
-			'region' => 'us-east-1',
-			'bucket' => env('MINIO_BUCKET'),
-			'endpoint' => env('MINIO_ENDPOINT','http://localhost:9000')
-		]
+
+        'minio' => [
+            'driver' => 'minio',
+            'key' => env('MINIO_KEY'),
+            'secret' => env('MINIO_SECRET'),
+            'region' => 'us-east-1',
+            'bucket' => env('MINIO_BUCKET'),
+            'endpoint' => env('MINIO_ENDPOINT', 'http://localhost:9000')
+        ],
+
+        'minio_dev' => [
+            'driver' => 'minio',
+            'key' => '9fJuD7JxFSfY1rsTAN4q',
+            'secret' => 'XIn0uIvVTnqPgTmNxUUmGULSHQiMN0zNqmWYKFW3',
+            'region' => 'us-east-1',
+            'bucket' => 'hrms',
+            'endpoint' => 'http://devapis3.hrms.duluin.com:9001'
+        ],
 
     ],
 
