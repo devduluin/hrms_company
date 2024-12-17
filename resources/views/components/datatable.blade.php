@@ -32,7 +32,7 @@
         </thead>
         @if (isset($showFooter) && $showFooter && isset($setTotal) && $setTotal)
         <tfoot class="border-b-4">
-            <tr id="tfoot-row">
+            <tr id="tfoot-row" class="border-collapse">
                 <!-- Your footer content here -->
             </tr>
         </tfoot>
@@ -221,7 +221,13 @@
                     if (response.message === "Data not found") {
                         return [];
                     } else {
-                        console.log(response.data);
+                        const formattedIDR = new Intl.NumberFormat('id-ID', {
+                            style: 'currency',
+                            currency: 'IDR',
+                            }).format(response.totalAmount);
+                        $('#totalAmount').html(
+                            formattedIDR
+                        );
                         return response.data;
                     }
                 },
@@ -303,11 +309,12 @@
                 // const lastCell = footerRow.find('td:last');
                 // lastCell.html('<div>halo</div>');
 
+                const firstCell = footerRow.find('td').eq(2)
+                firstCell.html('<div>Total</div>');
 
-                
                 const setTotal = @json($setTotal);
                 const cell = footerRow.find('td').eq(setTotal); // Index is 0-based, so 2 = 3rd column
-                cell.html('<div id="totalAmount">3</div>');
+                cell.html('<div id="totalAmount">Counting...</div>');
             @endif
         }
     </script>

@@ -43,7 +43,7 @@
                                         </x-form.select>
                                     </div>
 
-                                    {{-- <div class="gap-x-6 gap-y-10">
+                                    <div class="gap-x-6 gap-y-10">
                                         <!-- Child Select -->
                                         <x-form.select id="expense_approver" name="expense_approver"
                                             label="Expense Approver" url="{{ url('dashboard/hrms/designation') }}"
@@ -53,7 +53,7 @@
                                             ]">
                                             <option value="">Select Approver</option>
                                         </x-form.select>
-                                    </div> --}}
+                                    </div>
 
                                     <div class="gap-x-6 gap-y-10 ">
                                         <x-form.input id="description" name="description" label="Description" placholder=""
@@ -396,6 +396,16 @@
                             employeeSelect.setValue(employeeValue);
                         });
 
+                        const approverSelect = $('#expense_approver')[0].tomselect;
+                        const approverValue = expense_approver;
+                        if (!approverSelect.options[approverValue]) {
+                            approverSelect.addOption({
+                                value: approverValue,
+                                text: approverValue
+                            });
+                        }
+                        approverSelect.setValue(approverValue);
+
                         const selectedValue = response.data.status;
                         console.log(selectedValue);
                         $('#status').find(`option[value="${selectedValue}"]`).prop('selected', true);
@@ -539,5 +549,37 @@
 
             $("#form-submit").submit();
         });
+
+        $("#employee").change(function() {
+            console.log("test");
+            const selectedValue = $(this).val();
+            getDetailEmployee(selectedValue);
+        });
+
+        async function getDetailEmployee(value) {
+            var param = {
+                url: "{{ $apiUrlEmployee }}/" + value,
+                method: "GET",
+            }
+
+            await transAjax(param).then((result) => {
+                console.log(result);
+                const employee = result.data
+                const expense_approver = employee.attendanceLeave.expense_approver;
+                console.log("expense approver ", expense_approver);
+
+                const approverSelect = $('#expense_approver')[0].tomselect;
+                const approverValue = expense_approver;
+                if (!approverSelect.options[approverValue]) {
+                    approverSelect.addOption({
+                        value: approverValue,
+                        text: approverValue
+                    });
+                }
+                approverSelect.setValue(approverValue);
+            }).catch((error) => {
+                console.log(error);
+            });
+        }
     </script>
 @endpush

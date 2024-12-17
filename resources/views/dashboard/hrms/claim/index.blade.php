@@ -447,6 +447,7 @@
             }
 
             const baseUrl = "{{ url('dashboard/hrms/claim/expense') }}";
+            const claimTypeUrl = "{{ url('dashboard/hrms/claim/type') }}";
 
             if (value.includes(" - ")) {
                 const [startDate, endDate] = value.split(" - ");
@@ -461,8 +462,8 @@
                 totalApprovedLink : `${baseUrl}?status=approved${date ? '&filter_date=' + date : ''}`,
                 totalPaidLink : `${baseUrl}?status=paid${date ? '&filter_date=' + date : ''}`,
                 totalRejectedLink : `${baseUrl}?status=rejected${date ? '&filter_date=' + date : ''}`,
-                totalClaimTypeActiveLink : `${baseUrl}?is_active=1${date ? '&filter_date=' + date : ''}`,
-                totalClaimTypeInactiveLink : `${baseUrl}?is_active=0${date ? '&filter_date=' + date : ''}`,
+                totalClaimTypeActiveLink : `${claimTypeUrl}?is_active=1${date ? '&filter_date=' + date : ''}`,
+                totalClaimTypeInactiveLink : `${claimTypeUrl}?is_active=0${date ? '&filter_date=' + date : ''}`,
             }
 
             for (const [id, url] of Object.entries(links)) {
