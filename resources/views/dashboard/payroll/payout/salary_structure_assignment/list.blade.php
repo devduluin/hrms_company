@@ -43,16 +43,18 @@
                                     </div>
                                 </div>
                             </div>
-                                <a href="{{ url('dashboard/hrms/payout/salary_structure_assignment/bulk_assignment/create') }}"
+                                <x-form.button id="new_bulkAssignment" label="Bulk Assignment" style="primary" icon="plus" url="{{ url('dashboard/hrms/payout/salary_structure_assignment/bulk_assignment/create') }}"></x-button>
+                                <!-- <a href="{{ url('dashboard/hrms/payout/salary_structure_assignment/bulk_assignment/create') }}"
                                     class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"><i
                                         data-tw-merge="" data-lucide="plus" class="mr-2 h-4 w-4 stroke-[1.3]"
                                         data-value="id" data-render="getDropdownBtn"></i>
-                                    Bulk Assignment</a>
-                                <a href="{{ url('dashboard/hrms/payout/salary_structure_assignment/create') }}"
+                                    Bulk Assignment</a> -->
+                                <x-form.button id="new_payrollAssignment" label="Add New Assignment" style="primary" icon="plus" url="{{ url('dashboard/hrms/payout/salary_structure_assignment/create') }}"></x-button>
+                                <!-- <a href="{{ url('dashboard/hrms/payout/salary_structure_assignment/create') }}"
                                     class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"><i
                                         data-tw-merge="" data-lucide="plus" class="mr-2 h-4 w-4 stroke-[1.3]"
                                         data-value="id" data-render="getDropdownBtn"></i>
-                                    Add New Assignment</a>
+                                    Add New Assignment</a> -->
                             </div>
                         </div>
                         </div>
@@ -93,7 +95,7 @@
         <div data-transition data-selector=".show" data-enter="transition-all ease-linear duration-150" data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1" data-enter-to="!mt-1 visible opacity-100 translate-y-0" data-leave="transition-all ease-linear duration-150" data-leave-from="!mt-1 visible opacity-100 translate-y-0" data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1" class="dropdown-menu absolute z-[9999] hidden">
             <div data-tw-merge class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 w-40">
                 <a onClick="action('edit', '` + data['id'] + `')" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="external-link" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
-                    Edit</a>
+                    Update</a>
                     <a onClick="action('delete', '` + data['id'] + `')" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="external-link" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
                     Delete</a>
             </div>
