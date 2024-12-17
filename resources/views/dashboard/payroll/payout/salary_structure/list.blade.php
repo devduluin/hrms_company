@@ -39,6 +39,14 @@
                                                         <option value="0"> Inactive </option>
                                                     </x-form.select>
                                                 </div>
+                                                <div class="mt-3">
+                                                    <x-form.select style="width: 111%;" name="payroll_frequency" id="payroll_frequency" label="Select Payroll Frequency" data-method="POST">
+                                                        <option value="">Select Payroll Frequency</option>
+                                                        <option value="monthly"> Monthly </option>
+                                                        <option value="weekly"> Weekly </option>
+                                                        <option value="daily"> Daily </option>
+                                                    </x-form.select>
+                                                </div>
                                                 <div class="mt-4 flex items-center">
                                                     <button type="reset" onclick="resetForm()" data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 ml-auto w-32">Reset</button>
                                                     <button type="submit" data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary ml-2 w-32">Apply</button>
@@ -68,6 +76,7 @@
                                             <x-slot:thead>
                                                 <th data-value="id" data-render="getId">#</th>
                                                 <th data-value="name">Name</th>
+                                                <th data-value="payroll_frequency" data-render="getPayrollFrequency">Payroll Frequency</th>
                                                 <th data-value="is_active" data-render="getStatus">Status</th>
                                                 <th data-value="id" data-render="getActionBtn">Action</th>
                                             </x-slot:thead>
@@ -102,12 +111,16 @@
             </div>`;
         }
 
+        function getPayrollFrequency(data, type, row, meta) {
+            return `<div class="capitalize"> ${data}</div>`;
+        }
+
         function getStatus(data, type, row, meta) {
             console.log(data);
             if (data) {
-                return `<div class="flex items-center justify-center text-success"><div class="ml-1.5 whitespace-nowrap"><i data-tw-merge data-lucide="check" class="text-success"></i> Active</div></div>`;
+                return `<div class="flex text-success"><div class="ml-1.5 whitespace-nowrap"><i data-tw-merge data-lucide="check" class="text-success"></i> Active</div></div>`;
             } else {
-                return `<div class="flex items-center justify-center text-danger"><div class="ml-1.5 whitespace-nowrap">Inactive</div></div>`;
+                return `<div class="flex text-danger"><div class="ml-1.5 whitespace-nowrap">Inactive</div></div>`;
             }
         }
 
@@ -148,6 +161,7 @@
 
             // Call the function for each filter
             handleFilter("is_active", "is_active");
+            handleFilter("payroll_frequency", "payroll_frequency");
 
             const $countFilter = $("#countFilter");
             if ($countFilter.length > 0) {
