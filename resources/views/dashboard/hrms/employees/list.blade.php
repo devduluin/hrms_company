@@ -83,16 +83,16 @@
                                                         <div class="mt-3">
                                                             <x-form.select style="width: 111%;" id="status"
                                                                 name="status" label="Employee Status">
-                                                                <option value="">Select All</option>
-                                                                <option value="active" selected>Active</option>
+                                                                <option value="" selected>Select All</option>
+                                                                <option value="active">Active</option>
                                                                 <option value="inactive">Exit</option>
                                                             </x-form.select>
                                                         </div>
                                                         <div class="mt-3">
                                                             <x-form.select style="width: 111%;" id="is_verified"
                                                                 name="is_verified" label="Mobile Status">
-                                                                <option value="">Select All</option>
-                                                                <option value="active" selected>Active</option>
+                                                                <option value="" selected>Select All</option>
+                                                                <option value="active">Active</option>
                                                                 <option value="inactive">Inactive</option>
                                                             </x-form.select>
                                                         </div>

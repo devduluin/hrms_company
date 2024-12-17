@@ -5,6 +5,22 @@
     padding: 15px 10px; /* e.g. change 8x to 4px here */
 }
 </style>
+<?php
+    $i = 1;
+    $filterDate = request('filter_date');
+
+        if ($filterDate) {
+            $dates = explode(' - ', $filterDate);
+            $startDate = new DateTime(trim($dates[0])); // Parse the start date
+            $endDate = new DateTime(trim($dates[1]));   // Parse the end date
+        } else {
+            $now = new DateTime(); // Current date
+            $startDate = (clone $now)->modify('first day of this month')->setTime(0, 0, 0);
+            $endDate = (clone $now)->modify('last day of this month')->setTime(23, 59, 59);
+        }
+        $interval = new DateInterval('P1D');
+        $datePeriod = new DatePeriod($startDate, $interval, $endDate);
+    ?>
 <div class="hurricane before:content-[''] before:z-[-1] before:w-screen before:bg-slate-50 before:top-0 before:h-screen before:fixed before:bg-texture-black before:bg-contain before:bg-fixed before:bg-[center_-20rem] before:bg-no-repeat">
 @include('layouts.dashboard.menu')
     <div class="content transition-[margin,width] duration-100 px-5 pt-[56px] pb-16 relative z-20 content--compact xl:ml-[275px] [&amp;.content--compact]:xl:ml-[91px]">
@@ -68,7 +84,7 @@
                                 </div>
                                 <div class="relative">
                                     <i data-tw-merge="" data-lucide="calendar" class="absolute inset-y-0 left-0 z-10 my-auto ml-3 h-4 w-4 stroke-[1.3]"></i>
-                                    <input id="filter_date" name="filter_date" type="text" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 datepicker rounded-[0.3rem] pl-9 sm:w-64">
+                                    <input id="filter_date" name="filter_date" type="text"  value="{{ $startDate->format('Y-m-d') }} - {{ $endDate->format('Y-m-d') }}" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 datepicker rounded-[0.3rem] pl-9 sm:w-64">
                                 </div>
                                 <div class="relative">
                                 <button id="submitBtn" data-tw-merge="" type="submit"
@@ -104,6 +120,7 @@
                                     <th data-value="total_halfday" orderable="false" data-render="getUrlHalfday">Halfday</th>
                                     <th data-value="total_late_entry" orderable="false">Late Entry</th>
                                     <th data-value="total_early_exit" orderable="false">Early Exit</th>
+                                    <th data-value="total_working_hours" orderable="false" data-render="getWorkingHours">Working Hours</th>
                             </x-slot:thead>
                         </x-datatable>
                         </div>
@@ -145,6 +162,12 @@
         }
         function getUrlHalfday(data, type, row, meta) {     
             return '<a href="{{ url('dashboard/hrms/attendance/attendance') }}?employee_id='+row.id+'&attendance_status=halfday" data-placement="top" title="Click to see detail!"><div class=" px-1.5 w-full [&:hover:not(:disabled)]:bg-primary/10 [&:hover:not(:disabled)]:border-primary/10 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">'+data+'</div></a>';
+        }
+
+        function getWorkingHours(data, type, row, meta) {
+             
+                return '<a href="{{ url('dashboard/hrms/hr_setting') }}?employee_id='+row.id+'&attendance_status=halfday" data-placement="top" title="Present * Working Hour, Click to see!"><div class=" px-1.5 w-full [&:hover:not(:disabled)]:bg-primary/10 [&:hover:not(:disabled)]:border-primary/10 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80">'+data+'</div></a>';
+           
         }
 
         function getFullName(data, type, row, meta) {
