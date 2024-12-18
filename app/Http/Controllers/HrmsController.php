@@ -21,6 +21,7 @@ class HrmsController extends Controller
         $data['apiGenderChartUrl'] = $this->apiGatewayUrl . '/v1/employees/employee/report/gender-chart?company_id='. $request->session()->get('company_id');
         $data['apiDepartmentChartrUrl'] = $this->apiGatewayUrl . '/v1/employees/employee/report/department-chart?company_id='. $request->session()->get('company_id');
         $data['apiClaimAmountUrl'] = $this->apiGatewayUrl . '/v1/payroll/expense_claim/report/chart?company_id='. $request->session()->get('company_id');
+        $data['apiStatusEmployeeUrl'] = $this->apiGatewayUrl . '/v1/employees/employee/report/status-employee?company_id='. $request->session()->get('company_id');
         
         return view('dashboard.hrms.index', $data);
     }

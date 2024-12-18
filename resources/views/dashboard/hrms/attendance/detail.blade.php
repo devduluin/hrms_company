@@ -288,6 +288,19 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="box flex flex-col p-5">
+                        <div class="relative mt-3 rounded-[0.6rem] border border-slate-200/80 dark:border-darkmode-400">
+                            <div class="absolute left-0 -mt-2 ml-4 bg-white px-3 text-xs uppercase text-slate-500">
+                                <div class="-mt-px">Attendance Activities</div>
+                            </div>
+                            <div class="p-4"> 
+                                <div id="detail-activity" class="relative overflow-hidden before:absolute before:inset-y-0 before:left-0 before:ml-[14px] before:w-px before:bg-slate-200/60 before:content-[''] before:dark:bg-darkmode-400">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="grid grid-cols-12 gap-x-6 gap-y-5 mt-5">
@@ -307,6 +320,67 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7T5886HCdj0jMOWhW_aliRYP
             getPersonalEmployee();
         });
 
+        function getAttachment(data, type, row, meta) {
+            if (data) {
+
+                return `<a target="_blank" class="text-primary font-medium" href="${data}">Download</a>`;
+            }
+            return 'N/A';
+        }
+
+        //render activities employee
+        function getEmployeeActivities(employee_id, date){
+            var param = {
+                url: `{{ $apiUrlActivity }}`,
+                method: "POST",
+                data: {
+                    company_id: localStorage.getItem('company'),
+                    employee_id: employee_id,
+                    attendance_date: date,
+                    draw: 0,
+                    start: 0,
+                    length: 10,
+                    order: [
+                        {
+                        column: 0,
+                        dir: "asc"
+                        }
+                    ],
+                },
+            }
+
+            transAjax(param).then((result) => {
+                const activities = result.data;
+                console.log(activities);
+
+                activities.reverse().forEach(renderActivities);
+            });
+
+            function renderActivities(activity){
+                const fromTime = activity.from_time.split(" ");
+                const toTime = activity.to_time.split(" ");
+                document.getElementById("detail-activity").innerHTML += `
+                    <div class="mb-3 last:mb-0 relative first:before:content-[''] first:before:h-1/2 first:before:w-5 first:before:bg-white first:before:absolute last:after:content-[''] last:after:h-1/2 last:after:w-5 last:after:bg-white last:after:absolute last:after:bottom-0">
+                        <div class="px-4 py-3 ml-8 before:content-[''] before:ml-1 before:absolute before:w-5 before:h-5 before:bg-slate-200 before:rounded-full before:inset-y-0 before:my-auto before:left-0 before:dark:bg-darkmode-300 before:z-10 after:content-[''] after:absolute after:w-1.5 after:h-1.5 after:bg-slate-500 after:rounded-full after:inset-y-0 after:my-auto after:left-0 after:ml-[11px] after:dark:bg-darkmode-200 after:z-10">
+                            <a class="font-medium text-primary" href="{{ url('dashboard/hrms/attendance/activity/detail/${activity.id}') }}">
+                                ${fromTime[1]} - ${toTime[1]} 
+                            </a>
+                            <div class="mt-1.5 gap-y-1.5 text-[0.8rem] leading-relaxed text-slate-500 sm:flex-row sm:items-center">
+                                <span class="font-bold">${activity.activity_title}</span> : ${activity.explanation}
+                            </div>
+                            <div class="my-3.5 rounded-[0.6rem] border bg-slate-50/80 p-1 h-24 w-24">
+                                <div class="grid overflow-hidden rounded-[0.6rem] w-fit">
+                                    <div class="h-24 w-24 overflow-hidden border border-slate-100">
+                                        <img data-action="zoom" src="${activity.attachment}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
         function getPersonalEmployee()
         {
             var param = {
@@ -317,6 +391,8 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7T5886HCdj0jMOWhW_aliRYP
             transAjax(param).then((result) => {
                 let employee = result.data.employee_id_rel;
                 let attendance = result.data;
+                
+                getEmployeeActivities(employee.id, attendance.attendance_date);
 
                 $('#employeeId').html(employee.employee_id);
                 $('#name').html('<a class="text-info" href="{{ url('/dashboard/hrms/employee/edit_employee') }}/'+employee.id+'">'+employee.first_name + ' ' + employee.last_name+' <i class="fa-solid fa-arrow-up-right-from-square ml-2"></i></a>');

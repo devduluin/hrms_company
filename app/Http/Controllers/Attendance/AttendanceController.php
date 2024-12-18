@@ -76,6 +76,8 @@ class AttendanceController extends Controller
         $data['apiUrl'] = $this->apiGatewayUrl . "/v1/attendance/attendance/".$id;
         $data['apiUrlApproval'] = $this->apiGatewayUrl . "/v1/attendance/attendance/approval/".$id;
         $data['apiUrlShiftEmployee'] = $this->apiGatewayUrl . "/v1/attendance/shift-assignment/employee_id";
+        $data['apiUrlActivity'] = $this->apiGatewayUrl . '/v1/attendance/activity/datatable';
+
         return view('dashboard.hrms.attendance.detail', $data);
     }
 
