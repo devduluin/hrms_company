@@ -133,14 +133,14 @@
                         </div>
                         <div class="mt-3 text-slate-500">Company</div>
                     </a>
-                    <a class="flex flex-col items-center relative col-span-4 flex-1 overflow-hidden rounded-[0.6rem] border bg-slate-50/50 p-5 sm:col-span-2 xl:col-span-1 mx-1" href="{{ url('/dashboard/settings/user_account') }}">
+                    <a class="flex flex-col items-center relative col-span-4 flex-1 overflow-hidden rounded-[0.6rem] border bg-slate-50/50 p-5 sm:col-span-2 xl:col-span-1 mx-2" href="{{ url('/dashboard/settings/user_account') }}">
                         <div class="flex h-12 w-12 items-center justify-center rounded-full border border-info/10 bg-info/10">
                             <i data-tw-merge="" data-lucide="user" class="stroke-[1] h-6 w-6 fill-info/10
                             text-info"></i>
                         </div>
                         <div class="mt-3 text-slate-500">My Account</div>
                     </a>
-                    <a class="flex flex-col items-center relative col-span-4 flex-1 overflow-hidden rounded-[0.6rem] border bg-slate-50/50 p-5 sm:col-span-2 xl:col-span-1 mx-1" href="{{ url('/dashboard/hrms/hr_setting') }}">
+                    <a class="flex flex-col items-center relative col-span-4 flex-1 overflow-hidden rounded-[0.6rem] border bg-slate-50/50 p-5 sm:col-span-2 xl:col-span-1 mx-2" href="{{ url('/dashboard/hrms/hr_setting') }}">
                         <div class="flex h-12 w-12 items-center justify-center rounded-full border border-info/10 bg-info/10">
                             <i data-tw-merge="" data-lucide="settings" class="stroke-[1] h-6 w-6 fill-info/10
                             text-info"></i>
