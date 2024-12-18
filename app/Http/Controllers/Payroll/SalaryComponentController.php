@@ -40,7 +40,7 @@ class SalaryComponentController extends Controller
     public function edit($id, Request $request)
     {
         $data['title']   = 'Duluin HRMS';
-        $data['page_title']   = 'Create Salary Component';
+        $data['page_title']   = 'Update Salary Component';
         $data['apiPayrollUrl'] = $this->apiGatewayUrl . '/v1/salary_components';
         $data['salaryComponentId'] = $id;
         $allSessions = session()->all();
