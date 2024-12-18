@@ -200,7 +200,6 @@
             let amountData = (data) === null ? 0 : data.amount;
             let expenseDetailId = (data) === null ? null : data.id;
             // handleGetComponent(rowNumber, tableId, data);
-
             return `<tr id="${rowId}">
                     <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t">${rowNumber}</td>
                     <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t">
@@ -227,7 +226,7 @@
                         </div></td>
                     <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t"><input id="description-${claimType}-${rowNumber}" name="description" type="text" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10" placeholder="Description" value="${data?.description || ''}"></td>
                     <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t"><input id="amount-${claimType}-${rowNumber}" name="amount" type="number" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10" placeholder="0" value="${data?.amount || 0}"></td>
-                    <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t"><input type="hidden" name="attachment" id="attachment_url-${claimType}-${rowNumber}"></input><input id="attachment-${claimType}-${rowNumber}" name="attachment" onChange="handleUpload('${rowNumber}', '${claimType}', '${data?.id || ''}')" data-tw-merge type="file" placeholder="Input file" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10"></td>
+                    <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t"><div id="attachment_view_box-${claimType}-${rowNumber}" class="relative h-28 w-28 col-span-3 cursor-pointer image-fit zoom-in md:col-span-2"><img src="${data?.attachment}" id="attachment_view-${claimType}-${rowNumber}" /><span data-placement="top" onclick="handleDeleteFile('${rowNumber}', '${claimType}', '${data?.expenseClaimDetail?.id || ''}')" class="tooltip cursor-pointer absolute top-0 right-0 w-5 h-5 -mt-2 -mr-2 bg-white rounded-full"><span class="flex items-center justify-center w-full h-full text-white border rounded-full border-danger/50 bg-danger/80"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" class="lucide lucide-x h-4 w-4 stroke-[1.3]"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></span></span><input type="hidden" value="${data.attachment}" name="attachment" id="attachment_url-${claimType}-${rowNumber}"></input></div><input id="attachment-${claimType}-${rowNumber}" name="attachment" onChange="handleUpload('${rowNumber}', '${claimType}', '${data?.id || ''}')" data-tw-merge type="file" placeholder="Input file" class="hidden disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10"></td>
                     <td data-tw-merge class="px-5 py-3 border-b dark:border-darkmode-300 border-l border-r border-t">
                         <button type="button" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed text-xs py-1.5 px-2 bg-secondary/70 border-secondary/70 text-slate-500 dark:border-darkmode-400 dark:bg-darkmode-400 dark:text-slate-300 [&:hover:not(:disabled)]:bg-slate-100 [&:hover:not(:disabled)]:border-slate-100 [&:hover:not(:disabled)]:dark:border-darkmode-300/80 [&:hover:not(:disabled)]:dark:bg-darkmode-300/80 w-24 w-24" onclick="deleteRow('${rowId}', '${tableId}', '${expenseDetailId}')">Delete</button>
                     </td>
@@ -256,12 +255,82 @@
                     contentType: false,
                     success: function(response) {
                         $("#attachment_url-" + type + "-" + rowId).val(response.file);
+                        $("#attachment-" + type + "-" + rowId).addClass("hidden");
+                        $("#attachment_view_box-" + type + "-" + rowId).removeClass("hidden");
+                        $("#attachment_view-" + type + "-" + rowId).removeClass("hidden").attr("src", response
+                            .file);
                     },
                     error: function(xhr, status, error) {
                         console.error('Error uploading file:', error);
                     }
                 });
             }
+        }
+
+        function handleDeleteFile(rowId, type, selectId = null, data = null) {
+            const fileUrl = $("#attachment_url-" + type + "-" + rowId).val();
+            console.log(fileUrl);
+
+            Swal.fire({
+                title: "Delete image attachment?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#attachment_url-" + type + "-" + rowId).val("");
+                    $("#attachment-" + type + "-" + rowId).removeClass("hidden");
+                    $("#attachment_view_box-" + type + "-" + rowId).addClass("hidden");
+                    $("#attachment_view-" + type + "-" + rowId).addClass("hidden").attr("src", fileUrl);
+                    $.ajax({
+                        url: 'http://apidev.duluin.com/api/users/file_delete',
+                        type: 'POST',
+                        data: JSON.stringify({
+                            "filename": fileUrl
+                        }),
+                        contentType: 'application/json',
+                        headers: {
+                            'Authorization': `Bearer ${appToken}`,
+                            'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`
+                        },
+                        dataType: 'json',
+                        success: function(response) {
+                            console.log(response);
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('Error uploading file:', error);
+                        }
+                    });
+                }
+            });
+
+            /* if (fileInput.files && fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                console.log(file);
+
+                const formData = new FormData();
+                formData.append('file', file);
+
+                $.ajax({
+                    url: 'http://apidev.duluin.com/api/users/file_uploader',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        $("#attachment_url-" + type + "-" + rowId).val(response.file);
+                        $("#attachment-" + type + "-" + rowId).addClass("hidden");
+                        $("#attachment_view_box-" + type + "-" + rowId).removeClass("hidden");
+                        $("#attachment_view-" + type + "-" + rowId).removeClass("hidden").attr("src", response
+                            .file);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error uploading file:', error);
+                    }
+                });
+            } */
         }
 
         function deleteRow(rowId, tableId, data = null) {
@@ -500,7 +569,10 @@
 
         function handleResponse(response) {
             if (response.success == true) {
-                window.location = document.referrer;
+                showSuccessNotification('success', 'Data has been updated');
+                setTimeout(() => {
+                    window.location = document.referrer;
+                }, 3000);
             } else {
                 showErrorNotification('error', response.message);
             }
