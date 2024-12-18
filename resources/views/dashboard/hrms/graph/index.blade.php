@@ -47,21 +47,21 @@
                                 <x-chart.donut 
                                     id="genderChart"
                                     label="Gender Distribution"
-                                    apiUrl="http://apidev.duluin.com/api/v1/employees/employee/report/gender-chart?company_id=c8f745e0-aa6e-458b-bb70-4dda3e2accea"
+                                    apiUrl="{{ $apiGenderChartUrl }}"
                                     itemData="gender"
                                 />
                             
                                 <x-chart.donut 
-                                    id="genderChart"
+                                    id="DepartmentChart"
                                     label="Staff per Department"
-                                    apiUrl="http://apidev.duluin.com/api/v1/employees/employee/report/department-chart?company_id=c8f745e0-aa6e-458b-bb70-4dda3e2accea"
+                                    apiUrl="{{ $apiDepartmentChartrUrl }}"
                                     itemData="department_id"
                                 />
 
                                 <x-chart.donut 
                                     id="amountChart"
                                     label="Expense Claim Amount"
-                                    apiUrl="https://apidev.duluin.com/api/v1/payroll/expense_claim/report/chart?company_id=c8f745e0-aa6e-458b-bb70-4dda3e2accea"
+                                    apiUrl="{{ $apiClaimAmountUrl }}"
                                     itemData="status"
                                 />
                             </div>

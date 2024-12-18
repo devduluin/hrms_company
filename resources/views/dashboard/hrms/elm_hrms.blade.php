@@ -62,9 +62,9 @@
                     />
 
                     <x-chart.donut 
-                        id="amountChart"
-                        label="Expense Claim Amount"
-                        apiUrl="{{ $apiClaimAmountUrl }}"
+                        id="statusEmployeeChart"
+                        label="Status Employee"
+                        apiUrl="{{ $apiStatusEmployeeUrl }}"
                         itemData="status"
                     /> 
                 </div>
