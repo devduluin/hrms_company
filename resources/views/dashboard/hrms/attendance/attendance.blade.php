@@ -26,7 +26,7 @@
                                   <form method="GET" id="filterTable">
                                     <div>
                                         <x-form.select style="width: 111%;" id="employee_id" name="employee_id" data-method="POST" label="Employee Name" url="{{ url('dashboard/hrms/employee/create') }}"
-                                            apiUrl="{{ $apiUrlEmployee }}/datatables" columns='["first_name", "last_name"]' :selected='$selectedEmployee'
+                                            apiUrl="{{ $apiUrlEmployee }}/datatables_v2" columns='["first_name", "last_name"]' :selected='$selectedEmployee'
                                             :keys="[
                                                 'company_id' => $company_id,
                                             ]">
@@ -46,7 +46,7 @@
                                     <div class="mt-3">
                                         <x-form.select style="width: 111%;" id="status" name="status" label="Status">
                                             <option value="">Select All</option>
-                                            <option value="submit">Submit</option>
+                                            <option value="submit">Submited</option>
                                             <option value="approved">Approved</option>
                                             <option value="rejected">Rejected</option>
                                         </x-form.select>
@@ -69,13 +69,21 @@
             <div class="mt-3.5  gap-x-6 gap-y-10">
                 <div class="col-span-12 flex flex-col gap-y-7 xl:col-span-9">
                     <div class="box box--stacked flex flex-col p-5">
-                        <x-datatable id="attendanceTable" :url="$apiUrl.'/datatable'" method="POST" search="false" class="display small" :order="[[ 2, 'DESC']]"
+                        <div id="alert" hidden>
+                        <div class="flex flex-col gap-2 mb-4">
+                            <div role="alert" class="alert relative border rounded-md px-5 py-4 bg-pending border-pending text-white dark:border-pending flex items-center"><i data-tw-merge data-lucide="alert-triangle" class="stroke-[1] w-5 h-5 mr-2 h-6 w-6 mr-2 h-6 w-6"></i>
+                            <span id="alert-msg"></span>
+                            </div>
+                        </div>
+                        </div>
+                        <x-datatable id="attendanceTable" :url="$apiUrl.'/datatable'" method="POST" search="false" class="display nowrap" :order="[[ 2, 'DESC']]"
                         :filter="[
                                 'attendance_status' => '#attendanceStatus',
                                 'status' => '#status',
                             ]">
                             <x-slot:thead>
                             <th data-value="no" width="80px">No.</th>
+                                    <th data-value="employee_id_rel"  data-render="getEmployeeId" orderable="false">Employee ID</th>
                                     <th data-value="employee_id_rel"  data-render="getEmployeeName" orderable="false">Employee Name</th>
                                     <th data-value="shift_assigment_id_rel" data-render="getShiftAssignment" orderable="false">Shift</th>
                                     <th data-value="attendance_date" orderable="true">Date</th>
@@ -128,6 +136,13 @@
             }else{
                 return `<div class="flex capitalize text-danger"><div class="whitespace-nowrap">${data}</div></div>`;
             }
+        }
+
+        function getEmployeeId(data, type, row, meta) {
+            if (data !== null) {
+                return data.employee_id;
+            }
+            return 'N/A';
         }
 
         function getEmployeeName(data, type, row, meta) {
@@ -267,6 +282,32 @@
                 console.log(json); // Log the fetched data
             });
         });
+
+        
+
+    async function getDataChart()
+    {
+        const data = {company_id : '{{$company_id}}', status : 'submit'};
+        const param = {
+            url: "{{ $apiCountAttendance }}",
+            method: "GET",
+            data: data,
+        }
+
+        await transAjax(param).then((result) => {
+            
+            if(result){
+                const total = result.data?.total;
+                $('#alert').attr('hidden', false)
+                $('#alert-msg').html(`There are <a href="{{url('dashboard/hrms/attendance/attendance?status=submit')}}">${total} employee</a> attendance records that need to be approved.`)
+            }
+
+        }).catch((error) => {
+            console.log(error);
+        });
+
+    }
+    getDataChart();
     </script>
 @endpush
 @include('vendor-common.sweetalert')

@@ -25,7 +25,7 @@
                     </div>
                 </div> -->
                 <div class="text-base text-white/70 xl:ml-0 2xl:ml-0">
-                    Powered by duluin.com
+                    Powered by <a href="https://duluin.com">duluin.com</a>
                 </div>
             </div>
         </div>

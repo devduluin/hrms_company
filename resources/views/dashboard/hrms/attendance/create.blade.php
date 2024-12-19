@@ -35,7 +35,7 @@
                                     <div class="gap-x-6 gap-y-10 ">
                                         <div class="py-2">
                                             <x-form.select id="employee_id" name="employee_id" data-method="POST" required label="Employee Name" url="{{ url('dashboard/hrms/employee/create') }}"
-                                                apiUrl="{{ $apiUrlEmployee }}/datatables" columns='["first_name", "last_name"]'  
+                                                apiUrl="{{ $apiUrlEmployee }}/datatables_v2" columns='["first_name", "last_name"]'  
                                                 :keys="[
                                                     'company_id' => $company_id,
                                                 ]">

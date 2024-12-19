@@ -1,5 +1,10 @@
 @extends('layouts.dashboard.app')
 @section('content')
+<style>
+    table.dataTable tbody th, table.dataTable tbody td {
+    padding: 15px 10px; /* e.g. change 8x to 4px here */
+}
+</style>
     <div
         class="hurricane before:content-[''] before:z-[-1] before:w-screen before:bg-slate-50 before:top-0 before:h-screen before:fixed before:bg-texture-black before:bg-contain before:bg-fixed before:bg-[center_-20rem] before:bg-no-repeat">
         @include('layouts.dashboard.menu')
@@ -161,13 +166,13 @@
                                     <div class="table gap-y-2 p-5 sm:flex-row sm:items-center">
                                         <div>
                                             <x-datatable id="employeeTable" :url="$apiUrl . '/employee/datatables'" method="POST"
-                                                class="display" customButton="true"
+                                                class="display nowrap" customButton="true"
                                                 customButtonText="Send Verification Email"
                                                 customButtonFunction="sendEmailVerification()" :filter="[
                                                     'first_name' => '#name',
                                                     'designation_id' => '#designation_id',
                                                 ]"
-                                                :order="[[1, 'DESC']]">
+                                                :order="[[2, 'DESC']]">
                                                 <x-slot:thead>
                                                     <th data-value="id" data-render="getCheckBox" orderable="false">
                                                         <input type="checkbox"
@@ -175,14 +180,11 @@
                                                             id="select-all" />
                                                     </th>
                                                     <th data-value="id" data-render="getId" orderable="true">No.</th>
-                                                    <th data-value="employee_id" searchable="true" orderable="true">
-                                                        Employee
-                                                        ID</th>
-                                                    <th data-value="first_name" searchable="true" orderable="true"
-                                                        searchable="true">First Name
+                                                     
+                                                    <th data-value="first_name" searchable="true" orderable="true" data-render="getName"
+                                                        searchable="true">Employee Name
                                                     </th>
-                                                    <th data-value="last_name" searchable="true" orderable="true">Last
-                                                        Name
+                                                    <th data-value="addressContact" searchable="true" orderable="false" data-render="getAddress">Contact Address
                                                     </th>
                                                     <th data-value="company_id_rel" data-render="getCompany"
                                                         orderable="false">
@@ -344,6 +346,50 @@
         }
 
         // Updated getCheckBox function
+        function getName(data, type, row, meta) {
+            
+            if (data) {
+                let avatar = row.avatar 
+                            ? `<img src="${row.avatar}" alt="User Avatar" class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]" data-placement="top">`
+                            : `<img src="{{ asset('/img/3725294.png') }}" alt="Default Avatar" class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]" data-placement="top">`;
+
+                const html = `<div class="flex items-center">
+                    <div class="image-fit zoom-in h-9 w-9">
+                        ${avatar}
+                    </div>
+                    <div class="ml-3.5">
+                        <a class="whitespace-nowrap font-medium" href="{{ url('/dashboard/hrms/employee/edit_employee') }}/${row.id}">
+                            ${row.first_name} ${row.last_name}
+                        </a>
+                        <div class="mt-0.5 whitespace-nowrap text-xs text-slate-500">
+                            ${row.employee_id}
+                        </div>
+                    </div>
+                </div>`;
+
+                return html;
+            }
+            return '-';
+
+        }
+
+        function getAddress(data, type, row, meta) {
+            if (!data) return '-'; // Handle null or undefined data
+
+            const phoneNumber = data.mobil_phone || '';
+            const personalEmail = data.company_email || data.personal_email || '-';
+
+            if (phoneNumber) {
+                return `
+                    <a class="whitespace-nowrap font-medium" href="#">${phoneNumber}</a>
+                    <div class="mt-0.5 whitespace-nowrap text-xs text-slate-500">${personalEmail}</div>
+                `;
+            }
+
+            return personalEmail; // Default to personal email if company email is absent
+        }
+
+
         function getCheckBox(data, type, row, meta) {
             if (!data.is_verified) {
                 return `<input type="checkbox" class="transition-all duration-100 ease-in-out shadow-sm border-slate-200 cursor-pointer rounded focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;[type='radio']]:checked:bg-primary [&amp;[type='radio']]:checked:border-primary [&amp;[type='radio']]:checked:border-opacity-10 [&amp;[type='checkbox']]:checked:bg-primary [&amp;[type='checkbox']]:checked:border-primary [&amp;[type='checkbox']]:checked:border-opacity-10 [&amp;:disabled:not(:checked)]:bg-slate-100 [&amp;:disabled:not(:checked)]:cursor-not-allowed [&amp;:disabled:not(:checked)]:dark:bg-darkmode-800/50 [&amp;:disabled:checked]:opacity-70 [&amp;:disabled:checked]:cursor-not-allowed [&amp;:disabled:checked]:dark:bg-darkmode-800/50" name="selected_employees[]" value='${JSON.stringify(row)}'>`;

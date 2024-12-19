@@ -52,7 +52,7 @@
                                                 Select Status
                                             </option>
                                             <option value="pending">
-                                                Pending
+                                                Submited
                                             </option>
                                             <option value="approved">
                                                 Approved

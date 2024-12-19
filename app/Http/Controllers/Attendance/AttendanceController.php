@@ -61,6 +61,7 @@ class AttendanceController extends Controller
         $data['page_title']   = 'Attendance';
         $data['apiUrl'] = $this->apiGatewayUrl . "/v1/attendance/attendance";
         $data['apiUrlEmployee'] = $this->apiGatewayUrl . '/v1/employees/employee';
+        $data['apiCountAttendance'] = $this->apiGatewayUrl . '/v1/attendance/attendance/report/status';
         $data['company_id'] = session()->get('company_id');
         $data['selectedEmployee'] = request()->query('employee_id');
 
