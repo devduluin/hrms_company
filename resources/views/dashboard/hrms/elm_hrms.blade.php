@@ -8,13 +8,13 @@
                 </div>
                 <ul data-tw-merge="" role="tablist" class=" p-0.5 border dark:border-darkmode-400 flex box w-auto rounded-[0.6rem] border-slate-200 bg-white group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] md:ml-auto">
                     <li id="example-1-tab" data-tw-merge="" role="presentation" class="focus-visible:outline-none flex-1 bg-slate-50 first:rounded-l-[0.6rem] last:rounded-r-[0.6rem] group-[.mode--light]:bg-transparent [&_button.active]:text-current group-[.mode--light]:[&_button.active]:border-transparent group-[.mode--light]:[&_button.active]:bg-white/[0.12]">
-                        <button data-tw-merge="" data-tw-target="#example-1" role="tab" class="cursor-pointer block appearance-none px-3 border border-transparent transition-colors dark:text-slate-400 [&.active]:text-slate-700 py-1.5 dark:border-transparent [&.active]:border [&.active]:shadow-sm [&.active]:font-medium [&.active]:border-slate-200 [&.active]:bg-white [&.active]:dark:text-slate-300 [&.active]:dark:bg-darkmode-400 [&.active]:dark:border-darkmode-400 active w-full whitespace-nowrap rounded-[0.6rem] text-slate-500 group-[.mode--light]:text-slate-200 md:w-24">Daily</button>
+                        <button onclick="filterAttendanceChart('daily')" data-tw-merge="" data-tw-target="#example-1" role="tab" class="cursor-pointer block appearance-none px-3 border border-transparent transition-colors dark:text-slate-400 [&.active]:text-slate-700 py-1.5 dark:border-transparent [&.active]:border [&.active]:shadow-sm [&.active]:font-medium [&.active]:border-slate-200 [&.active]:bg-white [&.active]:dark:text-slate-300 [&.active]:dark:bg-darkmode-400 [&.active]:dark:border-darkmode-400 active w-full whitespace-nowrap rounded-[0.6rem] text-slate-500 group-[.mode--light]:text-slate-200 md:w-24">Daily</button>
                     </li>
-                    <li id="example-2-tab" data-tw-merge="" role="presentation" class="focus-visible:outline-none flex-1 bg-slate-50 first:rounded-l-[0.6rem] last:rounded-r-[0.6rem] group-[.mode--light]:bg-transparent [&_button.active]:text-current group-[.mode--light]:[&_button.active]:border-transparent group-[.mode--light]:[&_button.active]:bg-white/[0.12]">
+                    <!-- <li id="example-2-tab" data-tw-merge="" role="presentation" class="focus-visible:outline-none flex-1 bg-slate-50 first:rounded-l-[0.6rem] last:rounded-r-[0.6rem] group-[.mode--light]:bg-transparent [&_button.active]:text-current group-[.mode--light]:[&_button.active]:border-transparent group-[.mode--light]:[&_button.active]:bg-white/[0.12]">
                         <button data-tw-merge="" data-tw-target="#example-2" role="tab" class="cursor-pointer block appearance-none px-3 border border-transparent transition-colors dark:text-slate-400 [&.active]:text-slate-700 py-1.5 dark:border-transparent [&.active]:border [&.active]:shadow-sm [&.active]:font-medium [&.active]:border-slate-200 [&.active]:bg-white [&.active]:dark:text-slate-300 [&.active]:dark:bg-darkmode-400 [&.active]:dark:border-darkmode-400 w-full whitespace-nowrap rounded-[0.6rem] text-slate-500 group-[.mode--light]:text-slate-200 md:w-24">Weekly</button>
-                    </li>
+                    </li> -->
                     <li id="example-3-tab" data-tw-merge="" role="presentation" class="focus-visible:outline-none flex-1 bg-slate-50 first:rounded-l-[0.6rem] last:rounded-r-[0.6rem] group-[.mode--light]:bg-transparent [&_button.active]:text-current group-[.mode--light]:[&_button.active]:border-transparent group-[.mode--light]:[&_button.active]:bg-white/[0.12]">
-                        <button data-tw-merge="" data-tw-target="#example-3" role="tab" class="cursor-pointer block appearance-none px-3 border border-transparent transition-colors dark:text-slate-400 [&.active]:text-slate-700 py-1.5 dark:border-transparent [&.active]:border [&.active]:shadow-sm [&.active]:font-medium [&.active]:border-slate-200 [&.active]:bg-white [&.active]:dark:text-slate-300 [&.active]:dark:bg-darkmode-400 [&.active]:dark:border-darkmode-400 w-full whitespace-nowrap rounded-[0.6rem] text-slate-500 group-[.mode--light]:text-slate-200 md:w-24">Monthly</button>
+                        <button onclick="filterAttendanceChart('monthly')" data-tw-merge="" data-tw-target="#example-3" role="tab" class="cursor-pointer block appearance-none px-3 border border-transparent transition-colors dark:text-slate-400 [&.active]:text-slate-700 py-1.5 dark:border-transparent [&.active]:border [&.active]:shadow-sm [&.active]:font-medium [&.active]:border-slate-200 [&.active]:bg-white [&.active]:dark:text-slate-300 [&.active]:dark:bg-darkmode-400 [&.active]:dark:border-darkmode-400 w-full whitespace-nowrap rounded-[0.6rem] text-slate-500 group-[.mode--light]:text-slate-200 md:w-24">Monthly</button>
                     </li>
                 </ul>
                 <div class="ml-5">
@@ -29,7 +29,7 @@
                     <div class="mb-1 mt-2">
                         <div class="mb-1 mt-2">
                             <div class="w-auto h-[150px]">
-                                <canvas class="chart report-bar-chart-5"></canvas>
+                                <canvas id="attendanceChart" class="chart report-bar-chart-5"></canvas>
                             </div>
                         </div>
                     </div>
@@ -41,6 +41,18 @@
                         <div class="flex items-center text-slate-500">
                             <div class="mr-2 h-2 w-2 rounded-full border border-slate-500/60 bg-slate-500/60" style="background: rgba(239 68 68);"></div>
                             Total Absent
+                        </div>
+                        <div class="flex items-center text-slate-500">
+                            <div class="mr-2 h-2 w-2 rounded-full border border-slate-500/60 bg-slate-500/60" style="background: rgba(234, 179, 8, 1);"></div>
+                            Total Leave
+                        </div>
+                        <div class="flex items-center text-slate-500">
+                            <div class="mr-2 h-2 w-2 rounded-full border border-slate-500/60 bg-slate-500/60" style="background: rgba(34, 197, 94, 1);"></div>
+                            Total WFH
+                        </div>
+                        <div class="flex items-center text-slate-500">
+                            <div class="mr-2 h-2 w-2 rounded-full border border-slate-500/60 bg-slate-500/60" style="background: rgba(163, 73, 164, 1);"></div>
+                            Total Halfday
                         </div>
                     </div>
                 </div>  

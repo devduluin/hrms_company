@@ -34,18 +34,121 @@
     
 </div>
 <script>
-document.addEventListener('DOMContentLoaded', async function() {
-    const menu = document.getElementById("contents-page");
-    const content = document.getElementById("contents-page");
-    const loadingIndicator = document.getElementById("loading-indicator");
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    
-    getDataChart();
+    var filterData = {};
+    document.addEventListener('DOMContentLoaded', async function() {
+        const menu = document.getElementById("contents-page");
+        const content = document.getElementById("contents-page");
+        const loadingIndicator = document.getElementById("loading-indicator");
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        
+        getDataChart("daily");
 
-    async function getDataChart()
+        const routes = {
+        
+            duluin_gajian: {
+                path: '{{ url('/dashboard/hrms/duluin_gajian') }}',
+                element: '{{ url('/dashboard/hrms/elm/duluin_gajian') }}'
+            },
+        
+        };
+
+        async function loadContent(url) {
+            try {
+                loadingIndicator.style.display = 'block';
+                const response = await fetch(url, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRF-TOKEN': csrfToken
+                    }
+                });
+                const data = await response.text();
+                content.innerHTML = data;
+
+            } catch (error) {
+                console.error('Error loading content:', error);
+            } finally {
+                loadingIndicator.style.display = 'none';
+            }
+        }
+
+        async function initializeContent() {
+            const initialPath = window.location.pathname.split('/').pop();
+            const route = routes[initialPath];
+
+            if (route) {
+                await loadContent(route.element);
+                history.replaceState(initialPath, '', route.path);
+                setActiveClassByPath();
+                updateBreadcrumb();
+            }
+        }
+
+        menu.addEventListener('click', async function(event) {
+        let target = event.target;
+            while (target && target.tagName !== 'A') {
+                target = target.parentElement;
+            }
+            
+            if (target) {
+                const id = target?.id;
+                const route = routes[id];            
+                if (route) {
+                    event.preventDefault();
+                    window.history.pushState(id, '', route.path);
+                    await loadContent(route.element);
+                    setActiveClassByPath();
+                    updateBreadcrumb();
+                }
+            }
+        });
+
+        window.addEventListener('popstate', async function(event) {
+            const route = routes[event.state];
+            console.log(route);
+            if (route) {
+                await loadContent(route.element);
+                setActiveClassByPath();
+                updateBreadcrumb();
+            }else {
+            
+            location.reload();
+        }
+        });
+
+        function setActiveClassByPath() {
+            const currentPath = window.location.pathname.split('/').pop();
+            const routeKey = Object.keys(routes).find(key => routes[key].path.endsWith(currentPath));
+            
+            if (routeKey) {
+                const menuItems = menu.querySelectorAll('.menu-item');
+                menuItems.forEach(item => item.classList.remove('active'));
+
+                const activeItem = menu.querySelector(`#${routeKey}`);
+                if (activeItem) {
+                    activeItem.classList.add('active');
+                }
+            }
+        }
+
+        await initializeContent();
+    });
+
+    function filterAttendanceChart(value) {
+        $("#loading").removeAttr('style', 'display: none');
+        getDataChart(value);
+    }
+
+    async function getDataChart(filter)
         {
+            if (filter === "monthly"){
+                filterData = "monthly=monthly";
+            } else {
+                filterData = "daily=daily";
+            }
+
             var param = {
                 url: "{{ $apiChartAttendance }}",
+                data: filterData,
                 // url: "http://localhost:4446/api/v1/attendance/report/chart?company_id=c8f745e0-aa6e-458b-bb70-4dda3e2accea",
                 method: "GET",
             }
@@ -53,154 +156,72 @@ document.addEventListener('DOMContentLoaded', async function() {
             await transAjax(param).then((result) => {
                 const chart = result.data;
                 console.log(chart);
+                $("#loading").attr("style", "display: none");
+
+                if (!window.chartInstances) {
+                    window.chartInstances = {}; // Initialize storage for chart instances
+                }
 
                 //chart
                 let e = $(".report-bar-chart-5");
                 e.length &&
                     e.each(function () {
-                        let a = $(this)[0].getContext("2d"),
-                            r = new Chart(a, {
-                                type: "bar",
-                                data: chart,
-                                options: {
-                                    maintainAspectRatio: !1,
-                                    plugins: { legend: { display: !1 } },
-                                    scales: {
-                                        x: {
-                                            ticks: {
-                                                color: getColor("slate.500", 0.7),
-                                            },
-                                            grid: { display: !1 },
-                                            border: { display: !1 },
+                        let canvasId = $(this).attr("attendanceChart");
+                        let a = $(this)[0].getContext("2d");
+                        if (window.chartInstances[canvasId]) {
+                            window.chartInstances[canvasId].destroy(); // Destroy the existing chart instance
+                        }
+
+                        // Create a new chart instance and store it
+                        window.chartInstances[canvasId] = new Chart(a, {
+                            type: "bar",
+                            data: chart,
+                            options: {
+                                maintainAspectRatio: !1,
+                                plugins: { legend: { display: !1 } },
+                                scales: {
+                                    x: {
+                                        ticks: {
+                                            color: getColor("slate.500", 0.7),
                                         },
-                                        y: {
-                                            ticks: {
-                                                autoSkipPadding: 30,
-                                                color: getColor("slate.500", 0.9),
-                                                beginAtZero: !0,
-                                            },
-                                            grid: { color: getColor("slate.200", 0.7) },
-                                            border: { display: !1 },
-                                        },
+                                        grid: { display: !1 },
+                                        border: { display: !1 },
                                     },
-                                    onClick: function (e, elements) {
-                                        if (elements.length > 0) {
-                                            const firstElement = elements[0]; 
-                                            const datasetIndex = firstElement.datasetIndex;
-                                            const index = firstElement.index;
-
-                                            const label = r.data.labels[index];
-                                            const dataValue = r.data.datasets[datasetIndex].data[index];
-
-                                            // clickable
-                                            const baseUrl = '{{ url('dashboard/hrms/attendance/attendance') }}';
-                                            window.location.href = `${baseUrl}?attendance_status=${r.data.datasets[datasetIndex].label.toLowerCase()}&attendance_date=${label}`;
-                                            // console.log(`You clicked on ${label}: ${dataValue} ${r.data.datasets[datasetIndex].label}`);
-                                        }
-                                    }
+                                    y: {
+                                        ticks: {
+                                            autoSkipPadding: 30,
+                                            color: getColor("slate.500", 0.9),
+                                            beginAtZero: !0,
+                                        },
+                                        grid: { color: getColor("slate.200", 0.7) },
+                                        border: { display: !1 },
+                                    },
                                 },
-                            });
+                                onClick: function (e, elements) {
+                                    if (elements.length > 0) {
+                                        const firstElement = elements[0];
+                                        const datasetIndex = firstElement.datasetIndex;
+                                        const index = firstElement.index;
+
+                                        const label = chart.labels[index];
+                                        const dataValue = chart.datasets[datasetIndex].data[index];
+
+                                        // clickable
+                                        if (filter === "daily"){
+                                            const baseUrl = '{{ url('dashboard/hrms/attendance/attendance') }}';
+                                            window.location.href = `${baseUrl}?attendance_status=${window.chartInstances[canvasId].data.datasets[datasetIndex].label.toLowerCase()}&attendance_date=${label}`;   
+                                        }
+                                        // console.log(`You clicked on ${label}: ${dataValue} ${r.data.datasets[datasetIndex].label}`);
+                                    }
+                                }
+                            },
+                        });
                     });
                 
             }).catch((error) => {
                 console.log(error);
             });
-
-            //user bisa menampilkan data berdasarkan range tanggal yang dipilih
-            // $(".litepicker").on("click", ".button-apply", function() {
-            //     $("#loading").removeAttr('style', 'display: none');
-            // });
-        }
-    
-    const routes = {
-      
-        duluin_gajian: {
-            path: '{{ url('/dashboard/hrms/duluin_gajian') }}',
-            element: '{{ url('/dashboard/hrms/elm/duluin_gajian') }}'
-        },
-       
-    };
-
-    async function loadContent(url) {
-        try {
-            loadingIndicator.style.display = 'block';
-            const response = await fetch(url, {
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'X-CSRF-TOKEN': csrfToken
-                }
-            });
-            const data = await response.text();
-            content.innerHTML = data;
-
-        } catch (error) {
-            console.error('Error loading content:', error);
-        } finally {
-            loadingIndicator.style.display = 'none';
-        }
-    }
-
-    async function initializeContent() {
-        const initialPath = window.location.pathname.split('/').pop();
-        const route = routes[initialPath];
-
-        if (route) {
-            await loadContent(route.element);
-            history.replaceState(initialPath, '', route.path);
-            setActiveClassByPath();
-            updateBreadcrumb();
-        }
-    }
-
-    menu.addEventListener('click', async function(event) {
-    let target = event.target;
-        while (target && target.tagName !== 'A') {
-            target = target.parentElement;
-        }
-        
-        if (target) {
-            const id = target?.id;
-            const route = routes[id];            
-            if (route) {
-                event.preventDefault();
-                window.history.pushState(id, '', route.path);
-                await loadContent(route.element);
-                setActiveClassByPath();
-                updateBreadcrumb();
-            }
-        }
-    });
-
-    window.addEventListener('popstate', async function(event) {
-        const route = routes[event.state];
-        console.log(route);
-        if (route) {
-            await loadContent(route.element);
-            setActiveClassByPath();
-            updateBreadcrumb();
-        }else {
-        
-        location.reload();
-    }
-    });
-
-    function setActiveClassByPath() {
-        const currentPath = window.location.pathname.split('/').pop();
-        const routeKey = Object.keys(routes).find(key => routes[key].path.endsWith(currentPath));
-        
-        if (routeKey) {
-            const menuItems = menu.querySelectorAll('.menu-item');
-            menuItems.forEach(item => item.classList.remove('active'));
-
-            const activeItem = menu.querySelector(`#${routeKey}`);
-            if (activeItem) {
-                activeItem.classList.add('active');
-            }
-        }
-    }
-
-    await initializeContent();
-});
+        };
 
 </script>
 
