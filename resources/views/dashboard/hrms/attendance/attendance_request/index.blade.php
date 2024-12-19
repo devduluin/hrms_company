@@ -105,7 +105,7 @@
                                 'status' => '#status'
                             ]">
                             <x-slot:thead>
-                            <th data-value="no" width="80px">No.</th>
+                            <th data-value="no" width="60px">No.</th>
                                     <th data-value="employee_id_rel"  data-render="getEmployeeName">Employee Name</th>
                                     <th data-value="shift_type_id_rel" data-render="getShiftName">Shift Type</th>
                                     <th data-value="from_date" data-render="dateFormat">From Date</th>
@@ -169,9 +169,28 @@
 
             return utcDate.toLocaleString('en-GB', options); // Combined date and time
         }
+
         function getEmployeeName(data, type, row, meta) {
-            if (data !== null) {
-                return data.first_name + ' ' + data.last_name;
+            if (data) {
+                let avatar = data.avatar 
+                            ? `<img src="${data.avatar}" alt="User Avatar" class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]" data-placement="top">`
+                            : `<img src="{{ asset('/img/3725294.png') }}" alt="Default Avatar" class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]" data-placement="top">`;
+
+                const html = `<div class="flex items-center">
+                    <div class="image-fit zoom-in h-9 w-9">
+                        ${avatar}
+                    </div>
+                    <div class="ml-3.5">
+                        <a class="whitespace-nowrap font-medium" href="{{ url('/dashboard/hrms/employee/edit_employee') }}/${data.id}">
+                            ${data.first_name} ${data.last_name}
+                        </a>
+                        <div class="mt-0.5 whitespace-nowrap text-xs text-slate-500">
+                            ${data.employee_id}
+                        </div>
+                    </div>
+                </div>`;
+
+                return html;
             }
             return 'N/A';
         }

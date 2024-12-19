@@ -265,7 +265,7 @@
                     let myKey = Number(firstKey) - 1;
                     for (let key in attendances) {
                         if (attendances.hasOwnProperty(key)) {
-                            let day = (Number(key) + 3);
+                            let day = (Number(key) + 2);
                             if (attendances[key].status === " ") {
                                 $('td', row).eq(day)
                                     .addClass('attendances')

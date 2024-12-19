@@ -89,11 +89,28 @@
 @endsection
 @push('js')
     <script>
+        
         function getEmployeeName(data, type, row, meta) {
-            if (data !== null) {
-                const name = data.first_name + ' ' + data.last_name;
-                return `<a class="text-primary font-medium" href="{{ url("dashboard/hrms/attendance/activity/employee") }}/${row.id}">${name}</a>`;
+            if (data) {
+                let avatar = data.avatar 
+                            ? `<img src="${data.avatar}" alt="User Avatar" class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]" data-placement="top">`
+                            : `<img src="{{ asset('/img/3725294.png') }}" alt="Default Avatar" class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]" data-placement="top">`;
 
+                const html = `<div class="flex items-center">
+                    <div class="image-fit zoom-in h-9 w-9">
+                        ${avatar}
+                    </div>
+                    <div class="ml-3.5">
+                        <a class="whitespace-nowrap font-medium" href="{{ url('/dashboard/hrms/employee/edit_employee') }}/${data.id}">
+                            ${data.first_name} ${data.last_name}
+                        </a>
+                        <div class="mt-0.5 whitespace-nowrap text-xs text-slate-500">
+                            ${data.employee_id}
+                        </div>
+                    </div>
+                </div>`;
+
+                return html;
             }
             return 'N/A';
         }
