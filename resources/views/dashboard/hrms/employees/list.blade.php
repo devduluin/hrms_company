@@ -223,6 +223,33 @@
             </div>
         </div>
     </div>
+
+    <div 
+        id="imageModal" 
+        class="hidden fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center backdrop-blur-sm z-50"
+        onclick="closeImageModal()" 
+    >
+        <div 
+            class="relative w-[300px] h-[300px] bg-white rounded-lg flex justify-center items-center" 
+            onclick="event.stopPropagation()" 
+        >
+            <div class="relative">
+                <button 
+                    class="p-2 absolute top-1 left-1 text-white text-3xl font-bold bg-black bg-opacity-50 rounded-full"
+                    onclick="closeImageModal()"
+                >
+                    &times;
+                </button>
+                
+                <img 
+                    id="modalImage" 
+                    src="" 
+                    class="max-w-[90%] max-h-[90%] rounded-lg shadow-lg"
+                />
+            </div>
+        </div>
+    </div>
+
 @endsection
 @push('js')
     <script>
@@ -350,7 +377,7 @@
             
             if (data) {
                 let avatar = row.avatar 
-                            ? `<img src="${row.avatar}" alt="User Avatar" class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]" data-placement="top">`
+                            ? `<img src="${row.avatar}" alt="User Avatar" class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]" data-placement="top" onclick="openImageModal('${row.avatar}')">`
                             : `<img src="{{ asset('/img/3725294.png') }}" alt="Default Avatar" class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]" data-placement="top">`;
 
                 const html = `<div class="flex items-center">
@@ -579,6 +606,20 @@
             $(`#is_verified`)[0].tomselect.clear();
             $(`#status`)[0].tomselect.clear();
         }
+
+        function openImageModal(imageUrl) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+
+            modalImage.src = imageUrl; 
+            modal.classList.remove('hidden');
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.add('hidden');
+        }
+
     </script>
 @endpush
 @include('vendor-common.sweetalert')
