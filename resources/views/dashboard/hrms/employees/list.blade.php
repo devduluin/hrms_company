@@ -376,7 +376,7 @@
         function getAddress(data, type, row, meta) {
             if (!data) return '-'; // Handle null or undefined data
 
-            const phoneNumber = data.mobil_phone || '';
+            const phoneNumber = data.mobile_phone || '';
             const personalEmail = data.company_email || data.personal_email || '-';
 
             if (phoneNumber) {
@@ -525,7 +525,7 @@
                 $("#totalNewEmployee").html(employeeData.new_employees);
 
             } catch (error) {
-                console.error('Error fetching employees:', error);
+                //console.error('Error fetching employees:', error);
             }
         }
 
