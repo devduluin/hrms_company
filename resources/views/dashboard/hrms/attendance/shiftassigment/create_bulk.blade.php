@@ -180,8 +180,8 @@
                                                             <input type="checkbox" id="select-all" />
                                                         </th>
                                                         <th data-value="no" width="60px">No.</th>
-                                                        <th data-value="fullname" searchable="true" orderable="true"
-                                                            searchable="true">Full Name
+                                                        <th data-value="first_name" searchable="true" orderable="true" data-render="getEmployeeName"
+                                                            searchable="true">Employee Name
                                                         </th>
                                                          
                                                         
@@ -325,6 +325,13 @@
         }
     }
         // Updated getCheckBox function
+
+        function getEmployeeName(data, type, row, meta) {
+            if (data !== null) {
+                return row.first_name + ' ' + row.last_name;
+            }
+            return 'N/A';
+        }
       
         function getCompany(data, type, row, meta) {
             if (data !== null) {

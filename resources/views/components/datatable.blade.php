@@ -11,7 +11,7 @@
     'downloadOptions' => false,
     'dtcomponent' => 'true',
     'search' => '',
-    'dtheight' => '400',
+    'dtheight' => '450',
     'company_id' => '',
     'customButton' => 'false',
     'customButtonText' => '',
