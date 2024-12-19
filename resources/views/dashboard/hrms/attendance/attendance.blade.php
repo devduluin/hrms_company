@@ -88,7 +88,7 @@
                             <x-slot:thead>
                             <th data-value="no" width="50px">No.</th>
                                     <th data-value="employee_id_rel"  data-render="getEmployeeName" orderable="false">Employee Name</th>
-                                    <th data-value="shift_assigment_id_rel" data-render="getShiftAssignment" orderable="false">Shift</th>
+                                    <th data-value="shift_assigment_id_rel" data-render="getShiftAssignment" orderable="false">Shift Type</th>
                                     <th data-value="attendance_date" orderable="true">Date</th>
                                     <th data-value="time_in" orderable="true">Checkin time</th>
                                     <th data-value="time_out" orderable="true">Checkout time</th>

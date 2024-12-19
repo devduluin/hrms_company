@@ -109,8 +109,8 @@
                                 'filter_date' => '#filter_date',
                             ]" :order="[[0, 'DESC']]">
                             <x-slot:thead>
-                            <th data-value="no" width="60px">No.</th>
-                                    <th data-value="first_name" orderable="true" data-render="getFullName">Employee Name</th>
+                                    <th data-value="no" width="60px">No.</th>
+                                    <th align="left" data-value="first_name" orderable="true" data-render="getFullName">Employee Name</th>
                                     <th data-value="department_id_rel" data-render="getDepartment" orderable="false">Department</th>
                                     <th data-value="total_absent" orderable="false" data-render="getUrlAbsent">Absent</th>
                                     <th data-value="total_present" orderable="false" data-render="getUrlPresent">Preset</th>
@@ -181,7 +181,7 @@
                     </div>
                     <div class="ml-3.5">
                         <a class="whitespace-nowrap font-medium" href="{{ url('/dashboard/hrms/employee/edit_employee') }}/${row.id}">
-                            ${row.first_name} ${row.last_name}
+                            ${row.first_name} ${row.last_name}</br>
                         </a>
                         <div class="mt-0.5 whitespace-nowrap text-xs text-slate-500">
                             ${row.employee_id}

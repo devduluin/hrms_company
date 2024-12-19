@@ -99,7 +99,7 @@
                 </div> -->
                 <div class="col-span-12 flex flex-col gap-y-7 xl:col-span-9">
                     <div class="box box--stacked flex flex-col p-5">
-                        <x-datatable id="attendanceRequestTable" :url="$apiUrl.'/datatables'" method="POST" class="display small"
+                        <x-datatable id="attendanceRequestTable" :url="$apiUrl.'/datatables'" method="POST" class="display small" :order="[[ 3, 'DESC']]"
                         :filter="[
                                 'employee_id' => '#employee_id',
                                 'status' => '#status'
@@ -107,7 +107,7 @@
                             <x-slot:thead>
                             <th data-value="no" width="60px">No.</th>
                                     <th data-value="employee_id_rel"  data-render="getEmployeeName">Employee Name</th>
-                                    <th data-value="shift_type_id_rel" data-render="getShiftName">Shift Type</th>
+                                    <th data-value="shift_assigment_id_rel" data-render="getShiftName">Shift Type</th>
                                     <th data-value="from_date" data-render="dateFormat">From Date</th>
                                     <th data-value="to_date" data-render="dateFormat">To Date</th>
                                     <th data-value="reason">Reason</th>
@@ -140,7 +140,7 @@
     <script>
         function getStatus(data, type, row, meta) {
 
-            if (data === 'present') {
+            if (data === 'approved') {
                 return `<div class="flex capitalize text-success"><div class="whitespace-nowrap"><i data-tw-merge data-lucide="check" class="text-success"></i> ${data}</div></div>`;
             } else {
                 return `<div class="flex capitalize text-danger"><div class="whitespace-nowrap">${data}</div></div>`;
@@ -148,12 +148,13 @@
         }
 
         function getShiftName(data, type, row, meta) {
-                console.log(data);
+            console.log(data);
 
-            // if (data) {
-            //     return data.shift_type_name;
-            // }
-            // return 'N/A';
+            if (data && data.shift_type_id_rel) {
+                return data.shift_type_id_rel.shift_type_name || 'N/A';
+            }
+
+            return 'N/A';
         }
 
         function dateFormat(utcDateStr) {
@@ -203,7 +204,7 @@
                     <div data-tw-merge class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 w-40">
 
                         <a onClick="action('detail', '`+data['id']+`')" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="external-link" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
-                            Open</a>
+                            Detail</a>
                         <a onClick="action('update', '`+data['id']+`')" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="external-link" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>
                             Update</a>
                         <a onClick="action('delete', '`+data['id']+`')" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge data-lucide="file-text" class="stroke-[1] w-5 h-5 w-4 h-4 mr-2 w-4 h-4 mr-2"></i>

@@ -32,50 +32,43 @@
                                         <div class="-mt-px">Attendance Request</div>
                                     </div>
                                         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-2 p-4">
-                                            <div class="gap-x-6 gap-y-10 ">
-                                                <div class="py-2">
-                                                    <x-form.select id="employee_id" name="employee_id" data-method="POST" required label="Employee Name" url="{{ url('dashboard/hrms/employee/create') }}"
-                                                        apiUrl="{{ $apiUrlEmployee }}/datatables" columns='["first_name", "last_name"]'  
-                                                        :keys="[
-                                                            'company_id' => $company_id,
-                                                        ]">
-                                                        <option value="">Select Employee</option>
-                                                    </x-form.select>
-                                                </div>
-                                                <div class="py-2">
-                                                    <div class="mt-3 flex-row xl:items-center" placholder="">
-                                                        <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4">
-                                                            <div class="text-left">
-                                                                <div class="flex items-center">
-                                                                    <div class="font-medium" for="start_time">Department</div>
-                                                                                        
-                                                                </div>
-                                                                <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="flex-1 sm:w-full  w-96  gap-1 mt-3 xl:mt-0">
-                                                            <input id="department" readonly type="text" name="" value="" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 ">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="py-2">
-                                                <x-form.input id="company" label="Company" name="" readonly />
-                                                <input id="company_id" label="Company" name="company_id" type="hidden" />
-                                                </div>
-                                            </div>
-                                            <div class="gap-x-6 gap-y-10 ">
-                                                <div class="py-2">
-                                                <x-form.select id="shift_type_id" name="shift_type_id" data-method="POST" required label="Shift Type Name" url="{{ url('dashboard/hrms/attendance/shift_type/create') }}"
-                                                    apiUrl="{{ $apiUrlShiftType }}/datatable" columns='["shift_type_name"]'  
+                                        <div class="gap-x-6 gap-y-10 ">
+                                            <div class="py-2">
+                                                <x-form.select id="employee_id" name="employee_id" data-method="POST" required label="Employee Name" url="{{ url('dashboard/hrms/employee/create') }}"
+                                                    apiUrl="{{ $apiUrlEmployee }}/datatables_v2" columns='["first_name", "last_name"]'  
                                                     :keys="[
                                                         'company_id' => $company_id,
                                                     ]">
-                                                    <option value="">Select Shift Type</option>
+                                                    <option value="">Select Employee</option>
                                                 </x-form.select>
+                                            </div>
+                                        </div>
+                                        <div class="gap-x-6 gap-y-10">
+                                            <div id="infoEmployee" hidden>
+                                            <div class="py-2">
+                                                <div class="mt-3 flex-row xl:items-center" placholder="">
+                                                    <div class="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:mr-4">
+                                                        <div class="text-left">
+                                                            <div class="flex items-center">
+                                                                <div class="font-medium" for="start_time">Department</div>
+                                                                                    
+                                                            </div>
+                                                            <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-1 sm:w-full  w-96  gap-1 mt-3 xl:mt-0">
+                                                        <input id="department" readonly type="text" name="" value="" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 ">
+                                                    </div>
                                                 </div>
-                                            </div>                                
+                                            </div>
+                                            <div class="py-2">
+                                            <x-form.input id="company" label="Company" name="" readonly />
+                                            <input id="company_id" label="Company" name="company_id" type="hidden" />
+                                            </div>
+                                            </div>
+                                        </div>                                
                                                 
                                         </div>
                                     </div>
@@ -140,7 +133,7 @@
                                                         <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3"></div>
                                                     </div>
                                                     <div class="mt-3 w-96 flex-1 xl:mt-0">
-                                                        <select required name="reason" id="reason" data-title="Reason" data-placeholder="Select your reason" class="tom-select w-full" sclass="tom-select disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10"">
+                                                        <select required name="reason" id="reason" data-title="Reason" data-placeholder="Select your reason" class="tom-select disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10"">
                                                             <option value="">
                                                                 Select Reason
                                                             </option>
@@ -167,8 +160,8 @@
                                                     </div>
                                                     <div class="mt-3 w-96 flex-1 xl:mt-0">
                                                         <select required name="status" id="status" data-title="Language" data-placeholder="Select your language" class="tom-select w-full" sclass="tom-select disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&amp;[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&amp;:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10"">
-                                                            <option value="pending">
-                                                                Pending
+                                                            <option value="submit">
+                                                                Submit
                                                             </option>
                                                             <option value="approved">
                                                                 Approved
@@ -234,6 +227,7 @@
                     $("#from_date").val(response.data.from_date);
                     $("#to_date").val(response.data.to_date);
                     $("#explanation").html(response.data.explanation);
+                    $("#reason").val(response.data.reason);
                     
                     //$("select[name=status]").val(response.data.status).change();
                     addOptionIfNotExist('employee_id', response.data.employee_id);
@@ -259,7 +253,7 @@
         if (selectElement.options) {
             setTimeout(() => {
                 selectElement.setValue(optionValue);
-            }, 1000);
+            }, 800);
         } 
     }
     
@@ -274,6 +268,7 @@
         const employee = result.data
         employee_id = employee.id;
         company_id =  employee.company_id
+        $("#infoEmployee").attr('hidden', false);
          
         if (employee.department_id_rel?.department_name) {
             $('#department').val(employee.department_id_rel.department_name);

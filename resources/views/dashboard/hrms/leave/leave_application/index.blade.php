@@ -317,48 +317,10 @@
                 console.log(json); // Log the fetched data
             });
 
-            getAlertLeaveApplication();
+            //getAlertLeaveApplication();
         });
 
-        function getAlertLeaveApplication() {
-            const company_id = localStorage.getItem('company');
-
-            $.ajax({
-                // url: `http://localhost:5555/api/v1/employee/alert/employee-contract?company_id=92af08f7-8a0e-47e5-af34-d3ba84e130e8`,
-                url: `http://apidev.duluin.com/api/v1/attendance/leave/alert/leave-application?company_id=${company_id}`,
-                method: 'GET',
-                contentType: 'application/json',
-                headers: {
-                    'Authorization': `Bearer ${appToken}`,
-                    'X-Forwarded-Host': `${window.location.protocol}//${window.location.hostname}`,
-                    'credentials': 'same-origin',
-                },
-                crossDomain: true,
-                // data: JSON.stringify(data),
-                dataType: 'json',
-                success: function(data) {
-                    console.log("ini data :", data.data);
-                    const dataFound = data.data;
-                    if (dataFound.count > 1) {
-                        document.getElementById("alert-contract").classList = "visible flex flex-col";
-                        document.getElementById("alert-message").innerHTML =
-                            `Warning : <b>${dataFound.count}</b> employees have open leave application`;
-                    } else
-                    if (dataFound.count === 1) {
-                        document.getElementById("alert-contract").classList = "visible flex flex-col";
-                        document.getElementById("alert-message").innerHTML =
-                            `Warning : <b>${dataFound.count}</b> employee has open leave application`;
-                    }
-                    // document.getElementById("success").textContent = "Verification Success";
-                    // document.getElementById("success-icon").innerHTML = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' class='w-16'><path fill='green' fill-rule='evenodd' d='M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z' clip-rule='evenodd' /></svg>";
-                    // document.getElementById("message").textContent = "You have successfully verified your account";
-                    // alert-contract
-                },
-                error: function(error) {
-                    showErrorNotification('error', 'Failed to get Employees Contract.');
-                }
-            });
-        }
+        
     </script>
 @endpush
 @include('vendor-common.sweetalert')

@@ -36,6 +36,7 @@ Route::prefix('/attendance')->group(function () {
                 Route::get('/', 'index')->name('hrms.attendance.request');
                 Route::get('/create', 'create')->name('hrms.attendance.request.create');
                 Route::get('/update/{id}', 'update')->name('hrms.attendance.request.update');
+                Route::get('/detail/{id}', 'detail')->name('hrms.attendance.request.detail');
             });;
         });
         
