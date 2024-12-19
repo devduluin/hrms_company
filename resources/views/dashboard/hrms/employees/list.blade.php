@@ -374,9 +374,10 @@
         }
 
         function getAddress(data, type, row, meta) {
+            console.log(data);
             if (!data) return '-'; // Handle null or undefined data
 
-            const phoneNumber = data.mobil_phone || '';
+            const phoneNumber = data.mobile_phone || '';
             const personalEmail = data.company_email || data.personal_email || '-';
 
             if (phoneNumber) {
